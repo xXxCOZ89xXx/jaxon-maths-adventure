@@ -176,6 +176,13 @@ const worldCatalog=[
 {id:'measure',emoji:'⛏️',name:'Measurement Mines',summary:'Measures, area and volume',live:true}
 ];
 const badgeCatalog=[
+{id:'algebraTrail',icon:'🏔️',name:'Peak Pathfinder',desc:'Complete an Algebra Peaks discovery round',ok:()=>['algebra_patterns','algebra_missing','algebra_expressions'].some(id=>s.discovery?.[id]?.rounds?.length>0)},
+{id:'geometryTrail',icon:'🏰',name:'Castle Cartographer',desc:'Complete a Geometry Kingdom discovery round',ok:()=>['geometry_angles','geometry_triangles','geometry_area'].some(id=>s.discovery?.[id]?.rounds?.length>0)},
+{id:'ratioTrail',icon:'🏝️',name:'Island Navigator',desc:'Complete a Ratio Island discovery round',ok:()=>['ratio_basics','ratio_sharing','ratio_proportion'].some(id=>s.discovery?.[id]?.rounds?.length>0)},
+{id:'statisticsTrail',icon:'🏙️',name:'Data Detective',desc:'Complete a Statistics City discovery round',ok:()=>['stats_averages','stats_tables','stats_probability_data'].some(id=>s.discovery?.[id]?.rounds?.length>0)},
+{id:'probabilityTrail',icon:'🎲',name:'Chance Champion',desc:'Complete a Probability Portal discovery round',ok:()=>['prob_chance','prob_events','prob_compare'].some(id=>s.discovery?.[id]?.rounds?.length>0)},
+{id:'measurementTrail',icon:'⛏️',name:'Mine Surveyor',desc:'Complete a Measurement Mines discovery round',ok:()=>['measure_units','measure_volume','measure_speed'].some(id=>s.discovery?.[id]?.rounds?.length>0)},
+{id:'eightWorlds',icon:'🌍',name:'Eight-World Explorer',desc:'Complete at least one discovery round in every world',ok:()=>worldCatalog.every(w=>skills.some(k=>k.world===w.id&&s.discovery?.[k.id]?.rounds?.length>0))},
 {id:'desertExplorer',icon:'🏜️',name:'Desert Explorer',desc:'Complete a Fraction Desert discovery round',ok:()=>skills.some(k=>k.world==='fractions'&&s.discovery?.[k.id]?.rounds?.length>0)},
 {id:'fractionLearner',icon:'🌵',name:'Fraction Adventurer',desc:'Finish a Fraction Desert learning mission',ok:()=>s.recent?.some(x=>x.type==='mission'&&skills.some(k=>k.world==='fractions'&&k.name===x.label))},
 {id:'firstQuest',icon:'🚀',name:'First Expedition',desc:'Complete a four-question discovery round',ok:()=>!!s.diag?.completed||Object.values(s.discovery||{}).some(d=>d.rounds?.length>0)},
