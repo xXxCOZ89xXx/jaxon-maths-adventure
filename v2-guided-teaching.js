@@ -63,6 +63,17 @@ ratio_rates:[['.*','Divide to find the unit rate','Convert pack costs to one ite
 stats_pie:[['.*','A complete circle is 360 degrees','A quarter of the data is 90°, a half is 180°.','How many degrees is a quarter of a pie chart?',['45°','90°','180°','270°'],'90°','360 ÷ 4 = 90°.','bars']],
 measure_time:[['.*','Count forward in manageable steps','Count to the next full hour, then on to the finish time.','09:35 to 10:20 lasts how long?',['35 min','40 min','45 min','55 min'],'45 min','25 minutes to 10:00, then 20 more = 45 minutes.','clock']]
 };
+const FOUNDATIONS=Object.freeze({
+powers:'multiply',factors:'multiply',fraction_compare:'fractions',fraction_operations:'fraction_compare',
+fraction_mixed:'fractions',fraction_mult:'fractions',percent_change:'decimals',decimals:'fractions',
+algebra_missing:'operations',algebra_expressions:'algebra_missing',algebra_brackets:'algebra_expressions',
+algebra_coordinates:'negative',geometry_area:'multiply',geometry_circle:'geometry_area',
+geometry_transforms:'algebra_coordinates',ratio_sharing:'ratio_basics',ratio_proportion:'ratio_basics',
+ratio_rates:'ratio_proportion',stats_averages:'operations',stats_pie:'decimals',
+stats_probability_data:'decimals',prob_events:'prob_chance',prob_compare:'prob_events',
+measure_volume:'multiply',measure_speed:'multiply',measure_time:'operations'
+});
+function foundationFor(skillId){return FOUNDATIONS[skillId]||null}
 function plan(skillId,misses){
  const candidates=CARDS[skillId];if(!candidates)return null;
  const qs=(Array.isArray(misses)?misses:[]).map(m=>String(m&&((m.q||m.question)||'')||''));
@@ -80,5 +91,5 @@ function validate(){
  }}
  return {skillCount:ids.length,issues};
 }
-root.JaxonTutor=Object.freeze({plan:plan,validate:validate,supportedSkills:Object.freeze(Object.keys(CARDS))});
+root.JaxonTutor=Object.freeze({plan:plan,foundationFor:foundationFor,validate:validate,supportedSkills:Object.freeze(Object.keys(CARDS))});
 })(window);
