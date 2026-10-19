@@ -3,7 +3,7 @@
 **Agreed UX:** Jaxon prefers a PIN. Parent also wants a separate PIN.
 
 ## Intended interface
-- On his trusted iPad, Jaxon sees a large numeric keypad and enters a **six-digit learner PIN** to unlock his learner profile.
+- On his trusted iPad, Jaxon sees a large numeric keypad and enters a **four-digit learner PIN** to unlock his learner profile.
 - Parent view has a separate **six-digit parent PIN** and a clear success/error confirmation.
 - Never display or store raw PINs in GitHub, Supabase public tables or browser localStorage.
 - Provide an accessible keypad, deletion, lock feedback, visible focus and deliberate non-punitive error messages.
