@@ -1,0 +1,84 @@
+/* Run from the repository root: node tests/v2-learning-regression.cjs
+   Offline educational regression checks. No Supabase credentials or learner data used. */
+'use strict';
+const fs=require('node:fs');
+const path=require('node:path');
+const vm=require('node:vm');
+const assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..');
+const get=(name)=>fs.readFileSync(path.join(root,name),'utf8');
+const html=get('v2-game-test.html');
+const appMatch=html.match(/<script>([\s\S]*?)<\/script>/);
+assert.ok(appMatch,'Inline game script present');
+new vm.Script(appMatch[1],{filename:'v2-game-test.html'});
+function loadModule(file,name){
+  const context={window:{}};
+  vm.runInNewContext(get(file),context,{filename:file});
+  assert.ok(context.window[name],name+' module missing');
+  return context.window[name];
+}
+const tutor=loadModule('v2-guided-teaching.js','JaxonTutor');
+const review=loadModule('v2-review-bank.js','JaxonFreshReview');
+const skills=vm.runInNewContext(html.slice(html.indexOf('const skills=['),html.indexOf('const diagnostic='))+';skills');
+const discovery=vm.runInNewContext(html.slice(html.indexOf('const discoveryBank={'),html.indexOf('function discoveryData()'))+';discoveryBank');
+assert.equal(skills.length,tutor.supportedSkills.length,'Teaching for all missions');
+assert.equal(skills.length,review.supportedSkills.length,'Reviews for all missions');
+assert.equal(tutor.validate().issues.length,0,'Teaching choices must be valid');
+let questionCount=0;
+for(const skill of skills){
+ assert.ok(tutor.supportedSkills.includes(skill.id),'Missing teaching '+skill.id);
+ assert.ok(review.supportedSkills.includes(skill.id),'Missing review '+skill.id);
+ for(const q of skill.qs){
+  assert.equal(new Set(q[2]).size,4,'Four distinct mission options: '+skill.id);
+  assert.ok(q[2].some(choice=>String(choice).replace(/−/g,'-')===String(q[1]).replace(/−/g,'-')),'Mission answer key '+skill.id);
+ }
+ for(let year=5;year<=9;year++){
+  assert.equal(discovery[skill.id]?.[year]?.length,4,'Discovery bank '+skill.id+' '+year);
+  for(let round=1;round<=8;round++){
+   const reviewQs=review.create(skill.id,year,round);
+   assert.equal(reviewQs.length,3,'Review length');
+   for(const q of reviewQs){
+    assert.equal(new Set(q[2]).size,4,'Four distinct review answers');
+    assert.ok(q[2].includes(q[1]),'Review answer key');
+    assert.ok(q[3]&&q[4],'Review hints and worked examples');
+    questionCount++;
+   }
+  }
+ }
+ const plan=tutor.plan(skill.id,[{q:skill.qs[0][0],correct:false}]);
+ assert.ok(plan,'Missing guided lesson '+skill.id);
+ assert.equal(plan.choices.length,4,'Four scaffold answers');
+ assert.ok(plan.choices.includes(plan.answer),'Guided example answer key');
+}
+function slice(a,b){const i=html.indexOf(a),j=html.indexOf(b,i);assert.ok(i>=0&&j>i,'Missing game code boundary: '+a);return html.slice(i,j)}
+const startFunctions=slice('function reviewDue(','function question(){');
+const finishFunction=slice('function finishIfDone()','function fractionModel()');
+let missionChecks=0;
+for(const skill of skills){
+ const ctx={
+  skills:[skill],window:{JaxonFreshReview:review},s:{skills:{},discovery:{},recent:[],coins:0},
+  v2Role:'learner',pending:null,Date,
+  percent(n,d){return Math.round(n/d*100);},
+  save(){},render(){}
+ };
+ ctx.status=(id)=>ctx.s.skills[id]||{};
+ vm.runInNewContext(startFunctions+finishFunction,ctx);
+ ctx.s.discovery[skill.id]={rounds:[{band:7,score:2}],answers:[]};
+ ctx.startMission(skill.id);
+ assert.equal(ctx.s.session.qs,null,'Initial mission keeps authored questions');
+ ctx.s.session.i=3;ctx.s.session.correct=3;ctx.s.session.firstTry=3;ctx.finishIfDone();
+ ctx.startMission(skill.id);
+ assert.equal(ctx.s.session.qs?.length,3,'Repeat mission must use fresh questions');
+ const first=ctx.s.session.qs.map(q=>q[0]);
+ assert.ok(first.every(prompt=>!skill.qs.some(q=>q[0]===prompt)),'Repeat mission duplicates authored question');
+ ctx.s.session.i=3;ctx.s.session.correct=3;ctx.s.session.firstTry=3;ctx.finishIfDone();
+ ctx.startMission(skill.id);
+ const second=ctx.s.session.qs.map(q=>q[0]);
+ assert.ok(second.every(prompt=>!first.includes(prompt)),'Repeat mission duplicates earlier practice');
+ ctx.s.session.i=3;ctx.s.session.correct=3;ctx.s.session.firstTry=3;ctx.finishIfDone();
+ ctx.startIndependentCheck(skill.id);
+ assert.equal(ctx.s.session?.type,'review','Independent review is available');
+ assert.ok(ctx.s.session.qs.every(q=>!first.includes(q.q[0])&&!second.includes(q.q[0])),'Review must differ from repeat practice');
+ missionChecks++;
+}
+console.log('PASS: '+skills.length+' skills, '+questionCount+' generated multiple-choice review questions, '+missionChecks+' repeat-practice and independent-check flows.');
