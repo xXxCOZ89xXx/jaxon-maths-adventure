@@ -48,10 +48,11 @@
       if(q.error)throw q.error;
       return q.data||{bonus_coins:0,redeemed_minutes:0};
     }
-    async function parentAward(kind,amount){
+    async function parentAward(kind,amount,requestId){
       requireRole('parent');
       if(!['bonus_coins','redeem_minutes'].includes(kind)||!Number.isInteger(amount)||amount<1||amount>60)throw Error('Invalid reward request');
-      const q=await client.rpc('parent_award_maths',{p_child:activeChild,p_kind:kind,p_amount:amount});
+      if(!requestId||!/^[0-9a-f-]{36}$/i.test(requestId))throw Error('A stable request ID is required for safe retries');
+      const q=await client.rpc('parent_award_maths_once',{p_child:activeChild,p_kind:kind,p_amount:amount,p_request_id:requestId});
       if(q.error)throw q.error;
       return q.data;
     }
