@@ -4,7 +4,7 @@
  */
 (function(global){
   'use strict';
-  const TABLES={families:'maths_families',learning:'maths_learning',rewards:'maths_rewards',events:'maths_reward_events'};
+  const TABLES={families:'maths_families',learning:'maths_learning',rewards:'maths_rewards',events:'maths_reward_events',avatarCatalog:'maths_avatar_catalog',avatarPurchases:'maths_avatar_purchases'};
   const ALLOWED=['diag','skills','coins','earned','minutes','weekly','lastTick','lastActivity','equipped','bought','recent','session','discovery'];
   function cleanProgress(state){
     const result={};
@@ -48,6 +48,33 @@
       if(q.error)throw q.error;
       return q.data||{bonus_coins:0,redeemed_minutes:0};
     }
+    async function readAvatarEconomy(){
+      if(!activeChild||!['parent','learner'].includes(identity))throw Error('Linked account required');
+      const catalogue=await client.from(TABLES.avatarCatalog).select('item_id,cost').eq('active',true);
+      if(catalogue.error){
+        if(['42P01','PGRST205'].includes(catalogue.error.code))return {enabled:false,available:0,owned:[],prices:{}};
+        throw catalogue.error;
+      }
+      const balance=await client.from(TABLES.rewards).select('bonus_coins,bonus_spent').eq('child_user_id',activeChild).maybeSingle();
+      if(balance.error){
+        if(balance.error.code==='42703')return {enabled:false,available:0,owned:[],prices:{}};
+        throw balance.error;
+      }
+      const purchases=await client.from(TABLES.avatarPurchases).select('item_id,cost').eq('child_user_id',activeChild);
+      if(purchases.error)throw purchases.error;
+      const granted=Math.max(0,Number(balance.data?.bonus_coins||0));
+      const spent=Math.max(0,Number(balance.data?.bonus_spent||0));
+      const prices=Object.fromEntries((catalogue.data||[]).map(x=>[x.item_id,Number(x.cost)]));
+      return {enabled:true,granted,spent,available:Math.max(0,granted-spent),owned:(purchases.data||[]).map(x=>x.item_id),prices};
+    }
+    async function buyAvatarBonus(itemId,requestId){
+      requireRole('learner');
+      if(typeof itemId!=='string'||!/^[a-z][a-z0-9_]{1,50}$/.test(itemId))throw Error('Invalid shop item');
+      if(typeof requestId!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(requestId))throw Error('Stable purchase request ID required');
+      const q=await client.rpc('learner_buy_maths_avatar_bonus',{p_item_id:itemId,p_request_id:requestId});
+      if(q.error)throw q.error;
+      return q.data;
+    }
     async function parentAward(kind,amount,requestId){
       requireRole('parent');
       if(!['bonus_coins','redeem_minutes'].includes(kind)||!Number.isInteger(amount)||amount<1||amount>60)throw Error('Invalid reward request');
@@ -60,7 +87,7 @@
       const q=await client.auth.signOut();if(q.error)throw q.error;
       identity=null;activeChild=null;
     }
-    return Object.freeze({authenticate,readProgress,writeProgress,readRewards,parentAward,signOut,getRole:()=>identity,getChildId:()=>activeChild});
+    return Object.freeze({authenticate,readProgress,writeProgress,readRewards,readAvatarEconomy,buyAvatarBonus,parentAward,signOut,getRole:()=>identity,getChildId:()=>activeChild});
   }
   global.JaxonSecureCloud=Object.freeze({createSecureAdapter,cleanProgress});
 })(window);
