@@ -62,8 +62,8 @@ fractions:[
  n=>{const d=n%5+4,whole=d*(n+3);return N('What is 3/'+d+' of '+whole+'?',3*whole/d,'Divide by the denominator, then multiply by 3.',whole+' ÷ '+d+' × 3 = '+(3*whole/d)+'.')}
 ],
 fraction_compare:[
- n=>{const d=n%8+4;return C('Which fraction is larger?', '1/'+d,['1/'+(d+1),'1/'+(d+2),'1/'+(d+3)],'With a numerator of one, a smaller denominator means a larger piece.','1/'+d+' is the largest of these unit fractions.')},
- n=>{const d=n%7+6,a=2+n%3;return C('Which fraction is greater? (The denominator is the same.)',(a+2)+'/'+d,[a+'/'+d,(a+1)+'/'+d,(a-1)+'/'+d],'Compare the numerators.','With equal denominators, '+(a+2)+' parts is the most.')},
+ n=>{const d=n%8+4;return C('Which is the largest unit fraction when denominators start at '+d+'?', '1/'+d,['1/'+(d+1),'1/'+(d+2),'1/'+(d+3)],'With a numerator of one, a smaller denominator means a larger piece.','1/'+d+' is the largest of these unit fractions.')},
+ n=>{const d=n%7+6,a=2+n%3;return C('Which fraction has the greatest numerator when the denominator is '+d+'?',(a+2)+'/'+d,[a+'/'+d,(a+1)+'/'+d,(a-1)+'/'+d],'Compare the numerators.','With equal denominators, '+(a+2)+' parts is the most.')},
  n=>{const a=n%4+2,b=a+3,k=n%3+2;return C('Choose a fraction equal in value to '+a+'/'+b+'.',(a*k)+'/'+(b*k),[(a*k)+'/'+b,a+'/'+(b*k),(a+k)+'/'+(b+k)],'Multiply top and bottom by the same number.',a+'/'+b+' = '+(a*k)+'/'+(b*k)+'.')}
 ],
 fraction_operations:[
