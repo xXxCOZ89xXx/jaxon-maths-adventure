@@ -5,7 +5,7 @@
 (function(global){
   'use strict';
   const TABLES={families:'maths_families',learning:'maths_learning',rewards:'maths_rewards',events:'maths_reward_events'};
-  const ALLOWED=['diag','skills','earned','minutes','weekly','lastTick','lastActivity','equipped','bought','recent','session','discovery'];
+  const ALLOWED=['diag','skills','coins','earned','minutes','weekly','lastTick','lastActivity','equipped','bought','recent','session','discovery'];
   function cleanProgress(state){
     const result={};
     for(const key of ALLOWED)if(Object.prototype.hasOwnProperty.call(state||{},key))result[key]=state[key];
