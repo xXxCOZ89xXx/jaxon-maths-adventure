@@ -16,7 +16,7 @@
     let identity=null,activeChild=null;
     async function authenticate(){
       const {data,error}=await client.auth.getUser();
-      if(error)throw error;
+      if(error){if(/auth session missing|session missing/i.test(error.message||'')){identity=null;activeChild=null;return {role:'guest',childUserId:null}}throw error;}
       if(!data?.user){identity=null;activeChild=null;return {role:'guest',childUserId:null}}
       const uid=data.user.id;
       const q=await client.from(TABLES.families).select('parent_user_id,child_user_id').or('parent_user_id.eq.'+uid+',child_user_id.eq.'+uid);
