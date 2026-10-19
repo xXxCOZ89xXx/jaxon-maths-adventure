@@ -57,7 +57,7 @@ priority:[
  n=>{const a=60+n*3,b=4,c=2;return N('Work out '+a+' − '+b+' × '+c+'.',a-b*c,'Multiply before subtracting.',a+' − 8 = '+(a-8)+'.')}
 ],
 fractions:[
- n=>{const d=n%5+2,whole=d*(n+5);return N('What is one '+d+'th of '+whole+'?',whole/d,'Divide the amount by '+d+'.',whole+' ÷ '+d+' = '+(whole/d)+'.')},
+ n=>{const d=n%5+2,whole=d*(n+5);return N('What is 1/'+d+' of '+whole+'?',whole/d,'Divide the amount by '+d+'.',whole+' ÷ '+d+' = '+(whole/d)+'.')},
  n=>{const d=n%4+3,whole=d*(n+4);return N('What is 2/'+d+' of '+whole+'?',2*whole/d,'Find one part and double.',whole+' ÷ '+d+' × 2 = '+(2*whole/d)+'.')},
  n=>{const d=n%5+4,whole=d*(n+3);return N('What is 3/'+d+' of '+whole+'?',3*whole/d,'Divide by the denominator, then multiply by 3.',whole+' ÷ '+d+' × 3 = '+(3*whole/d)+'.')}
 ],
