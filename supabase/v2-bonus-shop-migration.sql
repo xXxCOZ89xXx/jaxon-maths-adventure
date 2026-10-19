@@ -127,10 +127,6 @@ begin
   if not exists(select 1 from public.maths_families
                 where child_user_id=v_child)
   then raise exception 'Linked learner account required'; end if;
-  select cost into v_price from public.maths_avatar_catalog
-    where item_id=p_item_id and active=true;
-  if v_price is null then raise exception 'Item unavailable'; end if;
-
   insert into public.maths_rewards(child_user_id) values (v_child)
     on conflict(child_user_id) do nothing;
   select * into v_reward from public.maths_rewards
@@ -143,6 +139,10 @@ begin
     then raise exception 'Request ID already used for another item'; end if;
     return v_reward;
   end if;
+  -- Check whether a completed purchase was a retry before consulting live prices.
+  select cost into v_price from public.maths_avatar_catalog
+    where item_id=p_item_id and active=true;
+  if v_price is null then raise exception 'Item unavailable'; end if;
   if exists(select 1 from public.maths_avatar_purchases
             where child_user_id=v_child and item_id=p_item_id)
   then raise exception 'Item already owned'; end if;
