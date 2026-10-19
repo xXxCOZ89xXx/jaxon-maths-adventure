@@ -64,7 +64,7 @@ fractions:[
 fraction_compare:[
  n=>{const d=n%8+4;return C('Which fraction is larger?', '1/'+d,['1/'+(d+1),'1/'+(d+2),'1/'+(d+3)],'With a numerator of one, a smaller denominator means a larger piece.','1/'+d+' is the largest of these unit fractions.')},
  n=>{const d=n%7+6,a=2+n%3;return C('Which fraction is greater? (The denominator is the same.)',(a+2)+'/'+d,[a+'/'+d,(a+1)+'/'+d,(a-1)+'/'+d],'Compare the numerators.','With equal denominators, '+(a+2)+' parts is the most.')},
- n=>{const a=n%4+2,b=a+3,k=n%3+2;return C('Which fraction is equivalent to '+a+'/'+b+'?',(a*k)+'/'+(b*k),[(a*k)+'/'+b,a+'/'+(b*k),(a+k)+'/'+(b+k)],'Multiply top and bottom by the same number.',a+'/'+b+' = '+(a*k)+'/'+(b*k)+'.')}
+ n=>{const a=n%4+2,b=a+3,k=n%3+2;return C('Choose a fraction equal in value to '+a+'/'+b+'.',(a*k)+'/'+(b*k),[(a*k)+'/'+b,a+'/'+(b*k),(a+k)+'/'+(b+k)],'Multiply top and bottom by the same number.',a+'/'+b+' = '+(a*k)+'/'+(b*k)+'.')}
 ],
 fraction_operations:[
  n=>{const d=n%7+6;return F('Add 1/'+d+' + 2/'+d+'.',3,d,'Add numerators when denominators match.','The answer is 3/'+d+'.')},
@@ -168,7 +168,7 @@ measure_volume:[
 ],
 measure_speed:[
  n=>{const speed=10*(n%9+3),hours=n%4+2;return N('Travel '+speed*hours+' km in '+hours+' hours. Speed in km/h?',speed,'Divide distance by time.',(speed*hours)+' ÷ '+hours+' = '+speed+'.')},
- n=>{const speed=10*(n%7+3),hours=n%4+2;return N('Travel at '+speed+' km/h for '+hours+' hours. Distance in km?',speed*hours,'Multiply speed by time.',speed+' × '+hours+' = '+speed*hours+'.')},
+ n=>{const speed=10*(n%7+3),hours=n%4+2;return N('A cyclist keeps a speed of '+speed+' km/h for '+hours+' hours. How far do they travel in kilometres?',speed*hours,'Multiply speed by time.',speed+' × '+hours+' = '+speed*hours+'.')},
  n=>{const speed=10*(n%8+4),hours=n%4+2;return N('Travel '+speed*hours+' km at '+speed+' km/h. Time in hours?',hours,'Divide distance by speed.',speed*hours+' ÷ '+speed+' = '+hours+'.')}
 ],
 factors:[
@@ -177,9 +177,9 @@ factors:[
  n=>{const m=n%7+3;return N('What is the smallest positive factor greater than 1 of '+(m*2)+'?',2,'An even number is divisible by 2.','The smallest prime factor is 2.')}
 ],
 powers:[
- n=>{const a=n%10+4;return N('What is '+a+' squared?',a*a,'Multiply by itself.',a+' × '+a+' = '+a*a+'.')},
- n=>{const a=n%6+2;return N('What is '+a+' cubed?',a**3,'Multiply the number three times.',a+' × '+a+' × '+a+' = '+a**3+'.')},
- n=>{const a=n%11+5;return N('What is the square root of '+a*a+'?',a,'Find the number that squares to it.',a+' × '+a+' = '+a*a+'.')}
+ n=>{const a=n%10+4;return N('Calculate the square of '+a+'.',a*a,'Multiply by itself.',a+' × '+a+' = '+a*a+'.')},
+ n=>{const a=n%6+2;return N('Calculate the cube of '+a+'.',a**3,'Multiply the number three times.',a+' × '+a+' × '+a+' = '+a**3+'.')},
+ n=>{const a=n%11+5;return N('Find the positive number that squares to '+a*a+'.',a,'Find the number that squares to it.',a+' × '+a+' = '+a*a+'.')}
 ],
 fraction_mixed:[
  n=>{const d=n%6+3,whole=n%4+2,rem=1;return N('Convert '+(whole*d+rem)+'/'+d+' to a mixed number. How many wholes?',whole,'Divide numerator by denominator.',(whole*d+rem)+' ÷ '+d+' gives '+whole+' wholes and 1/'+d+'.')},
