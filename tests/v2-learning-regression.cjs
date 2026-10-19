@@ -81,4 +81,39 @@ for(const skill of skills){
  assert.ok(ctx.s.session.qs.every(q=>!first.includes(q.q[0])&&!second.includes(q.q[0])),'Review must differ from repeat practice');
  missionChecks++;
 }
-console.log('PASS: '+skills.length+' skills, '+questionCount+' generated multiple-choice review questions, '+missionChecks+' repeat-practice and independent-check flows.');
+
+const basicMaths=loadModule('v2-maths-tools.js','JaxonMathTools');
+const extraMaths=loadModule('v2-extra-tools.js','JaxonMathToolsExtra');
+let visualSkills=0;
+for(const skill of skills){
+ const basic=basicMaths.supports(skill.id,skill.world);
+ const extra=extraMaths.supports(skill.id,skill.world);
+ if(basic.length+extra.length)visualSkills++;
+ for(const mode of ['lesson','teaching','question','hint']){
+  const learner={type:'mission',mode,firstTry:2,coins:99,correct:1};
+  const old={firstTry:learner.firstTry,coins:learner.coins,correct:learner.correct};
+  const output=basicMaths.render(skill.id,skill.world,learner)+extraMaths.render(skill.id,skill.world,learner);
+  if(basic.length+extra.length)assert.ok(output.includes('data-act='),'Visual aid should be interactive: '+skill.id);
+  for(const field of Object.keys(old))assert.equal(learner[field],old[field],'Rendering must never affect scores or coins');
+ }
+ assert.equal(basicMaths.render(skill.id,skill.world,{type:'review',mode:'question'}),'','No aids during independent checks');
+ assert.equal(extraMaths.render(skill.id,skill.world,{type:'review',mode:'question'}),'','No extra aids during checks');
+}
+const state={type:'mission',mode:'question',coins:40,firstTry:1,correct:1};
+for(const [tool,action] of [
+ [basicMaths,'math:den:1'],[basicMaths,'math:frac:4'],[basicMaths,'math:line:-3'],
+ [basicMaths,'math:coord:2:-1'],[basicMaths,'math:ratio:g1'],
+ [basicMaths,'math:clock:15'],[basicMaths,'math:percent:40'],
+ [extraMaths,'mathx:digit:0'],[extraMaths,'mathx:rows:1'],
+ [extraMaths,'mathx:cols:-1'],[extraMaths,'mathx:angle:15'],
+ [extraMaths,'mathx:coin:50']
+])assert.equal(tool.update(state,action),true,'Tool action failed '+action);
+assert.equal(state.coins,40,'Maths tools must not change rewards');
+assert.equal(state.firstTry,1,'Maths tools must not alter first-try score');
+assert.equal(state.correct,1,'Maths tools must not mark answers');
+for(const [tool,action] of [
+ [basicMaths,'math:coord:999:0'],[basicMaths,'math:percent:105'],
+ [extraMaths,'mathx:digit:9'],[extraMaths,'mathx:coin:999']
+])assert.equal(tool.update(state,action),false,'Invalid tool action accepted: '+action);
+console.log('PASS: '+skills.length+' skills, '+questionCount+' generated review questions, '+missionChecks+' repeat-practice flows, '+visualSkills+' skills with safe touch tools.');
+
