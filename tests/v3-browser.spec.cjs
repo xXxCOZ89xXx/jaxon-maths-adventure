@@ -96,8 +96,8 @@ async function solve(page) {
     for (let n = 0; n < q.p.answer / 90; n++)
       await action(page, "rotate").click();
   } else {
-    for (let n = 0; n < q.p.answer / (q.p.step || 1); n++)
-      await action(page, "adjust:" + (q.p.step || 1)).click();
+    await page.locator('[data-numeric-answer="quest"]').fill(String(q.p.answer));
+    await page.waitForFunction(() => !document.documentElement.hasAttribute("data-saving"));
   }
   await action(page, "solve").click();
   await expect(action(page, "next-quest")).toBeVisible();
@@ -105,6 +105,8 @@ async function solve(page) {
 test("Home, tour, map and all eight interactive world quests restore and persist", async ({
   page,
 }, info) => {
+  // This case completes 24 puzzles plus accessibility checks; each action still has its own timeout.
+  test.setTimeout(120000);
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "A little maths.",
   );
