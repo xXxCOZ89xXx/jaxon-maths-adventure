@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#142c25">
+<title>Hands-on Worlds · Jaxon's Maths Adventure</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#f5fff6;background:#10241d;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 95% 0,#2b6041,#10241d 65%)}
+main{max-width:1040px;margin:auto;padding:clamp(14px,3vw,27px)}
+h1{font-size:clamp(30px,5vw,48px);margin:5px 0 8px}
+h2{font-size:clamp(22px,3vw,32px);margin:10px 0}
+p{line-height:1.55}
+button,input{font:inherit}
+button{cursor:pointer;min-height:44px;touch-action:manipulation}
+button:focus-visible,input:focus-visible{outline:4px solid #ffe181;outline-offset:3px}
+.eyebrow{color:#b9eaa8;text-transform:uppercase;font-size:12px;font-weight:900;letter-spacing:.12em}
+.notice{border:1px solid #8ab596;border-radius:12px;background:#1f3a2b;padding:13px 16px}
+.worlds{display:flex;gap:9px;flex-wrap:wrap;margin:22px 0}
+.world{border:2px solid #608c6d;color:#f6fff4;background:#243d30;padding:11px 13px;border-radius:12px;font-size:15px;font-weight:750}
+.world[aria-pressed=true]{background:#b6e18a;border-color:#b6e18a;color:#132b15}
+.card{border:2px solid #5e8066;background:#172b23;border-radius:20px;padding:clamp(16px,3vw,29px)}
+.mission{background:#234732;border-left:5px solid #aee47a;padding:14px;border-radius:10px;margin:16px 0}
+.prompt{font-weight:800;font-size:clamp(18px,3vw,24px)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.action{background:#2c5139;border:2px solid #83b088;color:white;border-radius:12px;padding:12px 18px;font-weight:750}
+.action.primary{background:#b6e18a;color:#173019;border-color:#b6e18a}
+.status{min-height:53px;border-radius:10px;background:#253e30;padding:13px 15px;margin-top:16px;line-height:1.55;border-left:5px solid #839f8d}
+.status.success{border-left-color:#b5ea80}
+.status.warning{border-left-color:#ffcf77}
+.hint{background:#344534;color:#f9fbe9;border:1px solid #a7c293;border-radius:10px;padding:12px;margin-top:16px}
+.small{color:#bfdbca;font-size:14px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px}
+.metric{background:#254334;border-radius:12px;padding:12px 16px}
+.metric strong{font-size:25px;display:block}
+.frac-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;max-width:530px;margin:22px auto}
+.frac-tile{border:3px solid #809b78;color:white;background:#3b4e34;min-height:90px;border-radius:9px;font-size:22px;touch-action:none;user-select:none;-webkit-user-select:none}
+.frac-tile.shaded{background:#a9d871;color:#14351e;border-color:#ddffae}
+.frac-tile:hover{filter:brightness(1.08)}
+.frac-label{font-size:24px;font-weight:800;text-align:center}
+.number-line{max-width:760px;margin:30px auto 15px;position:relative;padding:0 10px}
+.slider{width:100%;accent-color:#aee47a;height:36px;cursor:pointer}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:#c4dfb9}
+.hero{font-size:55px;text-align:center;margin-bottom:2px}
+.big-value{font-size:31px;font-weight:900;text-align:center}
+.coord-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;max-width:550px;margin:18px auto}
+.cell{min-width:0;min-height:63px;border:2px solid #668575;background:#234435;color:#c7e2cc;border-radius:8px;touch-action:none;user-select:none;-webkit-user-select:none;font-size:17px;font-weight:700}
+.cell.selected{background:#c2de91;color:#18301d;border-color:#eaf9be}
+.cell small{font-size:11px;display:block;font-weight:500}
+.chart{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:20px auto;max-width:710px}
+.bar-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 8px;background:#263a2c;border:1px solid #719678;border-radius:14px;min-width:0}
+.bar-scene{height:160px;width:100%;max-width:120px;display:flex;align-items:flex-end;justify-content:center;border-bottom:3px solid #d6e7c8}
+.bar{width:min(90%,76px);height:0;background:linear-gradient(#c6eb96,#72b878);border:2px solid #d0f8b5;border-radius:8px 8px 0 0;transition:height .1s}
+.bar-control{width:100%;accent-color:#bcf092}
+.bar-wrap strong{font-size:23px}
+.shelf{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:22px auto;max-width:640px}
+.bin{background:#284433;border:3px dashed #a9cfa1;border-radius:13px;padding:15px;text-align:center;min-height:145px}
+.counters{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:15px}
+.counter{width:50px;height:50px;border-radius:13px;border:3px solid #f0efc2;font-size:19px;font-weight:900;color:#192519}
+.red{background:#ef8c89}
+.blue{background:#86bdf8}
+.shelf-pieces{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;min-height:43px;font-size:30px}
+.fill-meter{height:240px;width:130px;margin:20px auto;border:5px solid #b5dde2;border-radius:14px 14px 22px 22px;display:flex;align-items:flex-end;overflow:hidden;background:#344943}
+.water{background:linear-gradient(#7acadd,#3b95c0);width:100%;height:0;transition:height .12s}
+.measure-wrap{max-width:550px;margin:auto}
+.measure-wrap .slider{accent-color:#82cde4}
+@media(max-width:620px){.frac-tile{min-height:70px}.cell{min-height:52px;font-size:14px}.chart{gap:5px}.bar-wrap{padding:9px 5px}.bar-scene{height:135px}.shelf{grid-template-columns:1fr}.world{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.bar,.water{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<p class="eyebrow">Jaxon's Maths Adventure • hands-on question experiments</p>
+<h1>🧩 Try the interactive worlds</h1>
+<p class="notice"><strong>Safe standalone preview:</strong> These activities are not yet part of the signed-in game. No login, rewards, coins or progress is changed. Try touching, dragging, clicking or using keyboard controls.</p>
+<div class="worlds" role="group" aria-label="Choose a world experiment">
+<button class="world" data-world="fractions" aria-pressed="true">🏜️ Fractions</button>
+<button class="world" data-world="number" aria-pressed="false">🌲 Number Forest</button>
+<button class="world" data-world="geometry" aria-pressed="false">🏰 Geometry</button>
+<button class="world" data-world="statistics" aria-pressed="false">🏙️ Statistics</button>
+<button class="world" data-world="ratio" aria-pressed="false">🏝️ Ratio</button>
+<button class="world" data-world="measure" aria-pressed="false">⛏️ Measurement</button>
+</div>
+<div id="activity"></div>
+<p class="small">This is an interaction-design test, not a skills assessment. The final game will use different difficulties, hints, question variants and individual skill evidence.</p>
+</main>
+<script>
+(()=>{
+"use strict";
+const $=sel=>document.querySelector(sel);
+const state={world:"fractions",shaded:[],number:2,point:null,bars:[0,0,0],red:0,blue:0,water:0,feedback:"",ok:false,hint:false};
+const labels={fractions:"Fraction Desert",number:"Number Forest",geometry:"Geometry Kingdom",statistics:"Statistics City",ratio:"Ratio Island",measure:"Measurement Mines"};
+function btn(label,action,cls=""){return '<button type="button" class="action '+cls+'" data-act="'+action+'">'+label+'</button>'}
+function status(){return '<div class="status '+(state.ok?"success":state.feedback?"warning":"")+'" role="status" aria-live="polite">'+(state.feedback||"There's no timer. Try the activity at your own pace.")+'</div>'}
+function hint(){
+ if(!state.hint)return "";
+ const map={
+ fractions:"A fraction tells you how many equal parts you want. The bottom number is the total number of parts; the top number is how many to shade.",
+ number:"Five steps to the left means subtract five: 2 − 5. Crossing zero takes you into negative numbers.",
+ geometry:"In (x, y), the first number is across and the second number is up. Find x = 3, then y = 2.",
+ statistics:"Each bar should be as high as the number shown in the visitor list. The scale starts at zero.",
+ ratio:"For every 2 red counters, place 3 blue counters. The two groups have five altogether.",
+ measure:"The container holds 2 litres. One quarter of 2 litres is half a litre: 500 ml."
+ };
+ return '<div class="hint" role="note">💡 '+map[state.world]+'</div>';
+}
+function renderFractions(){
+ const tiles=Array.from({length:8},(_,i)=>'<button type="button" class="frac-tile '+(state.shaded.includes(i)?"shaded":"")+'" data-frac="'+i+'" aria-pressed="'+state.shaded.includes(i)+'" aria-label="Fraction part '+(i+1)+' of 8, '+(state.shaded.includes(i)?"shaded":"not shaded")+'">'+(state.shaded.includes(i)?"✓":"")+'</button>').join("");
+ return '<section class="card"><p class="eyebrow">🏜️ Fraction Desert · shade the whole</p><h2>Shade a fraction of the tiles</h2><div class="mission prompt">Shade <strong>3/8</strong> of this chocolate bar. Tap individual squares or drag across them to colour them in.</div><div class="frac-label">🟩 '+state.shaded.length+' of 8 shaded</div><div class="frac-grid" role="group" aria-label="Chocolate bar split into eight equal pieces">'+tiles+'</div><p class="small">Each of the eight equal pieces counts as one eighth.</p><div class="actions">'+btn("Check my shading","check","primary")+btn("Show a hint","hint")+btn("Clear shading","reset")+'</div>'+hint()+status()+'</section>';
+}
+function renderNumber(){
+ return '<section class="card"><p class="eyebrow">🌲 Number Forest · move on a number line</p><h2>Guide the explorer</h2><div class="mission prompt">Start at <strong>2</strong>. Walk <strong>5 steps left</strong>. Where do you land?</div><div class="hero" aria-hidden="true">🧍</div><div class="big-value" id="numberValue">'+state.number+'</div><div class="number-line"><label for="numberRange">Move the explorer along the number line</label><input class="slider" id="numberRange" type="range" min="-10" max="10" step="1" value="'+state.number+'" aria-label="Explorer position, from negative ten to positive ten"><div class="ticks"><span>−10</span><span>−5</span><span>0</span><span>5</span><span>10</span></div></div><div class="actions">'+btn("← One step left","left")+btn("One step right →","right")+'</div><div class="actions">'+btn("Check where I landed","check","primary")+btn("Show a hint","hint")+btn("Start at 2 again","reset")+'</div>'+hint()+status()+'</section>';
+}
+function renderGeometry(){
+ let cells="";
+ for(let y=5;y>=0;y--){for(let x=0;x<=5;x++){
+  const chosen=state.point&&state.point.x===x&&state.point.y===y;
+  cells+='<button type="button" class="cell '+(chosen?"selected":"")+'" data-point="'+x+","+y+'" aria-pressed="'+!!chosen+'" aria-label="Point '+x+' across, '+y+' up">'+(chosen?"📍":"·")+'<small>'+x+','+y+'</small></button>';
+ }}
+ return '<section class="card"><p class="eyebrow">🏰 Geometry Kingdom · coordinate explorer</p><h2>Move the marker</h2><div class="mission prompt">Place the marker on coordinate <strong>(3, 2)</strong>. The first number is across, then up.</div><div class="coord-grid" role="group" aria-label="Coordinate grid from zero to five on each axis">'+cells+'</div><div class="big-value" aria-live="polite">Point: '+(state.point?"("+state.point.x+", "+state.point.y+")":"not placed")+'</div><p class="small">Tap a square, or slide your finger across the grid to move the marker. Each square shows its coordinates.</p><div class="actions">'+btn("Check my coordinates","check","primary")+btn("Show a hint","hint")+btn("Remove marker","reset")+'</div>'+hint()+status()+'</section>';
+}
+function renderStatistics(){
+ const names=["Monday","Tuesday","Wednesday"];
+ const counts=[2,5,3];
+ return '<section class="card"><p class="eyebrow">🏙️ Statistics City · make a graph</p><h2>Build the visitor chart</h2><div class="mission prompt">A shop had <strong>2 visitors Monday</strong>, <strong>5 Tuesday</strong>, and <strong>3 Wednesday</strong>. Move each bar to the right height.</div><div class="chart">'+names.map((n,i)=>'<div class="bar-wrap"><strong id="barNum'+i+'">'+state.bars[i]+'</strong><div class="bar-scene"><div class="bar" id="bar'+i+'" style="height:'+(state.bars[i]/6*100)+'%" aria-hidden="true"></div></div><strong>'+n+'</strong><label class="small" for="barRange'+i+'">Visitors (0–6)</label><input class="bar-control" type="range" min="0" max="6" step="1" id="barRange'+i+'" data-bar="'+i+'" aria-label="'+n+' visitors" value="'+state.bars[i]+'"></div>').join("")+'</div><p class="small">Try dragging each slider. Use the arrow keys if you are on a keyboard.</p><div class="actions">'+btn("Check my bar chart","check","primary")+btn("Show a hint","hint")+btn("Reset graph","reset")+'</div>'+hint()+status()+'</section>';
+}
+function renderRatio(){
+ return '<section class="card"><p class="eyebrow">🏝️ Ratio Island · split the supplies</p><h2>Pack the explorers’ bags</h2><div class="mission prompt">Pack red and blue supplies in the ratio <strong>2 : 3</strong>. Use exactly <strong>5 counters</strong> altogether.</div><div class="shelf"><div class="bin"><h3>🟥 Red bag</h3><p class="small">Tap to add or remove red counters</p><div class="shelf-pieces" aria-label="'+state.red+' red counters">'+Array.from({length:state.red},()=>"🟥").join("")+'</div>'+btn("+ Add red","addRed")+btn("− Remove","removeRed")+'</div><div class="bin"><h3>🟦 Blue bag</h3><p class="small">Tap to add or remove blue counters</p><div class="shelf-pieces" aria-label="'+state.blue+' blue counters">'+Array.from({length:state.blue},()=>"🟦").join("")+'</div>'+btn("+ Add blue","addBlue")+btn("− Remove","removeBlue")+'</div></div><div class="big-value" aria-live="polite">'+state.red+' red : '+state.blue+' blue</div><div class="actions">'+btn("Check the ratio","check","primary")+btn("Show a hint","hint")+btn("Empty both bags","reset")+'</div>'+hint()+status()+'</section>';
+}
+function renderMeasure(){
+ return '<section class="card"><p class="eyebrow">⛏️ Measurement Mines · fill the tank</p><h2>Measure the water</h2><div class="mission prompt">This container holds <strong>2 litres</strong>. Fill it to <strong>one quarter</strong> of its capacity. How many millilitres is that?</div><div class="measure-wrap"><div class="fill-meter" aria-hidden="true"><div class="water" id="waterBar" style="height:'+(state.water/2000*100)+'%"></div></div><div class="big-value" id="waterValue">'+state.water+' ml</div><label for="waterRange">Move the water level from 0 to 2,000 millilitres</label><input type="range" class="slider" id="waterRange" min="0" max="2000" step="100" value="'+state.water+'"><div class="ticks"><span>0 ml</span><span>500 ml</span><span>1,000 ml</span><span>1,500 ml</span><span>2,000 ml</span></div></div><div class="actions">'+btn("Check the water level","check","primary")+btn("Show a hint","hint")+btn("Empty the container","reset")+'</div>'+hint()+status()+'</section>';
+}
+const views={fractions:renderFractions,number:renderNumber,geometry:renderGeometry,statistics:renderStatistics,ratio:renderRatio,measure:renderMeasure};
+function render(){
+ document.querySelectorAll("[data-world]").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.world===state.world)));
+ $("#activity").innerHTML=views[state.world]();
+}
+function changed(){state.feedback="";state.ok=false}
+function reset(){
+ if(state.world==="fractions")state.shaded=[];
+ if(state.world==="number")state.number=2;
+ if(state.world==="geometry")state.point=null;
+ if(state.world==="statistics")state.bars=[0,0,0];
+ if(state.world==="ratio"){state.red=0;state.blue=0}
+ if(state.world==="measure")state.water=0;
+ state.hint=false;changed();render();
+}
+function check(){
+ let ok=false,wrong="";
+ switch(state.world){
+ case "fractions":ok=state.shaded.length===3;wrong="Count your shaded parts. You need 3 out of 8 equal parts.";break;
+ case "number":ok=state.number===-3;wrong="Try five steps left from 2, one step at a time. Remember what happens when you cross zero.";break;
+ case "geometry":ok=!!state.point&&state.point.x===3&&state.point.y===2;wrong="Check the first number across and the second up.";break;
+ case "statistics":ok=state.bars.join(",")==="2,5,3";wrong="Look again at the visitors for each day: Monday 2, Tuesday 5, Wednesday 3.";break;
+ case "ratio":ok=state.red===2&&state.blue===3;wrong="You need 5 counters altogether, with two red for every three blue.";break;
+ case "measure":ok=state.water===500;wrong="One quarter means divide by four. There are 2,000 ml in 2 litres.";break;
+ }
+ state.ok=ok;state.feedback=ok?"Great! You completed this hands-on challenge. Nothing was saved or awarded.":wrong;
+ render();
+}
+function paint(index,value){
+ if(index<0||index>7)return;
+ const set=new Set(state.shaded);
+ if(value)set.add(index);else set.delete(index);
+ state.shaded=[...set].sort((a,b)=>a-b);changed();
+ const el=document.querySelector('[data-frac="'+index+'"]');
+ if(el){el.classList.toggle("shaded",value);el.setAttribute("aria-pressed",String(value));el.setAttribute("aria-label","Fraction part "+(index+1)+" of 8, "+(value?"shaded":"not shaded"));el.textContent=value?"✓":"";}
+ const top=$(".frac-label");if(top)top.textContent="🟩 "+state.shaded.length+" of 8 shaded";
+}
+function place(point){
+ const [x,y]=point.split(",").map(Number);
+ if(!Number.isInteger(x)||!Number.isInteger(y)||x<0||x>5||y<0||y>5)return;
+ state.point={x,y};changed();
+ document.querySelectorAll("[data-point]").forEach(el=>{
+  const on=el.dataset.point===point;
+  el.classList.toggle("selected",on);el.setAttribute("aria-pressed",String(on));el.firstChild.textContent=on?"📍":"·";
+ });
+ const v=$(".big-value");if(v)v.textContent="Point: ("+x+", "+y+")";
+}
+document.addEventListener("click",e=>{
+ const world=e.target.closest("[data-world]");
+ if(world){
+  state.world=world.dataset.world;state.hint=false;changed();render();return;
+ }
+ const action=e.target.closest("[data-act]");
+ if(action){
+  switch(action.dataset.act){
+   case "check":check();break;
+   case "hint":state.hint=!state.hint;render();break;
+   case "reset":reset();break;
+   case "left":state.number=Math.max(-10,state.number-1);changed();render();break;
+   case "right":state.number=Math.min(10,state.number+1);changed();render();break;
+   case "addRed":state.red=Math.min(15,state.red+1);changed();render();break;
+   case "removeRed":state.red=Math.max(0,state.red-1);changed();render();break;
+   case "addBlue":state.blue=Math.min(15,state.blue+1);changed();render();break;
+   case "removeBlue":state.blue=Math.max(0,state.blue-1);changed();render();break;
+  }
+  return;
+ }
+ // Pointer input is handled on pointerdown to permit continuous shading and movement.
+ // A keyboard-generated button click has detail 0 and uses this equivalent path.
+ if(e.detail===0){
+  const fraction=e.target.closest("[data-frac]");
+  if(fraction){const i=Number(fraction.dataset.frac);paint(i,!state.shaded.includes(i));return;}
+  const coord=e.target.closest("[data-point]");
+  if(coord){place(coord.dataset.point);return;}
+ }
+});
+document.addEventListener("input",e=>{
+ if(e.target.id==="numberRange"){state.number=Number(e.target.value);$("#numberValue").textContent=String(state.number);changed();return;}
+ if(e.target.hasAttribute("data-bar")){
+  const i=Number(e.target.dataset.bar);state.bars[i]=Number(e.target.value);
+  $("#barNum"+i).textContent=String(state.bars[i]);
+  $("#bar"+i).style.height=(state.bars[i]/6*100)+"%";changed();return;
+ }
+ if(e.target.id==="waterRange"){
+  state.water=Number(e.target.value);$("#waterValue").textContent=state.water+" ml";
+  $("#waterBar").style.height=(state.water/2000*100)+"%";changed();
+ }
+});
+let currentDrag=null;
+document.addEventListener("pointerdown",e=>{
+ const fraction=e.target.closest("[data-frac]");
+ if(fraction&&e.button===0){
+  const index=Number(fraction.dataset.frac),shade=!state.shaded.includes(index);
+  currentDrag={type:"fraction",id:e.pointerId,shade,last:String(index)};
+  paint(index,shade);
+  return;
+ }
+ const coord=e.target.closest("[data-point]");
+ if(coord&&e.button===0){
+  currentDrag={type:"point",id:e.pointerId,last:coord.dataset.point};
+  place(coord.dataset.point);
+ }
+});
+document.addEventListener("pointermove",e=>{
+ if(!currentDrag||currentDrag.id!==e.pointerId)return;
+ const item=document.elementFromPoint(e.clientX,e.clientY);
+ if(currentDrag.type==="fraction"){
+  const el=item?.closest("[data-frac]");
+  if(el&&el.dataset.frac!==currentDrag.last){currentDrag.last=el.dataset.frac;paint(Number(el.dataset.frac),currentDrag.shade)}
+ }else{
+  const el=item?.closest("[data-point]");
+  if(el&&el.dataset.point!==currentDrag.last){currentDrag.last=el.dataset.point;place(el.dataset.point)}
+ }
+});
+document.addEventListener("pointerup",e=>{if(currentDrag&&currentDrag.id===e.pointerId)currentDrag=null});
+document.addEventListener("pointercancel",e=>{if(currentDrag&&currentDrag.id===e.pointerId)currentDrag=null});
+render();
+})();
+</script>
+</body>
+</html>
