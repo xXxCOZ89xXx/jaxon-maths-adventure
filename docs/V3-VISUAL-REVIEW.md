@@ -9,7 +9,7 @@ Date: 20 October 2026. Branch `codex/v3-adventure-build`, draft PR #2. All revie
 - [All eight Town locations](https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site/review/town.html)
 - [Versioned gallery source and images](../tests/visual/index.html)
 
-The private links belong to the existing owner-only Site; use the owning ChatGPT account. Gallery deployment/version verification is recorded in the final QA report. Select a thumbnail for its full-size image; use Back to return. Before-this-redesign screenshots are included. Parent captures come from intercepted fictional API responses and are labelled accordingly. Desktop is 1440×1000, iPad portrait 820×1180 and landscape 1180×820; touch layouts are emulated, not physical-device certification.
+The private links belong to the existing owner-only Site; use the owning ChatGPT account. The album and corrected game are deployed as verified private Site version 2; access remains owner-only. Final source/archive provenance and green 100-case Chromium/WebKit CI are recorded in `V3-TEST-REPORT.md`. Select a thumbnail for its full-size image; use Back to return. Before-this-redesign screenshots are included. Parent captures come from intercepted fictional API responses and are labelled accordingly. Desktop is 1440×1000, iPad portrait 820×1180 and landscape 1180×820; touch layouts are emulated, not physical-device certification.
 
 ## Chosen direction
 

@@ -1,5 +1,7 @@
 # Nine-world continuation
 
+Current visual/reliability continuation: original isometric world/venue/camp artwork, SVG wardrobe/guide/keepsake art, 60-screen private review album, bounded meaningful-interaction reward timing, exact wallet/display separation, safe parent defaults and immutable retries, recovery-429 handling, synthetic migration/rollback rehearsal and a prepared production plan. See `V3-VISUAL-REVIEW.md`, `V3-TEST-REPORT.md` and `V3-OUTSTANDING-ISSUES.md`. No more manual tests are requested now; production remains unapproved.
+
 The 20 October user approval makes Practical Maths Town part of the current build. This continues draft PR #2 on `codex/v3-adventure-build`. No production account or database is involved.
 
 ## What is playable

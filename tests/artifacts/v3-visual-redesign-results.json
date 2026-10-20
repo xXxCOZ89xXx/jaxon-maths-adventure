@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-20",
+  "codeCommit": "1a1b63b2e45e1573c44e9a69520ffb9e3363a890",
+  "localBrowser": {
+    "startTime": "2026-10-20T13:24:00.412Z",
+    "duration": 379822.125,
+    "expected": 75,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "v2ScriptsPassed": 3,
+  "v3SuitesPassed": 24,
+  "newHelperAndRehearsalScriptsPassed": 2,
+  "postgresSuitesPassed": 14,
+  "sqlMode": "real isolated PostgreSQL; fictional Auth claims; network disabled",
+  "cloudBrowserMode": "mocked/intercepted fictional APIs",
+  "galleryScreens": 60,
+  "galleryGameCaptures": 52,
+  "captureResult": "no console/page errors, unexpected requests or horizontal overflow",
+  "npmAuditVulnerabilities": 0,
+  "protectedHashesUnchanged": 5,
+  "realStaging": "initial successes reported by owner; no authenticated agent tests or account/progress reads",
+  "pending": [
+    "physical Safari",
+    "cross-device sync and offline conflicts",
+    "direct hosted family API security",
+    "email recovery configuration/delivery",
+    "final grouped learner feedback",
+    "separately authorised production schema/backup/cutover review"
+  ],
+  "productionActions": "none",
+  "hostedCI": {
+    "runId": 39431994656,
+    "status": "completed",
+    "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39431994656",
+    "conclusion": "success",
+    "browserCasesPassed": 100,
+    "engines": [
+      "Chromium",
+      "WebKit"
+    ],
+    "evidence": "run/job success and 100-passed test annotation; hosted browser JSON not downloaded"
+  },
+  "privateDeployment": {
+    "projectId": "appgprj_6ad746f124fc8191b3f3845f9dff577b",
+    "status": "succeeded",
+    "version": 2,
+    "url": "https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site",
+    "galleryUrl": "https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site/review/",
+    "deploymentId": "appgdep_6ad7706e30e48191b49c776a87921383",
+    "versionId": "appgprj_6ad746f124fc8191b3f3845f9dff577b~appgver_8b3e96e735e081919be6d68e67967929",
+    "siteSourceCommit": "e168af86d731cea6d646a97614735b375e20f7b1",
+    "archiveHash": "sha256:4359854a2db8f7c9e35264bf929f40e851d1c4828359c080b622cf49bd708df8",
+    "audience": "owner only; no groups or external visitors",
+    "sourceAndArchiveMatchBuild": true
+  },
+  "packagedGalleryQA": {
+    "indexImagesDecoded": 60,
+    "worldImagesDecoded": 18,
+    "townImagesDecoded": 16,
+    "failures": 0,
+    "unexpectedExternalRequests": 0
+  }
+}

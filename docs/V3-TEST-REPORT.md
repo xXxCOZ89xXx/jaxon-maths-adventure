@@ -1,3 +1,28 @@
+# Visual redesign, reliability and release-preparation QA — 20 October 2026
+
+Current code: `1a1b63b` on `codex/v3-adventure-build`; PR #2 remains draft. [Visual review](V3-VISUAL-REVIEW.md), [independent code/security review](V3-RELIABILITY-SECURITY-REVIEW.md), [one outstanding-issues list](V3-OUTSTANDING-ISSUES.md) and [unexecuted production plan](V3-PRODUCTION-RELEASE-PLAN.md).
+
+| Current evidence | Result / scope |
+| --- | --- |
+| V2 regressions / V3 curriculum-gameplay-sync | 3 V2 scripts and 24 V3 suites pass; 55 skills, 1,100 discovery questions, exact saved state and compatibility preserved |
+| New display/release checks | Display-only coin/time/date/recovery helper tests and fixed synthetic historical-data migration/rollback rehearsal pass |
+| PostgreSQL security | 14 actual disposable network-disabled PostgreSQL suites pass, using fictional Auth claims; no hosted Auth/PostgREST or real accounts |
+| Full local Chromium browser run | 75/75 passed; 0 skipped, unexpected or flaky; desktop/iPad portrait/landscape. Later skyline-only polish is captured again and covered by final hosted CI |
+| Activity/recovery/award additions | Genuine control change required for a bounded activity window; no idle pointer/Tab/no-op/menu/refresh credit; hidden/queued state checks; one mocked 429 recovery request without retry; lost parent award retains exact immutable intent after reload |
+| Visual capture | 52 game captures pass overflow, console/rendering and blocked-network checks, plus 3 fictional parent captures and 5 old-design comparisons: 60-image static album. Actual rendered scenes/contact sheets inspected; floating skyline windows and sign overlap corrected |
+| Build guards | Complete configured staging build and all assets/PIN/sign-in/nine worlds/40 items verified; fictional preparation cannot replace any deployable byte |
+| Dependency / protected files | npm audit: 0 vulnerabilities; all 5 original protected live/V2/SQL hashes unchanged |
+| Hosted Chromium/WebKit | **Passed** [final run 39431994656](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39431994656): **100/100 Chromium/WebKit browser cases**, all logic/rehearsal/build/PostgreSQL checks for final code `1a1b63b` |
+| Existing private staging | **Version 2 deployed successfully** at the existing private URL; source `e168af86`, saved-version provenance and matching archive verified. Access rechecked: owner only, no groups/other viewers/external visitors |
+
+The packaged gallery browser check decoded all 60 index images, 18 restoration images and 16 Town images without broken resources, console errors or unexpected external requests. Hosted success/count are verified from run/job state and the 100-passed annotation, not a downloaded hosted browser JSON. Deployment `appgdep_6ad7706e30e48191b49c776a87921383`, saved version `appgprj_6ad746f124fc8191b3f3845f9dff577b~appgver_8b3e96e735e081919be6d68e67967929`, Site-source SHA `e168af86d731cea6d646a97614735b375e20f7b1`, archive SHA-256 `4359854a2db8f7c9e35264bf929f40e851d1c4828359c080b622cf49bd708df8`. Current machine evidence: `tests/artifacts/v3-visual-redesign-results.json` and `v3-visual-hosted-ci.json`.
+
+Owner reports successful real staging account/PIN/lock/refresh/bonus/purchase and visible two-family separation. The agent did not use those accounts, read their progress or send live recovery requests. Direct hosted API/RLS, actual recovery delivery, physical iPad Safari and cross-device acceptance remain pending, consolidated for later rather than requested now. Browser cloud responses are intercepted fictional APIs; isolated SQL uses emulated signed claim context. The synthetic backup/rollback exercise is not a production-data rehearsal.
+
+Production records/schema/settings, the live homepage, GitHub Pages and GitHub main were not touched. Optional custom-art briefs and honest 2D/performance limits are in the visual review. The pre-iteration test reports below are historical.
+
+---
+
 # Private staging activation QA — 20 October 2026
 
 The owner-completed staging database configuration is now built and deployed at the [owner-private HTTPS site](https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site). Only the owner is allowed; no groups or external visitors. [Setup, exact live limits and one combined two-family/iPad session](V3-STAGING-ACTIVATION.md).

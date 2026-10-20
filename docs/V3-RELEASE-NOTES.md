@@ -1,5 +1,7 @@
 # Nine-world V3 development release notes
 
+Current visual/reliability continuation: original isometric world/venue/camp artwork, SVG wardrobe/guide/keepsake art, 60-screen private review album, bounded meaningful-interaction reward timing, exact wallet/display separation, safe parent defaults and immutable retries, recovery-429 handling, synthetic migration/rollback rehearsal and a prepared production plan. See `V3-VISUAL-REVIEW.md`, `V3-TEST-REPORT.md` and `V3-OUTSTANDING-ISSUES.md`. No more manual tests are requested now; production remains unapproved.
+
 ## Private staging activation (20 October 2026)
 
 The owner-completed staging project now has a configured nine-world build hosted on a separate owner-private HTTPS Site. All four Cloud variables match the staging project; its public key is never printed or committed to this GitHub repository. Mock browser builds now use a guarded separate directory and cannot replace deployable staging files. New read-only audit/completeness commands and expanded eight-table security assertions accompany the combined two-family/physical-iPad test guide. See `V3-STAGING-ACTIVATION.md` for the private link and exact remaining checks.

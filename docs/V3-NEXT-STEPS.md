@@ -1,6 +1,6 @@
 # V3 release follow-up
 
-Current continuation: the owner has confirmed initial real staging sign-in/PIN/lock/save/reward/shop/visible-family checks. Visual redesign and autonomous reliability/release preparation are now underway; no further manual tests are requested yet. Use `V3-VISUAL-REVIEW.md`, `V3-RELIABILITY-SECURITY-REVIEW.md`, `V3-OUTSTANDING-ISSUES.md` and `V3-PRODUCTION-RELEASE-PLAN.md` for the current consolidated status. Older setup/run evidence below remains historical.
+Current continuation: the owner has confirmed initial real staging sign-in/PIN/lock/save/reward/shop/visible-family checks. Visual redesign, a verified private version-2 gallery/game, green 100-case hosted browser QA and autonomous reliability/release preparation are complete; no further manual tests are requested yet. Use `V3-VISUAL-REVIEW.md`, `V3-RELIABILITY-SECURITY-REVIEW.md`, `V3-OUTSTANDING-ISSUES.md` and `V3-PRODUCTION-RELEASE-PLAN.md` for the current consolidated status. Older setup/run evidence below remains historical.
 
 The nine-world gameplay milestone and isolated secure integration implementation exist on `codex/v3-adventure-build`, draft PR #2. Nothing is merged or connected to production.
 
