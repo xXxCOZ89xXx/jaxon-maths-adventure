@@ -691,17 +691,18 @@
           worked: `Gross ${money(gross)} − supplied deduction ${money(deduction)} = net ${money(gross - deduction)}. These are not real tax rates.`,
         });
       } else {
-        const goal = 5000,
-          saved = 1000,
-          weekly = 1000;
+        const goal = (40 + n * 5) * 100,
+          saved = (5 + d) * 100,
+          weekly = (5 + d) * 100,
+          weeks = Math.ceil((goal - saved) / weekly);
         Object.assign(t, {
           kind: "amount",
           unit: "weeks",
           step: 1,
           max: 20,
-          prompt: `Save for a ${money(goal)} tool kit. You already have ${money(saved)} and save ${money(weekly)} each week. Set the number of weeks needed.`,
-          answer: 4,
-          worked: `(${money(goal)} − ${money(saved)}) ÷ ${money(weekly)} = 4 weeks.`,
+          prompt: `Save for a ${money(goal)} tool kit. You already have ${money(saved)} and save ${money(weekly)} each week. Set the whole number of weeks needed.`,
+          answer: weeks,
+          worked: `(${money(goal)} − ${money(saved)}) ÷ ${money(weekly)} needs ${weeks} whole weeks. Round up to cover the remaining cost.`,
         });
       }
     }
@@ -716,6 +717,12 @@
     const lesson = T.lessons.find((l) => l[0] === t.skill);
     t.teach = lesson[4];
     t.example = lesson[5];
+    if (venue === "work" && stage === 2) {
+      t.teach +=
+        " Count whole weeks and round up if part of another week is needed.";
+      t.example =
+        "If you still need £11 and save £5 each week, you need 3 whole weeks.";
+    }
     t.hint = t.teach;
     return t;
   }

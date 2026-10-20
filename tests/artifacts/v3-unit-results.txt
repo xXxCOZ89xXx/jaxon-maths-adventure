@@ -24,4 +24,5 @@ PASS: Invalid moves, counterfeit denominations and out-of-sequence ledger postin
 PASS: Camp projects require durable milestones and malformed new state does not break V2 migration
 PASS: Academic celebration badges survive later struggle without falsely preserving current mastery
 PASS: Higher-level coordinates and turn composition match worked mathematical examples
-PASS: 9 expedition suites; 4466 generated tasks solved using fictional data.
+PASS: Fresh practical checks vary answer-producing quantities across rounds
+PASS: 10 expedition suites; 4466 generated tasks solved using fictional data.

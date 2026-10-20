@@ -300,18 +300,25 @@
         hint = "Divide the pack price by the number of pots.";
         worked = `${count * price} ÷ ${count} = ${price}p per pot.`;
         break;
-      case "town_timetable":
-        prompt = `Train departs ${clock(540 + n)} and arrives ${clock(540 + n + 25 + 5 * d)}. Journey duration in minutes?`;
-        answer = 25 + 5 * d;
+      case "town_timetable": {
+        const duration = 25 + 5 * d + 5 * (n % 6);
+        prompt = `Train departs ${clock(540 + n)} and arrives ${clock(540 + n + duration)}. Journey duration in minutes?`;
+        answer = duration;
         hint = "Count the minutes from departure to arrival.";
-        worked = `${clock(540 + n)} → ${clock(540 + n + 25 + 5 * d)} is ${answer} minutes.`;
+        worked = `${clock(540 + n)} → ${clock(540 + n + duration)} is ${duration} minutes.`;
         break;
-      case "town_travel":
-        prompt = `Two £${pounds} single tickets or a £${pounds * 2 - 1} return for the same journey. Pounds saved with the return?`;
-        answer = 1;
-        hint = "Compare the return with two singles, not one.";
-        worked = `2 × £${pounds} − £${pounds * 2 - 1} = £1 saved.`;
+      }
+      case "town_travel": {
+        const saving = 50 + 25 * (n % 7),
+          singles = pounds * 200,
+          returnPrice = singles - saving;
+        prompt = `Two ${money(pounds * 100)} single tickets or a ${money(returnPrice)} return for the same journey. Savings with the return in pence?`;
+        answer = saving;
+        hint =
+          "Compare the return with two singles. Use pence for the calculation.";
+        worked = `${singles}p − ${returnPrice}p = ${saving}p saved.`;
         break;
+      }
       case "town_bills":
         prompt = `Meter ${1000 + n} → ${1000 + n + count} kWh. ${20 + 5 * d}p per kWh plus 50p standing charge for one day. Total in pence?`;
         answer = count * (20 + 5 * d) + 50;
@@ -335,12 +342,14 @@
         hint = "Subtract the total ticket cost from the allowance.";
         worked = `Allowance minus ${count} × £${pounds} leaves £${answer}.`;
         break;
-      case "town_time":
-        prompt = `Film starts ${clock(780 + n)}. It lasts ${75 + 15 * d} minutes, followed by a 15-minute walk. Total minutes from the start until arrival?`;
-        answer = 90 + 15 * d;
+      case "town_time": {
+        const duration = 60 + 15 * d + 5 * (n % 7);
+        prompt = `Film starts ${clock(780 + n)}. It lasts ${duration} minutes, followed by a 15-minute walk. Total minutes from the start until arrival?`;
+        answer = duration + 15;
         hint = "Include both the film duration and walking time.";
-        worked = `${75 + 15 * d} + 15 = ${answer} minutes.`;
+        worked = `${duration} + 15 = ${answer} minutes.`;
         break;
+      }
       case "town_wages":
         prompt = `${count} paid hours at ${money(pay)} per hour. Gross wages in pence?`;
         answer = count * pay;

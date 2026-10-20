@@ -8,7 +8,7 @@
   "mission_level_combinations": 123,
   "keepsakes": 41,
   "v3_learning_suites": 9,
-  "expedition_suites": 9,
+  "expedition_suites": 10,
   "generated_tasks_solved": 4466,
   "baseline_scripts": 3,
   "browser": {
@@ -23,7 +23,7 @@
   "protected_files_unchanged": 5,
   "package_smoke": "PASS",
   "parent_activity_smoke": "PASS",
-  "preview_sha256": "af203d3cb012c6eefbe38ef98e4c814ec4a7aafb68412d6e93bb3021f9aec66c",
+  "preview_sha256": "10e09d31498c60e5f7ab20cde6a2f6623682af81e2534932a9972b4e7d58c906",
   "limits": [
     "Physical iPad Safari/WebKit untested",
     "Separate staging cloud auth/sync/rewards not configured",
@@ -62,5 +62,6 @@
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
-  }
+  },
+  "practical_question_variation_samples": 2880
 }

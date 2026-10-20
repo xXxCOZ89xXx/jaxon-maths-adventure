@@ -237,6 +237,17 @@ test("Higher-level coordinates and turn composition match worked mathematical ex
     ],
   );
 });
+test("Fresh practical checks vary answer-producing quantities across rounds", () => {
+  for (const lesson of T.lessons)
+    for (let band = 5; band <= 9; band++)
+      for (let round = 1; round <= 12; round++) {
+        const qs = [0, 1, 2].map((i) => T.question(lesson[0], band, round, i));
+        assert.ok(
+          new Set(qs.map((q) => q[1])).size > 1,
+          lesson[0] + " must require varied calculations",
+        );
+      }
+});
 console.log(
   `PASS: ${suites} expedition suites; ${tasks} generated tasks solved using fictional data.`,
 );
