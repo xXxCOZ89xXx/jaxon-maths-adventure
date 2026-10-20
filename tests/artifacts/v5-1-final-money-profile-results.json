@@ -1,0 +1,1710 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/jaxon-maths-adventure/node_modules/.bin/playwright",
+      "test",
+      "tests/v51-regression.spec.cjs",
+      "--grep",
+      "Fraction Desert|Ratio Island|Practical Maths Town",
+      "--workers=2",
+      "--output=/workspace/work/v51-final-money-profile-output",
+      "--reporter=line,json"
+    ],
+    "configFile": "/workspace/jaxon-maths-adventure/playwright.config.cjs",
+    "rootDir": "/workspace/jaxon-maths-adventure/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/work/v51-final-money-profile-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "desktop-chromium",
+        "name": "desktop-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/(?:v3-(?:browser|expeditions|cloud)|v5-interactions|v51-regression)\\.spec\\.cjs/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/workspace/work/v51-final-money-profile-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "ipad-portrait-chromium",
+        "name": "ipad-portrait-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/(?:v3-(?:browser|expeditions|cloud)|v5-interactions|v51-regression)\\.spec\\.cjs/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/workspace/work/v51-final-money-profile-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "ipad-landscape-chromium",
+        "name": "ipad-landscape-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/(?:v3-(?:browser|expeditions|cloud)|v5-interactions|v51-regression)\\.spec\\.cjs/"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/work/v51-final-money-profile-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "desktop-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop-chromium"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/work/v51-final-money-profile-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "ipad-portrait-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 820,
+            "height": 1180
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "ipad-portrait-chromium"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/work/v51-final-money-profile-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "ipad-landscape-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 1180,
+            "height": 820
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "ipad-landscape-chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 2,
+    "webServer": {
+      "command": "python3 -m http.server 4173 --bind 127.0.0.1",
+      "url": "http://127.0.0.1:4173/v3-adventure.html",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "v51-regression.spec.cjs",
+      "file": "v51-regression.spec.cjs",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "New Learner",
+          "file": "v51-regression.spec.cjs",
+          "line": 21,
+          "column": 8,
+          "specs": [
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12426,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:08:14.901Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbnMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlLCJjb21wbGV0ZWRJbmRlcGVuZGVudFJvdW5kIjp0cnVlLCJhc3Npc3RlZCI6ZmFsc2V9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbl9jb21wYXJlIiwibWV0aG9kIjoiY2hvaWNlIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX29wZXJhdGlvbnMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZGVjaW1hbHMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoicGVyY2VudF9jaGFuZ2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbl9taXhlZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX211bHQiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-8740fe0c0cc65b10ef11",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 9915,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:08:27.943Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX2Jhc2ljcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOmZhbHNlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19zaGFyaW5nIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19wcm9wb3J0aW9uIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19yYXRlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX1d"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-b8e6e15cf6584d898aef",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 26843,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:08:37.871Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9tb25leSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOmZhbHNlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdG90YWxzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbWVudSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3NwbGl0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmFsYW5jZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2ludGVyZXN0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fZGlzY291bnRzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdmFsdWUiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90aW1ldGFibGUiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90cmF2ZWwiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9iaWxscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2hvdXNlaG9sZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpY2tldHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90aW1lIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fd2FnZXMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9wYXlzbGlwIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-a0608a4e1864be5903ea",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 12319,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:08:14.968Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbnMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlLCJjb21wbGV0ZWRJbmRlcGVuZGVudFJvdW5kIjp0cnVlLCJhc3Npc3RlZCI6ZmFsc2V9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbl9jb21wYXJlIiwibWV0aG9kIjoiY2hvaWNlIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX29wZXJhdGlvbnMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZGVjaW1hbHMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoicGVyY2VudF9jaGFuZ2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbl9taXhlZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX211bHQiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-c48b1dc53beb058f007e",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 9912,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:08:27.940Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX2Jhc2ljcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOmZhbHNlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19zaGFyaW5nIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19wcm9wb3J0aW9uIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19yYXRlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX1d"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-b41342693f3b969b66c3",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 26086,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:08:37.866Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9tb25leSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOmZhbHNlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdG90YWxzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbWVudSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3NwbGl0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmFsYW5jZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2ludGVyZXN0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fZGlzY291bnRzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdmFsdWUiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90aW1ldGFibGUiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90cmF2ZWwiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9iaWxscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2hvdXNlaG9sZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpY2tldHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90aW1lIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fd2FnZXMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9wYXlzbGlwIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-e7f72696be648c17ddab",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 10184,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:12:05.962Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbnMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlLCJjb21wbGV0ZWRJbmRlcGVuZGVudFJvdW5kIjp0cnVlLCJhc3Npc3RlZCI6ZmFsc2V9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbl9jb21wYXJlIiwibWV0aG9kIjoiY2hvaWNlIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX29wZXJhdGlvbnMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZGVjaW1hbHMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoicGVyY2VudF9jaGFuZ2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbl9taXhlZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX211bHQiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-019479d5f9e94b1a2f6b",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7024,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:12:16.432Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX2Jhc2ljcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOmZhbHNlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19zaGFyaW5nIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19wcm9wb3J0aW9uIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19yYXRlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX1d"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-b0aa4447e27a76ffcaa1",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 19210,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:12:23.468Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9tb25leSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOmZhbHNlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdG90YWxzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbWVudSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3NwbGl0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmFsYW5jZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2ludGVyZXN0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fZGlzY291bnRzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdmFsdWUiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90aW1ldGFibGUiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90cmF2ZWwiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9iaWxscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2hvdXNlaG9sZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoibmV3Iiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpY2tldHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90aW1lIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJuZXciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fd2FnZXMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6Im5ldyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9wYXlzbGlwIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-7c2c0c86674e7c4102b3",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            }
+          ]
+        },
+        {
+          "title": "Foundation Learner",
+          "file": "v51-regression.spec.cjs",
+          "line": 21,
+          "column": 8,
+          "specs": [
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 14100,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:09:04.732Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25zIiwibWV0aG9kIjoiY2hvaWNlIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fY29tcGFyZSIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fb3BlcmF0aW9ucyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZGVjaW1hbHMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6InBlcmNlbnRfY2hhbmdlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX21peGVkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX211bHQiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-762c5a0f202d811b85f7",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8591,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:09:18.844Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19iYXNpY3MiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fc2hhcmluZyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX3Byb3BvcnRpb24iLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19yYXRlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX1d"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-15b44dc31bf21ec48821",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 25200,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:09:27.450Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbW9uZXkiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RvdGFscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9tZW51IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3NwbGl0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2JhbGFuY2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faW50ZXJlc3QiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fZGlzY291bnRzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3ZhbHVlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpbWV0YWJsZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90cmF2ZWwiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmlsbHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faG91c2Vob2xkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpY2tldHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGltZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl93YWdlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9wYXlzbGlwIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-bc4139b20f88a9f633b7",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 13710,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:09:03.975Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25zIiwibWV0aG9kIjoiY2hvaWNlIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fY29tcGFyZSIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fb3BlcmF0aW9ucyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZGVjaW1hbHMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6InBlcmNlbnRfY2hhbmdlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX21peGVkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX211bHQiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-5f705dcd101b120333d5",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8690,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:09:17.714Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19iYXNpY3MiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fc2hhcmluZyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX3Byb3BvcnRpb24iLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19yYXRlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX1d"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-d733c90db6a344b4e1cd",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 25489,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:09:26.425Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbW9uZXkiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RvdGFscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9tZW51IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3NwbGl0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2JhbGFuY2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faW50ZXJlc3QiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fZGlzY291bnRzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3ZhbHVlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpbWV0YWJsZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90cmF2ZWwiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmlsbHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faG91c2Vob2xkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpY2tldHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGltZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl93YWdlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9wYXlzbGlwIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-86d52467928dd83b1210",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 9022,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:12:42.687Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25zIiwibWV0aG9kIjoiY2hvaWNlIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fY29tcGFyZSIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fb3BlcmF0aW9ucyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZGVjaW1hbHMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6InBlcmNlbnRfY2hhbmdlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX21peGVkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX211bHQiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-52752b1ac2834e8638d2",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 6674,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:12:51.720Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19iYXNpY3MiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fc2hhcmluZyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX3Byb3BvcnRpb24iLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19yYXRlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX1d"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-6a4b66d43f466dfd3f31",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 18522,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:12:58.402Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbW9uZXkiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RvdGFscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9tZW51IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3NwbGl0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2JhbGFuY2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faW50ZXJlc3QiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fZGlzY291bnRzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3ZhbHVlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpbWV0YWJsZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90cmF2ZWwiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmlsbHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faG91c2Vob2xkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJmb3VuZGF0aW9uIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpY2tldHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImZvdW5kYXRpb24iLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGltZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl93YWdlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZm91bmRhdGlvbiIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9wYXlzbGlwIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-4dfe3e0a214c39dc558a",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            }
+          ]
+        },
+        {
+          "title": "Developing Learner",
+          "file": "v51-regression.spec.cjs",
+          "line": 21,
+          "column": 8,
+          "specs": [
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 11686,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:09:52.666Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25zIiwibWV0aG9kIjoiY2hvaWNlIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fY29tcGFyZSIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fb3BlcmF0aW9ucyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZGVjaW1hbHMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6InBlcmNlbnRfY2hhbmdlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX21peGVkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX211bHQiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-10dbc1a7896efb47d4c0",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 8827,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:10:04.389Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19iYXNpY3MiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fc2hhcmluZyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX3Byb3BvcnRpb24iLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19yYXRlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX1d"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-5e2dbe9d2ad84a50a2f8",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 46275,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:10:13.293Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbW9uZXkiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RvdGFscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9tZW51IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3NwbGl0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2JhbGFuY2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faW50ZXJlc3QiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fZGlzY291bnRzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3ZhbHVlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpbWV0YWJsZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90cmF2ZWwiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmlsbHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faG91c2Vob2xkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpY2tldHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGltZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl93YWdlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9wYXlzbGlwIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-3d23aa88354c9650e167",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 11977,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:09:51.942Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25zIiwibWV0aG9kIjoiY2hvaWNlIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fY29tcGFyZSIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fb3BlcmF0aW9ucyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZGVjaW1hbHMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6InBlcmNlbnRfY2hhbmdlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX21peGVkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX211bHQiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-474da44e47cce0a65b79",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 9200,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:10:03.932Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19iYXNpY3MiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fc2hhcmluZyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX3Byb3BvcnRpb24iLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19yYXRlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX1d"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-1e1e2872a940a382a0d8",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 46508,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:10:13.145Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbW9uZXkiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RvdGFscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9tZW51IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3NwbGl0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2JhbGFuY2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faW50ZXJlc3QiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fZGlzY291bnRzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3ZhbHVlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpbWV0YWJsZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90cmF2ZWwiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmlsbHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faG91c2Vob2xkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpY2tldHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGltZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl93YWdlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9wYXlzbGlwIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-ea2ca6d5da6892529f80",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 8538,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:13:16.947Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25zIiwibWV0aG9kIjoiY2hvaWNlIiwicmVzdW1lZCI6dHJ1ZSwiY29tcGxldGVkSW5kZXBlbmRlbnRSb3VuZCI6dHJ1ZSwiYXNzaXN0ZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fY29tcGFyZSIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fb3BlcmF0aW9ucyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZGVjaW1hbHMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6InBlcmNlbnRfY2hhbmdlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX21peGVkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX211bHQiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-0fa422748e6dded86426",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 6504,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:13:25.498Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19iYXNpY3MiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fc2hhcmluZyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX3Byb3BvcnRpb24iLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19yYXRlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX1d"
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-131a1dbf9349e139a593",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 18993,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:13:32.012Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbW9uZXkiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RvdGFscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9tZW51IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3NwbGl0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2JhbGFuY2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faW50ZXJlc3QiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fZGlzY291bnRzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3ZhbHVlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpbWV0YWJsZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90cmF2ZWwiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmlsbHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25faG91c2Vob2xkIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJkZXZlbG9waW5nIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RpY2tldHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImRldmVsb3BpbmciLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGltZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl93YWdlcyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiZGV2ZWxvcGluZyIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9wYXlzbGlwIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-ae582cd664d5cc38208a",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            }
+          ]
+        },
+        {
+          "title": "Advanced Learner",
+          "file": "v51-regression.spec.cjs",
+          "line": 21,
+          "column": 8,
+          "specs": [
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 19893,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:10:59.599Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9ucyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjpmYWxzZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fY29tcGFyZSIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX29wZXJhdGlvbnMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJkZWNpbWFscyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6InBlcmNlbnRfY2hhbmdlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbl9taXhlZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fbXVsdCIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9XQ=="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-fbf604377d4308f83684",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 12847,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:11:19.548Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fYmFzaWNzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlLCJjb21wbGV0ZWRJbmRlcGVuZGVudFJvdW5kIjp0cnVlLCJhc3Npc3RlZCI6ZmFsc2V9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fc2hhcmluZyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19wcm9wb3J0aW9uIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX3JhdGVzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-bee8e81bb52c6cb51ff8",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "desktop-chromium",
+                  "projectName": "desktop-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 33558,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:11:32.448Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX21vbmV5IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlLCJjb21wbGV0ZWRJbmRlcGVuZGVudFJvdW5kIjp0cnVlLCJhc3Npc3RlZCI6ZmFsc2V9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RvdGFscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbWVudSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fc3BsaXQiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2JhbGFuY2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2ludGVyZXN0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9kaXNjb3VudHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3ZhbHVlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90aW1ldGFibGUiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RyYXZlbCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmlsbHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2hvdXNlaG9sZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGlja2V0cyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGltZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fd2FnZXMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3BheXNsaXAiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9XQ=="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-b74f63dcaec9a15f8c2d",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 20025,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:10:59.678Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9ucyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjpmYWxzZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fY29tcGFyZSIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX29wZXJhdGlvbnMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJkZWNpbWFscyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6InBlcmNlbnRfY2hhbmdlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbl9taXhlZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fbXVsdCIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9XQ=="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-1cc2b709680cf2b0f816",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 12310,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:11:19.723Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fYmFzaWNzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlLCJjb21wbGV0ZWRJbmRlcGVuZGVudFJvdW5kIjp0cnVlLCJhc3Npc3RlZCI6ZmFsc2V9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fc2hhcmluZyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19wcm9wb3J0aW9uIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX3JhdGVzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-fb05d646658d7e9e01b1",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-portrait-chromium",
+                  "projectName": "ipad-portrait-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 32307,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:11:32.054Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX21vbmV5IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlLCJjb21wbGV0ZWRJbmRlcGVuZGVudFJvdW5kIjp0cnVlLCJhc3Npc3RlZCI6ZmFsc2V9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RvdGFscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbWVudSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fc3BsaXQiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2JhbGFuY2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2ludGVyZXN0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9kaXNjb3VudHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3ZhbHVlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90aW1ldGFibGUiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RyYXZlbCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmlsbHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2hvdXNlaG9sZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGlja2V0cyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGltZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fd2FnZXMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3BheXNsaXAiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9XQ=="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-7471f875a596d4d5f59b",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Fraction Desert: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 9934,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:13:51.017Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9ucyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWUsImNvbXBsZXRlZEluZGVwZW5kZW50Um91bmQiOnRydWUsImFzc2lzdGVkIjpmYWxzZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fY29tcGFyZSIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6ImZyYWN0aW9uX29wZXJhdGlvbnMiLCJtZXRob2QiOiJjaG9pY2UiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJkZWNpbWFscyIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJmcmFjdGlvbnMiLCJza2lsbCI6InBlcmNlbnRfY2hhbmdlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoiZnJhY3Rpb25zIiwic2tpbGwiOiJmcmFjdGlvbl9taXhlZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6ImZyYWN0aW9ucyIsInNraWxsIjoiZnJhY3Rpb25fbXVsdCIsIm1ldGhvZCI6ImNob2ljZSIsInJlc3VtZWQiOnRydWV9XQ=="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-7496bef813b9ac5c72ef",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Ratio Island: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7122,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:14:00.962Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fYmFzaWNzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlLCJjb21wbGV0ZWRJbmRlcGVuZGVudFJvdW5kIjp0cnVlLCJhc3Npc3RlZCI6ZmFsc2V9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJyYXRpbyIsInNraWxsIjoicmF0aW9fc2hhcmluZyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InJhdGlvIiwic2tpbGwiOiJyYXRpb19wcm9wb3J0aW9uIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoicmF0aW8iLCJza2lsbCI6InJhdGlvX3JhdGVzIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfV0="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-897e641b9d7c259cdecd",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            },
+            {
+              "title": "Practical Maths Town: all skill interfaces, resume and independent separation",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "ipad-landscape-chromium",
+                  "projectName": "ipad-landscape-chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 20248,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-10-20T21:14:08.091Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "curriculum-coverage",
+                          "contentType": "application/json",
+                          "body": "W3sicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX21vbmV5IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlLCJjb21wbGV0ZWRJbmRlcGVuZGVudFJvdW5kIjp0cnVlLCJhc3Npc3RlZCI6ZmFsc2V9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RvdGFscyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fbWVudSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fc3BsaXQiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2JhbGFuY2UiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2ludGVyZXN0IiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl9kaXNjb3VudHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3ZhbHVlIiwibWV0aG9kIjoidHlwZWQtbW9kZWwiLCJyZXN1bWVkIjp0cnVlfSx7InByb2ZpbGUiOiJhZHZhbmNlZCIsIndvcmxkIjoidG93biIsInNraWxsIjoidG93bl90aW1ldGFibGUiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3RyYXZlbCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fYmlsbHMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX2hvdXNlaG9sZCIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGlja2V0cyIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fdGltZSIsIm1ldGhvZCI6InR5cGVkLW1vZGVsIiwicmVzdW1lZCI6dHJ1ZX0seyJwcm9maWxlIjoiYWR2YW5jZWQiLCJ3b3JsZCI6InRvd24iLCJza2lsbCI6InRvd25fd2FnZXMiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9LHsicHJvZmlsZSI6ImFkdmFuY2VkIiwid29ybGQiOiJ0b3duIiwic2tpbGwiOiJ0b3duX3BheXNsaXAiLCJtZXRob2QiOiJ0eXBlZC1tb2RlbCIsInJlc3VtZWQiOnRydWV9XQ=="
+                        }
+                      ]
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "17bd5886044e55738676-1e3647f76bc1624c6cf3",
+              "file": "v51-regression.spec.cjs",
+              "line": 23,
+              "column": 34
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-20T21:08:13.274Z",
+    "duration": 375273.694,
+    "expected": 36,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

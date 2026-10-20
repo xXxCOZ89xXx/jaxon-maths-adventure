@@ -1,50 +1,56 @@
 # Codex handover — V5.1 usability and automated regression
 
-Branch `codex/v3-adventure-build`; [Draft PR #2](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/pull/2), unmerged. Application changes: `37174f1`; additional authenticated journey test/visuals: `725e653`; valid fictional discovery history and 55-skill discovery checks: `98084e0`. V5 baseline: `2ca7639` (application `98ff388`). **The latest user request authorises all eight V5.1 priorities**, superseding the earlier Phase 1-only request. No deployment is authorised or performed; the existing owner-private site still serves V5.
+Branch `codex/v3-adventure-build`; [Draft PR #2](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/pull/2), unmerged. **Final implementation: `2f30f72`**; V5 baseline: `2ca7639`. The latest user request authorises all eight V5.1 priorities and supersedes the earlier Phase 1-only request. Implementation is complete; final hosted CI is in progress. No deployment occurred: the owner-private site still serves V5.
 
-## V5.1 implementation status
+## Priority status
 
-| Priority | Implementation and verification scope |
+| Priority | Completed work |
 | --- | --- |
-| 1. Typed answers | Shared strict integer validation; raw drafts saved separately from validated values; empty/malformed/fractional/out-of-range drafts cannot submit a stale answer. Enter uses the ordinary guarded submit path. Typed/tapped correction and reload preserve first-attempt evidence. Focus and caret survive model updates. |
-| 2. Numeric controls | Direct entry in scalar expeditions, numeric constructed practice and original scalar quests. Text inputs prevent accidental wheel/spinner changes. Currency inputs explicitly use integer pence. Budget envelopes add £5/£10 shortcuts; bounded grouping/shading controls remain mathematical actions. |
-| 3. Bill sharing | Reusable equal-share fraction bar, friend payments, fictional UK money and allocated/remainder totals. Used in café missions and supported `town_split` practice; original saved café tasks use a prompt-derived metadata fallback. Models never render during independent checks/discovery. |
-| 4. Nine-world audit | Renderer contracts pass 1,107 task variants across all routes, three tiers and three seeds. Browser profile matrix samples every one of the 55 skills; representative complete practice/fresh-check journeys run in each world. |
-| 5. Testing identities | Node/Playwright-only fresh contexts, four deterministic fictional progress profiles, intercepted parent/learner sessions and reset/cleanup. No app auth hook, public bypass, remote identity creation, real credentials or service-role key. Existing sign-in/PIN UI tests and real PostgreSQL permission tests stay separate. |
-| 6. Expanded journeys | All 55 skills under each profile; full supported-to-independent round in each world, assistance/freshness checks, exact reloads. Existing tests retain nine-world expeditions, all venues, coins/time, shop, camp/estate, achievements and complete journey. New authenticated fixture journey checks every stage against intercepted save transport and parent review. |
-| 7. Repeatable regression | Focused npm scripts, four-project CI including emulated iPad WebKit, fail-closed local networking, per-test curriculum coverage attachments, JSON summary and reset fixtures. CI timeout increased to fit the expanded matrix. |
-| 8. Existing issues | Fixed blank clock drafts submitting old times, live numeric model/readout updates, and missing image roles in array/dot models. Original V2 sources remain unchanged. Final broad regression is in progress. |
+| 1. Typed answers | Shared validation, persistent raw drafts, clear invalid feedback and guarded Enter submission. Empty/invalid edits cannot submit an older value. Model/readout updates preserve focus/caret. Queued edits must still match world, mission seed, practice round and question; they cannot overwrite a replacement/completed task. |
+| 2. Slow controls | Direct entry in scalar expeditions, numeric supported practice and original scalar quests. Text inputs prevent wheel/spinner changes. Mission money uses integer pence; practice entry matches the question's pounds/pence unit, with exact two-decimal pounds conversion into model pence. Budget envelopes have £5/£10 shortcuts and wrapping touch controls. |
+| 3. Bill sharing | Reusable equal-share fraction bar, per-friend fictional UK money, and allocated/remainder totals. Shared by café missions and supported `town_split` practice. Old saved café tasks use a prompt-derived metadata fallback. No models during independent checks/discovery. |
+| 4. Nine-world audit | Renderer contracts cover 1,107 task variants: every route, three tiers and three seeds. Browser profiles sample all 55 skills; bounded shading/grouping controls remain mathematical actions. |
+| 5. Isolated identities | Node/Playwright-only fresh contexts, four deterministic progress profiles, intercepted parent/learner sessions, reset and cleanup. No app auth hook, public bypass, remote account creation or service-role key. Existing sign-in/PIN UI tests and real PostgreSQL permissions tests remain separate. |
+| 6. Expanded journeys | All 55 skills under four profiles; complete supported-to-independent rounds in each world; assistance/freshness, exact reloads and role checks. Authenticated fixture recipe journey verifies every stage against save transport and parent review. Existing all-world/venue, coins/time, shop, estate, achievements and recovery tests remain. |
+| 7. Repeatable regression | Focused npm commands, four-project CI including iPad WebKit, isolated networking, coverage attachments and JSON summary. CI uses two workers; local default remains one. Separate output/report paths are required for supplemental runners. |
+| 8. Existing issues | Fixed blank clocks submitting older times, stale queued edits crossing quests, pounds/pence entry mismatch, live model/readout updates, dot/array accessibility roles and cramped budget controls. Original V2 files are unchanged. |
 
-Profiles are synthetic scenarios: Foundation uses the supported band-5 floor with prerequisite gaps (approximate Year 4/5 needs); Developing mixes bands/gaps; Advanced has repeated strong independent evidence; New has no history. They make no assumptions about the real learner. Browser profile coverage samples supported interfaces; complete mastery/freshness/spaced checks for **all 55 skills** also remain covered by existing pure-engine suites.
+Foundation uses the supported band-5 floor plus prerequisite gaps (approximate Year 4/5 needs); Developing mixes evidence/gaps; Advanced has repeated strong independent evidence; New has no history. These synthetic profiles make no assumptions about the real learner. Seeded discovery histories are complete, valid records. New-learner discovery rounds are exercised across all 55 skills in pure-engine checks. Existing engine suites also cover full practice/fresh/spaced mastery for all skills; browser profiles sample each skill and complete representative rounds in every world.
 
-## Actual verification at this milestone
+## Actual verification
 
-- `npm test`: passed, including new profile/isolation checks, numeric/clock validation and input audit.
-- `npm run test:staging-build`: passed pinned configuration and fixture/deployable-byte isolation.
-- `npm run test:security`: **14/14 real disposable PostgreSQL suites passed**, network-disabled container, fictional Auth claims ([output](../tests/artifacts/v5-1-security-results.txt)). Not hosted Supabase Auth/RLS certification.
-- Initial focused input matrix: **18/18** desktop/iPad Chromium cases passed; added clock/model cases are in the current broad run.
-- Authenticated fictional lentil journey: **3/3** passed, desktop and both iPad Chromium layouts (57.7s), isolated output directory. [Machine evidence](../tests/artifacts/v5-1-family-journey-results.json).
-- Full local Chromium run: **249 cases in progress (166/166 desktop + portrait passed; landscape underway)**, with the three additional authenticated-journey cases reported separately. Final totals/coverage summary must replace this milestone entry.
-- Final hosted CI: [run 39495120026](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39495120026), `98084e0`, in progress. Earlier push/PR runs were superseded by workflow concurrency, not application failures.
-- Local WebKit installation is blocked by proxy destination policy (403 on browser distribution hosts); no bypass attempted. CI installs/runs WebKit separately.
-- [Renderer audit](../tests/artifacts/v5-1-input-audit.json). Reviewed equal-sharing screenshots: [desktop](../tests/visual/v51/desktop-equal-sharing.png), [portrait](../tests/visual/v51/ipad-portrait-equal-sharing.png), [landscape](../tests/visual/v51/ipad-landscape-equal-sharing.png).
+- **258 distinct local browser cases passed**, zero failed/skipped/flaky: desktop and both iPad Chromium layouts. The 249-case broad run passed in 30.3 minutes; subsequent focused results replace overlapping earlier cases rather than inflating totals.
+- Final focused input run: **27/27 passed**, including decimal pounds, invalid drafts, exact reloads, wrong-first evidence, clocks, cross-tab save-lock races and budget touch layout.
+- Final monetary profile recheck: **36/36 passed** across affected Fraction Desert, Ratio Island and Town skills, all four profiles and three layouts.
+- Authenticated fictional lentil journey: **3/3 passed**, including transport saves, reloads, finite receipts and parent review.
+- Browser coverage: **nine worlds, 55 skills, four profiles, 660 skill visits and 108 complete independent rounds**. [Summary](../tests/artifacts/v5-1-summary.json) · [Combined actual results](../tests/artifacts/v5-1-browser-results.json) · [Verification scope](../tests/artifacts/v5-1-verification.json). Raw broad/focused sources are named in the combined report.
+- `npm test` passed, including all existing compatibility/model suites, 14 V5 model suites, valid/resettable profile/discovery checks and the [1,107-variant renderer audit](../tests/artifacts/v5-1-input-audit.json).
+- `npm run test:staging-build` passed pinned configuration and fixture/deployable-byte isolation.
+- `npm run test:security`: **14/14 real disposable PostgreSQL suites passed**, network disabled and fictional Auth claims. [Output](../tests/artifacts/v5-1-security-results.txt). This is not hosted Supabase Auth/RLS certification.
+- Hosted CI: [run 39498386408](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39498386408), exact code `2f30f72`, **344 cases configured; in progress**. Local WebKit distribution downloads were blocked by proxy policy; CI installs WebKit separately. Superseded runs were cancelled by workflow concurrency and are not presented as passes.
+- Reviewed captures: [desktop](../tests/visual/v51/desktop-equal-sharing.png), [portrait](../tests/visual/v51/ipad-portrait-equal-sharing.png), [landscape](../tests/visual/v51/ipad-landscape-equal-sharing.png).
 
-Early harness failures were corrected: navigation uses the actual header `data-nav` controls; Town lessons need their visible disclosure opened; journey fixtures must include the completed-stage ledger; asynchronous Enter assertions wait for saves. Newly exercised multiplication accessibility failures were fixed in V3 rendering. An initial staging-build attempt was blocked by sandbox child-process permissions; the permitted rerun passed.
+The queued-input defect was reproduced before fixing: a blocked measurement edit wrote `123` into another tab's new algebra quest (expected `0`). Its regression now passes on all three Chromium layouts. Early harness issues—header navigation/disclosures, incomplete journey fixture ledgers, asynchronous save assertions and discovery fixture schema—were corrected. No unresolved failure remains in the local matrix.
 
-## Files and architecture
+## Files and architectural constraints
 
-- Application: `v3/app.js`, `adventure-ui.js`, `adventure.js`, `hands-on.js`, `journey.js`, `style.css`.
-- Tests: `tests/v5-hands-on.cjs`, `v5-interactions.spec.cjs`, `v51-regression.spec.cjs`, `v51-fixtures.cjs`; `tests/helpers/{profiles,identities,cloud-server}.cjs`. Existing `v3-cloud.spec.cjs` reuses the extracted fictional server.
-- Regression/reporting: `scripts/{audit-v51-inputs,summarize-v51}.cjs`, `package.json`, `playwright.config.cjs`, `.github/workflows/v3-offline-qa.yml`, linked JSON/visual evidence.
-- Extend the existing pure engines/renderers and versioned journey ledger. Optional `amountDraft`/`clockDraft` text does not replace validated numeric state. Taps clear stale drafts. Saves retain guided first-attempt evidence separately from independent mastery. Units remain integer pence/minutes; unsuitable practice variants retain choices.
-- Preserve nine worlds/55 skills, eight Town buildings, wallet/wardrobe/estate, **60 active minutes/week, ten coins/active minute and 1:1 screen time**. No new schema, RLS, live homepage or original V2 changes.
+- Application: `v3/{app,adventure-ui,adventure,hands-on,journey}.js`, `v3/style.css`.
+- Tests: `tests/v5-{hands-on.cjs,interactions.spec.cjs}`, `v51-regression.spec.cjs`, `v51-fixtures.cjs`, `helpers/{profiles,identities,cloud-server}.cjs`; existing `v3-cloud.spec.cjs` reuses the extracted fictional server.
+- Process/evidence: `scripts/{audit-v51-inputs,summarize-v51}.cjs`, `package.json`, `playwright.config.cjs`, `.github/workflows/v3-offline-qa.yml`, linked JSON/visual files.
+- Extend existing pure engines/renderers and the versioned journey ledger. Optional `amountDraft`/`clockDraft` text stays separate from validated numeric state. Taps clear stale drafts; only a current, unsolved question accepts a queued edit. Practice pounds convert into integer model pence; submitted practice values remain in the original question unit.
+- Preserve first-attempt/assisted evidence separately from independent mastery; no schema change was required. Preserve nine worlds/55 skills, eight venues, journey inventory, wallet/wardrobe/estate, **60 minutes/week, ten coins per active minute and 1:1 screen time**.
+- This session changed no production Auth, Supabase SQL/RLS, original live homepage or original V2 source. Test identities exist only in isolated fixture contexts and mocked APIs. No genuine learner records were requested, read or reset; no release was merged, published or deployed.
 
-## Remaining gates and exact resume point
+## Exact resume point and remaining gates
 
-Collect the full local report and final CI outcome; fix any failing case, rerun affected checks, update this handover with actual totals, then update PR #2. Do not end with an in-progress claim presented as a pass.
+First collect final hosted CI run `39498386408`, fix any failing case, and update this file/verification JSON/PR with the actual outcome. Implementation of priorities 1–8 is complete; do not restart Phase 2 from the earlier handover.
 
-Physical iPad Safari scrolling, virtual keyboard/minus-key entry, gestures, performance and assistive-technology review remain outstanding. Emulation is not hardware certification. Actual hosted login/PIN/RLS, real cross-device/offline recovery and deferred recovery delivery remain unverified; the previous staging proxy CONNECT 403 must not be bypassed. Do not read/reset genuine learner records, change production Auth, apply remote migrations, merge, publish or deploy. Keep the existing private V5 preview unchanged.
+After hosted regression, the useful next work is the existing consolidated **physical iPad acceptance and verified hosted-authentication/recovery checks**. Physical Safari scrolling, virtual keyboard/minus/decimal entry, gestures, performance and assistive-technology review remain outstanding. Actual hosted login/PIN/RLS, genuine cross-device/offline recovery and deferred recovery delivery remain unverified. The prior staging CONNECT 403 must not be bypassed. Do not access real records, alter production Auth/SQL, merge or deploy without further approval. Keep the private V5 preview unchanged.
 
-Commands after `npm ci`: `npm test`; `npm run test:staging-build`; `npm run test:security`; `npm run test:answers`; prepare fixtures with `node tests/prepare-v3.cjs` before `npm run test:profiles`; full matrix `V3_WEBKIT=1 V51_REPORT=tests/artifacts/v5-1-browser-results.json npm run test:e2e`; `npm run report:v51`. Use one Playwright runner at a time, or distinct output/report paths for supplemental tests. This environment uses `/workspace/work/npm-cache`; localhost browser/server, GitHub and Docker operations need the supported network permission.
+## Commands
 
-References: [AGENTS](../AGENTS.md), [V5 results](V5-TEST-REPORT.md), [V5 architecture](V5-INTERACTIVE-LEARNING.md), [test isolation](V3-TEST-ISOLATION.md), [secure staging](V3-SECURE-STAGING.md).
+After `npm ci`: `npm test`; `npm run test:staging-build`; `npm run test:security`; `npm run test:answers`. Prepare fixtures with `node tests/prepare-v3.cjs` before `npm run test:profiles`. Full hosted-equivalent matrix: `V3_WEBKIT=1 V51_REPORT=tests/artifacts/v5-1-browser-results.json npm run test:e2e`; summary: `npm run report:v51`.
+
+In this managed environment npm cache is `/workspace/work/npm-cache`; localhost browser/server, GitHub and Docker operations need the supported network permission. Local WebKit is blocked by policy. Use one local Playwright runner or distinct output/report paths; fixtures reset by closing their private browser contexts.
+
+References: [AGENTS](../AGENTS.md), [V5 baseline evidence](V5-TEST-REPORT.md), [V5 architecture](V5-INTERACTIVE-LEARNING.md), [test isolation](V3-TEST-ISOLATION.md), [secure staging](V3-SECURE-STAGING.md).
