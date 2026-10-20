@@ -221,6 +221,14 @@
         max: 9,
       };
     }
+    // Vary supply positions without changing the maths, and serialize the exact permutation.
+    if (["order","match"].includes(t.kind)) {
+      const supplied=t.kind==="order"?t.items:t.labels,permutation=supplied.map((_,i)=>i),originalAnswer=[...t.answer];
+      let random=(Math.imul(seed,2654435761)+tier*97+stage*101+String(route).charCodeAt(0))>>>0;
+      for(let i=permutation.length-1;i>0;i--){random=(Math.imul(random,1664525)+1013904223)>>>0;const j=random%(i+1);[permutation[i],permutation[j]]=[permutation[j],permutation[i]];}
+      if(t.kind==="order")t.items=permutation.map(i=>supplied[i]);else t.labels=permutation.map(i=>supplied[i]);
+      t.answer=originalAnswer.map(i=>permutation.indexOf(i));
+    }
     if (t.kind === "order") {
       t.teach =
         "Compare values before ordering. For fractions, compare equal-sized wholes using common denominators or equivalent bars.";
@@ -242,6 +250,7 @@
           : world === "ratio"
             ? "Three batches using two scoops each need six scoops."
             : "Half of £6 is £3.";
+      t.worked=t.items.map((item,i)=>item+' → '+t.labels[t.answer[i]]).join('; ')+'.';
     }
     if (t.kind === "array") {
       t.teach =
@@ -299,7 +308,7 @@
           "List every equally likely outcome once. For two independent devices, pair each outcome of the first with every outcome of the second.",
         example:
           "A coin and a two-section spinner give H1, H2, T1 and T2: four equally likely pairs.",
-        worked: "Check each listed outcome against the stated condition.",
+        worked: "Favourable outcomes: "+labels.filter(test).join("; ")+". Each listed outcome is equally likely.",
       };
     }
     t.hint = t.teach;
@@ -392,7 +401,7 @@
         picked = q.values.picked;
       body = `<p>${t.kind === "order" ? "Tap a label, then a position. Order from smallest to largest." : "Tap a price or quantity, then its matching destination."} Every label is used once.</p><div class="label-supply">${(t.labels || t.items).map((label, i) => btn(esc(label) + (/^\d+\/\d+$/.test(label) ? `<span class="fraction-mini" aria-hidden="true"><i style="width:${(label.split("/")[0] / label.split("/")[1]) * 100}%"></i></span>` : ""), `h-pick:${i}`, `aria-pressed="${picked === i}" class="movable-label"`)).join("")}</div><div class="label-destinations">${t.items.map((label, i) => `<section><strong>${t.kind === "match" ? esc(label) : "Position " + (i + 1)}</strong>${btn(order[i] === undefined ? "Place selected label" : esc((t.labels || t.items)[order[i]]), `h-place:${i}`, `aria-label="Place label in position ${i + 1}"`)}</section>`).join("")}</div>${btn("Clear placements", "h-clear")}`;
     } else if (t.kind === "array" || t.kind === "volume") {
-      body = `<p>Build rows and columns; the total follows your arrangement.</p><div class="array-controls">${(t.kind === "volume" ? ["Rows", "Columns", "Layers"] : ["Rows", "Columns"]).map((x, i) => `<div><strong>${x}: ${parts[i] || 0}</strong>${btn("−", `m-part:${i}:-1`, `aria-label="Remove one ${x.toLowerCase()}"`)}${btn("+", `m-part:${i}:1`, `aria-label="Add one ${x.toLowerCase()}"`)}</div>`).join("")}</div><div class="crate-array" style="grid-template-columns:repeat(${Math.max(1, parts[1] || 0)},26px)" aria-label="${parts[0] || 0} rows of ${parts[1] || 0} crates">${"<span>▣</span>".repeat((parts[0] || 0) * (parts[1] || 0))}</div>${t.kind === "volume" ? `<div class="volume-layers">${Array.from({ length: parts[2] || 0 }, (_, i) => `<section><strong>Layer ${i + 1}</strong><div class="crate-array" style="grid-template-columns:repeat(${Math.max(1, parts[1] || 0)},20px)">${"<span>▣</span>".repeat((parts[0] || 0) * (parts[1] || 0))}</div></section>`).join("")}</div>` : ""}<p>Total: ${(parts[0] || 0) * (parts[1] || 0) * (t.kind === "volume" ? parts[2] || 0 : 1)} ${t.kind === "volume" ? "cubic units" : "crates"}.</p>`;
+      body = `<p>Build rows and columns; the total follows your arrangement.</p><div class="array-controls">${(t.kind === "volume" ? ["Rows", "Columns", "Layers"] : ["Rows", "Columns"]).map((x, i) => `<div><strong>${x}: ${parts[i] || 0}</strong>${btn("−", `m-part:${i}:-1`, `aria-label="Remove one ${x.toLowerCase()}"`)}${btn("+", `m-part:${i}:1`, `aria-label="Add one ${x.toLowerCase()}"`)}</div>`).join("")}</div>${t.kind === "volume" ? "<p class=small>Footprint of one layer</p>" : ""}<div class="crate-array" style="grid-template-columns:repeat(${Math.max(1, parts[1] || 0)},26px)" aria-label="${parts[0] || 0} rows of ${parts[1] || 0} crates">${"<span>▣</span>".repeat((parts[0] || 0) * (parts[1] || 0))}</div>${t.kind === "volume" ? `<div class="volume-layers">${Array.from({ length: parts[2] || 0 }, (_, i) => `<section><strong>Layer ${i + 1}</strong><div class="crate-array" style="grid-template-columns:repeat(${Math.max(1, parts[1] || 0)},20px)">${"<span>▣</span>".repeat((parts[0] || 0) * (parts[1] || 0))}</div></section>`).join("")}</div>` : ""}<p>Total: ${(parts[0] || 0) * (parts[1] || 0) * (t.kind === "volume" ? parts[2] || 0 : 1)} ${t.kind === "volume" ? "cubic units" : "crates"}.</p>`;
     } else if (t.kind === "chart") body = bars(parts, t.labels, t.max);
     else if (t.kind === "grid" && t.sample)
       body = `<div class="sample-space" role="group" aria-label="Fair die sample space">${t.labels.map((l, i) => btn(esc(l), `m-select:${i}`, `aria-label="Outcome ${esc(l)}" aria-pressed="${(q.values.selected || []).includes(i)}"`)).join("")}</div>`;
