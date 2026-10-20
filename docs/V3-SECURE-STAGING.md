@@ -1,5 +1,7 @@
 # V3 secure staging integration and setup
 
+Current continuation: the owner has confirmed initial real staging sign-in/PIN/lock/save/reward/shop/visible-family checks. Visual redesign and autonomous reliability/release preparation are now underway; no further manual tests are requested yet. Use `V3-VISUAL-REVIEW.md`, `V3-RELIABILITY-SECURITY-REVIEW.md`, `V3-OUTSTANDING-ISSUES.md` and `V3-PRODUCTION-RELEASE-PLAN.md` for the current consolidated status. Older setup/run evidence below remains historical.
+
 Status, 20 October 2026: the owner confirms that `jaxon-maths-v3-staging` (`sfogrvedypgtxfvecmbx`) has all three migrations, eight protected tables, 40 catalogue items and two fictional families. The four Cloud variables match that staging ref/URL and the public key is present (never printed). The configured app has been built and deployed to a separate **owner-private** HTTPS Site. The Cloud proxy rejects the staging host with 403, so live Auth/RPC/RLS acceptance is still unverified. See [activation report](V3-STAGING-ACTIVATION.md). Continue on `codex/v3-adventure-build`, draft PR #2. No production release is authorised.
 
 Private test link: https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site

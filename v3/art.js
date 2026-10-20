@@ -1,4 +1,4 @@
-/* Original SVG artwork. No external assets or requests. */
+/* Original, deterministic isometric dioramas. No external images, fonts or engine. */
 (function () {
   "use strict";
   const E = window.V3Engine,
@@ -15,160 +15,499 @@
           "'": "&#39;",
         })[c],
     );
-  function tree(x, y, k = 1) {
-    return `<g transform="translate(${x} ${y}) scale(${k})"><path d="M-5 0h10v-48H-5" fill="#715943"/><path d="M0-113l-32 48h15l-25 34h84L17-65h15z" fill="#2b654c"/><path d="M0-113v82h42L17-65h15z" fill="#3f8960"/><path d="M0-113l-32 48h15l-25 34h12L9-69H-4L15-92z" fill="#78ad70" opacity=".6"/></g>`;
+  const palettes = {
+    number: ["#183c3b", "#91b9a1", "#558660", "#315c47", "#a9ca83"],
+    fractions: ["#6b493f", "#edcc96", "#d8b074", "#af7c51", "#fae1a7"],
+    algebra: ["#263e59", "#bdcfdd", "#8fa7bb", "#566e85", "#dbe9ea"],
+    geometry: ["#363c60", "#c7bdd4", "#9296b1", "#626680", "#ddd4cf"],
+    ratio: ["#174956", "#8bc7c6", "#e5cf8b", "#b09460", "#f8e4a9"],
+    statistics: ["#233d55", "#a1bfc4", "#648b83", "#3e665e", "#bfd1b0"],
+    probability: ["#241f4d", "#a3a2d0", "#7771a2", "#4e4977", "#cec4eb"],
+    measure: ["#3a3d49", "#b0a9a2", "#9f8c71", "#6c6254", "#d7c5a1"],
+    town: ["#284e50", "#bbd6cf", "#97b08a", "#63816a", "#d7dbaf"],
+  };
+  const poly = (pts, fill, extra = "") =>
+    `<path d="${pts}" fill="${fill}" ${extra}/>`;
+  const at = (x, y, body, k = 1) =>
+    `<g transform="translate(${x} ${y}) scale(${k})">${body}</g>`;
+  function block(
+    x,
+    y,
+    w = 40,
+    d = 22,
+    h = 35,
+    color = "#afbc9d",
+    roof = "#d9ddb8",
+    shadow = true,
+  ) {
+    return at(
+      x,
+      y,
+      `${shadow ? `<ellipse cy="8" rx="${w + 8}" ry="${d + 4}" fill="#102e30" opacity=".15"/>` : ""}${poly(`M-${w} 0L0 ${d}V${d - h}L-${w} -${h}Z`, color)}${poly(`M0 ${d}L${w} 0V-${h}L0 ${d - h}Z`, color)}${poly(`M0 ${d}L${w} 0V-${h}L0 ${d - h}Z`, "#102d38", 'opacity=".23"')}${poly(`M-${w} -${h}L0 -${h + d}L${w} -${h}L0 ${d - h}Z`, roof)}<path d="M-${w} -${h}L0 ${d - h}L${w} -${h}" fill="none" stroke="#fff" stroke-opacity=".22"/>`,
+    );
   }
-  function building(x, y, h = 60, color = "#dfcbb0") {
-    return `<g transform="translate(${x} ${y})"><path d="M-27 0v-${h}l27-15 28 15v${h}L0 16z" fill="${color}"/><path d="M0 16v-${h}l28-${15}v${h}z" fill="#000" opacity=".14"/><path d="M-27-${h}L0-${h + 15}l28 15L0-${h - 15}z" fill="#f5eedb"/><path d="M-17-${h - 19}h9v15h-9zM9-${h - 17}h9v15H9z" fill="#7dafb3"/></g>`;
+  function pine(x, y, k = 1, color = "#326e56") {
+    return at(
+      x,
+      y,
+      `<ellipse cy="5" rx="27" ry="10" fill="#163e37" opacity=".2"/>${block(0, 0, 5, 3, 42, "#83674b", "#b9986a")}${[0, 1, 2].map((i) => `${poly(`M0 ${-110 + i * 23}L-${33 + i * 5} ${-53 + i * 19}L0 ${-35 + i * 19}L${33 + i * 5} ${-53 + i * 19}Z`, color)}${poly(`M0 ${-110 + i * 23}V${-35 + i * 19}L${33 + i * 5} ${-53 + i * 19}Z`, "#102e35", 'opacity=".22"')}<path d="M0 ${-110 + i * 23}L-${33 + i * 5} ${-53 + i * 19}L0 ${-63 + i * 19}" fill="#badb9c" opacity=".22"/>`).join("")}`,
+      k,
+    );
+  }
+  function house(x, y, k = 1, color = "#d4ba8e", label = "", lit = true) {
+    return at(
+      x,
+      y,
+      block(0, 0, 46, 24, 65, color, "#ead9b1") +
+        poly("M-52 -65L0 -114L52 -65L0 -40Z", "#486c60") +
+        poly("M0 -114L52 -65L0 -40Z", "#264e49") +
+        `<path d="M-32-45l17 8v21l-17-8zM15-37l17-8v21l-17 8z" fill="${lit ? "#f5d98e" : "#667e79"}"/><path d="M-7-21l14-7V15L-7 8Z" fill="#3a554c"/><path d="M-33-45v21m18-13l-17-8M15-26l17-8" stroke="#8d7b57" stroke-width="2"/>${label ? `<g transform="translate(0 40)"><rect x="-62" y="-13" width="124" height="27" rx="5" fill="#f6edd7"/><text text-anchor="middle" y="5" fill="#223e38" font-size="15" font-family="system-ui" font-weight="700">${esc(label)}</text></g>` : ""}`,
+      k,
+    );
+  }
+  function lamp(x, y, on = true) {
+    return at(
+      x,
+      y,
+      `<path d="M0 0v-54h15" stroke="#3e5651" stroke-width="4" fill="none"/><path d="M9-56h13v17H9z" fill="${on ? "#ffe0a0" : "#74867a"}" stroke="#5c6250" stroke-width="2"/>${on ? '<circle class="scene-glow" cx="16" cy="-47" r="20" fill="#ffe4a1" opacity=".16"/>' : ""}`,
+    );
+  }
+  function bridge(x, y, restored = true) {
+    return at(
+      x,
+      y,
+      `${[0, 1, 2, 3, 4, 5]
+        .filter((i) => restored || i < 2 || i > 4)
+        .map((i) => block(i * 12, -i * 6, 29, 10, 8, "#956f4c", "#d4b17a"))
+        .join(
+          "",
+        )}${restored ? '<path d="M-30-13l61-30m-61 30v-20m61-10v-20M28 10l61-30m-61 30v-20m61-10v-20" stroke="#795739" stroke-width="4" fill="none"/>' : ""}`,
+    );
+  }
+  function gear(x, y, on = true, k = 1) {
+    return at(
+      x,
+      y,
+      `<path d="M-25-8h7l4-7-4-6 11-7 4 7h7l4-7 11 7-4 6 4 7h7V5h-7l-4 7 4 6-11 7-4-7h-7l-4 7-11-7 4-6-4-7h-7z" fill="${on ? "#dab976" : "#8b9293"}" stroke="#43565c" stroke-width="3"/><circle r="10" fill="#4a7171"/><circle r="4" fill="${on ? "#bdeba6" : "#687f80"}"/>`,
+      k,
+    );
+  }
+  function vessel(x, y, k = 1) {
+    return at(
+      x,
+      y,
+      poly("M-45 0L30 10L55-8L-25-18Z", "#f3e4be") +
+        poly("M-45 0L30 10L25 24L-35 13Z", "#925f48") +
+        '<path d="M0 3v-90" stroke="#6b5d4a" stroke-width="4"/>' +
+        poly("M-4-86L-4-12L-48-20Z", "#f4e6c7") +
+        poly("M4-80L42-14L4-12Z", "#e2a65c"),
+      k,
+    );
+  }
+  function terrain(id, l) {
+    const p = palettes[id],
+      parts = [];
+    for (let sum = 0; sum <= 14; sum++)
+      for (let a = 0; a < 8; a++) {
+        const b = sum - a;
+        if (b < 0 || b > 7 || (a === 0 && b === 0) || (a === 7 && b === 7))
+          continue;
+        const x = 450 + (a - b) * 43,
+          y = 238 + (a + b) * 19;
+        const water =
+          (id === "ratio" && (a < 2 || b > 5)) ||
+          (["number", "fractions"].includes(id) && a === 3);
+        let top = water
+          ? id === "fractions" && !l
+            ? "#ae8c59"
+            : "#5cabb6"
+          : p[2];
+        if (id === "town" && (a === 3 || a === 4 || b === 3 || b === 4))
+          top = "#bbc2af";
+        parts.push(block(x, y, 43, 19, water ? 26 : 35, p[3], top, false));
+        if (!water && (a * 7 + b * 11) % 4 === 0)
+          parts.push(
+            poly(
+              `M${x - 26} ${y - 34}l22-9 25 10-22 9Z`,
+              p[4],
+              'opacity=".16"',
+            ),
+          );
+        if (water && !(id === "fractions" && !l))
+          parts.push(
+            `<path d="M${x - 19} ${y - 19}l20 8m-6-15l17 7" stroke="#d3f2e4" stroke-opacity=".45" fill="none"/>`,
+          );
+        else if ((a * 13 + b * 7) % 5 === 0)
+          parts.push(
+            `<path d="M${x - 15} ${y - 24}l13 5m-4 5l13 5" stroke="${p[3]}" opacity=".23"/>`,
+          );
+      }
+    return parts.join("");
+  }
+  const venueNames = [
+    "Market",
+    "Café",
+    "Bank",
+    "Shops",
+    "Station",
+    "Home",
+    "Cinema",
+    "Workshop",
+  ];
+  function venue(x, y, i, lit = true, k = 1) {
+    const colors = [
+      "#c7885e",
+      "#769e93",
+      "#92a4ac",
+      "#b88996",
+      "#7697a8",
+      "#c9b779",
+      "#9180ae",
+      "#969d76",
+    ];
+    let body = house(0, 0, 1, lit ? colors[i] : "#9c9f93", "", lit);
+    if ([0, 1, 3].includes(i))
+      body += `<path d="M-52-47l49 23v13l-49-23z" fill="#f2ddae"/><path d="M-43-43l10 5v13l-10-5zm20 9l10 5v13l-10-5z" fill="${colors[i]}"/>`;
+    if (i === 2)
+      body += `<path d="M-45-61l42 20v26l-42-20z" fill="#d5d7c3"/><path d="M-35-53v25m13-19v25m13-19v25" stroke="#758985" stroke-width="5"/>`;
+    if (i === 4)
+      body += `<circle cx="0" cy="-80" r="13" fill="#eee3c5"/><path d="M0-89v9l7 3" stroke="#355459" stroke-width="2" fill="none"/>`;
+    if (i === 6)
+      body += `<path d="M-28-43l22 11v20l-22-11z" fill="#333c56"/><path d="M-21-34l11 6" stroke="#e6c17d" stroke-width="4"/>`;
+    if (i === 7) body += gear(24, -61, lit, 0.55);
+    body += `<rect x="-58" y="26" width="116" height="26" rx="4" fill="#f5ead1"/><text x="0" y="44" text-anchor="middle" font-size="14" font-family="system-ui" font-weight="750" fill="#29493e">${venueNames[i]}</text>`;
+    return at(x, y, body, k);
+  }
+  function landmarks(id, l, settled) {
+    const live = l > 0;
+    let s = "";
+    if (id === "number")
+      s = [
+        pine(290, 285, 1.12),
+        pine(393, 257, 0.75),
+        pine(555, 288, 1.3),
+        pine(663, 351, 1.08),
+        pine(211, 357, 0.8),
+        bridge(408, 350, live),
+        l >= 2
+          ? pine(560, 430, 0.72)
+          : '<path d="M560 430v-67m0 29l-22-17m22-2l16-25" stroke="#79694f" stroke-width="8"/>',
+        l >= 3
+          ? house(445, 267, 0.76, "#b69b70", "Workshop")
+          : block(445, 267, 36, 20, 13, "#928f7c", "#b6b399"),
+        pine(365, 453, 0.7),
+      ].join("");
+    if (id === "fractions")
+      s = `${block(330, 290, 55, 28, l >= 3 ? 65 : 20, "#c59e66", "#f3d294")}${block(330, 290, 30, 16, l >= 3 ? 93 : 27, "#d9b274", "#f5d99b")}${poly("M596 237L681 324L515 324Z", "#b69064")}${poly("M596 237L681 324L600 324Z", "#e1bc7c")}<path d="M390 339l130 58-72 41" stroke="${live ? "#78c9c5" : "#aa8d61"}" stroke-width="14" fill="none"/>${l >= 2 ? '<ellipse cx="478" cy="420" rx="52" ry="23" fill="#74bebb"/>' : ""}${pine(252, 358, 0.75, "#6b8a60")}${pine(542, 408, 0.7, "#6d9c6c")}${bridge(405, 357, live)}${block(624, 377, 24, 14, l >= 3 ? 73 : 17, "#c7a06e", "#f3d698")}`;
+    if (id === "algebra")
+      s = `<path d="M247 297l96-159 87 159zM511 273l88-162 108 162z" fill="#7189a1"/><path d="M343 138l-28 46 26-11 27 13zM599 111l-27 49 29-10 27 10z" fill="#d8e7e6"/>${block(456, 345, 47, 25, live ? 103 : 35, "#8099a4", "#bccbd0")}${gear(457, 274, live, 0.9)}<path d="M365 318v93m45-115v89m-45-59l45-22" stroke="#496574" stroke-width="7" fill="none"/>${block(385, l >= 2 ? 335 : 407, 24, 13, 20, "#e1ba72", "#f3db9b")}<path d="M502 345l91 42v-87" stroke="${l >= 3 ? "#eed28c" : "#526c79"}" stroke-width="9" fill="none"/>${gear(593, 291, l >= 3, 0.6)}`;
+    if (id === "geometry")
+      s = `${block(447, 325, 103, 45, live ? 74 : 19, "#9b9cb2", "#d4c9d2")}${[
+        [-78, 17],
+        [0, -28],
+        [78, 17],
+      ]
+        .map(([x, y], i) =>
+          at(
+            447 + x,
+            325 + y,
+            block(0, 0, 30, 17, l > i ? 135 : 29, "#b9b6c7", "#e5dacd") +
+              `${[
+                [-22, -8],
+                [0, 3],
+                [22, -8],
+              ]
+                .map(([a, b]) =>
+                  block(
+                    a,
+                    b - (l > i ? 135 : 29),
+                    8,
+                    5,
+                    13,
+                    "#c2bbca",
+                    "#e6d7cc",
+                  ),
+                )
+                .join(
+                  "",
+                )}${l > i ? '<path d="M0-158v-30h28l-8 10 8 10H0" fill="#81af91"/>' : ""}`,
+          ),
+        )
+        .join(
+          "",
+        )}<path d="M429 333v-29a18 18 0 0136 0v29" fill="#514c68"/>${bridge(417, 386, live)}${pine(229, 373, 0.8, "#65788c")}${pine(625, 410, 0.9, "#627c8e")}`;
+    if (id === "ratio")
+      s = `${pine(353, 280, 0.9, "#618d6a")}${house(533, 310, 0.8, "#e0c38d", "Harbour", l >= 3)}${[0, 1, 2, 3].map((i) => block(350 + i * 29, 351 + i * 13, 32, 13, live ? 24 : 10, "#97714c", "#d5b17a")).join("")}${l >= 2 ? vessel(306, 428, 0.9) : block(306, 428, 24, 10, 10, "#8b9785", "#bbba9d")}${block(638, 361, 20, 12, l >= 3 ? 115 : 31, "#e2d9ba", "#e8bb71")}${live ? lamp(636, 252, true) : ""}${block(511, 401, 22, 13, 27, "#ac895b", "#e5c38b")}`;
+    if (id === "statistics")
+      s = `${[
+        [295, 300, 60],
+        [385, 288, 103],
+        [526, 295, 84],
+        [612, 350, 131],
+        [355, 404, 77],
+      ]
+        .map(([x, y, h], i) =>
+          at(
+            x,
+            y,
+            block(
+              0,
+              0,
+              32,
+              19,
+              live ? h : h * 0.5,
+              ["#83a5a4", "#a9b49d", "#d1b488"][i % 3],
+              "#dae0c0",
+            ) +
+              [0, 1, 2]
+                .map(
+                  (j) =>
+                    `<path d="M-22 ${-h + 15 + j * 19}l12 6v9l-12-6zM10 ${-h + 22 + j * 19}l12-6v9l-12 6z" fill="${l >= 2 ? "#f4d791" : "#688784"}"/>`,
+                )
+                .join(""),
+          ),
+        )
+        .join(
+          "",
+        )}${house(474, 360, 0.9, "#c9bf9e", "Observatory", l >= 3)}${[0, 1, 2].map((i) => block(495 + i * 29, 438 - i * 13, 11, 7, live ? (i + 1) * 20 : 14, "#4e8277", "#a8c8a2")).join("")}${lamp(278, 379, live)}${lamp(602, 408, l >= 2)}`;
+    if (id === "probability")
+      s = `${block(452, 329, 91, 38, 30, "#665f91", "#aaa0cb")}<ellipse cx="452" cy="242" rx="64" ry="91" fill="${l >= 3 ? "#9e9bd5" : "#535377"}" stroke="#a99ac6" stroke-width="17"/><ellipse cx="452" cy="242" rx="40" ry="67" fill="${live ? "#c3d8e5" : "#393b60"}"/><path d="M432 193l36 27-36 29 36 30-32 22" fill="none" stroke="${live ? "#f6dfae" : "#7c729b"}" stroke-width="5"/>${[
+        [-137, 55],
+        [136, 55],
+        [-80, -37],
+        [80, -37],
+      ]
+        .map(([x, y], i) =>
+          at(
+            452 + x,
+            329 + y,
+            block(0, 0, 20, 12, l >= 2 ? 61 : 25, "#837b9f", "#c2aed1") +
+              poly("M0-105l16 23-16 23-16-23Z", live ? "#b6d8c7" : "#9a8fae"),
+          ),
+        )
+        .join("")}`;
+    if (id === "measure")
+      s = `<path d="M223 320l109-164 90 164zM496 292l91-162 109 162z" fill="#897f77"/><path d="M289 331v-58a42 42 0 0184 0v58" fill="#303c41" stroke="#bd9e72" stroke-width="13"/><path d="M319 321l-78 114m104-107l-76 120" stroke="#d5bf97" stroke-width="6"/>${[0, 1, 2, 3].map((i) => `<path d="M${303 - i * 18} ${346 + i * 24}l28 10" stroke="#755f48" stroke-width="7"/>`).join("")}${live ? at(284, 386, block(0, 0, 24, 14, 22, "#769a95", "#bdd0b3") + '<circle cx="-13" cy="19" r="7" fill="#39484a"/><circle cx="16" cy="23" r="7" fill="#39484a"/>') : ""}${at(559, 355, block(0, 0, 34, 20, l >= 3 ? 103 : 24, "#a8926e", "#d7bf8c") + gear(0, l >= 3 ? -75 : -20, live, 0.75))}${lamp(375, 322, l >= 2)}${poly("M611 398l19-45 19 45-19 20Z", l >= 2 ? "#a5d9cc" : "#899b98")}`;
+    if (id === "town")
+      s =
+        [
+          [420, 266],
+          [521, 310],
+          [626, 354],
+          [320, 310],
+          [217, 354],
+          [422, 410],
+          [526, 454],
+          [320, 454],
+        ]
+          .map(([x, y], i) =>
+            venue(x, y, i, l >= Math.floor(i / 3) + 1 || settled > i, 0.72),
+          )
+          .join("") +
+        lamp(390, 363, true) +
+        lamp(467, 400, true) +
+        (l >= 3
+          ? '<path d="M268 250l325 145" stroke="#8b7961" stroke-width="2"/><path d="M305 267l9 23 10-15m51 19l9 23 10-15m51 19l9 23 10-15m51 19l9 23 10-15" fill="#e3bb78"/>'
+          : "");
+    if (id !== "town" && settled > 0)
+      s += house(629, 444, 0.5, "#c8b784", "", true);
+    return s;
+  }
+  function scene(id, level = 0, before = false, settled = 0) {
+    if (!palettes[id]) id = "number";
+    const p = palettes[id],
+      l = before ? 0 : Math.min(3, level),
+      w = E.worlds.find((w) => w.id === id);
+    const uid = "sky-" + id + "-" + l + "-" + (before ? "before" : "now");
+    return `<svg class="world-scene scene-${id}" viewBox="0 0 900 560" role="img" aria-label="${esc(w.name)}: ${l === 0 ? "before restoration" : l + " of 3 landmarks restored"}"><defs><linearGradient id="${uid}" x2="0" y2="1"><stop stop-color="${p[0]}"/><stop offset="1" stop-color="${p[1]}"/></linearGradient></defs><rect width="900" height="560" fill="url(#${uid})"/><circle cx="706" cy="104" r="61" fill="#ffe7b3" opacity=".08"/><circle cx="706" cy="104" r="34" fill="#fff2cc" opacity=".85"/><path d="M0 225l118-71 119 83 130-104 127 79 107-76 129 93 90-57 80 53v335H0z" fill="${p[0]}" opacity=".22"/><g fill="#eff4df" opacity=".13"><path d="M89 102h140v8H89zM120 88h80v14h-80zM505 67h100v8H505z"/></g><ellipse cx="450" cy="488" rx="299" ry="37" fill="#142e39" opacity=".18"/>${terrain(id, l)}${landmarks(id, l, before ? 0 : settled)}${at(453, 423, miniExplorer(), 0.7)}<g fill="${p[4]}" opacity=".7"><path d="M179 406h7v7h-7zM677 437h6v6h-6zM566 459h5v5h-5z"/></g></svg>`;
+  }
+  function miniExplorer() {
+    return '<ellipse cy="7" rx="15" ry="6" fill="#153b36" opacity=".25"/><path d="M-8-6h7V8h-7zM3-6h7V8H3z" fill="#253e48"/><path d="M-12-34h26v30h-26z" fill="#e6b96c"/><path d="M-8-54h19v20H-8z" fill="#d2ad83"/><path d="M-11-60h25v11h-25z" fill="#326652"/><path d="M-16-30h5v21h-5zM14-30h5v21h-5z" fill="#c29d79"/>';
+  }
+  function petShape(id, color = "#c78e56") {
+    if (id === "frog")
+      return '<path d="M-22-24h44V1h-44z" fill="#83aa68"/><circle cx="-13" cy="-26" r="9" fill="#9abc79"/><circle cx="13" cy="-26" r="9" fill="#9abc79"/><circle cx="-13" cy="-27" r="3" fill="#2e4643"/><circle cx="13" cy="-27" r="3" fill="#2e4643"/><path d="M-12-8h24" stroke="#446444" stroke-width="3"/>';
+    if (id === "axolotl")
+      return '<path d="M-19-26h38V2h-38z" fill="#d4a0af"/><path d="M-19-20l-15-12m15 19l-17-2m55-5l15-12m-15 19l17-2" stroke="#b97697" stroke-width="6"/><path d="M-10-16h4v5h-4zM7-16h4v5H7z" fill="#3a444d"/>';
+    if (id === "robot")
+      return '<path d="M-18-28h36V2h-36z" fill="#91b6ac"/><path d="M-12-23h24v12h-24z" fill="#304b53"/><path d="M-8-20h4v4h-4zM5-20h4v4H5z" fill="#d5edb0"/><path d="M0-28v-8m-12 38v8m24-8v8" stroke="#78998f" stroke-width="5"/>';
+    if (id === "bee")
+      return '<ellipse cx="-10" cy="-22" rx="13" ry="8" fill="#dbead9"/><ellipse cx="12" cy="-22" rx="13" ry="8" fill="#dbead9"/><path d="M-21-17h42V3h-42z" fill="#dfb45b"/><path d="M-9-17v20M5-17v20" stroke="#3e5146" stroke-width="7"/>';
+    return `<path d="M-19-24l-5-18 16 13h17l15-13-5 18v26h-38z" fill="${color}"/><path d="M-12-13h5v5h-5zM7-13h5v5H7z" fill="#263f43"/><path d="M-9 2l9-10L9 2z" fill="#e7dbb8"/><path d="M19-6l16-8 6 12-20 6z" fill="${color}"/>`;
   }
   function explorer(s, inline = false) {
-    const equipped = C.catalog.filter(
-      (x) => s.equipped.includes(x.id) && s.bought.includes(x.id),
+    const items = C.catalog.filter(
+      (i) =>
+        (s.equipped || []).includes(i.id) && (s.bought || []).includes(i.id),
     );
-    const slot = (n) => equipped.find((x) => x.slot === n);
-    const head = slot("Headwear"),
+    const slot = (n) => items.find((i) => i.slot === n),
+      head = slot("Headwear"),
       outfit = slot("Outfits"),
       back = slot("Back items"),
       acc = slot("Accessories"),
       pet = slot("Companions"),
       bg = slot("Backgrounds");
-    const hue = outfit ? C.catalog.indexOf(outfit) * 32 : 150;
-    return `<svg class="explorer ${inline ? "inline-explorer" : ""}" viewBox="0 0 180 210" role="img" aria-label="Explorer wearing ${esc(equipped.map((x) => x.label).join(", ") || "starter outfit")}"><ellipse cx="87" cy="192" rx="56" ry="11" fill="#153f32" opacity=".15"/>${bg ? `<path d="M15 30h150v150H15z" fill="hsl(${C.catalog.indexOf(bg) * 28} 25% 83%)"/>` : ""}${back ? `<path d="M111 87h33v65h-33z" fill="#b89657"/><text x="125" y="120" font-size="25">${back.ico}</text>` : ""}<path d="M56 146h27v43H55zM92 146h26v43H92z" fill="#354c55"/><path d="M50 182h34v14H48zM92 182h33v14H92z" fill="#243e3b"/><path d="M51 86h69v69H51z" fill="hsl(${hue} 36% 39%)"/><path d="M51 86h69v15H51z" fill="hsl(${hue} 40% 53%)"/><path d="M36 93h18v55H36zM119 93h18v55h-18z" fill="#bb9c7c"/><path d="M36 93h18v29H36zM119 93h18v29h-18z" fill="hsl(${hue} 36% 39%)"/><path d="M61 42h50v47H61z" fill="#d4b28b"/><path d="M57 36h58v22H57zM57 51h10v18H57z" fill="#493e31"/><path d="M72 61h6v7h-6zM96 61h6v7h-6z" fill="#243e3b"/><path d="M82 78h12" stroke="#906b50" stroke-width="3"/>${head ? `<path d="M54 30h64v23H54z" fill="hsl(${C.catalog.indexOf(head) * 37} 42% 48%)"/><text x="68" y="46" font-size="24">${head.ico}</text>` : ""}${acc ? `<text x="61" y="125" font-size="30">${acc.ico}</text>` : ""}${pet ? `<text x="129" y="184" font-size="33">${pet.ico}</text>` : ""}<path d="M54 132h64v8H54z" fill="#bcab77"/><path d="M78 129h13v14H78z" fill="#e8c478"/></svg>`;
+    const hue = outfit ? C.catalog.indexOf(outfit) * 32 : 150,
+      color = `hsl(${hue} 32% 38%)`;
+    return `<svg class="explorer ${inline ? "inline-explorer" : ""}" viewBox="0 0 180 210" role="img" aria-label="Explorer wearing ${esc(items.map((i) => i.label).join(", ") || "starter outfit")}">${bg ? '<path d="M8 5h164v183H8z" fill="#c2d8c2"/><path d="M8 150l44-54 39 27 40-75 41 102v38H8z" fill="#749e88" opacity=".5"/>' : ""}<ellipse cx="86" cy="191" rx="56" ry="12" fill="#183b34" opacity=".15"/>${back ? '<path d="M112 83l27-10v75l-27 10z" fill="#a78150"/><path d="M119 86h12v31h-12z" fill="#d2ae6d"/>' : ""}${back?.id === "wings" ? '<path d="M55 112L10 48v57l45 40M117 112l53-64v57l-53 40" fill="#b5d8d2" stroke="#5c8b8c" stroke-width="3"/>' : ""}<path d="M55 144h28v43H55zM93 144h26v43H93z" fill="#344d57"/><path d="M49 180h35v15H46zM92 180h36v15H92z" fill="#243e41"/><path d="M51 87h69v70H51z" fill="${color}"/><path d="M51 87h69v14H51z" fill="hsl(${hue} 35% 51%)"/><path d="M36 94h18v55H36zM119 94h18v55h-18z" fill="#bb9874"/><path d="M36 94h18v29H36zM119 94h18v29h-18z" fill="${color}"/><path d="M61 40h50v48H61z" fill="#d3ad83"/><path d="M57 35h58v22H57zM57 49h10v18H57z" fill="#423b32"/><path d="M72 61h6v7h-6zM96 61h6v7h-6z" fill="#263d3f"/><path d="M82 78h12" stroke="#986e50" stroke-width="3"/>${head ? `<path d="M53 30h65v23H53z" fill="hsl(${C.catalog.indexOf(head) * 37} 37% 46%)"/><path d="M48 49h76v7H48z" fill="#324a44"/>${head.id === "crown" ? '<path d="M53 32V16l16 12 16-19 16 19 17-12v16z" fill="#e4bb65"/>' : head.id === "wizardhat" ? '<path d="M53 30l35-29 30 29z" fill="#66839f"/>' : head.id === "tophat" ? '<path d="M62 7h46v26H62z" fill="#45505b"/>' : '<path d="M65 32h13v13H65z" fill="#dbe2b0"/>'}` : ""}${acc ? `<path d="M63 102l23 25 24-25" stroke="#c5aa67" stroke-width="3" fill="none"/><path d="M79 119h15v16H79z" fill="#e6c575"/>${acc.id === "glasses" ? '<path d="M65 59h17v13H65zM91 59h17v13H91zM82 64h9" fill="none" stroke="#293e48" stroke-width="4"/>' : ""}` : ""}<path d="M54 134h64v8H54z" fill="#9a8058"/><path d="M79 132h13v12H79z" fill="#e1be70"/><path d="M60 103h15v20H60z" fill="#e4d4a4" opacity=".7"/>${pet ? at(145, 180, petShape(pet.id, pet.id === "frog" ? "#82ac6c" : pet.id === "axolotl" ? "#d2a1ab" : "#c78c58"), 0.7) : ""}</svg>`;
+  }
+  function icon(item) {
+    const i =
+      typeof item === "string" ? C.catalog.find((x) => x.id === item) : item;
+    if (!i) return "";
+    const hue = C.catalog.indexOf(i) * 31,
+      base = `hsl(${hue} 28% 55%)`;
+    let b = block(40, 56, 25, 14, 24, base, "#e2d7ab");
+    if (i.slot === "Companions") b = at(40, 56, petShape(i.id, base));
+    if (i.slot === "Headwear")
+      b =
+        '<path d="M13 48h54v9H13zM22 21h36v28H22z" fill="' +
+        base +
+        '"/><path d="M25 23h8v22h-8z" fill="#fff" opacity=".2"/>';
+    if (i.slot === "Outfits")
+      b =
+        '<path d="M12 27l17-9h22l17 9-8 19-11-5v27H29V41l-9 5z" fill="' +
+        base +
+        '"/><path d="M36 19v47" stroke="#e8d9a8" stroke-width="4"/>';
+    if (i.slot === "Accessories")
+      b =
+        i.id === "glasses"
+          ? '<path d="M8 30h24v20H8zM48 30h24v20H48zM32 38h16" fill="none" stroke="#38574f" stroke-width="5"/>'
+          : i.id === "watch"
+            ? '<path d="M31 3h18v74H31z" fill="#677a65"/><circle cx="40" cy="40" r="20" fill="#dfc98d"/><circle cx="40" cy="40" r="14" fill="#f4e8c4"/><path d="M40 29v11l8 4" stroke="#35594e" stroke-width="3" fill="none"/>'
+            : i.id === "sword"
+              ? '<path d="M40 5l9 13-5 35h-8l-5-35z" fill="#b6ccca"/><path d="M23 52h34v7H23zM35 59h10v17H35z" fill="#aa8a54"/>'
+              : i.id === "wand"
+                ? '<path d="M24 70l30-48" stroke="#826a48" stroke-width="6"/><path d="M55 4l5 12 14 2-11 9 3 14-11-8-12 8 4-14-11-9 14-2z" fill="#dabb72"/>'
+                : i.id === "scarf"
+                  ? '<path d="M12 22h56v18H12zM43 40h16v30H43z" fill="' +
+                    base +
+                    '"/><path d="M15 23v16m13-16v16m18 6h12" stroke="#e1ca90" stroke-width="4"/>'
+                  : i.id === "gloves"
+                    ? '<path d="M14 22h17v37H14l-5-21h5zM49 22h17v16h5l-5 21H49z" fill="' +
+                      base +
+                      '"/>'
+                    : '<path d="M21 7h12l9 28L31 40Z M47 7h12L49 40L38 35Z" fill="#668d87"/><circle cx="40" cy="51" r="20" fill="#d8b46b"/><path d="M40 37l5 9 11 1-8 7 2 11-10-6-10 6 2-11-8-7 11-1z" fill="#f2db97"/>';
+    if (i.slot === "Back items")
+      b =
+        i.id === "wings" || i.id === "dragon"
+          ? '<path d="M36 55L5 8v31l25 26M44 55L75 8v31L50 65" fill="' +
+            base +
+            '" stroke="#537976" stroke-width="3"/>'
+          : i.id === "shield"
+            ? '<path d="M40 7L68 20V49L40 75L12 49V20Z" fill="' +
+              base +
+              '" stroke="#bda166" stroke-width="5"/><path d="M40 16v45M22 30h36" stroke="#e7d5a4" stroke-width="5"/>'
+            : i.id === "parachute"
+              ? '<path d="M5 31a35 25 0 0170 0Z" fill="' +
+                base +
+                '"/><path d="M5 31l31 38m39-38L44 69M25 31l13 38m18-38L42 69" stroke="#6a795e" stroke-width="2"/><path d="M33 65h14v10H33z" fill="#b49262"/>'
+              : i.id === "jetpack"
+                ? '<path d="M13 13h20v45H13zM47 13h20v45H47z" fill="#87a4a4"/><path d="M33 27h14v18H33z" fill="#b5c3ab"/><path d="M17 60l6 16 6-16m22 0l6 16 6-16" fill="#e2bc77"/>'
+                : '<path d="M17 13h46v57H17z" fill="' +
+                  base +
+                  '"/><path d="M23 43h34v21H23zM30 15v24m20-24v24" fill="#e3c591" stroke="#826f4e" stroke-width="3"/>';
+    if (i.slot === "Backgrounds")
+      b =
+        '<path d="M5 10h70v60H5z" fill="#a6c2b6"/><path d="M5 61l24-37 22 31 14-17 10 23v9H5z" fill="' +
+        base +
+        '"/>';
+    return `<svg viewBox="0 0 80 80" class="item-art" aria-hidden="true">${b}</svg>`;
+  }
+  function guide(name) {
+    const hue =
+      [...String(name)].reduce((n, c) => n + c.charCodeAt(0), 0) % 360;
+    return `<div class="guide-avatar" aria-hidden="true">${atSvg(
+      miniExplorer()
+        .replace("#e6b96c", `hsl(${hue} 35% 55%)`)
+        .replace("#326652", `hsl(${(hue + 45) % 360} 30% 35%)`),
+    )}</div>`;
+  }
+  function atSvg(body) {
+    return `<svg viewBox="-25 -70 50 90">${body}</svg>`;
   }
   function townScene(level = 0, settled = 0, done = []) {
-    const names = [
-        "Market",
-        "Café",
-        "Bank",
-        "Shops",
-        "Station",
-        "Home",
-        "Cinema",
-        "Workshop",
-      ],
-      colors = [
-        "#c38e67",
-        "#6e9988",
-        "#8a9da6",
-        "#b58f9d",
-        "#7d97b0",
-        "#bdab7b",
-        "#9b8cae",
-        "#8a9c73",
-      ];
-    return `<svg class="world-scene town-scene" viewBox="0 0 780 460" role="img" aria-label="Practical Maths Town, ${level} of 3 restoration stages, ${settled} visits completed"><path d="M0 0h780v460H0z" fill="#e6dfca"/><circle cx="688" cy="55" r="27" fill="#fff6dc"/><path d="M34 106h712v318H34z" fill="#a8b991"/><path d="M34 252h712v48H34zM363 106h51v318h-51z" fill="#d1c3a2"/><path d="M34 274h712M389 106v318" stroke="#e9e0c7" stroke-width="3" stroke-dasharray="12 12"/>${names
-      .map((name, i) => {
-        const x = 108 + (i % 4) * 183,
-          y = i < 4 ? 205 : 365,
-          open =
-            done.includes(window.V3Town.venues[i].id) ||
-            level >= (i < 3 ? 1 : i < 6 ? 2 : 3);
-        return `<g transform="translate(${x} ${y})"><path d="M-52 0v-72l52-23 53 23V0L0 20z" fill="${open ? colors[i] : "#aba99a"}"/><path d="M0 20v-72l53-20V0z" fill="#203d33" opacity=".13"/><path d="M-52-72L0-95l53 23L0-50z" fill="#f5ead2"/><path d="M-47-44h43v24h-43z" fill="${open ? "#d7e6d4" : "#c5c5b4"}"/><path d="M14-35h25v38H14z" fill="#536b60"/><path d="M-58-51l62 23v12l-62-22z" fill="${open ? "#ead7a1" : "#b5b29d"}"/><path d="M-41-44l8 3v12l-8-3zM-20-36l8 3v12l-8-3z" fill="${open ? colors[i] : "#858d7d"}"/><text x="0" y="39" text-anchor="middle" fill="#203d33" font-size="15" font-family="system-ui" font-weight="750">${name}</text>${open ? '<path d="M40-88v-28h17l-5 8 5 8H40" fill="#587b58"/>' : ""}</g>`;
-      })
-      .join(
-        "",
-      )}${level >= 2 ? '<path d="M44 404h690" stroke="#d8e8b8" stroke-width="7"/>' : ""}${level >= 3 ? '<path d="M45 82h690" stroke="#6a8761" stroke-width="3"/><path d="M80 82l12 21 12-21m70 0l12 21 12-21m70 0l12 21 12-21m70 0l12 21 12-21m70 0l12 21 12-21m70 0l12 21 12-21" fill="#cc9865"/>' : ""}<path d="M376 273h24v20h-24z" fill="#5c8565"/><path d="M380 260h16v14h-16z" fill="#c6a57f"/></svg>`;
+    return scene(
+      "town",
+      Math.max(level, done.length >= 6 ? 2 : 0),
+      false,
+      Math.max(settled, done.length),
+    );
   }
-  function scene(id, level = 0, before = false, settled = 0) {
-    const w = E.worlds.find((w) => w.id === id) || E.worlds[0];
-    const l = before ? 0 : level;
-    const style = `--scene-sky:${w.sky}`;
-    if (id === "town") return townScene(l, before ? 0 : settled);
-    let props = "";
-    if (id === "number") {
-      props =
-        tree(165, 255, 1.15) +
-        tree(248, 226, 0.8) +
-        tree(573, 273, 1.15) +
-        tree(633, 307, 0.8) +
-        tree(135, 321, 0.7) +
-        (l >= 2
-          ? tree(530, 350, 0.8)
-          : '<path d="M520 350v-55m0 20l-17-16m17 4l14-20" stroke="#746f55" stroke-width="8"/>') +
-        (l >= 3
-          ? building(400, 225, 50, "#c5a577")
-          : '<path d="M370 231h60v-14h-60z" fill="#aba795"/>');
-    }
-    if (id === "fractions") {
-      props =
-        '<path d="M167 279l67-102 65 102zM488 263l58-89 62 89z" fill="#dfbd7b"/>' +
-        building(589, 300, l >= 3 ? 70 : 20, "#d6b472") +
-        (l >= 2
-          ? '<ellipse cx="290" cy="300" rx="70" ry="25" fill="#65bab8"/>' +
-            tree(240, 286, 0.65)
-          : '<ellipse cx="290" cy="300" rx="70" ry="25" fill="#a98a54"/>');
-    }
-    if (id === "algebra") {
-      props =
-        '<path d="M126 290l112-161 91 161zM458 275l107-160 100 160z" fill="#94a6b5"/><path d="M209 171l29-42 29 51-32-10zM535 159l30-44 33 49-29-12z" fill="#f7f5e9"/>' +
-        building(405, 265, l >= 1 ? 75 : 35, "#a0acb7") +
-        `<path d="M342 225h22v75h-22" fill="${l >= 2 ? "#e9c877" : "#738594"}"/>`;
-    }
-    if (id === "algebra" && l >= 3)
-      props +=
-        '<path d="M440 225v-64h55v64m-55-55h55" fill="none" stroke="#ecd48f" stroke-width="12"/>';
-    if (id === "geometry") {
-      props =
-        building(210, 290, l >= 2 ? 115 : 30, "#c3b4cc") +
-        building(540, 280, l >= 3 ? 115 : 30, "#c3b4cc") +
-        building(380, 250, l >= 1 ? 75 : 20, "#dfcbd4");
-    }
-    if (id === "ratio") {
-      props =
-        '<ellipse cx="265" cy="290" rx="91" ry="45" fill="#e8d79e"/>' +
-        tree(209, 265, 0.7) +
-        `<path d="M466 276h130v20H466zM484 296v34M574 296v34" fill="${l >= 2 ? "#ba9973" : "#8d9282"}" stroke="#796c57" stroke-width="8"/>` +
-        (l >= 3
-          ? '<path d="M440 345h95l-17 20h-58z" fill="#f2ead0"/><path d="M486 345v-70l40 61h-40" fill="#f1c47c"/>'
-          : "");
-    }
-    if (id === "statistics") {
-      props =
-        [200, 280, 480, 560]
-          .map((x, i) =>
-            building(
-              x,
-              280 + (i % 2) * 28,
-              45 + (l ? i * 16 : 0),
-              l >= 2 ? "#bed5b5" : "#9ba5ae",
-            ),
-          )
-          .join("") + building(390, 235, l >= 3 ? 110 : 20, "#d9c7a5");
-    }
-    if (id === "probability") {
-      props =
-        `<ellipse cx="390" cy="238" rx="65" ry="92" fill="${l >= 3 ? "#b89be9" : "#9c8cae"}" stroke="#d8c9e3" stroke-width="18"/><ellipse cx="390" cy="238" rx="39" ry="64" fill="${l >= 1 ? "#dee2f7" : "#756584"}"/>` +
-        [180, 580]
-          .map((x) => building(x, 300, l >= 2 ? 55 : 20, "#b8a3c7"))
-          .join("");
-    }
-    if (id === "measure") {
-      props =
-        '<path d="M132 295l96-152 94 152zM462 285l105-153 96 153z" fill="#b4a18d"/>' +
-        `<path d="M242 287v-55a32 32 0 0164 0v55" fill="#514e49"/><path d="M260 290l-37 72m64-72l-22 72" stroke="#dac9a8" stroke-width="6"/>` +
-        (l >= 1 ? '<path d="M225 320h44l-7 24h-30z" fill="#a8b9ac"/>' : "") +
-        (l >= 2 ? '<circle cx="275" cy="220" r="9" fill="#ffe7a1"/>' : "");
-    }
-    if (id === "measure" && l >= 3)
-      props +=
-        '<path d="M463 285v-104h61v104m-61-91h61" fill="none" stroke="#d7c49a" stroke-width="8"/><path d="M473 230h42v25h-42z" fill="#b8c5a8"/>';
-    return `<svg class="world-scene" viewBox="0 0 780 460" style="${style}" role="img" aria-label="${esc(w.name)}: ${l === 0 ? "before restoration" : l + " of 3 landmarks restored"}"><path d="M0 0h780v460H0z" fill="${w.sky}"/><circle cx="648" cy="76" r="34" fill="#fff9df" opacity=".8"/><g fill="#fff" opacity=".45"><path d="M80 80h115v16H80zM102 64h62v16h-62zM440 58h111v14H440zM464 44h57v14h-57z"/></g><path d="M58 288L370 143l347 139-316 158z" fill="${w.ground}"/><path d="M58 288v39l343 151v-38z" fill="#5c6652"/><path d="M401 440v38l316-157v-39z" fill="#414f44"/><path d="M58 288l312-145 347 139-316 158z" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="3"/><path d="M321 181l-38 40 27 28-25 33 62 33-21 35 75 38 49-25-79-38 24-32-62-34 23-30-25-20 36-18z" fill="${id === "fractions" && l === 0 ? "#a88c5a" : "#74b7c1"}"/><path d="M167 335l86-45 32 12 64 29 55-28 136 61" fill="none" stroke="#d4c49a" stroke-width="23"/>${l >= 1 ? '<path d="M278 306l67 32 42-21" fill="none" stroke="#e7cf9e" stroke-width="26"/><path d="M279 292l67 31 42-21m-109 5v-25m67 56v-25m42 5v-26" fill="none" stroke="#8b7351" stroke-width="5"/>' : '<path d="M284 309l12 6m74 10l12-6" stroke="#8b7351" stroke-width="14"/>'}${props}${!before && settled >= 1 ? building(660, 357, 20 + Math.min(4, settled) * 8, "#d5c491") : ""}${!before && settled >= 4 ? '<path d="M145 355l20-9 20 9v18h-40z" fill="#d0b989"/>' : ""}${!before && settled >= 8 ? '<path d="M190 190h40v9h-40zM208 152h5v38h-5zM213 152h27l-7 10 7 10h-27" fill="#e8ce92"/>' : ""}<g transform="translate(424 341)"><ellipse cy="23" rx="17" ry="6" fill="#294d3a" opacity=".3"/><path d="M-8 4h7v19h-7zM3 4h7v19H3z" fill="#374d50"/><path d="M-11-21h24V7h-24z" fill="#e4bd6f"/><path d="M-7-38h17v17H-7z" fill="#cfac83"/><path d="M-9-43h22v9H-9z" fill="#576c4c"/></g><g fill="#e4d6b0"><path d="M110 309h11v7h-11zM580 340h13v8h-13zM474 212h10v6h-10z"/></g></svg>`;
+  function keepsake(c) {
+    const name=String(c.name).toLowerCase(); let body;
+    if(/leaf|seed|rose|flower/.test(name))body='<path d="M40 65V20" stroke="#527f57" stroke-width="5"/><path d="M40 43Q9 42 13 19Q41 18 40 43M40 52Q72 49 67 28Q42 28 40 52" fill="#80a66a"/>';
+    else if(/gear|cog|wheel/.test(name))body=at(40,40,gear(0,0,true));
+    else if(/chart|ticket|notebook|card|pass|pencil|token/.test(name))body='<path d="M17 10h46v61H17z" fill="#e5ce97" stroke="#95835e" stroke-width="3"/><path d="M26 25h28m-28 11h28m-28 11h17m-17 11h25" stroke="#6f8d76" stroke-width="4"/>';
+    else if(/mug|vessel|pot|cup|basket/.test(name))body='<path d="M18 21h37v39l-8 10H26l-8-10z" fill="#c99668"/><path d="M55 28h13v25H55" fill="none" stroke="#9c7954" stroke-width="6"/><path d="M22 28h29" stroke="#e6c790" stroke-width="5"/>';
+    else if(/flag|pennant|sail|badge|crest/.test(name))body='<path d="M25 72V10" stroke="#907750" stroke-width="5"/><path d="M28 13h37L52 30l13 17H28Z" fill="#739b8b"/><path d="M34 19h8v22h-8z" fill="#c6d6ac"/>';
+    else body='<path d="M40 8l22 30-22 31-22-31Z" fill="#91bab1" stroke="#5e8c84" stroke-width="3"/><path d="M40 8v61L18 38Z" fill="#cbd9b5"/><path d="M22 69h36v7H22z" fill="#b79560"/>';
+    return `<svg class="keepsake-art" viewBox="0 0 80 80" aria-hidden="true">${body}</svg>`;
+  }
+  function location(id) {
+    const ids = [
+        "market",
+        "cafe",
+        "bank",
+        "shops",
+        "station",
+        "home",
+        "leisure",
+        "work",
+      ],
+      i = Math.max(0, ids.indexOf(id));
+    const detail =
+      i === 1
+        ? block(300, 426, 29, 15, 35, "#a88860", "#e2cc9c") +
+          block(571, 423, 29, 15, 35, "#a88860", "#e2cc9c")
+        : i === 4
+          ? '<path d="M265 428l330 52m-330-39l330 52" stroke="#4b6868" stroke-width="6"/>'
+          : i === 7
+            ? gear(560, 399, true, 1.4)
+            : [0, 1, 2]
+                .map((n) =>
+                  block(
+                    286 + n * 35,
+                    426 + n * 14,
+                    19,
+                    11,
+                    22 + n * 7,
+                    "#a78b5e",
+                    "#e0bd75",
+                  ),
+                )
+                .join("");
+    return `<svg class="world-scene location-scene" viewBox="0 0 900 560" role="img" aria-label="Inside Practical Maths Town: ${venueNames[i]}"><rect width="900" height="560" fill="#b4cec2"/><path d="M0 220l230-100 180 95 200-110 290 140v315H0z" fill="#799e8b" opacity=".4"/>${terrain("town", 3)}${pine(232, 346, 0.9)}${venue(450, 354, i, true, 1.7)}${detail}${lamp(640, 401)}${at(418, 446, miniExplorer(), 1.1)}</svg>`;
   }
   function camp(s) {
     const n = s.milestones.length,
-      projects = window.V3Adventure.state(s).campProjects,
-      placements = window.V3Adventure.state(s).camp,
-      keepsakes = window.V3Adventure.collections(s);
-    const decorations = Object.entries(placements)
-      .filter(([slot, id]) => id)
-      .map(([slot, id], i) => {
-        const c = keepsakes.find((c) => c.id === id);
-        return c
-          ? `<g transform="translate(${[320, 155, 545][["shelf", "garden", "gate"].indexOf(slot)]} ${slot === "garden" ? 280 : slot === "gate" ? 345 : 185})"><title>${esc(c.name)} at camp ${slot}</title><path d="M0-16l12 8-12 8-12-8z" fill="#f2d496" stroke="#5e7953" stroke-width="3"/></g>`
-          : "";
-      })
-      .join("");
-    return `<svg class="camp-scene" viewBox="0 0 680 370" role="img" aria-label="Base Camp with ${n} learning landmarks earned"><path d="M0 0h680v370H0z" fill="#d4e3c8"/><circle cx="566" cy="66" r="29" fill="#fff6d5"/><path d="M0 300L250 146l430 140v84H0z" fill="#92ac79"/><path d="M0 338l280-93 400 83" fill="none" stroke="#d7c69a" stroke-width="34"/>${tree(100, 244, 0.9)}${tree(584, 280, 1.05)}${tree(535, 188, 0.65)}<path d="M177 289l75-110 82 110z" fill="#d9b875"/><path d="M252 179v110h82z" fill="#b68c58"/><path d="M231 289l21-64 23 64z" fill="#5d634c"/><path d="M177 289l-10 12m167-12l10 12" stroke="#5d634c" stroke-width="3"/>${n >= 1 ? [354, 448].map((x, i) => `<path d="M${x} ${320 - i * 9}v-67" stroke="#6b7154" stroke-width="5"/><path d="M${x - 10} ${260 - i * 5}h20v24h-20z" fill="#f6d991" stroke="#8f7848" stroke-width="3"/>`).join("") : ""}${n >= 3 ? building(415, 223, 55, "#c6a779") : ""}${n >= 6 ? '<path d="M127 324l55-28 55 18-55 29z" fill="#6f8250"/><path d="M148 323l34-15m-16 25l34-15" stroke="#a5bc6c" stroke-width="9"/>' : ""}${n >= 12 ? '<path d="M487 313h57v30h-57z" fill="#b3956c"/><path d="M480 313l37-25 35 25z" fill="#737f58"/><text x="500" y="339" font-size="24">◆</text>' : ""}${n >= 24 ? building(350, 145, 52, "#e1c69b") : ""}${projects.greenhouse ? '<path d="M440 290v-32l30-22 30 22v32z" fill="#a7c6ae" stroke="#5e8168" stroke-width="4"/><path d="M470 236v54m-30-32h60" stroke="#5e8168" stroke-width="3"/>' : ""}${projects.lookout ? '<path d="M66 243v-94h50v94m-55-94h60v-17H61z" fill="#bca16a" stroke="#6b7956" stroke-width="5"/>' : ""}${projects.noticeboard ? '<path d="M302 333v-65h65v65m-65-12h65" fill="#d6bd83" stroke="#6b7956" stroke-width="5"/><path d="M313 281h15v19h-15zM342 281h15v19h-15z" fill="#f2e5bd"/>' : ""}${decorations}</svg>`;
+      a = window.V3Adventure.state(s),
+      p = palettes.number;
+    return `<svg class="camp-scene" viewBox="0 0 900 560" role="img" aria-label="Base Camp with ${n} learning landmarks earned"><rect width="900" height="560" fill="#aac8b7"/><path d="M0 226l100-65 130 70 150-114 173 120 154-88 193 102v309H0z" fill="#4c7d6c" opacity=".35"/>${terrain("number", 3)}${pine(278, 291, 1.3)}${pine(591, 288, 1.5)}${pine(665, 387, 1.05)}${pine(203, 361, 0.8)}${poly("M342 388L412 264L504 380L415 414Z", "#d7b36f")}${poly("M412 264L504 380L415 414Z", "#a27b4d")}${poly("M389 398L414 319L444 397L415 414Z", "#3c5e50")}${n >= 1 ? lamp(518, 426) + lamp(349, 432) : ""}${n >= 3 ? house(491, 286, 0.76, "#b89e76", "Workshop") : ""}${n >= 6 ? block(573, 413, 45, 22, 10, "#7d7650", "#5f8d64") + pine(570, 398, 0.35) : ""}${n >= 12 ? house(307, 359, 0.55, "#bba475", "Lodge") : ""}${n >= 24 ? house(435, 235, 0.6, "#d2bd8c", "Hall") : ""}${a.campProjects.greenhouse ? at(581, 365, block(0, 0, 31, 18, 41, "#81ad9f", "#b9dbba") + '<path d="M-30-42L0-74L31-42L0-24z" fill="#c9e1bf" stroke="#5b8b79" stroke-width="3"/>') : ""}${a.campProjects.lookout ? at(276, 312, block(0, 0, 25, 15, 112, "#a68b61", "#d7bd7e") + poly("M-36-113L0-144L36-113L0-92Z", "#426e5c")) : ""}${a.campProjects.noticeboard ? at(464, 454, '<path d="M-23 0v-61h46V0m-46-51h46v35h-46" fill="#c6ab72" stroke="#775f45" stroke-width="5"/><path d="M-13-43h11v16h-11zM7-43h11v16H7z" fill="#f0dfb7"/>') : ""}${Object.entries(
+      a.camp,
+    )
+      .filter(([, id]) => id)
+      .map(([slot, id], i) =>
+        at(
+          360 + i * 72,
+          456 - i * 13,
+          `<title>${esc(window.V3Adventure.collections(s).find((c) => c.id === id)?.name || "Keepsake")} at camp ${slot}</title>` +
+            block(0, 0, 15, 9, 23, "#9d8b61", "#e2c989") +
+            poly("M0-58l13 18L0-25l-13-15Z", "#b4d6a3"),
+        ),
+      )
+      .join("")}${at(460, 425, miniExplorer())}</svg>`;
   }
-  window.V3Art = { scene, explorer, esc, camp, townScene };
+  window.V3Art = {
+    scene,
+    explorer,
+    esc,
+    camp,
+    townScene,
+    icon,
+    guide,
+    venue,
+    location,
+    keepsake,
+  };
 })();

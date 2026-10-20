@@ -1,0 +1,470 @@
+[
+  {
+    "file": "after/desktop-home.jpg",
+    "title": "Home · forest trail",
+    "group": "Navigation",
+    "layout": "desktop",
+    "loadAndCaptureMs": 302,
+    "svgNodes": 583,
+    "domNodes": 672
+  },
+  {
+    "file": "after/desktop-map.jpg",
+    "title": "The nine-world atlas",
+    "group": "Navigation",
+    "layout": "desktop",
+    "loadAndCaptureMs": 508,
+    "svgNodes": 4648,
+    "domNodes": 4782
+  },
+  {
+    "file": "after/desktop-camp.jpg",
+    "title": "Base Camp · upgraded",
+    "group": "Explorer & rewards",
+    "layout": "desktop",
+    "loadAndCaptureMs": 410,
+    "svgNodes": 769,
+    "domNodes": 1139
+  },
+  {
+    "file": "after/desktop-wardrobe.jpg",
+    "title": "Explorer wardrobe · original SVG gear",
+    "group": "Explorer & rewards",
+    "layout": "desktop",
+    "loadAndCaptureMs": 369,
+    "svgNodes": 161,
+    "domNodes": 468
+  },
+  {
+    "file": "after/desktop-quest.jpg",
+    "title": "Bridge repair · interactive quest",
+    "group": "Interactive learning",
+    "layout": "desktop",
+    "loadAndCaptureMs": 295,
+    "svgNodes": 626,
+    "domNodes": 713
+  },
+  {
+    "file": "after/desktop-celebration.jpg",
+    "title": "Restoration recap",
+    "group": "Explorer & rewards",
+    "layout": "desktop",
+    "loadAndCaptureMs": 253,
+    "svgNodes": 624,
+    "domNodes": 677
+  },
+  {
+    "file": "after/desktop-number-before.jpg",
+    "title": "Number Forest · before restoration",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 327,
+    "svgNodes": 590,
+    "domNodes": 778
+  },
+  {
+    "file": "after/desktop-number-after.jpg",
+    "title": "Number Forest · restored",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 318,
+    "svgNodes": 651,
+    "domNodes": 839
+  },
+  {
+    "file": "after/desktop-fractions-before.jpg",
+    "title": "Fraction Desert · before restoration",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 295,
+    "svgNodes": 527,
+    "domNodes": 715
+  },
+  {
+    "file": "after/desktop-fractions-after.jpg",
+    "title": "Fraction Desert · restored",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 348,
+    "svgNodes": 570,
+    "domNodes": 758
+  },
+  {
+    "file": "after/desktop-algebra-before.jpg",
+    "title": "Algebra Peaks · before restoration",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 306,
+    "svgNodes": 473,
+    "domNodes": 645
+  },
+  {
+    "file": "after/desktop-algebra-after.jpg",
+    "title": "Algebra Peaks · restored",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 321,
+    "svgNodes": 486,
+    "domNodes": 658
+  },
+  {
+    "file": "after/desktop-geometry-before.jpg",
+    "title": "Geometry Kingdom · before restoration",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 355,
+    "svgNodes": 600,
+    "domNodes": 772
+  },
+  {
+    "file": "after/desktop-geometry-after.jpg",
+    "title": "Geometry Kingdom · restored",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 358,
+    "svgNodes": 638,
+    "domNodes": 810
+  },
+  {
+    "file": "after/desktop-ratio-before.jpg",
+    "title": "Ratio Island · before restoration",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 289,
+    "svgNodes": 545,
+    "domNodes": 709
+  },
+  {
+    "file": "after/desktop-ratio-after.jpg",
+    "title": "Ratio Island · restored",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 349,
+    "svgNodes": 561,
+    "domNodes": 725
+  },
+  {
+    "file": "after/desktop-statistics-before.jpg",
+    "title": "Statistics City · before restoration",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 291,
+    "svgNodes": 545,
+    "domNodes": 709
+  },
+  {
+    "file": "after/desktop-statistics-after.jpg",
+    "title": "Statistics City · restored",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 364,
+    "svgNodes": 560,
+    "domNodes": 724
+  },
+  {
+    "file": "after/desktop-probability-before.jpg",
+    "title": "Probability Portal · before restoration",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 316,
+    "svgNodes": 493,
+    "domNodes": 649
+  },
+  {
+    "file": "after/desktop-probability-after.jpg",
+    "title": "Probability Portal · restored",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 313,
+    "svgNodes": 506,
+    "domNodes": 662
+  },
+  {
+    "file": "after/desktop-measure-before.jpg",
+    "title": "Measurement Mines · before restoration",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 307,
+    "svgNodes": 470,
+    "domNodes": 634
+  },
+  {
+    "file": "after/desktop-measure-after.jpg",
+    "title": "Measurement Mines · restored",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 265,
+    "svgNodes": 494,
+    "domNodes": 658
+  },
+  {
+    "file": "after/desktop-town-before.jpg",
+    "title": "Practical Maths Town · before restoration",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 299,
+    "svgNodes": 1170,
+    "domNodes": 1529
+  },
+  {
+    "file": "after/desktop-town-after.jpg",
+    "title": "Practical Maths Town · restored",
+    "group": "World restoration",
+    "layout": "desktop",
+    "loadAndCaptureMs": 333,
+    "svgNodes": 1174,
+    "domNodes": 1533
+  },
+  {
+    "file": "after/desktop-town-market.jpg",
+    "title": "Supermarket · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "desktop",
+    "loadAndCaptureMs": 366,
+    "svgNodes": 533,
+    "domNodes": 634
+  },
+  {
+    "file": "after/desktop-town-cafe.jpg",
+    "title": "Corner Café · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "desktop",
+    "loadAndCaptureMs": 386,
+    "svgNodes": 526,
+    "domNodes": 627
+  },
+  {
+    "file": "after/desktop-town-bank.jpg",
+    "title": "Community Bank · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "desktop",
+    "loadAndCaptureMs": 367,
+    "svgNodes": 533,
+    "domNodes": 622
+  },
+  {
+    "file": "after/desktop-town-shops.jpg",
+    "title": "Shopping Centre · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "desktop",
+    "loadAndCaptureMs": 382,
+    "svgNodes": 533,
+    "domNodes": 617
+  },
+  {
+    "file": "after/desktop-town-station.jpg",
+    "title": "Bus & Train Station · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "desktop",
+    "loadAndCaptureMs": 334,
+    "svgNodes": 513,
+    "domNodes": 600
+  },
+  {
+    "file": "after/desktop-town-home.jpg",
+    "title": "Neighbourhood Home · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "desktop",
+    "loadAndCaptureMs": 335,
+    "svgNodes": 531,
+    "domNodes": 622
+  },
+  {
+    "file": "after/desktop-town-leisure.jpg",
+    "title": "Cinema & Leisure · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "desktop",
+    "loadAndCaptureMs": 302,
+    "svgNodes": 533,
+    "domNodes": 634
+  },
+  {
+    "file": "after/desktop-town-work.jpg",
+    "title": "Workshop Workplace · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "desktop",
+    "loadAndCaptureMs": 349,
+    "svgNodes": 518,
+    "domNodes": 602
+  },
+  {
+    "file": "after/ipad-portrait-home.jpg",
+    "title": "Home · forest trail",
+    "group": "Navigation",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 259,
+    "svgNodes": 583,
+    "domNodes": 672
+  },
+  {
+    "file": "after/ipad-portrait-map.jpg",
+    "title": "The nine-world atlas",
+    "group": "Navigation",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 498,
+    "svgNodes": 4648,
+    "domNodes": 4782
+  },
+  {
+    "file": "after/ipad-portrait-camp.jpg",
+    "title": "Base Camp · upgraded",
+    "group": "Explorer & rewards",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 429,
+    "svgNodes": 769,
+    "domNodes": 1139
+  },
+  {
+    "file": "after/ipad-portrait-wardrobe.jpg",
+    "title": "Explorer wardrobe · original SVG gear",
+    "group": "Explorer & rewards",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 366,
+    "svgNodes": 161,
+    "domNodes": 468
+  },
+  {
+    "file": "after/ipad-portrait-quest.jpg",
+    "title": "Bridge repair · interactive quest",
+    "group": "Interactive learning",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 288,
+    "svgNodes": 626,
+    "domNodes": 713
+  },
+  {
+    "file": "after/ipad-portrait-celebration.jpg",
+    "title": "Restoration recap",
+    "group": "Explorer & rewards",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 297,
+    "svgNodes": 624,
+    "domNodes": 677
+  },
+  {
+    "file": "after/ipad-portrait-town-market.jpg",
+    "title": "Supermarket · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 326,
+    "svgNodes": 533,
+    "domNodes": 634
+  },
+  {
+    "file": "after/ipad-portrait-town-cafe.jpg",
+    "title": "Corner Café · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 342,
+    "svgNodes": 526,
+    "domNodes": 627
+  },
+  {
+    "file": "after/ipad-portrait-town-bank.jpg",
+    "title": "Community Bank · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 375,
+    "svgNodes": 533,
+    "domNodes": 622
+  },
+  {
+    "file": "after/ipad-portrait-town-shops.jpg",
+    "title": "Shopping Centre · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 364,
+    "svgNodes": 533,
+    "domNodes": 617
+  },
+  {
+    "file": "after/ipad-portrait-town-station.jpg",
+    "title": "Bus & Train Station · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 389,
+    "svgNodes": 513,
+    "domNodes": 600
+  },
+  {
+    "file": "after/ipad-portrait-town-home.jpg",
+    "title": "Neighbourhood Home · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 344,
+    "svgNodes": 531,
+    "domNodes": 622
+  },
+  {
+    "file": "after/ipad-portrait-town-leisure.jpg",
+    "title": "Cinema & Leisure · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 400,
+    "svgNodes": 533,
+    "domNodes": 634
+  },
+  {
+    "file": "after/ipad-portrait-town-work.jpg",
+    "title": "Workshop Workplace · hands-on visit",
+    "group": "Practical Maths Town",
+    "layout": "ipad-portrait",
+    "loadAndCaptureMs": 394,
+    "svgNodes": 518,
+    "domNodes": 602
+  },
+  {
+    "file": "after/ipad-landscape-home.jpg",
+    "title": "Home · forest trail",
+    "group": "Navigation",
+    "layout": "ipad-landscape",
+    "loadAndCaptureMs": 310,
+    "svgNodes": 583,
+    "domNodes": 672
+  },
+  {
+    "file": "after/ipad-landscape-map.jpg",
+    "title": "The nine-world atlas",
+    "group": "Navigation",
+    "layout": "ipad-landscape",
+    "loadAndCaptureMs": 408,
+    "svgNodes": 4648,
+    "domNodes": 4782
+  },
+  {
+    "file": "after/ipad-landscape-camp.jpg",
+    "title": "Base Camp · upgraded",
+    "group": "Explorer & rewards",
+    "layout": "ipad-landscape",
+    "loadAndCaptureMs": 513,
+    "svgNodes": 769,
+    "domNodes": 1139
+  },
+  {
+    "file": "after/ipad-landscape-wardrobe.jpg",
+    "title": "Explorer wardrobe · original SVG gear",
+    "group": "Explorer & rewards",
+    "layout": "ipad-landscape",
+    "loadAndCaptureMs": 358,
+    "svgNodes": 161,
+    "domNodes": 468
+  },
+  {
+    "file": "after/ipad-landscape-quest.jpg",
+    "title": "Bridge repair · interactive quest",
+    "group": "Interactive learning",
+    "layout": "ipad-landscape",
+    "loadAndCaptureMs": 291,
+    "svgNodes": 626,
+    "domNodes": 713
+  },
+  {
+    "file": "after/ipad-landscape-celebration.jpg",
+    "title": "Restoration recap",
+    "group": "Explorer & rewards",
+    "layout": "ipad-landscape",
+    "loadAndCaptureMs": 320,
+    "svgNodes": 624,
+    "domNodes": 677
+  }
+]

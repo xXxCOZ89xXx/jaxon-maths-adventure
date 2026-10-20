@@ -2,7 +2,8 @@ import { createClient } from "@supabase/supabase-js";
 // Only included by the explicit staging builder. Test Camp never imports this file.
 const $ = (id) => document.getElementById(id),
   esc = window.V3Art.esc,
-  E = window.V3Engine;
+  E = window.V3Engine,
+  P = window.V3Presentation;
 let client,
   c,
   identity,
@@ -22,7 +23,7 @@ function message(s) {
   status.textContent = s;
 }
 function panel(title, body) {
-  main.innerHTML = `<section class="panel"><h1>${esc(title)}</h1>${body}</section>`;
+  main.innerHTML = `<section class="panel auth-panel"><h1>${esc(title)}</h1>${body}</section>`;
   main.focus();
 }
 function button(label, id) {
@@ -87,14 +88,14 @@ function authForm() {
       message("Enter your staging email first.");
       return;
     }
+    if ($("recover").disabled) return;
+    $("recover").disabled = true;
     const { error } = await client.auth.resetPasswordForEmail(email, {
       redirectTo: location.origin + location.pathname,
     });
-    message(
-      error
-        ? "Recovery request could not be sent."
-        : "If this staging account exists, a private recovery link will arrive.",
-    );
+    message(P.recoveryMessage(error));
+    // One request per deliberate action; rate limits never trigger automatic retries.
+    if (Number(error?.status) !== 429) $("recover").disabled = false;
   };
 }
 async function pinScreen() {
@@ -240,6 +241,8 @@ async function open(u) {
   window.V3CloudContext = {
     key,
     isUnlocked: active,
+    screenTime: () =>
+      Math.max(0, Number(wallet.active_seconds) / 60 - Number(wallet.redeemed)),
     applyWallet,
     onSave(state) {
       sync.enqueue(state);
@@ -316,8 +319,7 @@ async function open(u) {
   }, 10000);
 }
 function applyWallet(s) {
-  s.coins =
-    Math.floor((Number(wallet.coins) + Number(wallet.bonus)) * 100) / 100;
+  s.coins = Number(wallet.coins) + Number(wallet.bonus);
   s.bought = [...wallet.owned];
   s.equipped = s.equipped.filter((id) => s.bought.includes(id));
 }
@@ -400,29 +402,66 @@ async function heartbeat(seconds) {
 async function parent(remote) {
   const p = E.migrate(remote.progress),
     week = p.weekly[E.weekKey(Date.now())] || 0;
+  let pending = null,
+    invalidIntent = false;
+  try {
+    const raw = localStorage.getItem(
+      `v3-intent:${c.projectRef}:${identity.user}`,
+    );
+    if (raw) {
+      pending = JSON.parse(raw);
+      if (
+        !["award", "redeem", "confirm_offline"].includes(pending.op) ||
+        !Number.isInteger(pending.payload?.amount) ||
+        pending.payload.amount < 1 ||
+        pending.payload.amount > 60
+      )
+        throw Error("Invalid intent");
+    }
+  } catch {
+    invalidIntent = true;
+  }
   panel(
     "Staging parent dashboard",
-    `<p>Fictional family only · ${Number(week).toFixed(1)} / 60 reported weekly active minutes.</p><p>Server-credited active time (connected or parent-confirmed): ${(Number(remote.wallet.active_seconds) / 60).toFixed(1)} minutes. Screen-time conversion 1:1. Redeemed: ${remote.wallet.redeemed} minutes.</p><p>Reported time awaiting parent review: ${Math.max(0, Number(p.minutes) - Number(remote.wallet.active_seconds) / 60).toFixed(1)} minutes. Confirm only time you have reviewed; each confirmed minute credits 10 coins and 1 screen-time minute, once.</p><p>Available coins: ${Number(remote.wallet.coins) + Number(remote.wallet.bonus)}</p><h2>Learning evidence</h2><p>Saved game evidence; story progress and guided practice do not establish independent mastery.</p>${
+    `<p class="eyebrow">FAMILY FIELD JOURNAL</p><p class="parent-intro">Fictional family only · ${P.minutes(week)} / 60 reported weekly active minutes. Guided learning, story restoration and independent evidence stay separate.</p><div class="wallet-grid"><div class="wallet-card"><strong>${P.coins(Number(remote.wallet.coins) + Number(remote.wallet.bonus))}</strong><span>Available coins · learning + parent bonus</span></div><div class="wallet-card"><strong>${P.minutes(Math.max(0, Number(remote.wallet.active_seconds) / 60 - Number(remote.wallet.redeemed)))} min</strong><span>Earned screen time still available · 1:1</span></div><div class="wallet-card"><strong>${P.minutes(remote.wallet.redeemed)} min</strong><span>Redeemed screen time · already used</span></div><div class="wallet-card"><strong>${P.minutes(Math.max(0, Number(p.minutes) - Number(remote.wallet.active_seconds) / 60))} min</strong><span>Reported time awaiting parent review · not yet credited</span></div></div><p class="form-note">Server-credited active time: ${P.minutes(Number(remote.wallet.active_seconds) / 60)} minutes. Confirm only reviewed offline learning; each confirmed minute credits 10 coins and 1 screen-time minute once.</p><div class="parent-columns"><section class="panel"><h2>Learning evidence</h2><p>Saved game evidence; story progress and guided practice do not establish independent mastery.</p>${
       window.V3Curriculum.skills
         .filter((k) => p.practice[k.id] || p.checks[k.id])
         .map(
           (k) =>
-            `<p><strong>${esc(k.name)}</strong>: ${p.checks[k.id]?.reteach ? "Revisit teaching" : p.checks[k.id]?.stage >= 2 ? "Spaced independent mastery" : p.checks[k.id]?.stage === 1 ? "Fresh independent check passed" : "Guided practice"} · score ${esc(p.checks[k.id]?.score ?? "No independent score")}</p>`,
+            `<p class="evidence-row"><strong>${esc(k.name)}:</strong> ${p.checks[k.id]?.reteach ? "Revisit teaching" : p.checks[k.id]?.stage >= 2 ? "Spaced independent mastery" : p.checks[k.id]?.stage === 1 ? "Fresh independent check passed" : "Guided practice"} · score ${esc(p.checks[k.id]?.score ?? "No independent score")}</p>`,
         )
         .join("") || "<p>No completed learning yet.</p>"
     }<h2>Recent saved activity</h2>${p.recent
       .slice(0, 8)
       .map(
         (x) =>
-          `<p>${esc(x.type)} · ${esc(x.id || x.world || "")} · ${esc(x.date)}${x.assisted ? " · supported" : ""}</p>`,
+          `<p>${esc(x.type)} · ${esc(x.id || x.world || "")} · ${esc(P.date(x.date))}${x.assisted ? " · supported" : ""}</p>`,
       )
       .join(
         "",
-      )}<form id="reward-form">${field("Amount (1 to 60)", "amount", 'type="number" min="1" max="60" step="1" value="10"')}<label for="reward-kind">Action</label><select id="reward-kind"><option value="award">Award bonus coins</option><option value="redeem">Redeem earned screen-time minutes</option><option value="confirm_offline">Confirm reported offline learning minutes</option></select><button>Submit parent reward</button></form>${button("Refresh learning evidence", "refresh-parent")}`,
+      )}</section><section class="panel"><h2>Parent reward controls</h2><p class="small muted">Choose an action, enter an amount and review it before submitting. Nothing is selected or awarded automatically.</p><form id="reward-form" class="reward-form">${field("Amount (1 to 60)", "amount", 'type="number" min="1" max="60" step="1"')}<label for="reward-kind">Action</label><select id="reward-kind" required><option value="" disabled selected>Choose a reward action</option><option value="award">Award bonus coins</option><option value="redeem">Redeem earned screen-time minutes</option><option value="confirm_offline">Confirm reported offline learning minutes</option></select><button>Submit parent reward</button></form>${button("Refresh learning evidence", "refresh-parent")}</section></div>`,
   );
+  main.querySelector(".auth-panel").classList.add("parent-journal");
+  if (pending && !invalidIntent) {
+    $("reward-kind").value = pending.op;
+    $("reward-kind").disabled = true;
+    $("amount").value = pending.payload.amount;
+    $("amount").readOnly = true;
+    $("reward-form").querySelector("button").textContent =
+      "Retry saved parent transaction";
+    message(
+      "A saved parent transaction is awaiting confirmation. Retry sends the same request once; it does not create another award.",
+    );
+  }
+  if (invalidIntent) {
+    $("reward-form").querySelector("button").disabled = true;
+    message(
+      "Saved transaction cannot be read. Its original bytes are preserved; reward actions are paused.",
+    );
+  }
   $("reward-form").onsubmit = async (e) => {
     e.preventDefault();
-    if (busy) return;
+    if (busy || !$("reward-kind").value || !$("amount").value) return;
     busy = true;
     e.submitter.disabled = true;
     try {

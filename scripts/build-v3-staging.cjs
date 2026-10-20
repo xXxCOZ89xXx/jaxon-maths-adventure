@@ -73,6 +73,13 @@ require("esbuild").buildSync({
   format: "iife",
   minify: true,
 });
+// The owner-private review album contains only synthetic captures, never account data.
+const gallery = path.join(repo, "tests/visual");
+if (fs.existsSync(path.join(gallery,"index.html"))) {
+  fs.cpSync(gallery, path.join(out,"review"), {recursive:true});
+  const index = path.join(out,"index.html");
+  fs.writeFileSync(index,fs.readFileSync(index,"utf8").replace("<span>Staging only. Production is never used.</span>", '<span>Staging only. Production is never used.</span><a href="review/index.html">Visual review gallery</a>'));
+}
 console.log(
   `Built ${outName}. Separate private HTTPS hosting required; no deployment performed.`,
 );

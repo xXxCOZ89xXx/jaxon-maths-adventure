@@ -140,6 +140,10 @@ async function mock(page, server) {
             server.transactions.set(a.requestId, { wallet: server.wallet });
           }
           data = { wallet: server.wallet };
+          if (server.loseAward) {
+            server.loseAward = false;
+            return route.abort();
+          }
         }
       } else if (body.p_operation === "buy") {
         const a = body.p_args;
@@ -255,7 +259,7 @@ test("learner sign-in, incorrect PIN, unfinished quest, response loss, refresh a
 });
 test("parent evidence and server reward path remain separate from learner gameplay", async ({
   page,
-}) => {
+}, testInfo) => {
   const server = fixture();
   server.progress = {
     minutes: 2,
@@ -273,8 +277,17 @@ test("parent evidence and server reward path remain separate from learner gamepl
       },
     ],
   };
+  server.wallet.coins = 13.154587166666667;
   const errors = await mock(page, server);
   await login(page, true);
+  await expect(page.locator(".wallet-card").first()).toContainText("13.15");
+  await page.evaluate(() => document.activeElement?.blur());
+  await page.screenshot({
+    path: `tests/visual/after/${testInfo.project.name}-parent.jpg`,
+    fullPage: true,
+    type: "jpeg",
+    quality: 80,
+  });
   await expect(page.getByText(/Place value: Guided practice/)).toBeVisible();
   await expect(
     page.getByText(/Addition and subtraction: Fresh independent check passed/),
@@ -285,6 +298,11 @@ test("parent evidence and server reward path remain separate from learner gamepl
   await expect(
     page.getByRole("button", { name: "Explore worlds" }),
   ).toHaveCount(0);
+  await expect(page.getByLabel("Action", { exact: true })).toHaveValue("");
+  await expect(
+    page.getByLabel("Amount (1 to 60)", { exact: true }),
+  ).toHaveValue("");
+  await page.getByLabel("Action", { exact: true }).selectOption("award");
   await page.getByLabel("Amount (1 to 60)", { exact: true }).fill("10");
   await page.getByRole("button", { name: "Submit parent reward" }).click();
   await expect(page.getByRole("status")).toContainText("saved once");
@@ -446,5 +464,67 @@ test("private account recovery uses PKCE, changes the password and returns to si
         c.body.auth_code === "fictional-recovery-code",
     ),
   ).toBe(true);
+  expect(errors).toEqual([]);
+});
+
+test("recovery rate limits show useful copy and never auto-retry", async ({
+  page,
+}) => {
+  const server = fixture(),
+    errors = await mock(page, server);
+  let requests = 0;
+  await page.route("**/auth/v1/recover*", async (route) => {
+    requests++;
+    await route.fulfill({
+      status: 429,
+      contentType: "application/json",
+      body: JSON.stringify({
+        code: "over_email_send_rate_limit",
+        msg: "Rate limited",
+      }),
+    });
+  });
+  await page.goto("/staging-fixture-dist/");
+  await page
+    .getByLabel("Email", { exact: true })
+    .fill("fictional@fictional.invalid");
+  await page.getByRole("button", { name: "Forgot account password" }).click();
+  await expect(page.getByRole("status")).toContainText(
+    "Too many recovery requests",
+  );
+  await expect(
+    page.getByRole("button", { name: "Forgot account password" }),
+  ).toBeDisabled();
+  await page.waitForTimeout(250);
+  expect(requests).toBe(1);
+  expect(errors).toEqual([]);
+});
+
+test("lost parent award restores the same immutable retry after refresh", async ({
+  page,
+}) => {
+  const server = fixture(),
+    errors = await mock(page, server);
+  await login(page, true);
+  await page.getByLabel("Action", { exact: true }).selectOption("award");
+  await page.getByLabel("Amount (1 to 60)", { exact: true }).fill("7");
+  server.loseAward = true;
+  await page.getByRole("button", { name: "Submit parent reward" }).click();
+  await expect.poll(() => server.wallet.bonus).toBe(7);
+  await page.reload();
+  await expect(
+    page.getByRole("button", { name: "Retry saved parent transaction" }),
+  ).toBeVisible();
+  await expect(
+    page.getByLabel("Amount (1 to 60)", { exact: true }),
+  ).toHaveValue("7");
+  await page
+    .getByRole("button", { name: "Retry saved parent transaction" })
+    .click();
+  await expect(page.getByRole("status")).toContainText("saved once");
+  expect(server.wallet.bonus).toBe(7);
+  const awards = server.calls.filter((c) => c.body.p_operation === "award");
+  expect(awards).toHaveLength(2);
+  expect(awards[0].body.p_args).toEqual(awards[1].body.p_args);
   expect(errors).toEqual([]);
 });

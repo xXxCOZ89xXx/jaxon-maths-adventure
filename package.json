@@ -2,7 +2,7 @@
   "name": "jaxon-adventure-preview",
   "private": true,
   "scripts": {
-    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-cloud.cjs",
+    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs",
     "test:e2e": "playwright test",
     "preview": "python3 -m http.server 4173 --bind 0.0.0.0",
     "build:staging": "node scripts/build-v3-staging.cjs",
@@ -11,7 +11,9 @@
     "test:staging-build": "node tests/v3-staging-build.cjs",
     "test:security": "node tests/v3-postgres.cjs",
     "build:preview": "node scripts/build-v3-preview.cjs",
-    "pretest:e2e": "node tests/prepare-v3.cjs"
+    "pretest:e2e": "node tests/prepare-v3.cjs",
+    "capture:visual": "node scripts/capture-v3-gallery.cjs",
+    "build:gallery": "node scripts/build-v3-gallery.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

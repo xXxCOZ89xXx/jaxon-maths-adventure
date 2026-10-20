@@ -360,6 +360,10 @@ test("Visible active learning earns time; simulated hidden and idle time stop ea
   await page.bringToFront();
   await action(page, "continue").first().click();
   await action(page, "begin").click();
+  // Opening a puzzle alone must not accrue rewards.
+  await page.clock.runFor(10000);
+  expect((await read(page)).minutes).toBe(0);
+  await action(page, "value:1").click();
   await page.clock.runFor(10000);
   await expect
     .poll(async () => (await read(page)).minutes)
@@ -403,4 +407,34 @@ test("Corrupt demo saves remain intact and show a temporary-session warning", as
   expect(await page.evaluate((key) => localStorage.getItem(key), KEY)).toBe(
     "{broken fictional save",
   );
+});
+
+test("menus, idle movement, no-op edits and refresh cannot renew learning rewards", async ({
+  page,
+}) => {
+  await page.clock.install({ time: new Date("2026-10-20T12:00:00Z") });
+  await page.reload();
+  await action(page, "continue").first().click();
+  await action(page, "begin").click();
+  await page.clock.runFor(30000);
+  expect((await read(page)).minutes).toBe(0);
+  await action(page, "value:1").click();
+  await page.clock.runFor(10000);
+  const initial = (await read(page)).minutes;
+  expect(initial).toBeGreaterThan(0);
+  await page.clock.runFor(20000);
+  const stopped = (await read(page)).minutes;
+  for (let i = 0; i < 5; i++) {
+    await page.mouse.move(100 + i * 10, 100);
+    await page.keyboard.press("Tab");
+    await action(page, "value:1").click();
+    await page.clock.runFor(5000);
+  }
+  expect((await read(page)).minutes).toBe(stopped);
+  await page.reload();
+  await page.clock.runFor(20000);
+  expect((await read(page)).minutes).toBe(stopped);
+  await page.locator('nav [data-nav="home"]').click();
+  await page.clock.runFor(20000);
+  expect((await read(page)).minutes).toBe(stopped);
 });

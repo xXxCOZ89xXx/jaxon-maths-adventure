@@ -24,7 +24,7 @@
   let s = read(),
     filter = "all",
     before = false,
-    activity = Date.now(),
+    activity = 0,
     lastTick = Date.now();
   function status(message) {
     $("status").textContent = message;
@@ -113,7 +113,7 @@
   function home() {
     const w = world(),
       minutes = s.weekly[E.weekKey(Date.now())] || 0;
-    return `<section class="hero"><div class="hero-copy"><div class="eyebrow">YOUR NEXT CHAPTER IS WAITING</div><h1>A little maths.<br>A big adventure.</h1><p class="muted">Build bridges. Bring worlds back to life.<br>See what your next idea can do.</p>${btn('Continue adventure <span class="arrow" aria-hidden="true">→</span>', "continue", "primary")}<p class="small muted" style="margin-top:14px">${M.current(s) ? "Resume your saved visit" : s.quest ? "Resume your saved quest" : s.learning ? "Resume your saved lesson" : w.name + " · " + w.tag}</p></div><div class="hero-art">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="scene-caption">${esc(w.name.toUpperCase())}</span><div class="scene-bottom"><span>CHAPTER ${E.worlds.indexOf(w) + 1} / 09</span><span>${M.visualLevel(s, w.id, E.count(s, w.id))} / 3 restored</span></div></div></section><div class="eyebrow path-label">CHOOSE YOUR PATH</div><section class="choices" aria-label="Adventure choices"><article class="choice"><span class="tile-icon" aria-hidden="true">↗</span><h3>Continue adventure</h3><p class="muted">Pick up where you left off. Rowan and the forest are ready when you are.</p>${btn('Let’s go <span aria-hidden="true">→</span>', "continue", "wide")}</article><article class="choice"><span class="tile-icon" aria-hidden="true">▧</span><h3>Explore worlds</h3><p class="muted">Nine places to discover. Choose your own route through the adventure.</p>${btn('Open the map <span aria-hidden="true">→</span>', "nav:map", "wide")}</article><article class="choice"><span class="tile-icon" aria-hidden="true">⌂</span><h3>My explorer & camp</h3><p class="muted">Make yourself at home. Find your look and watch your camp grow.</p>${btn('Visit Base Camp <span aria-hidden="true">→</span>', "nav:camp", "wide")}</article></section><section class="week" aria-label="Weekly learning"><span><strong>Your week</strong> <span class="small muted">${minutes.toFixed(1)} / 60 active minutes</span></span>${bar(minutes, 60)}<span class="small muted">${minutes.toFixed(1)} minutes screen-time earned · 1:1</span></section>${U.suggestion(s)}${!s.tourSeen ? `<div class="notice small">New to Test Camp? Take a quick look around. <div class="actions">${btn("Show me around", "nav:tour")}${btn("Skip tour", "skip-tour")}</div></div>` : ""}`;
+    return `<section class="hero"><div class="hero-copy"><div class="eyebrow">YOUR NEXT CHAPTER IS WAITING</div><h1>A little maths.<br>A big adventure.</h1><p class="muted">Build bridges. Bring worlds back to life.<br>See what your next idea can do.</p>${btn('Continue adventure <span class="arrow" aria-hidden="true">→</span>', "continue", "primary")}<p class="small muted" style="margin-top:14px">${M.current(s) ? "Resume your saved visit" : s.quest ? "Resume your saved quest" : s.learning ? "Resume your saved lesson" : w.name + " · " + w.tag}</p></div><div class="hero-art">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="scene-caption">${esc(w.name.toUpperCase())}</span><div class="scene-bottom"><span>CHAPTER ${E.worlds.indexOf(w) + 1} / 09</span><span>${M.visualLevel(s, w.id, E.count(s, w.id))} / 3 restored</span></div></div></section><div class="eyebrow path-label">CHOOSE YOUR PATH</div><section class="choices" aria-label="Adventure choices"><article class="choice"><span class="tile-icon" aria-hidden="true">${A.icon("medal")}</span><h3>Continue adventure</h3><p class="muted">Pick up your saved trail. Your next idea can change this world.</p>${btn('Let’s go <span aria-hidden="true">→</span>', "continue", "wide")}</article><article class="choice"><span class="tile-icon" aria-hidden="true">${A.icon("forestbg")}</span><h3>Explore worlds</h3><p class="muted">Nine places to discover. Choose your own route through the adventure.</p>${btn('Open the map <span aria-hidden="true">→</span>', "nav:map", "wide")}</article><article class="choice"><span class="tile-icon" aria-hidden="true">${A.icon("rucksack")}</span><h3>My explorer & camp</h3><p class="muted">Make yourself at home. Find your look and watch your camp grow.</p>${btn('Visit Base Camp <span aria-hidden="true">→</span>', "nav:camp", "wide")}</article></section><section class="week" aria-label="Weekly learning"><span><strong>Your week</strong> <span class="small muted">${minutes.toFixed(1)} / 60 active minutes</span></span>${bar(minutes, 60)}<span class="small muted">${cloud ? window.V3Presentation.minutes(cloud.screenTime()) : minutes.toFixed(1)} minutes screen-time ${cloud ? "available" : "earned"} · 1:1</span></section>${U.suggestion(s)}${!s.tourSeen ? `<div class="notice small">New to Test Camp? Take a quick look around. <div class="actions">${btn("Show me around", "nav:tour")}${btn("Skip tour", "skip-tour")}</div></div>` : ""}`;
   }
   function map() {
     return `${header("THE ADVENTURE ATLAS", "Where will you go?", "home")}<div class="toolbar"><p class="muted">Every world is open. Follow your curiosity.</p>${A.explorer(s, true)}<span class="badge">${s.milestones.length} learning milestones</span></div><div class="world-grid">${E.worlds.map((w, i) => `<article class="world-card">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<div class="body"><div class="eyebrow">0${i + 1} · ${s.world === w.id ? "YOU ARE HERE" : "OPEN TO EXPLORE"}</div><h2>${w.name}</h2><p class="muted">${w.tag} · ${M.visualLevel(s, w.id, E.count(s, w.id))}/3 restored · ${M.completions(s, w.id).length} expeditions</p>${bar(M.visualLevel(s, w.id, E.count(s, w.id)), 3)}${btn("Explore " + w.name, "world:" + w.id)}</div></article>`).join("")}</div>`;
@@ -165,7 +165,7 @@
   function quest() {
     const q = s.quest,
       w = E.worlds.find((w) => w.id === q.world);
-    return `${header("RESTORE THE WORLD", w.name, "world")}<div class="quest-layout"><div>${art(w.id)}<section class="panel guide"><div class="portrait" aria-hidden="true">◈</div><div><h3>${w.guide}, your guide</h3><p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p></div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s, true)}${btn("Save & exit", "nav:home")}</div></div><section class="panel">${q.intro ? `<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2><p>We can restore this place with three small maths puzzles. Tap to build, move and explore.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn("Start building →", "begin", "primary")}` : puzzle(q) + `${q.solved ? `<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn(q.i < 2 ? "Next puzzle →" : "Quest recap →", "next-quest", "primary")}</div>` : `<div class="actions">${btn("Try my solution", "solve", "primary")}${btn("Hint", "hint")}${btn("I don’t know", "skip")}</div>${q.feedback ? `<div class="feedback" role="status">${esc(q.feedback)}</div>` : ""}`}`}</section></div>`;
+    return `${header("RESTORE THE WORLD", w.name, "world")}<div class="quest-layout"><div>${art(w.id)}<section class="panel guide">${A.guide(w.guide)}<div><h3>${w.guide}, your guide</h3><p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p></div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s, true)}${btn("Save & exit", "nav:home")}</div></div><section class="panel">${q.intro ? `<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2><p>We can restore this place with three small maths puzzles. Tap to build, move and explore.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn("Start building →", "begin", "primary")}` : puzzle(q) + `${q.solved ? `<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn(q.i < 2 ? "Next puzzle →" : "Quest recap →", "next-quest", "primary")}</div>` : `<div class="actions">${btn("Try my solution", "solve", "primary")}${btn("Hint", "hint")}${btn("I don’t know", "skip")}</div>${q.feedback ? `<div class="feedback" role="status">${esc(q.feedback)}</div>` : ""}`}`}</section></div>`;
   }
   function learning() {
     const l = s.learning,
@@ -207,7 +207,7 @@
   const campThresholds = [0, 1, 3, 6, 12, 24];
   function camp() {
     const n = s.milestones.length;
-    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Welcome to Base Camp.", "home")}<div class="split"><div><div class="hero-art">${A.camp(s)}</div><div class="camp-art">${A.explorer(s)}<div class="camp-buildings">${campNames.map((name, i) => `<div class="${n >= campThresholds[i] ? "" : "locked"}">${n >= campThresholds[i] ? "◆" : "◇"} ${name}${n < campThresholds[i] ? ` <span class="small">(${campThresholds[i]} landmarks)</span>` : ""}</div>`).join("")}</div></div></div><section class="panel"><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2 style="margin-top:20px">Make it yours.</h2><p class="muted">Your camp grows as you restore landmarks. Every upgrade stays with you.</p><p><strong>${E.xp(s)} explorer XP</strong> · ${s.coins} learning coins</p><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div></section></div><h2 style="margin-top:36px">Your discoveries</h2><div class="panel">${[
+    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Welcome to Base Camp.", "home")}<div class="split"><div><div class="hero-art">${A.camp(s)}</div><div class="camp-art">${A.explorer(s)}<div class="camp-buildings">${campNames.map((name, i) => `<div class="${n >= campThresholds[i] ? "" : "locked"}">${n >= campThresholds[i] ? "◆" : "◇"} ${name}${n < campThresholds[i] ? ` <span class="small">(${campThresholds[i]} landmarks)</span>` : ""}</div>`).join("")}</div></div></div><section class="panel"><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2 style="margin-top:20px">Make it yours.</h2><p class="muted">Your camp grows as you restore landmarks. Every upgrade stays with you.</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div></section></div><h2 style="margin-top:36px">Your discoveries</h2><div class="panel">${[
       ["First steps", n >= 1, "Restore your first landmark."],
       [
         "Forest keeper",
@@ -264,7 +264,7 @@
   }
   function shop() {
     const slots = [...new Set(C.catalog.map((i) => i.slot))];
-    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}<div class="shop-preview">${A.explorer(s)}<div><h2>Your explorer</h2><p class="muted">${s.coins} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. Only fictional demo coins are used here.</p>${btn("Unequip all", "unequip")}</div></div><label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All 40 items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${C.catalog
+    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}<div class="shop-preview">${A.explorer(s)}<div><h2>Your explorer</h2><p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Staging wallet only. Purchases are checked securely before saving." : "Only fictional demo coins are used here."}</p>${btn("Unequip all", "unequip")}</div></div><label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All 40 items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${C.catalog
       .filter(
         (i) =>
           filter === "all" ||
@@ -275,7 +275,7 @@
       )
       .map(
         (i) =>
-          `<article class="shop-item"><span class="ico" aria-hidden="true">${i.ico}</span><h3>${i.label}</h3><p class="small muted">${i.cost} coins · ${i.slot}</p>${btn(s.equipped.includes(i.id) ? "Unequip " + i.label : s.bought.includes(i.id) ? "Equip " + i.label : "Buy " + i.label, "buy:" + i.id, s.equipped.includes(i.id) ? "primary" : "", !s.bought.includes(i.id) && s.coins < i.cost)}</article>`,
+          `<article class="shop-item"><span class="ico" aria-hidden="true">${A.icon(i)}</span><h3>${i.label}</h3><p class="small muted">${i.cost} coins · ${i.slot}</p>${btn(s.equipped.includes(i.id) ? "Unequip " + i.label : s.bought.includes(i.id) ? "Equip " + i.label : "Buy " + i.label, "buy:" + i.id, s.equipped.includes(i.id) ? "primary" : "", !s.bought.includes(i.id) && s.coins < i.cost)}</article>`,
       )
       .join("")}</div>`;
   }
@@ -660,19 +660,45 @@
   document.addEventListener("click", async (e) => {
     const el = e.target.closest("[data-action],[data-nav],[data-act]");
     if (!el || el.disabled) return;
-    activity = Date.now();
-    await dispatch(
-      el.dataset.action || el.dataset.act || "nav:" + el.dataset.nav,
-    );
-  });
-  document.addEventListener("keydown", () => {
-    activity = Date.now();
-  });
-  document.addEventListener("pointerdown", () => {
-    activity = Date.now();
+    const action =
+      el.dataset.action || el.dataset.act || "nav:" + el.dataset.nav;
+    const name = action.split(":")[0];
+    // Only maths manipulation/answer/support controls renew the bounded learning window.
+    // Navigation, focus, raw key presses, pointer movement and refresh never do.
+    const meaningful =
+      [
+        "value",
+        "adjust",
+        "select",
+        "part",
+        "rotate",
+        "m-point",
+        "solve",
+        "hint",
+        "skip",
+        "answer",
+        "learning-hint",
+        "learning-skip",
+        "m-value",
+        "m-adjust",
+        "m-part",
+        "m-select",
+        "m-coin",
+        "m-choice",
+        "m-post",
+        "m-turn",
+        "m-turn-back",
+        "m-submit",
+        "m-help",
+        "m-worked",
+      ].includes(name) || el.dataset.act;
+    const evidence = () => JSON.stringify([s.quest, s.learning, M.current(s)]);
+    const previous = evidence();
+    await dispatch(action);
+    if (!meaningful) activity = 0;
+    else if (previous !== evidence()) activity = Date.now();
   });
   document.addEventListener("change", async (e) => {
-    activity = Date.now();
     if (e.target.dataset.missionTier) {
       const id = e.target.dataset.missionTier,
         value = Number(e.target.value);
@@ -708,10 +734,10 @@
   });
   document.addEventListener("input", async (e) => {
     if (e.target.dataset.missionClock) {
-      activity = Date.now();
       const [hour, minute] = e.target.value.split(":").map(Number),
         value = hour * 60 + minute;
       if (Number.isInteger(value) && value >= 0 && value < 1440) {
+        if (M.current(s)?.values.amount !== value) activity = Date.now();
         await change(() => M.edit(s, "amount", value), { renderPage: false });
         const display = document.querySelector(".clock-display");
         if (display) display.textContent = T.clock(value);
@@ -719,13 +745,19 @@
       return;
     }
     if (!e.target.dataset.missionInput) return;
-    activity = Date.now();
     const key = e.target.dataset.missionInput,
       q = M.current(s),
       t = q?.tasks[q.i],
       value = Number(e.target.value);
-    if (t && Number.isFinite(value) && value >= (t.min || 0) && value <= t.max)
+    if (
+      t &&
+      Number.isFinite(value) &&
+      value >= (t.min || 0) &&
+      value <= t.max
+    ) {
+      if (q.values[key] !== value) activity = Date.now();
       await change(() => M.edit(s, key, value), { renderPage: false });
+    }
     const display = document.querySelector(".amount-display");
     if (display && t)
       display.textContent =
@@ -746,14 +778,12 @@
     lastTick = Date.now();
     activity = 0;
   });
-  setInterval(async () => {
-    const now = Date.now(),
-      dt = now - lastTick;
-    lastTick = now;
-    const eligible =
+  function learningEligible(now) {
+    return (
       !document.hidden &&
       document.hasFocus() &&
-      now - activity < 60000 &&
+      activity > 0 &&
+      now - activity < 20000 &&
       [
         "quest",
         "lesson",
@@ -763,15 +793,26 @@
         "adventure",
       ].includes(s.view) &&
       (s.view === "adventure"
-        ? !!M.current(s) && !M.current(s)?.solved
+        ? !!M.current(s) &&
+          M.current(s)?.phase !== "lesson" &&
+          !M.current(s)?.solved
         : s.view === "quest"
-          ? !s.quest?.solved
-          : !s.learning?.answered);
+          ? !s.quest?.intro && !s.quest?.solved
+          : !s.learning?.answered)
+    );
+  }
+  setInterval(async () => {
+    const now = Date.now(),
+      dt = now - lastTick;
+    lastTick = now;
+    const eligible = learningEligible(now);
     if (eligible)
       await change(
         () => {
-          E.activeTime(s, dt, eligible, now);
-          cloud?.onActive(dt);
+          // A queued Web Lock may resolve after visibility, focus or the task changed.
+          if (!learningEligible(Date.now())) return;
+          E.activeTime(s, dt, true, now);
+          cloud?.onActive(Math.min(dt, 5000));
         },
         {
           renderPage: false,
