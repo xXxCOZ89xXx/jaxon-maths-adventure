@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-10-20T21:14:29.212Z",
+  "generatedAt": "2026-10-20T21:43:11.745Z",
   "report": "tests/artifacts/v5-1-browser-results.json",
   "stats": {
     "startTime": "2026-10-20T20:36:26.566Z",
-    "duration": 2281981.694091797,
+    "duration": 3954259.6000976562,
     "expected": 258,
     "skipped": 0,
     "unexpected": 0,

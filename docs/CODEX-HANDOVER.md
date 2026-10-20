@@ -1,6 +1,6 @@
 # Codex handover — V5.1 usability and automated regression
 
-Branch `codex/v3-adventure-build`; [Draft PR #2](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/pull/2), unmerged. **Final implementation: `2f30f72`**; V5 baseline: `2ca7639`. The latest user request authorises all eight V5.1 priorities and supersedes the earlier Phase 1-only request. Implementation is complete; final hosted CI is in progress. No deployment occurred: the owner-private site still serves V5.
+Branch `codex/v3-adventure-build`; [Draft PR #2](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/pull/2), unmerged. **Application: `2f30f72`; final QA harness: `a0da7d4`**; V5 baseline: `2ca7639`. The latest user request authorises all eight V5.1 priorities and supersedes the earlier Phase 1-only request. Implementation is complete; final hosted CI is in progress. No deployment occurred: the owner-private site still serves V5.
 
 ## Priority status
 
@@ -27,7 +27,7 @@ Foundation uses the supported band-5 floor plus prerequisite gaps (approximate Y
 - `npm test` passed, including all existing compatibility/model suites, 14 V5 model suites, valid/resettable profile/discovery checks and the [1,107-variant renderer audit](../tests/artifacts/v5-1-input-audit.json).
 - `npm run test:staging-build` passed pinned configuration and fixture/deployable-byte isolation.
 - `npm run test:security`: **14/14 real disposable PostgreSQL suites passed**, network disabled and fictional Auth claims. [Output](../tests/artifacts/v5-1-security-results.txt). This is not hosted Supabase Auth/RLS certification.
-- Hosted CI: [run 39498386408](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39498386408), exact code `2f30f72`, **344 cases configured; in progress**. Local WebKit distribution downloads were blocked by proxy policy; CI installs WebKit separately. Superseded runs were cancelled by workflow concurrency and are not presented as passes.
+- Hosted CI: [run 39502533251](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39502533251), exact QA source `a0da7d4`, **344 cases configured; in progress**. The first complete hosted run had one legacy WebKit walkthrough timeout while repeating arrows. Its helper now uses direct entry; only this 24-puzzle + accessibility walkthrough gets a 120-second total budget (per-action limits remain 15 seconds). The revised journey/save/concurrency checks passed **9/9 locally**. HTTP error logging remains; routine asset logs are suppressed by `tests/serve-preview.py` so full CI results fit decoded log limits. Local WebKit distribution downloads were blocked by proxy policy; CI installs WebKit separately. Superseded runs were cancelled by workflow concurrency and are not presented as passes.
 - Reviewed captures: [desktop](../tests/visual/v51/desktop-equal-sharing.png), [portrait](../tests/visual/v51/ipad-portrait-equal-sharing.png), [landscape](../tests/visual/v51/ipad-landscape-equal-sharing.png).
 
 The queued-input defect was reproduced before fixing: a blocked measurement edit wrote `123` into another tab's new algebra quest (expected `0`). Its regression now passes on all three Chromium layouts. Early harness issues—header navigation/disclosures, incomplete journey fixture ledgers, asynchronous save assertions and discovery fixture schema—were corrected. No unresolved failure remains in the local matrix.
@@ -35,7 +35,7 @@ The queued-input defect was reproduced before fixing: a blocked measurement edit
 ## Files and architectural constraints
 
 - Application: `v3/{app,adventure-ui,adventure,hands-on,journey}.js`, `v3/style.css`.
-- Tests: `tests/v5-{hands-on.cjs,interactions.spec.cjs}`, `v51-regression.spec.cjs`, `v51-fixtures.cjs`, `helpers/{profiles,identities,cloud-server}.cjs`; existing `v3-cloud.spec.cjs` reuses the extracted fictional server.
+- Tests: `tests/v3-browser.spec.cjs`, `tests/serve-preview.py`, `tests/v5-{hands-on.cjs,interactions.spec.cjs}`, `v51-regression.spec.cjs`, `v51-fixtures.cjs`, `helpers/{profiles,identities,cloud-server}.cjs`; existing `v3-cloud.spec.cjs` reuses the extracted fictional server.
 - Process/evidence: `scripts/{audit-v51-inputs,summarize-v51}.cjs`, `package.json`, `playwright.config.cjs`, `.github/workflows/v3-offline-qa.yml`, linked JSON/visual files.
 - Extend existing pure engines/renderers and the versioned journey ledger. Optional `amountDraft`/`clockDraft` text stays separate from validated numeric state. Taps clear stale drafts; only a current, unsolved question accepts a queued edit. Practice pounds convert into integer model pence; submitted practice values remain in the original question unit.
 - Preserve first-attempt/assisted evidence separately from independent mastery; no schema change was required. Preserve nine worlds/55 skills, eight venues, journey inventory, wallet/wardrobe/estate, **60 minutes/week, ten coins per active minute and 1:1 screen time**.
@@ -43,7 +43,7 @@ The queued-input defect was reproduced before fixing: a blocked measurement edit
 
 ## Exact resume point and remaining gates
 
-First collect final hosted CI run `39498386408`, fix any failing case, and update this file/verification JSON/PR with the actual outcome. Implementation of priorities 1–8 is complete; do not restart Phase 2 from the earlier handover.
+First collect final hosted CI run `39502533251`, fix any failing case, and update this file/verification JSON/PR with the actual outcome. Implementation of priorities 1–8 is complete; do not restart Phase 2 from the earlier handover.
 
 After hosted regression, the useful next work is the existing consolidated **physical iPad acceptance and verified hosted-authentication/recovery checks**. Physical Safari scrolling, virtual keyboard/minus/decimal entry, gestures, performance and assistive-technology review remain outstanding. Actual hosted login/PIN/RLS, genuine cross-device/offline recovery and deferred recovery delivery remain unverified. The prior staging CONNECT 403 must not be bypassed. Do not access real records, alter production Auth/SQL, merge or deploy without further approval. Keep the private V5 preview unchanged.
 

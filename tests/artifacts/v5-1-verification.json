@@ -21,18 +21,19 @@
       "new"
     ],
     "skillVisits": 660,
-    "completedIndependentRounds": 108
+    "completedIndependentRounds": 108,
+    "legacyJourneyRecheckPassed": 9
   },
   "logicAndCompatibility": "passed npm test",
   "stagingBuildAndFixtureIsolation": "passed",
   "rendererAuditTaskVariants": 1107,
   "postgresSecuritySuitesPassed": 14,
   "hostedCI": {
-    "runId": 39498386408,
-    "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39498386408",
+    "runId": 39502533251,
+    "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39502533251",
     "expectedBrowserCases": 344,
     "status": "in_progress",
-    "commit": "2f30f72"
+    "commit": "a0da7d4"
   },
   "safety": {
     "protectedSourcesUnchanged": true,
@@ -50,5 +51,12 @@
   ],
   "resolvedRegression": {
     "staleQueuedInput": "Reproduced with a failing save-lock test (expected 0, received 123); guard and all three Chromium projects now pass."
+  },
+  "qaCommit": "a0da7d44c99a606ce442263df5f9cc8b77f9c0dc",
+  "previousHostedCI": {
+    "runId": 39498386408,
+    "conclusion": "failure",
+    "reportedFailure": "Legacy all-world WebKit journey exceeded its 60-second test budget while still repeating numeric arrows. All other WebKit cases passed.",
+    "resolution": "Use direct entry, set a 120-second overall budget only for the 24-puzzle walkthrough, retain 15-second per-action limits; nine local journey/save/concurrency cases passed."
   }
 }

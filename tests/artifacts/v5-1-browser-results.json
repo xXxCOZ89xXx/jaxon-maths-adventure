@@ -217,7 +217,8 @@
     "tests/artifacts/v5-1-broad-results.json",
     "tests/artifacts/v5-1-family-journey-results.json",
     "tests/artifacts/v5-1-final-input-results.json",
-    "tests/artifacts/v5-1-final-money-profile-results.json"
+    "tests/artifacts/v5-1-final-money-profile-results.json",
+    "tests/artifacts/v5-1-legacy-final-results.json"
   ],
   "scope": "Local unique cases; later focused runs replace matching earlier cases by file/title/project. Supplemental race, budget and authenticated journey cases are included. Hosted CI is separate.",
   "suites": [
@@ -230,7 +231,7 @@
           "tags": [],
           "tests": [
             {
-              "timeout": 60000,
+              "timeout": 120000,
               "annotations": [],
               "expectedStatus": "passed",
               "projectId": "desktop-chromium",
@@ -240,12 +241,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 37030,
+                  "duration": 39303,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T20:36:27.824Z",
+                  "startTime": "2026-10-20T21:40:59.759Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -274,12 +275,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2728,
+                  "duration": 2764,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T20:37:05.230Z",
+                  "startTime": "2026-10-20T21:41:39.575Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -289,7 +290,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-0cde86adc57e08005fd4",
           "file": "v3-browser.spec.cjs",
-          "line": 156,
+          "line": 158,
           "column": 1
         },
         {
@@ -376,12 +377,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1923,
+                  "duration": 2747,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T20:37:15.834Z",
+                  "startTime": "2026-10-20T21:41:42.377Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -391,7 +392,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-3d3c90364a44ba419986",
           "file": "v3-browser.spec.cjs",
-          "line": 271,
+          "line": 273,
           "column": 1
         },
         {
@@ -672,7 +673,7 @@
           "tags": [],
           "tests": [
             {
-              "timeout": 60000,
+              "timeout": 120000,
               "annotations": [],
               "expectedStatus": "passed",
               "projectId": "ipad-portrait-chromium",
@@ -680,14 +681,14 @@
               "results": [
                 {
                   "workerIndex": 1,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 38554,
+                  "duration": 38443,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T20:46:43.104Z",
+                  "startTime": "2026-10-20T21:40:59.775Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -714,14 +715,14 @@
               "results": [
                 {
                   "workerIndex": 1,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2110,
+                  "duration": 2849,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T20:47:21.977Z",
+                  "startTime": "2026-10-20T21:41:38.733Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -731,7 +732,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-a8bb482b756b737bb275",
           "file": "v3-browser.spec.cjs",
-          "line": 156,
+          "line": 158,
           "column": 1
         },
         {
@@ -816,14 +817,14 @@
               "results": [
                 {
                   "workerIndex": 1,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2091,
+                  "duration": 2572,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T20:47:32.083Z",
+                  "startTime": "2026-10-20T21:41:41.602Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -833,7 +834,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-0bb20bad482bb4950cc4",
           "file": "v3-browser.spec.cjs",
-          "line": 271,
+          "line": 273,
           "column": 1
         },
         {
@@ -1114,7 +1115,7 @@
           "tags": [],
           "tests": [
             {
-              "timeout": 60000,
+              "timeout": 120000,
               "annotations": [],
               "expectedStatus": "passed",
               "projectId": "ipad-landscape-chromium",
@@ -1122,14 +1123,14 @@
               "results": [
                 {
                   "workerIndex": 2,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 37577,
+                  "duration": 31084,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T20:56:22.014Z",
+                  "startTime": "2026-10-20T21:41:44.832Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1156,14 +1157,14 @@
               "results": [
                 {
                   "workerIndex": 2,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 2238,
+                  "duration": 2115,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T20:56:59.852Z",
+                  "startTime": "2026-10-20T21:42:16.618Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1173,7 +1174,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-70289ef41b83dc2ef4b0",
           "file": "v3-browser.spec.cjs",
-          "line": 156,
+          "line": 158,
           "column": 1
         },
         {
@@ -1258,14 +1259,14 @@
               "results": [
                 {
                   "workerIndex": 2,
-                  "parallelIndex": 0,
+                  "parallelIndex": 1,
                   "status": "passed",
-                  "duration": 1663,
+                  "duration": 1937,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T20:57:10.412Z",
+                  "startTime": "2026-10-20T21:42:18.748Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1275,7 +1276,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-791fabec35e329696035",
           "file": "v3-browser.spec.cjs",
-          "line": 271,
+          "line": 273,
           "column": 1
         },
         {
@@ -9650,7 +9651,7 @@
   "errors": [],
   "stats": {
     "startTime": "2026-10-20T20:36:26.566Z",
-    "duration": 2281981.694091797,
+    "duration": 3954259.6000976562,
     "expected": 258,
     "skipped": 0,
     "unexpected": 0,
