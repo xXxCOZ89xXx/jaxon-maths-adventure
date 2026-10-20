@@ -1,3 +1,9 @@
+# Current V5 results
+
+The [V5 QA report](V5-TEST-REPORT.md) supersedes the historical reports below: **152/152 hosted Chromium/WebKit cases**, **111/111 local integration cases**, **21/21 latest V5 cases**, all logic and **14 isolated PostgreSQL suites** pass. V5 is deployed as **private Site version 5**, with owner-only access preserved. [Playable features and all-55-skill coverage](V5-INTERACTIVE-LEARNING.md) · [V5 gallery](https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site/review/interactive.html).
+
+---
+
 # Town architecture and eight-stage estate QA — 20 October 2026
 
 Current implementation: `79bd9f3`; final screenshot tree: `624c9d6`; save-acknowledgement test correction: `b9b3b23`, branch `codex/v3-adventure-build`. PR #2 remains draft. [Changes, progression, compatibility and optional asset workflow](V3-TOWN-ESTATE-EXPANSION.md).

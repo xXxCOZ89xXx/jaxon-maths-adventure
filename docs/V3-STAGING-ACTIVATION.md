@@ -1,3 +1,16 @@
+# V5 continuation of the existing combined acceptance session
+
+No additional session is requested now. When the owner chooses to run the already-planned family/iPad session, include the V5 checks below in that same session. Use the existing fictional families privately inside the app; never send credentials or PINs in chat or documents.
+
+- Start a recipe journey with Family A, prepare the missing-ingredient list and save at checkout. Resume on the physical iPad and verify the exact basket, cash and current step.
+- Compare a direct supermarket worker visit with the journey's customer visit in the same building. Finish payment/change and cooking, reload the completed journey, and confirm there is no repeated payment or ingredient consumption.
+- In portrait and landscape Safari, read the Cartesian axes and select a point, shade and unshade fractions by tap and horizontal painting, scroll vertically past the model, and check that every control remains reachable. Check practical response builders distinguish pence from pounds and minutes.
+- Retain the existing learner/parent PIN, lock, parent bonus, purchase, family separation, cloud/offline recovery and returning-from-background checks in the original plan below. Include preservation of wardrobe, estate stage and earlier learning evidence.
+
+These are **pending physical/live checks**, not automated or hosted results claimed by the agent. The current implementation, actual automated evidence and private deployment are [V5 scope](V5-INTERACTIVE-LEARNING.md) and [V5 QA](V5-TEST-REPORT.md). Older setup and acceptance detail follows.
+
+---
+
 Visual continuation: [immersive stages and camp](V3-IMMERSIVE-ADVENTURE.md). During the existing later combined session below, include the portrait bridge’s first/last destinations, landscape expedition entrances, camp place links, keepsake placement, building project and reduced-motion restoration. This extends the same session; no new passwords/PINs or separate manual tests are requested.
 
 # Private staging activation — 20 October 2026

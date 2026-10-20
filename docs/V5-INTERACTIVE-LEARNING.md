@@ -36,7 +36,7 @@ Supported practice uses numeric/place-value, number-line, fraction, angle and mo
 
 ## Town roles and the complete recipe journey
 
-`V3Town.context(venue, entry)` defines reusable, versioned role/objective metadata for all eight existing venues. Direct visits use worker scenarios. A journey uses customer, passenger or home-cook roles and the same physical venue art. The same supermarket therefore supports stocking/preparing orders directly and shopping from a household list in the journey. Other venue contexts are reusable foundations; additional connected storylines are not claimed complete.
+`V3Town.context(venue, entry)` defines reusable, versioned role/objective metadata for all eight existing venues. Direct visits use worker scenarios. A journey uses customer, passenger or home-cook roles and the same physical venue art. The same supermarket therefore supports stocking/preparing orders directly and shopping from a household list in the journey. Story roles are separate from parent/learner Auth roles and never change permissions. Other venue contexts are reusable foundations; additional connected storylines are not claimed complete.
 
 From the Town board, choose **Start a Bolognese journey** or the lentil recipe variant:
 
@@ -104,8 +104,8 @@ Every row retains lessons, fresh practice, discovery and independent checks. Con
 | factors | number | 9/9 | place-value |
 | powers | number | 9/9 | place-value |
 | fraction_mixed | fractions | 9/9 | place-value |
-| fraction_mult | fractions | 6/9 | fraction-shading |
-| algebra_brackets | algebra | 9/9 | place-value |
+| fraction_mult | fractions | 3/9 | fraction-shading |
+| algebra_brackets | algebra | 6/9 | place-value |
 | algebra_coordinates | algebra | 9/9 | number-line |
 | geometry_transforms | geometry | 6/9 | number-line |
 | geometry_circle | geometry | 0/9 | Conventional answers in this sample |
@@ -120,11 +120,11 @@ Every row retains lessons, fresh practice, discovery and independent checks. Con
 | town_interest | town | 9/9 | money |
 | town_discounts | town | 9/9 | money |
 | town_value | town | 9/9 | money |
-| town_timetable | town | 9/9 | money |
+| town_timetable | town | 9/9 | place-value |
 | town_travel | town | 9/9 | money |
 | town_bills | town | 9/9 | money |
 | town_household | town | 9/9 | money |
 | town_tickets | town | 9/9 | money |
-| town_time | town | 9/9 | money |
+| town_time | town | 9/9 | place-value |
 | town_wages | town | 9/9 | money |
 | town_payslip | town | 9/9 | money |

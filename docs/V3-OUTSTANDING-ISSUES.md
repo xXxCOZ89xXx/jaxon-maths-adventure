@@ -1,5 +1,7 @@
 # One consolidated outstanding-issues list
 
+V5 adds shared interactive maths, corrected Cartesian intersections, evidence-informed suggestions and the complete recipe journey. [Scope and per-skill coverage](V5-INTERACTIVE-LEARNING.md) · [current QA](V5-TEST-REPORT.md). Physical iPad, cross-device and hosted API gates remain unchanged; no additional manual session is requested.
+
 Updated 20 October 2026. The [Town architecture and eight-stage mansion estate](V3-TOWN-ESTATE-EXPANSION.md) are implemented with automatic unique-milestone upgrades and preserved historical camp projects. Current automated/deployment evidence is at the top of [the QA report](V3-TEST-REPORT.md). No additional manual testing is requested now. Use this list for one later family acceptance session, after automated QA and visual review. Keep PR #2 draft until a separate release decision.
 
 ## Owner-reported real staging checks already completed

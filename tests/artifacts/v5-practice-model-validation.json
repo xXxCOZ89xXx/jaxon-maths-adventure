@@ -1,0 +1,8 @@
+{
+  "supportedResponseCases": 2073,
+  "conventionalCases": 396,
+  "rejectedDuplicateRounds": 2,
+  "bands": 5,
+  "skills": 55,
+  "roundSeeds": 3
+}

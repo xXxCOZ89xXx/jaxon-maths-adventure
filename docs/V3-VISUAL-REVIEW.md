@@ -1,3 +1,5 @@
+Current continuation: [V5 interactive learning, Town contexts and connected recipe journey](V5-INTERACTIVE-LEARNING.md). See [V5 QA](V5-TEST-REPORT.md) for current automated results and private deployment. Earlier V3/V4 notes below remain historical.
+
 Current continuation: [purpose-designed Town and eight-stage estate expansion](V3-TOWN-ESTATE-EXPANSION.md), with the latest automated QA and private deployment at the top of [the QA report](V3-TEST-REPORT.md). All prior reports below are historical; no additional manual test session is requested.
 
 # V3 visual review — the explorer’s field journal
