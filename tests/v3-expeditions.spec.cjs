@@ -305,3 +305,30 @@ test("Concurrent mission completion grants one milestone and camp projects need 
     page.locator('[data-action="camp-build:greenhouse"]'),
   ).toBeDisabled();
 });
+test("Higher levels use negative coordinates and composed clockwise/anticlockwise turns", async ({
+  page,
+}) => {
+  test.setTimeout(60000);
+  await page.locator('nav [data-nav="map"]').click();
+  await click(page, "world:algebra");
+  await page.locator("[data-mission-tier]").selectOption("3");
+  await page.waitForFunction(
+    () => !document.documentElement.hasAttribute("data-saving"),
+  );
+  await click(page, "mission:algebra:2:3");
+  expect((await saved(page)).adventure.active.tasks[0].answer).toEqual([
+    -2, -1,
+  ]);
+  await finish(page);
+  await page.locator('nav [data-nav="map"]').click();
+  await click(page, "world:geometry");
+  await page.locator("[data-mission-tier]").selectOption("3");
+  await page.waitForFunction(
+    () => !document.documentElement.hasAttribute("data-saving"),
+  );
+  await click(page, "mission:geometry:0:3");
+  expect(
+    (await saved(page)).adventure.active.tasks.map((t) => t.answer),
+  ).toEqual([270, 0, 180]);
+  await finish(page);
+});

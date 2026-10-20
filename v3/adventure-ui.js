@@ -83,17 +83,17 @@
         html = `<div class="courtyard-grid" role="group" aria-label="Courtyard tiles, rows from top to bottom">${Array.from({ length: 25 }, (_, i) => `<button data-action="m-select:${i}" aria-label="Row ${Math.floor(i / 5) + 1}, column ${(i % 5) + 1}" aria-pressed="${(q.values.selected || []).includes(i)}">${(q.values.selected || []).includes(i) ? "▣" : "·"}</button>`).join("")}</div><p class="small">${(q.values.selected || []).length} square tiles laid</p>`;
         break;
       case "coordinate":
-        html = `<div class="courtyard-grid coordinate-board" role="group" aria-label="Lift coordinates"><span class="sr-only">Rows run from y=4 at the top to y=0 at the bottom.</span>${Array.from(
+        html = `<div class="courtyard-grid coordinate-board" role="group" aria-label="Lift coordinates"><span class="sr-only">Rows run from y=${t.maxCoord ?? 4} at the top to y=${t.minCoord ?? 0} at the bottom.</span>${Array.from(
           { length: 25 },
           (_, i) => {
-            const x = i % 5,
-              y = 4 - Math.floor(i / 5);
+            const x = (t.minCoord ?? 0) + (i % 5),
+              y = (t.maxCoord ?? 4) - Math.floor(i / 5);
             return `<button data-action="m-point:${x}:${y}" aria-label="Point (${x}, ${y})" aria-pressed="${q.values.point?.[0] === x && q.values.point?.[1] === y}">${x},${y}</button>`;
           },
         ).join("")}</div>`;
         break;
       case "rotate":
-        html = `<div class="rotate-area"><div><div class="shape" style="--turn:0deg" aria-hidden="true">⌜</div><p>Start</p></div><div><div class="shape" style="--turn:${v}deg" aria-hidden="true">⌜</div><p>Turned ${v}°</p></div></div><div class="actions">${button("↻ Turn clockwise 90°", "m-turn")}${button("Reset piece", "m-value:0")}</div>`;
+        html = `<div class="rotate-area"><div><div class="shape" style="--turn:0deg" aria-hidden="true">⌜</div><p>Start</p></div><div><div class="shape" style="--turn:${v}deg" aria-hidden="true">⌜</div><p>Turned ${v}°</p></div></div><div class="actions">${button("↻ Turn clockwise 90°", "m-turn")}${button("↺ Turn anticlockwise 90°", "m-turn-back")}${button("Reset piece", "m-value:0")}</div>`;
         break;
       case "journey":
         html = `<div class="timetable" role="group" aria-label="Choose a journey">${t.options.map((r, i) => `<button class="journey-option" data-action="m-choice:${i}" aria-pressed="${q.values.choice === i}"><strong>${r.name}</strong><span>${T.clock(r.depart)} → ${T.clock(r.arrive)}</span><span>${money(r.price)}</span></button>`).join("")}</div><p class="small">Arrival deadline ${T.clock(t.deadline)} including a ${t.walk}-minute walk.</p>`;

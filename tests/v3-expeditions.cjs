@@ -79,6 +79,15 @@ test("123 mission/difficulty combinations across twelve repeat seeds are solvabl
           assert.equal(M.start(s, w.id, route, tier), true);
           const q = M.current(s);
           assert.equal(q.phase, "lesson");
+          assert.equal(
+            new Set(
+              q.tasks.map((t) =>
+                JSON.stringify([t.kind, t.prompt, t.values, t.answer]),
+              ),
+            ).size,
+            3,
+            `Tasks within ${w.id}/${route}/${tier}/${round} must vary`,
+          );
           assert.equal(M.submit(s), false);
           for (const t of q.tasks) {
             assert.ok(t.teach && t.example && t.worked);
@@ -210,6 +219,24 @@ test("Academic celebration badges survive later struggle without falsely preserv
   assert.equal(s.skills.place.state, "learning");
 });
 
+test("Higher-level coordinates and turn composition match worked mathematical examples", () => {
+  assert.deepEqual(
+    [0, 1, 2].map((i) => M.task("geometry", "0", 3, 1, i).answer),
+    [270, 0, 180],
+  );
+  assert.deepEqual(
+    [0, 1, 2].map((i) => M.task("geometry", "0", 2, 1, i).answer),
+    [180, 270, 90],
+  );
+  assert.deepEqual(
+    [0, 1, 2].map((i) => M.task("algebra", "2", 3, 1, i).answer),
+    [
+      [-2, -1],
+      [-1, 2],
+      [0, 0],
+    ],
+  );
+});
 console.log(
   `PASS: ${suites} expedition suites; ${tasks} generated tasks solved using fictional data.`,
 );

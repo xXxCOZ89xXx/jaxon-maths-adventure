@@ -269,7 +269,7 @@
         .slice(0, 8)
         .map(
           (r) =>
-            `<p class="small"><strong>${esc(r.type === "expedition" ? (E.worlds.find(w=>w.id===r.world)?.name+" · "+(M.routes(r.world).find(v=>v.id===r.route)?.name||"Gateway")+" · level "+r.tier) : r.type === "restoration" ? E.worlds.find((w) => w.id === r.world)?.name : skill(r.id)?.name || r.type)}</strong> · ${esc(r.type)}${r.assisted ? " · with support" : ""}<br><span class="muted">${esc(new Date(r.date).toLocaleString("en-GB", { timeZone: "Europe/London" }))}</span></p>`,
+            `<p class="small"><strong>${esc(r.type === "expedition" ? E.worlds.find((w) => w.id === r.world)?.name + " · " + (M.routes(r.world).find((v) => v.id === r.route)?.name || "Gateway") + " · level " + r.tier : r.type === "restoration" ? E.worlds.find((w) => w.id === r.world)?.name : skill(r.id)?.name || r.type)}</strong> · ${esc(r.type)}${r.assisted ? " · with support" : ""}<br><span class="muted">${esc(new Date(r.date).toLocaleString("en-GB", { timeZone: "Europe/London" }))}</span></p>`,
         )
         .join("") || '<p class="muted">No learning activity yet.</p>'
     }</section></div>`;
@@ -448,6 +448,11 @@
           M.edit(s, "point", [Number(bits[1]), Number(bits[2])]);
           break;
         }
+        case "m-turn-back": {
+          const q = M.current(s);
+          if (q) M.edit(s, "amount", ((q.values.amount || 0) + 270) % 360);
+          break;
+        }
         case "m-turn": {
           const q = M.current(s);
           if (q) M.edit(s, "amount", ((q.values.amount || 0) + 90) % 360);
@@ -620,6 +625,7 @@
         "m-select",
         "m-point",
         "m-turn",
+        "m-turn-back",
         "m-choice",
         "m-coin",
         "m-post",

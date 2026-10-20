@@ -23,4 +23,5 @@ PASS: Town restoration requires distinct completed venues, collections are per r
 PASS: Invalid moves, counterfeit denominations and out-of-sequence ledger posting are rejected
 PASS: Camp projects require durable milestones and malformed new state does not break V2 migration
 PASS: Academic celebration badges survive later struggle without falsely preserving current mastery
-PASS: 8 expedition suites; 4466 generated tasks solved using fictional data.
+PASS: Higher-level coordinates and turn composition match worked mathematical examples
+PASS: 9 expedition suites; 4466 generated tasks solved using fictional data.

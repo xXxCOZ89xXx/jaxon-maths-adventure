@@ -11,8 +11,8 @@ This report covers the expanded fictional **offline development build**. It does
 | Branch and PR verification | Passed | Fetched existing development branch; PR #2 remains draft and targets main |
 | V2 baseline regression scripts | Passed, 3 scripts | Original 39 skills, 4,680 generated review samples, 780 discovery questions, mocked reward/role boundaries |
 | V3 learning/state logic | Passed, 9 suites | All 55 skills, all 1,100 discovery questions, fresh/spaced evidence, guided/mastery separation, legacy migration, active time and 40-item catalogue |
-| Nine-world expedition logic | Passed, 8 suites | 123 route/level combinations across 12 repeat seeds; **4,466 generated tasks** solved; teaching gate, suspended visits, varied seeds, finite XP/collections, move validation, camp projects and durable badges |
-| Browser end-to-end | Passed, 42/42 | 14 cases each at desktop, iPad portrait and iPad landscape sizes |
+| Nine-world expedition logic | Passed, 9 suites | 123 route/level combinations across 12 repeat seeds; **4,466 generated tasks** solved; teaching gate, suspended visits, varied seeds, finite XP/collections, move validation, camp projects and durable badges |
+| Browser end-to-end | Local full 42/42 + focused 9/9; latest 45-case CI on PR | 15 cases each at desktop, iPad portrait and iPad landscape sizes |
 | Automated accessibility | Included in browser results | axe WCAG 2 A/AA + 2.1 AA checks, including active new control types, Town, Camp, keyboard/focus, reduced motion, touch sizes and phone/iPad overflow |
 | Packaged preview smoke | Passed | Extracted latest ZIP, local assets and a playable Town task |
 | Protected-file integrity | Passed, 5 files | Homepage, V2 page, secure adapter and SQL files byte-for-byte unchanged |
@@ -21,7 +21,7 @@ Runtime: Node 24.19.0, Playwright 1.64.1, Chromium 154.0.8037.57 on Debian 13. D
 
 ## Browser matrix
 
-The same fourteen cases run in each viewport:
+The same fifteen cases run in each viewport:
 
 1. Three-choice home, skip/replay tour and nine-world map; complete the original eight introductory quest loops and all 24 original restoration puzzles, reload and inspect camp.
 2. Exact mid-quest save/resume with selection/help and keyboard solution.
@@ -39,6 +39,8 @@ The same fourteen cases run in each viewport:
 14. Queue concurrent completion from two tabs under a held Web Lock; exactly one milestone/record is written. Camp project remains unavailable without its required evidence.
 
 A focused additional browser smoke check verifies that new parent activity entries show the fictional world, venue, level and support. A read-only GitHub Actions workflow is included to rerun offline tests and Chromium gameplay on code changes; remote CI status is available on PR #2.
+
+15. Higher-level negative coordinates and clockwise/anticlockwise turn composition, with known expected positions and final orientations.
 
 Axe scans include the first encountered interactive mission renderer of each type in Town/gateway playthroughs, not only the completed recap. All browser contexts and fixtures are synthetic and isolated. The harness aborts every nonlocal request and fails on attempted external requests, runtime/console errors or reported CSP violations. V3 additionally uses `connect-src 'none'` and has no cloud adapter.
 
@@ -60,6 +62,7 @@ Axe scans include the first encountered interactive mission renderer of each typ
 - Native arrival-time input replaced an awkward minutes-after-midnight editor.
 - Town lessons are collapsed behind a clear curriculum entry instead of exposing sixteen skill cards immediately.
 - Practical assessment generators use integer-pence arithmetic and supplied fictional rates/deductions; question choices remain distinct and answer keys valid.
+- Mission seed mixing was corrected so three tasks within a visit use distinct values, including gateways. Higher levels now add negative coordinates and composed turns; fixed mathematical examples and UI playthroughs verify them.
 - Move validation rejects invalid amounts, counterfeit denomination values and out-of-sequence ledger posting.
 - Migration now defends the new mission extension; saved task state and one-time rewards are tested across reloads, world switches and concurrent tabs.
 

@@ -204,7 +204,7 @@
     return state(s).records[id(world, route, tier)];
   }
   function commonTask(world, route, tier, seed, stage) {
-    const n = seed * 7 + stage * 3 + Number(route) * 5,
+    const n = seed * 13 + stage * 11 + Number(route) * 6,
       kind = stories[world].types[Number(route)],
       d = tier;
     let task = { kind, skill: null, unit: "", min: 0, max: 30, step: 1 };
@@ -305,33 +305,48 @@
       task.skill = "algebra_patterns";
     }
     if (kind === "coordinate") {
-      const x = 1 + (n % 4),
-        y = 1 + ((n * 3 + 1) % 4);
+      const minCoord = 1 - d,
+        maxCoord = minCoord + 4,
+        x = d === 1 ? 1 + (n % 4) : minCoord + (n % 5),
+        y = d === 1 ? 1 + ((n * 3 + 1) % 4) : minCoord + ((n * 3 + 1) % 5);
       Object.assign(task, {
-        prompt: `Route the lift to (${x}, ${y}). Choose across x first, then up y.`,
+        prompt: `Route the lift to (${x}, ${y}). Choose x across and y vertically from the origin.`,
         answer: [x, y],
         size: 5,
+        minCoord,
+        maxCoord,
       });
       teach(
-        "Coordinates are (x, y): move across first, then vertically. The origin is (0, 0).",
-        "(2, 1) is 2 across and 1 up from the origin.",
+        "Coordinates are (x, y): across first, then vertically. The origin is (0, 0). Negative x goes left of the origin; negative y goes below it.",
+        "(−2, 1) means two left and one up from the origin.",
       );
-      task.worked = `Choose column ${x} and row ${y}.`;
+      task.worked = `Choose x = ${x} and y = ${y}.`;
       task.skill = "algebra_coordinates";
     }
     if (kind === "rotate") {
-      const answer = (1 + (n % 3)) * 90;
+      const degrees = (1 + (n % 3)) * 90,
+        answer =
+          d === 1
+            ? degrees
+            : d === 2
+              ? (360 - degrees) % 360
+              : (450 - degrees) % 360;
       Object.assign(task, {
-        prompt: `Turn the tower piece ${answer}° clockwise from its starting position.`,
+        prompt:
+          d === 1
+            ? `Turn the tower piece ${degrees}° clockwise from its starting position.`
+            : d === 2
+              ? `Turn the tower piece ${degrees}° anticlockwise from its starting position.`
+              : `Turn 90° clockwise, then ${degrees}° anticlockwise. Show the final tower-piece position.`,
         answer,
         max: 270,
         step: 90,
       });
       teach(
-        "A quarter turn is 90°, a half turn is 180°, and three quarter turns make 270°. Clockwise follows a clock’s hands.",
-        "Two clockwise quarter turns make a half turn: 180°.",
+        "A quarter turn is 90° and a full turn is 360°. Clockwise and anticlockwise are opposite directions. Add clockwise turns and subtract anticlockwise turns; a full turn returns to the start.",
+        "90° clockwise then 90° anticlockwise cancel. One anticlockwise quarter turn reaches the same position as three clockwise quarter turns.",
       );
-      task.worked = `Turn clockwise ${answer / 90} times to reach ${answer}°.`;
+      task.worked = `The final position is ${answer}° clockwise from the start (${answer / 90} clockwise quarter turns).`;
       task.skill = "geometry_transforms";
     }
     if (kind === "grid") {
@@ -791,7 +806,9 @@
       valid =
         array(value) &&
         value.length === 2 &&
-        value.every((n) => integer(n) && n >= 0 && n < 5);
+        value.every(
+          (n) => integer(n) && n >= (t.minCoord ?? 0) && n <= (t.maxCoord ?? 4),
+        );
     if (key === "choice")
       valid = integer(value) && value >= 0 && value < t.options?.length;
     if (key === "coins")

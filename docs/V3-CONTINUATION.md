@@ -28,3 +28,5 @@ The 60-minute weekly target, ten learning coins per active minute and 1:1 screen
 ## Remaining release work
 
 The local gameplay expansion is separate from real cloud integration. Physical iPad Safari/WebKit testing and a separate staging Supabase project for real auth/PIN, sync, family isolation and server-side rewards remain outstanding. Do not merge, publish the replacement homepage or change production without explicit approval.
+
+Higher-level expeditions include negative lift coordinates and anticlockwise/composed tower turns. Generated tasks within each visit are checked for distinct mathematical content across all route/level combinations.

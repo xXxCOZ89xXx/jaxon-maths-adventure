@@ -13,3 +13,5 @@ Continues draft PR #2 on `codex/v3-adventure-build`. The entry remains `v3-adven
 - **Isolation:** no new cloud adapter, credentials, Auth users or SQL. The 60-minute weekly goal, ten learning coins per active minute and 1:1 screen-time remain. Protected live files are unchanged.
 
 This is a larger offline development build, not a completed production release. Physical Safari testing, separate staging cloud auth/sync/reward validation and consolidated user acceptance remain outstanding. See the full QA report and preview walkthrough. Do not merge or publish without approval.
+
+Higher-level expeditions include negative lift coordinates and anticlockwise/composed tower turns. Generated tasks within each visit are checked for distinct mathematical content across all route/level combinations.

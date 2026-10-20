@@ -8,7 +8,7 @@
   "mission_level_combinations": 123,
   "keepsakes": 41,
   "v3_learning_suites": 9,
-  "expedition_suites": 8,
+  "expedition_suites": 9,
   "generated_tasks_solved": 4466,
   "baseline_scripts": 3,
   "browser": {
@@ -23,7 +23,7 @@
   "protected_files_unchanged": 5,
   "package_smoke": "PASS",
   "parent_activity_smoke": "PASS",
-  "preview_sha256": "f4c9d385e082d147438bb82a73cd4655b46f79481c67c657a2b1fe699c91a61d",
+  "preview_sha256": "11ea0e06ebef18475da183e6db8d4db77a0067b71c63d741164a802de25086b7",
   "limits": [
     "Physical iPad Safari/WebKit untested",
     "Separate staging cloud auth/sync/rewards not configured",
@@ -33,6 +33,23 @@
   "preference_save_regression": {
     "startTime": "2026-10-20T01:32:07.765Z",
     "duration": 26653.897,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "ci_matrix_cases": 45,
+  "higher_level_regression": {
+    "startTime": "2026-10-20T01:36:37.974Z",
+    "duration": 19558.251,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "gateway_regression": {
+    "startTime": "2026-10-20T01:34:52.996Z",
+    "duration": 87830.895,
     "expected": 3,
     "skipped": 0,
     "unexpected": 0,
