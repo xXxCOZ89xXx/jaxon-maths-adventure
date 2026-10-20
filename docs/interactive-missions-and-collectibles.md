@@ -7,6 +7,7 @@
 ## Status
 - Existing V2 development game predominantly uses multiple-choice questions and text entry. Full drag-and-drop tasks are not yet integrated into the authenticated adventure.
 - Independent `town-interactions-preview.html` is a **non-authenticated interaction experiment**, not a released mission. It must not save learning state, award coins, or alter rewards.
+- Independent `world-interactions-preview.html` now illustrates six more interactive question mechanics: shade a fraction, move on a number line, place a coordinate marker, build a bar chart, group ratio counters and fill a measuring container. This is a **non-authenticated interaction lab** on the repository default branch, not an integrated or browser-verified release.
 - Keep the live `index.html` unchanged until learning integration and security tests pass.
 
 ## Market Town activities — first release candidate
