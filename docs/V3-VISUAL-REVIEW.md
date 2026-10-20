@@ -1,3 +1,5 @@
+Current continuation: [purpose-designed Town and eight-stage estate expansion](V3-TOWN-ESTATE-EXPANSION.md), with the latest automated QA and private deployment at the top of [the QA report](V3-TEST-REPORT.md). All prior reports below are historical; no additional manual test session is requested.
+
 # V3 visual review — the explorer’s field journal
 
 Date: 20 October 2026. Branch `codex/v3-adventure-build`, draft PR #2. All review screenshots use deliberately seeded fictional state, including the parent dashboard. No staging family/progress was read to make this album. No manual testing is requested now.

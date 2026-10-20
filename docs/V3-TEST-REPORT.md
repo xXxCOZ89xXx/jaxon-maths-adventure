@@ -1,3 +1,34 @@
+# Town architecture and eight-stage estate QA — 20 October 2026
+
+Current implementation: `79bd9f3`; final screenshot tree: `624c9d6`; save-acknowledgement test correction: `b9b3b23`, branch `codex/v3-adventure-build`. PR #2 remains draft. [Changes, progression, compatibility and optional asset workflow](V3-TOWN-ESTATE-EXPANSION.md).
+
+| Evidence | Actual result and scope |
+| --- | --- |
+| V2 / V3 logic | Three V2 regression scripts, 29 V3 engine/expedition/estate/cloud suites, presentation checks and synthetic migration/rollback rehearsal pass; includes five new estate suites |
+| Local browser matrix | **93/93 passed**, no skipped/unexpected/flaky cases, desktop and iPad portrait/landscape Chromium. Final keypad/shaft/project-label refinements followed this run; the hosted matrix covers the final frozen tree |
+| Database security | **14 real isolated PostgreSQL suites passed**, network-disabled container and fictional Auth claims; not hosted Supabase certification |
+| Visual capture | **74 fresh fictional game captures**, no overflow, console/rendering errors or external requests; **92-image album** with earlier comparisons and mocked parent screens retained |
+| Packaged gallery | Complete/worlds/Town/old comparison/estate/estate comparison/architecture pages decode **92/18/19/14/8/5/17 images**; no errors or external requests. New pages fit desktop and both iPad orientations |
+| Build and preservation | Configured staging build/sign-in/PIN/assets/nine worlds/40 items pass; fixture preparation preserves deployable bytes. All five protected live/V2/SQL hashes match their original baseline; configured public key absent from tracked files |
+| Hosted final Chromium/WebKit | **Passed 124/124 cases**, including iPad WebKit; [run 39475831278](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39475831278), final tested tree `b9b3b23`. Decoded job logs report 124 passed (9.7m); logic/build/PostgreSQL/preview packaging all passed |
+| Owner-private deployment | **Version 4 deployed successfully**, same [private HTTPS URL](https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site/); one owner, no groups or external visitors, rechecked after deployment |
+
+New browser checks exercise all eight Town entrances and exact-task-preserving exterior/interior switches, every earned camp stage, all key machinery, compatible equipment/rewards, reload persistence, reduced motion, one-time celebrations and preview-only stage selection. Existing activity tests verify no credit through camp/navigation/decorations; teaching, independent mastery, PINs, permissions, family isolation, cloud save/recovery, CAS/offline queues, bonus coins and purchases retain their coverage.
+
+Actual read-only network result: all four environment values validate against `sfogrvedypgtxfvecmbx` / `https://sfogrvedypgtxfvecmbx.supabase.co`; the public key is present and redacted. The proxy returns **CONNECT 403 before contacting Supabase**, so live identity, anonymous table restrictions and authenticated operations are not independently verified here. No credentials or staging learner records were requested, read or reset. Owner-reported hosted checks remain separate evidence; intercepted browser responses and fictional PostgreSQL claims are explicitly isolated tests.
+
+Current machine evidence is `tests/artifacts/v3-estate-results.json`, retaining all 93 actual local case names/statuses/timing, plus `v3-estate-gallery.json` and `v3-estate-gallery-layout.json`. Historical generic browser artifacts remain historical. Current image deliverables are in `tests/visual/after/`, including all eight exteriors, all eight camp stages and representative iPad activities.
+
+The final private archive matches all **122** built application files byte for byte. Pushed Site source: `09002c0fefce666f7994569d8579a89458b83bc3`; local tar SHA-256: `d7c533d8242b95908b804db456dfad5929661bb83c5f056c95723a2f60f29528`. Deployment: `appgdep_6ad7b48dd36c8191b107670c710aac55`; saved version: `appgprj_6ad746f124fc8191b3f3845f9dff577b~appgver_c0dcd942c9e88191bc6603bdb38868e9`. Native saved-version provenance matches that source commit. The native archive reports 123 files including hosting manifest and content hash `sha256:e2410b7ce04abdd94c2c0633a73ae515147fce080c2ac53ab49ef90ce7eabeb7`; this is separate from the supplied tar SHA-256. Independent remote-archive byte comparison is unavailable. Native deployment success and owner-only audience are verified; packaged pages were tested locally.
+
+The first hosted run passed 121 cases, including every WebKit case, but three Chromium variants of an existing camp-navigation test read the initial local storage before the asynchronous Web Locks save completed. The test now awaits the persisted Camp view instead of treating click completion as a save acknowledgement. All three corrected cases pass locally; the final full hosted result is recorded above. Application/build bytes did not change for that correction.
+
+No known new functional defect remains from automated QA and screenshot inspection. Physical iPad Safari/performance, actual cross-device/offline recovery, direct hosted API enforcement and deferred recovery delivery remain for the existing combined family session later. No additional manual test is requested now. Production, real records, main, live homepage and GitHub Pages are untouched.
+
+Prior iteration reports below are historical.
+
+---
+
 # Immersive world stages and interactive camp — 20 October 2026
 
 Current game code: `924718d` on `codex/v3-adventure-build`; PR #2 remains draft. [What changed and remaining custom-asset work](V3-IMMERSIVE-ADVENTURE.md) · [seven paired comparisons](https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site/review/compare.html).

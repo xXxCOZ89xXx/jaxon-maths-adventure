@@ -1,3 +1,5 @@
+Current continuation: [purpose-designed Town and eight-stage estate expansion](V3-TOWN-ESTATE-EXPANSION.md), with the latest automated QA and private deployment at the top of [the QA report](V3-TEST-REPORT.md). All prior reports below are historical; no additional manual test session is requested.
+
 Current continuation: see [immersive adventure iteration](V3-IMMERSIVE-ADVENTURE.md) and the latest section of [QA report](V3-TEST-REPORT.md) for world stages, interactive camp, accessible portrait answers and private staging provenance. Prior iteration notes below are historical.
 
 # Nine-world V3 development release notes
