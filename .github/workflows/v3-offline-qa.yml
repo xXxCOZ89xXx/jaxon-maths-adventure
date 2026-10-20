@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - "v3/**"
+      - "supabase/v3-staging/**"
+      - "scripts/**"
       - "v3-adventure.html"
       - "v2-*.js"
       - "tests/**"
@@ -13,6 +15,8 @@ on:
     branches: ["codex/v3-adventure-build"]
     paths:
       - "v3/**"
+      - "supabase/v3-staging/**"
+      - "scripts/**"
       - "v3-adventure.html"
       - "v2-*.js"
       - "tests/**"
@@ -35,11 +39,17 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install --with-deps chromium webkit
       - name: Offline logic and compatibility
         run: npm test
+      - name: Real PostgreSQL security and migration checks
+        run: |
+          docker pull postgres:17-alpine
+          npm run test:security
       - name: Fictional desktop and touch gameplay
         run: npm run test:e2e
+        env:
+          V3_WEBKIT: "1"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -48,3 +58,11 @@ jobs:
             tests/artifacts/
             test-results/
           retention-days: 14
+
+      - name: Package isolated playable preview
+        run: npm run build:preview
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v3-offline-playable-preview
+          path: preview-dist/
+          retention-days: 30

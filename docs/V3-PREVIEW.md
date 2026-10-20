@@ -45,3 +45,9 @@ npm run test:e2e
 ```
 
 Browser tests use `/usr/bin/chromium`, clean contexts, synthetic fixtures and fail-closed nonlocal request blocking. Set `V3_CHROMIUM_EXECUTABLE` for another local installation. CI uses Playwright’s installed Chromium. Reports and screenshots are under `tests/artifacts/`.
+
+## Secure-integration continuation: easier download
+
+The Actions workflow now builds a separate **`v3-offline-playable-preview`** artifact containing `PLAY-V3.html` and a README. Download it from the successful PR #2 Actions run, extract the ZIP and open the HTML in a normal desktop browser. Everything needed is embedded; `connect-src 'none'` still prohibits cloud traffic. Managed Chromium in this workspace blocks `file://` navigation by administrator policy, so automated QA loads that same single HTML over localhost and verifies it needs no additional assets or cloud requests. Actual local-file opening remains a manual/browser-policy check. On iPad, Files may display a document preview rather than execute the game; use a browser/local-server method if necessary.
+
+No production hosting settings were changed. A public hosted preview would require a separate hosting target; the Actions download works without selecting one. The separate staging app is built only with explicit environment configuration and is never included in the offline artifact. See `V3-SECURE-STAGING.md` for the combined acceptance session, secure setup and remaining release gates; that walkthrough supersedes the earlier offline-only acceptance session.

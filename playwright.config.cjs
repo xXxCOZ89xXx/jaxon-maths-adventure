@@ -1,7 +1,7 @@
 const { defineConfig } = require("@playwright/test");
 module.exports = defineConfig({
   testDir: "./tests",
-  testMatch: /v3-(browser|expeditions)\.spec\.cjs/,
+  testMatch: /v3-(browser|expeditions|cloud)\.spec\.cjs/,
   timeout: 60000,
   fullyParallel: false,
   workers: 1,
@@ -17,6 +17,19 @@ module.exports = defineConfig({
     screenshot: "only-on-failure",
   },
   projects: [
+    ...(process.env.V3_WEBKIT
+      ? [
+          {
+            name: "ipad-portrait-webkit",
+            use: {
+              browserName: "webkit",
+              viewport: { width: 820, height: 1180 },
+              isMobile: true,
+              hasTouch: true,
+            },
+          },
+        ]
+      : []),
     {
       name: "desktop-chromium",
       use: {

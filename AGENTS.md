@@ -25,3 +25,6 @@ This file governs V3 development, currently on `codex/v3-adventure-build` in dra
 - Existing V2 test page on main: `v2-game-test.html`. Original live homepage: `index.html`.
 - Existing regression scripts: `tests/v2-learning-regression.cjs`, `tests/v2-discovery-regression.cjs`, `tests/v2-bonus-shop-regression.cjs`.
 - Database drafts: `supabase/v2-bonus-shop-migration.sql` plus earlier family/rewards migrations; **read only** until separately approved.
+
+## Secure integration continuation
+The subsequent user request approves staging integration development and fictional security QA. New SQL is under `supabase/v3-staging/`; no remote application is authorised until the separate project's identity is explicitly verified and authorised. Offline `v3-adventure.html` must keep `connect-src 'none'` and never load the staging entry point. Consult `docs/V3-SECURE-STAGING.md` for actual implementation limits and setup. Do not describe local PostgreSQL or intercepted browser tests as real Supabase staging acceptance.

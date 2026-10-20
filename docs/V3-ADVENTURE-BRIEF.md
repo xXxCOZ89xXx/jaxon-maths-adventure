@@ -104,3 +104,6 @@ Preserve existing secure parent authentication and parent-only reward actions. P
 
 ## Delivery notes
 Work as far as the available tool and usage limits allow. If Codex pauses or hits a capacity limit, leave branch commits, tests, concise NEXT_STEPS note and a draft PR instead of requiring the user to reconstruct context. Do not promise unattended unlimited/background work outside an active Codex task.
+
+## Secure integration continuation
+The subsequent approved phase develops a separate staging-connected build while preserving offline Test Camp. Server authorisation, PINs, sync, migration and reward implementation/status are documented in `V3-SECURE-STAGING.md`. A real staging project and physical iPad/family acceptance remain release gates. No production connection, migration, merge or homepage change is authorised.

@@ -8,7 +8,8 @@
     A = window.V3Art,
     $ = (id) => document.getElementById(id),
     esc = A.esc;
-  const KEY = "jaxon_v3_fictional_demo_2026",
+  const cloud = window.V3CloudContext;
+  const KEY = cloud?.key || "jaxon_v3_fictional_demo_2026",
     LOCK = KEY + ":transaction";
   let storageError = false,
     pendingSaves = 0;
@@ -35,11 +36,17 @@
       );
       return;
     }
+    if (cloud) cloud.applyWallet(s);
     s.revision++;
     try {
+      cloud?.onSave(s);
       localStorage.setItem(KEY, JSON.stringify(s));
       storageError = false;
-      status("Saved on this device · offline demo");
+      status(
+        cloud
+          ? "Saved on this device · waiting for staging sync"
+          : "Saved on this device · offline demo",
+      );
     } catch {
       storageError = true;
       status(
@@ -48,6 +55,7 @@
     }
   }
   async function change(fn, { focus = false, renderPage = true } = {}) {
+    if (cloud && !cloud.isUnlocked()) return;
     pendingSaves++;
     document.documentElement.setAttribute("data-saving", "");
     const transact = () => {
@@ -272,7 +280,7 @@
       .join("")}</div>`;
   }
   function settings() {
-    return `${header("PLAY YOUR WAY", "Settings", "home")}<div class="panel preferences"><h2>Comfort comes first</h2><label><input type="checkbox" data-setting="motion" ${s.settings.motion ? "checked" : ""}>Gentle scene animation (system reduced-motion preference takes priority)</label><label><input type="checkbox" data-setting="sound" ${s.settings.sound ? "checked" : ""}>Quiet restoration sound</label><p class="muted">Sound and animation start off. All puzzles work with tapping and a keyboard; dragging is optional.</p><div class="actions">${btn("Replay the welcome tour", "nav:tour")}</div><h3>Fictional Test Camp</h3><p class="small muted">This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.</p></div>`;
+    return `${header("PLAY YOUR WAY", "Settings", "home")}<div class="panel preferences"><h2>Comfort comes first</h2><label><input type="checkbox" data-setting="motion" ${s.settings.motion ? "checked" : ""}>Gentle scene animation (system reduced-motion preference takes priority)</label><label><input type="checkbox" data-setting="sound" ${s.settings.sound ? "checked" : ""}>Quiet restoration sound</label><p class="muted">Sound and animation start off. All puzzles work with tapping and a keyboard; dragging is optional.</p><div class="actions">${btn("Replay the welcome tour", "nav:tour")}</div>${cloud ? "<h3>Separate staging account</h3><p>Progress saves on this device and syncs to the verified staging project. Purchases need a connection. Lock or sign out on a shared device.</p>" : '<h3>Fictional Test Camp</h3><p class="small muted">This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.</p>'}</div>`;
   }
   function parent() {
     const minutes = s.weekly[E.weekKey(Date.now())] || 0;
@@ -318,7 +326,10 @@
       discovery: learning,
       adventure: () => U.play(s),
     };
-    $("main").innerHTML = (screens[s.view] || home)();
+    $("main").innerHTML =
+      cloud && s.view === "parent"
+        ? "<h1>Parent account required</h1>"
+        : (screens[s.view] || home)();
     document.querySelectorAll("[data-nav]").forEach((el) => {
       if (el.closest("nav")) {
         const current =
@@ -361,6 +372,16 @@
   }
   async function dispatch(action) {
     const [name, arg] = action.split(":");
+    if (cloud && !cloud.isUnlocked()) return;
+    if (cloud && name === "buy" && !s.bought.includes(arg)) {
+      try {
+        await cloud.purchase(arg);
+        s = read();
+      } catch (e) {
+        status(e.message);
+        return;
+      }
+    }
     const oldView = s.view;
     let error = null,
       restored = false;
@@ -747,9 +768,15 @@
           ? !s.quest?.solved
           : !s.learning?.answered);
     if (eligible)
-      await change(() => E.activeTime(s, dt, eligible, now), {
-        renderPage: false,
-      });
+      await change(
+        () => {
+          E.activeTime(s, dt, eligible, now);
+          cloud?.onActive(dt);
+        },
+        {
+          renderPage: false,
+        },
+      );
   }, 5000);
   render();
   if (storageError)

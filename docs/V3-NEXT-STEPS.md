@@ -1,11 +1,10 @@
 # V3 release follow-up
 
-Practical Maths Town, deeper nine-world expeditions and optional gateways are part of the current offline build. They are no longer backlog items. Keep draft PR #2 unmerged until review and release approval.
+The nine-world gameplay milestone and isolated secure integration implementation exist on `codex/v3-adventure-build`, draft PR #2. Nothing is merged or connected to production.
 
-1. Run the consolidated nine-world walkthrough in `V3-PREVIEW.md`; collect feedback once and fix confirmed issues.
-2. Test on physical iPad Safari. Managed-network policy blocked WebKit downloads with HTTP 403 `Domain forbidden`; Chromium touch emulation is not Safari coverage.
-3. Provision a **separate staging Supabase project** and fictional test family before implementing real V3 cloud integration. Test login/PIN, save/sync conflict recovery, cross-family RLS, server-side rewards, spending and retry idempotency there. No production migration or real learner access is authorized by this build.
-4. Review synthetic V2/old-V3 migration and test results before connecting any account. The preview intentionally has no real-backup import or production fallback.
-5. Review prices, reading load, difficulty progression and practical usefulness with the intended learner. The activity rates and deductions are fictional examples; they are not live tariffs or real payroll rules.
-6. Extend narrative/mission variants if acceptance calls for them. Current build has 123 mission/level combinations, three tasks each, 41 keepsakes, camp projects and the original restoration quests. Replays vary values but never create endless completion rewards.
-7. Cross-device saves, cold-offline asset caching and live parent workflows remain separate integration work. Do not redirect the homepage, merge or publish the replacement game without explicit approval.
+1. Follow `V3-SECURE-STAGING.md`: create **jaxon-maths-v3-staging**, verify its identity, explicitly authorise staging-only SQL, provision fictional families, and privately configure/build the separate staging app. No hosted project has been used by this task.
+2. Validate actual Supabase Auth password/PIN recovery, signed AMR claims, refresh, PostgREST/RLS and two-device operation there. Automated PostgreSQL and intercepted browser tests do not establish hosted staging acceptance.
+3. Resolve the offline reward-time policy: offline learning progress is saved, but automatic server coin/screen-time minting currently requires connected, clock-capped credit. The 60-minute goal and 1:1 conversion remain.
+4. Run the one consolidated offline/staging walkthrough in `V3-SECURE-STAGING.md`, including physical iPad Safari and family feedback. WebKit engine CI is an additional check, not a physical iPad result.
+5. Review a future production migration separately. Existing V2 records, main, live entry points and production Supabase remain untouched. No real-backup import, homepage change, Pages reconfiguration, merge or production deployment is authorised.
+6. Optional later hardening: server-verified academic/activity evidence, cold-offline asset caching, multiple children per parent, and more narrative variants. The current bounded replay templates, 123 mission/level combinations and 41 collectibles remain playable.

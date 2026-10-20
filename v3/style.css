@@ -1836,3 +1836,24 @@ summary {
     gap: 12px;
   }
 }
+/* Separate staging forms use the same comfortable touch controls as the game. */
+#cloud-form input, #reward-form input, #reward-form select {
+  display: block;
+  width: 100%;
+  max-width: 32rem;
+  min-height: 46px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--ink);
+}
+#sync-conflict {
+  max-width: min(38rem, calc(100vw - 32px));
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  padding: 24px;
+  color: var(--ink);
+}
+#sync-conflict::backdrop { background: rgb(20 35 25 / 65%); }
+#sync-conflict button { margin: 8px 8px 0 0; }

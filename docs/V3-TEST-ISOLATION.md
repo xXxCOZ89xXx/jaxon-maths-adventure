@@ -74,3 +74,6 @@ Do not request individual feature-by-feature approvals while building. When the 
 - One consolidated acceptance preview and report.
 
 Read this file as **the testing specification**, not a claim these systems already exist.
+
+## Secure integration implementation update
+New staging-only migrations, official Auth client integration, server PIN/unlock checks, CAS sync and atomic wallet operations now exist. `tests/v3-postgres.cjs` runs real PostgreSQL in a disposable **network-disabled** Docker container with fictional auth claims. Browser cloud tests intercept every synthetic backend request; all unexpected external traffic fails. These tests do not connect to hosted Supabase. The current setup and single combined acceptance walkthrough are `V3-SECURE-STAGING.md`; its status supersedes the older "future implementation" list above. Remote SQL still requires verified project identity and explicit staging authorisation.
