@@ -4,7 +4,7 @@ module.exports = defineConfig({
   testMatch: /(?:v3-(?:browser|expeditions|cloud)|v5-interactions|v51-regression)\.spec\.cjs/,
   timeout: 60000,
   fullyParallel: false,
-  workers: 1,
+  workers: process.env.CI ? 2 : 1,
   reporter: [
     ...(process.env.CI ? [["github"]] : []),
     ["list"],
