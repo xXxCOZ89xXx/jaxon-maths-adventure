@@ -523,3 +523,14 @@ test('V5.1 stale numeric input cannot overwrite another tab’s replacement ques
   const s=await state(page);expect(s.quest.world).toBe('algebra');expect(s.quest.value).toBe(0);expect(s.quest.amountDraft).toBeUndefined();
   await other.close();
 });
+
+test('V5.1 budget shortcuts save larger amounts and stay inside each touch envelope',async({page})=>{
+  await mission(page,'town','shops',3,2);
+  await click(page,'m-part:0:1000');await click(page,'m-part:0:500');
+  expect((await state(page)).adventure.active.values.parts[0]).toBe(1500);
+  await page.reload();expect((await state(page)).adventure.active.values.parts[0]).toBe(1500);
+  const fit=await page.locator('.envelopes section').evaluateAll(sections=>sections.every(s=>{
+    const r=s.getBoundingClientRect();return [...s.querySelectorAll('button')].every(b=>{const x=b.getBoundingClientRect();return x.width>=44&&x.height>=44&&x.left>=r.left&&x.right<=r.right;});
+  }));
+  expect(fit).toBe(true);await axe(page);
+});
