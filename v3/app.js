@@ -669,6 +669,7 @@
     if (e.target.dataset.setting) {
       const name = e.target.dataset.setting,
         value = e.target.checked;
+      status("Saving preferences on this device…");
       await change(() => {
         s.settings[name] = value;
       });

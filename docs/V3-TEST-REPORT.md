@@ -63,6 +63,8 @@ Axe scans include the first encountered interactive mission renderer of each typ
 - Move validation rejects invalid amounts, counterfeit denomination values and out-of-sequence ledger posting.
 - Migration now defends the new mission extension; saved task state and one-time rewards are tested across reloads, world switches and concurrent tabs.
 
+Initial hosted CI exposed a preference-test timing race in all three viewports: the test reloaded after changing the checkbox but before the asynchronous device save had completed. It now waits for the persisted motion/sound value before reloading; the app explicitly announces preference saving. GitHub failure annotations now expose exact errors through the supported API, and a concurrency group avoids duplicate push/PR runs.
+
 Development test-harness fixes included selecting explicit difficulty after adaptive suggestions changed, targeting feedback rather than native output elements, returning to the map before visiting another world, and correcting an accidentally recursive test helper. These were fixed before final QA; they are not outstanding product defects.
 
 ## Outstanding release limits

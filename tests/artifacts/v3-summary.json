@@ -23,11 +23,19 @@
   "protected_files_unchanged": 5,
   "package_smoke": "PASS",
   "parent_activity_smoke": "PASS",
-  "preview_sha256": "97be8b57958cba4d100ac96c93af6538e64a52cd7eacdb9efac965c6c4c458ef",
+  "preview_sha256": "f4c9d385e082d147438bb82a73cd4655b46f79481c67c657a2b1fe699c91a61d",
   "limits": [
     "Physical iPad Safari/WebKit untested",
     "Separate staging cloud auth/sync/rewards not configured",
     "Consolidated user acceptance pending",
     "Device-local storage; no cold-offline cache"
-  ]
+  ],
+  "preference_save_regression": {
+    "startTime": "2026-10-20T01:32:07.765Z",
+    "duration": 26653.897,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
 }

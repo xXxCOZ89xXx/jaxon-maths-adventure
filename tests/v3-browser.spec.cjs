@@ -241,7 +241,9 @@ test("Shop, avatar across screens, preferences and mock parent summary", async (
   );
   await page.locator('nav [data-nav="settings"]').click();
   await page.locator('[data-setting="motion"]').check();
+  await expect.poll(async()=>(await read(page)).settings.motion).toBe(true);
   await page.locator('[data-setting="sound"]').check();
+  await expect.poll(async()=>(await read(page)).settings.sound).toBe(true);
   await page.reload();
   await expect(page.locator('[data-setting="sound"]')).toBeChecked();
   await accessibility(page);
