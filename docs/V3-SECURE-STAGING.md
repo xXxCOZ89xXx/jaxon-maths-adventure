@@ -1,6 +1,10 @@
 # V3 secure staging integration and setup
 
-Status: implementation and isolated tests; **no hosted staging project has been connected or migrated**. Continue on `codex/v3-adventure-build`, draft PR #2. No production release is authorised.
+Status, 20 October 2026: the owner confirms that `jaxon-maths-v3-staging` (`sfogrvedypgtxfvecmbx`) has all three migrations, eight protected tables, 40 catalogue items and two fictional families. The four Cloud variables match that staging ref/URL and the public key is present (never printed). The configured app has been built and deployed to a separate **owner-private** HTTPS Site. The Cloud proxy rejects the staging host with 403, so live Auth/RPC/RLS acceptance is still unverified. See [activation report](V3-STAGING-ACTIVATION.md). Continue on `codex/v3-adventure-build`, draft PR #2. No production release is authorised.
+
+Private test link: https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site
+
+Use the owning ChatGPT account for the outer private-site gate, then a fictional Supabase staging account in the game. The Site has one owner, no other viewers/groups or external visitors. Normal HTTPS works on laptop/iPad; local-server setup is unnecessary. Keep the existing GitHub Pages configuration unchanged.
 
 ## What is implemented
 
@@ -18,14 +22,16 @@ The existing nine worlds, 55 skills, 60-minute weekly goal, teaching/mastery rul
 
 ## Important limits before release
 
-- No real Supabase Auth, email delivery, PostgREST integration, token refresh/revocation behaviour, hosted RLS or cross-device connection has been verified. SQL tests use actual PostgreSQL/pgcrypto with simulated signed-claim context; browser tests intercept all cloud traffic with fictional responses. Neither is a real staging acceptance result.
+- No successful live Supabase request, Auth, email delivery, PostgREST integration, token refresh/revocation behaviour, hosted RLS or cross-device connection has been verified by this task: the environment proxy denies the staging host. Owner-reported database setup is recorded separately. SQL tests use actual PostgreSQL/pgcrypto with simulated signed-claim context; browser tests intercept all cloud traffic with fictional responses. Neither is a real staging acceptance result.
 - Saved learning evidence is client-observed evidence, not cryptographically proven assessment results. Connected activity credit is capped against a shared server clock and a maximum 15 seconds per request. This prevents duplicate/concurrent credit but cannot prove a person was learning. Stronger anti-cheat would require server-side assessment/activity validation.
 - Offline quest and assessment changes queue on the device. **Offline time is retained in reported learning progress, but is not automatically minted into server coins or redeemable screen time.** The conversion of credited active minutes is still 1:1. Instead, a parent can review the saved evidence and use **Confirm reported offline learning minutes**. This server-authorised action reconciles whole minutes once, without allowing a learner to mint rewards from an untrusted snapshot. The dashboard shows the time awaiting review.
 - Warm offline use preserves the learner's current unlocked game. There is no service worker: cold offline navigation cannot be guaranteed. Offline parent rewards/purchases are blocked. Device storage must remain available; clearing browser data removes unsynced changes and local conflict archives. Storage errors preserve existing bytes and show a warning.
 - A PIN locks server actions and the app UI, but is not encryption of the local cache. A person with developer tools/device access can inspect device-local fictional data. Use a private device/profile for staging; do not store real learner data during QA.
 - Physical iPad Safari, actual Auth recovery emails, and the consolidated family acceptance remain required. Existing production/V2 identity layout must be reviewed separately before any future release migration; no production-data export/import is part of this task.
 
-## Exact staging setup (owner actions)
+## Original staging setup reference (database steps completed by owner)
+
+Do not repeat migrations or recreate the four accounts. The following numbered procedure documents the original setup. The current remaining actions are only the private staging Auth redirect configuration and the single acceptance session in [V3-STAGING-ACTIVATION.md](V3-STAGING-ACTIVATION.md). Do not change production settings.
 
 1. Create a **new**, empty Supabase project named **`jaxon-maths-v3-staging`**. Do not reuse, branch into, or use credentials from the live project. Record its project ref and URL from the dashboard. Confirm the dashboard project name, project ref in the URL, and database connection target all describe this new project. A manually written environment marker alone does not prove the physical project's identity.
 2. Explicitly authorise applying the three new migrations **to that verified project only**. No tool in this repository applies remote migrations automatically. The project/credentials are unavailable to this task, so no remote SQL has run. Do not run the old `supabase/setup.sql` or `v2-bonus-shop-migration.sql` for this standalone staging schema.
@@ -55,8 +61,8 @@ The existing nine worlds, 55 skills, 60-minute weekly goal, teaching/mastery rul
    V3_STAGING_ANON_KEY=<that-projects-public-anon-or-publishable-key>
    ```
 
-   Run `npm ci --ignore-scripts`, then `npm run build:staging`. Missing/mismatched configuration, secret keys, malformed URLs and known live-page project refs fail the build. There is no production fallback. Generated `staging-dist/` and `.env*` files are ignored by Git; only the public browser configuration is emitted. Do not use `tests/prepare-v3.cjs` for an actual staging deployment: it deliberately builds a non-working fictional endpoint for intercepted QA.
-6. Put **only `staging-dist/`** on a separate private HTTPS static origin of your choice, after reviewing that host/access settings. No hosting account is configured by this task. Do not change the existing GitHub Pages source, custom domain or homepage. Configure the exact staging origin/path in Supabase Auth Site URL and redirect allowlist. Recovery uses PKCE: request and open the recovery link in the same browser. Configure/rate-limit private test email delivery as appropriate.
+   Run `npm ci --ignore-scripts`, then `npm run build:staging` and `npm run verify:staging`. Missing/mismatched configuration, secret keys, malformed URLs and known live-page project refs fail the build. There is no production fallback. Generated `staging-dist/` and `.env*` files are ignored by Git; only the public browser configuration is emitted. `tests/prepare-v3.cjs` now builds only `staging-fixture-dist/`, with a guard requiring fictional configuration. It cannot replace the deployable build.
+6. Private hosting is now prepared at the link above, using only `staging-dist/` as static assets. Do not change the existing GitHub Pages source, custom domain or homepage. Configure the exact private staging URL with its trailing slash in **this staging project's** Auth Site URL and redirect allowlist. Recovery uses PKCE: request and open the recovery link in the same browser. Configure/rate-limit private test email delivery as appropriate.
 7. Sign in separately as each test account using its account password and create the appropriate PIN. If PIN enrollment says fresh password authentication is required, sign out and sign in with the password again; do not weaken the database check. Verify real staging Auth supplies the expected password `amr` claim before proceeding.
 8. Run the single consolidated acceptance below on the private staging origin. Keep the second family's accounts private to the owner and use them for the negative isolation checks. Record real staging results separately from the automated mock/PostgreSQL report. No production migration, merge, deployment or real-data import is authorised here.
 

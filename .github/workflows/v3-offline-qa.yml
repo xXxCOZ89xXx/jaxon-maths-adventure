@@ -44,6 +44,8 @@ jobs:
       - run: npx playwright install --with-deps chromium webkit
       - name: Offline logic and compatibility
         run: npm test
+      - name: Staging build isolation and completeness (fictional configuration)
+        run: npm run test:staging-build
       - name: Real PostgreSQL security and migration checks
         run: |
           docker pull postgres:17-alpine

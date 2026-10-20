@@ -153,6 +153,9 @@ function test(title, fn) {
         /Sign in again/,
       );
       rejects(() => call("parent", "v3_set_pin", "'1234'"), /length/);
+      rejects(() => call("learner", "v3_set_pin", "'123456'"), /length/);
+      rejects(() => call("learner", "v3_set_pin", "'abcd'"), /length/);
+      rejects(() => call("parent", "v3_set_pin", "'abcdef'"), /length/);
       for (const role of Object.keys(ids))
         call(
           role,
@@ -207,17 +210,26 @@ function test(title, fn) {
       );
     });
     test("RLS and grants deny direct data access, cross-family reads, catalog and ledger tampering", () => {
-      for (const table of [
+      const tables = [
+        "v3_environment",
+        "v3_catalog",
         "v3_pins",
+        "v3_unlocks",
         "v3_progress",
         "v3_wallet",
         "v3_transactions",
         "maths_families",
-      ])
-        rejects(
-          () => sql(prefix("learner") + `select * from public.${table}`),
-          /permission denied/,
-        );
+      ];
+      assert.equal(Number(sql(`select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relname in (${tables.map(lit).join(',')}) and c.relrowsecurity`)), 8);
+      for (const table of tables)
+        for(const actor of ["anon", ...Object.keys(ids)])
+          rejects(
+            () => sql((actor === "anon" ? "set role anon;" : prefix(actor)) + `select * from public.${table} limit 0`),
+            /permission denied/,
+          );
+      assert.equal(JSON.parse(sql('set role anon;select public.v3_identity();')).projectRef,'abcdefghijklmnopqrst');
+      for(const expression of ['v3_role()', "v3_set_pin('1234')", "v3_unlock('1234')", "v3_request('none','read','{}')", `v3_admin_import('${ids.learner}','{}')`])
+        rejects(()=>sql('set role anon;select public.'+expression), /permission denied/);
       rejects(
         () =>
           sql(prefix("learner") + `update public.v3_wallet set bonus=99999`),

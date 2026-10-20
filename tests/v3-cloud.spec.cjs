@@ -164,7 +164,7 @@ async function mock(page, server) {
   return errors;
 }
 async function login(page, parent = false) {
-  await page.goto("/staging-dist/");
+  await page.goto("/staging-fixture-dist/");
   await page
     .getByLabel("Email", { exact: true })
     .fill((parent ? "parent" : "learner") + "@fictional.invalid");
@@ -196,7 +196,7 @@ test("staging fails closed before sign-in when configuration is absent", async (
       body: "window.V3StagingConfig={};",
     }),
   );
-  await page.goto("/staging-dist/");
+  await page.goto("/staging-fixture-dist/");
   await expect(
     page.getByRole("heading", { name: "Staging is unavailable" }),
   ).toBeVisible();
@@ -208,7 +208,7 @@ test("learner sign-in, incorrect PIN, unfinished quest, response loss, refresh a
 }) => {
   const server = fixture(),
     errors = await mock(page, server);
-  await page.goto("/staging-dist/");
+  await page.goto("/staging-fixture-dist/");
   await page
     .getByLabel("Email", { exact: true })
     .fill("learner@fictional.invalid");
@@ -413,7 +413,7 @@ test("private account recovery uses PKCE, changes the password and returns to si
 }) => {
   const server = fixture(),
     errors = await mock(page, server);
-  await page.goto("/staging-dist/");
+  await page.goto("/staging-fixture-dist/");
   await page
     .getByLabel("Email", { exact: true })
     .fill("learner@fictional.invalid");
@@ -424,7 +424,7 @@ test("private account recovery uses PKCE, changes the password and returns to si
   const recover = server.calls.find((c) => c.path === "/auth/v1/recover");
   expect(recover.body.email).toBe("learner@fictional.invalid");
   expect(recover.body.code_challenge).toBeTruthy();
-  await page.goto("/staging-dist/?code=fictional-recovery-code");
+  await page.goto("/staging-fixture-dist/?code=fictional-recovery-code");
   await page
     .getByLabel("New password", { exact: true })
     .fill("fictional-recovered-password");

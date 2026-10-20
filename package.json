@@ -6,6 +6,9 @@
     "test:e2e": "playwright test",
     "preview": "python3 -m http.server 4173 --bind 0.0.0.0",
     "build:staging": "node scripts/build-v3-staging.cjs",
+    "verify:staging": "node scripts/verify-v3-staging.cjs",
+    "check:staging": "node scripts/check-v3-staging.cjs",
+    "test:staging-build": "node tests/v3-staging-build.cjs",
     "test:security": "node tests/v3-postgres.cjs",
     "build:preview": "node scripts/build-v3-preview.cjs",
     "pretest:e2e": "node tests/prepare-v3.cjs"

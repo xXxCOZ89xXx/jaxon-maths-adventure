@@ -2,7 +2,7 @@
 
 The nine-world gameplay milestone and isolated secure integration implementation exist on `codex/v3-adventure-build`, draft PR #2. Nothing is merged or connected to production.
 
-1. Follow `V3-SECURE-STAGING.md`: create **jaxon-maths-v3-staging**, verify its identity, explicitly authorise staging-only SQL, provision fictional families, and privately configure/build the separate staging app. No hosted project has been used by this task.
+1. Database/account setup is owner-completed; do not repeat migrations. The configured staging build is deployed owner-private at https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site . Follow `V3-STAGING-ACTIVATION.md` for the remaining staging-only Auth redirect settings and one combined acceptance session. The Cloud proxy rejects the staging host (403); no live staging success is claimed.
 2. Validate actual Supabase Auth password/PIN recovery, signed AMR claims, refresh, PostgREST/RLS and two-device operation there. Automated PostgreSQL and intercepted browser tests do not establish hosted staging acceptance.
 3. Validate the parent-reviewed offline-time reconciliation in real staging: automatic credit is connected and clock-capped; a parent can explicitly confirm saved uncredited minutes once. The 60-minute goal and 1:1 conversion remain.
 4. Run the one consolidated offline/staging walkthrough in `V3-SECURE-STAGING.md`, including physical iPad Safari and family feedback. WebKit engine CI is an additional check, not a physical iPad result.

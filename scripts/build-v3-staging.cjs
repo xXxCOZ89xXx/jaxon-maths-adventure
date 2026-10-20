@@ -20,7 +20,14 @@ for (const file of ["index.html", "v2-game-test.html"]) {
     if (ref === c.projectRef)
       throw Error("Live project configuration is forbidden");
 }
-const out = path.join(repo, "staging-dist");
+// Browser QA must never replace a configured deployable build with mock credentials.
+const outName = env.V3_STAGING_BUILD_FIXTURE === "1"
+  ? "staging-fixture-dist" : "staging-dist";
+if (env.V3_STAGING_BUILD_FIXTURE === "1" &&
+    (c.projectRef !== "abcdefghijklmnopqrst" ||
+     c.anonKey !== "sb_publishable_fictional_test_only"))
+  throw Error("Fixture output requires fictional configuration");
+const out = path.join(repo, outName);
 fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
 for (const file of [
@@ -67,5 +74,5 @@ require("esbuild").buildSync({
   minify: true,
 });
 console.log(
-  "Built staging-dist. Separate private HTTPS hosting required; no deployment performed.",
+  `Built ${outName}. Separate private HTTPS hosting required; no deployment performed.`,
 );
