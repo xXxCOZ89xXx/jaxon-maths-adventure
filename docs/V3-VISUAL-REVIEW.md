@@ -2,6 +2,10 @@
 
 Date: 20 October 2026. Branch `codex/v3-adventure-build`, draft PR #2. All review screenshots use deliberately seeded fictional state, including the parent dashboard. No staging family/progress was read to make this album. No manual testing is requested now.
 
+## Current immersive iteration
+
+[World stages, interactive camp, portrait fix and custom-asset next steps](V3-IMMERSIVE-ADVENTURE.md). The seven previous foundation captures are preserved in `tests/visual/foundation/`; [paired comparisons](https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site/review/compare.html) show this iteration. Final QA/deployment state is at the top of `V3-TEST-REPORT.md`. The version-2 details below describe the previous foundation.
+
 ## Open the album without development software
 
 - [Private screenshot gallery](https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site/review/)

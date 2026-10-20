@@ -1,3 +1,5 @@
+Current continuation: see [immersive adventure iteration](V3-IMMERSIVE-ADVENTURE.md) and the latest section of [QA report](V3-TEST-REPORT.md) for world stages, interactive camp, accessible portrait answers and private staging provenance. Prior iteration notes below are historical.
+
 # Nine-world V3 development release notes
 
 Current visual/reliability continuation: original isometric world/venue/camp artwork, SVG wardrobe/guide/keepsake art, 60-screen private review album, bounded meaningful-interaction reward timing, exact wallet/display separation, safe parent defaults and immutable retries, recovery-429 handling, synthetic migration/rollback rehearsal and a prepared production plan. See `V3-VISUAL-REVIEW.md`, `V3-TEST-REPORT.md` and `V3-OUTSTANDING-ISSUES.md`. No more manual tests are requested now; production remains unapproved.

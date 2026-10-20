@@ -147,7 +147,7 @@
         )
         .join(
           "",
-        )}</div><p class="small muted">All destinations are shown below, in order. Tap a number, or tab to it and press Enter. Selected: ${q.value}</p>`;
+        )}</div><p class="small muted">All destinations are visible, in order. Tap a number, or tab to it and press Enter. Selected: ${q.value}</p>`;
     if (["fraction", "chance"].includes(p.kind))
       ui = `<div class="parts" role="group" aria-label="${p.kind === "fraction" ? "Water channels" : "Portal chance slots"}">${Array.from({ length: 4 }, (_, i) => `<button class="part" data-action="part:${i}" aria-label="${p.kind === "fraction" ? "Channel" : "Slot"} ${i + 1}" aria-pressed="${q.selected.includes(i)}">${p.kind === "fraction" ? "≈" : "◇"}</button>`).join("")}</div><p class="small muted">${q.selected.length} of 4 ${p.kind === "fraction" ? "channels open" : "slots green"}. Tap to toggle.</p>`;
     if (p.kind === "balance")
