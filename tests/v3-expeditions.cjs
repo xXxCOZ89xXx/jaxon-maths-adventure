@@ -248,6 +248,16 @@ test("Fresh practical checks vary answer-producing quantities across rounds", ()
         );
       }
 });
+test("Best-value shopping varies the cheaper pack and cinema offers cover the requested group", () => {
+  assert.deepEqual(M.task("town", "market", 1, 1, 1).answer, [0, 1]);
+  assert.deepEqual(M.task("town", "market", 1, 2, 1).answer, [2, 0]);
+  const t = M.task("town", "leisure", 2, 1, 0);
+  assert.deepEqual(t.answer, [0, 2]);
+  assert.equal(t.budget, undefined);
+  assert.equal(t.items[1].quantity * 2, t.need);
+  assert.equal(t.items[1].price * 2, 1600);
+  assert.ok(t.items[1].price * 2 < t.items[0].price * t.need);
+});
 console.log(
   `PASS: ${suites} expedition suites; ${tasks} generated tasks solved using fictional data.`,
 );

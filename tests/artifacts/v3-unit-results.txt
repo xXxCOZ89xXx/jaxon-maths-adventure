@@ -25,4 +25,5 @@ PASS: Camp projects require durable milestones and malformed new state does not 
 PASS: Academic celebration badges survive later struggle without falsely preserving current mastery
 PASS: Higher-level coordinates and turn composition match worked mathematical examples
 PASS: Fresh practical checks vary answer-producing quantities across rounds
-PASS: 10 expedition suites; 4466 generated tasks solved using fictional data.
+PASS: Best-value shopping varies the cheaper pack and cinema offers cover the requested group
+PASS: 11 expedition suites; 4466 generated tasks solved using fictional data.

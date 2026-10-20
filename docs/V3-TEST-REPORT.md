@@ -11,7 +11,7 @@ This report covers the expanded fictional **offline development build**. It does
 | Branch and PR verification | Passed | Fetched existing development branch; PR #2 remains draft and targets main |
 | V2 baseline regression scripts | Passed, 3 scripts | Original 39 skills, 4,680 generated review samples, 780 discovery questions, mocked reward/role boundaries |
 | V3 learning/state logic | Passed, 9 suites | All 55 skills, all 1,100 discovery questions, fresh/spaced evidence, guided/mastery separation, legacy migration, active time and 40-item catalogue |
-| Nine-world expedition logic | Passed, 10 suites | 123 route/level combinations across 12 repeat seeds; **4,466 generated tasks** solved; teaching gate, suspended visits, varied seeds, finite XP/collections, move validation, camp projects and durable badges |
+| Nine-world expedition logic | Passed, 11 suites | 123 route/level combinations across 12 repeat seeds; **4,466 generated tasks** solved; teaching gate, suspended visits, varied seeds, finite XP/collections, move validation, camp projects and durable badges |
 | Browser end-to-end | Local full 42/42 + focused 15/15; latest 45-case CI on PR | 15 cases each at desktop, iPad portrait and iPad landscape sizes |
 | Automated accessibility | Included in browser results | axe WCAG 2 A/AA + 2.1 AA checks, including active new control types, Town, Camp, keyboard/focus, reduced motion, touch sizes and phone/iPad overflow |
 | Packaged preview smoke | Passed | Extracted latest ZIP, local assets and a playable Town task |
@@ -62,6 +62,7 @@ Axe scans include the first encountered interactive mission renderer of each typ
 - Native arrival-time input replaced an awkward minutes-after-midnight editor.
 - Town lessons are collapsed behind a clear curriculum entry instead of exposing sixteen skill cards immediately.
 - Practical assessment generators use integer-pence arithmetic and supplied fictional rates/deductions; question choices remain distinct and answer keys valid.
+- Best-value shopping alternates the cheaper pack across return visits. Higher cinema levels compare eligible single tickets with pair offers. Fixed cost/quantity examples and a browser smoke check verify those choices.
 - New travel/timetable/activity check generators vary the quantities that determine the answer; 2,880 practical question samples are checked for answer variety. Workplace saving goals also vary across return visits, with explicit teaching about rounding up whole weeks.
 - Mission seed mixing was corrected so three tasks within a visit use distinct values, including gateways. Higher levels now add negative coordinates and composed turns; fixed mathematical examples and UI playthroughs verify them.
 - Move validation rejects invalid amounts, counterfeit denomination values and out-of-sequence ledger posting.

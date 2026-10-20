@@ -490,7 +490,8 @@
       });
     } else if ((venue === "market" || venue === "shops") && stage === 1) {
       const packSize = 2 + d,
-        unit = 35 + n * 5;
+        unit = 35 + n * 5,
+        delta = n % 2 ? 50 : -50;
       Object.assign(t, {
         kind: "offers",
         need: packSize * 2,
@@ -503,12 +504,12 @@
           {
             name: packSize * 2 + " apples",
             quantity: packSize * 2,
-            price: unit * packSize * 2 + 50,
+            price: unit * packSize * 2 + delta,
           },
         ],
-        answer: [2, 0],
+        answer: delta > 0 ? [2, 0] : [0, 1],
         prompt: `Buy at least ${packSize * 2} apples for the lowest total cost. Add whole packs to the basket.`,
-        worked: `Two small packs cost ${money(unit * packSize * 2)}; one large pack costs ${money(unit * packSize * 2 + 50)}. Two small packs are 50p cheaper.`,
+        worked: `Two small packs cost ${money(unit * packSize * 2)}; one large pack costs ${money(unit * packSize * 2 + delta)}. ${delta > 0 ? "Two small packs are" : "The large pack is"} 50p cheaper.`,
       });
     } else if (
       ["market", "cafe", "leisure", "station"].includes(venue) &&
@@ -708,6 +709,21 @@
     }
     if (t.answer === undefined)
       throw Error("Missing town activity " + venue + " " + stage);
+    if (venue === "leisure" && stage === 0 && d >= 2) {
+      delete t.budget;
+      delete t.quantities;
+      Object.assign(t, {
+        kind: "offers",
+        items: [
+          { name: "Single child ticket", quantity: 1, price: 450 },
+          { name: "Two-ticket offer", quantity: 2, price: 800 },
+        ],
+        need: d * 2,
+        answer: [0, d],
+        prompt: `Book ${d * 2} child tickets for the lowest total cost. Both options are eligible for the same screening.`,
+        worked: `${d} two-ticket offers cover ${d * 2} people for ${money(d * 800)}. Separate tickets cost ${money(d * 2 * 450)}; save ${money(d * 100)}.`,
+      });
+    }
     if (venue === "bank")
       t.skill = stage === 2 ? "town_interest" : "town_balance";
     if (venue === "station")
