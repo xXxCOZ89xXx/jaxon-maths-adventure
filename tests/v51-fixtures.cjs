@@ -21,4 +21,12 @@ for(const file of ['scripts/build-v3-staging.cjs','scripts/build-v3-preview.cjs'
 assert.equal(H.invalidDraft({clockDraft:''},{min:0,max:1439}),true);
 assert.equal(H.invalidDraft({clockDraft:'23:59'},{min:0,max:1439}),false);
 assert.equal(H.invalidDraft({clockDraft:'24:00'},{min:0,max:1439}),true);
+const discovery=require('../v3/discovery').V3Discovery;
+for(const k of C.skills) {
+  for(const name of ['foundation','developing','advanced']) assert.match(E.startDiscovery(profile(name),k.id,C,discovery),/already found/);
+  const s=profile('new');assert.equal(E.startDiscovery(s,k.id,C,discovery),null);
+  for(let n=0;n<4;n++) {E.answerLearning(s,s.learning.qs[s.learning.i][1]);E.nextLearning(s);}
+  assert.equal(s.discovery[k.id].rounds.length,1);assert.equal(s.discovery[k.id].answers.length,4);
+  assert.equal(s.skills[k.id]?.state,undefined);assert.equal(s.checks[k.id]?.stage,undefined);
+}
 console.log('PASS V5.1 fictional profiles: 55 skills, nine worlds, adaptive gaps/strengths, deterministic independent resets, no application test-auth hooks, clock draft validation.');

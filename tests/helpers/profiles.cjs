@@ -15,7 +15,7 @@ function profile(name='new') {
   C.skills.forEach((k,i)=>{
     const band=name==='advanced'?8:name==='developing'&&i%3?7:5;
     const correct=name==='foundation'?1:name==='developing'&&i%3===0?1:4;
-    s.discovery[k.id]={rounds:[0,1].map(n=>({band,correct,total:4,date:`2026-10-${10+n}T12:00:00.000Z`}))};
+    s.discovery[k.id]={band,answers:[],complete:true,rounds:[0,1].map(n=>({band,correct,total:4,date:`2026-10-${10+n}T12:00:00.000Z`}))};
     if(name==='advanced') s.skills[k.id]={independentEvidence:[0,1].map(n=>({correct:3,total:3,date:`2026-10-${12+n}T12:00:00.000Z`}))};
     if(name==='foundation'||name==='developing'&&i%3===0) s.checks[k.id]={stage:0,score:25,reteach:true};
   });
