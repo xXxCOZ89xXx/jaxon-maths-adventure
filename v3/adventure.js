@@ -126,6 +126,14 @@
       )
         delete a.records[key];
     }
+    // Additive visual progress: existing projects, camp slots and unknown history survive.
+    const earned = campMilestones(s).length;
+    const attained = campStages.filter(stage => earned >= stage.need).length;
+    const prior = a.campEstate && typeof a.campEstate === "object" && !Array.isArray(a.campEstate) ? a.campEstate : null;
+    const validStage = n => Number.isInteger(n) && n >= 1 && n <= 8;
+    const highest = Math.max(attained, validStage(prior?.highest) ? prior.highest : 1);
+    a.campEstate = {...(prior || {}), version:1, highest,
+      celebrated: prior ? Math.min(highest,validStage(prior.celebrated) ? prior.celebrated : 1) : highest};
     return a;
   }
   const id = (world, route, tier) => [world, route, tier].join("|");
@@ -957,6 +965,39 @@
     a.camp[slot] = artefact || null;
     return true;
   }
+  const campStages = [
+    {id:1, name:"Wilderness Camp", need:0, story:"A tent, a warm campfire and a place for your first discoveries."},
+    {id:2, name:"Established Campsite", need:4, story:"An improved tent, canvas awning, lantern fence, storage and a growing garden."},
+    {id:3, name:"Explorer’s Cabin", need:10, story:"A timber home with chimney, porch, woodpile and rainwater barrel replaces the tent."},
+    {id:4, name:"Adventure Lodge", need:18, story:"An upper floor, balcony lookout, map room and landscaped garden expand your home."},
+    {id:5, name:"Workshop Homestead", need:30, story:"A bigger homestead, equipment workshop, tool shed, greenhouse and water pump."},
+    {id:6, name:"Watermill Estate", need:45, story:"A substantial residence and working watermill, stream, channel, bridge, storage tank and pipework."},
+    {id:7, name:"Powered Manor", need:65, story:"A manor with hydro generator, distribution equipment, visible power lines and illuminated grounds."},
+    {id:8, name:"Explorer’s Mansion", need:85, story:"A grand multi-wing mansion, trophy room, courtyard and gardens, advanced workshop, watermill and complete private power grid."},
+  ];
+  function campMilestoneIds() {
+    const worlds=[...Object.keys(stories),"town"], ids=[];
+    for(const w of worlds) {
+      if(w!=="town") for(let i=0;i<3;i++) ids.push(w+":"+i);
+      for(const r of [...routes(w).map(r=>r.id),"gateway"])
+        for(let tier=1;tier<=3;tier++) ids.push("mission|"+id(w,r,tier));
+    }
+    return ids;
+  }
+  function campMilestones(s) {
+    const valid=new Set(campMilestoneIds());
+    // Historical Town restoration identifiers also remain legitimate saved progress.
+    for(let i=0;i<3;i++) valid.add("town:"+i);
+    return [...new Set((s.milestones || []).filter(x=>typeof x==="string" && valid.has(x)))];
+  }
+  function campProgress(s) {
+    const a=state(s), count=campMilestones(s).length, current=campStages[a.campEstate.highest-1], next=campStages[current.id] || null;
+    return {count,current,next,remaining:next?Math.max(0,next.need-count):0,
+      pending:a.campEstate.celebrated<current.id,capacity:campMilestoneIds().length};
+  }
+  function celebrateCamp(s) {
+    const a=state(s);a.campEstate.celebrated=a.campEstate.highest;
+  }
   const projects = [
     {
       id: "greenhouse",
@@ -979,7 +1020,7 @@
   ];
   function build(s, id) {
     const project = projects.find((p) => p.id === id);
-    if (!project || s.milestones.length < project.need) return false;
+    if (!project || campMilestones(s).length < project.need) return false;
     state(s).campProjects[id] = true;
     return true;
   }
@@ -1005,6 +1046,11 @@
     task,
     campPlace,
     projects,
+    campStages,
+    campMilestoneIds,
+    campMilestones,
+    campProgress,
+    celebrateCamp,
     build,
   };
 })(typeof module !== "undefined" ? module.exports : window);

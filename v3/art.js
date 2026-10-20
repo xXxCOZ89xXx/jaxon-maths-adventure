@@ -554,6 +554,7 @@
       .join("")}${at(460, 425, miniExplorer())}${pine(65,530,1.5,"#3d7057")}${pine(835,530,1.6,"#3d7057")}</svg>`;
   }
   window.V3Art = {
+    primitives: {block,at,poly,pine,lamp,house,gear,vessel,miniExplorer},
     scene,
     worksite,
     explorer,

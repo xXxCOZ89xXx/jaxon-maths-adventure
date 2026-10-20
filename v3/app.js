@@ -23,6 +23,8 @@
   }
   let s = read(),
     filter = "all",
+    campPreview = null,
+    venueExterior = false,
     before = false,
     activity = 0,
     lastTick = Date.now();
@@ -197,7 +199,7 @@
     return `<section class="recap"><span class="badge">A CHAPTER IN YOUR JOURNEY</span><h1 style="margin-top:22px">${r.type === "expedition" ? "A visit worth remembering." : r.type === "quest" ? "Look what you restored." : r.type === "discovery" ? "Your starting point" : r.type === "check" ? "Your independent check" : "Another idea explored."}</h1><p class="muted">${r.type === "expedition" ? (r.newReward ? "A new milestone and keepsake are saved. Your maths has helped this place grow." : "A fresh visit complete. Your earlier rewards are safe; replaying does not duplicate them.") : r.type === "quest" ? "Three landmarks, brought back to life through your maths. Your progress is saved." : r.type === "discovery" ? "A starting point helps us choose suitable fresh practice. Discovery does not award mastery." : r.type === "check" ? r.correct + " / " + r.total + " first answers without help. " + (s.checks[r.id]?.stage >= 2 ? "Spaced mastery demonstrated." : s.checks[r.id]?.stage === 1 ? "Independently practised. Come back for a memory check in two days." : "Revisit the lesson before your next fresh check.") : "Guided practice complete. Your next step can be a separate fresh independent check."}</p>${art(w)}<div class="actions">${btn("Explore this world", "world:" + w, "primary")}${r.type === "practice" ? btn("Try a fresh independent check", "check:" + r.id) : r.type === "discovery" && !s.discovery[r.id]?.complete ? btn("Continue discovery", "discover:" + r.id) : ""}${r.type === "expedition" ? btn("Learn the maths behind this visit", "learn:" + (M.routes(w).find((v) => v.id === r.route)?.skills[0] || E.worlds.find((v) => v.id === w).skill)) : ""}${btn("Visit Base Camp", "nav:camp")}${btn("Save & exit", "nav:home")}</div></section>`;
   }
   const campNames = [
-    "Tent pitched",
+    "Camp foundations",
     "Lantern path",
     "Workshop",
     "Garden",
@@ -205,9 +207,13 @@
     "Explorer lodge",
   ];
   const campThresholds = [0, 1, 3, 6, 12, 24];
+  function campPlanner(progress) {
+    const selected=M.campStages.find(st=>st.id===campPreview) || progress.next || progress.current;
+    return `<section id="estate-planner" class="estate-planner panel" aria-label="Camp upgrade planner"><div class="section-head"><div><div class="eyebrow">A HOME BUILT THROUGH ADVENTURE</div><h2>${progress.next ? "Next: " + esc(progress.next.name) : "Your mansion estate is complete."}</h2><p>${progress.count} unique milestones · ${progress.next ? progress.remaining + " more for the next home" : "Every earned upgrade stays with you"}.</p></div><span class="badge">STAGE ${progress.current.id} / 8</span></div><p class="small muted">New homes arrive automatically at unique adventure milestones, with hints welcome. Coins and independent mastery are separate. Repeating the same milestone never moves this planner.</p><div class="estate-track" role="group" aria-label="Preview eight camp stages">${M.campStages.map(st=>`<button data-action="camp-preview:${st.id}" aria-pressed="${selected.id===st.id}"><strong>${st.id}. ${esc(st.name)}</strong><span>${st.need} unique milestones${st.id<=progress.current.id ? " · earned" : ""}</span></button>`).join("")}</div><div class="estate-plan-preview"><div>${A.camp(s,selected.id)}</div><div><span class="badge">PREVIEW ONLY · ${selected.need} MILESTONES</span><h3>${esc(selected.name)}</h3><p>${esc(selected.story)}</p><p class="small muted">Previewing never unlocks a stage, spends coins or earns learning time.</p>${progress.current.id>=6?`<div class="actions">${btn("Plan fictional water supply", "mission:measure:1:1")}${progress.current.id>=7?btn("Explore fictional power planning", "mission:statistics:1:1"):""}</div><p class="small muted">Illustrated maths models, not real machinery or electrical instructions.</p>`:""}</div></div></section>`;
+  }
   function camp() {
-    const n = s.milestones.length;
-    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Welcome to Base Camp.", "home")}<section class="camp-overview"><div class="camp-map hero-art">${A.camp(s)}<nav class="camp-hotspots" aria-label="Places at Base Camp"><a href="#camp-shelf" style="left:46%;top:62%">Tent & keepsakes</a><a href="#camp-garden" style="left:68%;top:69%">Garden</a><a href="#camp-gate" style="left:30%;top:65%">Gate</a><a href="#camp-projects" style="left:55%;top:29%">Build & upgrade</a></nav><span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>Make it yours.</h2><p class="muted">Tap a place in camp to decorate or build. Every earned upgrade stays with you.</p><p class="camp-inventory small">${campNames.filter((_,i)=>n>=campThresholds[i]).map(name=>`<span>◆ ${name}</span>`).join(" ")}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section><details class="camp-journal"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
+    const progress=M.campProgress(s),n=progress.count;
+    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Welcome to Base Camp.", "home")}<section class="camp-overview ${progress.pending ? "estate-unveiling" : ""}">${progress.pending ? `<div class="estate-celebration" role="status"><strong>Your ${esc(progress.current.name)} is ready.</strong><span>Built through your adventures. No coins spent.</span>${btn("Enjoy the new home", "camp-celebrate")}</div>` : ""}<div class="camp-map hero-art">${A.camp(s)}<nav class="camp-hotspots" aria-label="Places at Base Camp"><a href="#camp-shelf" style="left:55%;top:68%">Home & keepsakes</a><a href="#camp-garden" style="left:69%;top:78%">Garden</a><a href="#camp-gate" style="left:43%;top:83%">Gate</a><a href="#estate-planner" style="left:84%;top:62%">Plan upgrades</a></nav><span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>${esc(progress.current.name)}</h2><p class="muted">Tap a place in camp to decorate or build. Every earned upgrade stays with you.</p><p class="camp-inventory small">${campNames.filter((_,i)=>n>=campThresholds[i]).map(name=>`<span>◆ ${name}</span>`).join(" ")}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section>${campPlanner(progress)}<details class="camp-journal"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
       ["First steps", n >= 1, "Restore your first landmark."],
       [
         "Forest keeper",
@@ -324,7 +330,7 @@
       recap,
       tour,
       discovery: learning,
-      adventure: () => U.play(s),
+      adventure: () => U.play(s,venueExterior),
     };
     $("main").innerHTML =
       cloud && s.view === "parent"
@@ -429,9 +435,19 @@
         case "scene-mission":
         case "mission": {
           const bits = action.split(":");
+          venueExterior=false;
           M.start(s, bits[1], bits[2], Number(bits[3]));
           break;
         }
+        case "camp-preview":
+          if(M.campStages.some(st=>st.id===Number(arg))) campPreview=Number(arg);
+          break;
+        case "camp-celebrate":
+          M.celebrateCamp(s);
+          break;
+        case "venue-view":
+          venueExterior=arg==="exterior";
+          break;
         case "camp-build":
           M.build(s, arg);
           break;

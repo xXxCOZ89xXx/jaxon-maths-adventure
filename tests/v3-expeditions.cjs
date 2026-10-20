@@ -181,7 +181,7 @@ test("Invalid moves, counterfeit denominations and out-of-sequence ledger postin
 test("Camp projects require durable milestones and malformed new state does not break V2 migration", () => {
   const s = E.fresh();
   assert.equal(M.build(s, "greenhouse"), false);
-  s.milestones = Array.from({ length: 12 }, (_, i) => "fixture:" + i);
+  s.milestones = M.campMilestoneIds().slice(0,12);
   assert.ok(M.build(s, "greenhouse"));
   const before = E.xp(s);
   assert.ok(M.build(s, "greenhouse"));

@@ -69,6 +69,11 @@ const manifest = [];
               (slot, i) => (a.camp[slot] = cs[i]?.id || ""),
             );
           }
+          if (state.campStage || state.view === "camp") {
+            const stage=state.campStage || 8;
+            s.milestones=V3Adventure.campMilestoneIds().slice(0,V3Adventure.campStages[stage-1].need);
+            delete s.adventure?.campEstate;
+          }
           if (state.dressed) {
             s.bought = [
               "cap",
@@ -110,6 +115,8 @@ const manifest = [];
               requestAnimationFrame(() => requestAnimationFrame(r)),
             ),
         );
+        if(state.exterior) await page.locator('[data-action="venue-view:exterior"]').click();
+        await page.waitForFunction(()=>!document.documentElement.hasAttribute("data-saving"));
         await page.evaluate(() => document.activeElement?.blur());
         const overflow = await page.evaluate(
           () => document.documentElement.scrollWidth > innerWidth + 1,
@@ -118,9 +125,10 @@ const manifest = [];
           throw Error("Horizontal overflow: " + layout + " " + name);
         const file = "after/" + layout + "-" + name + ".jpg";
         fs.mkdirSync(path.join(out, "after"), { recursive: true });
-        await page.screenshot({
+        const target=state.scenery ? page.locator(".camp-map") : state.exterior ? page.locator(".exterior-scene") : state.townOverview ? page.locator(".town-explore-map") : page;
+        await target.screenshot({
           path: path.join(out, file),
-          fullPage,
+          ...(target===page?{fullPage}:{}),
           type: "jpeg",
           quality: 78,
         });
@@ -201,6 +209,14 @@ const manifest = [];
             true,
           );
       }
+      await shot("town-overview","Town overview · eight purpose-built venues","Town architecture",{view:"world",world:"town",restored:true,townOverview:true});
+      if(layout==="desktop") {
+        const stages=await page.evaluate(()=>V3Adventure.campStages);
+        for(const st of stages) await shot("camp-stage-"+st.id,st.id+". "+st.name+" · "+st.need+" milestones","Camp progression",{view:"camp",campStage:st.id,scenery:true});
+        const venues=await page.evaluate(()=>V3Town.venues.map(v=>({id:v.id,name:v.name})));
+        for(const v of venues)await shot("exterior-"+v.id,v.name+" · exterior","Town exteriors",{world:"town",route:v.id,exterior:true});
+      }
+      if(layout==="ipad-landscape")for(const id of ["market","station","work"])await shot("town-"+id,id+" · activity in landscape","Practical Maths Town",{world:"town",route:id,dressed:true,restored:true},true);
       if (errors.length)
         throw Error(
           "Rendering/network errors in " +

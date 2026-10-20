@@ -2,7 +2,7 @@
   "name": "jaxon-adventure-preview",
   "private": true,
   "scripts": {
-    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs",
+    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-estate.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs",
     "test:e2e": "playwright test",
     "preview": "python3 -m http.server 4173 --bind 0.0.0.0",
     "build:staging": "node scripts/build-v3-staging.cjs",

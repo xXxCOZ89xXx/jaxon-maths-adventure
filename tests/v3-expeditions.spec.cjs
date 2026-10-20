@@ -167,7 +167,7 @@ test("Practical Town: all eight venues teach and complete actual tasks, restore 
   await expect(page.locator('[data-camp-slot="shelf"]')).toHaveValue(
     "town|market",
   );
-  await expect(page.locator(".camp-scene title")).toContainText(
+  await expect(page.locator(".camp-map .camp-scene title")).toContainText(
     "Market basket at camp shelf",
   );
   await axe(page);
@@ -332,4 +332,50 @@ test("Higher levels use negative coordinates and composed clockwise/anticlockwis
     (await saved(page)).adventure.active.tasks.map((t) => t.answer),
   ).toEqual([270, 0, 180]);
   await finish(page);
+});
+
+test("Purpose-built Town entrances open their own interiors and exterior views preserve the exact task",async({page})=>{
+  test.setTimeout(90000);
+  const venues=await page.evaluate(()=>V3Town.venues.map(v=>({id:v.id,name:v.name})));
+  for(let i=0;i<venues.length;i++){
+    await page.locator('nav [data-nav="map"]').click();await click(page,'world:town');
+    const pin=page.locator('.town-hotspots button').nth(i);await expect(pin).toHaveAttribute('aria-label','Enter '+venues[i].name);await pin.click();
+    await expect(page.getByRole('heading',{level:1})).toHaveText(venues[i].name);
+    await expect(page.locator('.location-scene')).toHaveClass(new RegExp('interior-'+venues[i].id));
+    const before=await saved(page);await click(page,'venue-view:exterior');await expect(page.locator('.exterior-scene')).toBeVisible();
+    await click(page,'venue-view:interior');expect((await saved(page)).adventure.active).toEqual(before.adventure.active);
+    expect((await saved(page)).coins).toBe(before.coins);await click(page,'m-begin');await expect(page.locator('.task-controls')).toBeVisible();
+  }
+  await axe(page);
+});
+
+test("All eight camp homes render actual upgrades and reduced motion stops watermill machinery",async({page})=>{
+  test.setTimeout(90000);
+  for(let stage=1;stage<=8;stage++){
+    await page.evaluate(({stage,key})=>{const s=V3Engine.fresh();s.view='camp';s.tourSeen=true;s.settings.motion=true;s.bought=['cap','fox'];s.equipped=['cap','fox'];s.coins=83.5;s.milestones=V3Adventure.campMilestoneIds().slice(0,V3Adventure.campStages[stage-1].need);localStorage.setItem(key,JSON.stringify(s));},{stage,key:KEY});
+    await page.reload();const scene=page.locator('.camp-map>.camp-scene');await expect(scene).toHaveAttribute('data-camp-stage',String(stage));
+    await expect(page.locator('.estate-track button')).toHaveCount(8);
+    if(stage>=3)await expect(scene.locator('[data-estate-part="residence-'+stage+'"]').first()).toBeVisible();
+    if(stage>=6){await expect(scene.locator('[data-estate-part="watermill"]')).toBeVisible();await expect(scene.locator('[data-estate-part="storage-tank-and-pipework"]')).toBeVisible();}
+    if(stage>=7)await expect(scene.locator('[data-estate-part="private-power-grid"]')).toBeVisible();
+    const s=await saved(page);expect(s.bought).toEqual(['cap','fox']);expect(s.equipped).toEqual(['cap','fox']);expect(s.coins).toBe(83.5);expect(s.skills).toEqual({});
+    if(stage===1||stage===8)await axe(page);
+  }
+  await page.emulateMedia({reducedMotion:'reduce'});
+  expect(await page.locator('.camp-map .mill-wheel').evaluate(el=>getComputedStyle(el).animationName)).toBe('none');
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  expect(await page.locator('.camp-map .mill-wheel').evaluate(el=>getComputedStyle(el).animationName)).toBe('mill-turn');
+  await page.reload();await expect(page.locator('.camp-map>.camp-scene')).toHaveAttribute('data-camp-stage','8');
+});
+
+test("Camp upgrade celebration and previews preserve history and cannot earn a mansion, coins, mastery or time",async({page})=>{
+  await page.clock.install({time:new Date('2026-10-20T12:00:00Z')});
+  await page.evaluate(key=>{const s=V3Engine.fresh();s.view='camp';s.tourSeen=true;s.coins=71.25;s.milestones=V3Adventure.campMilestoneIds().slice(0,3);V3Adventure.state(s).campProjects.greenhouse=true;V3Adventure.state(s).historical={keep:17};s.milestones.push(V3Adventure.campMilestoneIds()[3]);localStorage.setItem(key,JSON.stringify(s));},KEY);
+  await page.reload();await expect(page.locator('.estate-celebration')).toBeVisible();const before=await saved(page);
+  await click(page,'camp-preview:8');await expect(page.locator('.estate-preview')).toHaveAttribute('data-camp-stage','8');
+  await expect(page.locator('.camp-map>.camp-scene')).toHaveAttribute('data-camp-stage','2');await click(page,'camp-celebrate');
+  await page.clock.runFor(30000);await page.reload();const after=await saved(page);
+  expect(after.adventure.campEstate.highest).toBe(2);expect(after.adventure.campEstate.celebrated).toBe(2);expect(after.adventure.historical).toEqual({keep:17});expect(after.adventure.campProjects.greenhouse).toBe(true);
+  for(const key of ['coins','earned','minutes','weekly','milestones','skills','checks','bought','equipped'])expect(after[key]).toEqual(before[key]);
+  await expect(page.locator('.estate-celebration')).toHaveCount(0);
 });
