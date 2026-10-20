@@ -52,9 +52,30 @@
     document.documentElement.setAttribute("data-saving", "");
     const transact = () => {
       if (!storageError) s = read();
+      const priorView = s.view,
+        focused = document.activeElement,
+        kind = ["action", "act", "setting", "missionTier", "campSlot"].find(
+          (key) => focused?.dataset?.[key],
+        ),
+        token = kind ? focused.dataset[kind] : null;
       fn();
       persist();
-      if (renderPage) render(focus);
+      if (renderPage) {
+        render(focus);
+        if (!focus && priorView === s.view && kind && token) {
+          const target = [
+            ...document.querySelectorAll(
+              "[data-action],[data-act],[data-setting],[data-mission-tier],[data-camp-slot]",
+            ),
+          ].find(
+            (el) =>
+              el.dataset[kind] === token &&
+              !el.disabled &&
+              !el.closest("[inert]"),
+          );
+          target?.focus({ preventScroll: true });
+        }
+      }
     };
     try {
       if (navigator.locks) await navigator.locks.request(LOCK, transact);
@@ -613,28 +634,6 @@
       ].includes(name)
     ) {
       $("main").focus();
-    } else if (
-      [
-        "value",
-        "adjust",
-        "part",
-        "rotate",
-        "m-value",
-        "m-adjust",
-        "m-part",
-        "m-select",
-        "m-point",
-        "m-turn",
-        "m-turn-back",
-        "m-choice",
-        "m-coin",
-        "m-post",
-      ].includes(name)
-    ) {
-      const el = [...document.querySelectorAll("[data-action]")].find(
-        (el) => el.dataset.action === action && !el.disabled,
-      );
-      el?.focus();
     }
   }
   document.addEventListener("click", async (e) => {
@@ -670,15 +669,20 @@
     if (e.target.id === "shop-filter") {
       filter = e.target.value;
       render();
+      $("shop-filter")?.focus({ preventScroll: true });
       return;
     }
     if (e.target.dataset.setting) {
       const name = e.target.dataset.setting,
         value = e.target.checked;
       status("Saving preferences on this device…");
-      await change(() => {
-        s.settings[name] = value;
-      });
+      await change(
+        () => {
+          s.settings[name] = value;
+        },
+        { renderPage: false },
+      );
+      document.body.classList.toggle("animate", !!s.settings.motion);
     }
   });
   document.addEventListener("input", async (e) => {

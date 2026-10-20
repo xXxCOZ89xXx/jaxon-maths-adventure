@@ -169,9 +169,24 @@ test("Mid-quest Save & Exit and reload resume exact puzzle, selection, hint and 
   expect((await read(page)).quest).toEqual(before);
   await expect(page.getByText("PUZZLE 2 / 3", { exact: false })).toBeVisible();
   expect((await read(page)).milestones).toEqual(["number:0"]);
+  await page.evaluate(() => {
+    navigator.locks.request(
+      "jaxon_v3_fictional_demo_2026:transaction",
+      () =>
+        new Promise((resolve) => {
+          window.releaseFocusSave = resolve;
+        }),
+    );
+  });
+  await page.waitForFunction(() => !!window.releaseFocusSave);
   await action(page, "value:2").focus();
   await page.keyboard.press("Enter");
   await action(page, "solve").focus();
+  await page.evaluate(() => window.releaseFocusSave());
+  await page.waitForFunction(
+    () => !document.documentElement.hasAttribute("data-saving"),
+  );
+  await expect(action(page, "solve")).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(action(page, "next-quest")).toBeVisible();
 });
@@ -241,9 +256,9 @@ test("Shop, avatar across screens, preferences and mock parent summary", async (
   );
   await page.locator('nav [data-nav="settings"]').click();
   await page.locator('[data-setting="motion"]').check();
-  await expect.poll(async()=>(await read(page)).settings.motion).toBe(true);
+  await expect.poll(async () => (await read(page)).settings.motion).toBe(true);
   await page.locator('[data-setting="sound"]').check();
-  await expect.poll(async()=>(await read(page)).settings.sound).toBe(true);
+  await expect.poll(async () => (await read(page)).settings.sound).toBe(true);
   await page.reload();
   await expect(page.locator('[data-setting="sound"]')).toBeChecked();
   await accessibility(page);
