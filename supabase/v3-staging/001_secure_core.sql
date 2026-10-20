@@ -139,8 +139,8 @@ begin
  owned=owned||jsonb_build_array(p_args->>'item') where child_user_id=c;
  elsif p_operation='active' then
  -- Shared server clock caps concurrent devices. Offline time stays learning evidence, never minted as money.
- secs:=least(15,greatest(0,extract(epoch from now()-w.last_active)),greatest(0,coalesce((p_args->>'seconds')::numeric,0)));
- update public.v3_wallet set active_seconds=active_seconds+secs,coins=coins+secs/6,last_active=now() where child_user_id=c;
+ secs:=least(15,greatest(0,extract(epoch from clock_timestamp()-w.last_active)),greatest(0,coalesce((p_args->>'seconds')::numeric,0)));
+ update public.v3_wallet set active_seconds=active_seconds+secs,coins=coins+secs/6,last_active=greatest(last_active,clock_timestamp()) where child_user_id=c;
  end if;
  if result is null then select jsonb_build_object('wallet',to_jsonb(t)-'child_user_id') into result from public.v3_wallet t where child_user_id=c; end if;
  insert into public.v3_transactions(child_user_id,request_id,operation,payload,result) values(c,req,p_operation,p_args,result);

@@ -16,7 +16,7 @@
     "failed": 0
   },
   "v3_logic_suites": 24,
-  "postgres_security_suites": 13,
+  "postgres_security_suites": 14,
   "v2_regression_scripts": 3,
   "current_test_matrix": {
     "chromium": 66,
@@ -29,9 +29,12 @@
     "sha256": "8bf4adf821a787a9da13267ec36e59040a4d8c44741f3b083358e8f269d714bd"
   },
   "hosted_ci": {
-    "status": "pending",
-    "run_id": 39384270497,
-    "head": "e9548763f4c734ebdcae8bcb671233b7e52876e4"
+    "status": "success",
+    "run_id": 39384587723,
+    "head": "eeca796c79d393c30982565d32a06f6d737b3b9e",
+    "browser_cases": 88,
+    "postgres_security_suites": 13,
+    "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39384587723"
   },
   "remaining": [
     "Verified and authorised separate staging project",
@@ -39,5 +42,9 @@
     "Physical iPad Safari and family acceptance",
     "Cold-offline asset caching",
     "Multiple children per parent"
-  ]
+  ],
+  "reward_clock_regression": {
+    "fixed_test_passes": true,
+    "old_implementation_fails": true
+  }
 }

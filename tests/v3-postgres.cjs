@@ -375,6 +375,28 @@ function test(title, fn) {
     assert.equal(req("learner", "read").revision, 2);
     count++;
     console.log("PASS concurrent identical saves commit exactly once");
+    // An earlier transaction may acquire the wallet lock later. Never regress its clock.
+    const delayed = asyncSQL(
+      `begin;select pg_sleep(0.7);${prefix("learner")}select public.v3_request('${tokens.learner}','active',${lit(JSON.stringify({ seconds: 15, requestId: crypto.randomUUID() }))}::jsonb);commit;`,
+    );
+    await new Promise((r) => setTimeout(r, 250));
+    req("learner", "active", { seconds: 15, requestId: crypto.randomUUID() });
+    const highWater = Number(
+      sql(
+        `select extract(epoch from last_active) from public.v3_wallet where child_user_id='${ids.learner}'`,
+      ),
+    );
+    await delayed;
+    const afterDelayed = Number(
+      sql(
+        `select extract(epoch from last_active) from public.v3_wallet where child_user_id='${ids.learner}'`,
+      ),
+    );
+    assert.ok(afterDelayed >= highWater);
+    count++;
+    console.log(
+      "PASS delayed concurrent activity transactions cannot move reward clock backwards",
+    );
     test("parent-reviewed offline minutes reconcile 1:1 once, bounded by saved evidence", () => {
       req("learner", "save", {
         revision: 2,
