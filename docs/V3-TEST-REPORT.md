@@ -2,6 +2,8 @@
 
 Date: 20 October 2026 (Europe/London). Branch: `codex/v3-adventure-build`, continuing draft PR #2 from milestone `bc30d1940d51fb7b234bb8cf1e8e2a518c2db5cf`.
 
+Hosted CI passed **45/45 browser cases in 3.8 minutes**, plus all offline logic checks, for gameplay commit `3481b767eec8bd19f6fe8e561c23c1d30889cafd`: [successful run](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39355378027). The final Node coverage is nine learning/state suites plus eleven expedition/practical suites, alongside three V2 baseline scripts.
+
 This report covers the expanded fictional **offline development build**. It does not certify a production-connected release. No real learner account, backup, history or Supabase row was used.
 
 ## Automated results
@@ -12,7 +14,7 @@ This report covers the expanded fictional **offline development build**. It does
 | V2 baseline regression scripts | Passed, 3 scripts | Original 39 skills, 4,680 generated review samples, 780 discovery questions, mocked reward/role boundaries |
 | V3 learning/state logic | Passed, 9 suites | All 55 skills, all 1,100 discovery questions, fresh/spaced evidence, guided/mastery separation, legacy migration, active time and 40-item catalogue |
 | Nine-world expedition logic | Passed, 11 suites | 123 route/level combinations across 12 repeat seeds; **4,466 generated tasks** solved; teaching gate, suspended visits, varied seeds, finite XP/collections, move validation, camp projects and durable badges |
-| Browser end-to-end | Local full 42/42 + focused 15/15; latest 45-case CI on PR | 15 cases each at desktop, iPad portrait and iPad landscape sizes |
+| Browser end-to-end | Passed, 45/45 hosted CI; local full 42/42 + focused 15/15 | 15 cases each at desktop, iPad portrait and iPad landscape sizes |
 | Automated accessibility | Included in browser results | axe WCAG 2 A/AA + 2.1 AA checks, including active new control types, Town, Camp, keyboard/focus, reduced motion, touch sizes and phone/iPad overflow |
 | Packaged preview smoke | Passed | Extracted latest ZIP, local assets and a playable Town task |
 | Protected-file integrity | Passed, 5 files | Homepage, V2 page, secure adapter and SQL files byte-for-byte unchanged |
@@ -38,9 +40,9 @@ The same fifteen cases run in each viewport:
 13. New Town lesson and unseen independent check: guided work stays learning; a fresh pass establishes practice rather than spaced mastery; immediate retake is disabled.
 14. Queue concurrent completion from two tabs under a held Web Lock; exactly one milestone/record is written. Camp project remains unavailable without its required evidence.
 
-A focused additional browser smoke check verifies that new parent activity entries show the fictional world, venue, level and support. A read-only GitHub Actions workflow is included to rerun offline tests and Chromium gameplay on code changes; remote CI status is available on PR #2.
-
 15. Higher-level negative coordinates and clockwise/anticlockwise turn composition, with known expected positions and final orientations.
+
+A focused additional browser smoke check verifies that new parent activity entries show the fictional world, venue, level and support. A read-only GitHub Actions workflow is included to rerun offline tests and Chromium gameplay on code changes; remote CI status is available on PR #2.
 
 Axe scans include the first encountered interactive mission renderer of each type in Town/gateway playthroughs, not only the completed recap. All browser contexts and fixtures are synthetic and isolated. The harness aborts every nonlocal request and fails on attempted external requests, runtime/console errors or reported CSP violations. V3 additionally uses `connect-src 'none'` and has no cloud adapter.
 
@@ -97,6 +99,7 @@ Local Chromium defaults to `/usr/bin/chromium`; set `V3_CHROMIUM_EXECUTABLE` for
 - `tests/artifacts/v3-unit-results.txt`: complete baseline and V3 logic output.
 - `tests/artifacts/v3-browser-results.json`: machine-readable results/timing.
 - `tests/artifacts/v3-summary.json`: consolidated results and preview checksum.
+- `tests/artifacts/v3-hosted-ci.json`: successful hosted-run metadata and 45-case summary.
 - `tests/artifacts/v3-protected-files.json`: unchanged protected-file hashes.
 - Screenshots: home/camp, Town/collection in each viewport and phone quest.
 - `V3-CONTINUATION.md`: gameplay/state scope.

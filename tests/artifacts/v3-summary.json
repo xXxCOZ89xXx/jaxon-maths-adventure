@@ -64,5 +64,12 @@
     "flaky": 0
   },
   "practical_question_variation_samples": 2880,
-  "cinema_offer_smoke": "PASS"
+  "cinema_offer_smoke": "PASS",
+  "hosted_ci": {
+    "run_id": 39355378027,
+    "tested_code_commit": "3481b767eec8bd19f6fe8e561c23c1d30889cafd",
+    "conclusion": "success",
+    "browser_passed": 45,
+    "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39355378027"
+  }
 }
