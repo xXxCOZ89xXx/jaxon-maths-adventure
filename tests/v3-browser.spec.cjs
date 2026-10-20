@@ -465,6 +465,8 @@ test("World-stage bridge exposes every destination and moves its explorer withou
 
 test("Camp places are keyboard links to usable displays; navigation cannot earn rewards", async ({page})=>{
   await page.locator('nav [data-nav="camp"]').click();
+  // Navigation persists through Web Locks; click completion is not a save acknowledgement.
+  await expect.poll(async () => (await read(page))?.view).toBe("camp");
   const before=await read(page);
   const garden=page.getByRole("link",{name:"Garden",exact:true});
   await garden.focus();await page.keyboard.press("Enter");
