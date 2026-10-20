@@ -98,3 +98,33 @@ test('A fresh identity fixture resets progress and sessions for the next test',a
   const learner=await family.open('learner');
   await expect(learner.getByRole('heading',{name:'A little maths. A big adventure.'})).toBeVisible();
 });
+
+test('Preauthenticated fictional learner completes the connected journey with cloud-fixture saves and parent review',async({family})=>{
+  const page=await family.open('learner');
+  const key=`jaxon_v3_staging:${family.ref}:${family.uid}:game`;
+  const read=()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  if(!(await read()).tourSeen) await click(page,'skip-tour');
+  await click(page,'nav:map');await click(page,'world:town');await click(page,'j-start:lentil');
+  const before=await read();
+  for(let step=0;step<8;step++) {
+    const t=await page.evaluate(key=>V5Journey.task(JSON.parse(localStorage.getItem(key))),key);
+    if(t.kind==='basket') for(let i=0;i<t.answer.length;i++) for(let n=0;n<t.answer[i];n++) await click(page,`j-part:${i}:1`);
+    else if(t.kind==='journey') await click(page,'j-choice:'+t.answer);
+    else if(t.kind==='coins') {
+      let rest=t.answer;for(const n of [5000,2000,1000,500,200,100,50,20,10,5,2,1]) while(rest>=n) {await click(page,'j-coin:'+n);rest-=n;}
+    } else {await page.locator('[data-numeric-answer="journey"]').fill(String(t.answer));await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+    const exact=(await read()).adventure.journeyV1;
+    await expect.poll(()=>family.server.progress.adventure?.journeyV1?.values).toEqual(exact.values);
+    await page.reload();await expect(page.locator('.journey-progress')).toBeVisible();
+    expect((await read()).adventure.journeyV1).toEqual(exact);
+    await click(page,'j-submit');expect((await read()).adventure.journeyV1.solved).toBe(true);
+    await click(page,'j-next');
+  }
+  await expect.poll(()=>family.server.progress.adventure?.journeyV1?.done).toBe(true);
+  const after=await read();expect(after.adventure.journeyV1.receipts).toHaveLength(2);
+  expect(after.coins).toBe(before.coins);expect(after.milestones).toEqual(before.milestones);expect(after.checks).toEqual(before.checks);
+  const ledger=JSON.stringify(after.adventure.journeyV1);
+  await page.reload();expect(JSON.stringify((await read()).adventure.journeyV1)).toBe(ledger);
+  const parent=await family.open('parent');await expect(parent.getByRole('heading',{name:'Staging parent dashboard'})).toBeVisible();
+  expect(family.server.calls.filter(c=>c.body.p_operation==='save').length).toBeGreaterThan(8);
+});
