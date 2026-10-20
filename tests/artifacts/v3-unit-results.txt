@@ -1,0 +1,17 @@
+
+> test
+> node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs
+
+PASS: 39 skills, 4680 generated review questions, 39 repeat-practice flows, 25 skills with safe touch tools.
+PASS: 780 discovery questions, 4 distinct options and 1 valid answer per question.
+PASS: missing-schema compatibility, learner bonus balance, server-only purchases, parent/unlinked permissions.
+PASS: Migration preserves synthetic V2 fields, unknown data, balances, ownership and mastery
+PASS: Eight world quest loops persist exact state, restore 24 landmarks and cannot farm XP or coins
+PASS: All 39 skills: guided practice cannot award mastery, checks are fresh, immediate retakes blocked, spaced mastery works
+PASS: Hinted, wrong and skipped check answers never inflate mastery; failed check requires reteaching
+PASS: Active time and coins are bounded, 60-minute goal is unmodified, reward conversion remains 1:1
+PASS: 40 unchanged catalogue IDs, unaffordable purchase rejection, equip slot and repeated purchase safety
+PASS: No cloud scripts, production keys or external assets in V3 entrypoint
+PASS: All 780 discovery choices remain valid; adaptive rounds choose a band without granting mastery
+PASS: Changing worlds preserves suspended quest selections without rewarding navigation
+PASS: 9 V3 suites, all 8 worlds and 39 skills. Fictional fixtures only.
