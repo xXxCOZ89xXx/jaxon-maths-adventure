@@ -45,10 +45,17 @@ button:focus-visible,input:focus-visible{outline:4px solid #ffe181;outline-offse
 .ticks{display:flex;justify-content:space-between;font-size:12px;color:#c4dfb9}
 .hero{font-size:55px;text-align:center;margin-bottom:2px}
 .big-value{font-size:31px;font-weight:900;text-align:center}
-.coord-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;max-width:550px;margin:18px auto}
-.cell{min-width:0;min-height:63px;border:2px solid #668575;background:#234435;color:#c7e2cc;border-radius:8px;touch-action:none;user-select:none;-webkit-user-select:none;font-size:17px;font-weight:700}
-.cell.selected{background:#c2de91;color:#18301d;border-color:#eaf9be}
-.cell small{font-size:11px;display:block;font-weight:500}
+.coord-plane{width:min(100%,580px);max-height:600px;display:block;margin:12px auto 20px;touch-action:none;user-select:none;-webkit-user-select:none}
+.coord-line{stroke:#81a68a;stroke-width:1.4;opacity:.5}
+.coord-axis{stroke:#d6eed4;stroke-width:3;stroke-linecap:round}
+.coord-tick{font-size:19px;fill:#f2fff0;font-weight:650}
+.coord-axis-label{font-size:23px;fill:#d3f5a6;font-weight:900}
+.coord-target{fill:transparent;stroke:none;cursor:crosshair;pointer-events:all;touch-action:none}
+.coord-target:hover,.coord-target:focus-visible{fill:#b2e49e;fill-opacity:.23;stroke:#d5f6ab;stroke-width:3;outline:none}
+.coord-target.selected{fill:#ffe48b;fill-opacity:.25;stroke:#ffe48b;stroke-width:2}
+.coord-node{fill:#e6f2db;pointer-events:none}
+.coord-marker{fill:#ffe48b;stroke:#244328;stroke-width:4;pointer-events:none}
+.coord-feedback{text-align:center;font-size:17px;font-weight:750}
 .chart{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin:20px auto;max-width:710px}
 .bar-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px 8px;background:#263a2c;border:1px solid #719678;border-radius:14px;min-width:0}
 .bar-scene{height:160px;width:100%;max-width:120px;display:flex;align-items:flex-end;justify-content:center;border-bottom:3px solid #d6e7c8}
@@ -114,12 +121,25 @@ function renderNumber(){
  return '<section class="card"><p class="eyebrow">🌲 Number Forest · move on a number line</p><h2>Guide the explorer</h2><div class="mission prompt">Start at <strong>2</strong>. Walk <strong>5 steps left</strong>. Where do you land?</div><div class="hero" aria-hidden="true">🧍</div><div class="big-value" id="numberValue">'+state.number+'</div><div class="number-line"><label for="numberRange">Move the explorer along the number line</label><input class="slider" id="numberRange" type="range" min="-10" max="10" step="1" value="'+state.number+'" aria-label="Explorer position, from negative ten to positive ten"><div class="ticks"><span>−10</span><span>−5</span><span>0</span><span>5</span><span>10</span></div></div><div class="actions">'+btn("← One step left","left")+btn("One step right →","right")+'</div><div class="actions">'+btn("Check where I landed","check","primary")+btn("Show a hint","hint")+btn("Start at 2 again","reset")+'</div>'+hint()+status()+'</section>';
 }
 function renderGeometry(){
- let cells="";
- for(let y=5;y>=0;y--){for(let x=0;x<=5;x++){
-  const chosen=state.point&&state.point.x===x&&state.point.y===y;
-  cells+='<button type="button" class="cell '+(chosen?"selected":"")+'" data-point="'+x+","+y+'" aria-pressed="'+!!chosen+'" aria-label="Point '+x+' across, '+y+' up">'+(chosen?"📍":"·")+'<small>'+x+','+y+'</small></button>';
+ const originX=74,originY=416,step=67,size=5,px=x=>originX+x*step,py=y=>originY-y*step;
+ let grid="",ticks="",targets="";
+ for(let i=0;i<=size;i++){
+  grid+='<line class="coord-line" x1="'+px(i)+'" y1="'+py(5)+'" x2="'+px(i)+'" y2="'+py(0)+'"/><line class="coord-line" x1="'+px(0)+'" y1="'+py(i)+'" x2="'+px(5)+'" y2="'+py(i)+'"/>';
+  ticks+='<text class="coord-tick" x="'+px(i)+'" y="451" text-anchor="middle">'+i+'</text><text class="coord-tick" x="49" y="'+(py(i)+6)+'" text-anchor="end">'+i+'</text>';
+ }
+ for(let y=0;y<=size;y++){for(let x=0;x<=size;x++){
+  const chosen=!!state.point&&state.point.x===x&&state.point.y===y;
+  targets+='<circle class="coord-target '+(chosen?'selected':'')+'" cx="'+px(x)+'" cy="'+py(y)+'" r="29" data-point="'+x+','+y+'" tabindex="0" role="button" aria-label="Select grid point '+x+' across and '+y+' up" aria-pressed="'+chosen+'"/><circle class="coord-node" cx="'+px(x)+'" cy="'+py(y)+'" r="4" aria-hidden="true"/>';
  }}
- return '<section class="card"><p class="eyebrow">🏰 Geometry Kingdom · coordinate explorer</p><h2>Move the marker</h2><div class="mission prompt">Place the marker on coordinate <strong>(3, 2)</strong>. The first number is across, then up.</div><div class="coord-grid" role="group" aria-label="Coordinate grid from zero to five on each axis">'+cells+'</div><div class="big-value" aria-live="polite">Point: '+(state.point?"("+state.point.x+", "+state.point.y+")":"not placed")+'</div><p class="small">Tap a square, or slide your finger across the grid to move the marker. Each square shows its coordinates.</p><div class="actions">'+btn("Check my coordinates","check","primary")+btn("Show a hint","hint")+btn("Remove marker","reset")+'</div>'+hint()+status()+'</section>';
+ const marker=state.point?'<circle id="coordMarker" class="coord-marker" cx="'+px(state.point.x)+'" cy="'+py(state.point.y)+'" r="12" aria-hidden="true"/>':'<circle id="coordMarker" class="coord-marker" cx="0" cy="0" r="12" style="display:none" aria-hidden="true"/>';
+ const svg='<svg class="coord-plane" viewBox="0 0 520 500" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Coordinate plane with labelled x and y axes from zero to five. Select a point at an intersection.">'+grid+
+ '<line class="coord-axis" x1="'+px(0)+'" y1="'+py(0)+'" x2="452" y2="'+py(0)+'"/><path d="M452 416 l-15 -9 v18 Z" fill="#d6eed4"/>'+
+ '<line class="coord-axis" x1="'+px(0)+'" y1="'+py(0)+'" x2="'+px(0)+'" y2="42"/><path d="M74 42 l-9 15 h18 Z" fill="#d6eed4"/>'+
+ ticks+'<text class="coord-axis-label" x="470" y="422">x</text><text class="coord-axis-label" x="67" y="29">y</text>'+targets+marker+'</svg>';
+ return '<section class="card"><p class="eyebrow">🏰 Geometry Kingdom · coordinate explorer</p><h2>Plot a point on the axes</h2><div class="mission prompt">Plot the point <strong>(3, 2)</strong>. Follow the horizontal x-axis to 3, then go up to 2 on the y-axis.</div>'+svg+
+ '<p class="coord-feedback" aria-live="polite">'+(state.point?'Marker placed. Check your answer when ready.':'Choose an intersection to place your marker.')+'</p>'+
+ '<p class="small">Select a dot where two grid lines meet, or drag your finger across the points. The numbers appear only on the axes, not beside each point. Keyboard: Tab to an intersection, then press Enter or Space.</p>'+
+ '<div class="actions">'+btn("Check my point","check","primary")+btn("Show a hint","hint")+btn("Remove marker","reset")+'</div>'+hint()+status()+'</section>';
 }
 function renderStatistics(){
  const names=["Monday","Tuesday","Wednesday"];
@@ -175,10 +195,19 @@ function place(point){
  state.point={x,y};changed();
  document.querySelectorAll("[data-point]").forEach(el=>{
   const on=el.dataset.point===point;
-  el.classList.toggle("selected",on);el.setAttribute("aria-pressed",String(on));el.firstChild.textContent=on?"📍":"·";
+  el.classList.toggle("selected",on);el.setAttribute("aria-pressed",String(on));
  });
- const v=$(".big-value");if(v)v.textContent="Point: ("+x+", "+y+")";
+ const marker=$("#coordMarker");
+ if(marker){marker.setAttribute("cx",String(74+x*67));marker.setAttribute("cy",String(416-y*67));marker.style.display="";}
+ const v=$(".coord-feedback");
+ if(v)v.textContent="Marker placed. Check your answer when ready.";
 }
+document.addEventListener("keydown",e=>{
+ const coord=e.target.closest?.("[data-point]");
+ if(coord&&(e.key==="Enter"||e.key===" ")){
+  e.preventDefault();place(coord.dataset.point);
+ }
+});
 document.addEventListener("click",e=>{
  const world=e.target.closest("[data-world]");
  if(world){
