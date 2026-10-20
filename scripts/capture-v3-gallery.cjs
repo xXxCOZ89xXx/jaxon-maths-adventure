@@ -164,6 +164,7 @@ const manifest = [];
         "Bridge repair · interactive quest",
         "Interactive learning",
         { quest: true, dressed: true },
+        true,
       );
       await shot("celebration", "Restoration recap", "Explorer & rewards", {
         restored: true,

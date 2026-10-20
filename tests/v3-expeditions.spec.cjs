@@ -156,6 +156,7 @@ test("Practical Town: all eight venues teach and complete actual tasks, restore 
   expect(s.skills).toEqual({});
   await expect(page.getByText("3/3 LANDMARKS RESTORED")).toBeVisible();
   await page.locator('nav [data-nav="camp"]').click();
+  await page.getByText("Your discoveries · achievement journal", {exact:true}).click();
   await expect(page.getByText("Town neighbour · earned")).toBeVisible();
   await expect(page.locator(".keepsake")).toHaveCount(8);
   await page.locator('[data-camp-slot="shelf"]').selectOption("town|market");

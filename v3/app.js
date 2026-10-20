@@ -121,7 +121,7 @@
   function worldPage() {
     const w = world(),
       n = M.visualLevel(s, w.id, E.count(s, w.id));
-    return `${header("WORLD " + (E.worlds.indexOf(w) + 1) + " / 09", w.name)}<div class="split"><div>${art(w.id)}<div class="actions">${btn(before ? "Show restored world" : "View before restoration", "before")}${w.id === "town" ? btn("Visit the supermarket →", "mission:town:market:1", "primary") : btn("Meet " + w.guide + " →", "quest:" + w.id, "primary")}</div></div><section class="panel"><span class="badge">${n}/3 LANDMARKS RESTORED</span><h2 style="margin-top:20px">${w.tag}</h2><p class="muted">${w.goal}</p><ul class="landmark-list">${w.stages.map((name, i) => `<li class="${n > i ? "done" : ""}"><span aria-hidden="true">${n > i ? "◆" : "◇"}</span>${name}</li>`).join("")}</ul><p class="small muted">Story restoration grows from solved puzzles. Independent mastery has its own fresh checks.</p>${A.explorer(s, true)}</section></div>${U.board(s, w)}${w.id === "town" ? '<details class="town-lessons"><summary>Maths lessons and independent checks · 16 skills</summary>' : ""}<h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills
+    return `${header("WORLD " + (E.worlds.indexOf(w) + 1) + " / 09", w.name)}<div class="split world-overview"><div><div class="world-route-map">${art(w.id)}${w.id !== "town" ? `<nav class="world-route-pins" aria-label="Explore ${esc(w.name)} landmarks">${M.routes(w.id).map((r,i)=>`<button data-action="scene-mission:${w.id}:${r.id}:${M.state(s).difficulty[w.id] || M.recommendation(s,w.id)}" style="left:${[39,62,49][i]}%;top:${[53,64,35][i]}%" aria-label="Visit ${esc(r.name)}"><span aria-hidden="true">${i+1}</span><span class="route-label">${esc(r.name)}</span></button>`).join("")}</nav>` : ""}</div><div class="actions">${btn(before ? "Show restored world" : "View before restoration", "before")}${w.id === "town" ? btn("Visit the supermarket →", "mission:town:market:1", "primary") : btn("Meet " + w.guide + " →", "quest:" + w.id, "primary")}</div></div><section class="panel"><span class="badge">${n}/3 LANDMARKS RESTORED</span><h2 style="margin-top:20px">${w.tag}</h2><p class="muted">${w.goal}</p><ul class="landmark-list">${w.stages.map((name, i) => `<li class="${n > i ? "done" : ""}"><span aria-hidden="true">${n > i ? "◆" : "◇"}</span>${name}</li>`).join("")}</ul><p class="small muted">Story restoration grows from solved puzzles. Independent mastery has its own fresh checks.</p>${A.explorer(s, true)}</section></div>${U.board(s, w)}${w.id === "town" ? '<details class="town-lessons"><summary>Maths lessons and independent checks · 16 skills</summary>' : ""}<h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills
       .filter((k) => k.world === w.id)
       .map((k) => {
         const c = s.checks[k.id],
@@ -137,7 +137,7 @@
     const p = E.puzzle(q.world, q.i);
     let ui = "";
     if (p.kind === "line")
-      ui = `<div class="numberline" role="group" aria-label="Bridge number line">${Array.from(
+      ui = `${A.worksite(q.world, "line", q.value, [], q.solved, p.min, p.max)}<p class="line-instruction">Move the explorer along the bridge · ${p.min} to ${p.max}</p><div class="numberline" role="group" aria-label="Bridge number line">${Array.from(
         { length: p.max - p.min + 1 },
         (_, i) => i + p.min,
       )
@@ -147,7 +147,7 @@
         )
         .join(
           "",
-        )}</div><p class="small muted">Tap a number, or tab to it and press Enter. Selected: ${q.value}</p>`;
+        )}</div><p class="small muted">All destinations are shown below, in order. Tap a number, or tab to it and press Enter. Selected: ${q.value}</p>`;
     if (["fraction", "chance"].includes(p.kind))
       ui = `<div class="parts" role="group" aria-label="${p.kind === "fraction" ? "Water channels" : "Portal chance slots"}">${Array.from({ length: 4 }, (_, i) => `<button class="part" data-action="part:${i}" aria-label="${p.kind === "fraction" ? "Channel" : "Slot"} ${i + 1}" aria-pressed="${q.selected.includes(i)}">${p.kind === "fraction" ? "≈" : "◇"}</button>`).join("")}</div><p class="small muted">${q.selected.length} of 4 ${p.kind === "fraction" ? "channels open" : "slots green"}. Tap to toggle.</p>`;
     if (p.kind === "balance")
@@ -165,7 +165,7 @@
   function quest() {
     const q = s.quest,
       w = E.worlds.find((w) => w.id === q.world);
-    return `${header("RESTORE THE WORLD", w.name, "world")}<div class="quest-layout"><div>${art(w.id)}<section class="panel guide">${A.guide(w.guide)}<div><h3>${w.guide}, your guide</h3><p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p></div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s, true)}${btn("Save & exit", "nav:home")}</div></div><section class="panel">${q.intro ? `<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2><p>We can restore this place with three small maths puzzles. Tap to build, move and explore.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn("Start building →", "begin", "primary")}` : puzzle(q) + `${q.solved ? `<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn(q.i < 2 ? "Next puzzle →" : "Quest recap →", "next-quest", "primary")}</div>` : `<div class="actions">${btn("Try my solution", "solve", "primary")}${btn("Hint", "hint")}${btn("I don’t know", "skip")}</div>${q.feedback ? `<div class="feedback" role="status">${esc(q.feedback)}</div>` : ""}`}`}</section></div>`;
+    return `${header("RESTORE THE WORLD", w.name, "world")}<div class="quest-layout world-stage stage-${w.id} ${q.solved ? "stage-restored" : ""}"><div class="stage-vista">${art(w.id).replace('viewBox="0 0 900 560"', 'viewBox="0 110 900 380" preserveAspectRatio="xMidYMid slice"')}<section class="panel guide">${A.guide(w.guide)}<div><h3>${w.guide}, your guide</h3><p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p></div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s, true)}${btn("Save & exit", "nav:home")}</div></div><section class="panel stage-workbench">${q.intro ? `<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2><p>We can restore this place with three small maths puzzles. Tap to build, move and explore.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn("Start building →", "begin", "primary")}` : puzzle(q) + `${q.solved ? `<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn(q.i < 2 ? "Next puzzle →" : "Quest recap →", "next-quest", "primary")}</div>` : `<div class="actions">${btn("Try my solution", "solve", "primary")}${btn("Hint", "hint")}${btn("I don’t know", "skip")}</div>${q.feedback ? `<div class="feedback" role="status">${esc(q.feedback)}</div>` : ""}`}`}</section></div>`;
   }
   function learning() {
     const l = s.learning,
@@ -207,7 +207,7 @@
   const campThresholds = [0, 1, 3, 6, 12, 24];
   function camp() {
     const n = s.milestones.length;
-    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Welcome to Base Camp.", "home")}<div class="split"><div><div class="hero-art">${A.camp(s)}</div><div class="camp-art">${A.explorer(s)}<div class="camp-buildings">${campNames.map((name, i) => `<div class="${n >= campThresholds[i] ? "" : "locked"}">${n >= campThresholds[i] ? "◆" : "◇"} ${name}${n < campThresholds[i] ? ` <span class="small">(${campThresholds[i]} landmarks)</span>` : ""}</div>`).join("")}</div></div></div><section class="panel"><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2 style="margin-top:20px">Make it yours.</h2><p class="muted">Your camp grows as you restore landmarks. Every upgrade stays with you.</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div></section></div><h2 style="margin-top:36px">Your discoveries</h2><div class="panel">${[
+    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Welcome to Base Camp.", "home")}<section class="camp-overview"><div class="camp-map hero-art">${A.camp(s)}<nav class="camp-hotspots" aria-label="Places at Base Camp"><a href="#camp-shelf" style="left:46%;top:62%">Tent & keepsakes</a><a href="#camp-garden" style="left:68%;top:69%">Garden</a><a href="#camp-gate" style="left:30%;top:65%">Gate</a><a href="#camp-projects" style="left:55%;top:29%">Build & upgrade</a></nav><span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>Make it yours.</h2><p class="muted">Tap a place in camp to decorate or build. Every earned upgrade stays with you.</p><p class="camp-inventory small">${campNames.filter((_,i)=>n>=campThresholds[i]).map(name=>`<span>◆ ${name}</span>`).join(" ")}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section><details class="camp-journal"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
       ["First steps", n >= 1, "Restore your first landmark."],
       [
         "Forest keeper",
@@ -260,7 +260,7 @@
         ([name, earned, desc]) =>
           `<div class="achievement"><span aria-hidden="true">${earned ? "◆" : "◇"}</span><div><strong>${name} ${earned ? "· earned" : ""}</strong><span class="small muted">${desc}</span></div></div>`,
       )
-      .join("")}</div>${U.collection(s)}`;
+      .join("")}</div></details>${U.collection(s)}`;
   }
   function shop() {
     const slots = [...new Set(C.catalog.map((i) => i.slot))];
@@ -426,6 +426,7 @@
           if (arg === "town") M.start(s, "town", "market", 1);
           else E.startQuest(s, arg);
           break;
+        case "scene-mission":
         case "mission": {
           const bits = action.split(":");
           M.start(s, bits[1], bits[2], Number(bits[3]));

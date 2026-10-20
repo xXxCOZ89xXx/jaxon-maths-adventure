@@ -438,3 +438,59 @@ test("menus, idle movement, no-op edits and refresh cannot renew learning reward
   await page.clock.runFor(20000);
   expect((await read(page)).minutes).toBe(stopped);
 });
+
+test("World-stage bridge exposes every destination and moves its explorer without changing learning evidence", async ({ page }) => {
+  await action(page,"continue").first().click();
+  await action(page,"begin").click();
+  const initial = await read(page);
+  const line = page.getByRole("group",{name:"Bridge number line"});
+  const bounds = await line.evaluate(el => {
+    const r=el.getBoundingClientRect();
+    return {scroll:el.scrollWidth,width:el.clientWidth,buttons:[...el.querySelectorAll("button")].map(b=>{const q=b.getBoundingClientRect();return {label:b.textContent,w:q.width,h:q.height,inside:q.left>=r.left&&q.right<=r.right};})};
+  });
+  expect(bounds.scroll).toBeLessThanOrEqual(bounds.width+1);
+  expect(bounds.buttons.every(b=>b.w>=44&&b.h>=44&&b.inside)).toBe(true);
+  const last=bounds.buttons.at(-1).label;
+  await line.getByRole("button",{name:last,exact:true}).click();
+  await expect(page.getByRole("img",{name:"Bridge marker at "+last})).toBeVisible();
+  await page.reload();
+  await expect(line.getByRole("button",{name:last,exact:true})).toHaveAttribute("aria-pressed","true");
+  const saved=await read(page);
+  expect(saved.quest.value).toBe(Number(last));
+  expect(saved.milestones).toEqual(initial.milestones);
+  expect(saved.skills).toEqual(initial.skills);
+  expect(saved.checks).toEqual(initial.checks);
+  await accessibility(page);
+});
+
+test("Camp places are keyboard links to usable displays; navigation cannot earn rewards", async ({page})=>{
+  await page.locator('nav [data-nav="camp"]').click();
+  const before=await read(page);
+  const garden=page.getByRole("link",{name:"Garden",exact:true});
+  await garden.focus();await page.keyboard.press("Enter");
+  await expect(page.locator("#camp-garden")).toBeInViewport();
+  await expect(page.locator('[data-camp-slot="garden"]')).toBeVisible();
+  expect(await page.locator(".camp-hotspots a").count()).toBe(4);
+  const after=await read(page);
+  expect(after.coins).toBe(before.coins);
+  expect(after.milestones).toEqual(before.milestones);
+  expect(after.weekly).toEqual(before.weekly);
+  await accessibility(page);
+});
+
+test("Landscape entrances open real expeditions in each original world without granting progress", async ({page})=>{
+  const worlds=await page.evaluate(()=>V3Engine.worlds.filter(w=>w.id!=="town").map(w=>w.id));
+  for(const id of worlds){
+    await page.locator('nav [data-nav="map"]').click();
+    await action(page,"world:"+id).click();
+    const pins=page.locator(".world-route-pins button");
+    await expect(pins).toHaveCount(3);
+    const title=(await pins.first().getAttribute("aria-label")).replace(/^Visit /,"");
+    await pins.first().click();
+    await expect(page.getByRole("heading",{level:1})).toHaveText(title);
+    await expect(action(page,"m-begin")).toBeVisible();
+  }
+  const state=await read(page);
+  expect(state.milestones).toEqual([]);
+  expect(state.skills).toEqual({});
+});
