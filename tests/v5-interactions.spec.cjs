@@ -284,6 +284,8 @@ test("V5 constructed practice can retry with support while independent checks ne
   ).toBeVisible();
 });
 
+test("V5 practical response builders preserve pence and minute units",async({page})=>{for(const id of ['town_money','town_timetable']){await page.evaluate(({KEY,id})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Engine.generate(s,id,'practice',JaxonFreshReview,V3Curriculum);s.learning.started=true;s.view='practice';localStorage.setItem(KEY,JSON.stringify(s));},{KEY,id});await page.reload();const value=Number((await state(page)).learning.qs[0][1]);if(id==='town_money'){await expect(page.locator('.practice-manipulative')).toContainText('pence');let rest=value;for(const n of [5000,2000,1000,500,200,100,50,20,10,5,2,1])while(rest>=n){await click(page,'p5-add:'+n);rest-=n;}}else{await expect(page.locator('.practice-manipulative')).toContainText('minutes');for(const n of [1000,100,10,1])for(let i=0;i<Math.floor(value/n)%10;i++)await click(page,'p5-add:'+n);}await click(page,'p5-submit');const result=await state(page);expect(result.learning.responses[0].answer).toBe(String(value));expect(result.learning.responses[0].correct).toBe(true);expect(result.learning.responses[0].firstIndependent).toBe(false);await axe(page);}});
+
 test("V5 worker and customer roles share the supermarket; a complete recipe journey carries exact list, fare, inventory and payments", async ({
   page,
 }) => {

@@ -456,8 +456,12 @@
         n <= 20
       )
         t = { kind: "line", min: -20, max: 20 };
-      else if (/town_|percent_change|ratio_rates/.test(skill.id))
-        t = { kind: "amount", unit: "p", min: 0, max: 100000, scale: 100 };
+      else if (["town_timetable","town_time"].includes(skill.id))
+        t = {kind:"blocks",unit:"minutes",min:0,max:9999};
+      else if (["town_money","town_totals","town_menu","town_value","town_travel","town_bills","town_wages","town_split","town_balance","town_interest","town_discounts","town_household","town_tickets","town_payslip","percent_change","ratio_rates"].includes(skill.id)) {
+        const pence=["town_money","town_totals","town_menu","town_value","town_travel","town_bills","town_wages"].includes(skill.id);
+        t = {kind:"amount",unit:"p",responseUnit:pence?"pence":"pounds",min:0,max:100000,scale:pence?1:100};
+      }
       else if (
         /place|operations|multiply|priority|powers|factors|algebra_|stats_|ratio_|measure_|fraction_mixed/.test(
           skill.id,
@@ -467,8 +471,9 @@
     }
     if (/^\d+\/\d+$/.test(text)) {
       const den = Number(text.split("/")[1]);
-      if (den <= 12) t = { kind: "fraction", total: den, min: 0, max: den };
+      if (den > 0 && den <= 12 && Number(text.split("/")[0])<=den) t = { kind: "fraction", total: den, min: 0, max: den };
     }
+    if(t&&t.kind!=="fraction"){const required=Number(text)*(t.scale||1);if(required<t.min||required>t.max)return null;}
     return t ? { ...t, skill: skill.id, format: text, practice: true } : null;
   }
   function practiceRender(l, k) {
@@ -482,11 +487,11 @@
     else if (t.kind === "line")
       body = `<p>Place your answer on the number line.</p><div class="numberline">${Array.from({ length: 41 }, (_, i) => btn(String(i - 20), `p5-value:${i - 20}`, `aria-pressed="${a === i - 20}"`)).join("")}</div>`;
     else if (t.kind === "blocks")
-      body = `<p>Build your answer from place-value blocks.</p><div class="envelopes">${[1000, 100, 10, 1].map((n) => `<section><strong>${n}s</strong><div class="practice-blocks">${"<i>▣</i>".repeat(Math.floor(a / n) % 10)}</div>${btn("−", `p5-add:${-n}`, `aria-label="Remove ${n}"`)}${btn("+", `p5-add:${n}`, `aria-label="Add ${n}"`)}</section>`).join("")}</div><output>${a}</output>`;
+      body = `<p>Build your answer${t.unit?" in "+t.unit:""} from place-value blocks.</p><div class="envelopes">${[1000, 100, 10, 1].map((n) => `<section><strong>${n}s</strong><div class="practice-blocks">${"<i>▣</i>".repeat(Math.floor(a / n) % 10)}</div>${btn("−", `p5-add:${-n}`, `aria-label="Remove ${n}"`)}${btn("+", `p5-add:${n}`, `aria-label="Add ${n}"`)}</section>`).join("")}</div><output>${a}</output>`;
     else if (t.kind === "angle")
       body = `<svg viewBox="0 0 400 220" role="img" aria-label="Your angle ${a} degrees"><path d="M370 200H200l${160 * Math.cos((a * Math.PI) / 180)} ${-160 * Math.sin((a * Math.PI) / 180)}" fill="none" stroke="#34563e" stroke-width="5"/><text x="200" y="80">${a}°</text></svg><div>${[-10, -1, 1, 10].map((n) => btn((n > 0 ? "+" : "") + n + "°", `p5-add:${n}`)).join("")}</div>`;
     else
-      body = `<p>Construct the answer in pounds using fictional money.</p><div class="money-tray">${coins.map((n) => btn(money(n), `p5-add:${n}`, `aria-label="Add ${n} pence"`)).join("")}</div>${btn("Remove 1p", "p5-add:-1")}${btn("Clear", "p5-value:0")}<output>${money(a)}</output>`;
+      body = `<p>Construct the answer in ${t.responseUnit} using fictional money. 100p = £1.</p><div class="money-tray">${coins.map((n) => btn(money(n), `p5-add:${n}`, `aria-label="Add ${n} pence"`)).join("")}</div>${btn("Remove 1p", "p5-add:-1")}${btn("Clear", "p5-value:0")}<output>${money(a)}${t.responseUnit==="pence"?" · "+a+"p":""}</output>`;
     return `<section class="hands-on practice-manipulative" data-mechanic="${mechanic(t)}"><h3>Build your answer</h3>${body}<div>${btn("Try constructed answer", "p5-submit", 'class="primary"')}</div><p class="small">You may also use the answer choices. Supported practice never awards mastery.</p></section>`;
   }
   function practiceEdit(l, action, n) {

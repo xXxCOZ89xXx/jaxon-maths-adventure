@@ -440,7 +440,9 @@
     const band = adaptive.skill(s,id).band;
     s.learningBand = band;
     for (let t = 0; t < 100; t++, round++) {
-      const sample = bank.create(id, band, round);
+      let sample;
+      try { sample = bank.create(id,band,round); }
+      catch (error) { if(/^Duplicate questions in review/.test(error.message))continue;throw error; }
       if (sample.every((q) => !used.has(q[0]))) {
         qs = sample;
         break;
