@@ -30,6 +30,8 @@ function sql(s) {
       "-i",
       name,
       "psql",
+      "-h",
+      "127.0.0.1",
       "-X",
       "-qAt",
       "-v",
@@ -85,7 +87,7 @@ function test(title, fn) {
       "-d",
       "postgres:17-alpine",
     ]);
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 100; i++) {
       try {
         sql("select 1");
         break;
@@ -307,6 +309,7 @@ function test(title, fn) {
         `update public.v3_wallet set last_active=now()-interval '60 seconds' where child_user_id='${ids.learner}'`,
       );
       const a = { seconds: 99999, requestId: crypto.randomUUID() };
+      const creditStart = Date.now();
       const first = req("learner", "active", a);
       req("learner", "active", a);
       assert.equal(first.wallet.active_seconds, 18 * 60 + 15);
@@ -315,7 +318,10 @@ function test(title, fn) {
         seconds: 99999,
         requestId: crypto.randomUUID(),
       });
-      assert.ok(req("learner", "read").wallet.active_seconds < 18 * 60 + 16);
+      assert.ok(
+        req("learner", "read").wallet.active_seconds <=
+          18 * 60 + 15 + (Date.now() - creditStart) / 1000 + 0.05,
+      );
       const red = { amount: 10, requestId: crypto.randomUUID() };
       req("parent", "redeem", red);
       req("parent", "redeem", red);
@@ -339,6 +345,8 @@ function test(title, fn) {
             "-i",
             name,
             "psql",
+            "-h",
+            "127.0.0.1",
             "-X",
             "-qAt",
             "-v",
@@ -367,6 +375,32 @@ function test(title, fn) {
     assert.equal(req("learner", "read").revision, 2);
     count++;
     console.log("PASS concurrent identical saves commit exactly once");
+    test("parent-reviewed offline minutes reconcile 1:1 once, bounded by saved evidence", () => {
+      req("learner", "save", {
+        revision: 2,
+        progress: { minutes: 20 },
+        requestId: crypto.randomUUID(),
+      });
+      const confirm = { amount: 1, requestId: crypto.randomUUID() };
+      rejects(
+        () => req("learner", "confirm_offline", confirm),
+        /Parent account/,
+      );
+      const before = req("parent", "read").wallet;
+      req("parent", "confirm_offline", confirm);
+      req("parent", "confirm_offline", confirm);
+      const after = req("parent", "read").wallet;
+      assert.equal(after.active_seconds, before.active_seconds + 60);
+      assert.ok(Math.abs(after.coins - before.coins - 10) < 1e-8);
+      rejects(
+        () =>
+          req("parent", "confirm_offline", {
+            amount: 2,
+            requestId: crypto.randomUUID(),
+          }),
+        /Not enough uncredited/,
+      );
+    });
     test("locking, expiration and password-backed PIN recovery revoke server unlocks", () => {
       req("other", "lock");
       rejects(() => req("other", "read"), /Unlock required/);

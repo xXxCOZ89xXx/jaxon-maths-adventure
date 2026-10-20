@@ -402,7 +402,7 @@ async function parent(remote) {
     week = p.weekly[E.weekKey(Date.now())] || 0;
   panel(
     "Staging parent dashboard",
-    `<p>Fictional family only · ${Number(week).toFixed(1)} / 60 reported weekly active minutes.</p><p>Server-counted connected active time: ${(Number(remote.wallet.active_seconds) / 60).toFixed(1)} minutes. Screen-time conversion 1:1. Redeemed: ${remote.wallet.redeemed} minutes.</p><p>Available coins: ${Number(remote.wallet.coins) + Number(remote.wallet.bonus)}</p><h2>Learning evidence</h2><p>Saved game evidence; story progress and guided practice do not establish independent mastery.</p>${
+    `<p>Fictional family only · ${Number(week).toFixed(1)} / 60 reported weekly active minutes.</p><p>Server-credited active time (connected or parent-confirmed): ${(Number(remote.wallet.active_seconds) / 60).toFixed(1)} minutes. Screen-time conversion 1:1. Redeemed: ${remote.wallet.redeemed} minutes.</p><p>Reported time awaiting parent review: ${Math.max(0, Number(p.minutes) - Number(remote.wallet.active_seconds) / 60).toFixed(1)} minutes. Confirm only time you have reviewed; each confirmed minute credits 10 coins and 1 screen-time minute, once.</p><p>Available coins: ${Number(remote.wallet.coins) + Number(remote.wallet.bonus)}</p><h2>Learning evidence</h2><p>Saved game evidence; story progress and guided practice do not establish independent mastery.</p>${
       window.V3Curriculum.skills
         .filter((k) => p.practice[k.id] || p.checks[k.id])
         .map(
@@ -418,7 +418,7 @@ async function parent(remote) {
       )
       .join(
         "",
-      )}<form id="reward-form">${field("Amount (1 to 60)", "amount", 'type="number" min="1" max="60" step="1" value="10"')}<label>Action<select id="reward-kind"><option value="award">Award bonus coins</option><option value="redeem">Redeem earned screen-time minutes</option></select></label><button>Submit parent reward</button></form>${button("Refresh learning evidence", "refresh-parent")}`,
+      )}<form id="reward-form">${field("Amount (1 to 60)", "amount", 'type="number" min="1" max="60" step="1" value="10"')}<label>Action<select id="reward-kind"><option value="award">Award bonus coins</option><option value="redeem">Redeem earned screen-time minutes</option><option value="confirm_offline">Confirm reported offline learning minutes</option></select></label><button>Submit parent reward</button></form>${button("Refresh learning evidence", "refresh-parent")}`,
   );
   $("reward-form").onsubmit = async (e) => {
     e.preventDefault();

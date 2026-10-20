@@ -99,8 +99,8 @@ begin
  if p_operation='read' then
  return jsonb_build_object('revision',pr.revision,'progress',pr.progress,'updatedAt',pr.updated_at,'wallet',to_jsonb(w)-'child_user_id','role',r->>'role');
  end if;
- if p_operation not in ('save','award','redeem','buy','active') then raise exception 'Unknown operation'; end if;
- if p_operation in ('award','redeem') and r->>'role'<>'parent' then raise exception 'Parent account required'; end if;
+ if p_operation not in ('save','award','redeem','confirm_offline','buy','active') then raise exception 'Unknown operation'; end if;
+ if p_operation in ('award','redeem','confirm_offline') and r->>'role'<>'parent' then raise exception 'Parent account required'; end if;
  if p_operation in ('save','buy','active') and r->>'role'<>'learner' then raise exception 'Learner account required'; end if;
  req:=(p_args->>'requestId')::uuid;
  if req is null then raise exception 'Stable request ID required'; end if;
@@ -116,10 +116,16 @@ begin
  -- Preserve V2 fields and unknown future fields. The wallet is never taken from client snapshots.
  update public.v3_progress set progress=clean,revision=revision+1,updated_at=now() where child_user_id=c returning * into pr;
  result:=jsonb_build_object('revision',pr.revision);
- elsif p_operation in ('award','redeem') then
+ elsif p_operation in ('award','redeem','confirm_offline') then
  amt:=(p_args->>'amount')::numeric;
  if amt is null or amt<1 or amt>60 or amt<>trunc(amt) then raise exception 'Amount must be a whole number from 1 to 60'; end if;
  if p_operation='award' then update public.v3_wallet set bonus=bonus+amt where child_user_id=c;
+ elsif p_operation='confirm_offline' then
+ -- Offline reward reconciliation requires an explicit parent review. Never a learner privilege.
+ if coalesce(pr.progress->>'minutes','0') !~ '^[0-9]+([.][0-9]+)?$'
+ or coalesce((pr.progress->>'minutes')::numeric,0)*60-w.active_seconds<amt*60
+ then raise exception 'Not enough uncredited reported learning time'; end if;
+ update public.v3_wallet set active_seconds=active_seconds+amt*60,coins=coins+amt*10 where child_user_id=c;
  else
  if w.active_seconds/60-w.redeemed<amt then raise exception 'Not enough earned screen time'; end if;
  update public.v3_wallet set redeemed=redeemed+amt where child_user_id=c;

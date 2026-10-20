@@ -122,14 +122,20 @@ async function mock(page, server) {
           server.loseSave = false;
           return route.abort();
         }
-      } else if (body.p_operation === "award") {
+      } else if (
+        body.p_operation === "award" ||
+        body.p_operation === "confirm_offline"
+      ) {
         if (!parent) {
           status = 403;
           data = { code: "P0001", message: "Parent account required" };
         } else {
           const a = body.p_args;
           if (!server.transactions.has(a.requestId)) {
-            server.wallet.bonus += a.amount;
+            if (body.p_operation === "confirm_offline") {
+              server.wallet.active_seconds += a.amount * 60;
+              server.wallet.coins += a.amount * 10;
+            } else server.wallet.bonus += a.amount;
             server.transactions.set(a.requestId, { wallet: server.wallet });
           }
           data = { wallet: server.wallet };
@@ -239,7 +245,11 @@ test("learner sign-in, incorrect PIN, unfinished quest, response loss, refresh a
   await expect(
     page.getByRole("heading", { name: "Unlock your learner account" }),
   ).toBeVisible();
-  expect(server.calls.some((c) => c.body.p_operation === "award")).toBe(false);
+  expect(
+    server.calls.some((c) =>
+      ["award", "confirm_offline"].includes(c.body.p_operation),
+    ),
+  ).toBe(false);
   expect(errors).toEqual([]);
 });
 test("parent evidence and server reward path remain separate from learner gameplay", async ({
@@ -247,6 +257,7 @@ test("parent evidence and server reward path remain separate from learner gamepl
 }) => {
   const server = fixture();
   server.progress = {
+    minutes: 2,
     practice: { town_coins: { completed: true } },
     checks: {},
     recent: [],
@@ -261,6 +272,13 @@ test("parent evidence and server reward path remain separate from learner gamepl
   await page.getByRole("button", { name: "Submit parent reward" }).click();
   await expect(page.getByRole("status")).toContainText("saved once");
   expect(server.wallet.bonus).toBe(10);
+  await page
+    .getByLabel("Action", { exact: true })
+    .selectOption("confirm_offline");
+  await page.getByLabel("Amount (1 to 60)", { exact: true }).fill("1");
+  await page.getByRole("button", { name: "Submit parent reward" }).click();
+  await expect.poll(() => server.wallet.active_seconds).toBe(60);
+
   const axe = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa"])
     .analyze();
