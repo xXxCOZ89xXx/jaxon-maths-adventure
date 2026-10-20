@@ -248,6 +248,7 @@ test("All eight buildings share validated worker/customer context metadata and r
   }
 });
 test("Missing journey context is retained and fails closed instead of crashing",()=>{const s=E.fresh();J.start(s);delete J.state(s).context;const before=JSON.stringify(J.state(s));assert.equal(J.model(s),null);assert.equal(J.start(s),false);assert.equal(JSON.stringify(J.state(s)),before);assert.equal(T.context('unknown','journey'),null);});
+test("Completed constructed-practice evidence survives recap without becoming independent mastery",()=>{const s=E.fresh(),bank={create:()=>[0,1,2].map(i=>['Unseen constructed audit '+i,'2',['1','2','3'],'Use objects','Two units'])};assert.equal(E.generate(s,'operations','practice',bank,C),null);for(let i=0;i<3;i++){s.learning.manipulation={amount:2};E.answerLearning(s,'2');E.nextLearning(s);}assert.equal(s.skills.operations.practiceEvidence[0].responses.length,3);assert.ok(s.skills.operations.practiceEvidence[0].responses.every(r=>r.interaction==='constructed'&&!r.firstIndependent&&r.firstAttempt));assert.deepEqual(s.checks,{});assert.equal(s.skills.operations.state,'learning');});
 console.log(
   `${suites} V5 suites, ${steps} generated task steps; fictional fixtures only.`,
 );

@@ -482,7 +482,7 @@
       });
     const responses=l.responses||(l.responses=[]);
     const firstAttempt=!responses.some(r=>r.question===q[0]);
-    if(responses.length<48)responses.push({question:q[0],answer:String(value),correct,firstAttempt,firstAttemptCorrect:firstAttempt&&correct&&!l.assisted&&!skip,firstIndependent:l.mode==='check'&&firstAttempt&&correct&&!l.assisted&&!skip,assisted:!!l.assisted,skipped:skip,source:l.mode,interaction:l.manipulation?'constructed':'conventional'});
+    if(responses.filter(r=>r.question===q[0]).length<16)responses.push({question:q[0],answer:String(value),correct,firstAttempt,firstAttemptCorrect:firstAttempt&&correct&&!l.assisted&&!skip,firstIndependent:l.mode==='check'&&firstAttempt&&correct&&!l.assisted&&!skip,assisted:!!l.assisted,skipped:skip,source:l.mode,interaction:l.manipulation?'constructed':'conventional'});
     l.answered = true;
     l.feedback =
       (correct
@@ -524,6 +524,7 @@
       if (s.checks[l.id]) s.checks[l.id].reteach = false;
       s.skills[l.id] = {
         ...old,
+        practiceEvidence:[...(old.practiceEvidence||[]),{at:now,round:l.round,source:"supported-practice",responses:l.responses||[]}].slice(-8),
         lastPractised: new Date(now).toISOString(),
         practiceSessions: num(old.practiceSessions) + 1,
         practiceSeen: [...(old.practiceSeen || []), ...l.qs.map((q) => q[0])],
