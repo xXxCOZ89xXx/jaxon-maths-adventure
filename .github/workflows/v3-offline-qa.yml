@@ -11,6 +11,9 @@ on:
       - ".github/workflows/v3-offline-qa.yml"
   push:
     branches: ["codex/v3-adventure-build"]
+concurrency:
+  group: v3-qa-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:

@@ -6,6 +6,7 @@ module.exports = defineConfig({
   fullyParallel: false,
   workers: 1,
   reporter: [
+    ...(process.env.CI ? [["github"]] : []),
     ["list"],
     ["json", { outputFile: "tests/artifacts/v3-browser-results.json" }],
   ],
