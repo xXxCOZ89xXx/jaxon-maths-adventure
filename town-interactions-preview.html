@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#163e2a">
+<title>Market Town • Hands-on maths test</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:#0e2019;color:#f5fff5;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 85% 0,#295b3b,#0e2019 70%);min-height:100vh}
+main{max-width:1000px;margin:auto;padding:20px}
+h1{margin:.25em 0;font-size:clamp(30px,5vw,46px)}
+h2{font-size:clamp(22px,3vw,30px)}
+p{line-height:1.55}
+.eyebrow{font-size:12px;font-weight:850;letter-spacing:.09em;color:#b3e0a0;text-transform:uppercase}
+.notice{background:#1f362b;border:1px solid #8ab88c;padding:12px 16px;border-radius:12px}
+.tabs{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
+button,input{font:inherit}
+button{cursor:pointer;min-height:46px}
+button:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:4px solid #ffe17a;outline-offset:3px}
+.tab,.action{border-radius:12px;background:#253f2f;border:2px solid #729e75;color:#fff;padding:11px 16px;font-weight:750}
+.tab[aria-pressed=true],.action.primary{background:#acdb80;color:#10220f;border-color:#acdb80}
+.card{border:2px solid #567e64;background:#172c23;border-radius:19px;padding:clamp(15px,3vw,26px);margin:16px 0}
+.objective{background:#254b35;border-left:6px solid #aee879;padding:14px;border-radius:10px}
+.space{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0}
+.crate,.basket{border:3px dashed #8daa89;padding:18px;border-radius:17px;min-height:244px;text-align:center;background:#203a2c}
+.basket{border-color:#cba75e;background:#382f22}
+.basket.ready{background:#345333;border-style:solid}
+.pickups{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-top:14px}
+.pickup{border:2px solid #7ca17d;background:#304b37;color:#fff;border-radius:12px;min-width:56px;min-height:62px;padding:8px;font-size:28px;touch-action:none;user-select:none;-webkit-user-select:none}
+.pickup[aria-pressed=true]{outline:4px solid #ffe17a}
+.small{font-size:14px;color:#c4d9c7}
+.basket-icons{font-size:31px;line-height:1.6;overflow-wrap:anywhere;min-height:100px}
+.remove{border:1px solid #d4af6b;color:#ffedae;background:transparent;border-radius:8px;padding:8px 12px}
+label{display:block;font-weight:700;margin:12px 0 7px}
+input{font-size:21px;border-radius:9px;border:2px solid #9eb8a1;background:#fff;color:#102018;padding:10px;max-width:180px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.status{border-radius:10px;padding:15px;background:#243e30;min-height:52px;line-height:1.5}
+.status.success{border-left:5px solid #aee879}
+.status.warn{border-left:5px solid #ffdc7c}
+.price-tags{display:flex;flex-wrap:wrap;gap:12px;margin:18px 0}
+.price-tag{min-height:64px;min-width:90px;border:3px dashed #a7c3a1;border-radius:9px;background:#d9f1b8;color:#1b2d12;font-size:23px;font-weight:900;touch-action:none;user-select:none;-webkit-user-select:none}
+.price-tag[aria-pressed=true]{outline:4px solid #ffdc7c;outline-offset:2px}
+.garments{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.garment{border:2px dashed #7ea482;border-radius:13px;padding:18px 12px;background:#233c2d;min-height:220px;cursor:pointer;text-align:center}
+.garment:focus-visible{outline:4px solid #ffdc7c}
+.garment .emoji{font-size:52px}
+.attached{display:inline-block;font-size:21px;font-weight:900;background:#d9f1b8;color:#193418;border-radius:9px;padding:7px 12px;margin:9px 0}
+.hint{background:#314331;border:1px solid #b4d089;padding:13px;border-radius:9px;margin-top:12px}
+.drag-ghost{position:fixed;pointer-events:none;z-index:1000;font-size:35px;transform:translate(-50%,-55%);filter:drop-shadow(0 7px 6px #0009)}
+.fine{font-size:13px;color:#b8d2bb}
+@media(max-width:650px){.space{grid-template-columns:1fr}.garments{grid-template-columns:1fr}.garment{min-height:155px}.pickups{gap:4px}.pickup{min-width:51px}.basket{min-height:180px}}
+@media(prefers-reduced-motion:no-preference){button{transition:background .12s ease}}
+</style>
+</head>
+<body>
+<main>
+<div class="eyebrow">Jaxon's Maths Adventure • Interaction lab</div>
+<h1>🏘️ Market Town</h1>
+<p class="notice"><strong>Prototype only:</strong> This page is for trying out hands-on activities. It doesn't sign into an account, change game progress, spend coins, or award rewards.</p>
+<p>Drag objects with a mouse or finger. You can also <strong>tap an object, then tap where it belongs</strong> — including using a keyboard.</p>
+<div class="tabs" role="group" aria-label="Choose market activity">
+<button class="tab" data-mode="apples" aria-pressed="true">🍎 Fill the basket</button>
+<button class="tab" data-mode="clothes" aria-pressed="false">👕 Match price tags</button>
+</div>
+<div id="activity"></div>
+<p class="fine">Learning idea: shopping and money, multiplication, subtraction, percentages and real-life decisions. Future levels can adjust difficulty based on Jaxon's skill discoveries.</p>
+</main>
+<script>
+(()=>{
+"use strict";
+const $=s=>document.querySelector(s);
+const state={mode:"apples",apples:0,total:"",assigned:{},selected:null,feedback:"",success:false,hint:false};
+const garments=[
+ {id:"hat",icon:"🧢",name:"Hat",question:"Was £12. Reduced by £3.",price:"£9"},
+ {id:"shirt",icon:"👕",name:"T-shirt",question:"Was £20. Now 25% off.",price:"£15"},
+ {id:"jacket",icon:"🧥",name:"Jacket",question:"Was £34. Now half price.",price:"£17"}
+];
+const tags=["£9","£15","£17"];
+function escapeHTML(str){return String(str).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]))}
+function btn(text,act,cls=""){return '<button type="button" class="action '+cls+'" data-act="'+act+'">'+text+'</button>'}
+function appleView(){
+const apples=Array.from({length:10},(_,i)=>'<button type="button" class="pickup" data-pick="apple" aria-label="Add one apple to basket" title="Move an apple into the basket">🍎</button>').join("");
+const chosen=Array.from({length:state.apples},()=> "🍎").join(" ");
+return '<section class="card"><div class="eyebrow">Market mission 1 • Counting and money</div><h2>Help the fruit seller</h2><div class="objective"><strong>The customer wants exactly 4 apples.</strong> Each apple costs <strong>35p</strong>. Put the apples into the basket, then work out the total cost.</div><div class="space"><div class="crate"><h3>Fruit stall</h3><p class="small">Drag or tap an apple</p><div class="pickups">'+apples+'</div></div><div class="basket '+(state.apples===4?"ready":"")+'" data-drop="basket" role="group" aria-label="Shopping basket, '+state.apples+' apples"><h3>🧺 Shopping basket</h3><div aria-live="polite"><strong>'+state.apples+' apples</strong></div><div class="basket-icons" aria-hidden="true">'+chosen+'</div><button type="button" class="remove" data-act="removeApple" '+(state.apples===0?'disabled':'')+'>Remove an apple</button></div></div><label for="total">What is the total cost in pence?</label><input id="total" type="number" min="0" step="1" inputmode="numeric" value="'+escapeHTML(state.total)+'"> <strong>p</strong><div class="actions">'+btn("Check my basket","checkApples","primary")+btn("A little hint","hint") + btn("Start again","resetApples")+'</div>'+hintView() +statusView()+'</section>';
+}
+function clothesView(){
+const used=Object.values(state.assigned);
+return '<section class="card"><div class="eyebrow">Market mission 2 • Discounts and labels</div><h2>Label the clothing rail</h2><div class="objective"><strong>Three prices are missing.</strong> Work out each sale price and put the correct price tag on the clothing. Tap a price label, then tap a garment, or drag the tag onto it.</div><h3>Available price labels</h3><div class="price-tags">'+tags.map(p=>'<button type="button" class="price-tag" data-pick="tag:'+p+'" aria-pressed="'+(state.selected==='tag:'+p)+'" aria-label="Select price tag '+p+'" '+(used.includes(p)?'disabled':'')+'>'+p+(used.includes(p)?' ✓':'')+'</button>').join('')+'</div><div class="garments">'+garments.map(g=>'<div class="garment" data-drop="garment:'+g.id+'" role="button" tabindex="0" aria-label="'+g.name+'. '+g.question+' Assigned '+(state.assigned[g.id]||"no price")+'"><div class="emoji" aria-hidden="true">'+g.icon+'</div><h3>'+g.name+'</h3><p>'+g.question+'</p><div class="attached">'+(state.assigned[g.id]||"Drop a label here")+'</div></div>').join('')+'</div><div class="actions">'+btn("Check my labels","checkClothes","primary")+btn("A little hint","hint")+btn("Clear labels","resetClothes")+'</div><p class="small">To change a label, select a new available price and tap the garment. To remove one, use Clear labels.</p>'+hintView()+statusView()+'</section>';
+}
+function hintView(){
+if(!state.hint)return "";
+return '<div class="hint" role="note">'+(state.mode==="apples"?"Try adding 35p four times: 35 + 35 + 35 + 35. Or use 4 × 35.":"Find the new price by subtracting the discount. For 25% off, one quarter is removed. Half price means divide by 2.")+'</div>';
+}
+function statusView(){return '<div class="status '+(state.success?"success":state.feedback?"warn":"")+'" role="status" aria-live="polite">'+(state.feedback||"Ready when you are. There's no timer.")+'</div>'}
+function render(){
+$(".tab[data-mode=apples]").setAttribute("aria-pressed",String(state.mode==="apples"));
+$(".tab[data-mode=clothes]").setAttribute("aria-pressed",String(state.mode==="clothes"));
+$("#activity").innerHTML=state.mode==="apples"?appleView():clothesView();
+}
+function resetFeedback(){state.feedback="";state.success=false}
+function put(item,drop){
+ if(item==="apple"&&drop==="basket"&&state.mode==="apples"){if(state.apples<10){state.apples++;resetFeedback();return true}}
+ if(item.startsWith("tag:")&&drop.startsWith("garment:")&&state.mode==="clothes"){
+  const price=item.slice(4),id=drop.slice(8);
+  if(!tags.includes(price)||!garments.some(x=>x.id===id))return false;
+  Object.keys(state.assigned).forEach(k=>{if(state.assigned[k]===price)delete state.assigned[k]});
+  state.assigned[id]=price;state.selected=null;resetFeedback();return true;
+ }
+ return false;
+}
+function activatePickup(which){
+ if(which==="apple"){put("apple","basket");render();return}
+ if(which.startsWith("tag:")){state.selected=state.selected===which?null:which;state.feedback=state.selected?"Now tap the clothing item that needs this price.":"";render();
+  if(state.selected)document.querySelector('[data-pick="'+CSS.escape(which)+'"]')?.focus();
+ }
+}
+function runAction(a){
+ switch(a){
+ case "removeApple":state.apples=Math.max(0,state.apples-1);resetFeedback();break;
+ case "hint":state.hint=!state.hint;break;
+ case "resetApples":state.apples=0;state.total="";state.hint=false;resetFeedback();break;
+ case "resetClothes":state.assigned={};state.selected=null;state.hint=false;resetFeedback();break;
+ case "checkApples":{
+   state.total=$("#total")?.value.trim()||"";
+   if(state.apples!==4){state.feedback="Almost: the order is for 4 apples. Count what's in your basket, then try again.";state.success=false}
+   else if(state.total===""){state.feedback="The basket is right. Now enter the total cost in pence.";state.success=false}
+   else if(Number(state.total)!==140){state.feedback="You have the right number of apples. Try 4 × 35p and check your total.";state.success=false}
+   else{state.feedback="Brilliant! Four apples at 35p each cost 140p (£1.40). Order complete!";state.success=true}
+   break;
+ }
+ case "checkClothes":{
+   const wrong=garments.filter(g=>state.assigned[g.id]!==g.price);
+   if(!wrong.length){state.feedback="All three sale prices are correct! You've labelled the clothing rail.";state.success=true}
+   else{state.feedback="Not quite yet. "+(garments.length-Object.keys(state.assigned).length>0?"Some garments still need a price tag. ":"")+"Check the "+wrong.map(x=>x.name).join(", ")+" price"+(wrong.length>1?"s":"")+".";state.success=false}
+   break;
+ }
+ default:return;
+ }
+ render();
+}
+document.addEventListener("click",e=>{
+ const mode=e.target.closest("[data-mode]");
+ if(mode){state.mode=mode.dataset.mode;state.selected=null;state.hint=false;resetFeedback();render();return}
+ const action=e.target.closest("[data-act]");if(action){runAction(action.dataset.act);return}
+ if(suppressClick)return;
+ const pickup=e.target.closest("[data-pick]");if(pickup){activatePickup(pickup.dataset.pick);return}
+ const drop=e.target.closest("[data-drop]");
+ if(drop&&state.selected){put(state.selected,drop.dataset.drop);render()}
+});
+document.addEventListener("input",e=>{if(e.target.id==="total")state.total=e.target.value});
+document.addEventListener("keydown",e=>{
+ if((e.key==="Enter"||e.key===" ")&&e.target.matches('[data-drop^="garment:"]')){
+  e.preventDefault();
+  if(state.selected){put(state.selected,e.target.dataset.drop);render()}
+ }
+});
+let drag=null,ghost=null,suppressClick=false;
+document.addEventListener("pointerdown",e=>{
+ const pickup=e.target.closest("[data-pick]");
+ if(!pickup||pickup.disabled||e.button!==0)return;
+ drag={item:pickup.dataset.pick,pointerId:e.pointerId,x:e.clientX,y:e.clientY,active:false};
+});
+document.addEventListener("pointermove",e=>{
+ if(!drag||drag.pointerId!==e.pointerId)return;
+ if(!drag.active&&Math.hypot(e.clientX-drag.x,e.clientY-drag.y)>9){
+  drag.active=true;
+  ghost=document.createElement("div");
+  ghost.className="drag-ghost";ghost.setAttribute("aria-hidden","true");
+  ghost.textContent=drag.item==="apple"?"🍎":"🏷️ "+drag.item.slice(4);
+  document.body.appendChild(ghost);
+ }
+ if(drag.active){e.preventDefault();ghost.style.left=e.clientX+"px";ghost.style.top=e.clientY+"px";}
+},{passive:false});
+function stopDrag(e){
+ if(!drag||drag.pointerId!==e.pointerId)return;
+ if(drag.active){
+   const target=document.elementFromPoint(e.clientX,e.clientY)?.closest("[data-drop]");
+   if(target)put(drag.item,target.dataset.drop);
+   suppressClick=true;setTimeout(()=>{suppressClick=false},0);
+   render();
+ }
+ ghost?.remove();ghost=null;drag=null;
+}
+document.addEventListener("pointerup",stopDrag);
+document.addEventListener("pointercancel",e=>{if(drag&&drag.pointerId===e.pointerId){ghost?.remove();ghost=null;drag=null}});
+render();
+})();
+</script>
+</body>
+</html>
