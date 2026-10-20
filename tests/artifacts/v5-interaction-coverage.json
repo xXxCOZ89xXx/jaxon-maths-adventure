@@ -1,0 +1,745 @@
+{
+  "scope": "Generated guided expedition steps across all routes, gateways and three tiers; repeat seeds do not inflate percentages. Digital clocks, numeric sequence steppers, budget steppers and normal multiple choice excluded. Practice audit samples nine actual fresh questions per skill, not a promise all variants use manipulatives.",
+  "worlds": [
+    {
+      "id": "number",
+      "steps": 36,
+      "beforeHandsOn": 36,
+      "handsOn": 36,
+      "percent": 100,
+      "mechanics": [
+        "number-line",
+        "place-value",
+        "ordering",
+        "arrays"
+      ]
+    },
+    {
+      "id": "fractions",
+      "steps": 36,
+      "beforeHandsOn": 24,
+      "handsOn": 36,
+      "percent": 100,
+      "mechanics": [
+        "fraction-shading",
+        "ordering",
+        "matching",
+        "pour"
+      ]
+    },
+    {
+      "id": "algebra",
+      "steps": 36,
+      "beforeHandsOn": 12,
+      "handsOn": 30,
+      "percent": 83,
+      "mechanics": [
+        "algebra-tiles",
+        "ordering",
+        "cartesian"
+      ]
+    },
+    {
+      "id": "geometry",
+      "steps": 36,
+      "beforeHandsOn": 36,
+      "handsOn": 36,
+      "percent": 100,
+      "mechanics": [
+        "rotation",
+        "area-tiles",
+        "cartesian",
+        "protractor"
+      ]
+    },
+    {
+      "id": "ratio",
+      "steps": 36,
+      "beforeHandsOn": 0,
+      "handsOn": 36,
+      "percent": 100,
+      "mechanics": [
+        "ratio-groups",
+        "matching",
+        "pour"
+      ]
+    },
+    {
+      "id": "statistics",
+      "steps": 36,
+      "beforeHandsOn": 0,
+      "handsOn": 27,
+      "percent": 75,
+      "mechanics": [
+        "bar-chart",
+        "cartesian",
+        "ordering"
+      ]
+    },
+    {
+      "id": "probability",
+      "steps": 36,
+      "beforeHandsOn": 36,
+      "handsOn": 36,
+      "percent": 100,
+      "mechanics": [
+        "probability-pool",
+        "sample-space",
+        "spinner"
+      ]
+    },
+    {
+      "id": "measure",
+      "steps": 36,
+      "beforeHandsOn": 0,
+      "handsOn": 36,
+      "percent": 100,
+      "mechanics": [
+        "ruler",
+        "pour",
+        "algebra-tiles",
+        "volume-blocks"
+      ]
+    },
+    {
+      "id": "town",
+      "steps": 81,
+      "beforeHandsOn": 36,
+      "handsOn": 60,
+      "percent": 74,
+      "mechanics": [
+        "basket",
+        "money",
+        "matching",
+        "pour"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "id": "place",
+      "world": "number",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "operations",
+      "world": "number",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "negative",
+      "world": "number",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "number-line"
+      ]
+    },
+    {
+      "id": "multiply",
+      "world": "number",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "priority",
+      "world": "number",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "fractions",
+      "world": "fractions",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 0,
+      "mechanics": []
+    },
+    {
+      "id": "fraction_compare",
+      "world": "fractions",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 7,
+      "mechanics": [
+        "fraction-shading"
+      ]
+    },
+    {
+      "id": "fraction_operations",
+      "world": "fractions",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 8,
+      "mechanics": [
+        "fraction-shading"
+      ]
+    },
+    {
+      "id": "decimals",
+      "world": "fractions",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 0,
+      "mechanics": []
+    },
+    {
+      "id": "percent_change",
+      "world": "fractions",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "algebra_patterns",
+      "world": "algebra",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "algebra_missing",
+      "world": "algebra",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "algebra_expressions",
+      "world": "algebra",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "geometry_angles",
+      "world": "geometry",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "protractor"
+      ]
+    },
+    {
+      "id": "geometry_triangles",
+      "world": "geometry",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "protractor"
+      ]
+    },
+    {
+      "id": "geometry_area",
+      "world": "geometry",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 0,
+      "mechanics": []
+    },
+    {
+      "id": "ratio_basics",
+      "world": "ratio",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "ratio_sharing",
+      "world": "ratio",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "ratio_proportion",
+      "world": "ratio",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "stats_averages",
+      "world": "statistics",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "stats_tables",
+      "world": "statistics",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "stats_probability_data",
+      "world": "statistics",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "prob_chance",
+      "world": "probability",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "fraction-shading"
+      ]
+    },
+    {
+      "id": "prob_events",
+      "world": "probability",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 8,
+      "mechanics": [
+        "fraction-shading"
+      ]
+    },
+    {
+      "id": "prob_compare",
+      "world": "probability",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 3,
+      "mechanics": [
+        "fraction-shading"
+      ]
+    },
+    {
+      "id": "measure_units",
+      "world": "measure",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 6,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "measure_volume",
+      "world": "measure",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "measure_speed",
+      "world": "measure",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "factors",
+      "world": "number",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "powers",
+      "world": "number",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "fraction_mixed",
+      "world": "fractions",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "fraction_mult",
+      "world": "fractions",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 6,
+      "mechanics": [
+        "fraction-shading"
+      ]
+    },
+    {
+      "id": "algebra_brackets",
+      "world": "algebra",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "algebra_coordinates",
+      "world": "algebra",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "number-line"
+      ]
+    },
+    {
+      "id": "geometry_transforms",
+      "world": "geometry",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 6,
+      "mechanics": [
+        "number-line"
+      ]
+    },
+    {
+      "id": "geometry_circle",
+      "world": "geometry",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 0,
+      "mechanics": []
+    },
+    {
+      "id": "ratio_rates",
+      "world": "ratio",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "stats_pie",
+      "world": "statistics",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "protractor",
+        "place-value"
+      ]
+    },
+    {
+      "id": "measure_time",
+      "world": "measure",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 3,
+      "mechanics": [
+        "place-value"
+      ]
+    },
+    {
+      "id": "town_money",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_totals",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_menu",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_split",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_balance",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_interest",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_discounts",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_value",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_timetable",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_travel",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_bills",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_household",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_tickets",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_time",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_wages",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    },
+    {
+      "id": "town_payslip",
+      "world": "town",
+      "accessible": true,
+      "samples": 9,
+      "constructed": 9,
+      "mechanics": [
+        "money"
+      ]
+    }
+  ],
+  "town": [
+    {
+      "id": "market",
+      "skills": [
+        "town_money",
+        "town_totals"
+      ],
+      "workerDirect": true,
+      "journeyCustomer": true
+    },
+    {
+      "id": "cafe",
+      "skills": [
+        "town_menu",
+        "town_split"
+      ],
+      "workerDirect": true,
+      "journeyCustomer": false
+    },
+    {
+      "id": "bank",
+      "skills": [
+        "town_balance",
+        "town_interest"
+      ],
+      "workerDirect": true,
+      "journeyCustomer": false
+    },
+    {
+      "id": "shops",
+      "skills": [
+        "town_discounts",
+        "town_value"
+      ],
+      "workerDirect": true,
+      "journeyCustomer": false
+    },
+    {
+      "id": "station",
+      "skills": [
+        "town_timetable",
+        "town_travel"
+      ],
+      "workerDirect": true,
+      "journeyCustomer": true
+    },
+    {
+      "id": "home",
+      "skills": [
+        "town_bills",
+        "town_household"
+      ],
+      "workerDirect": true,
+      "journeyCustomer": true
+    },
+    {
+      "id": "leisure",
+      "skills": [
+        "town_tickets",
+        "town_time"
+      ],
+      "workerDirect": true,
+      "journeyCustomer": false
+    },
+    {
+      "id": "work",
+      "skills": [
+        "town_wages",
+        "town_payslip"
+      ],
+      "workerDirect": true,
+      "journeyCustomer": false
+    }
+  ],
+  "totals": {
+    "guidedSteps": 369,
+    "handsOn": 333,
+    "allGuidedSteps": 393,
+    "conservativeAllGuidedHandsOn": 333,
+    "accessibleSkills": 55,
+    "skillsWithSampledManipulatives": 51
+  }
+}

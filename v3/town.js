@@ -410,7 +410,12 @@
       ],
     };
   }
-  root.V3Town = { world, venues, lessons, question, money, clock, install };
+  function context(venue,entry='direct') {
+    const v=venues.find(v=>v.id===venue),customer={market:'Follow your shopping list, stay within budget and pay for your purchases.',cafe:'Order a meal, scale quantities and settle your bill.',bank:'Check your fictional account before a planned purchase.',shops:'Compare the prices of the things you need.',station:'Choose an affordable service that arrives in time.',home:'Check your cupboards and prepare the chosen recipe.',leisure:'Plan your own tickets, booking and arrival.',work:'Plan the time and resources for your own project.'};
+    if((!v&&venue!=='gateway')||!['direct','journey'].includes(entry))return null;
+    return {version:1,venue,entry,role:entry==='journey'?(venue==='home'?'home cook':venue==='station'?'passenger':'customer'):'worker',objective:entry==='journey'?customer[venue]||'Continue your plan.':v?.story||'Help at the Town festival.'};
+  }
+  root.V3Town = { world, venues, lessons, question, money, clock, install, context };
   if (root.V3Curriculum && root.JaxonFreshReview)
     root.JaxonFreshReview = install(root.V3Curriculum, root.JaxonFreshReview);
 })(typeof module !== "undefined" ? module.exports : window);

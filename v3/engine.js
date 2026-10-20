@@ -189,6 +189,7 @@
         "check",
         "discovery",
         "adventure",
+        "journey",
         "camp",
         "shop",
         "settings",
@@ -435,15 +436,8 @@
     ]);
     let qs,
       round = num(p.round) + num(c.round) + 1;
-    const previous = s.skills[id] || {};
-    const band = Math.max(
-      5,
-      Math.min(
-        9,
-        (s.discovery?.[id]?.rounds?.at(-1)?.band || 7) +
-          (c.reteach ? -1 : previous.lastIndependentScore === 100 ? 1 : 0),
-      ),
-    );
+    const adaptive = typeof module !== "undefined" ? require('./adaptive').V5Adaptive : root.V5Adaptive;
+    const band = adaptive.skill(s,id).band;
     s.learningBand = band;
     for (let t = 0; t < 100; t++, round++) {
       const sample = bank.create(id, band, round);
@@ -486,6 +480,9 @@
         correct: correct && !l.assisted,
         skipped: skip,
       });
+    const responses=l.responses||(l.responses=[]);
+    const firstAttempt=!responses.some(r=>r.question===q[0]);
+    if(responses.length<48)responses.push({question:q[0],answer:String(value),correct,firstAttempt,firstAttemptCorrect:firstAttempt&&correct&&!l.assisted&&!skip,firstIndependent:l.mode==='check'&&firstAttempt&&correct&&!l.assisted&&!skip,assisted:!!l.assisted,skipped:skip,source:l.mode,interaction:l.manipulation?'constructed':'conventional'});
     l.answered = true;
     l.feedback =
       (correct
@@ -493,12 +490,16 @@
         : skip
           ? "Let’s work through it. "
           : "Here is one way to work through it. ") + q[4];
+    return correct;
   }
   function nextLearning(s, now = Date.now()) {
     const l = s.learning;
     if (!l?.answered) return;
     if (l.i < l.qs.length - 1) {
       l.i++;
+      delete l.manipulation;
+      delete l.lastConstructedSubmission;
+      delete l.retrying;
       l.assisted = false;
       l.answered = false;
       l.feedback = "";
@@ -545,6 +546,7 @@
       };
       s.skills[l.id] = {
         ...old,
+        independentEvidence:[...(old.independentEvidence||[]),{correct:l.correct,total:l.qs.length,at:now,band:s.learningBand,responses:l.responses||[]}].slice(-8),
         state: stage === 2 ? "mastered" : stage === 1 ? "review" : "learning",
         reviewStage: stage,
         lastIndependentScore: s.checks[l.id].score,

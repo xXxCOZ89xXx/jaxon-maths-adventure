@@ -72,12 +72,14 @@ async function solve(page) {
     await axe(page);
     checkedKinds.add(t.kind);
   }
-  if (["basket", "offers", "blocks", "budget"].includes(t.kind)) {
+  if (["basket", "offers", "blocks", "budget", "array", "chart", "volume"].includes(t.kind)) {
     for (let i = 0; i < t.answer.length; i++) {
       const step = t.kind === "budget" ? 100 : 1;
       for (let n = 0; n < t.answer[i] / step; n++)
         await click(page, `m-part:${i}:${step}`);
     }
+  } else if (["order","match"].includes(t.kind)) {
+    for(let i=0;i<t.answer.length;i++){await click(page,'h-pick:'+t.answer[i]);await click(page,'h-place:'+i);}
   } else if (["fraction", "chance"].includes(t.kind)) {
     for (let i = 0; i < t.answer; i++) await click(page, "m-select:" + i);
   } else if (t.kind === "grid") {

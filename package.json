@@ -2,7 +2,7 @@
   "name": "jaxon-adventure-preview",
   "private": true,
   "scripts": {
-    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-estate.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs",
+    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-estate.cjs && node tests/v5-hands-on.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs",
     "test:e2e": "playwright test",
     "preview": "python3 -m http.server 4173 --bind 0.0.0.0",
     "build:staging": "node scripts/build-v3-staging.cjs",
@@ -13,7 +13,8 @@
     "build:preview": "node scripts/build-v3-preview.cjs",
     "pretest:e2e": "node tests/prepare-v3.cjs",
     "capture:visual": "node scripts/capture-v3-gallery.cjs",
-    "build:gallery": "node scripts/build-v3-gallery.cjs"
+    "build:gallery": "node scripts/build-v3-gallery.cjs",
+    "audit:interactions": "node scripts/audit-v5-interactions.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

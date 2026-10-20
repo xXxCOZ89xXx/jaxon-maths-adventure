@@ -3,6 +3,9 @@
   "use strict";
   const T =
     typeof module !== "undefined" ? require("./town").V3Town : root.V3Town;
+  const H = typeof module !== "undefined" ? require("./hands-on").V5HandsOn : root.V5HandsOn;
+  const AD = typeof module !== "undefined" ? require("./adaptive").V5Adaptive : root.V5Adaptive;
+  const C = typeof module !== "undefined" ? require("./curriculum").V3Curriculum : root.V3Curriculum;
   const copy = (x) => JSON.parse(JSON.stringify(x)),
     money = T.money,
     clock = T.clock;
@@ -159,24 +162,12 @@
         }))
       : [];
   }
-  function recommendation(s, world) {
-    const a = state(s),
-      records = Object.values(a.records).filter((r) => r.world === world),
-      last = records.sort((x, y) => y.serial - x.serial)[0];
-    if (!last) return 1;
-    return Math.max(
-      1,
-      Math.min(
-        3,
-        last.tier +
-          ((last.lastUnassisted ?? last.unassisted) === 3
-            ? 1
-            : (last.lastUnassisted ?? last.unassisted) <= 1
-              ? -1
-              : 0),
-      ),
-    );
+  function recommendation(s, world, route=null) {
+    const ids=route?[...new Set([0,1,2].map(i=>task(world,route,1,1,i).skill))]:null;
+    const curriculum=world==="town"?{skills:T.venues.flatMap(v=>v.skills.map(id=>({id,world:"town"})))}:C;
+    return AD.world(s,world,curriculum,ids);
   }
+
   function completions(s, world) {
     return Object.values(state(s).records).filter((r) => r.world === world);
   }
@@ -759,13 +750,11 @@
           seed,
           stage === 0 ? 0 : stage === 1 ? 0 : 0,
         );
-      return commonTask(world, String(stage), tier, seed, stage);
+      return H.enrich(commonTask(world, String(stage), tier, seed, stage),world,String(stage),tier,seed,stage);
     }
-    return world === "town"
-      ? townTask(route, tier, seed, stage)
-      : commonTask(world, route, tier, seed, stage);
+    return H.enrich(world === "town" ? townTask(route,tier,seed,stage) : commonTask(world,route,tier,seed,stage),world,route,tier,seed,stage);
   }
-  function start(s, world, route, tier) {
+  function start(s, world, route, tier, context = null) {
     const a = state(s),
       valid =
         routes(world).some((r) => r.id === route) ||
@@ -780,6 +769,8 @@
       a.attempts[key] = seed;
       a.active = {
         key,
+        context: world==="town" ? {...T.context(route,context?.entry||"direct"),...(context||{})} : {version:1,role:"explorer"},
+        evidence: [],
         world,
         route,
         tier,
@@ -818,9 +809,11 @@
     let valid = false;
     if (key === "amount")
       valid = integer(value) && value >= (t.min || 0) && value <= t.max;
+    if (key === "picked") valid = integer(value) && value>=0 && value<(t.labels||t.items||[]).length;
+    if (key === "order") valid = array(value) && value.length<=t.items.length && value.every(n=>n===null || integer(n)&&n>=0&&n<t.items.length) && new Set(value.filter(n=>n!==null)).size===value.filter(n=>n!==null).length;
     if (key === "parts") {
       const length = t.items?.length || 3,
-        max = t.kind === "blocks" ? 9 : t.kind === "budget" ? t.budget : 12;
+        max = ["blocks","array","volume"].includes(t.kind) ? 9 : t.kind === "budget" ? t.budget : 12;
       valid =
         array(value) &&
         value.length === length &&
@@ -862,8 +855,9 @@
   function value(q, t) {
     if (["fraction", "chance", "grid"].includes(t.kind))
       return q.values.selected || [];
-    if (["basket", "offers", "budget", "blocks"].includes(t.kind))
+    if (["basket", "offers", "budget", "blocks", "array", "chart", "volume"].includes(t.kind))
       return q.values.parts || [];
+    if (["order","match"].includes(t.kind)) return q.values.order || [];
     if (t.kind === "coordinate") return q.values.point || [];
     if (t.kind === "journey") return q.values.choice ?? -1;
     if (t.kind === "coins")
@@ -895,6 +889,8 @@
     const q = current(s);
     if (!q || q.phase !== "play" || q.solved) return false;
     const t = q.tasks[q.i];
+    const evidence=q.evidence||(q.evidence=[]);
+    if(!evidence.some(e=>e.step===q.i)) evidence.push({step:q.i,skill:t.skill,mechanic:H.mechanic(t,q.world,q.route),firstValue:copy(value(q,t)),correct:correct(q,t),assisted:q.assisted,source:'guided-adventure'});
     if (!correct(q, t)) {
       q.assisted = true;
       q.feedback = "Let’s adjust this together. " + t.worked;
@@ -930,6 +926,8 @@
       tier: q.tier,
       unassisted: Math.max(old?.unassisted || 0, q.unassisted),
       lastUnassisted: q.unassisted,
+      evidence: copy(q.evidence || []),
+      context: copy(q.context || {}),
       completedAt: new Date(now).toISOString(),
       serial,
     };
@@ -1031,6 +1029,7 @@
     id,
     entry,
     recommendation,
+    task,
     completions,
     visualLevel,
     collections,

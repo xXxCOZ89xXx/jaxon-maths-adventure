@@ -177,8 +177,9 @@
       const plan = window.JaxonTutor.plan(l.id, []);
       return `${header("LEARN AT YOUR OWN PACE", esc(k.name), "world")}<div class="split"><section class="panel"><h2>Build the idea</h2><p class="lesson-copy">${esc(k.lesson)}</p>${plan ? `<div class="feedback"><strong>${esc(plan.title || "An easier example")}</strong><p>${esc(plan.explain || "")}</p><p>${esc(plan.question || plan.prompt || "")}</p><p>${esc(plan.worked || plan.feedback || "")}</p></div>` : ""}<div class="actions">${btn("Try supported practice →", "practice", "primary")}${btn("Save & exit", "nav:home")}</div></section><div>${art(k.world)}<p class="small muted">Practice helps you learn. Only separate fresh independent checks can establish mastery.</p></div></div>`;
     }
+    const handsOn=window.V5HandsOn.practiceRender(l,k);
     const tools =
-      l.mode === "practice"
+      l.mode === "practice" && !["algebra_coordinates","geometry_transforms"].includes(k.id)
         ? (window.JaxonMathTools.render(k.id, k.world, {
             ...l,
             type: "mission",
@@ -190,7 +191,12 @@
             mode: "question",
           }) || "")
         : "";
-    return `${header(l.mode === "check" ? "FRESH INDEPENDENT CHECK" : l.mode === "discovery" ? "FIND YOUR STARTING POINT" : "SUPPORTED PRACTICE", esc(k.name), "world")}<div class="split"><section class="panel"><span class="badge">QUESTION ${l.i + 1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2><div class="answer-grid">${q[2].map((a, i) => btn(esc(a), "answer:" + i, "", l.answered)).join("")}</div><div class="actions">${btn("Hint", "learning-hint", "", l.answered)}${btn("I don’t know", "learning-skip", "", l.answered)}${btn("Save & exit", "nav:home")}</div>${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}${l.answered ? `<div class="actions">${btn(l.i === l.qs.length - 1 ? "See recap →" : "Next question →", "next-learning", "primary")}</div>` : ""}</section><aside><div class="panel"><h3>${l.mode === "check" ? "Your own thinking" : "Explore the idea"}</h3><p class="muted">${l.mode === "check" ? "Only the first answer without help counts as independent. Hints and “I don’t know” are always safe." : "Use the tools, take a hint, or work through an example. Practice never awards mastery."}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
+    return `${header(l.mode === "check" ? "FRESH INDEPENDENT CHECK" : l.mode === "discovery" ? "FIND YOUR STARTING POINT" : "SUPPORTED PRACTICE", esc(k.name), "world")}<div class="split"><section class="panel"><span class="badge">QUESTION ${l.i + 1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2>${handsOn}<div class="answer-grid">${q[2].map((a, i) => btn(esc(a), "answer:" + i, "", l.answered)).join("")}</div><div class="actions">${btn("Hint", "learning-hint", "", l.answered)}${btn("I don’t know", "learning-skip", "", l.answered)}${btn("Save & exit", "nav:home")}</div>${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}${l.answered ? `<div class="actions">${btn(l.i === l.qs.length - 1 ? "See recap →" : "Next question →", "next-learning", "primary")}</div>` : ""}</section><aside><div class="panel"><h3>${l.mode === "check" ? "Your own thinking" : "Explore the idea"}</h3><p class="muted">${l.mode === "check" ? "Only the first answer without help counts as independent. Hints and “I don’t know” are always safe." : "Use the tools, take a hint, or work through an example. Practice never awards mastery."}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
+  }
+  function journey(){
+    const J=window.V5Journey,j=J.model(s);if(!j)return `<section class="panel"><h1>This journey needs another look.</h1><p>The saved copy has been preserved. Other learning remains available.</p>${btn('Back home','nav:home')}</section>`;
+    const t=j.task,q={world:'town',route:j.venue,values:j.values,solved:j.solved},role=j.context.role;
+    return `${header('ADVENTURE JOURNEY · '+j.recipeName,esc(j.title),'world')}<div class="journey-progress"><p>Step ${Math.min(8,j.stage+1)} of 8 · ${esc(role)} context · cash ${T.money(j.cash)}</p><p>Shopping list: ${j.shoppingList?`pasta ${j.shoppingList[0]} packs · tomatoes ${j.shoppingList[1]} tins · protein ${j.shoppingList[2]} packs`:'not prepared yet'} · Inventory: pasta ${j.inventory[0]} packs · tomatoes ${j.inventory[1]} tins · protein ${j.inventory[2]} packs</p><p class="small">Fictional journey inventory and money. Your learning coins and mastery are separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Jess')}<p>Your same Town, seen through a different role.</p></div></aside><section class="panel stage-workbench">${j.done?`<h2>The recipe is ready.</h2><p>Your shopping, change and cooking were saved together. Reopening this journey cannot repeat a payment or consume ingredients again.</p>${btn('Back to Town','world:town','primary')}`:`<h2>${esc(t.prompt)}</h2><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${U.controls(q,t).replaceAll('data-action="m-','data-action="j-').replace('data-mission-input="amount"','data-journey-input="amount"')}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===7?'Prepare dinner':'Continue journey','j-next','primary'):btn('Try my plan','j-submit','primary')}${btn('Hint','j-help')}${btn('Save & exit','nav:home')}</div>`}</section></div>`;
   }
   function recap() {
     const r = s.lastResult;
@@ -331,6 +337,7 @@
       tour,
       discovery: learning,
       adventure: () => U.play(s,venueExterior),
+      journey,
     };
     $("main").innerHTML =
       cloud && s.view === "parent"
@@ -392,6 +399,8 @@
     let error = null,
       restored = false;
     await change(() => {
+      if(name==='j-start'){M.state(s);if(!window.V5Journey.start(s,arg))error='This saved journey cannot be opened; its original data has been preserved.';return;}
+      if(name.startsWith('j-')){window.V5Journey.action(s,name,arg,action);return;}
       switch (name) {
         case "nav":
           s.view = arg;
@@ -403,7 +412,8 @@
           before = false;
           break;
         case "continue":
-          if (s.resumeView === "adventure" && M.current(s)) {
+          if(s.resumeView==="journey"&&window.V5Journey.state(s)){s.view="journey";}
+          else if (s.resumeView === "adventure" && M.current(s)) {
             s.world = M.current(s).world;
             s.view = "adventure";
           } else if (s.resumeView === "quest" && s.quest) s.view = "quest";
@@ -480,7 +490,7 @@
               parts = q.values.parts || Array(n).fill(0),
               i = Number(bits[1]),
               max =
-                t.kind === "blocks" ? 9 : t.kind === "budget" ? t.budget : 12;
+                ["blocks","array","volume"].includes(t.kind) ? 9 : t.kind === "budget" ? t.budget : 12;
             parts[i] = Math.min(
               max,
               Math.max(0, (parts[i] || 0) + Number(bits[2])),
@@ -488,6 +498,25 @@
             M.edit(s, "parts", parts);
           }
           break;
+        }
+        case "h-pick": {
+          M.edit(s,'picked',Number(arg));
+          break;
+        }
+        case "h-clear": M.edit(s,'order',[]);break;
+        case "h-place": {
+          const q=M.current(s),t=q?.tasks[q.i];
+          if(q&&Number.isInteger(q.values.picked)){
+            const order=Array(t.items.length).fill(null).map((_,i)=>q.values.order?.[i]??null),pick=q.values.picked,slot=Number(arg);
+            if(slot>=0&&slot<order.length){for(let i=0;i<order.length;i++)if(order[i]===pick)order[i]=null;order[slot]=pick;M.edit(s,'order',order);}
+          }break;
+        }
+        case "p5-add": case "p5-value": case "p5-shade":
+          window.V5HandsOn.practiceEdit(s.learning,name.slice(3),Number(arg));break;
+        case "p5-submit":
+          if(s.learning?.mode==='practice'){const stamp=JSON.stringify(s.learning.manipulation||{});if(s.learning.retrying&&s.learning.lastConstructedSubmission===stamp)break;s.learning.lastConstructedSubmission=stamp;const correct=E.answerLearning(s,window.V5HandsOn.practiceValue(s.learning));if(!correct){s.learning.answered=false;s.learning.assisted=true;s.learning.retrying=true;}}break;
+        case "h-shade": {
+          const bits=action.split(':'),q=M.current(s);if(q){const sel=q.values.selected||[],i=Number(bits[1]),on=bits[2]==='1';if(sel.includes(i)!==on&&M.edit(s,'selected',on?[...new Set([...sel,i])]:sel.filter(x=>x!==i)))activity=Date.now();}break;
         }
         case "m-select": {
           const q = M.current(s);
@@ -689,6 +718,7 @@
         "select",
         "part",
         "rotate",
+        "h-place", "h-clear", "p5-add", "p5-value", "p5-shade", "p5-submit",
         "m-point",
         "solve",
         "hint",
@@ -699,6 +729,7 @@
         "m-value",
         "m-adjust",
         "m-part",
+        "h-shade",
         "m-select",
         "m-coin",
         "m-choice",
@@ -708,13 +739,25 @@
         "m-submit",
         "m-help",
         "m-worked",
-      ].includes(name) || el.dataset.act;
-    const evidence = () => JSON.stringify([s.quest, s.learning, M.current(s)]);
+      ].includes(name) || ["j-part","j-choice","j-coin","j-adjust","j-value","j-submit","j-help"].includes(name) || el.dataset.act;
+    const evidence = () => JSON.stringify([s.quest, s.learning, M.current(s),window.V5Journey.state(s)]);
     const previous = evidence();
     await dispatch(action);
     if (!meaningful) activity = 0;
     else if (previous !== evidence()) activity = Date.now();
   });
+  let paint=null, suppressPaintClick=false;
+  document.addEventListener('pointerdown',e=>{const b=e.target.closest('.mission-parts .part,[data-shade-group] button');if(!b)return;paint={id:e.pointerId,x:e.clientX,y:e.clientY,first:b,on:b.getAttribute('aria-pressed')!=='true',seen:new Set(),active:false};});
+  document.addEventListener('pointermove',e=>{
+    if(!paint||paint.id!==e.pointerId)return;
+    if(!paint.active){if(Math.abs(e.clientY-paint.y)>12&&Math.abs(e.clientY-paint.y)>Math.abs(e.clientX-paint.x)){paint=null;return;}if(Math.abs(e.clientX-paint.x)<8)return;paint.active=true;}
+    const hit=document.elementFromPoint(e.clientX,e.clientY)?.closest('.mission-parts .part,[data-shade-group] button');
+    for(const b of [paint.first,hit])if(b&&!paint.seen.has(b.getAttribute('data-action'))){const action=b.getAttribute('data-action');paint.seen.add(action);if(action.startsWith('m-select:')){dispatch('h-shade:'+action.split(':')[1]+':'+(paint.on?1:0));}else if((b.getAttribute('aria-pressed')==='true')!==paint.on)dispatch(action);}
+  });
+  document.addEventListener('pointerup',()=>{if(paint?.active){suppressPaintClick=true;setTimeout(()=>suppressPaintClick=false,0);}paint=null;});
+  document.addEventListener('pointercancel',()=>{paint=null;});
+  document.addEventListener('click',e=>{if(suppressPaintClick){suppressPaintClick=false;e.stopImmediatePropagation();e.preventDefault();}},true);
+  document.addEventListener('keydown',e=>{const b=e.target.closest('.cartesian-point');if(!b||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();const x=Number(b.dataset.cx)+(e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0),y=Number(b.dataset.cy)+(e.key==='ArrowUp'?1:e.key==='ArrowDown'?-1:0);b.closest('.cartesian-plane').querySelector(`[data-cx="${x}"][data-cy="${y}"]`)?.focus();});
   document.addEventListener("change", async (e) => {
     if (e.target.dataset.missionTier) {
       const id = e.target.dataset.missionTier,
@@ -750,6 +793,8 @@
     }
   });
   document.addEventListener("input", async (e) => {
+    if(e.target.dataset.journeyInput){const n=Number(e.target.value);if(Number.isInteger(n)&&n>=0&&n<=window.V5Journey.task(s)?.max){if(window.V5Journey.state(s).values.amount!==n)activity=Date.now();await change(()=>window.V5Journey.action(s,'j-value',String(n),'j-value:'+n),{renderPage:false});}return;}
+
     if (e.target.dataset.missionClock) {
       const [hour, minute] = e.target.value.split(":").map(Number),
         value = hour * 60 + minute;
@@ -802,6 +847,7 @@
       activity > 0 &&
       now - activity < 20000 &&
       [
+        "journey",
         "quest",
         "lesson",
         "practice",
@@ -809,7 +855,7 @@
         "discovery",
         "adventure",
       ].includes(s.view) &&
-      (s.view === "adventure"
+      (s.view === "journey" ? !!window.V5Journey.state(s)&&!window.V5Journey.state(s).solved&&!window.V5Journey.state(s).done : s.view === "adventure"
         ? !!M.current(s) &&
           M.current(s)?.phase !== "lesson" &&
           !M.current(s)?.solved

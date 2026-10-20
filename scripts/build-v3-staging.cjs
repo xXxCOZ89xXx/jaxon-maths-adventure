@@ -43,6 +43,7 @@ let html = fs.readFileSync(path.join(repo, "v3-adventure.html"), "utf8");
 html = html
   .replace("connect-src 'none'", `connect-src 'self' ${c.url}`)
   .replaceAll("V3 Test Camp", "V3 Staging")
+  .replaceAll("V5 Interactive Test Camp", "V5 Interactive Staging")
   .replace("V3 TEST CAMP", "V3 STAGING")
   .replace(
     "Offline demo · fictional explorer · saved only on this device",

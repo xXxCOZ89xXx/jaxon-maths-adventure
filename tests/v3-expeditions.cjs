@@ -20,7 +20,7 @@ function choose(s) {
   const q = M.current(s),
     t = q.tasks[q.i];
   M.begin(s);
-  if (["basket", "offers", "budget", "blocks"].includes(t.kind))
+  if (["basket", "offers", "budget", "blocks", "array", "chart", "volume"].includes(t.kind))
     M.edit(s, "parts", t.answer);
   else if (["fraction", "chance"].includes(t.kind))
     M.edit(
@@ -28,6 +28,7 @@ function choose(s) {
       "selected",
       Array.from({ length: t.answer }, (_, i) => i),
     );
+  else if (["order","match"].includes(t.kind)) M.edit(s,"order",t.answer);
   else if (t.kind === "grid") M.edit(s, "selected", t.answer);
   else if (t.kind === "coordinate") M.edit(s, "point", t.answer);
   else if (t.kind === "journey") M.edit(s, "choice", t.answer);
@@ -124,11 +125,11 @@ test("Fresh task values vary on replay, resume preserves exact state and switchi
   assert.notEqual(JSON.stringify(M.current(s).tasks), first);
   assert.equal(M.current(s).seed, 2);
 });
-test("Supported missions do not grant mastery; recommendation follows recent support without taking away earned rewards", () => {
+test("Guided missions preserve rewards but cannot establish ability or independent mastery", () => {
   const s = E.fresh();
   M.start(s, "number", "0", 2);
   finish(s);
-  assert.equal(M.recommendation(s, "number"), 3);
+  assert.equal(M.recommendation(s, "number"), 1);
   M.start(s, "number", "0", 2);
   for (let i = 0; i < 3; i++) {
     M.help(s, true);
