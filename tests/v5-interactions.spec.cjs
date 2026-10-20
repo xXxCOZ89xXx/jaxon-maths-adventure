@@ -352,3 +352,154 @@ test("V5 worker and customer roles share the supermarket; a complete recipe jour
   ).toBeVisible();
   await axe(page);
 });
+
+test('V5.1 typed bill share saves each keystroke, updates equal shares and submits with Enter', async ({page}) => {
+  await mission(page,'town','cafe',2,1);
+  const t=(await state(page)).adventure.active.tasks[1];
+  const input=page.locator('[data-numeric-answer="mission"]');
+  await input.fill('');
+  await input.pressSequentially(String(t.answer));
+  await expect.poll(async()=> (await state(page)).adventure.active.values.amount).toBe(t.answer);
+  await expect(page.locator('.share-people section')).toHaveCount(t.people);
+  await expect(page.locator('.equal-sharing')).toContainText('£0.00 left to share');
+  await expect(input).toBeFocused();
+  await page.reload();
+  await expect(input).toHaveValue(String(t.answer));
+  await input.press('Enter');
+  await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+  const q=(await state(page)).adventure.active;
+  expect(q.solved).toBe(true);
+  expect(q.evidence[0]).toMatchObject({correct:true,assisted:false,source:'guided-adventure',firstValue:t.answer});
+  await axe(page);
+});
+
+test('V5.1 empty, decimal, out of range and malformed edits cannot submit an older answer', async ({page}) => {
+  await mission(page,'town','cafe',1,1);
+  const t=(await state(page)).adventure.active.tasks[1];
+  const input=page.locator('[data-numeric-answer="mission"]');
+  await input.fill(String(t.answer));
+  for(const raw of ['', '2.5','100001','1e3','-1','abc']) {
+    await input.fill(raw);
+    await expect(input).toHaveAttribute('aria-invalid','true');
+    await input.press('Enter');
+    await click(page,'m-submit');
+    let q=(await state(page)).adventure.active;
+    expect(q.solved).toBe(false);
+    expect(q.evidence || []).toHaveLength(0);
+    expect(q.values.amountDraft).toBe(raw);
+    await page.reload();
+    await expect(input).toHaveValue(raw);
+    await click(page,'m-submit');
+    q=(await state(page)).adventure.active;
+    expect(q.evidence || []).toHaveLength(0);
+  }
+  // Tapping money clears the invalid draft and uses the same saved answer.
+  await click(page,'m-value:0');
+  await expect(input).toHaveValue('0');
+  await input.fill(String(t.answer-100));
+  await click(page,'m-adjust:100');
+  await expect(input).toHaveValue(String(t.answer));
+  await click(page,'m-submit');
+  expect((await state(page)).adventure.active.solved).toBe(true);
+});
+
+test('V5.1 wrong typed first attempt is retained after a correct tapped retry and reload', async ({page})=>{
+  await mission(page,'town','cafe',3,1);
+  const t=(await state(page)).adventure.active.tasks[1];
+  await page.locator('[data-numeric-answer]').fill('1');
+  await click(page,'m-submit');
+  await page.locator('[data-numeric-answer]').fill(String(t.answer-1));
+  await click(page,'m-adjust:1');
+  await click(page,'m-submit');
+  await page.reload();
+  const s=await state(page), q=s.adventure.active;
+  expect(q.solved).toBe(true);
+  expect(q.evidence).toHaveLength(1);
+  expect(q.evidence[0]).toMatchObject({correct:false,firstValue:1,assisted:false});
+  expect(q.assisted).toBe(true);
+  expect(s.checks.town_split?.mastered).not.toBe(true);
+});
+
+test('V5.1 direct practice entry preserves pence/pounds units and saves supported evidence', async ({page})=>{
+  await page.evaluate(KEY=>{
+    const s=V3Engine.fresh(); s.tourSeen=true;
+    s.learning={id:'town_split',mode:'practice',qs:[['A £12 café bill is shared equally by 3 people. Pounds each?','4',['4','3','6','12']]],i:0,started:Date.now(),first:0,assisted:false};
+    s.view='practice';s.resumeView='practice';
+    localStorage.setItem(KEY,JSON.stringify(s));
+  },KEY);
+  await page.reload();
+  const input=page.locator('[data-numeric-answer="practice"]');
+  await expect(input).toBeVisible();
+  await input.fill('400');
+  await expect.poll(async()=> (await state(page)).learning.manipulation.amount).toBe(400);
+  await page.reload();
+  await expect(input).toHaveValue('400');
+  await input.press('Enter');
+  await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+  expect((await state(page)).learning.answered).toBe(true);
+  expect((await state(page)).checks.town_split?.mastered).not.toBe(true);
+});
+
+test('V5.1 journey direct entry validates and resumes without stale submissions',async ({page})=>{
+  await page.evaluate(KEY=>{
+    const s=V3Engine.fresh();s.tourSeen=true;V5Journey.start(s,'bolognese');
+    // The cooking quantity is scalar; inventory is fictional and local only.
+    const j=V5Journey.state(s);j.stage=7;j.inventory=[2,2,2];j.completed=[0,1,2,3,4,5,6];
+    localStorage.setItem(KEY,JSON.stringify(s));
+  },KEY);
+  await page.reload();
+  const input=page.locator('[data-numeric-answer="journey"]');
+  await expect(input).toBeVisible();
+  const t=await page.evaluate(()=>V5Journey.task(JSON.parse(localStorage.getItem('jaxon_v3_fictional_demo_2026'))));
+  await input.fill(String(t.answer));
+  await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+  await page.reload();
+  await expect(input).toHaveValue(String(t.answer));
+  await input.fill('');
+  await input.press('Enter');
+  await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+  expect((await state(page)).adventure.journeyV1.solved).toBe(false);
+  await input.fill(String(t.answer));
+  await input.press('Enter');
+  await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+  expect((await state(page)).adventure.journeyV1.solved).toBe(true);
+});
+
+test('V5.1 original quest direct entry avoids repeated arrows and rejects stale empty drafts',async ({page})=>{
+  await page.evaluate(KEY=>{
+    const s=V3Engine.fresh();s.tourSeen=true;V3Engine.startQuest(s,'measure');s.quest.intro=false;
+    localStorage.setItem(KEY,JSON.stringify(s));
+  },KEY);
+  await page.reload();
+  const input=page.locator('[data-numeric-answer="quest"]');
+  await expect(input).toBeVisible();
+  const answer=await page.evaluate(()=>V3Engine.puzzle('measure',0).answer);
+  await input.fill(String(answer));
+  await expect(input).toBeFocused();
+  await expect(page.locator('.puzzle > div:last-child > div[style]')).toHaveAttribute('style',new RegExp('width:'+answer/5+'%'));
+  await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+  await page.reload();
+  await expect(input).toHaveValue(String(answer));
+  await input.fill('');
+  await click(page,'solve');
+  expect((await state(page)).quest.solved).toBe(false);
+  await input.fill(String(answer));
+  await input.press('Enter');
+  await expect.poll(async()=> (await state(page)).quest.solved).toBe(true);
+  await axe(page);
+});
+
+test('V5.1 cleared clock drafts persist and cannot submit the previous arrival time',async({page})=>{
+  await mission(page,'town','station',2,1);
+  const t=(await state(page)).adventure.active.tasks[1], input=page.locator('#arrival-time');
+  const time=String(Math.floor(t.answer/60)).padStart(2,'0')+':'+String(t.answer%60).padStart(2,'0');
+  await input.fill(time);
+  await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+  await input.fill('');
+  await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+  await page.reload();await expect(input).toHaveValue('');
+  await click(page,'m-submit');
+  expect((await state(page)).adventure.active.evidence||[]).toHaveLength(0);
+  await input.fill(time);await click(page,'m-submit');
+  expect((await state(page)).adventure.active.solved).toBe(true);
+});

@@ -530,6 +530,7 @@
       Object.assign(t, {
         prompt: `Share a ${money(each * people)} café bill equally between ${people} friends. Set each person’s payment.`,
         answer: each,
+        people, shareTotal: each * people,
         worked: `${money(each * people)} ÷ ${people} = ${money(each)} each.`,
       });
     } else if (venue === "bank") {
@@ -850,6 +851,7 @@
         value <= t.transactions.length;
     if (!valid) return false;
     q.values[key] = copy(value);
+    if (key === "amount") {delete q.values.amountDraft;delete q.values.clockDraft;}
     return true;
   }
   function value(q, t) {
@@ -889,6 +891,7 @@
     const q = current(s);
     if (!q || q.phase !== "play" || q.solved) return false;
     const t = q.tasks[q.i];
+    if (H.invalidDraft(q.values, t)) return false;
     const evidence=q.evidence||(q.evidence=[]);
     if(!evidence.some(e=>e.step===q.i)) evidence.push({step:q.i,skill:t.skill,mechanic:H.mechanic(t,q.world,q.route),firstValue:copy(value(q,t)),correct:correct(q,t),assisted:q.assisted,source:'guided-adventure'});
     if (!correct(q, t)) {

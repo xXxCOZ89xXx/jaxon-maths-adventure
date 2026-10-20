@@ -401,7 +401,7 @@
         picked = q.values.picked;
       body = `<p>${t.kind === "order" ? "Tap a label, then a position. Order from smallest to largest." : "Tap a price or quantity, then its matching destination."} Every label is used once.</p><div class="label-supply">${(t.labels || t.items).map((label, i) => btn(esc(label) + (/^\d+\/\d+$/.test(label) ? `<span class="fraction-mini" aria-hidden="true"><i style="width:${(label.split("/")[0] / label.split("/")[1]) * 100}%"></i></span>` : ""), `h-pick:${i}`, `aria-pressed="${picked === i}" class="movable-label"`)).join("")}</div><div class="label-destinations">${t.items.map((label, i) => `<section><strong>${t.kind === "match" ? esc(label) : "Position " + (i + 1)}</strong>${btn(order[i] == null ? "Place selected label" : esc((t.labels || t.items)[order[i]]), `h-place:${i}`, `aria-label="Place label in position ${i + 1}"`)}</section>`).join("")}</div>${btn("Clear placements", "h-clear")}`;
     } else if (t.kind === "array" || t.kind === "volume") {
-      body = `<p>Build rows and columns; the total follows your arrangement.</p><div class="array-controls">${(t.kind === "volume" ? ["Rows", "Columns", "Layers"] : ["Rows", "Columns"]).map((x, i) => `<div><strong>${x}: ${parts[i] || 0}</strong>${btn("−", `m-part:${i}:-1`, `aria-label="Remove one ${x.toLowerCase()}"`)}${btn("+", `m-part:${i}:1`, `aria-label="Add one ${x.toLowerCase()}"`)}</div>`).join("")}</div>${t.kind === "volume" ? "<p class=small>Footprint of one layer</p>" : ""}<div class="crate-array" style="grid-template-columns:repeat(${Math.max(1, parts[1] || 0)},26px)" aria-label="${parts[0] || 0} rows of ${parts[1] || 0} crates">${"<span>▣</span>".repeat((parts[0] || 0) * (parts[1] || 0))}</div>${t.kind === "volume" ? `<div class="volume-layers">${Array.from({ length: parts[2] || 0 }, (_, i) => `<section><strong>Layer ${i + 1}</strong><div class="crate-array" style="grid-template-columns:repeat(${Math.max(1, parts[1] || 0)},20px)">${"<span>▣</span>".repeat((parts[0] || 0) * (parts[1] || 0))}</div></section>`).join("")}</div>` : ""}<p>Total: ${(parts[0] || 0) * (parts[1] || 0) * (t.kind === "volume" ? parts[2] || 0 : 1)} ${t.kind === "volume" ? "cubic units" : "crates"}.</p>`;
+      body = `<p>Build rows and columns; the total follows your arrangement.</p><div class="array-controls">${(t.kind === "volume" ? ["Rows", "Columns", "Layers"] : ["Rows", "Columns"]).map((x, i) => `<div><strong>${x}: ${parts[i] || 0}</strong>${btn("−", `m-part:${i}:-1`, `aria-label="Remove one ${x.toLowerCase()}"`)}${btn("+", `m-part:${i}:1`, `aria-label="Add one ${x.toLowerCase()}"`)}</div>`).join("")}</div>${t.kind === "volume" ? "<p class=small>Footprint of one layer</p>" : ""}<div class="crate-array" role="img" style="grid-template-columns:repeat(${Math.max(1, parts[1] || 0)},26px)" aria-label="${parts[0] || 0} rows of ${parts[1] || 0} crates">${"<span>▣</span>".repeat((parts[0] || 0) * (parts[1] || 0))}</div>${t.kind === "volume" ? `<div class="volume-layers">${Array.from({ length: parts[2] || 0 }, (_, i) => `<section><strong>Layer ${i + 1}</strong><div class="crate-array" style="grid-template-columns:repeat(${Math.max(1, parts[1] || 0)},20px)">${"<span>▣</span>".repeat((parts[0] || 0) * (parts[1] || 0))}</div></section>`).join("")}</div>` : ""}<p>Total: ${(parts[0] || 0) * (parts[1] || 0) * (t.kind === "volume" ? parts[2] || 0 : 1)} ${t.kind === "volume" ? "cubic units" : "crates"}.</p>`;
     } else if (t.kind === "chart") body = bars(parts, t.labels, t.max);
     else if (t.kind === "grid" && t.sample)
       body = `<div class="sample-space" role="group" aria-label="Equally likely sample space">${t.labels.map((l, i) => btn(esc(l), `m-select:${i}`, `aria-label="Outcome ${esc(l)}" aria-pressed="${(q.values.selected || []).includes(i)}"`)).join("")}</div>`;
@@ -444,7 +444,7 @@
         rest %= coin;
         if (n) tokens.push(`${n} × ${coin < 100 ? coin + "p" : money(coin)}`);
       }
-      body = `<div class="money-construction"><p>Build the amount using fictional UK money. ${t.kind === "bank" ? "Post every transaction above before checking." : ""}</p><div class="money-tray">${coins.map((c) => btn(c < 100 ? c + "p" : money(c), `m-adjust:${c}`, `aria-label="Add ${c} pence" class="money-button"`)).join("")}</div><div class="payment-objects">${tokens.map((x) => `<span>${x}</span>`).join("")}</div><output>${money(v)}</output><div>${btn("Remove 1p", "m-adjust:-1")}${btn("Remove £1", "m-adjust:-100")}${btn("Clear money", "m-value:0")}</div></div>`;
+      body = sharing(t, v) + `<div class="money-construction"><p>Build the amount using fictional UK money. ${t.kind === "bank" ? "Post every transaction above before checking." : ""}</p><div class="money-tray">${coins.map((c) => btn(c < 100 ? c + "p" : money(c), `m-adjust:${c}`, `aria-label="Add ${c} pence" class="money-button"`)).join("")}</div><div class="payment-objects">${tokens.map((x) => `<span>${x}</span>`).join("")}</div><output>${money(v)}</output><div>${btn("Remove 1p", "m-adjust:-1")}${btn("Remove £1", "m-adjust:-100")}${btn("Clear money", "m-value:0")}</div></div>`;
     } else return null;
     return `<div class="hands-on" data-mechanic="${kind}">${body}</div>`;
   }
@@ -482,8 +482,34 @@
       const den = Number(text.split("/")[1]);
       if (den > 0 && den <= 12 && Number(text.split("/")[0])<=den) t = { kind: "fraction", total: den, min: 0, max: den };
     }
+    if (t && skill.id === "town_split") {
+      const match = String(q[0]).match(/£(\d+) café bill is shared equally by (\d+) people/);
+      if(match) {t.people=Number(match[2]);t.shareTotal=Number(match[1])*100;}
+    }
     if(t&&t.kind!=="fraction"){const required=Number(text)*(t.scale||1);if(required<t.min||required>t.max)return null;}
     return t ? { ...t, skill: skill.id, format: text, practice: true } : null;
+  }
+  // A draft is kept separately: an empty or invalid edit must never submit an older value.
+  function numericValue(raw, t) {
+    if (!/^-?\d+$/.test(String(raw))) return null;
+    const n = Number(raw);
+    return Number.isSafeInteger(n) && n >= (t.min ?? 0) && n <= t.max ? n : null;
+  }
+  function numericInput(t, value, draft, context = "mission") {
+    const raw = draft ?? String(value), invalid = numericValue(raw, t) === null;
+    const label = t.unit === "p" ? "Amount in pence (100p = £1)" : "Answer" + (t.unit ? " in " + t.unit : "");
+    return `<div class="numeric-answer"><label for="${context}-amount">${label}</label><input id="${context}-amount" data-numeric-answer="${context}" type="text" inputmode="${(t.min ?? 0) < 0 ? 'text' : 'numeric'}" enterkeyhint="done" autocomplete="off" value="${esc(raw)}" aria-invalid="${invalid}" aria-describedby="${context}-number-help"><p id="${context}-number-help" class="small numeric-help" aria-live="polite">${invalid ? `Enter a whole number from ${t.min ?? 0} to ${t.max}.` : 'Type an answer or use the model.'}</p></div>`;
+  }
+  function invalidDraft(values, t) {
+    if(values?.clockDraft !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(values.clockDraft)) return true;
+    return values?.amountDraft !== undefined && numericValue(values.amountDraft, t) === null;
+  }
+  function sharing(t, amount) {
+    const saved = String(t.prompt || "").match(/Share a £([\d.]+) café bill equally between (\d+) friends/);
+    const people = t.people ?? (saved ? Number(saved[2]) : undefined);
+    if (!Number.isInteger(people) || people < 2 || people > 12) return "";
+    const total = t.shareTotal ?? Math.round(Number(saved?.[1])*100), allocated = people * amount;
+    return `<div class="equal-sharing"><h3>Share the whole bill equally</h3><p>Fictional café bill: ${money(total)}. Each friend pays 1/${people} of the whole.</p><div class="share-bar" role="img" aria-label="The whole bill divided into ${people} equal shares">${Array.from({length:people}, (_,i)=>`<span>1/${people}</span>`).join('')}</div><div class="share-people">${Array.from({length:people}, (_,i)=>`<section><strong>Friend ${i+1}</strong><p>${money(amount)}</p><span class="small">${Math.floor(amount/100)} × £1 + ${amount%100}p</span></section>`).join('')}</div><p role="status">${people} × ${money(amount)} = ${money(allocated)} · ${allocated <= total ? money(total-allocated)+' left to share' : money(allocated-total)+' over the bill'}</p><p>Change one payment below; every friend receives the same share.</p></div>`;
   }
   function practiceRender(l, k) {
     const t = practiceSpec(k, l.qs[l.i]);
@@ -500,8 +526,8 @@
     else if (t.kind === "angle")
       body = `<svg viewBox="0 0 400 220" role="img" aria-label="Your angle ${a} degrees"><path d="M370 200H200l${160 * Math.cos((a * Math.PI) / 180)} ${-160 * Math.sin((a * Math.PI) / 180)}" fill="none" stroke="#34563e" stroke-width="5"/><text x="200" y="80">${a}°</text></svg><div>${[-10, -1, 1, 10].map((n) => btn((n > 0 ? "+" : "") + n + "°", `p5-add:${n}`)).join("")}</div>`;
     else
-      body = `<p>Construct the answer in ${t.responseUnit} using fictional money. 100p = £1.</p><div class="money-tray">${coins.map((n) => btn(money(n), `p5-add:${n}`, `aria-label="Add ${n} pence"`)).join("")}</div>${btn("Remove 1p", "p5-add:-1")}${btn("Clear", "p5-value:0")}<output>${money(a)}${t.responseUnit==="pence"?" · "+a+"p":""}</output>`;
-    return `<section class="hands-on practice-manipulative" data-mechanic="${mechanic(t)}"><h3>Build your answer</h3>${body}<div>${btn("Try constructed answer", "p5-submit", 'class="primary"')}</div><p class="small">You may also use the answer choices. Supported practice never awards mastery.</p></section>`;
+      body = sharing(t,a) + `<p>Construct the answer in ${t.responseUnit} using fictional money. 100p = £1.</p><div class="money-tray">${coins.map((n) => btn(money(n), `p5-add:${n}`, `aria-label="Add ${n} pence"`)).join("")}</div>${btn("Remove 1p", "p5-add:-1")}${btn("Clear", "p5-value:0")}<output>${money(a)}${t.responseUnit==="pence"?" · "+a+"p":""}</output>`;
+    return `<section class="hands-on practice-manipulative" data-mechanic="${mechanic(t)}"><h3>Build your answer</h3><div class="practice-model">${body}</div>${t.kind !== "fraction" ? numericInput(t,a,v.amountDraft,"practice") : ""}<div>${btn("Try constructed answer", "p5-submit", 'class="primary"')}</div><p class="small">You may also use the answer choices. Supported practice never awards mastery.</p></section>`;
   }
   function practiceEdit(l, action, n) {
     if (!l || l.mode !== "practice" || l.answered) return false;
@@ -519,6 +545,7 @@
     const a = action === "add" ? (v.amount || 0) + n : n;
     if (!Number.isInteger(a) || a < t.min || a > t.max) return false;
     v.amount = a;
+    delete v.amountDraft;
     return true;
   }
   function practiceValue(l) {
@@ -534,6 +561,7 @@
     return !!m && !["clock", "sequence-rail", "budget"].includes(m);
   };
   root.V5HandsOn = {
+    numericValue, numericInput, invalidDraft, sharing,
     isHandsOn,
     enrich,
     mechanic,

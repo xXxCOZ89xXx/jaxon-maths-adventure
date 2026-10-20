@@ -133,7 +133,7 @@
       .join("")}</section>${w.id === "town" ? "</details>" : ""}`;
   }
   function stepper(q, p, unit = "") {
-    return `<div class="stepper">${btn("−", "adjust:-" + (p.step || 1), "", q.value <= (p.min || 0))}<output aria-label="Selected value" aria-live="polite">${q.value}${unit}</output>${btn("+", "adjust:" + (p.step || 1), "", q.value >= p.max)}</div>`;
+    return `<div class="stepper">${btn("−", "adjust:-" + (p.step || 1), "", q.value <= (p.min || 0))}${window.V5HandsOn.numericInput({...p,unit:unit.trim()},q.value,q.amountDraft,"quest")}${btn("+", "adjust:" + (p.step || 1), "", q.value >= p.max)}</div>`;
   }
   function puzzle(q) {
     const p = E.puzzle(q.world, q.i);
@@ -189,14 +189,14 @@
             ...l,
             type: "mission",
             mode: "question",
-          }) || "")
+          }) || "").replace('<div class="math-extra-dots"','<div role="img" class="math-extra-dots"')
         : "";
     return `${header(l.mode === "check" ? "FRESH INDEPENDENT CHECK" : l.mode === "discovery" ? "FIND YOUR STARTING POINT" : "SUPPORTED PRACTICE", esc(k.name), "world")}<div class="split"><section class="panel"><span class="badge">QUESTION ${l.i + 1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2>${handsOn}<div class="answer-grid">${q[2].map((a, i) => btn(esc(a), "answer:" + i, "", l.answered)).join("")}</div><div class="actions">${btn("Hint", "learning-hint", "", l.answered)}${btn("I don’t know", "learning-skip", "", l.answered)}${btn("Save & exit", "nav:home")}</div>${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}${l.answered ? `<div class="actions">${btn(l.i === l.qs.length - 1 ? "See recap →" : "Next question →", "next-learning", "primary")}</div>` : ""}</section><aside><div class="panel"><h3>${l.mode === "check" ? "Your own thinking" : "Explore the idea"}</h3><p class="muted">${l.mode === "check" ? "Only the first answer without help counts as independent. Hints and “I don’t know” are always safe." : "Use the tools, take a hint, or work through an example. Practice never awards mastery."}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
   }
   function journey(){
     const J=window.V5Journey,j=J.model(s);if(!j)return `<section class="panel"><h1>This journey needs another look.</h1><p>The saved copy has been preserved. Other learning remains available.</p>${btn('Back home','nav:home')}</section>`;
     const t=j.task,q={world:'town',route:j.venue,values:j.values,solved:j.solved},role=j.context.role;
-    return `${header('ADVENTURE JOURNEY · '+j.recipeName,esc(j.title),'world')}<div class="journey-progress"><p>Step ${Math.min(8,j.stage+1)} of 8 · ${esc(role)} context · cash ${T.money(j.cash)}</p><p>Shopping list: ${j.shoppingList?`pasta ${j.shoppingList[0]} packs · tomatoes ${j.shoppingList[1]} tins · protein ${j.shoppingList[2]} packs`:'not prepared yet'} · Inventory: pasta ${j.inventory[0]} packs · tomatoes ${j.inventory[1]} tins · protein ${j.inventory[2]} packs</p><p class="small">Fictional journey inventory and money. Your learning coins and mastery are separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Jess')}<p>Your same Town, seen through a different role.</p></div></aside><section class="panel stage-workbench">${j.done?`<h2>The recipe is ready.</h2><p>Your shopping, change and cooking were saved together. Reopening this journey cannot repeat a payment or consume ingredients again.</p>${btn('Back to Town','world:town','primary')}`:`<h2>${esc(t.prompt)}</h2><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${U.controls(q,t).replaceAll('data-action="m-','data-action="j-').replace('data-mission-input="amount"','data-journey-input="amount"')}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===7?'Prepare dinner':'Continue journey','j-next','primary'):btn('Try my plan','j-submit','primary')}${btn('Hint','j-help')}${btn('Save & exit','nav:home')}</div>`}</section></div>`;
+    return `${header('ADVENTURE JOURNEY · '+j.recipeName,esc(j.title),'world')}<div class="journey-progress"><p>Step ${Math.min(8,j.stage+1)} of 8 · ${esc(role)} context · cash ${T.money(j.cash)}</p><p>Shopping list: ${j.shoppingList?`pasta ${j.shoppingList[0]} packs · tomatoes ${j.shoppingList[1]} tins · protein ${j.shoppingList[2]} packs`:'not prepared yet'} · Inventory: pasta ${j.inventory[0]} packs · tomatoes ${j.inventory[1]} tins · protein ${j.inventory[2]} packs</p><p class="small">Fictional journey inventory and money. Your learning coins and mastery are separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Jess')}<p>Your same Town, seen through a different role.</p></div></aside><section class="panel stage-workbench">${j.done?`<h2>The recipe is ready.</h2><p>Your shopping, change and cooking were saved together. Reopening this journey cannot repeat a payment or consume ingredients again.</p>${btn('Back to Town','world:town','primary')}`:`<h2>${esc(t.prompt)}</h2><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${U.controls(q,t).replaceAll('data-action="m-','data-action="j-').replaceAll('mission-amount','journey-amount').replaceAll('mission-number-help','journey-number-help').replace('data-numeric-answer="mission"','data-numeric-answer="journey"')}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===7?'Prepare dinner':'Continue journey','j-next','primary'):btn('Try my plan','j-submit','primary')}${btn('Hint','j-help')}${btn('Save & exit','nav:home')}</div>`}</section></div>`;
   }
   function recap() {
     const r = s.lastResult;
@@ -514,6 +514,7 @@
         case "p5-add": case "p5-value": case "p5-shade":
           window.V5HandsOn.practiceEdit(s.learning,name.slice(3),Number(arg));break;
         case "p5-submit":
+          if (s.learning && window.V5HandsOn.invalidDraft(s.learning.manipulation,window.V5HandsOn.practiceSpec({id:s.learning.id},s.learning.qs[s.learning.i]))) break;
           if(s.learning?.mode==='practice'){const stamp=JSON.stringify(s.learning.manipulation||{});if(s.learning.retrying&&s.learning.lastConstructedSubmission===stamp)break;s.learning.lastConstructedSubmission=stamp;const correct=E.answerLearning(s,window.V5HandsOn.practiceValue(s.learning));if(!correct){s.learning.answered=false;s.learning.assisted=true;s.learning.retrying=true;}}break;
         case "h-shade": {
           const bits=action.split(':'),q=M.current(s);if(q){const sel=q.values.selected||[],i=Number(bits[1]),on=bits[2]==='1';if(sel.includes(i)!==on&&M.edit(s,'selected',on?[...new Set([...sel,i])]:sel.filter(x=>x!==i)))activity=Date.now();}break;
@@ -582,10 +583,11 @@
           if (s.quest) s.quest.intro = false;
           break;
         case "value":
-          if (s.quest && !s.quest.solved) s.quest.value = Number(arg);
+          if (s.quest && !s.quest.solved) {s.quest.value = Number(arg);delete s.quest.amountDraft;}
           break;
         case "adjust":
           if (s.quest && !s.quest.solved) {
+            delete s.quest.amountDraft;
             const p = E.puzzle(s.quest.world, s.quest.i);
             s.quest.value = Math.min(
               p.max,
@@ -609,6 +611,7 @@
           E.help(s);
           break;
         case "solve":
+          if (s.quest && window.V5HandsOn.invalidDraft(s.quest,E.puzzle(s.quest.world,s.quest.i))) break;
           restored = E.answerQuest(s);
           break;
         case "skip":
@@ -709,6 +712,10 @@
     const action =
       el.dataset.action || el.dataset.act || "nav:" + el.dataset.nav;
     const name = action.split(":")[0];
+    if (["m-submit","j-submit","p5-submit","solve"].includes(name)) {
+      const input = document.querySelector('[data-numeric-answer][aria-invalid="true"],[data-mission-clock][aria-invalid="true"]');
+      if(input) { input.setCustomValidity(input.dataset.missionClock ? 'Choose a complete 24-hour time before submitting.' : 'Enter a valid whole number before trying your answer.'); input.reportValidity(); return; }
+    }
     // Only maths manipulation/answer/support controls renew the bounded learning window.
     // Navigation, focus, raw key presses, pointer movement and refresh never do.
     const meaningful =
@@ -745,6 +752,13 @@
     await dispatch(action);
     if (!meaningful) activity = 0;
     else if (previous !== evidence()) activity = Date.now();
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Enter' && e.target.dataset.numericAnswer) {
+      e.preventDefault();
+      const action={mission:'m-submit',journey:'j-submit',practice:'p5-submit',quest:'solve'}[e.target.dataset.numericAnswer];
+      document.querySelector(`[data-action="${action}"]`)?.click();
+    }
   });
   let paint=null, suppressPaintClick=false;
   document.addEventListener('pointerdown',e=>{const b=e.target.closest('.mission-parts .part,[data-shade-group] button');if(!b)return;paint={id:e.pointerId,x:e.clientX,y:e.clientY,first:b,on:b.getAttribute('aria-pressed')!=='true',seen:new Set(),active:false};});
@@ -793,41 +807,78 @@
     }
   });
   document.addEventListener("input", async (e) => {
-    if(e.target.dataset.journeyInput){const n=Number(e.target.value);if(Number.isInteger(n)&&n>=0&&n<=window.V5Journey.task(s)?.max){if(window.V5Journey.state(s).values.amount!==n)activity=Date.now();await change(()=>window.V5Journey.action(s,'j-value',String(n),'j-value:'+n),{renderPage:false});}return;}
-
-    if (e.target.dataset.missionClock) {
-      const [hour, minute] = e.target.value.split(":").map(Number),
-        value = hour * 60 + minute;
-      if (Number.isInteger(value) && value >= 0 && value < 1440) {
-        if (M.current(s)?.values.amount !== value) activity = Date.now();
-        await change(() => M.edit(s, "amount", value), { renderPage: false });
-        const display = document.querySelector(".clock-display");
-        if (display) display.textContent = T.clock(value);
+    if (e.target.dataset.numericAnswer) {
+      const input = e.target, context = input.dataset.numericAnswer, raw = input.value;
+      const target = () => context === 'mission' ? M.current(s) : context === 'journey' ? window.V5Journey.state(s) : context === 'quest' ? s.quest : s.learning;
+      const original = target(), step = original?.i ?? original?.stage;
+      const spec = () => context === 'mission' ? M.current(s)?.tasks[M.current(s).i] : context === 'journey' ? window.V5Journey.task(s) : context === 'quest' ? E.puzzle(s.quest.world,s.quest.i) : window.V5HandsOn.practiceSpec({id:s.learning?.id},s.learning?.qs[s.learning.i]);
+      const t = spec();
+      if (!original || !t) return;
+      const n = window.V5HandsOn.numericValue(raw,t);
+      await change(() => {
+        const q = target();
+        if (!q || (q.i ?? q.stage) !== step || (q.key ?? q.id) !== (original.key ?? original.id)) return;
+        const values = context === 'practice' ? (q.manipulation ||= {}) : context === 'quest' ? q : q.values;
+        if (n !== null) {
+          if ((context === 'quest' ? q.value : values.amount) !== n) activity = Date.now();
+          if (context === 'mission') M.edit(s,'amount',n);
+          else if (context === 'journey') window.V5Journey.action(s,'j-value',String(n),'j-value:'+n);
+          else if(context === 'quest') q.value=n;
+          else window.V5HandsOn.practiceEdit(q,'value',n);
+        }
+        values.amountDraft = raw;
+      }, {renderPage:false});
+      if (!input.isConnected || input.value !== raw) return;
+      const invalid = n === null;
+      input.setAttribute('aria-invalid',String(invalid));
+      input.setCustomValidity(invalid ? `Enter a whole number from ${t.min ?? 0} to ${t.max}.` : '');
+      input.parentElement.querySelector('.numeric-help').textContent = invalid ? input.validationMessage : 'Type an answer or use the model.';
+      if (!invalid) {
+        const q = target();
+        if(context === 'practice') {
+          const template=document.createElement('template');
+          template.innerHTML=window.V5HandsOn.practiceRender(q,{id:q.id});
+          const model=document.querySelector('.practice-model');
+          if(model) model.innerHTML=template.content.querySelector('.practice-model').innerHTML;
+        }
+        if(context === 'quest') {
+          const template=document.createElement('template');template.innerHTML=puzzle(q);
+          const current=document.querySelector('.puzzle > div:last-child'),fresh=template.content.querySelector('.puzzle > div:last-child');
+          if(current&&fresh) [...fresh.children].forEach((child,i)=>{if(!child.classList.contains('stepper')) current.children[i]?.replaceWith(child.cloneNode(true));});
+        } else if(context !== 'practice') {
+          const template=document.createElement('template');template.innerHTML=U.controls(q,t);
+          for(const selector of ['.invoice','.sale-tag']) {
+            const current=input.closest('.task-controls')?.querySelector(selector),fresh=template.content.querySelector(selector);
+            if(current&&fresh) current.replaceWith(fresh);
+          }
+        }
+        const model = input.closest('.task-controls,.mission-task,.practice-manipulative')?.querySelector('.hands-on');
+        if (model && context !== 'practice') {const html=window.V5HandsOn.render(q,t) || ''; model.outerHTML=context==='journey' ? html.replaceAll('data-action="m-','data-action="j-') : html;}
+        const display = document.querySelector('.amount-display');
+        if (display) display.textContent = t.unit === 'p' ? T.money(n) : n + ' ' + (t.unit || 'units');
+        const stepper = context==='quest' ? input.closest('.stepper') : input.closest('.amount-editor')?.querySelector('.stepper');
+        if(stepper) {stepper.firstElementChild.disabled=n <= (t.min ?? 0);stepper.lastElementChild.disabled=n >= t.max;}
       }
       return;
     }
-    if (!e.target.dataset.missionInput) return;
-    const key = e.target.dataset.missionInput,
-      q = M.current(s),
-      t = q?.tasks[q.i],
-      value = Number(e.target.value);
-    if (
-      t &&
-      Number.isFinite(value) &&
-      value >= (t.min || 0) &&
-      value <= t.max
-    ) {
-      if (q.values[key] !== value) activity = Date.now();
-      await change(() => M.edit(s, key, value), { renderPage: false });
+
+    if (e.target.dataset.missionClock) {
+      const input=e.target, raw=input.value, original=M.current(s), step=original?.i;
+      const valid=/^([01]\d|2[0-3]):[0-5]\d$/.test(raw);
+      const [hour,minute]=raw.split(':').map(Number),value=hour*60+minute;
+      await change(()=>{
+        const q=M.current(s);
+        if(!q || q.key!==original?.key || q.i!==step || q.solved) return;
+        if(valid) {if(q.values.amount!==value) activity=Date.now();M.edit(s,'amount',value);}
+        q.values.clockDraft=raw;
+      },{renderPage:false});
+      input.setAttribute('aria-invalid',String(!valid));
+      input.setCustomValidity(valid?'':'Choose a complete 24-hour time.');
+      const display=document.querySelector('.clock-display');
+      if(display&&valid) display.textContent=T.clock(value);
+      return;
     }
-    const display = document.querySelector(".amount-display");
-    if (display && t)
-      display.textContent =
-        t.unit === "p"
-          ? T.money(value)
-          : t.unit === "time"
-            ? T.clock(value)
-            : value + " " + (t.unit || "units");
+
   });
   window.addEventListener("storage", (e) => {
     if (e.key === KEY) {

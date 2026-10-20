@@ -33,7 +33,7 @@ permissions:
 jobs:
   fictional-learner-qa:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -54,6 +54,10 @@ jobs:
         run: npm run test:e2e
         env:
           V3_WEBKIT: "1"
+          V51_REPORT: "tests/artifacts/v5-1-browser-results.json"
+      - name: Summarise actual V5.1 world and skill coverage
+        if: always()
+        run: npm run report:v51
       - uses: actions/upload-artifact@v4
         if: always()
         with:

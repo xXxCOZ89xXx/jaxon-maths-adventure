@@ -1,14 +1,14 @@
 const { defineConfig } = require("@playwright/test");
 module.exports = defineConfig({
   testDir: "./tests",
-  testMatch: /(?:v3-(?:browser|expeditions|cloud)|v5-interactions)\.spec\.cjs/,
+  testMatch: /(?:v3-(?:browser|expeditions|cloud)|v5-interactions|v51-regression)\.spec\.cjs/,
   timeout: 60000,
   fullyParallel: false,
   workers: 1,
   reporter: [
     ...(process.env.CI ? [["github"]] : []),
     ["list"],
-    ["json", { outputFile: "tests/artifacts/v3-browser-results.json" }],
+    ["json", { outputFile: process.env.V51_REPORT || "tests/artifacts/v3-browser-results.json" }],
   ],
   use: {
     baseURL: "http://127.0.0.1:4173",

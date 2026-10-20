@@ -1,0 +1,122 @@
+{
+  "scope": "Renderer/model contract audit, all routes, three tiers, three seeds; browser operation is separate evidence",
+  "worlds": [
+    {
+      "world": "number",
+      "tasks": 108,
+      "directScalars": 0,
+      "clocks": 0,
+      "models": [
+        "arrays",
+        "number-line",
+        "ordering",
+        "place-value"
+      ]
+    },
+    {
+      "world": "fractions",
+      "tasks": 108,
+      "directScalars": 36,
+      "clocks": 0,
+      "models": [
+        "fraction-shading",
+        "matching",
+        "ordering",
+        "pour"
+      ]
+    },
+    {
+      "world": "algebra",
+      "tasks": 108,
+      "directScalars": 54,
+      "clocks": 0,
+      "models": [
+        "algebra-tiles",
+        "cartesian",
+        "ordering",
+        "sequence-rail"
+      ]
+    },
+    {
+      "world": "geometry",
+      "tasks": 108,
+      "directScalars": 9,
+      "clocks": 0,
+      "models": [
+        "area-tiles",
+        "cartesian",
+        "protractor",
+        "rotation"
+      ]
+    },
+    {
+      "world": "ratio",
+      "tasks": 108,
+      "directScalars": 90,
+      "clocks": 0,
+      "models": [
+        "matching",
+        "pour",
+        "ratio-groups"
+      ]
+    },
+    {
+      "world": "statistics",
+      "tasks": 108,
+      "directScalars": 63,
+      "clocks": 0,
+      "models": [
+        "bar-chart",
+        "cartesian",
+        "ordering",
+        "sequence-rail"
+      ]
+    },
+    {
+      "world": "probability",
+      "tasks": 108,
+      "directScalars": 0,
+      "clocks": 0,
+      "models": [
+        "probability-pool",
+        "sample-space",
+        "spinner"
+      ]
+    },
+    {
+      "world": "measure",
+      "tasks": 108,
+      "directScalars": 99,
+      "clocks": 0,
+      "models": [
+        "algebra-tiles",
+        "pour",
+        "ruler",
+        "volume-blocks"
+      ]
+    },
+    {
+      "world": "town",
+      "tasks": 243,
+      "directScalars": 99,
+      "clocks": 18,
+      "models": [
+        "amount",
+        "basket",
+        "budget",
+        "clock",
+        "journey",
+        "matching",
+        "money",
+        "pour"
+      ]
+    }
+  ],
+  "tasks": 1107,
+  "decisions": [
+    "Direct entry for all scalar mission values and numeric constructed practice; integer pence explicitly labelled.",
+    "Small bounded grouping, shading, arrays and selection controls retained as mathematical actions.",
+    "Budget envelopes keep £1 steps and add £5/£10 shortcuts; coin trays already offer UK notes.",
+    "Independent checks/discovery retain conventional choices and never render constructed-answer teaching models."
+  ]
+}

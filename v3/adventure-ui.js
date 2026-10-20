@@ -33,7 +33,7 @@
   }
   function scalar(q, t, model=true) {
     const v = q.values.amount ?? 0;
-    return `${model ? window.V5HandsOn.render(q,t)||"" : ""}<div class="amount-editor"><label for="mission-amount">${t.unit === "time" ? "Minutes after midnight (clock below)" : t.unit === "p" ? "Amount in pence (100p = £1)" : "Value in " + (t.unit || "units")}</label><div class="stepper">${button("−", "m-adjust:" + -t.step, "", v <= (t.min || 0))}<input id="mission-amount" data-mission-input="amount" type="number" inputmode="numeric" min="${t.min || 0}" max="${t.max}" step="1" value="${v}" aria-label="${t.unit === "p" ? "Amount in pence" : "Task value"}">${button("+", "m-adjust:" + t.step, "", v >= t.max)}</div><p class="amount-display" aria-live="polite">${t.unit === "p" ? money(v) : t.unit === "time" ? T.clock(v) : v + " " + esc(t.unit || "units")}</p></div>`;
+    return `${model ? window.V5HandsOn.render(q,t)||"" : ""}<div class="amount-editor">${window.V5HandsOn.numericInput(t,v,q.values.amountDraft)}<div class="stepper">${button("−", "m-adjust:" + -(t.step || 1), "", v <= (t.min ?? 0))}${button("+", "m-adjust:" + (t.step || 1), "", v >= t.max)}</div><p class="amount-display" aria-live="polite">${t.unit === "p" ? money(v) : t.unit === "time" ? T.clock(v) : v + " " + esc(t.unit || "units")}</p></div>`;
   }
   function items(q, t) {
     const parts = q.values.parts || Array(t.items.length).fill(0),
@@ -65,7 +65,7 @@
         const parts = q.values.parts || [0, 0, 0],
           labels =
             t.kind === "blocks" ? ["Hundreds", "Tens", "Ones"] : t.labels;
-        html = `<div class="envelopes">${labels.map((label, i) => `<section><strong>${esc(label)}</strong><output>${t.kind === "budget" ? money(parts[i] || 0) : parts[i] || 0}</output><div class="counter-controls">${button("−", `m-part:${i}:${t.kind === "budget" ? -100 : -1}`, "", !parts[i])}${button("+", `m-part:${i}:${t.kind === "budget" ? 100 : 1}`, "", (parts[i] || 0) >= (t.kind === "budget" ? t.budget : 9))}</div></section>`).join("")}</div><p class="receipt">${t.kind === "budget" ? "Allocated " + money(parts.reduce((a, b) => a + b, 0)) + " of " + money(t.budget) : "Packed " + ((parts[0] || 0) * 100 + (parts[1] || 0) * 10 + (parts[2] || 0)) + " units"}</p>`;
+        html = `<div class="envelopes">${labels.map((label, i) => `<section><strong>${esc(label)}</strong><output>${t.kind === "budget" ? money(parts[i] || 0) : parts[i] || 0}</output><div class="counter-controls">${button("−", `m-part:${i}:${t.kind === "budget" ? -100 : -1}`, "", !parts[i])}${button("+", `m-part:${i}:${t.kind === "budget" ? 100 : 1}`, "", (parts[i] || 0) >= (t.kind === "budget" ? t.budget : 9))}${t.kind === "budget" ? button("+ £5",`m-part:${i}:500`, "",(parts[i] || 0)>=t.budget)+button("+ £10",`m-part:${i}:1000`, "",(parts[i] || 0)>=t.budget) : ""}</div></section>`).join("")}</div><p class="receipt">${t.kind === "budget" ? "Allocated " + money(parts.reduce((a, b) => a + b, 0)) + " of " + money(t.budget) : "Packed " + ((parts[0] || 0) * 100 + (parts[1] || 0) * 10 + (parts[2] || 0)) + " units"}</p>`;
         break;
       }
       case "line":
@@ -130,7 +130,7 @@
         html = `<div class="sequence-rail">${t.values.map((n) => "<span>" + n + "</span>").join("")}<span class="new-carriage">${v}</span></div>${scalar(q, t)}`;
         break;
       case "clock":
-        html = `<div class="planning-clock"><strong class="clock-display">${T.clock(v)}</strong><span>24-hour arrival time</span></div><label for="arrival-time">Set your arrival time</label><input id="arrival-time" data-mission-clock="true" type="time" value="${T.clock(v)}" step="60"><div class="actions">${button("− 1 hour", "m-adjust:-60")}${button("+ 1 hour", "m-adjust:60")}${button("+ 5 minutes", "m-adjust:5")}</div>`;
+        html = `<div class="planning-clock"><strong class="clock-display">${T.clock(v)}</strong><span>24-hour arrival time</span></div><label for="arrival-time">Set your arrival time</label><input id="arrival-time" data-mission-clock="true" type="time" value="${esc(q.values.clockDraft ?? T.clock(v))}" aria-invalid="${window.V5HandsOn.invalidDraft(q.values,t)}" aria-describedby="clock-help" step="60"><p id="clock-help" class="small">Choose a complete 24-hour time before submitting.</p><div class="actions">${button("− 1 hour", "m-adjust:-60")}${button("+ 1 hour", "m-adjust:60")}${button("+ 5 minutes", "m-adjust:5")}</div>`;
         break;
       case "measure":
         html = `<div class="measuring-jug" role="img" aria-label="Container ${v} ${esc(t.unit)} out of ${t.max}"><div style="height:${Math.min(100, (v / t.max) * 100)}%"></div><span>${v} ${esc(t.unit)}</span></div>${scalar(q, t)}`;

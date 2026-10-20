@@ -3,6 +3,7 @@
   "use strict";
   const T =
     typeof module !== "undefined" ? require("./town").V3Town : root.V3Town;
+  const H = typeof module !== "undefined" ? require("./hands-on").V5HandsOn : root.V5HandsOn;
   const recipes = {
     bolognese: { name: "Spaghetti Bolognese", protein: "Mince" },
     lentil: { name: "Lentil Bolognese", protein: "Lentils" },
@@ -223,6 +224,7 @@
       return true;
     }
     if (name === "j-submit") {
+      if (H.invalidDraft(v, t)) return false;
       const correct =
         valid(t, v) &&
         (j.stage !== 3 || total(v.parts || []) <= j.cash) &&
@@ -278,6 +280,7 @@
         name === "j-adjust" ? (v.amount || 0) + Number(arg) : Number(arg);
       if (!Number.isInteger(n) || n < 0 || n > t.max) return false;
       v.amount = n;
+      delete v.amountDraft;
       return true;
     }
     return false;

@@ -1939,3 +1939,11 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .base-ten-model{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.base-ten-model section{padding:12px;background:#f6f0da;min-width:0}.base-ten-model strong{display:block}.base-ten-tray{display:flex;flex-wrap:wrap;gap:5px;min-height:70px;margin:12px 0}.base-ten{display:inline-flex;background:#56764c;color:#fff4c7;align-items:center;justify-content:center;border:1px solid #304d35}.base-100{width:38px;height:38px;font-size:30px}.base-10{width:14px;height:38px}.base-1{width:14px;height:14px}.measure-ruler-scroll{overflow-x:auto;padding:0 25px}.measure-ruler-scroll .interactive-ruler{min-width:600px;height:95px;display:block;margin:20px 22px}.interactive-ruler button{position:absolute;top:0;transform:translateX(-50%);height:60px;border-radius:0;border-bottom:4px solid #35563b}.journey-progress{background:#e5ebd8;padding:15px 20px;margin:20px 0;border-radius:10px}.journey-invitation{margin:20px 0}.journey-invitation button{margin:8px}
 .fraction-mini{display:block;width:100px;height:16px;border:1px solid #58704c;background:#fcf3d8;margin:8px auto}.fraction-mini i{display:block;height:100%;background:#698b55}
 .volume-layers{display:flex;flex-wrap:wrap;gap:15px}.volume-layers section{background:#e0dbc0;padding:10px;border-bottom:5px solid #879369}.volume-layers .crate-array{margin:10px 0}
+
+/* Direct answer entry and equal-sharing teaching model. */
+.numeric-answer input {width:100%;max-width:22rem;min-height:48px;font-size:1.2rem;padding:10px;}
+.numeric-answer input[aria-invalid="true"] {border:2px solid #8e402e;}
+.share-bar,.share-people {display:flex;gap:8px;flex-wrap:wrap;margin:16px 0;}
+.share-bar span {flex:1;padding:14px;background:#e5ebd5;border:1px solid #36573e;text-align:center;}
+.share-people section {flex:1;min-width:120px;padding:14px;border:1px solid #becbb5;border-radius:10px;background:#f5f3e8;}
+.share-people p {font-size:1.4rem;font-weight:700;}

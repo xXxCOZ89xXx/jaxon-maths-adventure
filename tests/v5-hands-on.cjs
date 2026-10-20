@@ -252,6 +252,20 @@ test("Completed constructed-practice evidence survives recap without becoming in
 test("Every supported practice response is constructible in the question's units across all 55 skills and bands",()=>{const ctx={window:{}};vm.runInNewContext(fs.readFileSync('v2-review-bank.js','utf8'),ctx);const bank=T.install(C,ctx.window.JaxonFreshReview);let checked=0;for(const k of C.skills)for(const band of [5,6,7,8,9])for(const round of [1,23,80])for(const q of (()=>{try{return bank.create(k.id,band,round);}catch(e){if(/^Duplicate questions in review/.test(e.message))return [];throw e;}})()){const t=H.practiceSpec(k,q);if(!t)continue;const l={id:k.id,mode:'practice',qs:[q],i:0,manipulation:{}};if(t.kind==='fraction')l.manipulation.selected=Array.from({length:Number(q[1].split('/')[0])},(_,i)=>i);else l.manipulation.amount=Number(q[1])*(t.scale||1);assert.equal(H.practiceValue(l),String(q[1]),k.id+' '+q[0]);if(['town_money','town_totals','town_menu','town_value','town_travel','town_bills','town_wages'].includes(k.id))assert.equal(t.scale,1);if(['town_timetable','town_time'].includes(k.id))assert.equal(t.unit,'minutes');checked++;}assert.ok(checked>1000);assert.equal(H.practiceSpec({id:'fraction_mixed'},['','7/3']),null);assert.equal(H.practiceSpec({id:'algebra_missing'},['','-100']),null);});
 test("Practice generation skips a rejected duplicate round and serves a validated fresh set",()=>{const s=E.fresh();let calls=0;const bank={create:()=>{if(!calls++)throw Error('Duplicate questions in review for operations');return [0,1,2].map(i=>['Fresh duplicate recovery '+i,'2',['1','2','3'],'Hint','Worked']);}};assert.equal(E.generate(s,'operations','practice',bank,C),null);assert.equal(calls,2);assert.equal(s.learning.qs.length,3);});
 test("Ordering and matching supply positions vary deterministically rather than repeating an answer-slot pattern",()=>{for(const [world,route,stage] of [['number','2',0],['ratio','1',1],['town','shops',1],['fractions','1',2]]){const layouts=new Set();for(let seed=1;seed<=12;seed++){const t=M.task(world,route,2,seed,stage);assert.deepEqual(M.task(world,route,2,seed,stage),t);layouts.add(JSON.stringify(t.answer));}assert.ok(layouts.size>=3,world+' should vary the answer slots');}});
+
+
+test('V5.1 strict numeric drafts prevent stale submissions without recording learning evidence',()=>{
+  for(const raw of ['', ' ', '1e3','NaN','2.5','-1','101','Infinity']) assert.equal(H.numericValue(raw,{min:0,max:100}),null,raw);
+  for(const raw of ['0','001','100']) assert.equal(H.numericValue(raw,{min:0,max:100}),Number(raw));
+  assert.equal(H.numericValue('-12',{min:-20,max:20}),-12);
+  const s=E.fresh(); M.start(s,'town','cafe',2);s.adventure.active.i=1;M.begin(s);
+  const q=M.current(s),t=q.tasks[1];M.edit(s,'amount',t.answer);q.values.amountDraft='';
+  assert.equal(M.submit(s),false);assert.equal(q.solved,false);assert.equal(q.evidence?.length||0,0);
+  M.edit(s,'amount',t.answer);assert.equal(q.values.amountDraft,undefined);assert.equal(M.submit(s),true);
+  assert.match(H.sharing(t,t.answer),/£0.00 left to share/);
+  assert.match(H.sharing(t,0),/1\/3/);
+});
+
 console.log(
   `${suites} V5 suites, ${steps} generated task steps; fictional fixtures only.`,
 );
