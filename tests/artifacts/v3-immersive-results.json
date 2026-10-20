@@ -1,0 +1,496 @@
+{
+  "codeCommit": "924718db821bfb1797e9f514ab77a634aa90508c",
+  "localBrowser": {
+    "startTime": "2026-10-20T14:31:32.823Z",
+    "duration": 412574.962,
+    "expected": 84,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "cases": [
+    {
+      "test": "Home, tour, map and all eight interactive world quests restore and persist",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Mid-quest Save & Exit and reload resume exact puzzle, selection, hint and milestone",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Lesson, visual tools, independent freshness, help and failed check reteaching",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Shop, avatar across screens, preferences and mock parent summary",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Two tabs serialize purchases and milestones without duplicate rewards",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Responsive navigation, focus, touch targets and reduced motion",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Adaptive discovery, device isolation and offline play preserve fictional state",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Visible active learning earns time; simulated hidden and idle time stop earning",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Corrupt demo saves remain intact and show a temporary-session warning",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "menus, idle movement, no-op edits and refresh cannot renew learning rewards",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "World-stage bridge exposes every destination and moves its explorer without changing learning evidence",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Camp places are keyboard links to usable displays; navigation cannot earn rewards",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Landscape entrances open real expeditions in each original world without granting progress",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Home, tour, map and all eight interactive world quests restore and persist",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Mid-quest Save & Exit and reload resume exact puzzle, selection, hint and milestone",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Lesson, visual tools, independent freshness, help and failed check reteaching",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Shop, avatar across screens, preferences and mock parent summary",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Two tabs serialize purchases and milestones without duplicate rewards",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Responsive navigation, focus, touch targets and reduced motion",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Adaptive discovery, device isolation and offline play preserve fictional state",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Visible active learning earns time; simulated hidden and idle time stop earning",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Corrupt demo saves remain intact and show a temporary-session warning",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "menus, idle movement, no-op edits and refresh cannot renew learning rewards",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "World-stage bridge exposes every destination and moves its explorer without changing learning evidence",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Camp places are keyboard links to usable displays; navigation cannot earn rewards",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Landscape entrances open real expeditions in each original world without granting progress",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Home, tour, map and all eight interactive world quests restore and persist",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Mid-quest Save & Exit and reload resume exact puzzle, selection, hint and milestone",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Lesson, visual tools, independent freshness, help and failed check reteaching",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Shop, avatar across screens, preferences and mock parent summary",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Two tabs serialize purchases and milestones without duplicate rewards",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Responsive navigation, focus, touch targets and reduced motion",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Adaptive discovery, device isolation and offline play preserve fictional state",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Visible active learning earns time; simulated hidden and idle time stop earning",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Corrupt demo saves remain intact and show a temporary-session warning",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "menus, idle movement, no-op edits and refresh cannot renew learning rewards",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "World-stage bridge exposes every destination and moves its explorer without changing learning evidence",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Camp places are keyboard links to usable displays; navigation cannot earn rewards",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Landscape entrances open real expeditions in each original world without granting progress",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "staging fails closed before sign-in when configuration is absent",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "learner sign-in, incorrect PIN, unfinished quest, response loss, refresh and lock",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "parent evidence and server reward path remain separate from learner gameplay",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "offline edit and reconnect, competing-device conflict and server shop ownership",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "standalone downloadable preview loads as one HTML with no asset or cloud requests",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "a parent award reaches an open learner shop without a progress revision",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "private account recovery uses PKCE, changes the password and returns to sign-in",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "recovery rate limits show useful copy and never auto-retry",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "lost parent award restores the same immutable retry after refresh",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "staging fails closed before sign-in when configuration is absent",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "learner sign-in, incorrect PIN, unfinished quest, response loss, refresh and lock",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "parent evidence and server reward path remain separate from learner gameplay",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "offline edit and reconnect, competing-device conflict and server shop ownership",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "standalone downloadable preview loads as one HTML with no asset or cloud requests",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "a parent award reaches an open learner shop without a progress revision",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "private account recovery uses PKCE, changes the password and returns to sign-in",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "recovery rate limits show useful copy and never auto-retry",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "lost parent award restores the same immutable retry after refresh",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "staging fails closed before sign-in when configuration is absent",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "learner sign-in, incorrect PIN, unfinished quest, response loss, refresh and lock",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "parent evidence and server reward path remain separate from learner gameplay",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "offline edit and reconnect, competing-device conflict and server shop ownership",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "standalone downloadable preview loads as one HTML with no asset or cloud requests",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "a parent award reaches an open learner shop without a progress revision",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "private account recovery uses PKCE, changes the password and returns to sign-in",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "recovery rate limits show useful copy and never auto-retry",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "lost parent award restores the same immutable retry after refresh",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Practical Town: all eight venues teach and complete actual tasks, restore town and decorate camp",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Optional gateways across all nine worlds vary interactions and preserve finite rewards",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Hands-on town task saves exact selections, help and latest activity; higher level is freely available",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "New town lessons and fresh checks keep assistance out of mastery, even after restored town visits",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Concurrent mission completion grants one milestone and camp projects need durable evidence",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Higher levels use negative coordinates and composed clockwise/anticlockwise turns",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Practical Town: all eight venues teach and complete actual tasks, restore town and decorate camp",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Optional gateways across all nine worlds vary interactions and preserve finite rewards",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Hands-on town task saves exact selections, help and latest activity; higher level is freely available",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "New town lessons and fresh checks keep assistance out of mastery, even after restored town visits",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Concurrent mission completion grants one milestone and camp projects need durable evidence",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Higher levels use negative coordinates and composed clockwise/anticlockwise turns",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Practical Town: all eight venues teach and complete actual tasks, restore town and decorate camp",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Optional gateways across all nine worlds vary interactions and preserve finite rewards",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Hands-on town task saves exact selections, help and latest activity; higher level is freely available",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "New town lessons and fresh checks keep assistance out of mastery, even after restored town visits",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Concurrent mission completion grants one milestone and camp projects need durable evidence",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Higher levels use negative coordinates and composed clockwise/anticlockwise turns",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    }
+  ],
+  "logic": "3 V2 scripts, 24 V3 suites, presentation and synthetic migration rehearsal passed",
+  "database": "14 actual isolated PostgreSQL suites passed; fictional claims, network disabled",
+  "visual": "52 fresh game captures; 67-image album; 7 paired foundation comparisons; no external requests/errors/overflow",
+  "gallery": {
+    "scope": "Packaged fictional gallery only, no external network",
+    "pages": [
+      {
+        "name": "index",
+        "images": 67,
+        "broken": 0
+      },
+      {
+        "name": "worlds",
+        "images": 18,
+        "broken": 0
+      },
+      {
+        "name": "town",
+        "images": 16,
+        "broken": 0
+      },
+      {
+        "name": "compare",
+        "images": 14,
+        "broken": 0
+      }
+    ],
+    "errors": 0
+  },
+  "liveStaging": {
+    "projectRef": "sfogrvedypgtxfvecmbx",
+    "url": "https://sfogrvedypgtxfvecmbx.supabase.co",
+    "configuration": "matched",
+    "publishableKey": "present; redacted",
+    "authenticatedTests": "not attempted; no account credentials",
+    "requests": [
+      {
+        "label": "identity",
+        "status": null,
+        "proxyStatus": 403,
+        "outcome": "proxy denied staging host; target not contacted"
+      }
+    ]
+  },
+  "privateSourceCommit": "945512d84b4c2e7e70bec5c5341e76eb2cab235a",
+  "archiveSha256": "fb225af07a673a55535c5a42d3d311ba8421fadf6b997d243097d5df39cae1df",
+  "archiveMatchedFiles": 93,
+  "hostedCI": {
+    "run": 39440319406,
+    "status": "completed",
+    "conclusion": "success",
+    "passed": 112,
+    "source": "Native run/job state and decoded job logs"
+  },
+  "privateSite": {
+    "version": 3,
+    "url": "https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site",
+    "ownerOnly": true,
+    "deployment": "appgdep_6ad77f0512388191a3e9bd57a0c19164",
+    "savedVersion": "appgprj_6ad746f124fc8191b3f3845f9dff577b~appgver_e936893be2f08191ad0ea49efbbeb55a",
+    "nativeContentHash": "sha256:ed09714178a6a403348b309d39429348b2c314e8f628cb4a9e2e2a3f1ea38e5f",
+    "remoteArchiveByteComparison": "unavailable; native source/deployment verified"
+  }
+}

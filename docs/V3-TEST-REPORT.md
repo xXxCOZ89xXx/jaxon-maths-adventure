@@ -1,3 +1,34 @@
+# Immersive world stages and interactive camp — 20 October 2026
+
+Current game code: `924718d` on `codex/v3-adventure-build`; PR #2 remains draft. [What changed and remaining custom-asset work](V3-IMMERSIVE-ADVENTURE.md) · [seven paired comparisons](https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site/review/compare.html).
+
+| Evidence | Result / scope |
+| --- | --- |
+| V2 / learning / gameplay / sync | All three V2 regression scripts, 24 V3 suites, display/recovery tests and synthetic compatibility/migration/rollback rehearsal pass |
+| Local browser matrix | **84/84 passed**, 0 skipped/unexpected/flaky, final code tree; desktop, iPad portrait and landscape Chromium, including contrast/keyboard/touch and learning-record/reward preservation |
+| Additional small-screen check | Camp entrances at 390px are at least 44px and do not overlap; keyboard links reach usable displays. Also covered by the full matrix |
+| Database security | **14 real isolated PostgreSQL suites pass**, network-disabled Docker and fictional Auth claims; no hosted Supabase authentication or RLS certification |
+| Visual QA | **52 fresh fictional game captures** across three layouts; **67-image album**, including three mocked parent dashboards, five older comparisons and seven preserved foundation images; seven new before/after pairs |
+| Packaged gallery | All **67 / 18 / 16 / 14** images decode on complete/worlds/Town/comparison pages; no broken resources, console errors or external requests |
+| Staging build | Pinned project/URL/key validation (key redacted), complete sign-in/PIN entry, nine worlds, 40 catalogue items and assets pass. Fixture preparation cannot overwrite deployable files |
+| Protected files | All five original live/V2/SQL SHA-256 hashes unchanged; configured publishable key absent from tracked GitHub files |
+| Hosted Chromium / WebKit | **Passed 112/112 cases**, including iPad WebKit; [run 39440319406](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39440319406), final code `924718d`; decoded hosted job logs report 112 passed (9.0m). All logic/build/PostgreSQL steps passed. |
+| Owner-private Site | **Version 3 deployed successfully**, same [private URL](https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site/); one owner, no groups or external visitors. |
+
+New functional checks verify all bridge destinations fit without horizontal scrolling, a changed destination moves the explorer and survives reload without granting mastery/milestones, camp keyboard entrances never earn coins/time, and all eight original worlds' scene entrances open actual expeditions. Existing learning, gateway, Town, PIN/login/lock, parent roles, family isolation, cloud retry/CAS/offline queue, bonus and purchase checks continue. Review found and fixed low-contrast workbench copy, missing earned-structure labels, a hidden tablet Save & exit control and potential phone camp-target overlap.
+
+Actual read-only staging audit: all four configured variables validate against `sfogrvedypgtxfvecmbx` and `https://sfogrvedypgtxfvecmbx.supabase.co`; the publishable key is redacted. The environment proxy rejected CONNECT with **403 before contacting Supabase**, so no live identity/table-denial or authenticated success is claimed. Existing owner-reported hosted sign-in/PIN/save/bonus/shop/family-separation checks remain separate evidence. No credentials were requested and no live learner records were read.
+
+Current compact machine evidence is `tests/artifacts/v3-immersive-results.json`, with all 84 local case names/project/statuses and actual timings; packaged-gallery checks are `v3-immersive-gallery.json`. Full hosted artifacts belong to the linked workflow run. Earlier generic `tests/artifacts/` captures/reports remain historical; current visual deliverables are `tests/visual/after/` and `tests/visual/compare.html`.
+
+The final private archive matches all **93** built files byte for byte. Site source `945512d84b4c2e7e70bec5c5341e76eb2cab235a`; archive SHA-256 `fb225af07a673a55535c5a42d3d311ba8421fadf6b997d243097d5df39cae1df`. Deployment `appgdep_6ad77f0512388191a3e9bd57a0c19164`; saved version `appgprj_6ad746f124fc8191b3f3845f9dff577b~appgver_e936893be2f08191ad0ea49efbbeb55a`. Native source provenance matches the pushed Site commit. The native archive content hash is `sha256:ed09714178a6a403348b309d39429348b2c314e8f628cb4a9e2e2a3f1ea38e5f` (94 files including hosting manifest); this is recorded separately from the supplied local tar SHA-256. Native archive download was unavailable, so independent remote-byte comparison is not claimed. Deployment success and owner-only access are verified by native Site results; packaged pages were browser-tested locally.
+
+Physical iPad Safari, actual cross-device/offline recovery and direct hosted API security remain in the existing single combined acceptance plan. Optional custom character pose sheets, unique landmark machinery/interiors and individual keepsake art are documented, rather than presented as completed assets. No additional manual session is requested now. No production records/schema/settings, GitHub main, live homepage or GitHub Pages changed.
+
+The prior reports below describe earlier versions.
+
+---
+
 # Visual redesign, reliability and release-preparation QA — 20 October 2026
 
 Current code: `1a1b63b` on `codex/v3-adventure-build`; PR #2 remains draft. [Visual review](V3-VISUAL-REVIEW.md), [independent code/security review](V3-RELIABILITY-SECURITY-REVIEW.md), [one outstanding-issues list](V3-OUTSTANDING-ISSUES.md) and [unexecuted production plan](V3-PRODUCTION-RELEASE-PLAN.md).

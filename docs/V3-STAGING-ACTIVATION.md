@@ -1,3 +1,5 @@
+Visual continuation: [immersive stages and camp](V3-IMMERSIVE-ADVENTURE.md). During the existing later combined session below, include the portrait bridge’s first/last destinations, landscape expedition entrances, camp place links, keepsake placement, building project and reduced-motion restoration. This extends the same session; no new passwords/PINs or separate manual tests are requested.
+
 # Private staging activation — 20 October 2026
 
 **Private HTTPS test site:** https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site
