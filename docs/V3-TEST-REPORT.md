@@ -1,3 +1,32 @@
+# Secure integration continuation QA
+
+Date: 20 October 2026. Branch: `codex/v3-adventure-build`, draft PR #2. **Implementation is tested with fictional data; no hosted Supabase staging acceptance has occurred.**
+
+| Layer | Completed local result | Scope |
+| --- | --- | --- |
+| Existing V2 regression scripts | 3 passed | Original learning/discovery/shop integrity |
+| V3 gameplay/state logic | 20 suites passed | 55 skills, 123 mission/level combinations, 4,466 task instances |
+| Durable cloud sync | 4 suites passed | Fail-closed config, response-loss retries, concurrent flush, full-state conflicts, corrupt-cache preservation |
+| Actual PostgreSQL security | 13 suites passed | Migration guard, bcrypt/PIN cooldown, server unlocks, family/RLS boundaries, role checks, idempotent wallet, CAS concurrency, parent-reviewed offline credit, PIN recovery/revocation |
+| Full Chromium browser regression | 60/60 passed | Desktop, iPad portrait and landscape; existing gameplay plus initial five cloud/preview cases per project |
+| Final cloud/preview browser checks | 21/21 passed | Seven cases per Chromium project, including PKCE recovery, live shop-balance refresh and explicit conflict handling |
+| Final parent-evidence refinement | 3/3 passed | Real curriculum IDs; guided/fresh/struggle evidence distinct; offline-time confirmation and accessible controls |
+| npm dependency audit | 0 vulnerabilities | Installed lockfile at test time |
+
+The focused browser passes overlap the full run; they are not 84 distinct local cases. The current complete suite contains **66 distinct Chromium cases**, or **88 with the hosted iPad WebKit project**. Hosted results are recorded below when available. Synthetic API responses test the official client and UI; they do not test actual Supabase Auth or PostgREST. The PostgreSQL container uses `--network none` and emulates Auth claim context; no hosted database, real identity or production network request is involved.
+
+Verified fixes include the generated staging lock controls, a Supabase thenable being mistaken for a Promise during locking, a header ARIA role, stable PIN/recovery forms, a correctly labelled parent action selector, hidden navigation overriding CSS display, server-wallet refresh during an open shop, revision rechecks before remote replacement, and database readiness against the final TCP listener rather than PostgreSQL's temporary initialization socket. Tests allow fractional server-time credit without assuming a CI command completes within one second.
+
+Preview delivery is now `preview-dist/PLAY-V3.html` plus README in the **v3-offline-playable-preview** Actions artifact. All scripts/styles are embedded; scripts have CSP hashes and cloud `connect-src 'none'` remains. A browser test verifies no asset or cloud requests after loading the single HTML. Local `file://` navigation is blocked by this managed Chromium's administrator policy, so actual file opening is not claimed as tested. Local WebKit downloads again returned HTTP 403 `Domain forbidden`; no restrictions were bypassed.
+
+**Remaining release gates:** provision/verify/authorise a separate `jaxon-maths-v3-staging` project; test real Auth AMR/password/PIN recovery, email, token refresh, hosted SQL/RLS and multi-device operation; physical iPad Safari and one family acceptance session. Offline learning evidence queues, but rewards for offline minutes need explicit parent review/confirmation. Cold-offline asset caching and multiple children per parent are not implemented. Client-reported academic/activity evidence is not cryptographic anti-cheat. See `V3-SECURE-STAGING.md` for exact setup, security limits and the one consolidated walkthrough.
+
+Main, both protected game entry points, the old adapter and both existing database drafts remain unchanged. Nothing was deployed, merged or connected to production.
+
+---
+
+## Earlier nine-world gameplay milestone (historical report)
+
 # Nine-world V3 development QA
 
 Date: 20 October 2026 (Europe/London). Branch: `codex/v3-adventure-build`, continuing draft PR #2 from milestone `bc30d1940d51fb7b234bb8cf1e8e2a518c2db5cf`.

@@ -1,6 +1,6 @@
 
 > test
-> node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs
+> node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-cloud.cjs
 
 PASS: 39 skills, 4680 generated review questions, 39 repeat-practice flows, 25 skills with safe touch tools.
 PASS: 780 discovery questions, 4 distinct options and 1 valid answer per question.
@@ -27,3 +27,8 @@ PASS: Higher-level coordinates and turn composition match worked mathematical ex
 PASS: Fresh practical checks vary answer-producing quantities across rounds
 PASS: Best-value shopping varies the cheaper pack and cinema offers cover the requested group
 PASS: 11 expedition suites; 4466 generated tasks solved using fictional data.
+PASS configuration fails closed without an explicitly pinned staging identity
+PASS lost response retries exact immutable save and retains later edits
+PASS cross-device CAS conflict preserves complete local and remote learning evidence
+PASS parallel flush calls share one request and corrupt caches remain untouched
+4 cloud sync suites passed (synthetic transport, no backend connection).

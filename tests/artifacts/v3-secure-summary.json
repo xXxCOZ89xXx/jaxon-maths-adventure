@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-20",
+  "isolated": true,
+  "real_staging_tested": false,
+  "production_accessed": false,
+  "local_chromium_full": {
+    "passed": 60,
+    "failed": 0
+  },
+  "final_cloud_focused": {
+    "passed": 21,
+    "failed": 0
+  },
+  "parent_evidence_focused": {
+    "passed": 3,
+    "failed": 0
+  },
+  "v3_logic_suites": 24,
+  "postgres_security_suites": 13,
+  "v2_regression_scripts": 3,
+  "current_test_matrix": {
+    "chromium": 66,
+    "with_webkit": 88
+  },
+  "npm_audit_vulnerabilities": 0,
+  "preview": {
+    "file": "PLAY-V3.html",
+    "bytes": 372167,
+    "sha256": "8bf4adf821a787a9da13267ec36e59040a4d8c44741f3b083358e8f269d714bd"
+  },
+  "hosted_ci": {
+    "status": "pending",
+    "run_id": 39384270497,
+    "head": "e9548763f4c734ebdcae8bcb671233b7e52876e4"
+  },
+  "remaining": [
+    "Verified and authorised separate staging project",
+    "Actual Supabase Auth/PostgREST/RLS acceptance",
+    "Physical iPad Safari and family acceptance",
+    "Cold-offline asset caching",
+    "Multiple children per parent"
+  ]
+}
