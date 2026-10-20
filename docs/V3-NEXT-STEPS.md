@@ -1,10 +1,11 @@
 # V3 release follow-up
 
-The standalone offline adventure is ready for consolidated acceptance after automated checks. Keep the draft unmerged until approval.
+Practical Maths Town, deeper nine-world expeditions and optional gateways are part of the current offline build. They are no longer backlog items. Keep draft PR #2 unmerged until review and release approval.
 
-1. Run the single walkthrough in `V3-PREVIEW.md` and address consolidated feedback.
-2. Test on physical iPad Safari. Playwright WebKit installation was blocked by the managed network policy (HTTP 403 `Domain forbidden` on its download hosts); Chromium iPad emulation is not Safari coverage.
-3. Provision a **separate staging Supabase project** and dedicated test parent/learner family. Wire a staging-only adapter with no production fallback, then test real login/PIN, sync, offline queue/conflicts, cross-family RLS, server-side reward spending and idempotency. No V3 cloud adapter or production migrations are included in this change.
-4. Review migration using synthetic exports plus the existing compatibility tests before connecting any account. The pure V3 migration preserves unknown V2 fields and ownership, but intentionally offers no real-backup import in this offline preview.
-5. Review optional gateway/boss puzzles, additional quest variants and narrative depth after the core acceptance. Current quests have three persistent puzzles per world; their fixed values are repeatable for learning and cannot farm XP or completion coins.
-6. Keep Practical Maths Town in the backlog. Never redirect the homepage or modify production Supabase as part of these follow-ups. Merging/publishing the replacement game requires explicit approval.
+1. Run the consolidated nine-world walkthrough in `V3-PREVIEW.md`; collect feedback once and fix confirmed issues.
+2. Test on physical iPad Safari. Managed-network policy blocked WebKit downloads with HTTP 403 `Domain forbidden`; Chromium touch emulation is not Safari coverage.
+3. Provision a **separate staging Supabase project** and fictional test family before implementing real V3 cloud integration. Test login/PIN, save/sync conflict recovery, cross-family RLS, server-side rewards, spending and retry idempotency there. No production migration or real learner access is authorized by this build.
+4. Review synthetic V2/old-V3 migration and test results before connecting any account. The preview intentionally has no real-backup import or production fallback.
+5. Review prices, reading load, difficulty progression and practical usefulness with the intended learner. The activity rates and deductions are fictional examples; they are not live tariffs or real payroll rules.
+6. Extend narrative/mission variants if acceptance calls for them. Current build has 123 mission/level combinations, three tasks each, 41 keepsakes, camp projects and the original restoration quests. Replays vary values but never create endless completion rewards.
+7. Cross-device saves, cold-offline asset caching and live parent workflows remain separate integration work. Do not redirect the homepage, merge or publish the replacement game without explicit approval.

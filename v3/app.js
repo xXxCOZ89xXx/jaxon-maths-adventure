@@ -1,79 +1,750 @@
-(function(){
-'use strict';
-const E=window.V3Engine,C=window.V3Curriculum,A=window.V3Art,$=id=>document.getElementById(id),esc=A.esc;
-const KEY='jaxon_v3_fictional_demo_2026',LOCK=KEY+':transaction';
-let storageError=false,pendingSaves=0;function read(){try{return E.migrate(JSON.parse(localStorage.getItem(KEY))||{});}catch(error){storageError=error instanceof SyntaxError?'corrupt':'unavailable';return E.fresh();}}
-let s=read(),filter='all',before=false,activity=Date.now(),lastTick=Date.now();
-function status(message){$('status').textContent=message;}
-function persist(){if(storageError==='corrupt'){status('Saved Test Camp data could not be read. This session is temporary; the saved copy has been preserved.');return;}s.revision++;try{localStorage.setItem(KEY,JSON.stringify(s));storageError=false;status('Saved on this device · offline demo');}catch{storageError=true;status('Device storage unavailable. Keep this tab open; progress is not saved.');}}
-async function change(fn,{focus=false,renderPage=true}={}){pendingSaves++;document.documentElement.setAttribute('data-saving','');const transact=()=>{if(!storageError)s=read();fn();persist();if(renderPage)render(focus);};try{if(navigator.locks)await navigator.locks.request(LOCK,transact);else{transact();status('Please use one Test Camp tab: this browser cannot coordinate saves across tabs.');}}finally{pendingSaves--;if(!pendingSaves)document.documentElement.removeAttribute('data-saving');}}
-const btn=(label,action,cls='',disabled=false)=>`<button data-action="${esc(action)}" class="${cls}" ${disabled?'disabled':''}>${label}</button>`;
-const bar=(n,max)=>`<div class="bar" role="progressbar" aria-label="Restoration progress" aria-valuemin="0" aria-valuemax="${max}" aria-valuenow="${Math.min(max,n)}"><span style="width:${Math.min(100,n/max*100)}%"></span></div>`;
-const world=()=>E.worlds.find(w=>w.id===s.world)||E.worlds[0];
-const skill=id=>C.skills.find(k=>k.id===id);
-const art=(id,level=E.count(s,id))=>`<div class="hero-art">${A.scene(id,level,before)}</div>`;
-function header(eyebrow,title,back='map'){return `<div class="section-head"><div><div class="eyebrow">${eyebrow}</div><h1>${title}</h1></div>${btn('← Back', 'nav:'+back)}</div>`;}
-function home(){const w=world(),minutes=s.weekly[E.weekKey(Date.now())]||0;return `<section class="hero"><div class="hero-copy"><div class="eyebrow">YOUR NEXT CHAPTER IS WAITING</div><h1>A little maths.<br>A big adventure.</h1><p class="muted">Build bridges. Bring worlds back to life.<br>See what your next idea can do.</p>${btn('Continue adventure <span class="arrow" aria-hidden="true">→</span>','continue','primary')}<p class="small muted" style="margin-top:14px">${s.quest?'Resume your saved quest':s.learning?'Resume your saved lesson':w.name+' · '+w.tag}</p></div><div class="hero-art">${A.scene(w.id,E.count(s,w.id))}<span class="scene-caption">${esc(w.name.toUpperCase())}</span><div class="scene-bottom"><span>CHAPTER ${E.worlds.indexOf(w)+1} / 08</span><span>${E.count(s,w.id)} / 3 restored</span></div></div></section><div class="eyebrow path-label">CHOOSE YOUR PATH</div><section class="choices" aria-label="Adventure choices"><article class="choice"><span class="tile-icon" aria-hidden="true">↗</span><h3>Continue adventure</h3><p class="muted">Pick up where you left off. Rowan and the forest are ready when you are.</p>${btn('Let’s go <span aria-hidden="true">→</span>','continue','wide')}</article><article class="choice"><span class="tile-icon" aria-hidden="true">▧</span><h3>Explore worlds</h3><p class="muted">Eight places to discover. Choose your own route through the adventure.</p>${btn('Open the map <span aria-hidden="true">→</span>','nav:map','wide')}</article><article class="choice"><span class="tile-icon" aria-hidden="true">⌂</span><h3>My explorer & camp</h3><p class="muted">Make yourself at home. Find your look and watch your camp grow.</p>${btn('Visit Base Camp <span aria-hidden="true">→</span>','nav:camp','wide')}</article></section><section class="week" aria-label="Weekly learning"><span><strong>Your week</strong> <span class="small muted">${minutes.toFixed(1)} / 60 active minutes</span></span>${bar(minutes,60)}<span class="small muted">${minutes.toFixed(1)} minutes screen-time earned · 1:1</span></section>${!s.tourSeen?`<div class="notice small">New to Test Camp? Take a quick look around. <div class="actions">${btn('Show me around','nav:tour')}${btn('Skip tour','skip-tour')}</div></div>`:''}`;}
-function map(){return `${header('THE ADVENTURE ATLAS','Where will you go?','home')}<div class="toolbar"><p class="muted">Every world is open. Follow your curiosity.</p>${A.explorer(s,true)}<span class="badge">${s.milestones.length} / 24 landmarks</span></div><div class="world-grid">${E.worlds.map((w,i)=>`<article class="world-card">${A.scene(w.id,E.count(s,w.id))}<div class="body"><div class="eyebrow">0${i+1} · ${s.world===w.id?'YOU ARE HERE':'OPEN TO EXPLORE'}</div><h2>${w.name}</h2><p class="muted">${w.tag} · ${E.count(s,w.id)}/3 restored</p>${bar(E.count(s,w.id),3)}${btn('Explore '+w.name,'world:'+w.id)}</div></article>`).join('')}</div>`;}
-function worldPage(){const w=world(),n=E.count(s,w.id);return `${header('WORLD '+(E.worlds.indexOf(w)+1)+' / 08',w.name)}<div class="split"><div>${art(w.id)}<div class="actions">${btn(before?'Show restored world':'View before restoration','before')}${btn('Meet '+w.guide+' →','quest:'+w.id,'primary')}</div></div><section class="panel"><span class="badge">${n}/3 LANDMARKS RESTORED</span><h2 style="margin-top:20px">${w.tag}</h2><p class="muted">${w.goal}</p><ul class="landmark-list">${w.stages.map((name,i)=>`<li class="${s.milestones.includes(w.id+':'+i)?'done':''}"><span aria-hidden="true">${s.milestones.includes(w.id+':'+i)?'◆':'◇'}</span>${name}</li>`).join('')}</ul><p class="small muted">Story restoration grows from solved puzzles. Independent mastery has its own fresh checks.</p>${A.explorer(s,true)}</section></div><h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills.filter(k=>k.world===w.id).map(k=>{const c=s.checks[k.id],old=s.skills[k.id];return `<article class="panel"><h3>${esc(k.name)}</h3><p class="small muted">${esc(k.description)}</p><span class="badge">${c?.stage>=2?'SPACED MASTERY':c?.stage===1?'INDEPENDENTLY PRACTISED':old?.state==='mastered'?'EXISTING MASTERY':'READY TO EXPLORE'}</span><div class="actions">${btn('Learn & practise','learn:'+k.id)}${!s.discovery[k.id]?.complete?btn('Find my starting point','discover:'+k.id):''}${btn('Independent check','check:'+k.id,'',!s.practice[k.id]?.completed||c?.reteach||c?.due>Date.now())}</div>${c?.due>Date.now()?'<p class="small muted">Memory check due '+esc(new Date(c.due).toLocaleDateString('en-GB',{timeZone:'Europe/London'}))+'</p>':''}${c?.reteach?'<p class="small muted">Revisit the lesson before another check.</p>':''}</article>`;}).join('')}</section>`;}
-function stepper(q,p,unit=''){return `<div class="stepper">${btn('−','adjust:-'+(p.step||1),'',q.value<=(p.min||0))}<output aria-label="Selected value" aria-live="polite">${q.value}${unit}</output>${btn('+','adjust:'+(p.step||1),'',q.value>=p.max)}</div>`;}
-function puzzle(q){const p=E.puzzle(q.world,q.i);let ui='';if(p.kind==='line')ui=`<div class="numberline" role="group" aria-label="Bridge number line">${Array.from({length:p.max-p.min+1},(_,i)=>i+p.min).map(v=>`<button data-action="value:${v}" aria-pressed="${q.value===v}">${v}</button>`).join('')}</div><p class="small muted">Tap a number, or tab to it and press Enter. Selected: ${q.value}</p>`;
- if(['fraction','chance'].includes(p.kind))ui=`<div class="parts" role="group" aria-label="${p.kind==='fraction'?'Water channels':'Portal chance slots'}">${Array.from({length:4},(_,i)=>`<button class="part" data-action="part:${i}" aria-label="${p.kind==='fraction'?'Channel':'Slot'} ${i+1}" aria-pressed="${q.selected.includes(i)}">${p.kind==='fraction'?'≈':'◇'}</button>`).join('')}</div><p class="small muted">${q.selected.length} of 4 ${p.kind==='fraction'?'channels open':'slots green'}. Tap to toggle.</p>`;
- if(p.kind==='balance')ui=`<div class="puzzle-bars"><span style="height:${(q.value+q.i+3)*8}px">${q.value+q.i+3}</span><span style="height:${(q.i+8)*8}px">${q.i+8}</span></div>${stepper(q,p)}<p class="small muted">Adjust the battery value x until both sides balance.</p>`;
- if(p.kind==='rotate')ui=`<div class="rotate-area"><div><div class="shape" style="--turn:0deg" aria-hidden="true">⌜</div><p class="small">Start</p></div><div><div class="shape" style="--turn:${q.value}deg" aria-hidden="true">⌜</div><p class="small">Your piece: ${q.value}°</p></div></div><div class="actions">${btn('↻ Turn clockwise 90°','rotate')}${btn('Reset rotation','value:0')}</div>`;
- if(p.kind==='ratio')ui=`<p class="small">Green crates: ${p.green}</p><div class="token-row" aria-hidden="true">${'<span class="token"></span>'.repeat(p.green)}</div><p class="small">Blue crates: ${q.value}</p><div class="token-row" aria-hidden="true">${'<span class="token blue"></span>'.repeat(q.value)}</div>${stepper(q,p)}`;
- if(p.kind==='bars')ui=`<div class="puzzle-bars" role="img" aria-label="Left neighbourhood: ${p.values.join(' plus ')}. Right neighbourhood: two bars each ${q.value}.">${[...p.values,q.value,q.value].map((v,i)=>`<span style="height:${v*12}px;${i===2?'margin-left:25px':''}">${v}</span>`).join('')}</div>${stepper(q,p)}<p class="small muted">Left: ${p.values.join(' + ')}. Adjust both right-hand bars together.</p>`;
- if(p.kind==='measure')ui=`<div class="ruler" aria-hidden="true">${[0,100,200,300,400,500].map(v=>'<span>'+v+'</span>').join('')}</div><div style="height:14px;background:#72976c;width:${q.value/5}%;max-width:100%"></div>${stepper(q,p,' cm')}`;
- return `<div class="puzzle"><div class="eyebrow">PUZZLE ${q.i+1} / 3 · ${esc(E.worlds.find(w=>w.id===q.world).stages[q.i])}</div><h2>${esc(p.prompt)}</h2><div ${q.solved?'inert':''}>${ui}</div></div>`;
-}
-function quest(){const q=s.quest,w=E.worlds.find(w=>w.id===q.world);return `${header('RESTORE THE WORLD',w.name,'world')}<div class="quest-layout"><div>${art(w.id)}<section class="panel guide"><div class="portrait" aria-hidden="true">◈</div><div><h3>${w.guide}, your guide</h3><p>${q.intro?esc(w.goal):'Take your time. You can use a hint or ask me to work through it. Every idea helps.'}</p></div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s,true)}${btn('Save & exit','nav:home')}</div></div><section class="panel">${q.intro?`<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2><p>We can restore this place with three small maths puzzles. Tap to build, move and explore.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn('Start building →','begin','primary')}`:puzzle(q)+`${q.solved?`<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn(q.i<2?'Next puzzle →':'Quest recap →','next-quest','primary')}</div>`:`<div class="actions">${btn('Try my solution','solve','primary')}${btn('Hint','hint')}${btn('I don’t know','skip')}</div>${q.feedback?`<div class="feedback" role="status">${esc(q.feedback)}</div>`:''}`}`}</section></div>`;}
-function learning(){const l=s.learning,k=skill(l.id),q=l.qs[l.i];if(s.view==='lesson'){const plan=window.JaxonTutor.plan(l.id,[]);return `${header('LEARN AT YOUR OWN PACE',esc(k.name),'world')}<div class="split"><section class="panel"><h2>Build the idea</h2><p class="lesson-copy">${esc(k.lesson)}</p>${plan?`<div class="feedback"><strong>${esc(plan.title||'An easier example')}</strong><p>${esc(plan.explain||'')}</p><p>${esc(plan.question||plan.prompt||'')}</p><p>${esc(plan.worked||plan.feedback||'')}</p></div>`:''}<div class="actions">${btn('Try supported practice →','practice','primary')}${btn('Save & exit','nav:home')}</div></section><div>${art(k.world)}<p class="small muted">Practice helps you learn. Only separate fresh independent checks can establish mastery.</p></div></div>`;}
- const tools=l.mode==='practice'?(window.JaxonMathTools.render(k.id,k.world,{...l,type:'mission',mode:'question'})||'')+(window.JaxonMathToolsExtra.render(k.id,k.world,{...l,type:'mission',mode:'question'})||''):'';
- return `${header(l.mode==='check'?'FRESH INDEPENDENT CHECK':l.mode==='discovery'?'FIND YOUR STARTING POINT':'SUPPORTED PRACTICE',esc(k.name),'world')}<div class="split"><section class="panel"><span class="badge">QUESTION ${l.i+1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2><div class="answer-grid">${q[2].map((a,i)=>btn(esc(a),'answer:'+i,'',l.answered)).join('')}</div><div class="actions">${btn('Hint','learning-hint','',l.answered)}${btn('I don’t know','learning-skip','',l.answered)}${btn('Save & exit','nav:home')}</div>${l.feedback?`<div class="feedback" role="status">${esc(l.feedback)}</div>`:''}${l.answered?`<div class="actions">${btn(l.i===l.qs.length-1?'See recap →':'Next question →','next-learning','primary')}</div>`:''}</section><aside><div class="panel"><h3>${l.mode==='check'?'Your own thinking':'Explore the idea'}</h3><p class="muted">${l.mode==='check'?'Only the first answer without help counts as independent. Hints and “I don’t know” are always safe.':'Use the tools, take a hint, or work through an example. Practice never awards mastery.'}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
-}
-function recap(){const r=s.lastResult;if(!r)return home();const w=r.world||skill(r.id)?.world||s.world;return `<section class="recap"><span class="badge">A CHAPTER IN YOUR JOURNEY</span><h1 style="margin-top:22px">${r.type==='quest'?'Look what you restored.':r.type==='discovery'?'Your starting point':r.type==='check'?'Your independent check':'Another idea explored.'}</h1><p class="muted">${r.type==='quest'?'Three landmarks, brought back to life through your maths. Your progress is saved.':r.type==='discovery'?'A starting point helps us choose suitable fresh practice. Discovery does not award mastery.':r.type==='check'?r.correct+' / '+r.total+' first answers without help. '+(s.checks[r.id]?.stage>=2?'Spaced mastery demonstrated.':s.checks[r.id]?.stage===1?'Independently practised. Come back for a memory check in two days.':'Revisit the lesson before your next fresh check.'):'Guided practice complete. Your next step can be a separate fresh independent check.'}</p>${art(w)}<div class="actions">${btn('Explore this world','world:'+w,'primary')}${r.type==='practice'?btn('Try a fresh independent check','check:'+r.id):r.type==='discovery'&&!s.discovery[r.id]?.complete?btn('Continue discovery','discover:'+r.id):''}${btn('Visit Base Camp','nav:camp')}${btn('Save & exit','nav:home')}</div></section>`;}
-const campNames=['Tent pitched','Lantern path','Workshop','Garden','Companion corner','Explorer lodge'];const campThresholds=[0,1,3,6,12,24];
-function camp(){const n=s.milestones.length;return `${header('YOUR LITTLE CORNER OF THE WORLD','Welcome to Base Camp.','home')}<div class="split"><div><div class="hero-art">${A.camp(s)}</div><div class="camp-art">${A.explorer(s)}<div class="camp-buildings">${campNames.map((name,i)=>`<div class="${n>=campThresholds[i]?'':'locked'}">${n>=campThresholds[i]?'◆':'◇'} ${name}${n<campThresholds[i]?` <span class="small">(${campThresholds[i]} landmarks)</span>`:''}</div>`).join('')}</div></div></div><section class="panel"><span class="badge">LEVEL ${1+Math.floor(E.xp(s)/400)} EXPLORER</span><h2 style="margin-top:20px">Make it yours.</h2><p class="muted">Your camp grows as you restore landmarks. Every upgrade stays with you.</p><p><strong>${E.xp(s)} explorer XP</strong> · ${s.coins} learning coins</p><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p><div class="actions">${btn('Customise explorer','nav:shop','primary')}${btn('Explore worlds','nav:map')}</div></section></div><h2 style="margin-top:36px">Your discoveries</h2><div class="panel">${[['First steps',n>=1,'Restore your first landmark.'],['Forest keeper',E.count(s,'number')===3,'Restore all of Number Forest.'],['World wanderer',E.worlds.every(w=>E.count(s,w.id)>0),'Restore a landmark in each of the eight worlds.'],['Independent thinker',Object.values(s.checks).some(c=>c.stage>=1),'Pass a fresh independent check.'],['Memory maker',Object.values(s.checks).some(c=>c.stage>=2),'Pass a delayed memory check.'],['World restorer',n===24,'Restore all 24 landmarks.']].map(([name,earned,desc])=>`<div class="achievement"><span aria-hidden="true">${earned?'◆':'◇'}</span><div><strong>${name} ${earned?'· earned':''}</strong><span class="small muted">${desc}</span></div></div>`).join('')}</div>`;}
-function shop(){const slots=[...new Set(C.catalog.map(i=>i.slot))];return `${header('A LOOK THAT IS ALL YOURS','Explorer wardrobe','camp')}<div class="shop-preview">${A.explorer(s)}<div><h2>Your explorer</h2><p class="muted">${s.coins} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. Only fictional demo coins are used here.</p>${btn('Unequip all','unequip')}</div></div><label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All 40 items</option><option value="owned" ${filter==='owned'?'selected':''}>Owned</option><option value="affordable" ${filter==='affordable'?'selected':''}>Affordable</option>${slots.map(x=>`<option ${filter===x?'selected':''}>${x}</option>`).join('')}</select></label><div class="shop-grid">${C.catalog.filter(i=>filter==='all'||filter==='owned'&&s.bought.includes(i.id)||filter==='affordable'&&(s.bought.includes(i.id)||s.coins>=i.cost)||filter===i.slot).map(i=>`<article class="shop-item"><span class="ico" aria-hidden="true">${i.ico}</span><h3>${i.label}</h3><p class="small muted">${i.cost} coins · ${i.slot}</p>${btn(s.equipped.includes(i.id)?'Unequip '+i.label:s.bought.includes(i.id)?'Equip '+i.label:'Buy '+i.label,'buy:'+i.id,s.equipped.includes(i.id)?'primary':'',!s.bought.includes(i.id)&&s.coins<i.cost)}</article>`).join('')}</div>`;}
-function settings(){return `${header('PLAY YOUR WAY','Settings','home')}<div class="panel preferences"><h2>Comfort comes first</h2><label><input type="checkbox" data-setting="motion" ${s.settings.motion?'checked':''}>Gentle scene animation (system reduced-motion preference takes priority)</label><label><input type="checkbox" data-setting="sound" ${s.settings.sound?'checked':''}>Quiet restoration sound</label><p class="muted">Sound and animation start off. All puzzles work with tapping and a keyboard; dragging is optional.</p><div class="actions">${btn('Replay the welcome tour','nav:tour')}</div><h3>Fictional Test Camp</h3><p class="small muted">This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.</p></div>`;}
-function parent(){const minutes=s.weekly[E.weekKey(Date.now())]||0;return `${header('FICTIONAL TEST LEARNER','Demo parent summary','home')}<div class="notice">Offline summary only. Real parent login, bonus awards and family data stay in the existing secure game. No production data is loaded here.</div><div class="stat-grid"><div class="stat"><strong>${minutes.toFixed(1)} / 60</strong>weekly active minutes</div><div class="stat"><strong>${minutes.toFixed(1)}</strong>screen-time minutes · 1:1</div><div class="stat"><strong>${Object.values(s.skills).filter(k=>k.state==='mastered').length}</strong>independently mastered skills</div></div><div class="split"><section class="panel"><h2>Learning evidence</h2>${C.skills.filter(k=>s.checks[k.id]||s.practice[k.id]).map(k=>`<p><strong>${k.name}</strong><br><span class="small muted">${s.checks[k.id]?.reteach?'Needs reinforcement':s.checks[k.id]?.stage>=2?'Spaced mastery':s.checks[k.id]?.stage===1?'Independent practice passed':'Guided practice'} · ${s.checks[k.id]?.score??'No independent score'}${s.checks[k.id]?'%':''}</span></p>`).join('')||'<p class="muted">Learning evidence appears after lessons and checks.</p>'}<p class="small muted">${s.milestones.length} story landmarks · separate from academic mastery.</p></section><section class="panel"><h2>Recent genuine activity</h2>${s.recent.slice(0,8).map(r=>`<p class="small"><strong>${esc(r.type==='restoration'?E.worlds.find(w=>w.id===r.world)?.name:skill(r.id)?.name||r.type)}</strong> · ${esc(r.type)}${r.assisted?' · with support':''}<br><span class="muted">${esc(new Date(r.date).toLocaleString('en-GB',{timeZone:'Europe/London'}))}</span></p>`).join('')||'<p class="muted">No learning activity yet.</p>'}</section></div>`;}
-function tour(){return `<section class="tour">${header('WELCOME, EXPLORER','A world you can change.','home')}${art('number')}<div class="panel"><h2>One idea at a time.</h2><p>Choose any of eight worlds. Meet your guide and solve three hands-on puzzles to restore each place.</p><p>Hints are always safe. Lessons and practice help you learn; separate fresh checks show what you can do independently.</p><p>Your explorer and Base Camp grow with your adventure. Progress saves automatically on this device.</p><div class="actions">${btn('Start exploring →','finish-tour','primary')}${btn('Skip tour','skip-tour')}</div></div></section>`;}
-function render(focus=false){document.body.classList.toggle('animate',!!s.settings.motion);$('headerExplorer').innerHTML=A.explorer(s,true);const screens={home,map,world:worldPage,quest,lesson:learning,practice:learning,check:learning,camp,shop,settings,parent,recap,tour,discovery:learning};$('main').innerHTML=(screens[s.view]||home)();document.querySelectorAll('[data-nav]').forEach(el=>{if(el.closest('nav')){const current=el.dataset.nav===s.view||(el.dataset.nav==='map'&&['world','quest','lesson','practice','check','discovery'].includes(s.view))||(el.dataset.nav==='camp'&&s.view==='shop');if(current)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');}});if(focus){$('main').focus();window.scrollTo(0,0);}}
-function sound(){if(!s.settings.sound)return;try{const ctx=new(window.AudioContext||window.webkitAudioContext)(),osc=ctx.createOscillator(),gain=ctx.createGain();gain.gain.value=.025;osc.frequency.value=440;osc.connect(gain);gain.connect(ctx.destination);osc.start();gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.25);osc.stop(ctx.currentTime+.3);osc.onended=()=>ctx.close();}catch{}}
-async function dispatch(action){const [name,arg]=action.split(':');const oldView=s.view;let error=null,restored=false;await change(()=>{switch(name){
- case 'nav':s.view=arg;before=false;break;
- case 'world':s.world=arg;s.view='world';before=false;break;
- case 'continue':if(s.resumeView==='quest'&&s.quest)s.view='quest';else if(['lesson','practice','check','discovery'].includes(s.resumeView)&&s.learning)s.view=s.resumeView;else if(s.quest)s.view='quest';else if(s.learning)s.view=s.learning.mode==='discovery'?'discovery':s.learning.mode==='check'?'check':s.learning.started?'practice':'lesson';else E.startQuest(s,s.world);break;
- case 'quest':E.startQuest(s,arg);break;
- case 'begin':if(s.quest)s.quest.intro=false;break;
- case 'value':if(s.quest&&!s.quest.solved)s.quest.value=Number(arg);break;
- case 'adjust':if(s.quest&&!s.quest.solved){const p=E.puzzle(s.quest.world,s.quest.i);s.quest.value=Math.min(p.max,Math.max(p.min||0,s.quest.value+Number(arg)));}break;
- case 'part':if(s.quest&&!s.quest.solved){const sel=s.quest.selected;s.quest.selected=sel.includes(Number(arg))?sel.filter(v=>v!==Number(arg)):[...sel,Number(arg)];}break;
- case 'rotate':if(s.quest&&!s.quest.solved)s.quest.value=(s.quest.value+90)%360;break;
- case 'hint':E.help(s);break;
- case 'solve':restored=E.answerQuest(s);break;
- case 'skip':E.answerQuest(s,true);break;
- case 'next-quest':E.nextQuest(s);break;
- case 'before':before=!before;break;
- case 'learn':error=E.generate(s,arg,'practice',window.JaxonFreshReview,C);break;
- case 'discover':error=E.startDiscovery(s,arg,C,window.V3Discovery);break;
- case 'check':error=E.generate(s,arg,'check',window.JaxonFreshReview,C);break;
- case 'practice':if(s.learning){s.learning.started=true;s.view='practice';s.resumeView='practice';}break;
- case 'answer':if(s.learning)E.answerLearning(s,s.learning.qs[s.learning.i][2][Number(arg)]);break;
- case 'learning-skip':E.answerLearning(s,'',true);break;
- case 'learning-hint':if(s.learning&&!s.learning.answered){s.learning.assisted=true;s.learning.feedback=s.learning.qs[s.learning.i][3];}break;
- case 'next-learning':E.nextLearning(s);break;
- case 'buy':if(!E.purchase(s,arg,C.catalog))error='More active learning coins are needed for this item.';break;
- case 'unequip':s.equipped=[];break;
- case 'skip-tour':s.tourSeen=true;s.view='home';break;
- case 'finish-tour':s.tourSeen=true;s.view='map';break;
- default:if(action.startsWith('math:')||action.startsWith('mathx:')){if(s.learning){s.learning.type='mission';window.JaxonMathTools.update(s.learning,action);window.JaxonMathToolsExtra.update(s.learning,action);}}
- }});if(error)status(error);if(restored)sound();if(s.view!==oldView){$('main').focus();window.scrollTo(0,0);}else if(['next-quest','next-learning','answer','learning-skip','hint','learning-hint','skip','begin','solve'].includes(name)){$('main').focus();}else if(['value','adjust','part','rotate'].includes(name)){const el=[...document.querySelectorAll('[data-action]')].find(el=>el.dataset.action===action&&!el.disabled);el?.focus();}}
-document.addEventListener('click',async e=>{const el=e.target.closest('[data-action],[data-nav],[data-act]');if(!el||el.disabled)return;activity=Date.now();await dispatch(el.dataset.action||el.dataset.act||'nav:'+el.dataset.nav);});
-document.addEventListener('keydown',()=>{activity=Date.now();});document.addEventListener('pointerdown',()=>{activity=Date.now();});
-document.addEventListener('change',async e=>{activity=Date.now();if(e.target.id==='shop-filter'){filter=e.target.value;render();return;}if(e.target.dataset.setting){const name=e.target.dataset.setting,value=e.target.checked;await change(()=>{s.settings[name]=value;});}});
-window.addEventListener('storage',e=>{if(e.key===KEY){s=read();render();status('Updated from another Test Camp tab.');}});
-document.addEventListener('visibilitychange',()=>{lastTick=Date.now();activity=0;});
-setInterval(async()=>{const now=Date.now(),dt=now-lastTick;lastTick=now;const eligible=!document.hidden&&document.hasFocus()&&now-activity<60000&&(['quest','lesson','practice','check','discovery'].includes(s.view))&&(s.view==='quest'?!s.quest?.solved:!s.learning?.answered);if(eligible)await change(()=>E.activeTime(s,dt,eligible,now),{renderPage:false});},5000);
-render();if(storageError)status(storageError==='corrupt'?'Saved Test Camp data could not be read. This session is temporary; the saved copy has been preserved.':'Device storage unavailable. This session is temporary.');
+(function () {
+  "use strict";
+  const M = window.V3Adventure,
+    U = window.V3AdventureUI,
+    T = window.V3Town;
+  const E = window.V3Engine,
+    C = window.V3Curriculum,
+    A = window.V3Art,
+    $ = (id) => document.getElementById(id),
+    esc = A.esc;
+  const KEY = "jaxon_v3_fictional_demo_2026",
+    LOCK = KEY + ":transaction";
+  let storageError = false,
+    pendingSaves = 0;
+  function read() {
+    try {
+      return E.migrate(JSON.parse(localStorage.getItem(KEY)) || {});
+    } catch (error) {
+      storageError = error instanceof SyntaxError ? "corrupt" : "unavailable";
+      return E.fresh();
+    }
+  }
+  let s = read(),
+    filter = "all",
+    before = false,
+    activity = Date.now(),
+    lastTick = Date.now();
+  function status(message) {
+    $("status").textContent = message;
+  }
+  function persist() {
+    if (storageError === "corrupt") {
+      status(
+        "Saved Test Camp data could not be read. This session is temporary; the saved copy has been preserved.",
+      );
+      return;
+    }
+    s.revision++;
+    try {
+      localStorage.setItem(KEY, JSON.stringify(s));
+      storageError = false;
+      status("Saved on this device · offline demo");
+    } catch {
+      storageError = true;
+      status(
+        "Device storage unavailable. Keep this tab open; progress is not saved.",
+      );
+    }
+  }
+  async function change(fn, { focus = false, renderPage = true } = {}) {
+    pendingSaves++;
+    document.documentElement.setAttribute("data-saving", "");
+    const transact = () => {
+      if (!storageError) s = read();
+      fn();
+      persist();
+      if (renderPage) render(focus);
+    };
+    try {
+      if (navigator.locks) await navigator.locks.request(LOCK, transact);
+      else {
+        transact();
+        status(
+          "Please use one Test Camp tab: this browser cannot coordinate saves across tabs.",
+        );
+      }
+    } finally {
+      pendingSaves--;
+      if (!pendingSaves)
+        document.documentElement.removeAttribute("data-saving");
+    }
+  }
+  const btn = (label, action, cls = "", disabled = false) =>
+    `<button data-action="${esc(action)}" class="${cls}" ${disabled ? "disabled" : ""}>${label}</button>`;
+  const bar = (n, max) =>
+    `<div class="bar" role="progressbar" aria-label="Restoration progress" aria-valuemin="0" aria-valuemax="${max}" aria-valuenow="${Math.min(max, n)}"><span style="width:${Math.min(100, (n / max) * 100)}%"></span></div>`;
+  const world = () => E.worlds.find((w) => w.id === s.world) || E.worlds[0];
+  const skill = (id) => C.skills.find((k) => k.id === id);
+  const art = (id, level = E.count(s, id)) =>
+    `<div class="hero-art">${A.scene(id, M.visualLevel(s, id, level), before, M.completions(s, id).length)}</div>`;
+  function header(eyebrow, title, back = "map") {
+    return `<div class="section-head"><div><div class="eyebrow">${eyebrow}</div><h1>${title}</h1></div>${btn("← Back", "nav:" + back)}</div>`;
+  }
+  function home() {
+    const w = world(),
+      minutes = s.weekly[E.weekKey(Date.now())] || 0;
+    return `<section class="hero"><div class="hero-copy"><div class="eyebrow">YOUR NEXT CHAPTER IS WAITING</div><h1>A little maths.<br>A big adventure.</h1><p class="muted">Build bridges. Bring worlds back to life.<br>See what your next idea can do.</p>${btn('Continue adventure <span class="arrow" aria-hidden="true">→</span>', "continue", "primary")}<p class="small muted" style="margin-top:14px">${M.current(s) ? "Resume your saved visit" : s.quest ? "Resume your saved quest" : s.learning ? "Resume your saved lesson" : w.name + " · " + w.tag}</p></div><div class="hero-art">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="scene-caption">${esc(w.name.toUpperCase())}</span><div class="scene-bottom"><span>CHAPTER ${E.worlds.indexOf(w) + 1} / 09</span><span>${M.visualLevel(s, w.id, E.count(s, w.id))} / 3 restored</span></div></div></section><div class="eyebrow path-label">CHOOSE YOUR PATH</div><section class="choices" aria-label="Adventure choices"><article class="choice"><span class="tile-icon" aria-hidden="true">↗</span><h3>Continue adventure</h3><p class="muted">Pick up where you left off. Rowan and the forest are ready when you are.</p>${btn('Let’s go <span aria-hidden="true">→</span>', "continue", "wide")}</article><article class="choice"><span class="tile-icon" aria-hidden="true">▧</span><h3>Explore worlds</h3><p class="muted">Nine places to discover. Choose your own route through the adventure.</p>${btn('Open the map <span aria-hidden="true">→</span>', "nav:map", "wide")}</article><article class="choice"><span class="tile-icon" aria-hidden="true">⌂</span><h3>My explorer & camp</h3><p class="muted">Make yourself at home. Find your look and watch your camp grow.</p>${btn('Visit Base Camp <span aria-hidden="true">→</span>', "nav:camp", "wide")}</article></section><section class="week" aria-label="Weekly learning"><span><strong>Your week</strong> <span class="small muted">${minutes.toFixed(1)} / 60 active minutes</span></span>${bar(minutes, 60)}<span class="small muted">${minutes.toFixed(1)} minutes screen-time earned · 1:1</span></section>${U.suggestion(s)}${!s.tourSeen ? `<div class="notice small">New to Test Camp? Take a quick look around. <div class="actions">${btn("Show me around", "nav:tour")}${btn("Skip tour", "skip-tour")}</div></div>` : ""}`;
+  }
+  function map() {
+    return `${header("THE ADVENTURE ATLAS", "Where will you go?", "home")}<div class="toolbar"><p class="muted">Every world is open. Follow your curiosity.</p>${A.explorer(s, true)}<span class="badge">${s.milestones.length} learning milestones</span></div><div class="world-grid">${E.worlds.map((w, i) => `<article class="world-card">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<div class="body"><div class="eyebrow">0${i + 1} · ${s.world === w.id ? "YOU ARE HERE" : "OPEN TO EXPLORE"}</div><h2>${w.name}</h2><p class="muted">${w.tag} · ${M.visualLevel(s, w.id, E.count(s, w.id))}/3 restored · ${M.completions(s, w.id).length} expeditions</p>${bar(M.visualLevel(s, w.id, E.count(s, w.id)), 3)}${btn("Explore " + w.name, "world:" + w.id)}</div></article>`).join("")}</div>`;
+  }
+  function worldPage() {
+    const w = world(),
+      n = M.visualLevel(s, w.id, E.count(s, w.id));
+    return `${header("WORLD " + (E.worlds.indexOf(w) + 1) + " / 09", w.name)}<div class="split"><div>${art(w.id)}<div class="actions">${btn(before ? "Show restored world" : "View before restoration", "before")}${w.id === "town" ? btn("Visit the supermarket →", "mission:town:market:1", "primary") : btn("Meet " + w.guide + " →", "quest:" + w.id, "primary")}</div></div><section class="panel"><span class="badge">${n}/3 LANDMARKS RESTORED</span><h2 style="margin-top:20px">${w.tag}</h2><p class="muted">${w.goal}</p><ul class="landmark-list">${w.stages.map((name, i) => `<li class="${n > i ? "done" : ""}"><span aria-hidden="true">${n > i ? "◆" : "◇"}</span>${name}</li>`).join("")}</ul><p class="small muted">Story restoration grows from solved puzzles. Independent mastery has its own fresh checks.</p>${A.explorer(s, true)}</section></div>${U.board(s, w)}${w.id === "town" ? '<details class="town-lessons"><summary>Maths lessons and independent checks · 16 skills</summary>' : ""}<h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills
+      .filter((k) => k.world === w.id)
+      .map((k) => {
+        const c = s.checks[k.id],
+          old = s.skills[k.id];
+        return `<article class="panel"><h3>${esc(k.name)}</h3><p class="small muted">${esc(k.description)}</p><span class="badge">${c?.stage >= 2 ? "SPACED MASTERY" : c?.stage === 1 ? "INDEPENDENTLY PRACTISED" : old?.state === "mastered" ? "EXISTING MASTERY" : "READY TO EXPLORE"}</span><div class="actions">${btn("Learn & practise", "learn:" + k.id)}${!s.discovery[k.id]?.complete ? btn("Find my starting point", "discover:" + k.id) : ""}${btn("Independent check", "check:" + k.id, "", !s.practice[k.id]?.completed || c?.reteach || c?.due > Date.now())}</div>${c?.due > Date.now() ? '<p class="small muted">Memory check due ' + esc(new Date(c.due).toLocaleDateString("en-GB", { timeZone: "Europe/London" })) + "</p>" : ""}${c?.reteach ? '<p class="small muted">Revisit the lesson before another check.</p>' : ""}</article>`;
+      })
+      .join("")}</section>${w.id === "town" ? "</details>" : ""}`;
+  }
+  function stepper(q, p, unit = "") {
+    return `<div class="stepper">${btn("−", "adjust:-" + (p.step || 1), "", q.value <= (p.min || 0))}<output aria-label="Selected value" aria-live="polite">${q.value}${unit}</output>${btn("+", "adjust:" + (p.step || 1), "", q.value >= p.max)}</div>`;
+  }
+  function puzzle(q) {
+    const p = E.puzzle(q.world, q.i);
+    let ui = "";
+    if (p.kind === "line")
+      ui = `<div class="numberline" role="group" aria-label="Bridge number line">${Array.from(
+        { length: p.max - p.min + 1 },
+        (_, i) => i + p.min,
+      )
+        .map(
+          (v) =>
+            `<button data-action="value:${v}" aria-pressed="${q.value === v}">${v}</button>`,
+        )
+        .join(
+          "",
+        )}</div><p class="small muted">Tap a number, or tab to it and press Enter. Selected: ${q.value}</p>`;
+    if (["fraction", "chance"].includes(p.kind))
+      ui = `<div class="parts" role="group" aria-label="${p.kind === "fraction" ? "Water channels" : "Portal chance slots"}">${Array.from({ length: 4 }, (_, i) => `<button class="part" data-action="part:${i}" aria-label="${p.kind === "fraction" ? "Channel" : "Slot"} ${i + 1}" aria-pressed="${q.selected.includes(i)}">${p.kind === "fraction" ? "≈" : "◇"}</button>`).join("")}</div><p class="small muted">${q.selected.length} of 4 ${p.kind === "fraction" ? "channels open" : "slots green"}. Tap to toggle.</p>`;
+    if (p.kind === "balance")
+      ui = `<div class="puzzle-bars"><span style="height:${(q.value + q.i + 3) * 8}px">${q.value + q.i + 3}</span><span style="height:${(q.i + 8) * 8}px">${q.i + 8}</span></div>${stepper(q, p)}<p class="small muted">Adjust the battery value x until both sides balance.</p>`;
+    if (p.kind === "rotate")
+      ui = `<div class="rotate-area"><div><div class="shape" style="--turn:0deg" aria-hidden="true">⌜</div><p class="small">Start</p></div><div><div class="shape" style="--turn:${q.value}deg" aria-hidden="true">⌜</div><p class="small">Your piece: ${q.value}°</p></div></div><div class="actions">${btn("↻ Turn clockwise 90°", "rotate")}${btn("Reset rotation", "value:0")}</div>`;
+    if (p.kind === "ratio")
+      ui = `<p class="small">Green crates: ${p.green}</p><div class="token-row" aria-hidden="true">${'<span class="token"></span>'.repeat(p.green)}</div><p class="small">Blue crates: ${q.value}</p><div class="token-row" aria-hidden="true">${'<span class="token blue"></span>'.repeat(q.value)}</div>${stepper(q, p)}`;
+    if (p.kind === "bars")
+      ui = `<div class="puzzle-bars" role="img" aria-label="Left neighbourhood: ${p.values.join(" plus ")}. Right neighbourhood: two bars each ${q.value}.">${[...p.values, q.value, q.value].map((v, i) => `<span style="height:${v * 12}px;${i === 2 ? "margin-left:25px" : ""}">${v}</span>`).join("")}</div>${stepper(q, p)}<p class="small muted">Left: ${p.values.join(" + ")}. Adjust both right-hand bars together.</p>`;
+    if (p.kind === "measure")
+      ui = `<div class="ruler" aria-hidden="true">${[0, 100, 200, 300, 400, 500].map((v) => "<span>" + v + "</span>").join("")}</div><div style="height:14px;background:#72976c;width:${q.value / 5}%;max-width:100%"></div>${stepper(q, p, " cm")}`;
+    return `<div class="puzzle"><div class="eyebrow">PUZZLE ${q.i + 1} / 3 · ${esc(E.worlds.find((w) => w.id === q.world).stages[q.i])}</div><h2>${esc(p.prompt)}</h2><div ${q.solved ? "inert" : ""}>${ui}</div></div>`;
+  }
+  function quest() {
+    const q = s.quest,
+      w = E.worlds.find((w) => w.id === q.world);
+    return `${header("RESTORE THE WORLD", w.name, "world")}<div class="quest-layout"><div>${art(w.id)}<section class="panel guide"><div class="portrait" aria-hidden="true">◈</div><div><h3>${w.guide}, your guide</h3><p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p></div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s, true)}${btn("Save & exit", "nav:home")}</div></div><section class="panel">${q.intro ? `<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2><p>We can restore this place with three small maths puzzles. Tap to build, move and explore.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn("Start building →", "begin", "primary")}` : puzzle(q) + `${q.solved ? `<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn(q.i < 2 ? "Next puzzle →" : "Quest recap →", "next-quest", "primary")}</div>` : `<div class="actions">${btn("Try my solution", "solve", "primary")}${btn("Hint", "hint")}${btn("I don’t know", "skip")}</div>${q.feedback ? `<div class="feedback" role="status">${esc(q.feedback)}</div>` : ""}`}`}</section></div>`;
+  }
+  function learning() {
+    const l = s.learning,
+      k = skill(l.id),
+      q = l.qs[l.i];
+    if (s.view === "lesson") {
+      const plan = window.JaxonTutor.plan(l.id, []);
+      return `${header("LEARN AT YOUR OWN PACE", esc(k.name), "world")}<div class="split"><section class="panel"><h2>Build the idea</h2><p class="lesson-copy">${esc(k.lesson)}</p>${plan ? `<div class="feedback"><strong>${esc(plan.title || "An easier example")}</strong><p>${esc(plan.explain || "")}</p><p>${esc(plan.question || plan.prompt || "")}</p><p>${esc(plan.worked || plan.feedback || "")}</p></div>` : ""}<div class="actions">${btn("Try supported practice →", "practice", "primary")}${btn("Save & exit", "nav:home")}</div></section><div>${art(k.world)}<p class="small muted">Practice helps you learn. Only separate fresh independent checks can establish mastery.</p></div></div>`;
+    }
+    const tools =
+      l.mode === "practice"
+        ? (window.JaxonMathTools.render(k.id, k.world, {
+            ...l,
+            type: "mission",
+            mode: "question",
+          }) || "") +
+          (window.JaxonMathToolsExtra.render(k.id, k.world, {
+            ...l,
+            type: "mission",
+            mode: "question",
+          }) || "")
+        : "";
+    return `${header(l.mode === "check" ? "FRESH INDEPENDENT CHECK" : l.mode === "discovery" ? "FIND YOUR STARTING POINT" : "SUPPORTED PRACTICE", esc(k.name), "world")}<div class="split"><section class="panel"><span class="badge">QUESTION ${l.i + 1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2><div class="answer-grid">${q[2].map((a, i) => btn(esc(a), "answer:" + i, "", l.answered)).join("")}</div><div class="actions">${btn("Hint", "learning-hint", "", l.answered)}${btn("I don’t know", "learning-skip", "", l.answered)}${btn("Save & exit", "nav:home")}</div>${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}${l.answered ? `<div class="actions">${btn(l.i === l.qs.length - 1 ? "See recap →" : "Next question →", "next-learning", "primary")}</div>` : ""}</section><aside><div class="panel"><h3>${l.mode === "check" ? "Your own thinking" : "Explore the idea"}</h3><p class="muted">${l.mode === "check" ? "Only the first answer without help counts as independent. Hints and “I don’t know” are always safe." : "Use the tools, take a hint, or work through an example. Practice never awards mastery."}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
+  }
+  function recap() {
+    const r = s.lastResult;
+    if (!r) return home();
+    const w = r.world || skill(r.id)?.world || s.world;
+    return `<section class="recap"><span class="badge">A CHAPTER IN YOUR JOURNEY</span><h1 style="margin-top:22px">${r.type === "expedition" ? "A visit worth remembering." : r.type === "quest" ? "Look what you restored." : r.type === "discovery" ? "Your starting point" : r.type === "check" ? "Your independent check" : "Another idea explored."}</h1><p class="muted">${r.type === "expedition" ? (r.newReward ? "A new milestone and keepsake are saved. Your maths has helped this place grow." : "A fresh visit complete. Your earlier rewards are safe; replaying does not duplicate them.") : r.type === "quest" ? "Three landmarks, brought back to life through your maths. Your progress is saved." : r.type === "discovery" ? "A starting point helps us choose suitable fresh practice. Discovery does not award mastery." : r.type === "check" ? r.correct + " / " + r.total + " first answers without help. " + (s.checks[r.id]?.stage >= 2 ? "Spaced mastery demonstrated." : s.checks[r.id]?.stage === 1 ? "Independently practised. Come back for a memory check in two days." : "Revisit the lesson before your next fresh check.") : "Guided practice complete. Your next step can be a separate fresh independent check."}</p>${art(w)}<div class="actions">${btn("Explore this world", "world:" + w, "primary")}${r.type === "practice" ? btn("Try a fresh independent check", "check:" + r.id) : r.type === "discovery" && !s.discovery[r.id]?.complete ? btn("Continue discovery", "discover:" + r.id) : ""}${r.type === "expedition" ? btn("Learn the maths behind this visit", "learn:" + (M.routes(w).find((v) => v.id === r.route)?.skills[0] || E.worlds.find((v) => v.id === w).skill)) : ""}${btn("Visit Base Camp", "nav:camp")}${btn("Save & exit", "nav:home")}</div></section>`;
+  }
+  const campNames = [
+    "Tent pitched",
+    "Lantern path",
+    "Workshop",
+    "Garden",
+    "Companion corner",
+    "Explorer lodge",
+  ];
+  const campThresholds = [0, 1, 3, 6, 12, 24];
+  function camp() {
+    const n = s.milestones.length;
+    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Welcome to Base Camp.", "home")}<div class="split"><div><div class="hero-art">${A.camp(s)}</div><div class="camp-art">${A.explorer(s)}<div class="camp-buildings">${campNames.map((name, i) => `<div class="${n >= campThresholds[i] ? "" : "locked"}">${n >= campThresholds[i] ? "◆" : "◇"} ${name}${n < campThresholds[i] ? ` <span class="small">(${campThresholds[i]} landmarks)</span>` : ""}</div>`).join("")}</div></div></div><section class="panel"><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2 style="margin-top:20px">Make it yours.</h2><p class="muted">Your camp grows as you restore landmarks. Every upgrade stays with you.</p><p><strong>${E.xp(s)} explorer XP</strong> · ${s.coins} learning coins</p><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div></section></div><h2 style="margin-top:36px">Your discoveries</h2><div class="panel">${[
+      ["First steps", n >= 1, "Restore your first landmark."],
+      [
+        "Forest keeper",
+        E.count(s, "number") === 3,
+        "Restore all of Number Forest.",
+      ],
+      [
+        "World wanderer",
+        E.worlds.every((w) => M.visualLevel(s, w.id, E.count(s, w.id)) > 0),
+        "Restore a landmark in each of the nine worlds.",
+      ],
+      [
+        "Independent thinker",
+        s.achievements.includes("independent"),
+        "Pass a fresh independent check.",
+      ],
+      [
+        "Memory maker",
+        s.achievements.includes("memory"),
+        "Pass a delayed memory check.",
+      ],
+      [
+        "Original atlas keeper",
+        E.worlds
+          .filter((w) => w.id !== "town")
+          .every((w) => E.count(s, w.id) === 3),
+        "Restore the original 24 landmarks.",
+      ],
+      [
+        "Town neighbour",
+        new Set(
+          M.completions(s, "town")
+            .filter((r) => r.route !== "gateway")
+            .map((r) => r.route),
+        ).size === 8,
+        "Help all eight town locations.",
+      ],
+      [
+        "Gateway guardian",
+        E.worlds.every(
+          (w) =>
+            M.entry(s, w.id, "gateway", 1) ||
+            M.entry(s, w.id, "gateway", 2) ||
+            M.entry(s, w.id, "gateway", 3),
+        ),
+        "Complete a gateway in each of the nine worlds.",
+      ],
+    ]
+      .map(
+        ([name, earned, desc]) =>
+          `<div class="achievement"><span aria-hidden="true">${earned ? "◆" : "◇"}</span><div><strong>${name} ${earned ? "· earned" : ""}</strong><span class="small muted">${desc}</span></div></div>`,
+      )
+      .join("")}</div>${U.collection(s)}`;
+  }
+  function shop() {
+    const slots = [...new Set(C.catalog.map((i) => i.slot))];
+    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}<div class="shop-preview">${A.explorer(s)}<div><h2>Your explorer</h2><p class="muted">${s.coins} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. Only fictional demo coins are used here.</p>${btn("Unequip all", "unequip")}</div></div><label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All 40 items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${C.catalog
+      .filter(
+        (i) =>
+          filter === "all" ||
+          (filter === "owned" && s.bought.includes(i.id)) ||
+          (filter === "affordable" &&
+            (s.bought.includes(i.id) || s.coins >= i.cost)) ||
+          filter === i.slot,
+      )
+      .map(
+        (i) =>
+          `<article class="shop-item"><span class="ico" aria-hidden="true">${i.ico}</span><h3>${i.label}</h3><p class="small muted">${i.cost} coins · ${i.slot}</p>${btn(s.equipped.includes(i.id) ? "Unequip " + i.label : s.bought.includes(i.id) ? "Equip " + i.label : "Buy " + i.label, "buy:" + i.id, s.equipped.includes(i.id) ? "primary" : "", !s.bought.includes(i.id) && s.coins < i.cost)}</article>`,
+      )
+      .join("")}</div>`;
+  }
+  function settings() {
+    return `${header("PLAY YOUR WAY", "Settings", "home")}<div class="panel preferences"><h2>Comfort comes first</h2><label><input type="checkbox" data-setting="motion" ${s.settings.motion ? "checked" : ""}>Gentle scene animation (system reduced-motion preference takes priority)</label><label><input type="checkbox" data-setting="sound" ${s.settings.sound ? "checked" : ""}>Quiet restoration sound</label><p class="muted">Sound and animation start off. All puzzles work with tapping and a keyboard; dragging is optional.</p><div class="actions">${btn("Replay the welcome tour", "nav:tour")}</div><h3>Fictional Test Camp</h3><p class="small muted">This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.</p></div>`;
+  }
+  function parent() {
+    const minutes = s.weekly[E.weekKey(Date.now())] || 0;
+    return `${header("FICTIONAL TEST LEARNER", "Demo parent summary", "home")}<div class="notice">Offline summary only. Real parent login, bonus awards and family data stay in the existing secure game. No production data is loaded here.</div><div class="stat-grid"><div class="stat"><strong>${minutes.toFixed(1)} / 60</strong>weekly active minutes</div><div class="stat"><strong>${minutes.toFixed(1)}</strong>screen-time minutes · 1:1</div><div class="stat"><strong>${Object.values(s.skills).filter((k) => k.state === "mastered").length}</strong>independently mastered skills</div></div><div class="split"><section class="panel"><h2>Learning evidence</h2>${
+      C.skills
+        .filter((k) => s.checks[k.id] || s.practice[k.id])
+        .map(
+          (k) =>
+            `<p><strong>${k.name}</strong><br><span class="small muted">${s.checks[k.id]?.reteach ? "Needs reinforcement" : s.checks[k.id]?.stage >= 2 ? "Spaced mastery" : s.checks[k.id]?.stage === 1 ? "Independent practice passed" : "Guided practice"} · ${s.checks[k.id]?.score ?? "No independent score"}${s.checks[k.id] ? "%" : ""}</span></p>`,
+        )
+        .join("") ||
+      '<p class="muted">Learning evidence appears after lessons and checks.</p>'
+    }<p class="small muted">${s.milestones.length} story landmarks · separate from academic mastery.</p></section><section class="panel"><h2>Recent genuine activity</h2>${
+      s.recent
+        .slice(0, 8)
+        .map(
+          (r) =>
+            `<p class="small"><strong>${esc(r.type === "expedition" ? (E.worlds.find(w=>w.id===r.world)?.name+" · "+(M.routes(r.world).find(v=>v.id===r.route)?.name||"Gateway")+" · level "+r.tier) : r.type === "restoration" ? E.worlds.find((w) => w.id === r.world)?.name : skill(r.id)?.name || r.type)}</strong> · ${esc(r.type)}${r.assisted ? " · with support" : ""}<br><span class="muted">${esc(new Date(r.date).toLocaleString("en-GB", { timeZone: "Europe/London" }))}</span></p>`,
+        )
+        .join("") || '<p class="muted">No learning activity yet.</p>'
+    }</section></div>`;
+  }
+  function tour() {
+    return `<section class="tour">${header("WELCOME, EXPLORER", "A world you can change.", "home")}${art("number")}<div class="panel"><h2>One idea at a time.</h2><p>Choose any of nine worlds. Meet your guide, choose a difficulty and solve hands-on tasks. Return for new expeditions, practical visits and optional gateways.</p><p>Hints are always safe. Lessons and practice help you learn; separate fresh checks show what you can do independently.</p><p>Your explorer and Base Camp grow with your adventure. Progress saves automatically on this device.</p><div class="actions">${btn("Start exploring →", "finish-tour", "primary")}${btn("Skip tour", "skip-tour")}</div></div></section>`;
+  }
+  function render(focus = false) {
+    document.body.classList.toggle("animate", !!s.settings.motion);
+    $("headerExplorer").innerHTML = A.explorer(s, true);
+    const screens = {
+      home,
+      map,
+      world: worldPage,
+      quest,
+      lesson: learning,
+      practice: learning,
+      check: learning,
+      camp,
+      shop,
+      settings,
+      parent,
+      recap,
+      tour,
+      discovery: learning,
+      adventure: () => U.play(s),
+    };
+    $("main").innerHTML = (screens[s.view] || home)();
+    document.querySelectorAll("[data-nav]").forEach((el) => {
+      if (el.closest("nav")) {
+        const current =
+          el.dataset.nav === s.view ||
+          (el.dataset.nav === "map" &&
+            [
+              "world",
+              "quest",
+              "lesson",
+              "practice",
+              "check",
+              "discovery",
+              "adventure",
+            ].includes(s.view)) ||
+          (el.dataset.nav === "camp" && s.view === "shop");
+        if (current) el.setAttribute("aria-current", "page");
+        else el.removeAttribute("aria-current");
+      }
+    });
+    if (focus) {
+      $("main").focus();
+      window.scrollTo(0, 0);
+    }
+  }
+  function sound() {
+    if (!s.settings.sound) return;
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)(),
+        osc = ctx.createOscillator(),
+        gain = ctx.createGain();
+      gain.gain.value = 0.025;
+      osc.frequency.value = 440;
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+      osc.stop(ctx.currentTime + 0.3);
+      osc.onended = () => ctx.close();
+    } catch {}
+  }
+  async function dispatch(action) {
+    const [name, arg] = action.split(":");
+    const oldView = s.view;
+    let error = null,
+      restored = false;
+    await change(() => {
+      switch (name) {
+        case "nav":
+          s.view = arg;
+          before = false;
+          break;
+        case "world":
+          s.world = arg;
+          s.view = "world";
+          before = false;
+          break;
+        case "continue":
+          if (s.resumeView === "adventure" && M.current(s)) {
+            s.world = M.current(s).world;
+            s.view = "adventure";
+          } else if (s.resumeView === "quest" && s.quest) s.view = "quest";
+          else if (
+            ["lesson", "practice", "check", "discovery", "adventure"].includes(
+              s.resumeView,
+            ) &&
+            s.learning
+          )
+            s.view = s.resumeView;
+          else if (s.quest) s.view = "quest";
+          else if (s.learning)
+            s.view =
+              s.learning.mode === "discovery"
+                ? "discovery"
+                : s.learning.mode === "check"
+                  ? "check"
+                  : s.learning.started
+                    ? "practice"
+                    : "lesson";
+          else if (s.world === "town")
+            M.start(s, "town", "market", M.recommendation(s, "town"));
+          else E.startQuest(s, s.world);
+          break;
+        case "quest":
+          if (arg === "town") M.start(s, "town", "market", 1);
+          else E.startQuest(s, arg);
+          break;
+        case "mission": {
+          const bits = action.split(":");
+          M.start(s, bits[1], bits[2], Number(bits[3]));
+          break;
+        }
+        case "camp-build":
+          M.build(s, arg);
+          break;
+        case "m-begin":
+          M.begin(s);
+          break;
+        case "m-value":
+          M.edit(s, "amount", Number(arg));
+          break;
+        case "m-adjust": {
+          const q = M.current(s),
+            t = q?.tasks[q.i];
+          if (t)
+            M.edit(
+              s,
+              "amount",
+              Math.min(
+                t.max,
+                Math.max(t.min || 0, (q.values.amount || 0) + Number(arg)),
+              ),
+            );
+          break;
+        }
+        case "m-part": {
+          const q = M.current(s),
+            t = q?.tasks[q.i],
+            bits = action.split(":");
+          if (t) {
+            const n = t.items?.length || 3,
+              parts = q.values.parts || Array(n).fill(0),
+              i = Number(bits[1]),
+              max =
+                t.kind === "blocks" ? 9 : t.kind === "budget" ? t.budget : 12;
+            parts[i] = Math.min(
+              max,
+              Math.max(0, (parts[i] || 0) + Number(bits[2])),
+            );
+            M.edit(s, "parts", parts);
+          }
+          break;
+        }
+        case "m-select": {
+          const q = M.current(s);
+          if (q) {
+            const sel = q.values.selected || [],
+              i = Number(arg);
+            M.edit(
+              s,
+              "selected",
+              sel.includes(i) ? sel.filter((v) => v !== i) : [...sel, i],
+            );
+          }
+          break;
+        }
+        case "m-point": {
+          const bits = action.split(":");
+          M.edit(s, "point", [Number(bits[1]), Number(bits[2])]);
+          break;
+        }
+        case "m-turn": {
+          const q = M.current(s);
+          if (q) M.edit(s, "amount", ((q.values.amount || 0) + 90) % 360);
+          break;
+        }
+        case "m-choice":
+          M.edit(s, "choice", Number(arg));
+          break;
+        case "m-post": {
+          const q = M.current(s);
+          if (q && Number(arg) === (q.values.posted || 0))
+            M.edit(s, "posted", Number(arg) + 1);
+          break;
+        }
+        case "m-coin": {
+          const q = M.current(s);
+          if (q) {
+            const coins = q.values.coins || [];
+            if (arg === "clear") M.edit(s, "coins", []);
+            else if (arg === "undo") M.edit(s, "coins", coins.slice(0, -1));
+            else if (coins.length < 100)
+              M.edit(s, "coins", [...coins, Number(arg)]);
+          }
+          break;
+        }
+        case "m-help":
+          M.help(s);
+          break;
+        case "m-worked":
+          M.help(s, true);
+          break;
+        case "m-submit":
+          restored = M.submit(s);
+          break;
+        case "m-next":
+          restored = M.next(s);
+          break;
+        case "begin":
+          if (s.quest) s.quest.intro = false;
+          break;
+        case "value":
+          if (s.quest && !s.quest.solved) s.quest.value = Number(arg);
+          break;
+        case "adjust":
+          if (s.quest && !s.quest.solved) {
+            const p = E.puzzle(s.quest.world, s.quest.i);
+            s.quest.value = Math.min(
+              p.max,
+              Math.max(p.min || 0, s.quest.value + Number(arg)),
+            );
+          }
+          break;
+        case "part":
+          if (s.quest && !s.quest.solved) {
+            const sel = s.quest.selected;
+            s.quest.selected = sel.includes(Number(arg))
+              ? sel.filter((v) => v !== Number(arg))
+              : [...sel, Number(arg)];
+          }
+          break;
+        case "rotate":
+          if (s.quest && !s.quest.solved)
+            s.quest.value = (s.quest.value + 90) % 360;
+          break;
+        case "hint":
+          E.help(s);
+          break;
+        case "solve":
+          restored = E.answerQuest(s);
+          break;
+        case "skip":
+          E.answerQuest(s, true);
+          break;
+        case "next-quest":
+          E.nextQuest(s);
+          break;
+        case "before":
+          before = !before;
+          break;
+        case "learn":
+          error = E.generate(s, arg, "practice", window.JaxonFreshReview, C);
+          break;
+        case "discover":
+          error = E.startDiscovery(s, arg, C, window.V3Discovery);
+          break;
+        case "check":
+          error = E.generate(s, arg, "check", window.JaxonFreshReview, C);
+          break;
+        case "practice":
+          if (s.learning) {
+            s.learning.started = true;
+            s.view = "practice";
+            s.resumeView = "practice";
+          }
+          break;
+        case "answer":
+          if (s.learning)
+            E.answerLearning(s, s.learning.qs[s.learning.i][2][Number(arg)]);
+          break;
+        case "learning-skip":
+          E.answerLearning(s, "", true);
+          break;
+        case "learning-hint":
+          if (s.learning && !s.learning.answered) {
+            s.learning.assisted = true;
+            s.learning.feedback = s.learning.qs[s.learning.i][3];
+          }
+          break;
+        case "next-learning":
+          E.nextLearning(s);
+          break;
+        case "buy":
+          if (!E.purchase(s, arg, C.catalog))
+            error = "More active learning coins are needed for this item.";
+          break;
+        case "unequip":
+          s.equipped = [];
+          break;
+        case "skip-tour":
+          s.tourSeen = true;
+          s.view = "home";
+          break;
+        case "finish-tour":
+          s.tourSeen = true;
+          s.view = "map";
+          break;
+        default:
+          if (action.startsWith("math:") || action.startsWith("mathx:")) {
+            if (s.learning) {
+              s.learning.type = "mission";
+              window.JaxonMathTools.update(s.learning, action);
+              window.JaxonMathToolsExtra.update(s.learning, action);
+            }
+          }
+      }
+    });
+    if (error) status(error);
+    if (restored) sound();
+    if (s.view !== oldView) {
+      $("main").focus();
+      window.scrollTo(0, 0);
+    } else if (
+      [
+        "next-quest",
+        "next-learning",
+        "answer",
+        "learning-skip",
+        "hint",
+        "learning-hint",
+        "skip",
+        "begin",
+        "solve",
+        "m-begin",
+        "m-submit",
+        "m-next",
+        "m-help",
+        "m-worked",
+      ].includes(name)
+    ) {
+      $("main").focus();
+    } else if (
+      [
+        "value",
+        "adjust",
+        "part",
+        "rotate",
+        "m-value",
+        "m-adjust",
+        "m-part",
+        "m-select",
+        "m-point",
+        "m-turn",
+        "m-choice",
+        "m-coin",
+        "m-post",
+      ].includes(name)
+    ) {
+      const el = [...document.querySelectorAll("[data-action]")].find(
+        (el) => el.dataset.action === action && !el.disabled,
+      );
+      el?.focus();
+    }
+  }
+  document.addEventListener("click", async (e) => {
+    const el = e.target.closest("[data-action],[data-nav],[data-act]");
+    if (!el || el.disabled) return;
+    activity = Date.now();
+    await dispatch(
+      el.dataset.action || el.dataset.act || "nav:" + el.dataset.nav,
+    );
+  });
+  document.addEventListener("keydown", () => {
+    activity = Date.now();
+  });
+  document.addEventListener("pointerdown", () => {
+    activity = Date.now();
+  });
+  document.addEventListener("change", async (e) => {
+    activity = Date.now();
+    if (e.target.dataset.missionTier) {
+      const id = e.target.dataset.missionTier,
+        value = Number(e.target.value);
+      await change(() => {
+        M.state(s).difficulty[id] = value;
+      });
+      return;
+    }
+    if (e.target.dataset.campSlot) {
+      const slot = e.target.dataset.campSlot,
+        value = e.target.value;
+      await change(() => M.campPlace(s, slot, value));
+      return;
+    }
+    if (e.target.id === "shop-filter") {
+      filter = e.target.value;
+      render();
+      return;
+    }
+    if (e.target.dataset.setting) {
+      const name = e.target.dataset.setting,
+        value = e.target.checked;
+      await change(() => {
+        s.settings[name] = value;
+      });
+    }
+  });
+  document.addEventListener("input", async (e) => {
+    if (e.target.dataset.missionClock) {
+      activity = Date.now();
+      const [hour, minute] = e.target.value.split(":").map(Number),
+        value = hour * 60 + minute;
+      if (Number.isInteger(value) && value >= 0 && value < 1440) {
+        await change(() => M.edit(s, "amount", value), { renderPage: false });
+        const display = document.querySelector(".clock-display");
+        if (display) display.textContent = T.clock(value);
+      }
+      return;
+    }
+    if (!e.target.dataset.missionInput) return;
+    activity = Date.now();
+    const key = e.target.dataset.missionInput,
+      q = M.current(s),
+      t = q?.tasks[q.i],
+      value = Number(e.target.value);
+    if (t && Number.isFinite(value) && value >= (t.min || 0) && value <= t.max)
+      await change(() => M.edit(s, key, value), { renderPage: false });
+    const display = document.querySelector(".amount-display");
+    if (display && t)
+      display.textContent =
+        t.unit === "p"
+          ? T.money(value)
+          : t.unit === "time"
+            ? T.clock(value)
+            : value + " " + (t.unit || "units");
+  });
+  window.addEventListener("storage", (e) => {
+    if (e.key === KEY) {
+      s = read();
+      render();
+      status("Updated from another Test Camp tab.");
+    }
+  });
+  document.addEventListener("visibilitychange", () => {
+    lastTick = Date.now();
+    activity = 0;
+  });
+  setInterval(async () => {
+    const now = Date.now(),
+      dt = now - lastTick;
+    lastTick = now;
+    const eligible =
+      !document.hidden &&
+      document.hasFocus() &&
+      now - activity < 60000 &&
+      [
+        "quest",
+        "lesson",
+        "practice",
+        "check",
+        "discovery",
+        "adventure",
+      ].includes(s.view) &&
+      (s.view === "adventure"
+        ? !!M.current(s) && !M.current(s)?.solved
+        : s.view === "quest"
+          ? !s.quest?.solved
+          : !s.learning?.answered);
+    if (eligible)
+      await change(() => E.activeTime(s, dt, eligible, now), {
+        renderPage: false,
+      });
+  }, 5000);
+  render();
+  if (storageError)
+    status(
+      storageError === "corrupt"
+        ? "Saved Test Camp data could not be read. This session is temporary; the saved copy has been preserved."
+        : "Device storage unavailable. This session is temporary.",
+    );
 })();

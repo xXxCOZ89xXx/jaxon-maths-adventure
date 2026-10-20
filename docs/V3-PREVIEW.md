@@ -1,31 +1,42 @@
-# V3 Test Camp preview
+# Nine-world V3 Test Camp
 
-Open `http://localhost:4173/v3-adventure.html` after running:
+This is a playable fictional **offline development build**, continuing draft PR #2. It includes Practical Maths Town now; Town is not backlogged.
+
+Run from the repository root or extracted preview folder:
 
 ```sh
 python3 -m http.server 4173 --bind 127.0.0.1
 ```
 
-Run the command from the repository root or the extracted preview folder. No install, login, PIN or Supabase setup is needed to play. Use a modern browser with Web Locks support (current Safari, Chrome, Edge or Firefox). Allow local device storage to retain progress. For reliable concurrent-tab saves, use localhost or an HTTPS preview origin.
+Open `http://localhost:4173/v3-adventure.html`. No installation, login, PIN or Supabase configuration is needed to play. Use a current browser with Web Locks support and device storage enabled. Existing V3 Test Camp saves continue to work. The app never reads the live game's storage keys or real learner history.
 
-This is a fictional offline test explorer. The app has no cloud adapter; its Content Security Policy blocks all network connections from script. It loads local scripts and SVG artwork only. Storage uses `jaxon_v3_fictional_demo_2026` and never reads V2/production keys. The original homepage and V2 test page are unchanged.
+The nine worlds are freely selectable. Each original world retains its introductory restoration quest and now has three expedition routes across three difficulty levels, plus optional gateways. Practical Maths Town has eight explorable locations and three levels. Every task teaches the idea and gives an easier example before its hands-on controls. Completed visits return with different generated values, while XP and keepsakes remain finite.
 
-The demo parent summary shows the same fictional explorer's activity. It is not an authenticated parent portal and has no reward-award or account-management actions. Existing secure family authentication and server-side parent rewards remain in the V2 build. Real cloud integration requires a separate staging project before any release.
+The 55-skill curriculum includes the original 39 skills and 16 new everyday skills. Guided missions, practice and academic mastery stay separate. Expand **Maths lessons and independent checks** in Town to see its curriculum; the town tasks themselves teach their own skills as you play.
 
-## One consolidated acceptance session (20–30 minutes)
+## One consolidated acceptance session (25–30 minutes)
 
-Use a fresh browser profile or private window. All test data is fictional and can be discarded by clearing only this preview origin's Test Camp storage. No real credentials are required.
+Use a fresh browser profile/private window with fictional data. Do not use real family credentials, backups, bank details or bills. All prices, balances, jobs and payslips are fictional.
 
-1. **Home and tour (2 min):** choose Show me around or Skip. Confirm the three main choices are clear. Return home and use Continue adventure.
-2. **Number Forest (5 min):** meet Rowan, start building, try a wrong number, Hint and I don't know. Place the marker on 2, restore the bridge, then begin puzzle two. Save & exit, reload and Continue; confirm the exact puzzle and marker remain. Finish all three puzzles and inspect before/restored views.
-3. **Worlds (4 min):** choose a world freely from all eight. Try fraction channels, tower rotation or the measurement rail. Confirm wrong answers remain safe, and restoration remains visible after reloading.
-4. **Learning evidence (5 min):** open a maths mission. Optionally Find my starting point. Complete supported practice with help, then try the separate independent check. Verify practice alone never says Mastered. A failed check requests reteaching; a successful check schedules a delayed memory check.
-5. **Explorer and camp (4 min):** visit Base Camp. Confirm milestone upgrades and achievements. Browse all 40 wardrobe items. Spend fictional learning coins when affordable; equip/unequip an item and check that it appears in the header, map, camp and quest. Coins accrue from active learning, not navigation clicks.
-6. **Comfort and summary (3 min):** toggle gentle motion and quiet sound. Test tapping and keyboard controls in portrait and landscape. Open Demo parent summary: inspect active time, 60-minute weekly target, 1:1 screen-time, recent activity and independent evidence.
+1. **Home and map (2 min):** skip/replay the tour, open Worlds and confirm all nine worlds are available. Enter Practical Maths Town.
+2. **Supermarket (5 min):** tap the market building. Read the lesson/easier example, pack the shopping list, compare apple packs, then return exact change using UK denomination tokens. Try a wrong plan and I don't know; adjust the same task without punishment.
+3. **Save and difficulty (3 min):** start another venue at any level. Make a selection, take a hint, Save & exit and reload. Continue must restore that exact task and help state. Visit another world and return; the unfinished visit should remain. Level suggestions are optional.
+4. **Practical independence (6 min):** choose two other locations. Suggested pairs: Station + Home (timetable, walking allowance, 24-hour clock, meter bill) or Bank + Workplace (deposit/withdrawal ledger, savings, paid hours, net pay). Fictional exercise money must never alter learning coins or any real account.
+5. **Return adventures (4 min):** revisit Number Forest or another restored world and choose an expedition or optional gateway. Try place-value supplies, coordinate lifts, courtyard tiles or scaled quantities. Observe extra settlement scenery and earned keepsakes. Replaying should not duplicate completion XP.
+6. **Camp and explorer (4 min):** view the keepsake journal, place an earned keepsake at the shelf/garden/gate and reload. Check project requirements and build an available project. Browse all 40 wardrobe items, equip an owned item and inspect the character across screens.
+7. **Learning and comfort (3 min):** open a Town lesson, practise with support and inspect the separate fresh-check entry. Assisted work must not say Mastered. Check sound/reduced-motion options, keyboard focus, portrait/landscape readability and Demo parent summary. The weekly goal remains 60 active minutes, with 1:1 screen-time conversion.
 
-Collect feedback once: navigation clarity, maths explanation, puzzle usability, visual appeal, save/resume, readability on iPad, and any unexpected behaviour. Include the world/puzzle and browser for a defect. Do not use the live learner account for this session.
+Collect feedback once: navigation, explanations, practical usefulness, task controls, save/resume, difficulty, visual clarity and iPad comfort. For a bug, record the venue/world, level, task, browser and what happened.
 
-## Developer verification
+## Isolation and limits
+
+This build has no V3 cloud adapter or real account login. CSP blocks script connections (`connect-src 'none'`); scripts, styles and original SVG art load locally. Storage uses `jaxon_v3_fictional_demo_2026`. The original homepage, V2 game, secure adapter and Supabase files are unchanged.
+
+The parent summary shows this fictional explorer and has no privileged reward/account actions. Device data can be discarded by clearing only the preview's Test Camp storage. An already-loaded game works without network, but a cold offline launch is not cached by a service worker.
+
+Physical iPad Safari is still needed: WebKit installation was blocked by the managed network policy. Real cloud login/PIN, sync, family isolation and server rewards require a **separate staging Supabase project** before release. Nothing is merged or deployed by running this preview.
+
+## Developer checks
 
 ```sh
 npm ci --cache /tmp/jaxon-npm-cache
@@ -33,4 +44,4 @@ npm test
 npm run test:e2e
 ```
 
-Browser tests use the system Chromium at `/usr/bin/chromium`, separate clean browser contexts and a fail-closed nonlocal network route. The server runs on port 4173. Edit the test launch configuration if Chromium has another local installation path. Screenshots and the machine-readable browser report are in `tests/artifacts/`.
+Browser tests use `/usr/bin/chromium`, clean contexts, synthetic fixtures and fail-closed nonlocal request blocking. Set `V3_CHROMIUM_EXECUTABLE` for another local installation. CI uses Playwright’s installed Chromium. Reports and screenshots are under `tests/artifacts/`.

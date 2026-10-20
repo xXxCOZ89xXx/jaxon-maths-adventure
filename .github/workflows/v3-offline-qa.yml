@@ -1,0 +1,39 @@
+name: V3 isolated offline QA
+on:
+  pull_request:
+    paths:
+      - "v3/**"
+      - "v3-adventure.html"
+      - "v2-*.js"
+      - "tests/**"
+      - "package*.json"
+      - "playwright.config.cjs"
+      - ".github/workflows/v3-offline-qa.yml"
+  push:
+    branches: ["codex/v3-adventure-build"]
+permissions:
+  contents: read
+jobs:
+  fictional-learner-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - name: Offline logic and compatibility
+        run: npm test
+      - name: Fictional desktop and touch gameplay
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v3-fictional-qa
+          path: |
+            tests/artifacts/
+            test-results/
+          retention-days: 14

@@ -1,5 +1,5 @@
 # V3 Test Isolation and Single Final Acceptance Plan
-Status: Approved approach, **not an existing staging deployment**. The aim is zero test writes to Jaxon's real learning/rewards records.
+Status: Approved testing specification. Tier A offline fixtures, interception and Playwright coverage now exist; see `V3-TEST-REPORT.md` for actual results. **No staging deployment exists.** The aim is zero test writes to Jaxon's real learning/rewards records.
 
 ## What "one big test near the end" means
 - **Codex runs automated tests repeatedly during development**, correcting bugs without asking the family to click through every feature.

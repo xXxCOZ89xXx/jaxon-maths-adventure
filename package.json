@@ -1,8 +1,13 @@
 {
-  "name": "jaxon-adventure-preview", "private": true,
+  "name": "jaxon-adventure-preview",
+  "private": true,
   "scripts": {
-    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs",
-    "test:e2e": "playwright test", "preview": "python3 -m http.server 4173 --bind 0.0.0.0"
+    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs",
+    "test:e2e": "playwright test",
+    "preview": "python3 -m http.server 4173 --bind 0.0.0.0"
   },
-  "devDependencies": {"@playwright/test":"^1.56.1", "@axe-core/playwright":"^4.10.2"}
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@axe-core/playwright": "^4.10.2"
+  }
 }

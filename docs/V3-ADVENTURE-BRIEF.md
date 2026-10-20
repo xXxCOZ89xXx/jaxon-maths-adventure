@@ -1,5 +1,9 @@
 # Jaxon's Maths Adventure — V3 Complete Build Brief
-Status: **Approved design direction, not yet implemented**. Source of truth for the autonomous Codex redesign. Date: 20 October 2026.
+Status: **Original design plus approved 20 October continuation**. The offline milestone exists in draft PR #2. Source of truth for the autonomous Codex redesign. Date: 20 October 2026.
+
+## Current continuation approval
+
+Practical Maths Town is now the ninth current world, with supermarket, café, bank, shops, station, home, leisure and workplace activities. Expand all nine worlds with varied missions, three difficulty levels, optional gateways, collectibles, deeper restoration and a more interactive Base Camp. Retain the 39-skill baseline and extend everyday learning. Continue on `codex/v3-adventure-build` and update draft PR #2. This explicit user approval supersedes the original Town backlog below. Production isolation and release approval requirements remain.
 
 ## Outcome, not another quiz bank
 Transform the existing free, iPad-friendly maths browser game into an original, **voxel-inspired 2D/isometric adventure**. The maths engine remains, but the dominant experience is to explore, solve interactive problems, earn progress and **visibly change the world**. Prioritise engagement, understandable navigation and real teaching over continually adding question counts.
@@ -14,7 +18,7 @@ Audience: early teens. Visual direction: green highlights, crafted block/voxel a
 - **60-minute weekly learning goal; screen-time conversion 1:1**. Do not change these.
 - Jaxon may choose any world/mission; recommendations are optional. No punitive mechanics or enforced linear unlocking of mathematical subjects.
 - Existing test page `v2-game-test.html` on `main` stays untouched; live `index.html` stays untouched.
-- Keep planned future ninth **Practical Maths Town** (money, time, bills, shopping, travel) in a backlog until this redesign is playable and tested.
+- **Practical Maths Town is part of this build**, following the user’s continuation approval (money, time, bills, shopping, travel and work).
 
 ## Product experience
 

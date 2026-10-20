@@ -1,25 +1,33 @@
 {
   "date": "2026-10-20",
-  "base_commit": "664b631ab0f02cdeec3ece3d56d610fb6787be13",
   "branch": "codex/v3-adventure-build",
-  "offline_regressions": "PASS",
-  "v3_logic_suites": 9,
+  "continuation_base": "bc30d1940d51fb7b234bb8cf1e8e2a518c2db5cf",
+  "worlds": 9,
+  "skills": 55,
+  "discovery_questions": 1100,
+  "mission_level_combinations": 123,
+  "keepsakes": 41,
+  "v3_learning_suites": 9,
+  "expedition_suites": 8,
+  "generated_tasks_solved": 4466,
+  "baseline_scripts": 3,
   "browser": {
-    "startTime": "2026-10-20T00:48:12.638Z",
-    "duration": 145506.11299999998,
-    "expected": 27,
+    "startTime": "2026-10-20T01:12:43.735Z",
+    "duration": 366778.094,
+    "expected": 42,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
   },
   "nonlocal_browser_requests": 0,
   "protected_files_unchanged": 5,
-  "preview_package_smoke": "PASS",
-  "preview_sha256": "50bd2f9774ec7de81c145f66a019e18e99a9bd00c821b63e99aaec587c65a374",
-  "limitations": [
-    "WebKit download blocked: HTTP 403 Domain forbidden",
-    "Separate staging cloud integration not configured",
-    "Physical iPad and consolidated acceptance pending",
-    "Optional boss challenges and further quest variants deferred"
+  "package_smoke": "PASS",
+  "parent_activity_smoke": "PASS",
+  "preview_sha256": "97be8b57958cba4d100ac96c93af6538e64a52cd7eacdb9efac965c6c4c458ef",
+  "limits": [
+    "Physical iPad Safari/WebKit untested",
+    "Separate staging cloud auth/sync/rewards not configured",
+    "Consolidated user acceptance pending",
+    "Device-local storage; no cold-offline cache"
   ]
 }

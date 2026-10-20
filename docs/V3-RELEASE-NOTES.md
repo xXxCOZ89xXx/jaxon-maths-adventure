@@ -1,16 +1,15 @@
-# V3 Test Camp release notes
+# Nine-world V3 development release notes
 
-This review build adds a standalone adventure at `v3-adventure.html`. It leaves the existing live homepage, V2 test game, secure cloud adapter and Supabase SQL files unchanged.
+Continues draft PR #2 on `codex/v3-adventure-build`. The entry remains `v3-adventure.html`; the live homepage and V2 game are unchanged.
 
-- Three-choice home, optional skip/replay tour and freely selectable eight-world illustrated atlas.
-- Original SVG island scenes and guides. Each world has three hands-on restoration puzzles: number-line bridge markers, fraction water channels, algebra balances, clockwise tower rotations, ratio supply packs, data-bar power grids, probability slot pools and centimetre rails.
-- Twenty-four durable, idempotent restoration milestones; before/restored views, quiet optional celebration, explorer XP and achievements. Repeat quests do not award duplicate XP or completion coins.
-- Exact quest selections, hints and stage resume after reload, with suspended quests retained when exploring other worlds. Continue resumes the latest saved activity.
-- All 39 existing skills, guided explanations and easier examples, generated fresh practice and ten reusable visual tools. The 780-question adaptive starting-point discovery and existing 40-item shop IDs are retained.
-- Separate first-answer independent checks and delayed memory checks; assisted practice and restoration never award academic mastery. Failure requires a lesson/practice revisit; immediate successful retakes are blocked.
-- Layered explorer preview, ownership-aware equip/unequip, milestone-driven illustrated Base Camp, and a fictional activity summary for parents.
-- Sixty-minute weekly goal and 1:1 screen-time conversion retained. Ten learning coins per active minute; no navigation-click coins. Hidden, idle and completed task time is excluded.
-- Keyboard alternatives, minimum touch targets, readable responsive screens, reduced-motion support, optional quiet sound, logical screen focus and automatic device saves. Web Locks serialize multi-tab saves. Corrupt demo saves are preserved with a visible temporary-session warning.
-- Dedicated fictional storage and `connect-src 'none'`; no cloud credentials, real account access, account-creation actions or database changes.
+- **Practical Maths Town is playable now:** Supermarket, Café, Bank, Shopping Centre, Station, Home, Cinema/Leisure and Workplace. Original town art has eight tap/keyboard building entrances and visible restoration.
+- **Hands-on everyday maths:** shopping/order baskets, whole-pack best-value comparisons, UK denomination change trays, bank transaction ledgers, sale labels, budget envelopes, timetable/arrival planning, meter bills, measuring jugs, timesheets and simplified payslips. All exercise money is fictional and separate from learning rewards.
+- **55 skills:** original 39 plus 16 everyday skills. Guided explanations, easier examples and the independent/spaced learning pipeline remain available. Discovery now covers 1,100 questions without changing the original bank.
+- **Longer adventures in every world:** three themed expedition routes for each original world; eight routes in Town; three selectable difficulty levels; optional mixed gateways. There are 123 mission/level combinations with three tasks each, alongside the original 24 puzzles.
+- **Return visits:** deterministic saved attempt seeds vary maths values. Supportive help preserves editable task state. Difficulty suggestions respond to recent supported/unassisted outcomes and never lock away worlds or levels.
+- **Progress and identity:** one-time milestone XP, 41 route keepsakes, expanded settlement art, new Town/gateway achievements, a keepsake journal and camp placement. Three buildable camp projects require durable evidence. All 40 shop IDs and owned/equipped cosmetics remain compatible.
+- **Learning integrity:** tasks teach before play; assisted gameplay cannot set mastery. Fresh checks exclude seen prompts, immediate retakes stay blocked, failures require reteaching, and due/struggled skills can be suggested at Home. Earned academic celebration badges persist even when a later check shows a need to revisit the skill.
+- **Usability:** native arrival-time control, tap-first keyboard-compatible counters, small-screen layouts, clear feedback focus, sensory preferences and contrast fixes. New state is versioned inside the existing save; exact tasks, seeds and selections survive reload and world switching. Concurrent completion cannot duplicate a milestone.
+- **Isolation:** no new cloud adapter, credentials, Auth users or SQL. The 60-minute weekly goal, ten learning coins per active minute and 1:1 screen-time remain. Protected live files are unchanged.
 
-This is an offline acceptance build, not a production-connected replacement. Secure V3 family authentication, cloud sync/conflict reconciliation and server reward integration require a separate staging project. Physical iPad Safari/WebKit testing remains outstanding. Optional boss/gateway challenges and additional narrative/puzzle variants are follow-up work; Practical Maths Town stays in the backlog.
+This is a larger offline development build, not a completed production release. Physical Safari testing, separate staging cloud auth/sync/reward validation and consolidated user acceptance remain outstanding. See the full QA report and preview walkthrough. Do not merge or publish without approval.

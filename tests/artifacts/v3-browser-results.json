@@ -33,7 +33,7 @@
         "testDir": "/workspace/jaxon-maths-adventure/tests",
         "testIgnore": [],
         "testMatch": [
-          "v3-browser.spec.cjs"
+          "/v3-(browser|expeditions)\\.spec\\.cjs/"
         ],
         "timeout": 60000
       },
@@ -49,7 +49,7 @@
         "testDir": "/workspace/jaxon-maths-adventure/tests",
         "testIgnore": [],
         "testMatch": [
-          "v3-browser.spec.cjs"
+          "/v3-(browser|expeditions)\\.spec\\.cjs/"
         ],
         "timeout": 60000
       },
@@ -65,7 +65,7 @@
         "testDir": "/workspace/jaxon-maths-adventure/tests",
         "testIgnore": [],
         "testMatch": [
-          "v3-browser.spec.cjs"
+          "/v3-(browser|expeditions)\\.spec\\.cjs/"
         ],
         "timeout": 60000
       }
@@ -84,10 +84,11 @@
         "testDir": "/workspace/jaxon-maths-adventure/tests",
         "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
         "testIgnore": [],
-        "testMatch": "v3-browser.spec.cjs",
+        "testMatch": {},
         "timeout": 60000,
         "use": {
           "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
           "trace": "retain-on-failure",
           "screenshot": "only-on-failure",
           "browserName": "chromium",
@@ -119,10 +120,11 @@
         "testDir": "/workspace/jaxon-maths-adventure/tests",
         "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
         "testIgnore": [],
-        "testMatch": "v3-browser.spec.cjs",
+        "testMatch": {},
         "timeout": 60000,
         "use": {
           "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
           "trace": "retain-on-failure",
           "screenshot": "only-on-failure",
           "browserName": "chromium",
@@ -156,10 +158,11 @@
         "testDir": "/workspace/jaxon-maths-adventure/tests",
         "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
         "testIgnore": [],
-        "testMatch": "v3-browser.spec.cjs",
+        "testMatch": {},
         "timeout": 60000,
         "use": {
           "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
           "trace": "retain-on-failure",
           "screenshot": "only-on-failure",
           "browserName": "chromium",
@@ -233,12 +236,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 30120,
+                  "duration": 34062,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:48:13.546Z",
+                  "startTime": "2026-10-20T01:12:44.623Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -248,7 +251,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-b5914da2d8c72b189a83",
           "file": "v3-browser.spec.cjs",
-          "line": 13,
+          "line": 105,
           "column": 1
         },
         {
@@ -267,12 +270,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1492,
+                  "duration": 2489,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:48:43.966Z",
+                  "startTime": "2026-10-20T01:13:19.020Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -282,7 +285,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-0cde86adc57e08005fd4",
           "file": "v3-browser.spec.cjs",
-          "line": 14,
+          "line": 156,
           "column": 1
         },
         {
@@ -301,12 +304,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3086,
+                  "duration": 3839,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:48:45.471Z",
+                  "startTime": "2026-10-20T01:13:21.533Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -316,7 +319,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-c8b143f1312b4695f736",
           "file": "v3-browser.spec.cjs",
-          "line": 15,
+          "line": 178,
           "column": 1
         },
         {
@@ -335,12 +338,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3108,
+                  "duration": 3548,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:48:48.582Z",
+                  "startTime": "2026-10-20T01:13:25.402Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -350,7 +353,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-cfd961d21615ffae0d0c",
           "file": "v3-browser.spec.cjs",
-          "line": 16,
+          "line": 212,
           "column": 1
         },
         {
@@ -369,12 +372,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1439,
+                  "duration": 1799,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:48:51.708Z",
+                  "startTime": "2026-10-20T01:13:28.971Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -384,7 +387,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-3d3c90364a44ba419986",
           "file": "v3-browser.spec.cjs",
-          "line": 17,
+          "line": 254,
           "column": 1
         },
         {
@@ -403,12 +406,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3792,
+                  "duration": 3982,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:48:53.161Z",
+                  "startTime": "2026-10-20T01:13:30.795Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -418,7 +421,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-d0dac1b886e5636118ea",
           "file": "v3-browser.spec.cjs",
-          "line": 18,
+          "line": 272,
           "column": 1
         },
         {
@@ -437,12 +440,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2624,
+                  "duration": 2813,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:48:56.976Z",
+                  "startTime": "2026-10-20T01:13:34.798Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -452,7 +455,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-a44d54158eb7b4f01c7b",
           "file": "v3-browser.spec.cjs",
-          "line": 20,
+          "line": 300,
           "column": 1
         },
         {
@@ -471,12 +474,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1155,
+                  "duration": 1215,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:48:59.618Z",
+                  "startTime": "2026-10-20T01:13:37.627Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -486,7 +489,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-91cf660e8e3976efda77",
           "file": "v3-browser.spec.cjs",
-          "line": 21,
+          "line": 337,
           "column": 1
         },
         {
@@ -505,12 +508,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 908,
+                  "duration": 1073,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:49:00.789Z",
+                  "startTime": "2026-10-20T01:13:38.864Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -520,7 +523,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-f635561c8f3d9915fbcc",
           "file": "v3-browser.spec.cjs",
-          "line": 22,
+          "line": 373,
           "column": 1
         },
         {
@@ -539,12 +542,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 29265,
+                  "duration": 32774,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:49:02.403Z",
+                  "startTime": "2026-10-20T01:14:40.133Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -554,7 +557,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-278957fad4cf0073c3ba",
           "file": "v3-browser.spec.cjs",
-          "line": 13,
+          "line": 105,
           "column": 1
         },
         {
@@ -573,12 +576,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1608,
+                  "duration": 1615,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:49:32.142Z",
+                  "startTime": "2026-10-20T01:15:13.303Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -588,7 +591,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-a8bb482b756b737bb275",
           "file": "v3-browser.spec.cjs",
-          "line": 14,
+          "line": 156,
           "column": 1
         },
         {
@@ -607,12 +610,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3135,
+                  "duration": 3570,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:49:33.774Z",
+                  "startTime": "2026-10-20T01:15:14.933Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -622,7 +625,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-dd49ac9dfa377518fa50",
           "file": "v3-browser.spec.cjs",
-          "line": 15,
+          "line": 178,
           "column": 1
         },
         {
@@ -641,12 +644,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3018,
+                  "duration": 3411,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:49:36.924Z",
+                  "startTime": "2026-10-20T01:15:18.528Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -656,7 +659,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-b6c13b2542caf6e7f36b",
           "file": "v3-browser.spec.cjs",
-          "line": 16,
+          "line": 212,
           "column": 1
         },
         {
@@ -675,12 +678,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1508,
+                  "duration": 1659,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:49:39.958Z",
+                  "startTime": "2026-10-20T01:15:21.962Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -690,7 +693,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-0bb20bad482bb4950cc4",
           "file": "v3-browser.spec.cjs",
-          "line": 17,
+          "line": 254,
           "column": 1
         },
         {
@@ -709,12 +712,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3758,
+                  "duration": 3733,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:49:41.488Z",
+                  "startTime": "2026-10-20T01:15:23.644Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -724,7 +727,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-b9ec6cc8953fe024f88d",
           "file": "v3-browser.spec.cjs",
-          "line": 18,
+          "line": 272,
           "column": 1
         },
         {
@@ -743,12 +746,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2611,
+                  "duration": 2783,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:49:45.267Z",
+                  "startTime": "2026-10-20T01:15:27.396Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -758,7 +761,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-c865769f4409a1a6dead",
           "file": "v3-browser.spec.cjs",
-          "line": 20,
+          "line": 300,
           "column": 1
         },
         {
@@ -777,12 +780,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1097,
+                  "duration": 1207,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:49:47.899Z",
+                  "startTime": "2026-10-20T01:15:30.198Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -792,7 +795,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-9b0c9ac423dc4950e097",
           "file": "v3-browser.spec.cjs",
-          "line": 21,
+          "line": 337,
           "column": 1
         },
         {
@@ -811,12 +814,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 889,
+                  "duration": 1096,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:49:49.014Z",
+                  "startTime": "2026-10-20T01:15:31.431Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -826,7 +829,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-cab9273629c5dd121145",
           "file": "v3-browser.spec.cjs",
-          "line": 22,
+          "line": 373,
           "column": 1
         },
         {
@@ -845,12 +848,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 29525,
+                  "duration": 37919,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:49:50.661Z",
+                  "startTime": "2026-10-20T01:16:42.281Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -860,7 +863,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-3f4298619d2eae8993d2",
           "file": "v3-browser.spec.cjs",
-          "line": 13,
+          "line": 105,
           "column": 1
         },
         {
@@ -879,12 +882,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1789,
+                  "duration": 3860,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:50:20.525Z",
+                  "startTime": "2026-10-20T01:17:20.840Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -894,7 +897,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-70289ef41b83dc2ef4b0",
           "file": "v3-browser.spec.cjs",
-          "line": 14,
+          "line": 156,
           "column": 1
         },
         {
@@ -913,12 +916,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3184,
+                  "duration": 5732,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:50:22.335Z",
+                  "startTime": "2026-10-20T01:17:24.735Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -928,7 +931,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-ea1f44f077eb6c56fd51",
           "file": "v3-browser.spec.cjs",
-          "line": 15,
+          "line": 178,
           "column": 1
         },
         {
@@ -947,12 +950,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3091,
+                  "duration": 3742,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:50:25.533Z",
+                  "startTime": "2026-10-20T01:17:30.543Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -962,7 +965,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-b71fe3814133474904bd",
           "file": "v3-browser.spec.cjs",
-          "line": 16,
+          "line": 212,
           "column": 1
         },
         {
@@ -981,12 +984,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1608,
+                  "duration": 1642,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:50:28.641Z",
+                  "startTime": "2026-10-20T01:17:34.307Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -996,7 +999,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-791fabec35e329696035",
           "file": "v3-browser.spec.cjs",
-          "line": 17,
+          "line": 254,
           "column": 1
         },
         {
@@ -1015,12 +1018,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3291,
+                  "duration": 3925,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:50:30.265Z",
+                  "startTime": "2026-10-20T01:17:35.975Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1030,7 +1033,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-038ddbb82e648b2c19af",
           "file": "v3-browser.spec.cjs",
-          "line": 18,
+          "line": 272,
           "column": 1
         },
         {
@@ -1049,12 +1052,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2484,
+                  "duration": 3173,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:50:33.573Z",
+                  "startTime": "2026-10-20T01:17:39.920Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1064,7 +1067,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-f6fb110f3c55d80ff429",
           "file": "v3-browser.spec.cjs",
-          "line": 20,
+          "line": 300,
           "column": 1
         },
         {
@@ -1083,12 +1086,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1102,
+                  "duration": 1321,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:50:36.070Z",
+                  "startTime": "2026-10-20T01:17:43.112Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1098,7 +1101,7 @@
           ],
           "id": "7f9a68246ac24d64ac02-160e1447253e091f7aed",
           "file": "v3-browser.spec.cjs",
-          "line": 21,
+          "line": 337,
           "column": 1
         },
         {
@@ -1117,12 +1120,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 830,
+                  "duration": 1056,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-20T00:50:37.189Z",
+                  "startTime": "2026-10-20T01:17:44.460Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -1132,7 +1135,525 @@
           ],
           "id": "7f9a68246ac24d64ac02-9983247f8d41eb39a09e",
           "file": "v3-browser.spec.cjs",
-          "line": 22,
+          "line": 373,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "v3-expeditions.spec.cjs",
+      "file": "v3-expeditions.spec.cjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Practical Town: all eight venues teach and complete actual tasks, restore town and decorate camp",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 27387,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:13:39.978Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-fcf7d71126c25ce379f0",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 127,
+          "column": 1
+        },
+        {
+          "title": "Optional gateways across all nine worlds vary interactions and preserve finite rewards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 24729,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:14:07.380Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-9948625012aa6cf157b5",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 178,
+          "column": 1
+        },
+        {
+          "title": "Hands-on town task saves exact selections, help and latest activity; higher level is freely available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3559,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:14:32.128Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-e0a1d3233209d70ed27a",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 202,
+          "column": 1
+        },
+        {
+          "title": "New town lessons and fresh checks keep assistance out of mastery, even after restored town visits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2103,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:14:35.705Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-fb059235b32803043077",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 235,
+          "column": 1
+        },
+        {
+          "title": "Concurrent mission completion grants one milestone and camp projects need durable evidence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1475,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:14:37.827Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-59de43e14cfe46fceb7d",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 269,
+          "column": 1
+        },
+        {
+          "title": "Practical Town: all eight venues teach and complete actual tasks, restore town and decorate camp",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 33879,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:15:32.575Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-a2ce18e1c2d21abbffe2",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 127,
+          "column": 1
+        },
+        {
+          "title": "Optional gateways across all nine worlds vary interactions and preserve finite rewards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 27032,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:16:06.469Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-34ac0565c355efc67832",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 178,
+          "column": 1
+        },
+        {
+          "title": "Hands-on town task saves exact selections, help and latest activity; higher level is freely available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3501,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:16:33.519Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-41e24b4496594d292748",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 202,
+          "column": 1
+        },
+        {
+          "title": "New town lessons and fresh checks keep assistance out of mastery, even after restored town visits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2603,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:16:37.036Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-4f3842d3cc93ecccb7e4",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 235,
+          "column": 1
+        },
+        {
+          "title": "Concurrent mission completion grants one milestone and camp projects need durable evidence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1647,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:16:39.696Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-659341c9d1ee4699e98a",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 269,
+          "column": 1
+        },
+        {
+          "title": "Practical Town: all eight venues teach and complete actual tasks, restore town and decorate camp",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 26477,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:17:45.552Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-4f18e60ade86ad7a197f",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 127,
+          "column": 1
+        },
+        {
+          "title": "Optional gateways across all nine worlds vary interactions and preserve finite rewards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 30931,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:18:12.056Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-d6ec6f4ebdb4c9567ee3",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 178,
+          "column": 1
+        },
+        {
+          "title": "Hands-on town task saves exact selections, help and latest activity; higher level is freely available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3545,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:18:43.023Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-ac4b5f5c8930e0bf1ee1",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 202,
+          "column": 1
+        },
+        {
+          "title": "New town lessons and fresh checks keep assistance out of mastery, even after restored town visits",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2144,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:18:46.585Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-a2f4da6c4003c0821a88",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 235,
+          "column": 1
+        },
+        {
+          "title": "Concurrent mission completion grants one milestone and camp projects need durable evidence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1532,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T01:18:48.747Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "64f7ad22a94a91dcc96c-fb10c66c69f587a3c982",
+          "file": "v3-expeditions.spec.cjs",
+          "line": 269,
           "column": 1
         }
       ]
@@ -1140,9 +1661,9 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-20T00:48:12.638Z",
-    "duration": 145506.11299999998,
-    "expected": 27,
+    "startTime": "2026-10-20T01:12:43.735Z",
+    "duration": 366778.094,
+    "expected": 42,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
