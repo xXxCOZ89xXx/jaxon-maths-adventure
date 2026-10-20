@@ -34,6 +34,10 @@
     return (
       !!j &&
       j.version === 1 &&
+      j.context?.version === 1 &&
+      j.context.entry === "journey" &&
+      j.context.venue === venues[Math.min(j.stage, 7)] &&
+      j.done === (j.stage === 8) &&
       !!recipes[j.recipe] &&
       Number.isInteger(j.stage) &&
       j.stage >= 0 &&

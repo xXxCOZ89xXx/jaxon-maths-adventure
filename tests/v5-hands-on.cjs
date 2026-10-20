@@ -247,6 +247,7 @@ test("All eight buildings share validated worker/customer context metadata and r
     assert.notEqual(worker.objective, customer.objective);
   }
 });
+test("Missing journey context is retained and fails closed instead of crashing",()=>{const s=E.fresh();J.start(s);delete J.state(s).context;const before=JSON.stringify(J.state(s));assert.equal(J.model(s),null);assert.equal(J.start(s),false);assert.equal(JSON.stringify(J.state(s)),before);assert.equal(T.context('unknown','journey'),null);});
 console.log(
   `${suites} V5 suites, ${steps} generated task steps; fictional fixtures only.`,
 );
