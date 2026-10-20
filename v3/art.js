@@ -260,9 +260,10 @@
               "#dae0c0",
             ) +
               [0, 1, 2]
+                .filter(j => j * 19 <= (live ? h : h * 0.5) - 18)
                 .map(
                   (j) =>
-                    `<path d="M-22 ${-h + 15 + j * 19}l12 6v9l-12-6zM10 ${-h + 22 + j * 19}l12-6v9l-12 6z" fill="${l >= 2 ? "#f4d791" : "#688784"}"/>`,
+                    `<path d="M-22 ${-(live ? h : h * 0.5) + 15 + j * 19}l12 6v9l-12-6zM10 ${-(live ? h : h * 0.5) + 22 + j * 19}l12-6v9l-12 6z" fill="${l >= 2 ? "#f4d791" : "#688784"}"/>`,
                 )
                 .join(""),
           ),
@@ -319,7 +320,7 @@
       l = before ? 0 : Math.min(3, level),
       w = E.worlds.find((w) => w.id === id);
     const uid = "sky-" + id + "-" + l + "-" + (before ? "before" : "now");
-    return `<svg class="world-scene scene-${id}" viewBox="0 0 900 560" role="img" aria-label="${esc(w.name)}: ${l === 0 ? "before restoration" : l + " of 3 landmarks restored"}"><defs><linearGradient id="${uid}" x2="0" y2="1"><stop stop-color="${p[0]}"/><stop offset="1" stop-color="${p[1]}"/></linearGradient></defs><rect width="900" height="560" fill="url(#${uid})"/><circle cx="706" cy="104" r="61" fill="#ffe7b3" opacity=".08"/><circle cx="706" cy="104" r="34" fill="#fff2cc" opacity=".85"/><path d="M0 225l118-71 119 83 130-104 127 79 107-76 129 93 90-57 80 53v335H0z" fill="${p[0]}" opacity=".22"/><g fill="#eff4df" opacity=".13"><path d="M89 102h140v8H89zM120 88h80v14h-80zM505 67h100v8H505z"/></g><ellipse cx="450" cy="488" rx="299" ry="37" fill="#142e39" opacity=".18"/>${terrain(id, l)}${landmarks(id, l, before ? 0 : settled)}${at(453, 423, miniExplorer(), 0.7)}<g fill="${p[4]}" opacity=".7"><path d="M179 406h7v7h-7zM677 437h6v6h-6zM566 459h5v5h-5z"/></g></svg>`;
+    return `<svg class="world-scene scene-${id}" viewBox="0 0 900 560" role="img" aria-label="${esc(w.name)}: ${l === 0 ? "before restoration" : l + " of 3 landmarks restored"}"><defs><linearGradient id="${uid}" x2="0" y2="1"><stop stop-color="${p[0]}"/><stop offset="1" stop-color="${p[1]}"/></linearGradient></defs><rect width="900" height="560" fill="url(#${uid})"/><circle cx="706" cy="104" r="61" fill="#ffe7b3" opacity=".08"/><circle cx="706" cy="104" r="34" fill="#fff2cc" opacity=".85"/><path d="M0 225l118-71 119 83 130-104 127 79 107-76 129 93 90-57 80 53v335H0z" fill="${p[0]}" opacity=".22"/><g fill="#eff4df" opacity=".13"><path d="M89 102h140v8H89zM120 88h80v14h-80zM505 67h100v8H505z"/></g><ellipse cx="450" cy="488" rx="299" ry="37" fill="#142e39" opacity=".18"/>${terrain(id, l)}${landmarks(id, l, before ? 0 : settled)}${at(id === "statistics" ? 365 : 453, id === "statistics" ? 451 : 423, miniExplorer(), 0.7)}<g fill="${p[4]}" opacity=".7"><path d="M179 406h7v7h-7zM677 437h6v6h-6zM566 459h5v5h-5z"/></g></svg>`;
   }
   function miniExplorer() {
     return '<ellipse cy="7" rx="15" ry="6" fill="#153b36" opacity=".25"/><path d="M-8-6h7V8h-7zM3-6h7V8H3z" fill="#253e48"/><path d="M-12-34h26v30h-26z" fill="#e6b96c"/><path d="M-8-54h19v20H-8z" fill="#d2ad83"/><path d="M-11-60h25v11h-25z" fill="#326652"/><path d="M-16-30h5v21h-5zM14-30h5v21h-5z" fill="#c29d79"/>';
