@@ -1,5 +1,21 @@
 # Codex handover — V5.1 usability and automated regression
 
+## Latest continuation: production discovery and release hold
+
+The owner now authorises replacing production and accepts resetting learning progress where necessary, while preserving accounts, PINs and security. This supersedes the earlier deployment restrictions below. **No V5.1 cutover occurred.** The remaining block is production backend compatibility/access and live authentication verification, not general release permission.
+
+- **Actual production:** https://xxxcoz89xxx.github.io/jaxon-maths-adventure/ — GitHub Pages legacy `main:/`, HTTPS enforced, no custom domain; successful build `1300525156`, commit **`0d0b0265d75f26efeaaaf9bfeea0f061ded2a5a0`**. The original homepage is the older shared-account prototype; deployed V2 routes also exist. The family's bookmarked route needs confirming.
+- **Rollback:** pushed tag `rollback/production-before-v51-0d0b026`; verified complete Git bundle, original source archive and Pages configuration manifest under restricted `/workspace/work/v51-production-rollback/`. No data writes/downloads occurred; a private database backup is still required before any future schema/data change.
+- **Production Supabase:** `mbdelspbjusarbwlltol`. The original homepage uses account-owned `learning_progress` and explicitly says parent buttons are not separately secured. The V2 adapter expects different family/reward APIs; actual hosted schema and policies remain unknown. Do not treat either source as proof of live permissions.
+- **V5.1 backend gap:** answer-saving fixes need no new JSON schema, but the adventure's connected adapter requires V3 server PIN/unlock, role, CAS and wallet APIs and a pinned staging identity. There is no reviewed production configuration/migration. Do not repoint staging or deploy offline Test Camp as production.
+- **Verification:** reconfirmed the exact green hosted 344-case source and byte-identical application/harness. Fresh `npm test`, configured staging build/verification, build isolation and all 14 disposable PostgreSQL suites passed. A production build is not available or certified. Latest interaction fixes, nine worlds and 55 skills are present.
+- **Live Auth:** production page and production Supabase health probes both stopped at proxy CONNECT **HTTP 403**. No identity/login/PIN request reached production. Normal parent/learner Auth, PINs, role restrictions, live saves and reward denials remain blocked/unverified. No genuine learner identity was used.
+- **Private preview:** unchanged, owner-private V5 version 5, not the production game. PR #2 remains draft/unmerged. No Auth accounts, PINs, grants, policies or records were altered.
+- **Owner involvement:** permit the exact website/production/staging Supabase hosts through supported environment configuration; provide trusted read-only production schema access or a private schema-only export and confirm the bookmarked route. Then review a concrete compatibility proposal for existing identities/PINs, enable private backup/restore, and securely bind dedicated fictional accounts for hosted checks. No passwords/PINs or exports in GitHub/chat. Replacement authorisation is already granted.
+- **Physical iPad:** not performed. The concise Safari/PIN/map/input/gesture/bill/fraction/coordinate/hint/save/shopping-cooking checklist and exact deployment/rollback procedure are in [V5.1 live release record](V51-LIVE-RELEASE.md). Next priority is production integration and hosted security verification, then that single device session.
+
+The rest of this handover records the completed V5.1 development milestone. Its earlier “no deployment authorised” language is historical and superseded by this continuation.
+
 Branch `codex/v3-adventure-build`; [Draft PR #2](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/pull/2), unmerged. **Application: `2f30f72`; final QA harness: `a0da7d4`**; V5 baseline: `2ca7639`. The latest user request authorises all eight V5.1 priorities and supersedes the earlier Phase 1-only request. All eight priorities are implemented and the final hosted regression is green. No deployment occurred: the owner-private site still serves V5.
 
 ## Priority status
@@ -45,7 +61,7 @@ The queued-input defect was reproduced before fixing: a blocked measurement edit
 
 All eight implementation priorities and automated regression are complete. Start a new session with `AGENTS.md` and this handover, then resume the existing consolidated physical-device and verified fictional-staging acceptance work. Do not recreate the test profiles, restart the game or treat Phase 2 from the earlier handover as unfinished. PR #2 remains draft and unmerged.
 
-The useful next work is the existing consolidated **physical iPad acceptance and verified hosted-authentication/recovery checks**. Physical Safari scrolling, virtual keyboard/minus/decimal entry, gestures, performance and assistive-technology review remain outstanding. Actual hosted login/PIN/RLS, genuine cross-device/offline recovery and deferred recovery delivery remain unverified. The prior staging CONNECT 403 must not be bypassed. Do not access real records, alter production Auth/SQL, merge or deploy without further approval. Keep the private V5 preview unchanged.
+The latest production continuation above now governs release work. Physical Safari scrolling, virtual keyboard/minus/decimal entry, gestures, performance and assistive-technology review remain outstanding. Actual hosted login/PIN/RLS, genuine cross-device/offline recovery and deferred recovery delivery remain unverified. The proxy CONNECT 403 must not be bypassed. Production replacement is authorised subject to the security checks; incompatible authentication/schema decisions and missing access remain blockers. See [the concrete release hold and next steps](V51-LIVE-RELEASE.md).
 
 ## Commands
 

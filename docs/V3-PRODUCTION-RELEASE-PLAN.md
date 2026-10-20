@@ -1,5 +1,7 @@
 # V2 → V3 production release plan — prepared, not executed
 
+**Latest continuation:** the owner has now authorised website replacement and accepts loss of the small amount of learning progress. Earlier permission restrictions in this historical plan are superseded. Accounts, PINs and security must still be preserved. Actual production discovery, rollback tag, current integration blockers and owner access requirements are recorded in [V5.1 live release status](V51-LIVE-RELEASE.md). No production rollout or database modification has occurred.
+
 Status: no production access, export, schema change, account change, deployment, homepage replacement or merge is authorised by this task. PR #2 stays draft. Initial real staging checks below are owner-reported. Automated tests use fictional fixtures or isolated PostgreSQL.
 
 ## Preconditions and decision gates
