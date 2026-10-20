@@ -1,5 +1,13 @@
 # Nine-world V3 development release notes
 
+## Private staging activation (20 October 2026)
+
+The owner-completed staging project now has a configured nine-world build hosted on a separate owner-private HTTPS Site. All four Cloud variables match the staging project; its public key is never printed or committed to this GitHub repository. Mock browser builds now use a guarded separate directory and cannot replace deployable staging files. New read-only audit/completeness commands and expanded eight-table security assertions accompany the combined two-family/physical-iPad test guide. See `V3-STAGING-ACTIVATION.md` for the private link and exact remaining checks.
+
+The live identity RPC was blocked by the Cloud proxy (403), so no live authenticated or hosted-RLS success is claimed. Existing local results use isolated PostgreSQL claims and intercepted browser APIs. Production, the live homepage and GitHub Pages settings remain unchanged; PR #2 stays draft and unmerged.
+
+## Earlier offline milestone
+
 Continues draft PR #2 on `codex/v3-adventure-build`. The entry remains `v3-adventure.html`; the live homepage and V2 game are unchanged.
 
 - **Practical Maths Town is playable now:** Supermarket, Café, Bank, Shopping Centre, Station, Home, Cinema/Leisure and Workplace. Original town art has eight tap/keyboard building entrances and visible restoration.

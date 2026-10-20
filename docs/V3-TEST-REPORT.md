@@ -1,3 +1,29 @@
+# Private staging activation QA — 20 October 2026
+
+The owner-completed staging database configuration is now built and deployed at the [owner-private HTTPS site](https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site). Only the owner is allowed; no groups or external visitors. [Setup, exact live limits and one combined two-family/iPad session](V3-STAGING-ACTIVATION.md).
+
+| Current run | Result and scope |
+| --- | --- |
+| Cloud configuration | Both project refs and URL match `sfogrvedypgtxfvecmbx`; public key present, accepted by validator, never printed and absent from tracked GitHub files |
+| Live identity RPC | **Blocked** by proxy CONNECT 403; no Supabase response, no live authenticated tests, no hosted-RLS success claimed |
+| V2 regression | **3 scripts passed** |
+| V3 learning/gameplay/sync | **24 suites passed**, including 55 skills, 4,466 generated task instances, preserved V2 data and immutable retry/CAS conflicts |
+| Actual isolated PostgreSQL | **14 security suites passed**; expanded assertions check all eight RLS-enabled tables against anon and all four fictional family actors, anonymous RPC restrictions, role PIN lengths, permissions, rewards, recovery and concurrency |
+| Full local browser suite | **66/66 passed**, 0 skipped, flaky or unexpected; desktop and iPad portrait/landscape Chromium; about 4.9 minutes. Cloud responses are mocked |
+| Staging build and fixture isolation | **Passed**: complete asset/syntax checks, sign-in/PIN entry, nine worlds, 40 items; mock preparation cannot replace any deployable bytes |
+| npm audit | **0 vulnerabilities** |
+| Protected file integrity | **5/5 original hashes retained**: live homepage, V2 page, old adapter and two old SQL drafts |
+| Local WebKit / physical Safari | WebKit download blocked by proxy 403; physical iPad Safari not run |
+| New hosted Chromium/WebKit CI | **Passed** [run 39411280360](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39411280360): **88/88 Chromium/WebKit cases**, all 14 PostgreSQL/24 V3/3 V2 checks and build checks, for code commit `cf2ddc1` |
+
+The initial browser run was interrupted after changing fixture output paths; the table reports only the completed clean rerun. The final deployed static assets match `staging-dist/`. Native hosting deployment/access verification proves the private deployment, not live game authentication or Supabase RLS. No production records, accounts, schema, GitHub Pages settings or live entry points were changed. PR #2 remains draft and unmerged.
+
+Hosted success and the 88-case count were verified through run/job state and the test-result annotation. Artifact storage download is blocked by the Cloud proxy; the hosted browser JSON was not downloaded. The [QA artifact](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39411280360/artifacts/12260320684) remains available through GitHub.
+
+Machine-readable current evidence: `tests/artifacts/v3-staging-activation-results.json`, `v3-live-staging.json` and `v3-browser-results.json`. Text logs: `v3-staging-security-results.txt`, `v3-staging-unit-results.txt`. Existing reports below are historical; their earlier setup instructions and "nothing deployed" statements describe those earlier runs.
+
+---
+
 # Secure integration continuation QA
 
 Date: 20 October 2026. Branch: `codex/v3-adventure-build`, draft PR #2. **Implementation is tested with fictional data; no hosted Supabase staging acceptance has occurred.**

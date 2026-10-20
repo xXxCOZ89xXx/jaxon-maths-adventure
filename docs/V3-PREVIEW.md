@@ -1,5 +1,7 @@
 # Nine-world V3 Test Camp
 
+Current owner-private HTTPS staging: https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site . Sign in with the owning ChatGPT account, then a fictional staging account. The owner has completed the separate database setup. See [activation status and one combined family/iPad session](V3-STAGING-ACTIVATION.md); live Auth/RLS acceptance is unverified because the Cloud proxy blocks the staging host. The local/offline preview below remains separate.
+
 This is a playable fictional **offline development build**, continuing draft PR #2. It includes Practical Maths Town now; Town is not backlogged.
 
 Run from the repository root or extracted preview folder:

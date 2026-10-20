@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-20",
+  "branch": "codex/v3-adventure-build",
+  "codeCommit": "cf2ddc1ecf8671aeb5acfb1de4f836891b8c1fbe",
+  "configuration": {
+    "projectRef": "sfogrvedypgtxfvecmbx",
+    "url": "https://sfogrvedypgtxfvecmbx.supabase.co",
+    "allFourVariables": "read; refs/URL match; key present and redacted"
+  },
+  "hosting": {
+    "url": "https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site",
+    "status": "succeeded",
+    "audience": "owner only; no groups, other users or external visitors",
+    "version": 1,
+    "sourceCommit": "b2527491a33a9894f663df1af90615390a719ccb",
+    "deploymentId": "appgdep_6ad747703b908191935bf34624c65329"
+  },
+  "live": {
+    "projectRef": "sfogrvedypgtxfvecmbx",
+    "url": "https://sfogrvedypgtxfvecmbx.supabase.co",
+    "configuration": "matched",
+    "publishableKey": "present; redacted",
+    "authenticatedTests": "not attempted; no account credentials",
+    "requests": [
+      {
+        "label": "identity",
+        "status": null,
+        "proxyStatus": 403,
+        "outcome": "proxy denied staging host; target not contacted"
+      }
+    ]
+  },
+  "local": {
+    "v2RegressionScripts": 3,
+    "v3LogicAndSyncSuites": 24,
+    "postgresSecuritySuites": 14,
+    "postgresMode": "real disposable network-disabled PostgreSQL; fictional auth claims",
+    "browserStats": {
+      "startTime": "2026-10-20T10:50:57.702Z",
+      "duration": 291726.568,
+      "expected": 66,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "browserProjects": [
+      "desktop Chromium",
+      "iPad portrait Chromium",
+      "iPad landscape Chromium"
+    ],
+    "browserCloudMode": "intercepted fictional responses; no live authentication",
+    "stagingBuildVerification": "passed: nine worlds, 40 items, PIN/login, complete assets",
+    "fixtureBuildIsolation": "passed: every deployable byte preserved",
+    "protectedFilesUnchanged": 5,
+    "npmAuditVulnerabilities": 0,
+    "configuredKeyAbsentFromTrackedFiles": true
+  },
+  "hostedCI": {
+    "runId": 39411280360,
+    "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39411280360",
+    "status": "completed",
+    "conclusion": "success",
+    "browserCasesPassed": 88,
+    "browserProjects": [
+      "iPad portrait WebKit",
+      "desktop Chromium",
+      "iPad portrait Chromium",
+      "iPad landscape Chromium"
+    ],
+    "evidence": "GitHub run/job success and 88 passed annotation",
+    "artifactDownload": "Cloud proxy denied artifact storage host; no downloaded hosted JSON claimed",
+    "qaArtifactUrl": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39411280360/artifacts/12260320684"
+  },
+  "remaining": [
+    "live identity/RLS blocked by proxy 403",
+    "real Auth, password/PIN recovery and two-device acceptance",
+    "physical iPad Safari",
+    "staging Auth recovery redirect setup"
+  ],
+  "production": "not contacted; protected files unchanged; no merge or Pages change"
+}

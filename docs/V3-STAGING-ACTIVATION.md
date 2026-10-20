@@ -22,7 +22,7 @@ The environment network allowlist currently omits `sfogrvedypgtxfvecmbx.supabase
 
 ## Automated QA
 
-Current-run details are in `V3-TEST-REPORT.md` and `tests/artifacts/v3-staging-activation-results.json`. PostgreSQL tests use a disposable network-disabled container and fictional signed-claim context. Browser cloud tests intercept fictional responses; they do not prove hosted Auth/PostgREST/RLS. Local WebKit download is denied by the environment proxy; the GitHub QA workflow runs Chromium and WebKit separately. Physical iPad Safari remains part of the session below.
+Current-run details are in `V3-TEST-REPORT.md` and `tests/artifacts/v3-staging-activation-results.json`. PostgreSQL tests use a disposable network-disabled container and fictional signed-claim context. Browser cloud tests intercept fictional responses; they do not prove hosted Auth/PostgREST/RLS. Local WebKit download is denied by the environment proxy; the current [GitHub QA run](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39411280360) passed all 88 Chromium/WebKit browser cases, all 14 PostgreSQL security suites, 24 V3 logic/sync suites, three V2 scripts and the new build checks. These are automated fictional-account tests. Physical iPad Safari remains part of the session below.
 
 Fixed a deployment hazard: `tests/prepare-v3.cjs` previously replaced `staging-dist/` with fictional credentials. It now writes only `staging-fixture-dist/`, and the builder refuses real configuration for that fixture output. A regression test verifies that every existing deployable file remains byte-for-byte intact. The offline game still has `connect-src 'none'`; the staging game permits only its own origin and this staging Supabase URL.
 

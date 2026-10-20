@@ -27,6 +27,6 @@ The 60-minute weekly target, ten learning coins per active minute and 1:1 screen
 
 ## Remaining release work
 
-The local gameplay expansion is separate from real cloud integration. Physical iPad Safari/WebKit testing and a separate staging Supabase project for real auth/PIN, sync, family isolation and server-side rewards remain outstanding. Do not merge, publish the replacement homepage or change production without explicit approval.
+The local gameplay expansion is separate from real cloud integration. The owner has now provisioned the separate staging database and fictional families, and a configured owner-private HTTPS site is deployed; see `V3-STAGING-ACTIVATION.md`. Live Auth/PIN, sync, hosted family isolation, rewards and physical iPad Safari acceptance remain outstanding: the Cloud proxy blocks staging RPC access. Do not merge, publish the replacement homepage or change production without explicit approval.
 
 Higher-level expeditions include negative lift coordinates and anticlockwise/composed tower turns. Generated tasks within each visit are checked for distinct mathematical content across all route/level combinations.
