@@ -1,0 +1,16 @@
+V5.1 hosted verification
+Run: https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39502533251
+Verified source: a0da7d44c99a606ce442263df5f9cc8b77f9c0dc
+Job: 118904029987; completed successfully
+
+2026-10-20T21:45:05.2186866Z 14 V5 suites, 1107 generated task steps; fictional fixtures only.
+2026-10-20T21:45:22.3834968Z 14 real PostgreSQL security suites passed. No hosted Supabase or real accounts used.
+2026-10-20T21:45:22.7639323Z Built preview-dist/PLAY-V3.html (standalone offline game).
+2026-10-20T22:07:32.7787563Z ##[notice]  344 passed (22.2m)
+2026-10-20T22:07:32.7794619Z   344 passed (22.2m)
+2026-10-20T22:07:32.9713201Z {"counts":{"passed":344},"worlds":9,"skills":55,"profiles":["advanced","developing","foundation","new"],"skillVisits":880,"completedIndependentRounds":144}
+2026-10-20T22:07:35.1264026Z Built preview-dist/PLAY-V3.html (standalone offline game).
+
+Per-project passing cases: {"ipad-portrait-webkit":86,"desktop-chromium":86,"ipad-portrait-chromium":86,"ipad-landscape-chromium":86}
+All 344 case-result lines were passing; no failing case-result lines.
+

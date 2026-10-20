@@ -32,8 +32,30 @@
     "runId": 39502533251,
     "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39502533251",
     "expectedBrowserCases": 344,
-    "status": "in_progress",
-    "commit": "a0da7d4"
+    "status": "completed",
+    "commit": "a0da7d4",
+    "conclusion": "success",
+    "passedBrowserCases": 344,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "projects": {
+      "ipad-portrait-webkit": 86,
+      "desktop-chromium": 86,
+      "ipad-portrait-chromium": 86,
+      "ipad-landscape-chromium": 86
+    },
+    "worlds": 9,
+    "skills": 55,
+    "profiles": [
+      "advanced",
+      "developing",
+      "foundation",
+      "new"
+    ],
+    "skillVisits": 880,
+    "completedIndependentRounds": 144,
+    "proof": "tests/artifacts/v5-1-hosted-results.txt"
   },
   "safety": {
     "protectedSourcesUnchanged": true,
@@ -45,7 +67,7 @@
     "hostedAuthVerified": false
   },
   "limits": [
-    "Local WebKit distribution download blocked by proxy policy; hosted CI includes WebKit.",
+    "Local WebKit downloads were blocked by proxy policy; all 86 hosted iPad WebKit cases passed.",
     "Physical iPad Safari, assistive technology and performance acceptance outstanding.",
     "Actual hosted Auth/PIN/RLS, cross-device/offline recovery and deferred recovery delivery unverified."
   ],
