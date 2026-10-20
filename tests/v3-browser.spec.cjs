@@ -476,6 +476,14 @@ test("Camp places are keyboard links to usable displays; navigation cannot earn 
   expect(after.milestones).toEqual(before.milestones);
   expect(after.weekly).toEqual(before.weekly);
   await accessibility(page);
+  await page.setViewportSize({width:390,height:844});
+  const links=await page.locator(".camp-hotspots a").evaluateAll(els=>els.map(e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,w:r.width,h:r.height};}));
+  expect(links.every(r=>r.w>=44&&r.h>=44)).toBe(true);
+  for(let i=0;i<links.length;i++)for(let j=i+1;j<links.length;j++){
+    const a=links[i],b=links[j];
+    expect(a.x+a.w<=b.x||b.x+b.w<=a.x||a.y+a.h<=b.y||b.y+b.h<=a.y).toBe(true);
+  }
+  await accessibility(page);
 });
 
 test("Landscape entrances open real expeditions in each original world without granting progress", async ({page})=>{
