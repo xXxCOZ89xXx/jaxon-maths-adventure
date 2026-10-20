@@ -71,5 +71,7 @@
     "conclusion": "success",
     "browser_passed": 45,
     "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39355378027"
-  }
+  },
+  "historical_gameplay_milestone": true,
+  "superseded_by": "v3-secure-summary.json"
 }

@@ -1,0 +1,30 @@
+{
+  "run_id": 39385393158,
+  "conclusion": "success",
+  "head_sha": "986b345962c0a5d821fe22ea46c884d677a07378",
+  "job_id": 118505638121,
+  "job_started_at": "2026-10-20T07:21:06Z",
+  "job_completed_at": "2026-10-20T07:28:41Z",
+  "all_steps_succeeded": true,
+  "browser_matrix": {
+    "cases": 88,
+    "projects": [
+      "desktop-chromium",
+      "ipad-portrait-chromium",
+      "ipad-landscape-chromium",
+      "ipad-portrait-webkit"
+    ]
+  },
+  "postgres_security_suites": 14,
+  "playable_artifact": {
+    "id": 12247702744,
+    "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39385393158/artifacts/12247702744",
+    "bytes": 91989
+  },
+  "qa_artifact": {
+    "id": 12247253648,
+    "bytes": 4457394
+  },
+  "real_staging_used": false,
+  "production_accessed": false
+}

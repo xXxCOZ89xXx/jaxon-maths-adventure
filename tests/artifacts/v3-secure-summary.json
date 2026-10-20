@@ -30,11 +30,14 @@
   },
   "hosted_ci": {
     "status": "success",
-    "run_id": 39384587723,
-    "head": "eeca796c79d393c30982565d32a06f6d737b3b9e",
+    "run_id": 39385393158,
+    "head": "986b345962c0a5d821fe22ea46c884d677a07378",
     "browser_cases": 88,
-    "postgres_security_suites": 13,
-    "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39384587723"
+    "postgres_security_suites": 14,
+    "v3_logic_suites": 24,
+    "v2_regression_scripts": 3,
+    "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39385393158",
+    "playable_artifact_url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39385393158/artifacts/12247702744"
   },
   "remaining": [
     "Verified and authorised separate staging project",
