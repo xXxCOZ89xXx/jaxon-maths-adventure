@@ -418,7 +418,7 @@ async function parent(remote) {
       )
       .join(
         "",
-      )}<form id="reward-form">${field("Amount (1 to 60)", "amount", 'type="number" min="1" max="60" step="1" value="10"')}<label>Action<select id="reward-kind"><option value="award">Award bonus coins</option><option value="redeem">Redeem earned screen-time minutes</option><option value="confirm_offline">Confirm reported offline learning minutes</option></select></label><button>Submit parent reward</button></form>${button("Refresh learning evidence", "refresh-parent")}`,
+      )}<form id="reward-form">${field("Amount (1 to 60)", "amount", 'type="number" min="1" max="60" step="1" value="10"')}<label for="reward-kind">Action</label><select id="reward-kind"><option value="award">Award bonus coins</option><option value="redeem">Redeem earned screen-time minutes</option><option value="confirm_offline">Confirm reported offline learning minutes</option></select><button>Submit parent reward</button></form>${button("Refresh learning evidence", "refresh-parent")}`,
   );
   $("reward-form").onsubmit = async (e) => {
     e.preventDefault();

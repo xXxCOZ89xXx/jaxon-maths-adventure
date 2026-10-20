@@ -1857,3 +1857,4 @@ summary {
 }
 #sync-conflict::backdrop { background: rgb(20 35 25 / 65%); }
 #sync-conflict button { margin: 8px 8px 0 0; }
+[hidden] { display: none !important; }

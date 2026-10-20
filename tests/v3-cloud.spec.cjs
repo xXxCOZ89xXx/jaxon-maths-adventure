@@ -64,6 +64,7 @@ async function mock(page, server) {
         };
       }
     } else if (u.pathname === "/auth/v1/user") data = user;
+    else if (u.pathname === "/auth/v1/recover") data = {};
     else if (u.pathname === "/auth/v1/logout") data = {};
     else if (u.pathname === "/rest/v1/rpc/v3_identity")
       data = { name: "jaxon-maths-v3-staging", projectRef: ref };
@@ -258,13 +259,29 @@ test("parent evidence and server reward path remain separate from learner gamepl
   const server = fixture();
   server.progress = {
     minutes: 2,
-    practice: { town_coins: { completed: true } },
-    checks: {},
-    recent: [],
+    practice: { place: { completed: true } },
+    checks: {
+      operations: { stage: 1, score: 100 },
+      negative: { reteach: true, score: 33 },
+    },
+    recent: [
+      {
+        type: "check",
+        id: "negative",
+        date: "2026-10-20T06:00:00Z",
+        assisted: true,
+      },
+    ],
   };
   const errors = await mock(page, server);
   await login(page, true);
-  await expect(page.getByText("No completed learning yet.")).toBeVisible();
+  await expect(page.getByText(/Place value: Guided practice/)).toBeVisible();
+  await expect(
+    page.getByText(/Addition and subtraction: Fresh independent check passed/),
+  ).toBeVisible();
+  await expect(
+    page.getByText(/Negative numbers: Revisit teaching/),
+  ).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Explore worlds" }),
   ).toHaveCount(0);
@@ -388,5 +405,46 @@ test("a parent award reaches an open learner shop without a progress revision", 
   await page.clock.fastForward(11000);
   await expect(cap).toBeEnabled();
   expect(server.revision).toBe(before);
+  expect(errors).toEqual([]);
+});
+
+test("private account recovery uses PKCE, changes the password and returns to sign-in", async ({
+  page,
+}) => {
+  const server = fixture(),
+    errors = await mock(page, server);
+  await page.goto("/staging-dist/");
+  await page
+    .getByLabel("Email", { exact: true })
+    .fill("learner@fictional.invalid");
+  await page
+    .getByRole("button", { name: "Forgot account password", exact: true })
+    .click();
+  await expect(page.getByRole("status")).toContainText("private recovery link");
+  const recover = server.calls.find((c) => c.path === "/auth/v1/recover");
+  expect(recover.body.email).toBe("learner@fictional.invalid");
+  expect(recover.body.code_challenge).toBeTruthy();
+  await page.goto("/staging-dist/?code=fictional-recovery-code");
+  await page
+    .getByLabel("New password", { exact: true })
+    .fill("fictional-recovered-password");
+  await page.getByRole("button", { name: "Continue", exact: true }).click();
+  await expect(
+    page.getByRole("heading", { name: "Staging account sign-in" }),
+  ).toBeVisible();
+  expect(
+    server.calls.some(
+      (c) =>
+        c.path === "/auth/v1/user" &&
+        c.body.password === "fictional-recovered-password",
+    ),
+  ).toBe(true);
+  expect(
+    server.calls.some(
+      (c) =>
+        c.path === "/auth/v1/token" &&
+        c.body.auth_code === "fictional-recovery-code",
+    ),
+  ).toBe(true);
   expect(errors).toEqual([]);
 });
