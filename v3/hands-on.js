@@ -490,19 +490,27 @@
     return t ? { ...t, skill: skill.id, format: text, practice: true } : null;
   }
   // A draft is kept separately: an empty or invalid edit must never submit an older value.
-  function numericValue(raw, t) {
-    if (!/^-?\d+$/.test(String(raw))) return null;
-    const n = Number(raw);
+  function numericValue(raw, t, scale = 1) {
+    if (!t || !(scale === 1 || scale === 100)) return null;
+    const pattern = scale === 100 ? /^-?\d+(?:\.\d{1,2})?$/ : /^-?\d+$/;
+    if (!pattern.test(String(raw))) return null;
+    const n = Math.round(Number(raw) * scale);
     return Number.isSafeInteger(n) && n >= (t.min ?? 0) && n <= t.max ? n : null;
   }
+  function numericMessage(t, scale = 1) {
+    return scale === 100
+      ? `Enter pounds from ${(t.min ?? 0)/scale} to ${t.max/scale}, using at most two decimal places.`
+      : `Enter a whole number from ${t.min ?? 0} to ${t.max}.`;
+  }
   function numericInput(t, value, draft, context = "mission") {
-    const raw = draft ?? String(value), invalid = numericValue(raw, t) === null;
-    const label = t.unit === "p" ? "Amount in pence (100p = £1)" : "Answer" + (t.unit ? " in " + t.unit : "");
-    return `<div class="numeric-answer"><label for="${context}-amount">${label}</label><input id="${context}-amount" data-numeric-answer="${context}" type="text" inputmode="${(t.min ?? 0) < 0 ? 'text' : 'numeric'}" enterkeyhint="done" autocomplete="off" value="${esc(raw)}" aria-invalid="${invalid}" aria-describedby="${context}-number-help"><p id="${context}-number-help" class="small numeric-help" aria-live="polite">${invalid ? `Enter a whole number from ${t.min ?? 0} to ${t.max}.` : 'Type an answer or use the model.'}</p></div>`;
+    const scale = t.practice ? t.scale || 1 : 1;
+    const raw = draft ?? String(value/scale), invalid = numericValue(raw, t, scale) === null;
+    const label = scale === 100 ? "Amount in pounds (£)" : t.unit === "p" ? "Amount in pence (100p = £1)" : "Answer" + (t.unit ? " in " + t.unit : "");
+    return `<div class="numeric-answer"><label for="${context}-amount">${label}</label><input id="${context}-amount" data-numeric-answer="${context}" type="text" inputmode="${(t.min ?? 0) < 0 ? 'text' : scale === 100 ? 'decimal' : 'numeric'}" enterkeyhint="done" autocomplete="off" value="${esc(raw)}" aria-invalid="${invalid}" aria-describedby="${context}-number-help"><p id="${context}-number-help" class="small numeric-help" aria-live="polite">${invalid ? numericMessage(t,scale) : 'Type an answer or use the model.'}</p></div>`;
   }
   function invalidDraft(values, t) {
     if(values?.clockDraft !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(values.clockDraft)) return true;
-    return values?.amountDraft !== undefined && numericValue(values.amountDraft, t) === null;
+    return values?.amountDraft !== undefined && numericValue(values.amountDraft, t, t?.practice ? t.scale || 1 : 1) === null;
   }
   function sharing(t, amount) {
     const saved = String(t.prompt || "").match(/Share a £([\d.]+) café bill equally between (\d+) friends/);
@@ -561,7 +569,7 @@
     return !!m && !["clock", "sequence-rail", "budget"].includes(m);
   };
   root.V5HandsOn = {
-    numericValue, numericInput, invalidDraft, sharing,
+    numericValue, numericMessage, numericInput, invalidDraft, sharing,
     isHandsOn,
     enrich,
     mechanic,

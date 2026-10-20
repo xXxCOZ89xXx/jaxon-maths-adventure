@@ -10,8 +10,7 @@ async function answer(page,read,constructed=true) {
   const l=(await read()).learning,q=l.qs[l.i];
   const input=page.locator('[data-numeric-answer="practice"]');
   if(constructed && await input.count()) {
-    const spec=await page.evaluate(()=>{const l=JSON.parse(localStorage.getItem('jaxon_v3_fictional_demo_2026')).learning;return V5HandsOn.practiceSpec({id:l.id},l.qs[l.i]);});
-    await input.fill(String(Number(q[1])*(spec.scale||1)));
+    await input.fill(String(q[1]));
     await click(page,'p5-submit');
     return 'typed-model';
   }

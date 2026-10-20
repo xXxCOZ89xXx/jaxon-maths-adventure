@@ -430,10 +430,13 @@ test('V5.1 direct practice entry preserves pence/pounds units and saves supporte
   await page.reload();
   const input=page.locator('[data-numeric-answer="practice"]');
   await expect(input).toBeVisible();
-  await input.fill('400');
+  await expect(page.getByLabel('Amount in pounds (£)',{exact:true})).toBeVisible();
+  await input.fill('4.001');await click(page,'p5-submit');
+  expect((await state(page)).learning.answered).not.toBe(true);
+  await input.fill('4.00');
   await expect.poll(async()=> (await state(page)).learning.manipulation.amount).toBe(400);
   await page.reload();
-  await expect(input).toHaveValue('400');
+  await expect(input).toHaveValue('4.00');
   await input.press('Enter');
   await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
   expect((await state(page)).learning.answered).toBe(true);
@@ -502,4 +505,21 @@ test('V5.1 cleared clock drafts persist and cannot submit the previous arrival t
   expect((await state(page)).adventure.active.evidence||[]).toHaveLength(0);
   await input.fill(time);await click(page,'m-submit');
   expect((await state(page)).adventure.active.solved).toBe(true);
+});
+
+test('V5.1 stale numeric input cannot overwrite another tab’s replacement quest',async({page,context})=>{
+  await page.evaluate(KEY=>{const s=V3Engine.fresh();s.tourSeen=true;V3Engine.startQuest(s,'measure');s.quest.intro=false;localStorage.setItem(KEY,JSON.stringify(s));},KEY);
+  await page.reload();
+  // Hold the real save lock so an edit waits while another tab replaces the active quest.
+  await page.evaluate(async KEY=>new Promise(held=>{
+    navigator.locks.request(KEY+':transaction',()=>new Promise(release=>{window.releaseEditLock=release;held();}));
+  }),KEY);
+  await page.locator('[data-numeric-answer="quest"]').fill('123');
+  const other=await context.newPage();await other.goto('/v3-adventure.html');
+  await other.evaluate(KEY=>{const s=V3Engine.fresh();s.tourSeen=true;V3Engine.startQuest(s,'algebra');s.quest.intro=false;localStorage.setItem(KEY,JSON.stringify(s));},KEY);
+  await expect(page.getByRole('heading',{name:'Algebra Peaks',exact:true})).toBeVisible();
+  await page.evaluate(()=>window.releaseEditLock());
+  await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+  const s=await state(page);expect(s.quest.world).toBe('algebra');expect(s.quest.value).toBe(0);expect(s.quest.amountDraft).toBeUndefined();
+  await other.close();
 });

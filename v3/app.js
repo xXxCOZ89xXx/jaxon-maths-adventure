@@ -714,7 +714,7 @@
     const name = action.split(":")[0];
     if (["m-submit","j-submit","p5-submit","solve"].includes(name)) {
       const input = document.querySelector('[data-numeric-answer][aria-invalid="true"],[data-mission-clock][aria-invalid="true"]');
-      if(input) { input.setCustomValidity(input.dataset.missionClock ? 'Choose a complete 24-hour time before submitting.' : 'Enter a valid whole number before trying your answer.'); input.reportValidity(); return; }
+      if(input) { input.setCustomValidity(document.getElementById(input.getAttribute('aria-describedby'))?.textContent || 'Check your answer before submitting.'); input.reportValidity(); return; }
     }
     // Only maths manipulation/answer/support controls renew the bounded learning window.
     // Navigation, focus, raw key presses, pointer movement and refresh never do.
@@ -814,10 +814,10 @@
       const spec = () => context === 'mission' ? M.current(s)?.tasks[M.current(s).i] : context === 'journey' ? window.V5Journey.task(s) : context === 'quest' ? E.puzzle(s.quest.world,s.quest.i) : window.V5HandsOn.practiceSpec({id:s.learning?.id},s.learning?.qs[s.learning.i]);
       const t = spec();
       if (!original || !t) return;
-      const n = window.V5HandsOn.numericValue(raw,t);
+      const scale=context==='practice' ? t.scale || 1 : 1, n = window.V5HandsOn.numericValue(raw,t,scale);
       await change(() => {
         const q = target();
-        if (!q || (q.i ?? q.stage) !== step || (q.key ?? q.id) !== (original.key ?? original.id)) return;
+        if (!q || (q.i ?? q.stage) !== step || (q.key ?? q.id) !== (original.key ?? original.id) || q.world !== original.world || q.seed !== original.seed || q.round !== original.round || q.solved || q.answered || q.intro) return;
         const values = context === 'practice' ? (q.manipulation ||= {}) : context === 'quest' ? q : q.values;
         if (n !== null) {
           if ((context === 'quest' ? q.value : values.amount) !== n) activity = Date.now();
@@ -831,7 +831,7 @@
       if (!input.isConnected || input.value !== raw) return;
       const invalid = n === null;
       input.setAttribute('aria-invalid',String(invalid));
-      input.setCustomValidity(invalid ? `Enter a whole number from ${t.min ?? 0} to ${t.max}.` : '');
+      input.setCustomValidity(invalid ? window.V5HandsOn.numericMessage(t,scale) : '');
       input.parentElement.querySelector('.numeric-help').textContent = invalid ? input.validationMessage : 'Type an answer or use the model.';
       if (!invalid) {
         const q = target();
@@ -868,7 +868,7 @@
       const [hour,minute]=raw.split(':').map(Number),value=hour*60+minute;
       await change(()=>{
         const q=M.current(s);
-        if(!q || q.key!==original?.key || q.i!==step || q.solved) return;
+        if(!q || q.key!==original?.key || q.seed!==original?.seed || q.i!==step || q.solved) return;
         if(valid) {if(q.values.amount!==value) activity=Date.now();M.edit(s,'amount',value);}
         q.values.clockDraft=raw;
       },{renderPage:false});

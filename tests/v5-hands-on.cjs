@@ -258,6 +258,10 @@ test('V5.1 strict numeric drafts prevent stale submissions without recording lea
   for(const raw of ['', ' ', '1e3','NaN','2.5','-1','101','Infinity']) assert.equal(H.numericValue(raw,{min:0,max:100}),null,raw);
   for(const raw of ['0','001','100']) assert.equal(H.numericValue(raw,{min:0,max:100}),Number(raw));
   assert.equal(H.numericValue('-12',{min:-20,max:20}),-12);
+  assert.equal(H.numericValue('4.50',{min:0,max:100000},100),450);
+  assert.equal(H.numericValue('4.001',{min:0,max:100000},100),null);
+  assert.equal(H.invalidDraft({amountDraft:'4.50'},{min:0,max:100000,practice:true,scale:100}),false);
+  assert.equal(H.invalidDraft({amountDraft:'4.001'},{min:0,max:100000,practice:true,scale:100}),true);
   const s=E.fresh(); M.start(s,'town','cafe',2);s.adventure.active.i=1;M.begin(s);
   const q=M.current(s),t=q.tasks[1];M.edit(s,'amount',t.answer);q.values.amountDraft='';
   assert.equal(M.submit(s),false);assert.equal(q.solved,false);assert.equal(q.evidence?.length||0,0);
