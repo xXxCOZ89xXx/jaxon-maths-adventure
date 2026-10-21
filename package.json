@@ -17,7 +17,15 @@
     "audit:interactions": "node scripts/audit-v5-interactions.cjs",
     "test:answers": "playwright test tests/v5-interactions.spec.cjs --grep V5.1",
     "test:profiles": "playwright test tests/v51-regression.spec.cjs",
-    "report:v51": "node scripts/summarize-v51.cjs"
+    "report:v51": "node scripts/summarize-v51.cjs",
+    "test:production-preparation": "node tests/v52-production-preparation.cjs",
+    "test:production-metadata": "node tests/v52-metadata.cjs",
+    "build:production-preparation": "node scripts/build-v51-production-preparation.cjs",
+    "check:production-config": "node scripts/build-v51-production-preparation.cjs --check-config",
+    "build:production": "node scripts/build-v52-production.cjs",
+    "test:production-build": "node tests/v52-production-build.cjs",
+    "test:production-security": "node tests/v52-production-postgres.cjs",
+    "test:production-browser": "playwright test --config playwright.production.config.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

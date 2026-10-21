@@ -15,7 +15,9 @@ function fixture() {
     loseSave: false,
   };
 }
-async function mock(page, server) {
+async function mock(page, server, options = {}) {
+  const targetRef = options.projectRef || ref;
+  const targetUrl = `https://${targetRef}.supabase.co`;
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.route("**/*", async (route) => {
@@ -23,7 +25,7 @@ async function mock(page, server) {
       u = new URL(req.url());
     if (u.origin === "http://127.0.0.1:4173" || u.protocol === "file:")
       return route.continue();
-    if (u.origin !== url) {
+    if (u.origin !== targetUrl) {
       errors.push("Unexpected external request: " + u.origin);
       return route.abort();
     }
@@ -65,14 +67,18 @@ async function mock(page, server) {
     else if (u.pathname === "/auth/v1/recover") data = {};
     else if (u.pathname === "/auth/v1/logout") data = {};
     else if (u.pathname === "/rest/v1/rpc/v3_identity")
-      data = { name: "jaxon-maths-v3-staging", projectRef: ref };
+      data = { name: options.projectName || "jaxon-maths-v3-staging", projectRef: targetRef,
+        ...(options.identity || {}) };
     else if (u.pathname === "/rest/v1/rpc/v3_role")
       data = {
         role: parent ? "parent" : "learner",
         child: uid,
         user: user.id,
-        pinSet: true,
+        pinSet: server.pinSet !== false,
       };
+    else if (u.pathname === "/rest/v1/rpc/v3_set_pin") {
+      server.pinSet = true; data = { ok: true };
+    }
     else if (u.pathname === "/rest/v1/rpc/v3_unlock") {
       if (body.p_pin !== (parent ? "654321" : "1234")) {
         server.pinAttempts++;

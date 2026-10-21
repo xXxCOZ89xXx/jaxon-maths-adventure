@@ -7,3 +7,6 @@ staging-fixture-dist/
 .env.*
 !.env.example
 preview-dist/
+production-preparation-dist/
+production-dist/
+production-test-dist/
