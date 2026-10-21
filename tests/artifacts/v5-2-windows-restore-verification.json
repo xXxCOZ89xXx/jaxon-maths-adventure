@@ -1,0 +1,34 @@
+{
+  "task": "owner-run scoped Windows backup restoration verification",
+  "date": "2026-10-21",
+  "passed_suites": 6,
+  "failed_suites": 0,
+  "runtime": "PowerShell 7.4.6 on Linux; native PostgreSQL 17 tools via test-only Docker transport wrappers",
+  "database": "cached postgres:17-alpine, --network none --pull=never; fictional records only",
+  "intended_windows_baseline": "Windows PowerShell 5.1; not executed on Windows in this session",
+  "coverage": [
+    "PASS actual PowerShell + local PG17 restore: original Auth/game data, counts, family links, constraints/indexes/sequences, explicit partial scope; poisoned PG environment ignored",
+    "PASS nonempty destination refused without overwriting or cleanup",
+    "PASS server-side exact database-name check rejects another local database",
+    "PASS wrong local port cannot reach the authorised server",
+    "PASS non-loopback reported server address refused; no remote connection or server configuration change",
+    "PASS unsupported managed dependency aborts selected restore atomically, no fake objects or partial tables"
+  ],
+  "missing_vault_test": "fictional extension generated a real EXTENSION TOC entry; extension files removed before restore; no Vault emulator or real secrets",
+  "script_result_for_success": "PARTIAL overall / applicationChecks PASS / exit 0; never full Supabase PASS",
+  "guards": "fixed loopback + exact port/database identity; nonempty refusal; inherited PG settings stripped; local-only PUBLIC access restrictions; no clean/drop/fake dependencies",
+  "owner_archive_read": false,
+  "owner_windows_tested": false,
+  "production_access": false,
+  "staging_changed": false,
+  "genuine_accounts_changed": false,
+  "migrations_run": false,
+  "deployed": false,
+  "merged": false,
+  "full_gameplay_regression_rerun": false,
+  "owner_next_action": "save reviewed script beside existing private archive; run documented command and enter local postgres password; share only result/stage line",
+  "source_sha256": {
+    "scripts/windows/Verify-JaxonBackup.ps1": "5a5643ef033a8e87defc2017d4bf5b0afb2892aa11b7786390546e234ca81327",
+    "tests/v52-windows-restore.cjs": "d811db5cc5f41041a6c68c091b8e087ad11a43ce7d80bd3d5070b85adafd0de7"
+  }
+}

@@ -1,5 +1,11 @@
 # V5.2 private backup and restoration guide
 
+## Current owner update — simplified Windows verification
+
+The owner reports a successful PostgreSQL **17.11** `pg_dump` archive (**390,821 bytes**), inventory containing Auth and all five game tables, a tested AES-256 encrypted 7-Zip copy and a separately stored second encrypted copy. A local PG17.11 server on port 5433 and empty `jaxon_restore_test` database exist. Standard extensions are available; `supabase_vault` is unavailable locally and production Vault has zero secrets **according to the owner**. Codex has not inspected the real archive or independently verified those statements.
+
+**Next step: run [the one-command Windows check](V52-WINDOWS-RESTORE.md), using [Verify-JaxonBackup.ps1](../scripts/windows/Verify-JaxonBackup.ps1).** No additional lengthy manual inventory is requested. It automates a deliberately scoped application/Auth-record restore and validation, explicitly excludes managed dependencies/security policies/services, and reports **PARTIAL** even when every supported check passes. This supersedes the earlier request to repeat basic backup/encryption/inventory work below; it does not certify a complete Supabase restoration or automatically satisfy the production activation receipt. Original full-recovery requirements remain available as reference.
+
 **Preparation only. No production backup, restoration or SQL execution has been performed by Codex.** The next safe owner action is to arrange an encrypted, independently restorable backup and a private restoration rehearsal, before authorising any installation or activation. Do not paste the backup, identities, credentials or review manifest into chat, GitHub, CI or public logs.
 
 ## What must survive
@@ -71,7 +77,7 @@ Verify privately, without shared row output:
 
 Write a private restoration receipt with archive ID, encrypted backup location/reference, plaintext digest, scope, target type/versions, restore command/procedure, exit status, verification results, limitations, operator and timestamp. Hash that receipt; its digest is `restoreReceiptSha256`. Store it encrypted with the backup. The SQL gate checks receipt fields and explicit owner acknowledgement; **it cannot prove that an external file was backed up or restored**. Set `restoreVerified:true` only after the owner/operator has completed this work successfully.
 
-## Owner verification checklist — not yet completed
+## Full recovery checklist — remaining scope, not a request to repeat owner-completed backup work
 
 - [ ] Correct production project/connection confirmed; current deployment commit/settings recorded.
 - [ ] Maintenance/drain arranged; full snapshot taken before installation and no later legacy writes.

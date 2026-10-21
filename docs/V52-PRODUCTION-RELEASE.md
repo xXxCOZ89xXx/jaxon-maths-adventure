@@ -2,6 +2,8 @@
 
 **Implemented and locally rehearsed; not applied, deployed or merged.** No genuine account, PIN, family, progress or reward record was accessed or altered. No remote Supabase call or proxy workaround was attempted. The owner-supplied CSV remains outside Git. The next steps concern release review and hosted acceptance, not rebuilding gameplay.
 
+The owner has since reported successful backup/encryption/inventory preparation and an empty Windows PG17.11 restore target. The next local action is the [one-command scoped Windows restore check](V52-WINDOWS-RESTORE.md). A PARTIAL/application PASS result must retain its stated exclusions and must not be promoted to full Supabase recovery or automatic activation approval. No production action is authorised here.
+
 ## Current owner decision: fresh gameplay at launch
 
 The latest owner instruction supersedes the earlier requirement to carry forward game-generated entitlements. Preserve existing Auth accounts/UUIDs/passwords and exact family relationships; explicitly enroll server PINs. Start discovery, mastery, missions, minutes/week totals, coins/bonus, screen-time entitlement/history display, wardrobe/estate/achievements and Town activities at zero. Old records remain privately recoverable and never contribute to the new opening. This decision applies only to this game, not external rewards or account credentials.

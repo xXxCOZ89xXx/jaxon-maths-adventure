@@ -1,6 +1,35 @@
 # Codex handover — V5.1 usability and automated regression
 
-## Latest continuation: V5.2 fresh-start activation and backup preparation — 21 October 2026
+## Latest continuation: simplified Windows restoration verification — 21 October 2026
+
+**Owner-run script prepared; stop before production changes.** Continue on `codex/v3-adventure-build`, Draft PR #2, after fresh-start commit `caeb435`. No real archive, Windows PC, production/staging data, genuine account, migration, deployment or merge was accessed/changed. Existing app/SQL and live entry points are untouched. No full gameplay or prior database suite was rerun for this tooling-only change.
+
+### New evidence supplied by the owner
+
+Owner reports PostgreSQL 17.11 `pg_dump` success, archive size **390,821 bytes**, Auth/all-five-game-table inventory, successful AES-256 7-Zip integrity test, separately stored second encrypted copy, local PG17.11 on port **5433**, empty **`jaxon_restore_test`**, standard extensions available, unavailable local `supabase_vault` and zero production Vault secrets. Treat these as owner-completed/reported evidence, not independently certified by Codex. Do not ask the owner to repeat lengthy manual inventory or upload personal exports/passwords. Full restore/hosted Auth coverage remains unverified.
+
+### Prepared files and behaviour
+
+- [scripts/windows/Verify-JaxonBackup.ps1](../scripts/windows/Verify-JaxonBackup.ps1): standalone PowerShell 5.1-targeted script, fixed existing archive path, **only localhost/127.0.0.1:5433/jaxon_restore_test** as local `postgres`. The only configuration parameter is the PG17 binary folder. Clears inherited libpq connection/service/options/password settings per child; prompts once for the **local** password; verifies actual database/server version/address and empty destination. No remote/other-DB parameter/fallback, creation, `--clean`, drop/truncate/reset, fake Auth/role/extension or ignored-error loop.
+- Selects actual archived definitions/data for the five game tables, `auth.users` and optional actual `auth.identities`, supported Auth types, actual helper/reward definitions, standard available extensions, relevant constraints/indexes/sequences and RLS-enable flags. Unrelated managed objects, policies/ACLs/ownership, triggers/event triggers, other Auth tables and external services are explicitly excluded. Known managed-extension availability is recorded safely. Missing essential dependencies fail the selected transaction rather than being stubbed.
+- Full selected restore is a single error-stopping `pg_restore` transaction. Validates archive COPY counts against every restored table, constraints/indexes, sequence state and no orphan family/Auth/game/identity links. Original backup SHA-256 is checked before/after; no plaintext data/SQL exports or raw native logs are written. Temporary lists contain inventory only and are removed. Reports contain aggregate counts, digest, checks/exclusions, never personal rows/credentials/hashes.
+- PUBLIC connection access is revoked **only for the disposable target database** before import, and recovered public/Auth schema/table/function access is restricted to its owner. No global roles or other databases are modified. This intentionally does not reproduce production permissions. Restore errors roll selected DDL/data back; local access restrictions may remain. A validation failure after restore leaves the private local copy; never clean/reset automatically. A second run refuses nonempty data.
+- **Always `PARTIAL` overall if supported checks pass**, `applicationChecks:PASS`, exit 0; failure gives FAIL/exit 1 with a fixed safe stage. Private JSON report is written beside the archive. It is not a full Supabase recovery receipt, does not set `restoreVerified:true`, and cannot certify login/AMR/JWT, service/config/Storage/Vault or production policies/grants. Vault zero-secrets is owner-reported, not checked by this script.
+- [docs/V52-WINDOWS-RESTORE.md](V52-WINDOWS-RESTORE.md): save script beside existing private backup, run one PowerShell command, enter local password, reply only with result/stopped-stage line. No manual SQL inspection requested. [Backup guide](V52-BACKUP-RESTORE.md) now records owner progress and points to this scoped check. New `tests/v52-windows-restore.cjs` and `test:windows-restore` command provide fictional automated rehearsal.
+
+### Actual verification and limits
+
+**Six focused script suites passed** under actual PowerShell **7.4.6 on Linux** and real PostgreSQL 17 clients/server in a **network-disabled disposable container**, fictional accounts/data only: scoped restore/counts/relationships/constraints/indexes/types/sequence state and unchanged archive; no sensitive sentinel values in output/reports; missing Vault-extension exclusion; poisoned PG environment ignored; refusal of nonempty/wrong database/port/nonloopback reported server address; and atomic failure on a required unavailable dependency without fake objects. Test-only scratch source mutations exercise closed target guards; no remote connection is attempted. A fictional extension creates a real Vault TOC entry, then its local files are removed; it is not an emulator or actual Vault verification.
+
+See [verification evidence](../tests/artifacts/v5-2-windows-restore-verification.json) and [safe fictional test output](../tests/artifacts/v5-2-windows-restore.txt). Script syntax/whitespace checks passed. No actual Windows PowerShell 5.1 execution, genuine archive restoration or hosted Auth verification occurred. Existing V5.2 test evidence remains historical and unchanged. The task stops with the owner-run script ready.
+
+### Exact next safe action
+
+Owner runs the single command in the Windows guide against the already prepared local target and shares only the safe result/stage line. Do not request the backup, raw PostgreSQL errors, table records, PINs or passwords. If PARTIAL/application PASS, preserve the local copy and private report and record its exact limited scope; **do not claim full Supabase restoration or silently clear fresh-activation backup/release gates**. A missing essential dependency needs a targeted supported recovery fix, not fake Auth objects, broad skipping or repeated manual inventory. If rerun/reset becomes necessary, obtain specific owner authorisation for that disposable database; the script never resets it itself.
+
+Production fresh activation/SQL, deployment/merge, actual Auth/security/recovery configuration, complete compatible Supabase recovery coverage, private receipt/fingerprints, post-release reconciliation and physical-iPad acceptance remain separate owner-controlled gates. Do not redevelop gameplay or repeat completed schema investigation.
+
+## Previous continuation: V5.2 fresh-start activation and backup preparation — 21 October 2026
 
 **Completed local implementation/testing only; production is unchanged. Stop before production actions.** Continue on `codex/v3-adventure-build`, Draft PR #2, from the fresh-start continuation of `81eda94`. No live SQL, reset, backup/export of genuine records, Auth request, deployment, merge or proxy workaround was performed. Keep CSVs, backup files, real identifiers and credentials private/outside Git. Root live pages, staging source/SQL/build and V5.1 gameplay are unchanged.
 

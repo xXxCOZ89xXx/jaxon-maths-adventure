@@ -1,0 +1,7 @@
+PASS actual PowerShell + local PG17 restore: original Auth/game data, counts, family links, constraints/indexes/sequences, explicit partial scope; poisoned PG environment ignored
+PASS nonempty destination refused without overwriting or cleanup
+PASS server-side exact database-name check rejects another local database
+PASS wrong local port cannot reach the authorised server
+PASS non-loopback reported server address refused; no remote connection or server configuration change
+PASS unsupported managed dependency aborts selected restore atomically, no fake objects or partial tables
+6 Windows-script restoration suites passed; PowerShell on Linux, network-disabled PostgreSQL, fictional records only. Windows/owner archive not executed.
