@@ -1,6 +1,18 @@
 # Codex handover — V5.1 usability and automated regression
 
-## Latest continuation: staging results reviewed and preservation upgrade designed — 21 October 2026
+## Latest continuation: final routine finding isolated; importer revoke proposed — 21 October 2026
+
+**Preparation/documentation only; no SQL executed or Supabase changes.** Latest owner-run diagnostic: **five PASS / one FAIL**. All six routine bodies are EXACT, all search paths and execution attributes match. Only `public.v3_admin_import(uuid,jsonb)` permits service_role EXECUTE; PUBLIC, anon and authenticated do not. The former source/formatting investigation is resolved. Do not request another diagnostic, definition export, inventory or broad test rerun.
+
+Recommend removing this unused service-role route. Source/setup documentation describes an owner-run fictional fixture importer, the staging app does not call it, and the original revoke omitted service_role. The exact grant origin is unproven and irrelevant to this narrow removal. SECURITY INVOKER means no owner privilege escalation; ordinary browser roles cannot call it, and existing progress/wallet rows cannot be overwritten. A privileged caller can seed absent linked-learner rows. Incremental risk is limited within the service trust boundary, but unnecessary access should be removed. No compromise/public exploit is established; revocation does not remove independent service table privileges.
+
+Read [V52-STAGING-IMPORTER-PERMISSION.md](V52-STAGING-IMPORTER-PERMISSION.md). The [separately approvable SQL proposal](V52-STAGING-IMPORTER-REVOKE.sql) has one persistent statement: revoke EXECUTE on this exact function from service_role with RESTRICT. It includes transactional staging/definition/owner/client-access guards and before/after effective-access verification. Inherited access or dependent grants cause a stop/rollback, never broader revokes or CASCADE. No function body, role membership, default privilege, other grant or data change is included. No execution is approved yet.
+
+[Upgrade plan](V52-STAGING-UPGRADE-PLAN.md) and [staging-reuse guide](V52-STAGING-REUSE.md) now use the accepted exact source baseline. Shortest path: separately approve/apply/verify the single permission correction; prepare/rehearse the guarded in-place preservation patch/build (offline preparation can proceed independently); review private staging recovery coverage and approve the concrete install; verify unchanged state; then separately approve private artifact publication and a hosted smoke with the existing four accounts/known PINs. Auth/API/real AMR checks remain pending. All preservation, immutable retry and rollback safeguards remain; no production installer/activation, account/PIN reset, data clearing, merge or deploy is allowed.
+
+**Exact minimum next owner action:** review the one-function SQL proposal and explicitly approve only that staging EXECUTE revoke. Do not execute before approval. No backup upload or additional test is requested now. Static scope/source checks only; Codex has executed no SQL, contacted no Supabase endpoint and repeated no completed suites. Documentation-only continuation on `codex/v3-adventure-build`.
+
+## Previous continuation: staging results reviewed and preservation upgrade designed — 21 October 2026
 
 **Design and one targeted read-only owner diagnostic only; no Supabase changes.** The owner reports the compatibility query succeeded in the correct staging project: **8 PASS / 5 REVIEW / 1 expected FAIL**. Four confirmed Auth accounts, two independent families, four PIN rows, table/family structure, all 40 catalogue entries and no V5.2 activation overlap pass. Accept these results; do not repeat the inventory. Unavailable SQL history / 82 Auth history rows do not prove application drift.
 
