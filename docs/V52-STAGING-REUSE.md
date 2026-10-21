@@ -1,4 +1,10 @@
-# V5.2 staging reuse — preservation implementation prepared
+# Staging reuse — private iPad gameplay first
+
+22 October 2026 priority update: the owner has paused production work and migration planning. The latest gameplay already runs through the existing staging adapter. Build with `scripts/build-v3-staging.cjs`, preserving existing accounts, PINs, origin and browser queues. No SQL upgrade is needed for the nine worlds, interactive questions or either Town journey.
+
+See [actual playable feature status and minimum next action](IPAD-PLAYABLE-GAME-STATUS.md). Next approval is an assets-only update of the existing owner-private Site, followed by one owner iPad play/save check. The preservation upgrade below is parked; its older approval request is superseded.
+
+# Prior preservation preparation (parked)
 
 22 October 2026. The owner completed the approved importer correction: **service_role=false, anon=false, authenticated=false, postgres=true**. This item is closed; do not rerun diagnostics or revoke scripts.
 

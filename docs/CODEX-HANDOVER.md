@@ -1,6 +1,20 @@
 # Codex handover — V5.1 usability and automated regression
 
-## Latest continuation: preservation-only staging package and private build prepared — 22 October 2026
+## Latest priority: newest complete game on Jaxon’s iPad — 22 October 2026
+
+The owner has explicitly stopped unnecessary production work, broad audits, backups and migration planning. This priority supersedes all older “next owner approval” sections below. Do not ask for SQL, a fresh environment, reset accounts/PINs or activate V5.2 to make current gameplay playable.
+
+Actual code at `76d24d5` already implements all nine worlds/55 skills, mixed hands-on models, the connected eight-stage cupboard→list→bus→shopping→payment/change→home→recipe journey, and direct Town-map workplace entry with employee wages/payslip/saving tasks. Adaptive suggestions, teaching/hints, avatar shop, coins, queued progress saves and server parent rewards exist. The recipe portion is a basic water-measurement/preparation task; sorting/matching is tap-to-place and finger dragging paints shading. Do not describe either as a full cooking simulator or drag-and-drop sorting.
+
+Latest gameplay was built successfully with the **original existing staging adapter**, `scripts/build-v3-staging.cjs`, into ignored `staging-dist/` and passed static validation. This builder copies current gameplay; its V3 filename does not mean old gameplay. The installed original RPC contract accepts the new JSON adventure state. No database upgrade or activation is necessary for these features. Park `v52-staging-dist/` and the preservation SQL package; those optional preparation artifacts are not prerequisites for this private-game goal.
+
+Focused checks: 14 logic groups/1,107 generated task steps passed, plus **14 browser cases** (8 interaction/customer cases, 4 new visible-map/workplace cases across iPad portrait/landscape, 2 intercepted cloud journey/offline/conflict cases). No external backend traffic, live data, SQL, new security audit or database suite. Actual iPad Safari access/sign-in/save remains **PARTIAL / awaiting owner acceptance**, not a claimed browser-device certification.
+
+Read [actual feature table, evidence and minimal iPad route](IPAD-PLAYABLE-GAME-STATUS.md). Existing Sites project `appgprj_6ad746f124fc8191b3f3845f9dff577b` is active with owner-only custom access and no external viewers; version 5 is saved. Do not claim its assets are current branch bytes. Preserve its audience and existing origin so browser queues/storage survive; finish syncing and close open game tabs before any approved asset switch. Unresolved offline drafts/conflicts must remain intact.
+
+**Minimum next owner action:** approve an assets-only update of the existing owner-private staging Site using the latest gameplay and **existing staging adapter**. No SQL, accounts, PIN or data changes. After that update, owner opens it in current Safari on the iPad using the existing private Site access and an existing fictional learner login/PIN, then performs one combined play/save/reopen check. Jaxon can play with that staging learner’s progress; production identity/history is untouched. No publication, merge or deployment has occurred in this continuation.
+
+## Previous continuation: preservation-only staging package and private build prepared — 22 October 2026
 
 **Preparation complete; stop before hosted execution/publication.** The owner verified the importer correction succeeded: service_role/anon/authenticated EXECUTE **false**, postgres **true**. Record it complete; no more revoke/guard diagnostics or duplicate approval. Reuse the four existing fictional staging accounts, both families and known PINs. Target `sfogrvedypgtxfvecmbx`; no Supabase connection or hosted SQL occurred here.
 
