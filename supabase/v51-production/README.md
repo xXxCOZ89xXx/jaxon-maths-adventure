@@ -4,7 +4,10 @@
 
 - `001_secure_backend.sql`: guarded inactive backend, protected PIN/unlock, CAS, wallet/ledger and identity/role/request APIs. No Auth or family recreation.
 - `002_catalog.sql`: existing 40-item catalogue in the reviewed inactive production environment.
-- `003_activation.sql`: administrator-only reviewed opening/cutover, legacy writer guard, freeze and rollback. Merely defining these routines does not activate or reset learning.
+- `003_activation.sql`: shared audited activation core, preserved reviewed-opening API, legacy writer guard, freeze and rollback.
+- `004_fresh_start.sql`: separately approved fresh-start API, zero opening, private archive/backup receipts and release epoch. Definitions remain inactive; no reset occurs at installation.
+
+The current owner decision is a fresh gameplay opening with existing accounts/family rows preserved. Read the [private backup/restore guide](../../docs/V52-BACKUP-RESTORE.md) before future installation. Keep the original preservation mode separate; do not falsify its balances. Files are for a new installation, not a rerunnable upgrade over an older package.
 
 Production SQL is separate from staging. Do not blindly run it. Verify the project and private backup/restore, review schema drift, PIN transition and a private trusted opening manifest. No app, CLI or CI runner applies SQL.
 
@@ -14,6 +17,7 @@ Local commands using fictional records:
 npm run test:production-preparation
 npm run test:production-build
 npm run test:production-security
+npm run test:fresh-start
 npm run test:production-browser
 ```
 

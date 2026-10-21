@@ -25,7 +25,8 @@
     "build:production": "node scripts/build-v52-production.cjs",
     "test:production-build": "node tests/v52-production-build.cjs",
     "test:production-security": "node tests/v52-production-postgres.cjs",
-    "test:production-browser": "playwright test --config playwright.production.config.cjs"
+    "test:production-browser": "playwright test --config playwright.production.config.cjs",
+    "test:fresh-start": "node tests/v52-fresh-start.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

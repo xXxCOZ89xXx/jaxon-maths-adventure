@@ -10,7 +10,7 @@ const ids = { learner: '11111111-1111-4111-8111-111111111111',
   parent: '22222222-2222-4222-8222-222222222222', child: '11111111-1111-4111-8111-111111111111' };
 const memory = () => { const m = new Map(); return { getItem: k => m.get(k) ?? null, setItem: (k,v) => m.set(k,v) }; };
 const clone = x => JSON.parse(JSON.stringify(x));
-function fake({ storage = memory(), role = 'learner', ready = true, pinSet = true } = {}) {
+function fake({ storage = memory(), role = 'learner', ready = true, pinSet = true, backendIdentity = {} } = {}) {
   let ms = Date.parse('2026-10-21T00:00:00Z'), seq = 0, revision = 0, progress = {}, lost = false;
   let late = null, startLate = null;
   const log = [], responses = new Map();
@@ -23,7 +23,7 @@ function fake({ storage = memory(), role = 'learner', ready = true, pinSet = tru
   }, rpc: async (name, args) => {
     log.push({ name, args: clone(args ?? {}) });
     if (name === 'v3_identity') return { data: { name: base.projectName,
-      projectRef: base.projectRef, contractVersion: 1, ready } };
+      projectRef: base.projectRef, contractVersion: 1, ready, ...backendIdentity } };
     if (name === 'v3_role') return { data: family() };
     if (name === 'v3_set_pin') { pinSet=true; return {data:{ok:true}}; }
     if (name === 'v3_unlock') return { data: { ...family(), token: 'a'.repeat(64),
@@ -83,6 +83,24 @@ async function test(label, f) { await f(); suites++; console.log('PASS', label);
       { name: base.projectName, projectRef: 'sfogrvedypgtxfvecmbx', contractVersion: 1, ready: true }])
       assert.throws(() => B.verifyIdentity(base, value));
   });
+  await test('fresh release identity isolates old pending saves without deleting their archive', async () => {
+    const epoch = '33333333-3333-4333-8333-333333333333', storage = memory();
+    for (const identity of [{activationMode:'fresh-start'}, {activationMode:'fresh-start',activationId:'bad'},
+      {activationMode:'unknown',activationId:epoch}]) {
+      const bad=fake({backendIdentity:identity}); await assert.rejects(bad.adapter.initialize());
+      await assert.rejects(bad.adapter.resumeAccount(), /Verify/);
+    }
+    const oldKey=B.namespace(base,`initial:${ids.learner}:${ids.child}:sync`);
+    const old=JSON.stringify({version:1,revision:0,archives:[],pending:{requestId:'old',revision:0,
+      progress:{coins:9999,oldQuest:true}}});storage.setItem(oldKey,old);
+    const f=fake({storage,backendIdentity:{activationMode:'fresh-start',activationId:epoch}});
+    await f.connect();assert.deepEqual((await f.adapter.read()).progress,{});
+    await f.adapter.save({newQuest:true});
+    assert.equal(storage.getItem(oldKey),old);
+    assert.ok(storage.getItem(B.namespace(base,`${epoch}:${ids.learner}:${ids.child}:sync`)));
+    assert.ok(f.log.filter(x=>x.args.p_operation==='save').every(x=>!x.args.p_args.progress.oldQuest));
+    assert.deepEqual((await f.adapter.read()).progress,{newQuest:true});
+  });
   await test('PIN enrollment is never automatic; role identity comes only from server and Auth user', async () => {
     const f = fake({ pinSet: false }); await f.adapter.initialize(); await f.adapter.resumeAccount();
     await assert.rejects(f.adapter.unlock('1234'), /pending review/);
@@ -111,7 +129,7 @@ async function test(label, f) { await f(); suites++; console.log('PASS', label);
     assert.deepEqual(writes[0].args, writes[1].args);
     assert.equal((await f.adapter.read()).progress.quest.amountDraft, '4.00');
     assert.ok(!f.log.some(x => x.name.includes('parent_award')));
-    assert.ok([...f.storage.getItem(B.namespace(base, `${ids.learner}:${ids.child}:sync`))].length > 0);
+    assert.ok([...f.storage.getItem(B.namespace(base, `initial:${ids.learner}:${ids.child}:sync`))].length > 0);
   });
   await test('parent save denied; expired unlocks and delayed locked responses fail closed', async () => {
     const parent = fake({ role: 'parent' }); await parent.connect(); await parent.adapter.read();

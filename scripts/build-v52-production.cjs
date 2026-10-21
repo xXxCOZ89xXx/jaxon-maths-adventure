@@ -8,10 +8,17 @@ function once(source, before, after) {
 }
 function entry() {
   let s = fs.readFileSync(path.join(root, 'v3/staging-app.js'), 'utf8');
-  s = 'import Backend from "./backend-config.js";\n' + s;
+  s = 'import Backend from "./backend-config.js";\nlet productionEpoch="initial";\n' + s;
   s = once(s, 'window.V3CloudSync.config(window.V3StagingConfig)', 'Backend.productionConfig(window.V51ProductionConfig)');
   s = once(s, '"jaxon_v3_staging_auth:" + c.projectRef', 'Backend.namespace(c, "auth")');
-  s = once(s, '    } else {\n      if (\n        check.data?.name', '    } else {\n      Backend.verifyIdentity(c, check.data);\n      if (\n        check.data?.name');
+  s = once(s, '    } else {\n      if (\n        check.data?.name', '    } else {\n      Backend.verifyIdentity(c, check.data);\n      productionEpoch=Backend.activationEpoch(check.data);\n      if (\n        check.data?.name');
+  s = once(s, '    if (check.error) {\n      if (\n        navigator.onLine ||\n        sessionStorage.getItem(verifiedKey) !== c.projectRef\n      )\n        throw Error("Staging identity was not verified. Sign-in is disabled.");',
+    '    if (check.error) {\n      throw Error("Reconnect to verify the active family release before opening saved progress.");');
+  s = once(s, 'const key = `jaxon_v3_staging:${c.projectRef}:${identity.user}:game`,',
+    'const key = `jaxon_v51_production:${c.projectRef}:${productionEpoch}:${identity.user}:game`,');
+  s = s.replaceAll('"v3-unlock:" + c.projectRef', '"v3-unlock:" + c.projectRef + ":" + productionEpoch')
+    .replaceAll('`v3-last-remote:${c.projectRef}:${identity.user}`','`v3-last-remote:${c.projectRef}:${productionEpoch}:${identity.user}`')
+    .replaceAll('`v3-intent:${c.projectRef}:${identity.user}`','`v52-production-intent:${c.projectRef}:${productionEpoch}:${identity.user}`');
   s = once(s, 'Use a fictional account from jaxon-maths-v3-staging. Your game account and PIN are separate.',
     'Sign in with your existing family account. Your account password and game PIN are separate.');
   s = once(s, 'set ? "Set your staging PIN"', 'set ? "Enroll your game PIN after password sign-in"');

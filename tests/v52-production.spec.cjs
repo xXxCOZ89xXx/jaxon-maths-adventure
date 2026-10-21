@@ -71,3 +71,44 @@ test('password recovery uses SDK PKCE and the intended production application re
  const request=s.calls.find(c=>c.path==='/auth/v1/recover');expect(request.body.code_challenge).toBeTruthy();
  expect(request.body.email).toBe('learner@fictional.invalid');expect(errors).toEqual([]);
 });
+const freshEpoch='55555555-5555-4555-8555-555555555555';
+async function seedPreviousRelease(page){
+ await page.addInitScript(({ref,epoch})=>{
+  if(localStorage.getItem('fresh-test-seeded'))return;
+  const uid='11111111-1111-4111-8111-111111111111',parent='22222222-2222-4222-8222-222222222222';
+  const old={coins:9999,minutes:500,skills:{place:{state:'mastered'}},bought:['dragon'],achievements:['old'],quest:{legacy:true}};
+  for(const prefix of [`jaxon_v51_production:${ref}:${uid}:game`,`jaxon_v51_production:${ref}:initial:${uid}:game`]){
+   localStorage.setItem(prefix,JSON.stringify(old));localStorage.setItem(prefix+':queue',JSON.stringify({version:1,revision:0,archives:[],latest:old}));
+  }
+  localStorage.setItem(`v3-intent:${ref}:${parent}`,JSON.stringify({op:'award',payload:{amount:60,requestId:epoch}}));
+  localStorage.setItem(`v52-production-last-remote:${ref}:${uid}`,JSON.stringify({progress:old,wallet:{coins:9999}}));
+  localStorage.setItem('legacy-device-pin-sentinel','fictional-preserved');localStorage.setItem('fresh-test-seeded','yes');
+ },{ref:B.production.projectRef,epoch:freshEpoch});
+}
+test('fresh release ignores previous game caches and queues, preserves them privately, and resumes only new progress',async({page})=>{
+ const s=fixture();s.wallet={coins:0,bonus:0,owned:[],active_seconds:0,redeemed:0,legacy_redeemed:0,opening_seconds:0};
+ const errors=await mock(page,s,{...options,identity:{...options.identity,activationId:freshEpoch,activationMode:'fresh-start'}});
+ await seedPreviousRelease(page);await account(page);await pin(page);
+ await expect(page.getByRole('heading',{name:'A little maths. A big adventure.'})).toBeVisible();
+ const current=await page.evaluate(({ref,epoch})=>JSON.parse(localStorage.getItem(`jaxon_v51_production:${ref}:${epoch}:11111111-1111-4111-8111-111111111111:game`)),{ref:B.production.projectRef,epoch:freshEpoch});
+ expect(current.coins).toBe(0);expect(current.minutes).toBe(0);expect(current.bought).toEqual([]);expect(current.achievements).toEqual([]);expect(current.discovery).toEqual({});expect(current.skills).toEqual({});
+ await page.getByRole('button',{name:'Continue adventure',exact:false}).first().click();
+ await page.getByRole('button',{name:'Start building',exact:false}).click();await page.getByRole('button',{name:'Hint',exact:true}).click();
+ await expect.poll(()=>s.progress.quest?.assisted).toBe(true);await page.reload();
+ await expect(page.getByRole('button',{name:'Try my solution'})).toBeVisible();
+ expect(s.progress.achievements).toEqual([]);expect(s.wallet.coins).toBe(0);
+ expect(await page.evaluate(()=>localStorage.getItem('legacy-device-pin-sentinel'))).toBe('fictional-preserved');
+ expect(await page.evaluate(ref=>JSON.parse(localStorage.getItem(`jaxon_v51_production:${ref}:11111111-1111-4111-8111-111111111111:game`)).coins,B.production.projectRef)).toBe(9999);
+ expect(s.calls.filter(c=>c.body.p_operation==='save').some(c=>c.body.p_args.progress.quest?.legacy)).toBe(false);expect(errors).toEqual([]);
+});
+test('fresh parent dashboard starts at zero and ignores a previous release reward intent',async({page})=>{
+ const s=fixture();s.wallet={coins:0,bonus:0,owned:[],active_seconds:0,redeemed:0,legacy_redeemed:0,opening_seconds:0};
+ const errors=await mock(page,s,{...options,identity:{...options.identity,activationId:freshEpoch,activationMode:'fresh-start'}});
+ await seedPreviousRelease(page);await account(page,true);await pin(page,true);
+ await expect(page.getByText('No completed learning yet.')).toBeVisible();
+ await expect(page.getByText('Historical redeemed time:',{exact:false})).toContainText('0 minutes');
+ await page.getByLabel('Amount (1 to 60)',{exact:true}).fill('2');await page.getByLabel('Action',{exact:true}).selectOption('award');
+ await page.getByRole('button',{name:'Submit parent reward',exact:true}).click();await expect.poll(()=>s.wallet.bonus).toBe(2);
+ const awards=s.calls.filter(c=>c.body.p_operation==='award');expect(awards).toHaveLength(1);expect(awards[0].body.p_args.amount).toBe(2);
+ expect(await page.evaluate(ref=>!!localStorage.getItem(`v3-intent:${ref}:22222222-2222-4222-8222-222222222222`),B.production.projectRef)).toBe(true);expect(errors).toEqual([]);
+});

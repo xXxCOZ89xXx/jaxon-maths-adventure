@@ -45,5 +45,14 @@
   function namespace(c, suffix) {
     return `jaxon_v51_${c.environment}:${c.projectRef}:${suffix}`;
   }
-  return { production, publicKey, validate, productionConfig, verifyIdentity, namespace };
+  function activationEpoch(identity) {
+    const mode=identity?.activationMode, id=identity?.activationId;
+    if (mode != null && !['fresh-start','preserve-reviewed'].includes(mode))
+      throw Error('Unknown backend activation mode');
+    if (id != null && !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id))
+      throw Error('Invalid backend activation identity');
+    if (mode==='fresh-start' && !id) throw Error('Fresh-start activation identity required');
+    return id || 'initial';
+  }
+  return { production, publicKey, validate, productionConfig, verifyIdentity, namespace, activationEpoch };
 });

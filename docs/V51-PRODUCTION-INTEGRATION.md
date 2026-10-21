@@ -1,5 +1,9 @@
 # V5.2 Part 1 — production integration analysis
 
+## Fresh-start continuation supersedes opening preservation — 21 October 2026
+
+The latest owner decision explicitly forfeits this game's historical unused rewards/progress at the new opening while retaining Auth accounts, exact family relationships and private recoverability. A separate fresh-start activation, protected archive, release cache isolation and private backup/restore guide are implemented and locally rehearsed. The reviewed-preservation path remains available as an alternative. Read [V52-PRODUCTION-RELEASE.md](V52-PRODUCTION-RELEASE.md) and the latest [handover](CODEX-HANDOVER.md) for current implementation/test counts and owner gates; older entitlement-preservation requirements below are historical. No production action/deployment/merge occurred and no repeat bulk metadata investigation is needed.
+
 ## Current implementation status — 21 October 2026
 
 The owner has now supplied **705 metadata rows** and authorised continued isolated implementation/rehearsal. The original analysis below is retained as historical rationale, not an instruction to repeat collection or stop development. All five application tables are owned by `postgres`, have RLS enabled/not forced; pgcrypto 1.3 is in `extensions`; no application table triggers were returned. Authenticated can TRUNCATE `learning_progress` and execute `parent_award_maths_once`, but cannot execute the older `parent_award_maths`. The event ID is identity-backed; the existing parent/request partial unique index is preserved without guessing its withheld predicate. Broad default grants are countered by explicit transactional object revocations. Platform routines remain untouched.

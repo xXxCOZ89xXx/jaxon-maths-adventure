@@ -8,6 +8,7 @@ do $$ begin
 end $$;
 create table public.v3_activation (
  singleton boolean primary key default true check(singleton), review jsonb not null,
+ mode text not null check(mode in ('preserve-reviewed','fresh-start')),
  legacy_acl jsonb not null, activated_at timestamptz not null default now()
 );
 alter table public.v3_activation enable row level security;
@@ -22,22 +23,24 @@ begin
 end $$;
 revoke all on function public.v3_legacy_write_guard() from public,anon,authenticated;
 
-create function public.v3_admin_activate(p_review jsonb) returns jsonb
+create function public.v3_admin_apply_activation(p_review jsonb,p_mode text) returns jsonb
 language plpgsql set search_path='' as $$
 declare x jsonb; old public.maths_rewards; c uuid; bonus numeric; remaining numeric; redeemed numeric;
- t text; f text; acl jsonb; previous jsonb; count_families integer;
+ t text; f text; acl jsonb; previous jsonb; previous_mode text; count_families integer;
 begin
  if current_user<>'postgres' or current_setting('app.v51.cutover_authorized',true) is distinct from 'yes'
  then raise exception 'Reviewed administrator cutover required'; end if;
+ if p_mode is null or p_mode not in ('preserve-reviewed','fresh-start') then raise exception 'Explicit activation mode required'; end if;
+ if p_mode='preserve-reviewed' and p_review ? 'mode' and p_review->>'mode' is distinct from 'preserve-reviewed' then raise exception 'Use the separate fresh-start activation entry point'; end if;
  if (select count(*) from public.v3_catalog)<>40 then raise exception 'Complete reviewed catalogue required'; end if;
  if jsonb_typeof(p_review) is distinct from 'object' or p_review->'pinTransitionApproved' is distinct from 'true'::jsonb
  or jsonb_typeof(p_review->'families') is distinct from 'array' or p_review->>'migrationId' is null
  then raise exception 'Complete PIN/accounting review manifest required'; end if;
  perform (p_review->>'migrationId')::uuid;
  lock table public.v3_environment, public.v3_activation in exclusive mode;
- select review into previous from public.v3_activation;
+ select review,mode into previous,previous_mode from public.v3_activation;
  if found then
- if previous=p_review and exists(select 1 from public.v3_environment where ready) then return '{"alreadyActivated":true}'; end if;
+ if previous=p_review and previous_mode=p_mode and exists(select 1 from public.v3_environment where ready) then return '{"alreadyActivated":true}'; end if;
  raise exception 'Existing activation; no overwrite or automatic replay after rollback'; end if;
  lock table public.maths_families in share mode;
  lock table public.learning_progress,public.maths_learning,public.maths_rewards,public.maths_reward_events in access exclusive mode;
@@ -64,9 +67,16 @@ begin
  from pg_proc p cross join lateral aclexplode(coalesce(p.proacl,acldefault('f',p.proowner))) a
  where p.oid in ('public.parent_award_maths(uuid,text,integer)'::regprocedure,'public.parent_award_maths_once(uuid,text,integer,uuid)'::regprocedure)
  and a.grantee in (0,'anon'::regrole::oid,'authenticated'::regrole::oid)) q;
+ if p_mode='fresh-start' then perform v51_private.archive_fresh_start(p_review); end if;
  for x in select value from jsonb_array_elements(p_review->'families') loop
  c:=(x->>'child')::uuid;
  if not exists(select 1 from public.maths_families where child_user_id=c) then raise exception 'Unknown reviewed family'; end if;
+ if p_mode='fresh-start' then
+ if (x-array['child','parent','familyId'])<>'{}'::jsonb or not exists(select 1 from public.maths_families where child_user_id=c and parent_user_id=(x->>'parent')::uuid and id=(x->>'familyId')::uuid)
+ then raise exception 'Fresh-start family identity mismatch or unexpected opening fields'; end if;
+ insert into public.v3_progress(child_user_id,progress) values(c,'{}');
+ insert into public.v3_wallet(child_user_id) values(c);
+ else
  bonus:=(x->>'bonus')::numeric; remaining:=(x->>'remaining_minutes')::numeric; redeemed:=(x->>'legacy_redeemed')::numeric;
  if bonus is null or remaining is null or redeemed is null or bonus::text in ('NaN','Infinity','-Infinity')
  or remaining::text in ('NaN','Infinity','-Infinity') or redeemed::text in ('NaN','Infinity','-Infinity')
@@ -83,6 +93,7 @@ begin
  insert into public.v3_progress(child_user_id,progress) values(c,'{}');
  insert into public.v3_wallet(child_user_id,bonus,opening_seconds,legacy_redeemed,owned)
  values(c,bonus,remaining*60,redeemed,x->'owned');
+ end if;
  end loop;
  foreach t in array array['learning_progress','maths_learning','maths_families','maths_rewards','maths_reward_events'] loop
  execute format('revoke all on public.%I from public,anon,authenticated',t);
@@ -97,10 +108,16 @@ begin
  cross join (values('SELECT'),('INSERT'),('UPDATE'),('DELETE'),('TRUNCATE')) v(priv)
  where k.oid in ('public.learning_progress'::regclass,'public.maths_learning'::regclass,'public.maths_rewards'::regclass,'public.maths_reward_events'::regclass)
  and has_table_privilege(r.name,k.oid,v.priv)) then raise exception 'Legacy client authority remains'; end if;
- insert into public.v3_activation(review,legacy_acl) values(p_review,coalesce(acl,'[]'));
+ insert into public.v3_activation(review,mode,legacy_acl) values(p_review,p_mode,coalesce(acl,'[]'));
  update public.v3_environment set pin_transition_approved=true,ready=true;
  return jsonb_build_object('activated',true,'families',count_families);
 end $$;
+revoke all on function public.v3_admin_apply_activation(jsonb,text) from public,anon,authenticated,service_role;
+
+-- Preserved reviewed-balance interface. It cannot select the fresh-start branch.
+create function public.v3_admin_activate(p_review jsonb) returns jsonb language sql set search_path='' as $$
+ select public.v3_admin_apply_activation(p_review,'preserve-reviewed');
+$$;
 revoke all on function public.v3_admin_activate(jsonb) from public,anon,authenticated,service_role;
 
 create function public.v3_admin_freeze() returns void language plpgsql set search_path='' as $$

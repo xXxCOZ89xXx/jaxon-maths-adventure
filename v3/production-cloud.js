@@ -12,7 +12,7 @@
   function create({ config, createClient, storage, now = () => Date.now(), id }) {
     const c = B.productionConfig(config);
     let client, verified = false, identity = null, binding = null, sync = null;
-    let generation = 0, loaded = false;
+    let generation = 0, loaded = false, epoch = 'initial';
     function invalidate() {
       generation++; identity = null; binding = null; sync = null; loaded = false;
     }
@@ -28,7 +28,9 @@
         persistSession: true, autoRefreshToken: true, detectSessionInUrl: false,
       } });
       const turn = generation;
-      B.verifyIdentity(c, await call("v3_identity"));
+      const backendIdentity=await call("v3_identity");
+      B.verifyIdentity(c, backendIdentity);
+      epoch=B.activationEpoch(backendIdentity);
       if (turn !== generation) throw Error("Account state changed");
       verified = true;
     }
@@ -83,7 +85,7 @@
       const b = Object.freeze({ token: r.token, expires });
       binding = b;
       if (who.role === "learner") sync = Sync.create({ storage,
-        key: B.namespace(c, `${who.user}:${who.child}:sync`), id,
+        key: B.namespace(c, `${epoch}:${who.user}:${who.child}:sync`), id,
         rpc: (op, args) => request(b, op, args),
       });
     }

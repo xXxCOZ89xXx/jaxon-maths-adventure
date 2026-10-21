@@ -1,0 +1,64 @@
+{
+  "version": "5.2",
+  "continuation": "fresh-start and private backup preparation",
+  "base_commit": "81eda94",
+  "status": "implemented and locally rehearsed; no production execution/deploy/merge",
+  "fresh_start_postgres_suites_passed": 14,
+  "preservation_postgres_suites_passed_again": 18,
+  "adapter_config_suites_passed": 10,
+  "production_browser": {
+    "passed": 24,
+    "failed": 0,
+    "layouts": [
+      "desktop",
+      "ipad-portrait",
+      "ipad-landscape"
+    ],
+    "engine": "Chromium",
+    "transport": "all nonlocal traffic intercepted or denied"
+  },
+  "production_build_verified": true,
+  "configured_artifact_rebuilt_without_remote_calls": true,
+  "npm_test_passed": true,
+  "renderer_variants": 1107,
+  "staging_build_isolation_passed": true,
+  "unchanged_staging_and_root_live_sources": true,
+  "full_344_browser_matrix_rerun": false,
+  "prior_staging_sql_browser_rerun": false,
+  "boundaries": {
+    "fictional_auth_claims_and_records_only": true,
+    "database": "cached PostgreSQL 17 container --network none --pull=never",
+    "production_access": false,
+    "actual_production_backup_taken": false,
+    "actual_production_restore_verified": false,
+    "hosted_auth_verified": false,
+    "physical_ipad_tested": false,
+    "production_sql_executed": false,
+    "genuine_accounts_altered": false,
+    "deployed": false,
+    "merged": false,
+    "private_csv_in_git": false
+  },
+  "owner_next_action": "complete encrypted private production backup and isolated restoration checklist; share only redacted status",
+  "remaining_gates": [
+    "actual private backup/restore coverage and receipt",
+    "reviewed schema/security compatibility and separately approved installation/activation",
+    "hosted Auth/AMR/JWT/PIN/recovery/API verification using authorised fictional accounts and supported access",
+    "reviewed artifact-to-Pages release and rollback window",
+    "actual multi-device/offline and physical iPad acceptance"
+  ],
+  "source_sha256": {
+    "package.json": "f649e89385652f3e5234eebe8ba0573ca34da0c30f09163a532742b589622f67",
+    "scripts/build-v52-production.cjs": "7dfe67ae185466fe601c13f7320ec7addca953de5beaaf477419f399978a3a41",
+    "v3/backend-config.js": "fb5cc876fa2e43abb846a4c9312099fcdf3d1437befffdcc0ef3a9971abb80aa",
+    "v3/production-cloud.js": "a92d77396901548ce9fd76b5d1c0df42b94c20ba98a66983549145cd86642c90",
+    "tests/v52-fresh-start.cjs": "f675e60b0f8ce423977248afc296db9b9f45b9b636c9ded62d726c6acccbf1df",
+    "tests/v52-production-preparation.cjs": "e6afb00a2f2841797fca9ad9afcbe703200fadb0adb04046dee9661d81fc011b",
+    "tests/v52-production.spec.cjs": "d4261939c95601e025cae371e4976566d89ce80643ec6a0d0284c219a6f24974",
+    "docs/V52-FRESH-START-PREFLIGHT.sql": "e1126b32b61b63ecb3d1db7099d9df1a354a7802c5561a35645742b03328c7dd",
+    "supabase/v51-production/001_secure_backend.sql": "8d20b743e47647e736347d58926222fa0da7a73876c9eb37327d940fadf86ec3",
+    "supabase/v51-production/002_catalog.sql": "66296a53d344f19a0c22095ab2ca78f3edb6b81665d11b3affe15c5937b2bf2c",
+    "supabase/v51-production/003_activation.sql": "cdd1b3dd035629cf2e33f02e48968008b18c7a4426ebf88feb51ab41221464f8",
+    "supabase/v51-production/004_fresh_start.sql": "5546f8b614bb0e6a7282e239cba8f491c1bed200405a81fb0bc7ec644df315ac"
+  }
+}

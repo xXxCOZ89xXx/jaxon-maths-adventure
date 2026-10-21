@@ -4,7 +4,7 @@
       "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
       "/workspace/jaxon-maths-adventure/node_modules/.bin/playwright",
       "test",
-      "--config",
+      "-c",
       "playwright.production.config.cjs"
     ],
     "configFile": "/workspace/jaxon-maths-adventure/playwright.production.config.cjs",
@@ -235,12 +235,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 959,
+                  "duration": 857,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:18.642Z",
+                  "startTime": "2026-10-21T07:16:34.107Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -269,12 +269,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 680,
+                  "duration": 533,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:20.114Z",
+                  "startTime": "2026-10-21T07:16:35.448Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -303,12 +303,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 4036,
+                  "duration": 3055,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:20.823Z",
+                  "startTime": "2026-10-21T07:16:35.995Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -337,12 +337,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1036,
+                  "duration": 1301,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:24.877Z",
+                  "startTime": "2026-10-21T07:16:39.076Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -371,12 +371,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1078,
+                  "duration": 1063,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:25.931Z",
+                  "startTime": "2026-10-21T07:16:40.392Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -405,12 +405,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 806,
+                  "duration": 727,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:27.022Z",
+                  "startTime": "2026-10-21T07:16:41.487Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -421,6 +421,74 @@
           "id": "2f8d8b3fb67437688615-652b1fffbd531f7610bf",
           "file": "v52-production.spec.cjs",
           "line": 66,
+          "column": 1
+        },
+        {
+          "title": "fresh release ignores previous game caches and queues, preserves them privately, and resumes only new progress",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2230,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:16:42.230Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2f8d8b3fb67437688615-c4445eb5dd92c076aed1",
+          "file": "v52-production.spec.cjs",
+          "line": 88,
+          "column": 1
+        },
+        {
+          "title": "fresh parent dashboard starts at zero and ignores a previous release reward intent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 862,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:16:44.476Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2f8d8b3fb67437688615-9227497e9338ead3af57",
+          "file": "v52-production.spec.cjs",
+          "line": 104,
           "column": 1
         },
         {
@@ -439,12 +507,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 973,
+                  "duration": 755,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:28.413Z",
+                  "startTime": "2026-10-21T07:16:46.013Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -473,12 +541,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 692,
+                  "duration": 555,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:29.690Z",
+                  "startTime": "2026-10-21T07:16:47.025Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -507,12 +575,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3145,
+                  "duration": 2996,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:30.406Z",
+                  "startTime": "2026-10-21T07:16:47.598Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -541,12 +609,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1006,
+                  "duration": 902,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:33.566Z",
+                  "startTime": "2026-10-21T07:16:50.619Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -575,12 +643,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1069,
+                  "duration": 1033,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:34.588Z",
+                  "startTime": "2026-10-21T07:16:51.534Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -609,12 +677,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 830,
+                  "duration": 641,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:35.674Z",
+                  "startTime": "2026-10-21T07:16:52.579Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -625,6 +693,74 @@
           "id": "2f8d8b3fb67437688615-e1d440d928834a6028c9",
           "file": "v52-production.spec.cjs",
           "line": 66,
+          "column": 1
+        },
+        {
+          "title": "fresh release ignores previous game caches and queues, preserves them privately, and resumes only new progress",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait",
+              "projectName": "ipad-portrait",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2354,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:16:53.233Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2f8d8b3fb67437688615-ad6ee481f93b8d8fce9a",
+          "file": "v52-production.spec.cjs",
+          "line": 88,
+          "column": 1
+        },
+        {
+          "title": "fresh parent dashboard starts at zero and ignores a previous release reward intent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait",
+              "projectName": "ipad-portrait",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 947,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:16:55.598Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2f8d8b3fb67437688615-e773b91bdfe8fed4219e",
+          "file": "v52-production.spec.cjs",
+          "line": 104,
           "column": 1
         },
         {
@@ -643,12 +779,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 956,
+                  "duration": 907,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:37.621Z",
+                  "startTime": "2026-10-21T07:16:57.052Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -677,12 +813,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1030,
+                  "duration": 605,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:38.929Z",
+                  "startTime": "2026-10-21T07:16:58.249Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -711,12 +847,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3333,
+                  "duration": 2910,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:39.978Z",
+                  "startTime": "2026-10-21T07:16:58.872Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -745,12 +881,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1002,
+                  "duration": 1020,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:43.363Z",
+                  "startTime": "2026-10-21T07:17:01.797Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -779,12 +915,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1039,
+                  "duration": 1115,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:44.383Z",
+                  "startTime": "2026-10-21T07:17:02.830Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -813,12 +949,12 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 713,
+                  "duration": 647,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-21T06:42:45.436Z",
+                  "startTime": "2026-10-21T07:17:03.958Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -830,15 +966,83 @@
           "file": "v52-production.spec.cjs",
           "line": 66,
           "column": 1
+        },
+        {
+          "title": "fresh release ignores previous game caches and queues, preserves them privately, and resumes only new progress",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape",
+              "projectName": "ipad-landscape",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2352,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:17:04.617Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2f8d8b3fb67437688615-5cb5edaddce35e6dac8d",
+          "file": "v52-production.spec.cjs",
+          "line": 88,
+          "column": 1
+        },
+        {
+          "title": "fresh parent dashboard starts at zero and ignores a previous release reward intent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape",
+              "projectName": "ipad-landscape",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 971,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-21T07:17:06.985Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "2f8d8b3fb67437688615-e70d5f19d7f1445fd7b8",
+          "file": "v52-production.spec.cjs",
+          "line": 104,
+          "column": 1
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-21T06:42:16.997Z",
-    "duration": 29276.243,
-    "expected": 18,
+    "startTime": "2026-10-21T07:16:32.821Z",
+    "duration": 35246.58,
+    "expected": 24,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
