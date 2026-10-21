@@ -29,7 +29,11 @@
     "test:fresh-start": "node tests/v52-fresh-start.cjs",
     "test:windows-restore": "node tests/v52-windows-restore.cjs",
     "prepare:production-release": "node scripts/prepare-v52-release.cjs",
-    "test:release-readiness": "node tests/v52-release-readiness.cjs"
+    "test:release-readiness": "node tests/v52-release-readiness.cjs",
+    "build:staging-preserve": "node scripts/build-v52-staging.cjs",
+    "prepare:staging-preserve": "node scripts/prepare-v52-staging.cjs",
+    "test:staging-preserve": "node tests/v52-staging-preserve.cjs",
+    "test:staging-preserve-db": "node tests/v52-staging-preserve-postgres.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

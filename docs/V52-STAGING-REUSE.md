@@ -1,21 +1,11 @@
-# V5.2 staging reuse — final diagnostic reviewed
+# V5.2 staging reuse — preservation implementation prepared
 
-Status: 21 October 2026. Staging `sfogrvedypgtxfvecmbx` only. **No Supabase SQL executed or changes applied by Codex.** Preserve all four existing fictional accounts, both families, PINs, progress, wallets, purchases and request history.
+22 October 2026. The owner completed the approved importer correction: **service_role=false, anon=false, authenticated=false, postgres=true**. This item is closed; do not rerun diagnostics or revoke scripts.
 
-The owner reports the original compatibility inventory passed the expected preservation prerequisites (8 PASS / 5 REVIEW / 1 expected FAIL). The subsequent routine diagnostic now resolves source review: **five PASS / one FAIL; all six bodies EXACT; all search paths and execution attributes match**. Only the importer has unexpected service_role EXECUTE. PUBLIC, anon and authenticated cannot execute it. Do not repeat inventories, export definitions or rerun the six-routine diagnostic.
+The four existing fictional Auth accounts, both families and their PINs/progress/wallet/history are the preservation baseline. Earlier compatibility/source checks are accepted, including the independently explained LF/CRLF body representation. No further broad audit is requested.
 
-## Recommendation and minimum next action
+A staging-specific in-place SQL package and matching unpublished private build are now prepared. Read [the upgraded plan](V52-STAGING-UPGRADE-PLAN.md), [owner runbook](V52-STAGING-PRESERVE-RELEASE.md), [source review](V52-STAGING-PRESERVE-REVIEW.md) and [actual readiness evidence](V52-STAGING-PRESERVE-READINESS.md).
 
-Review [V52-STAGING-IMPORTER-PERMISSION.md](V52-STAGING-IMPORTER-PERMISSION.md) and [V52-STAGING-IMPORTER-REVOKE.sql](V52-STAGING-IMPORTER-REVOKE.sql), then explicitly approve **only the single-function staging EXECUTE revoke**. Do not execute it before that separate approval.
+The SQL pauses/drains existing RPCs, performs an atomic additive patch with unchanged-original-data assertions, then separately restores only captured access. It never creates accounts/families, resets PINs/progress or runs production activation/import. The build keeps existing storage/queue namespaces and immutable retries; rejected intents stay preserved for reconciliation. Rollback retains all current data and stays closed until a reviewed decision.
 
-The importer is documented as an owner-run fixture tool, is not used by the staging app and is unnecessary for preserving existing learners. The proposal removes only service_role EXECUTE, retains owner access and verifies before/after permissions within a guarded transaction. It changes no functions, other grants, default privileges, accounts or records.
-
-Its incremental security risk is limited: it is SECURITY INVOKER, ordinary browser roles are denied, and it cannot overwrite existing progress/wallet rows. A privileged service caller could initialise an absent linked learner's state, so the unused route should be closed. The finding does not establish a public exploit or compromise, and revocation cannot remove the service role's separate table privileges.
-
-## Shortest remaining V5.2 path
-
-After separate correction approval/application/verification, prepare and rehearse the in-place preservation patch and staging build against the now-confirmed exact routine baseline; offline preparation can proceed independently. Review the concrete package with current private staging recovery coverage, explicitly approve installation, verify unchanged state, and separately approve a private artifact update and hosted smoke using the **same four accounts and known PINs**.
-
-The [upgrade plan](V52-STAGING-UPGRADE-PLAN.md) retains all existing data and immutable retries, adds only needed compatibility metadata/fields and reviewed RPC hardening, and preserves browser queues. Neither production installer nor fresh-start/preserve-reviewed production activation is suitable for existing staging. Approval of the revoke includes none of those operations.
-
-Auth/API service configuration and actual hosted Auth/AMR remain pending. No PIN reset, new account, learning-data clearing, broad audit/test rerun or backup upload is needed for the next action. Cloud Supabase probing remains stopped. SQL preparation received static review only; no migration, activation, merge or deployment occurred.
+**Next owner approval:** the exact hashed staging pause/install/verify/resume package, after reviewing current private staging recovery coverage. No hosted SQL or site publication has occurred. Private-site publication and hosted operations are separate approvals. Cloud Supabase probes remain stopped; previous broad suites and inventories were not repeated.

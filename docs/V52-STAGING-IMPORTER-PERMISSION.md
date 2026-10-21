@@ -1,6 +1,6 @@
 # Staging importer EXECUTE correction — approved scope, corrected guard
 
-**Recommendation unchanged; execution was approved by the owner.** The owner reports the approved staging run stopped at the importer-definition guard before REVOKE. No SQL has been executed by Codex and no permission change is claimed. This is not a request for repeat approval. This proposal does not approve any V5.2 upgrade, activation, data change or publication.
+**Complete — owner verified successful execution on 22 October 2026.** Final EXECUTE: service_role=false, anon=false, authenticated=false, postgres=true. Do not rerun the correction or its diagnostics. No SQL was executed by Codex. The previous guard investigation below is historical; current work is preparation of the separately approvable [preservation staging package](V52-STAGING-PRESERVE-RELEASE.md).
 
 ## Hash discrepancy resolved — 22 October 2026
 
@@ -62,4 +62,5 @@ The shortest remaining route is: prepare/rehearse the in-place preservation patc
 
 Keep the existing [upgrade preservation safeguards](V52-STAGING-UPGRADE-PLAN.md). No new account, PIN reset, progress reset, fresh-start activation or repeat broad inventory/security/browser suite is needed. The future package must retain owner-only importer access and verify service_role stays denied after any routine replacement.
 
-**Minimum next owner action:** if necessary clear the prior aborted transaction with `ROLLBACK;`, then run the entire corrected [V52-STAGING-IMPORTER-REVOKE.sql](V52-STAGING-IMPORTER-REVOKE.sql) in a new SQL Editor query as postgres in staging `sfogrvedypgtxfvecmbx`. Share only the final metadata row: expected service_role/anon/authenticated=false and owner=true. If any guard stops, report that error and stop; do not edit around it. No new diagnostic or approval is needed for the unchanged approved scope.
+**No further owner action is required for this permission correction.** Next review/approval is the separate [staging preservation package](V52-STAGING-PRESERVE-RELEASE.md); no additional importer diagnostic, revoke or duplicate approval is requested.
+
