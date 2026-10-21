@@ -1,6 +1,22 @@
 # Codex handover — V5.1 usability and automated regression
 
-## Latest continuation: importer guard failure investigated — 22 October 2026
+## Latest continuation: importer LF/CRLF discrepancy explained; narrow guard corrected — 22 October 2026
+
+**No SQL executed or permissions changed by Codex.** The owner-run guard check reports existence/owner/invoker=true, hash=false: live MD5 `c3bbfcab24ccb1bfef6892a8af89c9d6`, LF-reference MD5 `a1d3a5958ad9c360d0fd9b2f6eab6159`. Local reconstruction of the reviewed importer body with **only LF → CRLF** reproduces the live digest exactly. Migration and diagnostic repository bodies are identical LF text (1398 bytes); CRLF adds 16 carriage returns (1414 bytes). No string literal contains a line break, so this verified transformation changes no literal value or code token.
+
+The earlier six-function `EXACT` test is `a.prosrc=a.body`: equality with the baseline literal as submitted in that query. A CRLF-submitted literal can exactly match a CRLF-installed body while failing a hardcoded repository-LF hash. Thus EXACT was not a fixed repository-byte attestation. The specific editor/transport that introduced the separators is not established, and no extra source export or broad diagnostic is necessary.
+
+Corrected **only the body fingerprint predicate** in [V52-STAGING-IMPORTER-REVOKE.sql](V52-STAGING-IMPORTER-REVOKE.sql). It now requires the live UTF-8 body's SHA-256 to match one of the two independently reconstructed exact references:
+- LF: `872f848436e16972771fa07d0690077da7e187af89351e47d4f34baee36d7bf8`
+- CRLF: `406cd4b0797de348355e5fddf2e90fe6da7ce43be34f24b948440ca0a016d928`
+
+No general normalization or observed-hash-only acceptance. Changed source, literals, trimmed/mixed-ending variants are rejected by the pinned predicate. The guard's signature, postgres owner, invoker, staging and ordinary-client checks remain intact. Transaction/timeouts, exact one-function `REVOKE ... FROM service_role RESTRICT` and before/after verification are byte-for-byte unchanged. Live SHA-256 verification happens before REVOKE and exports no function definitions, literals or account data.
+
+[Permission note](V52-STAGING-IMPORTER-PERMISSION.md) records the explanation and reference fingerprints. Static local checks verified both digests, reproduced the reported CRLF MD5, rejected altered candidate bodies and confirmed the patch changes only the fingerprint predicate. This was not a PostgreSQL runtime test; no SQL, Supabase request, migration, other permission change, merge, deployment or repeated suite occurred.
+
+**Exact next owner action:** under the already recorded approval, clear a previous aborted transaction with `ROLLBACK;` if needed, then run the whole corrected revoke file in a new SQL Editor query as postgres in staging `sfogrvedypgtxfvecmbx`. Share only the final permission metadata row (service_role/anon/authenticated false, owner true). Stop if a guard fails. Do not repeat the six-function or one-row diagnostics or seek duplicate approval. Existing preservation-upgrade and hosted-testing gates remain unchanged.
+
+## Previous continuation: importer guard failure investigated — 22 October 2026
 
 **No SQL executed and no revoke-guard condition changed.** The owner approved the one-function revoke and reports that its staging run stopped at P0001, `Importer differs from reviewed owner-invoker definition`. This exception occurs before REVOKE, so that attempt changed no permissions or data. Approval for the original narrow revoke remains recorded; do not ask for that approval again. An aborted/open editor transaction should be cleared with `ROLLBACK;` before any new query.
 

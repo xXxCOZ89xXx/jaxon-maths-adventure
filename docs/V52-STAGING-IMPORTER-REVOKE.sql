@@ -21,7 +21,13 @@ BEGIN
   SELECT 1 FROM pg_proc p
   WHERE p.oid=to_regprocedure('public.v3_admin_import(uuid,jsonb)')
    AND p.proowner='postgres'::regrole AND NOT p.prosecdef
-   AND md5(p.prosrc)='a1d3a5958ad9c360d0fd9b2f6eab6159'
+   -- Independently derived SHA-256s of the reviewed body: LF, then CRLF.
+   -- Only these two byte variants are allowed; no whitespace/token normalization.
+   AND pg_catalog.encode(
+        pg_catalog.sha256(pg_catalog.convert_to(p.prosrc,'UTF8')),'hex') IN (
+    '872f848436e16972771fa07d0690077da7e187af89351e47d4f34baee36d7bf8',
+    '406cd4b0797de348355e5fddf2e90fe6da7ce43be34f24b948440ca0a016d928'
+   )
  ) THEN
   RAISE EXCEPTION 'Importer differs from reviewed owner-invoker definition';
  END IF;

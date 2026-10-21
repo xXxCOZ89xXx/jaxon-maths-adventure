@@ -1,10 +1,23 @@
-# Staging importer EXECUTE correction — approval proposal only
+# Staging importer EXECUTE correction — approved scope, corrected guard
 
 **Recommendation unchanged; execution was approved by the owner.** The owner reports the approved staging run stopped at the importer-definition guard before REVOKE. No SQL has been executed by Codex and no permission change is claimed. This is not a request for repeat approval. This proposal does not approve any V5.2 upgrade, activation, data change or publication.
 
-## Guard stop — 22 October 2026
+## Hash discrepancy resolved — 22 October 2026
 
-The committed guard digest matches both the migration body and the earlier diagnostic's embedded exact baseline: `a1d3a5958ad9c360d0fd9b2f6eab6159`. Owner/invoker checks are equivalent between the two scripts. No outdated or mistyped repository hash was found, so no guard condition is weakened or changed. The precise current live mismatch is not established by the combined P0001 message. Run only [V52-STAGING-IMPORTER-GUARD-CHECK.sql](V52-STAGING-IMPORTER-GUARD-CHECK.sql) next; it returns one metadata row separating those predicates and code digests. If needed, clear the prior aborted transaction with `ROLLBACK;` first. Do not rerun the full six-function diagnostic or the revoke blindly.
+The owner-run importer-only check isolates the failure to body hashing: routine exists, postgres owns it, SECURITY INVOKER is correct, but live MD5 is `c3bbfcab24ccb1bfef6892a8af89c9d6` rather than the LF baseline `a1d3a5958ad9c360d0fd9b2f6eab6159`.
+
+Local byte-for-byte reconstruction explains that exact value. The migration body and the six-routine diagnostic's embedded importer baseline are identical repository LF text. Replacing only its 16 LF separators with CRLF yields **exactly the reported live MD5**:
+
+| Reviewed byte variant | Bytes | MD5 | SHA-256 |
+| --- | --- | --- | --- |
+| LF | 1398 | `a1d3a5958ad9c360d0fd9b2f6eab6159` | `872f848436e16972771fa07d0690077da7e187af89351e47d4f34baee36d7bf8` |
+| CRLF | 1414 | `c3bbfcab24ccb1bfef6892a8af89c9d6` | `406cd4b0797de348355e5fddf2e90fe6da7ce43be34f24b948440ca0a016d928` |
+
+The earlier `EXACT` branch uses `a.prosrc=a.body`. It is a comparison with the literal **as submitted in that particular SQL query**, not with an immutable repository-file fingerprint. If that submitted literal and the installed function both contain CRLF, EXACT is consistent with the differing LF-only hardcoded hash. The precise editor/transport that introduced CRLF is not established or needed. The earlier result is useful as query-local equality, but must not be interpreted as portable LF-byte certification.
+
+Minimum safe live verification needs no definition export or extra diagnostic: [the corrected revoke file](V52-STAGING-IMPORTER-REVOKE.sql) now computes SHA-256 of the live UTF-8 body before REVOKE and accepts only the two independently reconstructed byte variants above. These are reference-derived fingerprints, not an arbitrary adoption of an observed live hash. A third variant, changed code/literal, trimmed body or mixed LF/CRLF text remains rejected. No whitespace/comment/token normalization is used. Every literal in this reviewed body is single-line, so the verified LF/CRLF substitution changes only separators outside literals.
+
+Only the body-fingerprint predicate changed. The staging marker, exact signature, postgres owner, SECURITY INVOKER, ordinary-client denial, transaction/timeouts, single-function RESTRICT revoke and before/after effective-access checks are unchanged. The body guard is upgraded from MD5 to SHA-256. The owner's original one-function permission approval remains recorded; no new scope is requested and no SQL has been executed by Codex.
 
 ## Finding and intent
 
@@ -43,10 +56,10 @@ A SQL error rolls back the revoke; if the editor leaves an aborted/open transact
 
 ## What this clears and what remains
 
-Once separately approved, applied by the owner and verified, this closes the single known routine-access finding. It does not install V5.2 or certify hosted Auth/API configuration.
+Once applied by the owner under the recorded approval and verified, this closes the single known routine-access finding. It does not install V5.2 or certify hosted Auth/API configuration.
 
 The shortest remaining route is: prepare/rehearse the in-place preservation patch and staging build using the accepted exact routine baseline → protect current staging state and review the concrete package → explicit staging-install approval and unchanged-state checks → separately approved private staging artifact update and a concise hosted smoke with the same four accounts/known PINs. This work can be prepared independently of the permission correction; approval of the revoke does not approve installation or hosting.
 
 Keep the existing [upgrade preservation safeguards](V52-STAGING-UPGRADE-PLAN.md). No new account, PIN reset, progress reset, fresh-start activation or repeat broad inventory/security/browser suite is needed. The future package must retain owner-only importer access and verify service_role stays denied after any routine replacement.
 
-**Minimum next owner action: run the one-row read-only guard check in staging as postgres and share its result. Original one-function revoke approval remains recorded; do not ask for it again or rerun the revoke until the mismatch is resolved.**
+**Minimum next owner action:** if necessary clear the prior aborted transaction with `ROLLBACK;`, then run the entire corrected [V52-STAGING-IMPORTER-REVOKE.sql](V52-STAGING-IMPORTER-REVOKE.sql) in a new SQL Editor query as postgres in staging `sfogrvedypgtxfvecmbx`. Share only the final metadata row: expected service_role/anon/authenticated=false and owner=true. If any guard stops, report that error and stop; do not edit around it. No new diagnostic or approval is needed for the unchanged approved scope.
