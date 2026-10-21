@@ -1,6 +1,18 @@
 # Codex handover — V5.1 usability and automated regression
 
-## Latest continuation: owner-run staging compatibility preparation — 21 October 2026
+## Latest continuation: staging results reviewed and preservation upgrade designed — 21 October 2026
+
+**Design and one targeted read-only owner diagnostic only; no Supabase changes.** The owner reports the compatibility query succeeded in the correct staging project: **8 PASS / 5 REVIEW / 1 expected FAIL**. Four confirmed Auth accounts, two independent families, four PIN rows, table/family structure, all 40 catalogue entries and no V5.2 activation overlap pass. Accept these results; do not repeat the inventory. Unavailable SQL history / 82 Auth history rows do not prove application drift.
+
+Zero routines are missing, but the old combined fingerprint reports six changes. All six expected body MD5s were rechecked against committed SQL. The combined result cannot distinguish raw formatting, an equivalent empty-search-path representation, or meaningful body/attribute changes; no live cause is established. New [V52-STAGING-ROUTINE-DIAGNOSTIC.sql](V52-STAGING-ROUTINE-DIAGNOSTIC.sql) returns six catalog-only rows separating exact/conservative token-equivalent bodies, path representation, execution attributes and narrow grants. It never calls application functions, reads account/game rows or returns definitions/literals/credentials. Its PASS means legacy-baseline equivalence, not V5.2 security certification. Unknown token changes remain a targeted review gate; no automatic routine/grant correction.
+
+Read [V52-STAGING-UPGRADE-PLAN.md](V52-STAGING-UPGRADE-PLAN.md) and the updated [staging-reuse guide](V52-STAGING-REUSE.md). The design is a new in-place staging-specific patch: preserve all accounts/families/PINs and original gameplay/wallet/request columns, add zero wallet compatibility fields and a staging version marker, harden reviewed RPCs without activation/import, preserve exact old retries and browser queues, and keep proper staging identity. It includes private staging recovery coverage, delta-only rehearsal, a drained maintenance window, atomic unchanged-state assertions and rollback retaining newer activity. No executable migration was prepared or applied.
+
+Shortest path: owner six-row diagnostic → resolve routine-only drift → prepare/rehearse a guarded preservation patch and staging build → explicit concrete staging-install approval → unchanged-state/version checks → separately approved private artifact update and hosted smoke with the same four accounts/known PINs. Auth/API settings and real hosted Auth/AMR remain pending; no account or PIN reset is needed for this path. Production installer/fresh-start/preserve-reviewed activation remain unsuitable for this existing staging state.
+
+**Exact next owner action:** in staging `sfogrvedypgtxfvecmbx`, run the whole routine diagnostic once as postgres in a new SQL Editor query and share only its six-row grid. No backup upload, broader inventory, credential change or test suite rerun. Cloud Supabase probing remains stopped. Static SQL scope/delimiter and conservative lexical-model checks passed locally; no PostgreSQL/Supabase execution or hosted result is claimed. All existing state remains untouched. Only documentation is changed in this continuation; no migration, activation, merge or deployment.
+
+## Previous continuation: owner-run staging compatibility preparation — 21 October 2026
 
 **Read-only owner check prepared; no Supabase SQL executed.** The current user scope supersedes historical release/setup steps below: preserve all four existing fictional staging accounts, both families, PINs and progress. Stop Cloud Supabase connectivity attempts. Do not create accounts, change credentials/settings, install migrations, activate V5.2, merge or deploy.
 
