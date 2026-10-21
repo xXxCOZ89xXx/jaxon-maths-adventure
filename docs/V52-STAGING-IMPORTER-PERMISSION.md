@@ -1,6 +1,10 @@
 # Staging importer EXECUTE correction — approval proposal only
 
-**Recommendation: revoke service_role EXECUTE on `public.v3_admin_import(uuid,jsonb)` in staging `sfogrvedypgtxfvecmbx`. No SQL has been executed by Codex.** This proposal does not approve any V5.2 upgrade, activation, data change or publication.
+**Recommendation unchanged; execution was approved by the owner.** The owner reports the approved staging run stopped at the importer-definition guard before REVOKE. No SQL has been executed by Codex and no permission change is claimed. This is not a request for repeat approval. This proposal does not approve any V5.2 upgrade, activation, data change or publication.
+
+## Guard stop — 22 October 2026
+
+The committed guard digest matches both the migration body and the earlier diagnostic's embedded exact baseline: `a1d3a5958ad9c360d0fd9b2f6eab6159`. Owner/invoker checks are equivalent between the two scripts. No outdated or mistyped repository hash was found, so no guard condition is weakened or changed. The precise current live mismatch is not established by the combined P0001 message. Run only [V52-STAGING-IMPORTER-GUARD-CHECK.sql](V52-STAGING-IMPORTER-GUARD-CHECK.sql) next; it returns one metadata row separating those predicates and code digests. If needed, clear the prior aborted transaction with `ROLLBACK;` first. Do not rerun the full six-function diagnostic or the revoke blindly.
 
 ## Finding and intent
 
@@ -45,4 +49,4 @@ The shortest remaining route is: prepare/rehearse the in-place preservation patc
 
 Keep the existing [upgrade preservation safeguards](V52-STAGING-UPGRADE-PLAN.md). No new account, PIN reset, progress reset, fresh-start activation or repeat broad inventory/security/browser suite is needed. The future package must retain owner-only importer access and verify service_role stays denied after any routine replacement.
 
-**Minimum next owner action: review the linked SQL proposal and explicitly approve only this single-function staging EXECUTE revoke. Do not execute it before that approval.**
+**Minimum next owner action: run the one-row read-only guard check in staging as postgres and share its result. Original one-function revoke approval remains recorded; do not ask for it again or rerun the revoke until the mismatch is resolved.**

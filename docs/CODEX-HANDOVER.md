@@ -1,6 +1,18 @@
 # Codex handover — V5.1 usability and automated regression
 
-## Latest continuation: final routine finding isolated; importer revoke proposed — 21 October 2026
+## Latest continuation: importer guard failure investigated — 22 October 2026
+
+**No SQL executed and no revoke-guard condition changed.** The owner approved the one-function revoke and reports that its staging run stopped at P0001, `Importer differs from reviewed owner-invoker definition`. This exception occurs before REVOKE, so that attempt changed no permissions or data. Approval for the original narrow revoke remains recorded; do not ask for that approval again. An aborted/open editor transaction should be cleared with `ROLLBACK;` before any new query.
+
+Repository evidence at `e984fb969e3cc9f00764602cd26362a6c9d235f6`: the revoke file's expected MD5 is `a1d3a5958ad9c360d0fd9b2f6eab6159`. Independent local hashing of the exact dollar-quoted importer body in both `supabase/v3-staging/003_import_compatibility.sql` and `docs/V52-STAGING-ROUTINE-DIAGNOSTIC.sql` produced that same digest; the two reference bodies are identical. The diagnostic and revoke also use equivalent signature/owner/security-invoker checks. There is no evidence that the committed hash is stale or mistyped. The earlier owner's EXACT/attribute result and the later combined failure cannot identify which current live predicate is false, whether state changed between runs, or whether a different SQL copy was executed. Do not claim one of these explanations is established.
+
+The requested condition-only correction is therefore **not justified yet**. `docs/V52-STAGING-IMPORTER-REVOKE.sql` remains byte-for-byte unchanged; no expected hash, owner check or invoker check was removed/replaced, and its transaction, one-function RESTRICT revoke and before/after verification remain intact. Do not run it again blindly.
+
+Added [V52-STAGING-IMPORTER-GUARD-CHECK.sql](V52-STAGING-IMPORTER-GUARD-CHECK.sql): one read-only importer-only row reproducing the failing predicates separately (existence, owner, invoker, body hash) and returning only routine-body code digests/booleans. It reads routine metadata only, does not call the importer and returns no definitions, personal data, PIN hashes or privileges inventory. No full six-function diagnostic or completed suite is repeated.
+
+**Minimum next owner action:** if needed clear the prior aborted transaction, then run only this one-row read-only check in the correct staging project as postgres and share its result. Use that evidence to fix only a demonstrated faulty guard; if a real owner/body/security change is found, stop for targeted review rather than adopting it as a new baseline. If all checks pass, reconcile the failed run's SQL copy/context before repeating the approved revoke. No fresh approval for the unchanged original scope is needed. No Supabase connectivity attempt, SQL execution, migration, other-permission change, merge or deployment occurred in this continuation. The previous preservation upgrade plan remains in force.
+
+## Previous continuation: final routine finding isolated; importer revoke proposed — 21 October 2026
 
 **Preparation/documentation only; no SQL executed or Supabase changes.** Latest owner-run diagnostic: **five PASS / one FAIL**. All six routine bodies are EXACT, all search paths and execution attributes match. Only `public.v3_admin_import(uuid,jsonb)` permits service_role EXECUTE; PUBLIC, anon and authenticated do not. The former source/formatting investigation is resolved. Do not request another diagnostic, definition export, inventory or broad test rerun.
 
