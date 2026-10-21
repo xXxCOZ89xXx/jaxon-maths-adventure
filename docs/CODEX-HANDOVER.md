@@ -1,6 +1,16 @@
 # Codex handover — V5.1 usability and automated regression
 
-## Latest continuation: V5.2 final release readiness — 21 October 2026
+## Latest continuation: owner-run staging compatibility preparation — 21 October 2026
+
+**Read-only owner check prepared; no Supabase SQL executed.** The current user scope supersedes historical release/setup steps below: preserve all four existing fictional staging accounts, both families, PINs and progress. Stop Cloud Supabase connectivity attempts. Do not create accounts, change credentials/settings, install migrations, activate V5.2, merge or deploy.
+
+Read [V52-STAGING-REUSE.md](V52-STAGING-REUSE.md). The exact next owner action is to verify staging ref `sfogrvedypgtxfvecmbx` in the dashboard, run the whole [V52-STAGING-COMPATIBILITY.sql](V52-STAGING-COMPATIBILITY.sql) once as postgres in a new SQL Editor query, and share only its 14-row Check/Result/Details grid. It uses a read-only transaction and fixed metadata/aggregate SELECTs, returns no account IDs/emails/PINs/learning records, and calls no application functions. No other inventory, backup upload, restoration or browser/security suite is requested. Auth service settings and hosted Auth behaviour remain REVIEW because SQL metadata cannot certify them.
+
+Source review at pushed branch head `f0b2d50` confirms the release-readiness handover was present but staging-reuse documentation was missing. This documentation-only continuation adds that guide and SQL plus this handover entry. An unmodified production installer is incompatible with existing staging: production guards/legacy-table expectations, existing `v3_*` name collisions and different fresh-start family shape. Neither fresh-start nor existing preserve-reviewed activation preserves current staging gameplay. A new preservation-only staging-specific upgrade/build path appears feasible in principle, pending the owner grid and separate reviewed scope; do not run either activation/import path or replace staging identity with production.
+
+The preceding Cloud HTTPS probe failed before CONNECT with curl error 7 (could not connect to proxy:8080), HTTP/CONNECT 000; resolution of the historical CONNECT 403 is unverified. No further Supabase network attempt occurred here. Static scope/source checks were performed on the prepared SQL; it was not executed or runtime-certified. All existing accounts/families/PINs/progress remain untouched. Production recovery/release evidence below remains historical and unchanged.
+
+## Previous continuation: V5.2 final release readiness — 21 October 2026
 
 **All safe release preparation completed; stop before production changes.** Branch `codex/v3-adventure-build`, Draft PR #2. Owner-completed full encrypted export/second copy/integrity and Windows local **PARTIAL/application PASS, original archive unchanged** are accepted. Do not repeat analysis, gameplay or local restoration testing, and never access/request private backups or genuine records. No production SQL, provisioning, Auth/API setting change, merge or deployment occurred.
 
