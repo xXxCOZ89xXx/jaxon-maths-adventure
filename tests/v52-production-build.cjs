@@ -10,7 +10,7 @@ try {
  const js=fs.readFileSync(path.join(dir,'production-app.js'),'utf8');
  assert.ok(!html.includes('staging-config.js')&&!html.includes('review/'));
  assert.ok(js.includes('contractVersion')&&js.includes('Historical redeemed time'));
-  for(const old of ['v2-game-test.html','v2-secure-preview.html','secure-access-test.html']) {
+  for(const old of ['v2-game-test.html','v2-secure-preview.html','secure-access-test.html','v3-adventure.html','town-interactions-preview.html','world-interactions-preview.html']) {
     const redirect=fs.readFileSync(path.join(dir,old),'utf8');
     assert.ok(redirect.includes('0;url=./')&&!redirect.includes('supabase.co'));
   }

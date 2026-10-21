@@ -11,6 +11,10 @@ The current owner decision is a fresh gameplay opening with existing accounts/fa
 
 Production SQL is separate from staging. Do not blindly run it. Verify the project and private backup/restore, review schema drift, PIN transition and a private trusted opening manifest. No app, CLI or CI runner applies SQL.
 
+Current final sequence: [V52-CUTOVER-RUNBOOK.md](../../docs/V52-CUTOVER-RUNBOOK.md). The owner completed encrypted backup/integrity and PARTIAL application recovery; do not repeat it. `npm run prepare:production-release` builds an ignored, hashed package: one atomic inactive installer for all four files, read-only checks and isolated `site/`. Only `site/` is publishable. No SQL is executed. Use the complete generated installer once; do not then run the originals again. Fresh receipts now explicitly declare recovery scope and managed-service safeguards; freeze keeps legacy writes blocked until reviewed rollback.
+
+Focused final-preparation commands: `npm run test:release-readiness`, `npm run test:production-build`. Historical broader commands below remain available; they are not a request to rerun completed recovery/gameplay.
+
 Local commands using fictional records:
 
 ```text

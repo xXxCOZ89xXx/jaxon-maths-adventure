@@ -1,0 +1,8 @@
+PASS offline hashed release package: six legacy routes, .nojekyll, strict site boundary and nonempty-output refusal
+PASS all-four installation is atomic on late failure; no partial backend/private schema remains
+PASS atomic inactive installation preserves existing Auth/family records and creates no openings
+PASS partial recovery receipt requires explicit scope and separately acknowledged managed-service safeguards, atomically
+PASS canonical backup-state query and aggregate release checks match fresh zero openings/private access boundaries
+PASS freeze retains legacy write guard even for privileged stale writers while backend is not ready
+PASS explicit rollback alone restores legacy writes, retaining original accounts/families, new zero opening and private archive
+7 focused final-release suites passed; fictional records, network-disabled PG17; no backup-restoration rerun or hosted requests.

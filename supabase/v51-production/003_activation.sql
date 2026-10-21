@@ -9,6 +9,7 @@ end $$;
 create table public.v3_activation (
  singleton boolean primary key default true check(singleton), review jsonb not null,
  mode text not null check(mode in ('preserve-reviewed','fresh-start')),
+ legacy_restored boolean not null default false,
  legacy_acl jsonb not null, activated_at timestamptz not null default now()
 );
 alter table public.v3_activation enable row level security;
@@ -17,7 +18,7 @@ revoke all on public.v3_activation from public,anon,authenticated;
 create function public.v3_legacy_write_guard() returns trigger
 language plpgsql security definer set search_path='' as $$
 begin
- if exists(select 1 from public.v3_environment where ready) then
+ if exists(select 1 from public.v3_activation where not legacy_restored) then
  raise exception 'Legacy writes retired; use the activated adventure backend'; end if;
  return null;
 end $$;
@@ -127,6 +128,7 @@ begin
  lock table public.v3_environment in exclusive mode;
  lock table public.v3_wallet,public.v3_progress in access exclusive mode;
  update public.v3_environment set ready=false;
+ update public.v3_activation set legacy_restored=false;
  delete from public.v3_unlocks;
  -- Legacy client access remains revoked. Reconcile privately before restoring it.
 end $$;
@@ -152,7 +154,8 @@ begin
  execute format('grant %s on %s %s to %s%s',x->>'privilege',x->>'kind',x->>'name',grant_target,
  case when (x->>'grantable')::boolean then ' with grant option' else '' end);
  end loop;
- -- The guard permits legacy writes while ready=false. Preserve all V3 changes for reconciliation.
+ update public.v3_activation set legacy_restored=true;
+ -- Only reviewed rollback re-enables legacy writes; freeze alone never does. Retain all V3 records.
 end $$;
 revoke all on function public.v3_admin_rollback() from public,anon,authenticated,service_role;
 commit;

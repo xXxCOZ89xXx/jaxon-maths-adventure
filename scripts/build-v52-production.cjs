@@ -59,7 +59,7 @@ function build(config, out) {
   fs.writeFileSync(path.join(out,'index.html'),html);
   // Future deployment retires stale writers/bookmarks; original repository pages stay intact.
   const redirect='<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; base-uri \'none\'; form-action \'none\'"><meta http-equiv="refresh" content="0;url=./"><title>Jaxon’s Maths Adventure has moved</title><p><a href="./">Open Jaxon’s Maths Adventure</a></p></html>\n';
-  for(const old of ['v2-game-test.html','v2-secure-preview.html','secure-access-test.html'])
+  for(const old of ['v2-game-test.html','v2-secure-preview.html','secure-access-test.html','v3-adventure.html','town-interactions-preview.html','world-interactions-preview.html'])
     fs.writeFileSync(path.join(out,old),redirect);
   fs.writeFileSync(path.join(out,'production-config.js'),'window.V51ProductionConfig = '+JSON.stringify(c)+';\n');
   require('esbuild').buildSync({ stdin: { contents: entry(), resolveDir:path.join(root,'v3'),sourcefile:'production-app.js' },

@@ -44,7 +44,8 @@ const req=(who,op,args={})=>JSON.parse(call(who,'v3_request',`${lit(tokens[who])
  const families=JSON.parse(familyBefore).map(f=>({familyId:f.id,parent:f.parent_user_id,child:f.child_user_id}));
  manifest={mode:'fresh-start',migrationId:crypto.randomUUID(),pinTransitionApproved:true,gameplayResetApproved:true,
  legacyFingerprint,permissionFingerprint,families,backupReceipt:{archiveId:crypto.randomUUID(),backupSha256:hash(backup),
- restoreReceiptSha256:hash('fictional isolated restoration checked'),restoreVerified:true}};
+ restoreReceiptSha256:hash('fictional isolated restoration checked'),restoreVerified:true,recoveryScope:'application-data-only',
+ managedAuthRecoveryVerified:false,managedServiceSafeguardsApproved:true}};
  await test('pre-migration fictional backup restores Auth credentials, family links and old rewards in isolation',()=>{
  docker(['exec',name,'createdb','-h','127.0.0.1','-U','postgres','fresh_backup_restore']);
  docker([...psql,'-d','fresh_backup_restore'],backup);

@@ -27,7 +27,9 @@
     "test:production-security": "node tests/v52-production-postgres.cjs",
     "test:production-browser": "playwright test --config playwright.production.config.cjs",
     "test:fresh-start": "node tests/v52-fresh-start.cjs",
-    "test:windows-restore": "node tests/v52-windows-restore.cjs"
+    "test:windows-restore": "node tests/v52-windows-restore.cjs",
+    "prepare:production-release": "node scripts/prepare-v52-release.cjs",
+    "test:release-readiness": "node tests/v52-release-readiness.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

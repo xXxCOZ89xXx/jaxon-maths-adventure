@@ -56,6 +56,15 @@ begin
  or coalesce(receipt->>'backupSha256','') !~ '^[0-9a-f]{64}$'
  or coalesce(receipt->>'restoreReceiptSha256','') !~ '^[0-9a-f]{64}$'
  or receipt->>'archiveId' is null then raise exception 'Verified private backup and restoration receipt required'; end if;
+ -- Verification is explicitly scoped. A PARTIAL application restore never claims managed Auth recovery.
+ if receipt->>'recoveryScope' is null or receipt->>'recoveryScope' not in ('application-data-only','full-supabase')
+ then raise exception 'Explicit restoration receipt scope required'; end if;
+ if receipt->>'recoveryScope'='application-data-only' and
+ (receipt->'managedAuthRecoveryVerified' is distinct from 'false'::jsonb
+ or receipt->'managedServiceSafeguardsApproved' is distinct from 'true'::jsonb)
+ then raise exception 'Partial restoration receipt needs explicit managed-service safeguards approval'; end if;
+ if receipt->>'recoveryScope'='full-supabase' and receipt->'managedAuthRecoveryVerified' is distinct from 'true'::jsonb
+ then raise exception 'Full restoration receipt needs explicit managed Auth recovery verification'; end if;
  perform (receipt->>'archiveId')::uuid;
  if exists(select 1 from public.v3_wallet) or exists(select 1 from public.v3_progress)
  or exists(select 1 from public.v3_transactions) or exists(select 1 from public.v3_pins) or exists(select 1 from public.v3_unlocks)
