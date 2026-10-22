@@ -1,6 +1,14 @@
 # Codex handover — V5.1 usability and automated regression
 
-## Latest continuation: final Practical Maths Town expansion implemented — 22 October 2026
+## Final visual polish — feature freeze, 22 October 2026
+
+Continued from `e733b38`. Presentation-only polish: colour-framed world artwork and landmark markers, Town building previews and explicit customer/employee labels, location-arrival strip, larger selected/placed controls and feedback, clearer Continue caption for saved Town plans, reversible wardrobe previews, quiet inline coin feedback and immediately skippable completion ribbons. Animation remains opt-in; reduced motion overrides all animations/transitions. No new sound or mandatory delay.
+
+Nine worlds, 55 skills and 27 Town plans remain available. No engine/content, reward calculations, cloud adapter, authentication, PINs, roles, schemas, storage namespaces or saved progress formats were changed. UI previews/dismissals are transient and tested not to write storage. Focused checks cover both iPad orientations, all-world entry, older visits, selection/save/Continue/reopen, preview conservation, completion dismissal, reduced motion, accessibility/layout, complete customer/employee plans and existing intercepted cloud saves; the 27-plan logic check still completes 2,007 stages. Screenshots were inspected locally. No broad suite or security audit was run.
+
+**Feature-frozen for private publication approval. Exact artifact:** current `staging-dist/`, produced with `node scripts/build-v3-staging.cjs` and checked with `node scripts/verify-v3-staging.cjs`, using the existing staging project. Publish only that static directory to the existing owner-private Site/origin after approval. Do not use the parked `v52-staging-dist/`, preservation SQL or an earlier hosted version. Artwork remains original stylised SVG; travel/preparation remain guided scene transitions. Physical Safari acceptance is still an owner check. No publication, deployment, merge, Supabase/account change or database diagnostic occurred.
+
+## Previous continuation: final Practical Maths Town expansion implemented — 22 October 2026
 
 Owner’s final gameplay expansion is implemented in code: **27 replayable plans** (5 cooking, 5 shopping, 5 travel, 7 employment, 5 errands). `v3/town-life.js` reuses Town venues and existing interactive controls. Meals now connect cupboard/list → bus → shop/pay/change → return → unpack/match → preparation order → measurement → cooking clock → serving. Workplaces on Town map start full employee days with venue service, shift/net wages and a savings budget. The original eight-stage recipes and old three-task venue visits remain available and their saves are preserved.
 
