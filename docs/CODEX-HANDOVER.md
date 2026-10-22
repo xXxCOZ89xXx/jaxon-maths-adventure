@@ -2,6 +2,8 @@
 
 ## Owner-approved interactive release — 22 October 2026
 
+**Published:** game commit `2e84e74d9fbcb22208b6332ca98f2cd7466912d3` is on `release/ipad`. GitHub push automatically built, verified and deployed successfully as Pages deployment `808e1cf8-45db-4fce-a631-e3c148a21e15`; project canonical deployment points to it. Post-publication API readback confirms parent-email-only OTP Access remains on both exact/wildcard hostnames and previews remain disabled. Same staging project `sfogrvedypgtxfvecmbx`. Authenticated physical Safari play/save/reopen remains the owner check; Codex did not use the parent’s OTP or real learner session. Reopen/refresh the existing address; never clear Safari data or pending saves for this update.
+
 The owner’s mandatory-interaction attachment and “I approve the changes” explicitly authorise the completed, passing development version to be promoted to `release/ipad` and automatically published through the existing GitHub-connected Cloudflare Pages project `jaxon-maths-private-git`. The address stays https://jaxon-maths-private-git.pages.dev. This approval supersedes the earlier development-only hold below; future changes still need approval before promotion.
 
 Final additions: opening cupboard/fridge doors, tap-to-place/return base-ten blocks, select-and-place money tokens in budget envelopes, visible cooking-temperature controls and train-style ordering. These complete the earlier contextual Town and interactive-world overhaul. Existing 27 plans (5 cooking, 5 shopping, 5 travel, 7 jobs, 5 errands), original Bolognese/lentil recipes, nine worlds and 55 skills remain.

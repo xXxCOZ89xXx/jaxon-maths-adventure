@@ -51,5 +51,17 @@
     "staleCrossTabRange": true,
     "stagingBuildVerified": true,
     "liveWrites": 0
+  },
+  "release": {
+    "commit": "2e84e74d9fbcb22208b6332ca98f2cd7466912d3",
+    "branch": "release/ipad",
+    "url": "https://jaxon-maths-private-git.pages.dev",
+    "deployment": "808e1cf8-45db-4fce-a631-e3c148a21e15",
+    "status": "success",
+    "automaticGitHubPush": true,
+    "canonicalVerified": true,
+    "mainAndPreviewAccessVerified": true,
+    "stagingProject": "sfogrvedypgtxfvecmbx",
+    "authenticatedPhysicalSafariCheck": "owner pending"
   }
 }
