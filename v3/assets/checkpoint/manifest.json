@@ -126,6 +126,42 @@
       "bytes": 74158,
       "sha256": "06e42e6c94e150b3e6399261061be056f5449ddf2df3f4c4f8202fd4f3d12e10",
       "master": "exec-b90deb75-628d-455d-a35f-81f94321d066.png"
+    },
+    "teen": {
+      "file": "v3/assets/checkpoint/teen.webp",
+      "width": 867,
+      "height": 1300,
+      "alpha": true,
+      "bytes": 95506,
+      "sha256": "536898bfcd86cdd46a568062bb49c3f5893aee45426d68effcbcb84c3be676ea",
+      "master": "exec-dfb64920-932e-41f3-b85f-926020cb77da.png"
+    },
+    "pantry-empty": {
+      "file": "v3/assets/checkpoint/pantry-empty.webp",
+      "width": 1000,
+      "height": 1202,
+      "alpha": true,
+      "bytes": 90070,
+      "sha256": "188b23eb0ce2d24a2faa54247a47492059ecaa507e2504753b2edef831b23dc4",
+      "master": "exec-8c4539b9-fb53-4bb7-9b8a-5af29ede7512.png"
+    },
+    "basket-empty": {
+      "file": "v3/assets/checkpoint/basket-empty.webp",
+      "width": 1000,
+      "height": 667,
+      "alpha": true,
+      "bytes": 179260,
+      "sha256": "6db2f0c5d8b7bea5578cc676ed577d764f1e0ca8cd256149bc5f87038d7e7591",
+      "master": "exec-e554c1bb-b64e-4b30-a49b-c9f2a9cb4d80.png"
+    },
+    "fridge-empty": {
+      "file": "v3/assets/checkpoint/fridge-empty.webp",
+      "width": 1000,
+      "height": 1202,
+      "alpha": true,
+      "bytes": 104454,
+      "sha256": "1f3e34a2fca0f98184cefc1a74d99c9efb1633f9a63ddb20e6c5be87868818c4",
+      "master": "exec-696d7e68-68d7-45d5-9ce9-7096620ba41e.png"
     }
   }
 }

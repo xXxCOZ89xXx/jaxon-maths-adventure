@@ -1,3 +1,5 @@
+> Historical checkpoint `63f787f`, not approved. The current revision is [REVISED-CHECKPOINT.md](REVISED-CHECKPOINT.md).
+
 # Playable original-asset checkpoint
 
 This is a development review sample, not a live release. `release/ipad` remains at `2e84e74`; hosting, Supabase, accounts and personal progress were not accessed or changed.

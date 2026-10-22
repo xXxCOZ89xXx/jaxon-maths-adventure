@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "uniquePassingCases": 12,
+  "unexpected": 0,
+  "viewports": [
+    "820x1180",
+    "1180x820"
+  ],
+  "browser": "Chromium touch emulation; physical Safari not tested",
+  "isolatedData": true,
+  "sourceBase": "63f787f6eb846fecc99061c6e607ca85d88d2819",
+  "releaseUnchanged": "2e84e74d9fbcb22208b6332ca98f2cd7466912d3",
+  "sceneScreenshots": 16,
+  "finalLayoutCasesPassed": 2,
+  "newProps": [
+    "teen",
+    "pantry-empty",
+    "fridge-empty",
+    "basket-empty"
+  ],
+  "runtimeAssetBytes": 3322472,
+  "scope": "Scene navigation, direct stock/shelf/basket/timetable interactions, full touch meal, reopen, keyboard, embedded assets, intercepted immutable queue and stale-stage guard. No live network or backend writes."
+}

@@ -1,5 +1,11 @@
 # Codex handover — V5.1 usability and automated regression
 
+## Revised visual checkpoint — owner feedback, 22 October 2026
+
+The owner explicitly did NOT approve `63f787f`: scenery direction accepted, avatar scale and separate worksheet presentation rejected. Keep the original artwork and all educational/Town improvements. New `v3/scene-interactions.js` adds a teen-proportioned sprite, individually calibrated floor placement in Camp/kitchen/market/bus, object-sized Camp/building regions, in-scene recipe/storage/shelf/basket/timetable entry and keyboard/touch close-ups using existing validated actions. New empty cupboard/fridge and basket props support accurate saved stock and selected basket contents. No migration, saved-format/namespace change or reward/auth change. A scene/run/stage guard inside the existing save lock rejects stale close-up edits.
+
+See `docs/art-direction/REVISED-CHECKPOINT.md` for scope, calibration and actual screenshots. The generated standalone preview embeds all assets. Focused tests cover both iPad orientations, a full touch meal, storage/basket/timetable edits, save/reopen, mocked immutable pending saves and stale-stage refusal. No hosted account or backend was used. The previous layout tests/screenshots are historical, not current approval evidence. New rendered-sample approval is still required before wider graphical rollout. Keep `release/ipad` at `2e84e74d9fbcb22208b6332ca98f2cd7466912d3`; do not deploy. Full wardrobe layers, Camp exterior stages and connected world atlas are still pending.
+
 ## Asset-based art checkpoint — 22 October 2026
 
 The owner supplied/adopted the three text files, then all 16 approved references inline. Text was read first; all references were inspected individually. The missing-reference dependency is resolved. See `docs/art-direction/REFERENCE-REVIEW.md`. No board was cropped or used as a background.

@@ -1,0 +1,1 @@
+const base=require('./playwright.quality.config.cjs');module.exports={...base,testMatch:/scene-revision\.spec\.cjs/,reporter:[['list'],['json',{outputFile:process.env.SCENE_REPORT||'tests/artifacts/scene-revision-browser.json'}]]};
