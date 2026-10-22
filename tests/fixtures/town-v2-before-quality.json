@@ -1,0 +1,413 @@
+{
+  "version": 2,
+  "runs": {
+    "cook-pasta:1": {
+      "version": 2,
+      "id": "cook-pasta:1",
+      "scenario": "cook-pasta",
+      "name": "Tomato pasta",
+      "category": "Cooking",
+      "tier": 1,
+      "seed": 1,
+      "stage": 0,
+      "steps": [
+        {
+          "venue": "home",
+          "title": "Check cupboards",
+          "kind": "basket",
+          "prompt": "Inspect the cupboards: 1 Pasta · 100 g pack, 0 Tomatoes · tin, 1 Cheese · 50 g pack. Build the quantities already at home.",
+          "answer": [
+            1,
+            0,
+            1
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Compare each requested quantity with the cupboard or order. Build one item at a time.",
+          "example": "Need three tins and have one? Put two tins on the list.",
+          "hint": "Re-read the quantity beside each item, then check the total.",
+          "worked": "Match the stock shown in the cupboard list.",
+          "effect": {},
+          "items": [
+            {
+              "name": "Pasta · 100 g pack",
+              "price": 65
+            },
+            {
+              "name": "Tomatoes · tin",
+              "price": 85
+            },
+            {
+              "name": "Cheese · 50 g pack",
+              "price": 90
+            }
+          ]
+        },
+        {
+          "venue": "home",
+          "title": "Make a shopping list",
+          "kind": "basket",
+          "prompt": "Plan needs 2 Pasta · 100 g pack, 2 Tomatoes · tin, 1 Cheese · 50 g pack. Use your cupboard stock and list only what is missing.",
+          "answer": [
+            1,
+            2,
+            0
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Compare each requested quantity with the cupboard or order. Build one item at a time.",
+          "example": "Need three tins and have one? Put two tins on the list.",
+          "hint": "Re-read the quantity beside each item, then check the total.",
+          "worked": "Pasta · 100 g pack: 2 − 1 = 1; Tomatoes · tin: 2 − 0 = 2; Cheese · 50 g pack: 1 − 1 = 0",
+          "effect": {
+            "list": {
+              "Pasta · 100 g pack": 1,
+              "Tomatoes · tin": 2,
+              "Cheese · 50 g pack": 0
+            }
+          },
+          "items": [
+            {
+              "name": "Pasta · 100 g pack",
+              "price": 65
+            },
+            {
+              "name": "Tomatoes · tin",
+              "price": 85
+            },
+            {
+              "name": "Cheese · 50 g pack",
+              "price": 90
+            }
+          ]
+        },
+        {
+          "venue": "station",
+          "title": "Travel to Supermarket",
+          "kind": "journey",
+          "prompt": "Reach Supermarket by 09:35, with 5 minutes to walk. Current time 09:00. Choose the cheapest bus arriving in time.",
+          "answer": 0,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Add walking time to arrival before comparing the deadline. Then compare fares of the services that work.",
+          "example": "Arrive at 09:10 plus a 10-minute walk: reach the destination at 09:20.",
+          "hint": "Check arrival plus walking for each service. Pick the cheapest eligible fare.",
+          "worked": "Bus A costs £1.00; arrival plus walking is 09:30. Bus B misses the deadline and Express C costs more.",
+          "effect": {
+            "spend": 100,
+            "minutes": 30,
+            "receipt": "Bus fare to Supermarket",
+            "choice": "Bus A"
+          },
+          "options": [
+            {
+              "name": "Bus A",
+              "depart": 550,
+              "arrive": 565,
+              "price": 100
+            },
+            {
+              "name": "Bus B",
+              "depart": 560,
+              "arrive": 580,
+              "price": 75
+            },
+            {
+              "name": "Express C",
+              "depart": 555,
+              "arrive": 560,
+              "price": 200
+            }
+          ],
+          "walk": 5,
+          "deadline": 575
+        },
+        {
+          "venue": "market",
+          "title": "Choose the shopping",
+          "kind": "basket",
+          "prompt": "Follow the saved list for Tomato pasta. Your shopping limit is £64.00. Select only the missing quantities.",
+          "answer": [
+            1,
+            2,
+            0
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Compare each requested quantity with the cupboard or order. Build one item at a time.",
+          "example": "Need three tins and have one? Put two tins on the list.",
+          "hint": "Re-read the quantity beside each item, then check the total.",
+          "worked": "The list costs £2.35; £61.65 of the shopping limit remains.",
+          "effect": {},
+          "items": [
+            {
+              "name": "Pasta · 100 g pack",
+              "price": 65
+            },
+            {
+              "name": "Tomatoes · tin",
+              "price": 85
+            },
+            {
+              "name": "Cheese · 50 g pack",
+              "price": 90
+            }
+          ],
+          "budget": 6400
+        },
+        {
+          "venue": "market",
+          "title": "Pay for Tomato pasta",
+          "kind": "coins",
+          "prompt": "The Tomato pasta costs £2.35. Build the £5.00 payment.",
+          "answer": 500,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "p",
+          "skill": "town_money",
+          "teach": "Count in pence. £1 is 100p. Change is payment minus the bill.",
+          "example": "£5 paid for a £3.20 bill leaves £1.80 change.",
+          "hint": "Add the denominations in your tray and compare with the requested payment or change.",
+          "worked": "Make 500 pence with coins or notes.",
+          "effect": {}
+        },
+        {
+          "venue": "market",
+          "title": "Collect change",
+          "kind": "coins",
+          "prompt": "Paid £5.00 for £2.35. Build your change before leaving.",
+          "answer": 265,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "p",
+          "skill": "town_money",
+          "teach": "Count in pence. £1 is 100p. Change is payment minus the bill.",
+          "example": "£5 paid for a £3.20 bill leaves £1.80 change.",
+          "hint": "Add the denominations in your tray and compare with the requested payment or change.",
+          "worked": "£5.00 − £2.35 = £2.65.",
+          "effect": {
+            "spend": 235,
+            "add": {
+              "Pasta · 100 g pack": 1,
+              "Tomatoes · tin": 2,
+              "Cheese · 50 g pack": 0
+            },
+            "receipt": "Tomato pasta"
+          }
+        },
+        {
+          "venue": "station",
+          "title": "Return bus home",
+          "kind": "journey",
+          "prompt": "Return home by 10:05, with 5 minutes to walk. Current time 09:30. Choose the cheapest bus arriving in time.",
+          "answer": 2,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Add walking time to arrival before comparing the deadline. Then compare fares of the services that work.",
+          "example": "Arrive at 09:10 plus a 10-minute walk: reach the destination at 09:20.",
+          "hint": "Check arrival plus walking for each service. Pick the cheapest eligible fare.",
+          "worked": "Bus A costs £1.00; arrival plus walking is 10:00. Bus B misses the deadline and Express C costs more.",
+          "effect": {
+            "spend": 100,
+            "minutes": 30,
+            "receipt": "Bus fare to home",
+            "choice": "Bus A"
+          },
+          "options": [
+            {
+              "name": "Bus B",
+              "depart": 590,
+              "arrive": 610,
+              "price": 75
+            },
+            {
+              "name": "Express C",
+              "depart": 585,
+              "arrive": 590,
+              "price": 200
+            },
+            {
+              "name": "Bus A",
+              "depart": 580,
+              "arrive": 595,
+              "price": 100
+            }
+          ],
+          "walk": 5,
+          "deadline": 605
+        },
+        {
+          "venue": "home",
+          "title": "Unpack the recipe ingredients",
+          "kind": "match",
+          "prompt": "Match each ingredient to its required quantity before cooking.",
+          "answer": [
+            2,
+            1,
+            0
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Match the meaning and units of each label to its destination. Each label is used once.",
+          "example": "A 500 ml bottle matches half a litre.",
+          "hint": "Check each destination against the information in the task.",
+          "worked": "Pasta · 100 g pack → 2 × Pasta · 100 g pack; Tomatoes · tin → 2 × Tomatoes · tin; Cheese · 50 g pack → 1 × Cheese · 50 g pack",
+          "effect": {},
+          "items": [
+            "Pasta · 100 g pack",
+            "Tomatoes · tin",
+            "Cheese · 50 g pack"
+          ],
+          "labels": [
+            "1 × Cheese · 50 g pack",
+            "2 × Tomatoes · tin",
+            "2 × Pasta · 100 g pack"
+          ],
+          "instruction": "Tap a label, then its matching destination."
+        },
+        {
+          "venue": "home",
+          "title": "Prepare Tomato pasta",
+          "kind": "order",
+          "prompt": "Arrange the preparation stages for Tomato pasta. Your recipe says: Read the recipe; then Boil the pasta water; then Stir in tomatoes and cheese.",
+          "answer": [
+            1,
+            2,
+            0
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Put the actions into a sensible sequence. Explain what must happen before the next step.",
+          "example": "First read a list, then collect items, then pay.",
+          "hint": "Read the supplied sequence, then place each action in its position.",
+          "worked": "Read the recipe → Boil the pasta water → Stir in tomatoes and cheese",
+          "effect": {},
+          "items": [
+            "Stir in tomatoes and cheese",
+            "Read the recipe",
+            "Boil the pasta water"
+          ],
+          "instruction": "Arrange the preparation stages for Tomato pasta. Your recipe says: Read the recipe; then Boil the pasta water; then Stir in tomatoes and cheese."
+        },
+        {
+          "venue": "home",
+          "title": "Measure for Tomato pasta",
+          "kind": "measure",
+          "prompt": "For this Tomato pasta batch, measure 0.3 litres of water in the jug.",
+          "answer": 300,
+          "min": 0,
+          "max": 2500,
+          "step": 50,
+          "unit": "ml",
+          "skill": "town_money",
+          "teach": "Use the correct units and read the model from zero. One litre equals 1,000 ml; one metre equals 100 cm.",
+          "example": "0.25 litres is 250 ml. Half a metre is 50 cm.",
+          "hint": "Convert the requested quantity to the model’s units before adding or removing units.",
+          "worked": "0.3 × 1,000 = 300 ml.",
+          "effect": {}
+        },
+        {
+          "venue": "home",
+          "title": "Set the cooking finish time",
+          "kind": "clock",
+          "prompt": "Tomato pasta starts at 10:00. Cook for 12 minutes. Build the finishing time.",
+          "answer": 612,
+          "min": 0,
+          "max": 1439,
+          "step": 5,
+          "unit": "time",
+          "skill": "town_money",
+          "teach": "Add minutes to the starting time. Carry 60 minutes into the next hour.",
+          "example": "09:50 plus 20 minutes finishes at 10:10.",
+          "hint": "Find the starting time, add the duration, and check the hour change.",
+          "worked": "The clock should show 10:12.",
+          "effect": {
+            "minutes": 12,
+            "consume": {
+              "Pasta · 100 g pack": 2,
+              "Tomatoes · tin": 2,
+              "Cheese · 50 g pack": 1
+            }
+          }
+        },
+        {
+          "venue": "home",
+          "title": "Serve and tidy",
+          "kind": "order",
+          "prompt": "The Tomato pasta is ready. Order the finish: serve, store spares, then wash up.",
+          "answer": [
+            2,
+            0,
+            1
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Put the actions into a sensible sequence. Explain what must happen before the next step.",
+          "example": "First read a list, then collect items, then pay.",
+          "hint": "Read the supplied sequence, then place each action in its position.",
+          "worked": "Serve the meal → Put away spare ingredients → Wash the equipment",
+          "effect": {},
+          "items": [
+            "Put away spare ingredients",
+            "Wash the equipment",
+            "Serve the meal"
+          ],
+          "instruction": "The Tomato pasta is ready. Order the finish: serve, store spares, then wash up."
+        }
+      ],
+      "values": {
+        "parts": [
+          1,
+          0,
+          0
+        ]
+      },
+      "inventory": {
+        "Pasta · 100 g pack": 1,
+        "Tomatoes · tin": 0,
+        "Cheese · 50 g pack": 1
+      },
+      "shoppingList": {},
+      "cash": 6500,
+      "time": 540,
+      "savings": 0,
+      "receipts": [],
+      "completed": [],
+      "evidence": [],
+      "solved": false,
+      "assisted": false,
+      "feedback": "",
+      "done": false
+    }
+  },
+  "counts": {
+    "cook-pasta": 1
+  },
+  "active": "cook-pasta:1"
+}

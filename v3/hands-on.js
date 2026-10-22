@@ -230,10 +230,8 @@
       t.answer=originalAnswer.map(i=>permutation.indexOf(i));
     }
     if (t.kind === "order") {
-      t.teach =
-        "Compare values before ordering. For fractions, compare equal-sized wholes using common denominators or equivalent bars.";
-      t.example =
-        "One quarter is smaller than one half, which is smaller than three quarters.";
+      t.teach = world==='fractions'?'Compare equal-sized wholes using common denominators or equivalent fraction bars.':'Compare the numbers. Place the smallest first, then compare the remaining numbers.';
+      t.example = world==='fractions'?'For a different set: 2/7 is smaller than 5/7 because 2 is smaller than 5.':'For a different set: 101, 104, 103 becomes 101, 103, 104.';
       t.worked =
         "From smallest: " + t.answer.map((i) => t.items[i]).join(", ") + ".";
     }
@@ -246,31 +244,31 @@
             : "Half price means divide the original price by two. Work in pence and match the calculated price to each rail.";
       t.example =
         world === "fractions"
-          ? "One half is 0.5, or 50 percent."
+          ? "For a different fraction: 3/8 = 0.375 = 37.5 percent."
           : world === "ratio"
-            ? "Three batches using two scoops each need six scoops."
-            : "Half of £6 is £3.";
+            ? "Five batches using seven scoops each need 35 scoops."
+            : "Half of £23.50 is £11.75.";
       t.worked=t.items.map((item,i)=>item+' → '+t.labels[t.answer[i]]).join('; ')+'.';
     }
     if (t.kind === "array") {
       t.teach =
         "An array has equal-length rows. Number of rows times crates per row gives the total.";
-      t.example = "Two rows of three crates show 2 × 3 = 6.";
+      t.example = "One row of seven crates shows 1 × 7 = 7.";
     }
     if (t.kind === "chart") {
       t.teach =
         "The horizontal labels identify categories. Each vertical tick is one observation. Set each bar to the recorded count.";
-      t.example = "A count of four needs a bar reaching the tick marked 4.";
+      t.example = "On a separate survey, 13 responses would need a bar reaching 13.";
     }
     if (t.kind === "coordinate") {
       t.teach =
         "The x-axis runs horizontally and the y-axis vertically. Start at the origin. Negative x moves left; negative y moves down.";
-      t.example = "The point (−1, 2) is one step left and two steps up.";
+      t.example = "For a separate grid, (7, 6) is seven steps right and six steps up.";
     }
     if (t.kind === "angle") {
       t.teach =
         "Read degrees from zero on the right-hand baseline. A right angle is 90 degrees and a straight angle is 180.";
-      t.example = "An angle of 60 degrees is two thirds of a right angle.";
+      t.example = "A separate example: 25 degrees is just over one quarter of a right angle.";
     }
     if (world === "probability" && route === "1" && stage === 1) {
       const labels =
@@ -312,6 +310,9 @@
       };
     }
     t.hint = t.teach;
+    if(t.kind==='sequence')t.example='A separate train: 51, 54, 57. Each carriage adds 3, so connect 60 next.';
+    if(t.kind==='balance')t.example='A separate balance: 2x + 3 = 29. Remove 3, then share 26 between 2 boxes: x = 13.';
+    if(t.hint===t.teach)t.hint='Start with the known quantities and units. Which operation or placement does the task need?';
     t.interactionVersion = 1;
     return t;
   }
@@ -383,11 +384,34 @@
   function bars(parts, labels, max, act = "m-part") {
     return `<div class="construct-chart" role="group" aria-label="Build the chart"><div class="chart-scale" aria-hidden="true">${Array.from({ length: max + 1 }, (_, i) => `<span style="bottom:${(i / max) * 100}%">${i}</span>`).join("")}</div>${labels.map((label, i) => `<section><div class="chart-track"><div style="height:${((parts[i] || 0) / max) * 100}%"></div></div><strong>${esc(label)}: ${parts[i] || 0}</strong><div>${btn("−", `${act}:${i}:-1`, `aria-label="Remove one ${esc(label)}"`)}${btn("+", `${act}:${i}:1`, `aria-label="Add one ${esc(label)}"`)}</div></section>`).join("")}</div>`;
   }
+  function visualTool(q,t) {
+    const v=q.values.amount||0,parts=q.values.parts||[0,0,0];
+    const slider=(max,step=1,unit='')=>`<label class="model-slider">Move the ${t.kind==='measure'?'scale marker':'pointer'}<input type="range" min="${t.min||0}" max="${max}" step="${step}" value="${v}" data-model-range="m-value" aria-label="Set ${esc(unit||t.unit||'value')}" /><output>${v} ${esc(unit||t.unit||'')}</output></label>`;
+    if(t.kind==='clock') {
+      const hour=Math.floor(v/60),minute=v%60;
+      return `<div class="hands-on clock-workbench" data-mechanic="clock"><p>Tap an hour, then a minute mark. This clock uses 24-hour time.</p><div class="clock-face"><svg viewBox="0 0 260 260" role="img" aria-label="Clock showing ${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}"><circle cx="130" cy="130" r="112" fill="#f4efd9" stroke="#3a6040" stroke-width="6"/>${Array.from({length:12},(_,i)=>{const r=(i+1)*Math.PI/6;return `<text x="${130+91*Math.sin(r)}" y="${137-91*Math.cos(r)}" text-anchor="middle">${i+1}</text>`;}).join('')}<path d="M130 130l${52*Math.sin((hour%12+minute/60)*Math.PI/6)} ${-52*Math.cos((hour%12+minute/60)*Math.PI/6)}" stroke="#35543c" stroke-width="7"/><path d="M130 130l${78*Math.sin(minute*Math.PI/30)} ${-78*Math.cos(minute*Math.PI/30)}" stroke="#7b5830" stroke-width="4"/></svg><strong>${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}</strong></div><fieldset><legend>Hour</legend><div class="clock-marks">${Array.from({length:24},(_,h)=>btn(String(h).padStart(2,'0'),`m-value:${h*60+minute}`,`aria-label="Set hour ${h}" aria-pressed="${h===hour}"`)).join('')}</div></fieldset><fieldset><legend>Minute</legend><div class="clock-marks">${Array.from({length:12},(_,i)=>i*5).map(m=>btn(String(m).padStart(2,'0'),`m-value:${hour*60+m}`,`aria-label="Set minute ${m}" aria-pressed="${m===minute}"`)).join('')}</div></fieldset><div class="actions">${btn('One minute earlier',`m-value:${Math.max(0,v-1)}`)}${btn('One minute later',`m-value:${Math.min(1439,v+1)}`)}</div></div>`;
+    }
+    if(t.kind==='amount'&&t.unit&&t.unit!=='p')return `<div class="hands-on" data-mechanic="quantity-scale"><p>Move the marker to build your quantity in ${esc(t.unit)}.</p>${slider(Math.max(t.answer+10,Math.ceil(t.answer*1.5)),1,t.unit)}</div>`;
+    if(t.kind==='sequence') {
+      const choices=[...new Set([t.answer,...[-2,-1,1,2].map(n=>Math.max(0,Math.min(t.max,t.answer+n)))])];
+      const sorted=choices.map((n,i)=>({n,key:Math.sin(n*17+t.values[0]*13+i)*100})).sort((a,b)=>a.key-b.key);
+      return `<div class="hands-on train-yard" data-mechanic="sequence-rail"><p>Choose a loose carriage. Tap it to connect it at the end of the train.</p><div class="connected-train" aria-label="Connected train"><span class="train-engine" aria-hidden="true"><svg viewBox="0 0 90 70"><path d="M7 22h37v32H7ZM45 7h29v47H45ZM15 10h12v12H15Z" fill="#4b7744" stroke="#294d31" stroke-width="3"/><path d="M50 13h18v18H50Z" fill="#dce5bf"/><path d="M2 54h80l6 8H2Z" fill="#ad8c53"/><circle cx="20" cy="61" r="7" fill="#294336"/><circle cx="61" cy="61" r="7" fill="#294336"/></svg></span>${t.values.map(n=>`<span class="train-cart">${n}</span>`).join('')}<span class="train-cart train-slot" aria-label="Last connected carriage">${q.values.amount==null?'?':v}</span></div><div class="loose-carriages" role="group" aria-label="Loose train carriages">${sorted.map(({n})=>btn(`<span class="cart-body">${n}</span><span class="cart-wheels" aria-hidden="true">● &nbsp; ●</span>`,`m-value:${n}`,`class="train-cart" aria-pressed="${q.values.amount===n}" aria-label="Connect carriage ${n}"`)).join('')}</div></div>`;
+    }
+    if(t.kind==='array'||t.kind==='volume')return `<div class="hands-on" data-mechanic="${t.kind==='array'?'crate-array':'volume-layers'}"><p>Tap the far corner of your rectangle to build its rows and columns.</p><div class="build-array" role="group" aria-label="Build rows and columns">${Array.from({length:81},(_,i)=>{const r=Math.floor(i/9)+1,c=i%9+1;return btn('▣',`m-array:${r}:${c}`,`aria-label="Build ${r} rows and ${c} columns" aria-pressed="${r<=parts[0]&&c<=parts[1]}"`);}).join('')}</div>${t.kind==='volume'?`<p>Choose the number of layers.</p><div class="layer-rack">${Array.from({length:9},(_,i)=>btn(`${i+1} layers`,`m-layer:${i+1}`,`aria-pressed="${parts[2]===i+1}"`)).join('')}</div>`:''}<output>${parts[0]||0} rows × ${parts[1]||0} columns${t.kind==='volume'?' × '+(parts[2]||0)+' layers':''} = ${(parts[0]||0)*(parts[1]||0)*(t.kind==='volume'?parts[2]||0:1)} unit blocks</output></div>`;
+    if(t.kind==='chart')return `<div class="hands-on" data-mechanic="bar-chart"><p>Tap a height in each column to construct the chart.</p><div class="tap-chart" role="group" aria-label="Construct a bar chart">${t.labels.map((label,i)=>`<section><strong>${esc(label)}</strong><div class="tap-chart-column">${Array.from({length:t.max+1},(_,n)=>t.max-n).map(n=>btn(String(n),`m-chart:${i}:${n}`,`aria-label="Set ${esc(label)} to ${n}" aria-pressed="${(parts[i]||0)>=n}"`)).join('')}</div></section>`).join('')}</div></div>`;
+    if(t.kind==='measure')return `<div class="hands-on" data-mechanic="${t.unit==='ml'?'pouring':'ruler'}"><p>${t.unit==='ml'?'Move the marker to fill the jug.':'Move the marker to set the end of the measured strip.'}</p>${t.unit==='ml'?`<div class="pour-model"><div class="pour-vessel" role="img" aria-label="Jug contains ${v} ml"><div style="height:${v/t.max*100}%"></div>${[0,1,2,3,4].map(i=>`<span style="bottom:${i*24}%">${Math.round(i*t.max/4)} ml</span>`).join('')}</div></div>`:`<div class="touch-ruler" role="img" aria-label="Strip length ${v} ${esc(t.unit)}"><div style="width:${v/t.max*100}%"></div>${[0,1,2,3,4].map(i=>`<span>${i*t.max/4}</span>`).join('')}</div>`}${slider(t.max,t.step||1,t.unit)}<div class="scale-stops">${Array.from({length:5},(_,i)=>Math.round(t.max*i/4/(t.step||1))*(t.step||1)).filter((n,i,a)=>a.indexOf(n)===i&&n<=t.max).map(n=>btn(n+' '+esc(t.unit),`m-value:${n}`)).join('')}</div></div>`;
+    if(t.kind==='balance')return `<div class="hands-on" data-mechanic="tile-balance"><p>Select a unit bundle to place in every x box. Make the two pans equal.</p><div class="physical-balance"><div class="balance-pan">${Array.from({length:t.coefficient},()=>`<span class="unit-bundle">${'▪'.repeat(v)}<b>x = ${v}</b></span>`).join('')}<span>+ ${t.add} fixed units</span></div><span class="balance-beam" aria-hidden="true">⚖</span><div class="balance-pan">${t.total} units</div></div><div class="bundle-rack" role="group" aria-label="Unit bundles">${Array.from({length:(t.max??12)+1},(_,n)=>btn(`<span aria-hidden="true">${'▪'.repeat(n)||'□'}</span><b>${n} units</b>`,`m-value:${n}`,`aria-pressed="${q.values.amount===n}" aria-label="Place bundle of ${n} units"`)).join('')}</div></div>`;
+    if(t.kind==='ratio')return `<div class="hands-on" data-mechanic="ratio-packs"><p>Tap a blue supply position to build that many blue crates. Compare them with the green supplies.</p><div class="ratio-packs"><section><strong>Green supplies: ${t.green}</strong><div>${'<i>▣</i>'.repeat(t.green)}</div></section><section><strong>Blue supplies: ${v}</strong><div class="crate-tray">${Array.from({length:t.max||30},(_,i)=>btn('▣',`m-value:${i+1}`,`aria-label="Place ${i+1} blue crates" aria-pressed="${i<v}"`)).join('')}</div>${btn('Empty blue tray','m-value:0')}</section></div></div>`;
+    if(t.kind==='bars')return `<div class="hands-on" data-mechanic="bar-chart"><p>Build one equal-height mean bar from the recorded counts.</p><div class="puzzle-bars" role="img" aria-label="Recorded counts ${t.values.join(', ')} and your mean ${v}">${[...t.values,v].map(n=>`<span style="height:${Math.max(24,n*8)}px">${n}</span>`).join('')}</div>${slider(t.max,1,'units')}</div>`;
+    if(t.kind==='angle')return `<div class="hands-on" data-mechanic="protractor"><svg viewBox="0 0 400 230" role="img" aria-label="Angle ${v} degrees"><path d="M30 200a170 170 0 0 1 340 0H30" fill="#e5ebd5" stroke="#36573e"/><path d="M370 200H200l${160*Math.cos(v*Math.PI/180)} ${-160*Math.sin(v*Math.PI/180)}" fill="none" stroke="#34563e" stroke-width="5"/><text x="200" y="70">${v}°</text></svg>${slider(180,1,'degrees')}</div>`;
+    return null;
+  }
   function render(q, t) {
     const v = q.values.amount || 0,
       parts = q.values.parts || [0, 0, 0],
       kind = mechanic(t, q.world, q.route);
     let body = "";
+    const tool=visualTool(q,t);if(tool)return tool;
     if (t.kind === "coordinate")
       return (
         '<div class="hands-on" data-mechanic="cartesian">' +
@@ -399,7 +423,9 @@
     } else if (t.kind === "order" || t.kind === "match") {
       const order = q.values.order || [],
         picked = q.values.picked;
-      body = `<p>${esc(t.instruction || (t.kind === "order" ? "Tap a label, then a position. Order from smallest to largest." : "Tap a price or quantity, then its matching destination."))} Every label is used once.</p><div class="label-supply">${(t.labels || t.items).map((label, i) => btn(esc(label) + (/^\d+\/\d+$/.test(label) ? `<span class="fraction-mini" aria-hidden="true"><i style="width:${(label.split("/")[0] / label.split("/")[1]) * 100}%"></i></span>` : ""), `h-pick:${i}`, `aria-pressed="${picked === i}" class="movable-label"`)).join("")}</div><div class="label-destinations">${t.items.map((label, i) => `<section><strong>${t.kind === "match" ? esc(label) : "Position " + (i + 1)}</strong>${btn(order[i] == null ? "Place selected label" : esc((t.labels || t.items)[order[i]]), `h-place:${i}`, `aria-label="Place label in position ${i + 1}" data-placed="${order[i]!=null}"`)}</section>`).join("")}</div>${btn("Clear placements", "h-clear")}`;
+      const labels=t.labels||t.items,display=labels.map((_,i)=>i).sort((a,b)=>Math.sin((a+1)*73+t.prompt.length)-Math.sin((b+1)*73+t.prompt.length));
+      if(display.every((x,i)=>x===t.answer[i]))display.push(display.shift());
+      body = `<p>${esc(t.instruction || (t.kind === "order" ? "Tap a label, then a position. Order from smallest to largest." : "Tap a price or quantity, then its matching destination."))} Every label is used once.</p><div class="label-supply">${display.map((i) => {const label=labels[i];return btn(esc(label) + (/^\d+\/\d+$/.test(label) ? `<span class="fraction-mini" aria-hidden="true"><i style="width:${(label.split("/")[0] / label.split("/")[1]) * 100}%"></i></span>` : ""), `h-pick:${i}`, `aria-pressed="${picked === i}" class="movable-label"`);}).join("")}</div><div class="label-destinations">${t.items.map((label, i) => `<section><strong>${t.kind === "match" ? esc(label) : "Position " + (i + 1)}</strong>${btn(order[i] == null ? "Place selected label" : esc((t.labels || t.items)[order[i]]), `h-place:${i}`, `aria-label="Place label in position ${i + 1}" data-placed="${order[i]!=null}"`)}</section>`).join("")}</div>${btn("Clear placements", "h-clear")}`;
     } else if (t.kind === "array" || t.kind === "volume") {
       body = `<p>Build rows and columns; the total follows your arrangement.</p><div class="array-controls">${(t.kind === "volume" ? ["Rows", "Columns", "Layers"] : ["Rows", "Columns"]).map((x, i) => `<div><strong>${x}: ${parts[i] || 0}</strong>${btn("−", `m-part:${i}:-1`, `aria-label="Remove one ${x.toLowerCase()}"`)}${btn("+", `m-part:${i}:1`, `aria-label="Add one ${x.toLowerCase()}"`)}</div>`).join("")}</div>${t.kind === "volume" ? "<p class=small>Footprint of one layer</p>" : ""}<div class="crate-array" role="img" style="grid-template-columns:repeat(${Math.max(1, parts[1] || 0)},26px)" aria-label="${parts[0] || 0} rows of ${parts[1] || 0} crates">${"<span>▣</span>".repeat((parts[0] || 0) * (parts[1] || 0))}</div>${t.kind === "volume" ? `<div class="volume-layers">${Array.from({ length: parts[2] || 0 }, (_, i) => `<section><strong>Layer ${i + 1}</strong><div class="crate-array" style="grid-template-columns:repeat(${Math.max(1, parts[1] || 0)},20px)">${"<span>▣</span>".repeat((parts[0] || 0) * (parts[1] || 0))}</div></section>`).join("")}</div>` : ""}<p>Total: ${(parts[0] || 0) * (parts[1] || 0) * (t.kind === "volume" ? parts[2] || 0 : 1)} ${t.kind === "volume" ? "cubic units" : "crates"}.</p>`;
     } else if (t.kind === "chart") body = bars(parts, t.labels, t.max);
@@ -566,10 +592,10 @@
   }
   const isHandsOn = (t, w, r) => {
     const m = mechanic(t, w, r);
-    return !!m && !["clock", "sequence-rail", "budget"].includes(m);
+    return !!m && !["clock", "budget"].includes(m);
   };
   root.V5HandsOn = {
-    numericValue, numericMessage, numericInput, invalidDraft, sharing,
+    numericValue, numericMessage, numericInput, invalidDraft, sharing, visualTool,
     isHandsOn,
     enrich,
     mechanic,

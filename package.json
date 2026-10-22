@@ -35,7 +35,8 @@
     "test:staging-preserve": "node tests/v52-staging-preserve.cjs",
     "test:staging-preserve-db": "node tests/v52-staging-preserve-postgres.cjs",
     "test:town": "node tests/town-life.cjs",
-    "test:town-browser": "node tests/prepare-v3.cjs && playwright test --config=playwright.town-life.config.cjs"
+    "test:town-browser": "node tests/prepare-v3.cjs && playwright test --config=playwright.town-life.config.cjs",
+    "test:gameplay-quality": "node tests/gameplay-quality.cjs && node tests/town-life.cjs && node tests/v5-hands-on.cjs && node tests/prepare-v3.cjs && playwright test --config playwright.quality.config.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

@@ -1,0 +1,46 @@
+{
+  "scope": "Development only; offline and intercepted synthetic fixtures",
+  "releaseUnchanged": "2d9cb055cbdda766349189a7f1017b31948d83e4",
+  "fullRepresentativeBrowserRun": {
+    "passed": 32,
+    "failed": 0,
+    "orientations": [
+      "820×1180",
+      "1180×820"
+    ],
+    "engine": "Chromium with touch"
+  },
+  "finalLunchRefinement": {
+    "passed": 2,
+    "failed": 0
+  },
+  "rangeAndCrossTabFollowup": {
+    "passed": 6,
+    "failed": 0
+  },
+  "logic": {
+    "townPlans": 27,
+    "tiers": 3,
+    "seeds": [
+      1,
+      2,
+      7
+    ],
+    "lunchBranches": 27,
+    "orderingDisplays": 21,
+    "legacyV1": true,
+    "legacyV2": true,
+    "liveWrites": 0
+  },
+  "handsOn": {
+    "groups": 14,
+    "generatedSteps": 1107
+  },
+  "screenshotsInspected": [
+    "train",
+    "Bolognese kitchen",
+    "lunch supermarket"
+  ],
+  "physicalSafari": false,
+  "hostedWrites": 0
+}

@@ -883,9 +883,10 @@
     const q = current(s);
     if (!q || q.solved) return;
     q.assisted = true;
+    q.hintLevel ||= 0;
     q.feedback = worked
       ? "Let’s work through it. " + q.tasks[q.i].worked
-      : q.tasks[q.i].hint;
+      : (++q.hintLevel>2?q.tasks[q.i].worked:q.hintLevel===2?q.tasks[q.i].teach:q.tasks[q.i].hint);
   }
   function submit(s) {
     const q = current(s);
@@ -896,7 +897,7 @@
     if(!evidence.some(e=>e.step===q.i)) evidence.push({step:q.i,skill:t.skill,mechanic:H.mechanic(t,q.world,q.route),firstValue:copy(value(q,t)),correct:correct(q,t),assisted:q.assisted,source:'guided-adventure'});
     if (!correct(q, t)) {
       q.assisted = true;
-      q.feedback = "Let’s adjust this together. " + t.worked;
+      q.feedback = "Not yet. " + t.hint;
       return false;
     }
     q.solved = true;
@@ -914,7 +915,7 @@
       q.values = {};
       q.assisted = false;
       q.solved = false;
-      q.feedback = "";
+      q.feedback = "";q.hintLevel=0;
       return false;
     }
     const old = a.records[q.key],

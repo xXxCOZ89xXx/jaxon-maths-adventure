@@ -487,8 +487,18 @@
   function product(name, i=0) {
     let body;
     if (/apple|fruit/i.test(name)) body = '<path d="M40 30q-25-17-29 9-3 26 25 28 26 4 29-23 2-26-25-14" fill="#b96c4c"/><path d="M40 31l4-17" stroke="#776542" stroke-width="5"/><path d="M45 23q19-21 24-6-10 14-24 6" fill="#708e51"/><path d="M22 39v12" stroke="#df9870" stroke-width="5"/>';
+    else if (/pear/i.test(name)) body='<path d="M34 12h12l3 17 13 15v17H18V44l13-15Z" fill="#a7b76c" stroke="#657b43" stroke-width="3"/><path d="M39 12l5-8" stroke="#79623e" stroke-width="4"/>';
+    else if (/potato/i.test(name)) body='<path d="M12 31l15-13h29l13 16v26l-15 8H26L12 55Z" fill="#bb9b68" stroke="#806440" stroke-width="3"/><path d="M26 30h5m15 11h5m-23 10h5m18 8h5" stroke="#7b6949" stroke-width="4"/>';
+    else if (/biscuit|chocolate|popcorn/i.test(name)) body='<path d="M15 18h50v48H15Z" fill="#ae7852" stroke="#73563e" stroke-width="3"/><path d="M15 32h50m-50 16h50m-34-30v48m17-48v48" stroke="#e8c995" stroke-width="3"/>';
     else if (/milk/i.test(name)) body = '<path d="M24 26l8-15h20l9 15v44H24Z" fill="#f0e8ca" stroke="#7a9b98" stroke-width="2"/><path d="M24 27h37v12H24zM30 48h25v16H30z" fill="#86afa8"/><path d="M32 11v16h20V11" fill="#d3dbc6"/>';
     else if (/bread|loaf/i.test(name)) body = '<path d="M12 40q0-24 28-24t28 24v26H12Z" fill="#bc8e56"/><path d="M19 41q0-17 21-17t21 17v18H19Z" fill="#e3bd7d"/><path d="M28 27l-6 15m20-17-7 17m20-13-7 15" stroke="#a47744" stroke-width="3"/>';
+    else if (/pasta|spaghetti|rice|flour|oats|lentils/i.test(name)) body='<path d="M21 10h38l5 60H16Z" fill="#e9d8a8" stroke="#6e7650" stroke-width="3"/><path d="M27 26h26v27H27Z" fill="#e3bf67"/>'+Array.from({length:5},(_,i)=>`<path d="M${30+i*4} 29v20" stroke="#9d813a" stroke-width="2"/>`).join('')+'<path d="M23 13h34" stroke="#46714b" stroke-width="6"/>';
+    else if (/tomato|sauce|chickpea|stock|passata|soup/i.test(name)) body='<path d="M21 17h38v50H21Z" fill="#c6cbb3" stroke="#6c7b63" stroke-width="3"/><ellipse cx="40" cy="17" rx="19" ry="6" fill="#ece6c9" stroke="#6c7b63" stroke-width="3"/><path d="M22 30h36v26H22Z" fill="#b66448"/><path d="M34 38h12v12H34Z" fill="#e9cc8c"/><path d="M25 64h30" stroke="#8a977d" stroke-width="3"/>';
+    else if (/cheese/i.test(name)) body='<path d="M12 49l39-30 17 36-38 14Z" fill="#e3bd63" stroke="#9c7c3d" stroke-width="3"/><path d="M12 49l18 20v-22l21-28" fill="#f3d58b"/><circle cx="44" cy="45" r="5" fill="#b99443"/><circle cx="54" cy="54" r="4" fill="#b99443"/>';
+    else if (/mince/i.test(name)) body='<path d="M12 25h56v40H12Z" fill="#e2ddc9" stroke="#7f8b76" stroke-width="3"/><path d="M18 31h44v24H18Z" fill="#b88073"/><path d="M21 36h38m-38 7h38m-38 7h38" stroke="#e1ad98" stroke-width="3"/>';
+    else if (/banana/i.test(name)) body='<path d="M16 20q0 38 44 32-26 30-45-1-9-16 1-31" fill="#e5c66b" stroke="#9b8045" stroke-width="3"/>';
+    else if (/carrot|pepper/i.test(name)) body='<path d="M22 30l34-8-15 47Z" fill="#cf8e52" stroke="#94603d" stroke-width="3"/><path d="M30 27l-4-18m9 15 9-16m-5 14 17-8" stroke="#61834c" stroke-width="6"/>';
+    else if (/base|wrap|roll/i.test(name)) body='<path d="M14 29h52v29H14Z" fill="#d7b47a" stroke="#9e7b4e" stroke-width="3"/><path d="M18 32h44m-44 9h44m-44 9h44" stroke="#f0d59d" stroke-width="4"/>';
     else body = block(40,57,23,14,28,["#9ba86e","#b6805b","#8aa7a2"][i%3],"#e7d19c") + '<path d="M31 24h18v18H31z" fill="#e8ddba"/>';
     return '<svg class="product-image" viewBox="0 0 80 80" aria-hidden="true">'+body+'</svg>';
   }

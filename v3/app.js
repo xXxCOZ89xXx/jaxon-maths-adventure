@@ -195,6 +195,10 @@
       ui = `<div class="puzzle-bars" role="img" aria-label="Left neighbourhood: ${p.values.join(" plus ")}. Right neighbourhood: two bars each ${q.value}.">${[...p.values, q.value, q.value].map((v, i) => `<span style="height:${v * 12}px;${i === 2 ? "margin-left:25px" : ""}">${v}</span>`).join("")}</div>${stepper(q, p)}<p class="small muted">Left: ${p.values.join(" + ")}. Adjust both right-hand bars together.</p>`;
     if (p.kind === "measure")
       ui = `<div class="ruler" aria-hidden="true">${[0, 100, 200, 300, 400, 500].map((v) => "<span>" + v + "</span>").join("")}</div><div style="height:14px;background:#72976c;width:${q.value / 5}%;max-width:100%"></div>${stepper(q, p, " cm")}`;
+    if(['balance','ratio','bars','measure'].includes(p.kind)){
+      const spec={...p,unit:p.kind==='measure'?'cm':p.unit,...(p.kind==='balance'?{coefficient:1,add:q.i+3,total:q.i+8}:{})};
+      ui=window.V5HandsOn.visualTool({values:{amount:q.value}},spec).replaceAll('data-action="m-value:', 'data-action="value:');
+    }
     return `<div class="puzzle"><div class="eyebrow">PUZZLE ${q.i + 1} / 3 · ${esc(E.worlds.find((w) => w.id === q.world).stages[q.i])}</div><h2>${esc(p.prompt)}</h2><div ${q.solved ? "inert" : ""}>${ui}</div></div>`;
   }
   function quest() {
@@ -229,13 +233,13 @@
   function townLife(j){
     const t=j.task,q={world:'town',route:j.venue,values:j.values,solved:j.solved};
     const controls=t?U.controls(q,t).replaceAll('data-action="m-','data-action="j-').replaceAll('data-action="h-','data-action="j-').replaceAll('mission-amount','journey-amount').replaceAll('mission-number-help','journey-number-help').replace('data-numeric-answer="mission"','data-numeric-answer="journey"').replace('data-mission-clock="true"','data-life-clock="true"'):'';
-    return `${header(j.category+' · LEVEL '+j.tier,esc(j.name),'world')}${locationTrail(j)}<div class="journey-progress panel"><p>Stage ${Math.min(j.stage+1,j.steps.length)} / ${j.steps.length} · ${esc(j.context.role)} context · ${T.clock(j.time)} · pretend cash ${T.money(j.cash)} · savings plan ${T.money(j.savings)}</p><p>List: ${Object.entries(j.shoppingList).map(([k,v])=>esc(k)+' × '+v).join(' · ')||'No shopping needed yet'}</p><p>Inventory: ${Object.entries(j.inventory).map(([k,v])=>esc(k)+' × '+v).join(' · ')||'Nothing carried yet'}</p><details><summary>Receipts · ${j.receipts.length}</summary><ul>${j.receipts.map(r=>`<li>${esc(r.label)} · ${T.clock(r.time)} · paid ${T.money(r.spent)} · received ${T.money(r.earned)}${r.sale?' · customer sale '+T.money(r.sale):''}${r.saved?' · moved to savings '+T.money(r.saved):''}${Object.keys(r.items||{}).length?' · '+Object.entries(r.items).map(([k,v])=>esc(k)+' × '+v).join(', '):''}${r.choice?' · '+esc(r.choice):''}</li>`).join('')}</ul></details><p class="small">Fictional Town cash. Learning coins, mastery and parent rewards stay separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Ellis')}<p>${esc(j.context.objective)}</p></div></aside><section class="panel stage-workbench">${j.done?`<div class="town-complete"><h2>Town plan complete.</h2><p>You finished ${esc(j.name)}. Your receipts and decisions are saved. Replay starts a fresh day with different values and keeps this completed day.</p><div class="actions">${btn('Try another day','j-replay:'+j.scenario,'primary')}${btn('Choose another Town plan','world:town')}</div></div>`:`<h2>${esc(j.title)}</h2><p class="town-task-prompt">${esc(t.prompt)}</p><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${controls}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===j.steps.length-1?'Complete Town plan':'Continue plan','j-next','primary'):btn('Try my plan','j-submit','primary')}${btn('Hint','j-help')}${btn('I don’t know','j-skip')}${btn('Save & exit','nav:home')}${btn('Choose a different plan','world:town')}</div>`}</section></div>`;
+    return `${header(j.category+' · LEVEL '+j.tier,esc(j.name),'world')}${locationTrail(j)}<div class="journey-progress panel"><p>Stage ${Math.min(j.stage+1,j.steps.length)} / ${j.steps.length} · ${esc(j.context.role)} context · ${T.clock(j.time)} · pretend cash ${t?.title==='Count your remaining cash'?'use your receipts':T.money(j.cash)} · savings plan ${T.money(j.savings)}</p><p>List: ${Object.entries(j.shoppingList).map(([k,v])=>esc(k)+' × '+v).join(' · ')||'No shopping needed yet'}</p><details><summary>Carried inventory</summary><p>${Object.entries(j.inventory).map(([k,v])=>esc(k)+' × '+v).join(' · ')||'Nothing carried yet'}</p></details><details><summary>Receipts · ${j.receipts.length}</summary><ul>${j.receipts.map(r=>`<li>${esc(r.label)} · ${T.clock(r.time)} · paid ${T.money(r.spent)} · received ${T.money(r.earned)}${r.sale?' · customer sale '+T.money(r.sale):''}${r.saved?' · moved to savings '+T.money(r.saved):''}${Object.keys(r.items||{}).length?' · '+Object.entries(r.items).map(([k,v])=>esc(k)+' × '+v).join(', '):''}${r.choice?' · '+esc(r.choice):''}</li>`).join('')}</ul></details><p class="small">Fictional Town cash. Learning coins, mastery and parent rewards stay separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Ellis')}<p>${esc(j.context.objective)}</p></div></aside><section class="panel stage-workbench">${j.done?`<div class="town-complete"><h2>Town plan complete.</h2><p>You finished ${esc(j.name)}. Your receipts and decisions are saved. Replay starts a fresh day with different values and keeps this completed day.</p><div class="actions">${btn('Try another day',j.originalRecipe?'j-start:'+j.originalRecipe:'j-replay:'+j.scenario,'primary')}${btn('Choose another Town plan','world:town')}</div></div>`:`<h2>${esc(j.title)}</h2>${U.recipe(j.recipeCard)}<p class="town-task-prompt">${esc(t.prompt)}</p><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${controls}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===j.steps.length-1?'Complete Town plan':'Continue plan','j-next','primary'):btn('Check answer','j-submit','primary')}${btn('Hint','j-help')}${btn('I don’t know','j-skip')}${btn('Save & exit','nav:home')}${btn('Choose a different plan','world:town')}</div>`}</section></div>`;
   }
   function journey(){
     const J=window.V5Journey,j=J.model(s);if(!j)return `<section class="panel"><h1>This journey needs another look.</h1><p>The saved copy has been preserved. Other learning remains available.</p>${btn('Back home','nav:home')}</section>`;
     if(j.version===2)return townLife(j);
     const t=j.task,q={world:'town',route:j.venue,values:j.values,solved:j.solved},role=j.context.role;
-    return `${header('ADVENTURE JOURNEY · '+j.recipeName,esc(j.title),'world')}<div class="journey-progress"><p>Step ${Math.min(8,j.stage+1)} of 8 · ${esc(role)} context · cash ${T.money(j.cash)}</p><p>Shopping list: ${j.shoppingList?`pasta ${j.shoppingList[0]} packs · tomatoes ${j.shoppingList[1]} tins · protein ${j.shoppingList[2]} packs`:'not prepared yet'} · Inventory: pasta ${j.inventory[0]} packs · tomatoes ${j.inventory[1]} tins · protein ${j.inventory[2]} packs</p><p class="small">Fictional journey inventory and money. Your learning coins and mastery are separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Jess')}<p>Your same Town, seen through a different role.</p></div></aside><section class="panel stage-workbench">${j.done?`<h2>The recipe is ready.</h2><p>Your shopping, change and cooking were saved together. Reopening this journey cannot repeat a payment or consume ingredients again.</p>${btn('Back to Town','world:town','primary')}`:`<h2>${esc(t.prompt)}</h2><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${U.controls(q,t).replaceAll('data-action="m-','data-action="j-').replaceAll('mission-amount','journey-amount').replaceAll('mission-number-help','journey-number-help').replace('data-numeric-answer="mission"','data-numeric-answer="journey"')}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===7?'Prepare dinner':'Continue journey','j-next','primary'):btn('Try my plan','j-submit','primary')}${btn('Hint','j-help')}${btn('I don’t know','j-skip')}${btn('Save & exit','nav:home')}</div>`}</section></div>`;
+    return `${header('ADVENTURE JOURNEY · '+j.recipeName,esc(j.title),'world')}<div class="journey-progress"><p>Step ${Math.min(8,j.stage+1)} of 8 · ${esc(role)} context · cash ${T.money(j.cash)}</p><p>Shopping list: ${j.shoppingList?`pasta ${j.shoppingList[0]} packs · tomatoes ${j.shoppingList[1]} tins · protein ${j.shoppingList[2]} packs`:'not prepared yet'} · Inventory: pasta ${j.inventory[0]} packs · tomatoes ${j.inventory[1]} tins · protein ${j.inventory[2]} packs</p><p class="small">Fictional journey inventory and money. Your learning coins and mastery are separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Jess')}<p>Your same Town, seen through a different role.</p></div></aside><section class="panel stage-workbench">${j.done?`<h2>The recipe is ready.</h2><p>Your shopping, change and cooking were saved together. Reopening this journey cannot repeat a payment or consume ingredients again.</p>${btn('Back to Town','world:town','primary')}`:`<h2>${esc(t.prompt)}</h2><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${U.controls(q,t).replaceAll('data-action="m-','data-action="j-').replaceAll('mission-amount','journey-amount').replaceAll('mission-number-help','journey-number-help').replace('data-numeric-answer="mission"','data-numeric-answer="journey"')}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===7?'Prepare dinner':'Continue journey','j-next','primary'):btn('Check answer','j-submit','primary')}${btn('Hint','j-help')}${btn('I don’t know','j-skip')}${btn('Save & exit','nav:home')}</div>`}</section></div>`;
   }
   function recap() {
     const r = s.lastResult;
@@ -442,7 +446,7 @@
     await change(() => {
       if(name==='j-work'){const tier=Number(action.split(':')[2])||M.recommendation(s,'town');if(!window.V52TownLife.start(s,'job-'+arg,tier))error='This saved Town plan needs another look. It has been preserved.';return;}
       if(name==='j-plan'||name==='j-replay'){const tier=M.state(s).difficulty.town||M.recommendation(s,'town');if(!window.V52TownLife.start(s,arg,tier,name==='j-replay'))error='This saved Town plan needs another look. It has been preserved.';return;}
-      if(name==='j-start'){M.state(s);if(!window.V5Journey.start(s,arg))error='This saved journey cannot be opened; its original data has been preserved.';return;}
+      if(name==='j-start'){M.state(s);if(!window.V5Journey.start(s,arg,M.state(s).difficulty.town||M.recommendation(s,'town')))error='This saved journey cannot be opened; its original data has been preserved.';return;}
       if(name.startsWith('j-')){window.V5Journey.action(s,name,arg,action);return;}
       switch (name) {
         case "nav":
@@ -523,6 +527,15 @@
               ),
             );
           break;
+        }
+        case "m-array": {
+          const q=M.current(s),bits=action.split(':');if(q)M.edit(s,'parts',[Number(bits[1]),Number(bits[2]),q.values.parts?.[2]||0]);break;
+        }
+        case "m-layer": {
+          const q=M.current(s);if(q)M.edit(s,'parts',[q.values.parts?.[0]||0,q.values.parts?.[1]||0,Number(arg)]);break;
+        }
+        case "m-chart": {
+          const q=M.current(s),bits=action.split(':');if(q){const parts=[...(q.values.parts||[0,0,0])];parts[Number(bits[1])]=Number(bits[2]);M.edit(s,'parts',parts);}break;
         }
         case "m-part": {
           const q = M.current(s),
@@ -776,7 +789,7 @@
         "part",
         "rotate",
         "h-place", "h-clear", "p5-add", "p5-value", "p5-shade", "p5-submit",
-        "m-point",
+        "m-point", "m-array", "m-layer", "m-chart",
         "solve",
         "hint",
         "skip",
@@ -803,6 +816,22 @@
     if (!meaningful) activity = 0;
     else if (previous !== evidence()) activity = Date.now();
   });
+  document.addEventListener('change',async e=>{
+    const input=e.target;if(!input.matches('[data-model-range]'))return;
+    const view=s.view,n=Number(input.value),get=()=>view==='journey'?window.V5Journey.state(s):view==='quest'?s.quest:M.current(s),q=get();
+    if(!q||!Number.isInteger(n))return;
+    const stamp=x=>JSON.stringify([x?.key||x?.id||x?.world,x?.i??x?.stage,x?.seed,x?.round]),original=stamp(q);let applied=false;
+    await change(()=>{
+      const current=get();if(s.view!==view||!current||stamp(current)!==original||current.solved||current.answered)return;
+      const before=JSON.stringify(current);
+      if(view==='journey')window.V5Journey.action(s,'j-value',String(n));
+      else if(view==='quest'){const p=E.puzzle(current.world,current.i);if(n<(p.min||0)||n>p.max)return;current.value=n;delete current.amountDraft;}
+      else M.edit(s,'amount',n);
+      applied=JSON.stringify(current)!==before;if(applied)activity=Date.now();
+    });
+    if(applied)document.querySelector('[data-model-range]')?.focus({preventScroll:true});
+  });
+  document.addEventListener('input',e=>{if(e.target.matches('[data-model-range]')){const out=e.target.parentElement.querySelector('output');if(out)out.textContent=e.target.value;}});
   document.addEventListener('keydown',e=>{
     if(e.key==='Enter' && e.target.dataset.numericAnswer) {
       e.preventDefault();

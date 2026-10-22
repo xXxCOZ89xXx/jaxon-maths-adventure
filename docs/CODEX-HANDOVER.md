@@ -1,5 +1,18 @@
 # Codex handover — V5.1 usability and automated regression
 
+## Gameplay quality overhaul — development only, 22 October 2026
+
+The owner confirms the current Cloudflare game works and saves on the physical iPad. Its published release remains `2d9cb055cbdda766349189a7f1017b31948d83e4`, on `release/ipad`, at https://jaxon-maths-private-git.pages.dev. Do not promote or deploy this continuation without separate approval. The owner’s latest gameplay request supersedes the freeze for development only.
+
+Implemented contextual generation for all 27 Town plans in `v3/town-content.js`. New original Bolognese/lentil starts use full recipe journeys. Unfinished V1 journeys and actual pre-overhaul V2 snapshots retain their existing tasks and values until completion. All nine worlds and 55 skills remain. Recipe cards, visual stock/list/shelves, meals' own preparation/methods/measurements/supplied temperatures/times, bus returns, payment/change, three branching £12 lunches with out-of-stock substitutes, contextual worker cash, and receipt reconciliation use the existing progress JSON and save queue. No reward calculations, cloud/auth/PIN modules, schemas, production files or storage namespaces were changed.
+
+Interactive controls now include connected train carriages, balance bundles, tap-built arrays/layers and charts, supply crates, jug/ruler scales and clock faces. Ordering/matching presentation cannot start with the complete correct permutation; new prompts no longer recite their own ordering answers. Teaching and wrong-answer feedback are separate from worked solutions; hints become more explicit. Missions/journeys have one `Check answer` action. There was no literal `Try Plan Check` control in the source; this replaces the ambiguous plan label and removes duplicate scalar editors from visual models.
+
+Verification: 27 plans × 3 tiers × 3 replay seeds (1,983 stages), all three lunch branches at those tiers/seeds, 21 ordering/matching displays, old V1/V2 preservation, cash/receipts/inventory invariants, and existing 14 hands-on logic groups (1,107 generated steps). Focused Chromium touch-browser checks passed in both iPad orientations: 32 full representative cases, plus targeted lunch refinement and range/cross-tab checks. Mocked cloud queue tests retained the original immutable pending request through offline edits and reconnect. Screenshots inspected locally. This is not physical Safari certification; no broad infrastructure/security/SQL suites or live account writes were performed.
+
+Read `docs/GAMEPLAY-QUALITY-REVIEW.md` for the pre-code inventory, changes and remaining simplifications. Run `npm run test:gameplay-quality` for the focused synthetic checks. The offline `preview-dist/PLAY-V3.html` is an optional local review artifact, not a published release. Next owner action: review the development changes and approve a protected preview before any release promotion.
+
+
 ## Final visual polish — feature freeze, 22 October 2026
 
 Continued from `e733b38`. Presentation-only polish: colour-framed world artwork and landmark markers, Town building previews and explicit customer/employee labels, location-arrival strip, larger selected/placed controls and feedback, clearer Continue caption for saved Town plans, reversible wardrobe previews, quiet inline coin feedback and immediately skippable completion ribbons. Animation remains opt-in; reduced motion overrides all animations/transitions. No new sound or mandatory delay.
