@@ -1,9 +1,10 @@
-/* Fictional, versioned journey ledger. Never awards coins, minutes, mastery or estate milestones. */
+/* Original V1 ledger retained; V2 plans delegate to TownLife. V1 never awards coins, minutes, mastery or estate milestones. */
 (function (root) {
   "use strict";
   const T =
     typeof module !== "undefined" ? require("./town").V3Town : root.V3Town;
   const H = typeof module !== "undefined" ? require("./hands-on").V5HandsOn : root.V5HandsOn;
+  const L = typeof module !== "undefined" ? require("./town-life").V52TownLife : root.V52TownLife;
   const recipes = {
     bolognese: { name: "Spaghetti Bolognese", protein: "Mince" },
     lentil: { name: "Lentil Bolognese", protein: "Lentils" },
@@ -29,7 +30,7 @@
     "home",
   ];
   function state(s) {
-    return s.adventure?.journeyV1 || null;
+    return s.adventure?.townActive === 2 ? L.state(s) : s.adventure?.journeyV1 || null;
   }
   function validState(j) {
     return (
@@ -72,9 +73,11 @@
     );
   }
   function start(s, recipe = "bolognese") {
-    if (!recipes[recipe] || (state(s) && !validState(state(s)))) return false;
+    const saved=s.adventure?.journeyV1;
+    if (!recipes[recipe] || (saved && !validState(saved))) return false;
     s.adventure = s.adventure || {};
-    if (!state(s))
+    s.adventure.townActive=1;
+    if (!saved)
       s.adventure.journeyV1 = {
         version: 1,
         id: "recipe-journey-1",
@@ -102,6 +105,7 @@
   }
   const total = (list) => list.reduce((n, x, i) => n + x * [50, 80, 150][i], 0);
   function task(s) {
+    if(s.adventure?.townActive===2)return L.task(s);
     const j = state(s);
     if (!validState(j) || j.done) return null;
     const protein = recipes[j.recipe].protein,
@@ -212,6 +216,8 @@
       : answer === t.answer;
   }
   function action(s, name, arg, raw) {
+    if(s.adventure?.townActive===2)return L.action(s,name,arg,raw);
+    if(name==='j-skip'){const j=state(s),t=task(s);if(!validState(j)||!t)return false;j.assisted=true;j.feedback=t.worked;return true;}
     const j = state(s);
     if (!validState(j) || j.done) return false;
     const t = task(s),
@@ -286,6 +292,7 @@
     return false;
   }
   function next(s) {
+    if(s.adventure?.townActive===2)return L.next(s);
     const j = state(s);
     if (!validState(j) || !j.solved || j.done || j.completed.includes(j.stage))
       return false;
@@ -319,6 +326,7 @@
     return true;
   }
   function model(s) {
+    if(s.adventure?.townActive===2)return L.model(s);
     const j = state(s);
     return validState(j)
       ? {

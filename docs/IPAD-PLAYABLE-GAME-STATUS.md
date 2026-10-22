@@ -1,4 +1,8 @@
 # Latest game: private iPad readiness
+
+**Final Town expansion supersedes the earlier basic-journey status below:** 27 replayable plans (5 meals, 5 shopping, 5 travel, 7 worker roles, 5 errands) are implemented and tested. Read [current variation counts, connected play, preservation and readiness](TOWN-EXPANSION-READY.md). Use the current branch build, not the earlier `76d24d5` artifact. No SQL is needed.
+
+## Earlier verified baseline
 22 October 2026. Gameplay inspected at `76d24d59b7a8b11cb33857e9af6642b1114d6ca6` on `codex/v3-adventure-build`. This continuation changes focused tests and documentation only; gameplay already exists.
 
 ## Actual playable features

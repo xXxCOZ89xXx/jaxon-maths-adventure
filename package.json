@@ -33,7 +33,9 @@
     "build:staging-preserve": "node scripts/build-v52-staging.cjs",
     "prepare:staging-preserve": "node scripts/prepare-v52-staging.cjs",
     "test:staging-preserve": "node tests/v52-staging-preserve.cjs",
-    "test:staging-preserve-db": "node tests/v52-staging-preserve-postgres.cjs"
+    "test:staging-preserve-db": "node tests/v52-staging-preserve-postgres.cjs",
+    "test:town": "node tests/town-life.cjs",
+    "test:town-browser": "node tests/prepare-v3.cjs && playwright test --config=playwright.town-life.config.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

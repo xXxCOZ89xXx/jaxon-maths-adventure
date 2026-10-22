@@ -13,25 +13,25 @@ test('All nine worlds open from the visible map and expose playable mission cont
     await page.locator('nav [data-nav="map"]').click();
     await click(page,'world:'+world.id);
     const route=await page.evaluate(id=>V3Adventure.routes(id)[0].id,world.id);
-    const selector=world.id==='town'?`.town-hotspots [data-action^="mission:town:${route}:"]`:`.world-route-pins [data-action^="scene-mission:${world.id}:${route}:"]`;
+    const selector=world.id==='town'?`.town-hotspots [data-action^="j-work:${route}:"]`:`.world-route-pins [data-action^="scene-mission:${world.id}:${route}:"]`;
     await page.locator(selector).click();
-    await click(page,'m-begin');
+    if(world.id!=='town')await click(page,'m-begin');
     await expect(page.locator('.task-controls')).toBeVisible();
     expect(await page.locator('.task-controls button,.task-controls input').count()).toBeGreaterThan(0);
-    await click(page,'m-help');
-    const snapshot=(await read()).adventure.active;
-    expect(snapshot.world).toBe(world.id);
+    await click(page,world.id==='town'?'j-help':'m-help');
+    const snapshot=world.id==='town'?(await read()).adventure.townLifeV2:(await read()).adventure.active;
+    if(world.id!=='town')expect(snapshot.world).toBe(world.id);
     await page.reload();
-    expect((await read()).adventure.active).toEqual(snapshot);
+    expect(world.id==='town'?(await read()).adventure.townLifeV2:(await read()).adventure.active).toEqual(snapshot);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
   }
 });
-test('Town map enters the workplace directly and completes employee wages, payslip and saving tasks',async({camp})=>{
+test('Original workplace learning visit remains playable alongside the expanded employee day',async({camp})=>{
   const {page,read}=camp;
   await click(page,'skip-tour');
   await page.locator('nav [data-nav="map"]').click();
   await click(page,'world:town');
-  await page.locator('.town-hotspots [data-action^="mission:town:work:"]').click();
+  await page.locator('.location-card [data-action^="mission:town:work:"]').click();
   await expect(page.locator('.guide .badge')).toHaveText('worker context');
   expect((await read()).adventure.journeyV1).toBeUndefined();
   for(const kind of ['timesheet','payslip','amount']){

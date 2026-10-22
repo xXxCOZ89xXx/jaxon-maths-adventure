@@ -1,6 +1,16 @@
 # Codex handover — V5.1 usability and automated regression
 
-## Latest priority: newest complete game on Jaxon’s iPad — 22 October 2026
+## Latest continuation: final Practical Maths Town expansion implemented — 22 October 2026
+
+Owner’s final gameplay expansion is implemented in code: **27 replayable plans** (5 cooking, 5 shopping, 5 travel, 7 employment, 5 errands). `v3/town-life.js` reuses Town venues and existing interactive controls. Meals now connect cupboard/list → bus → shop/pay/change → return → unpack/match → preparation order → measurement → cooking clock → serving. Workplaces on Town map start full employee days with venue service, shift/net wages and a savings budget. The original eight-stage recipes and old three-task venue visits remain available and their saves are preserved.
+
+New progress is additive `adventure.townLifeV2`, with per-run immutable task snapshots, inventory, pretend cash/time, receipts, savings, first-response evidence, explicit replay and independent resume. `journeyV1`, original active/suspended visits, the cloud adapter and all auth/PIN/queue/request-ID namespaces remain intact. Unknown ledgers stop safely. No SQL, accounts, credentials, hosted data, merge or deployment was touched. Completed plans can earn the existing venue/tier story milestone once, preserving earlier records; they do not grant academic mastery or change the wallet directly.
+
+Focused results: 27-plan logic checks completed **2,007 stages** across 3 tiers × 3 seeds; existing hands-on compatibility passed 14 groups/1,107 steps. New Town browser run **36 passed / 22 intentional landscape skips**; two additional ability/offline-pending-save cases and four nine-world/original-workplace cases passed. All seven worker plans were rerun after correcting the transfer from cash into reserved savings. Configured unpublished `staging-dist/` built and statically verified with the newest assets. Only fictional/intercepted backend traffic was used; physical Safari and hosted saves remain owner acceptance.
+
+Read [playable variations, connections, simplifications and exact readiness](TOWN-EXPANSION-READY.md). Use the original staging builder with current gameplay; no database upgrade or V5.2 marker is needed. Production/migration/security planning stays parked. **Next owner action: approve an assets-only update of the existing owner-private staging Site**, then one owner Safari/iPad play/save/reopen session with an existing fictional learner account/PIN. No publication is approved yet.
+
+## Previous priority: newest complete game on Jaxon’s iPad — 22 October 2026
 
 The owner has explicitly stopped unnecessary production work, broad audits, backups and migration planning. This priority supersedes all older “next owner approval” sections below. Do not ask for SQL, a fresh environment, reset accounts/PINs or activate V5.2 to make current gameplay playable.
 
