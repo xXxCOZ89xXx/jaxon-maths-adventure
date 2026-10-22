@@ -401,6 +401,7 @@
     }
     if(t.kind==='array'||t.kind==='volume')return `<div class="hands-on" data-mechanic="${t.kind==='array'?'crate-array':'volume-layers'}"><p>Tap the far corner of your rectangle to build its rows and columns.</p><div class="build-array" role="group" aria-label="Build rows and columns">${Array.from({length:81},(_,i)=>{const r=Math.floor(i/9)+1,c=i%9+1;return btn('▣',`m-array:${r}:${c}`,`aria-label="Build ${r} rows and ${c} columns" aria-pressed="${r<=parts[0]&&c<=parts[1]}"`);}).join('')}</div>${t.kind==='volume'?`<p>Choose the number of layers.</p><div class="layer-rack">${Array.from({length:9},(_,i)=>btn(`${i+1} layers`,`m-layer:${i+1}`,`aria-pressed="${parts[2]===i+1}"`)).join('')}</div>`:''}<output>${parts[0]||0} rows × ${parts[1]||0} columns${t.kind==='volume'?' × '+(parts[2]||0)+' layers':''} = ${(parts[0]||0)*(parts[1]||0)*(t.kind==='volume'?parts[2]||0:1)} unit blocks</output></div>`;
     if(t.kind==='chart')return `<div class="hands-on" data-mechanic="bar-chart"><p>Tap a height in each column to construct the chart.</p><div class="tap-chart" role="group" aria-label="Construct a bar chart">${t.labels.map((label,i)=>`<section><strong>${esc(label)}</strong><div class="tap-chart-column">${Array.from({length:t.max+1},(_,n)=>t.max-n).map(n=>btn(String(n),`m-chart:${i}:${n}`,`aria-label="Set ${esc(label)} to ${n}" aria-pressed="${(parts[i]||0)>=n}"`)).join('')}</div></section>`).join('')}</div></div>`;
+    if(t.kind==='measure'&&t.unit==='g')return `<div class="hands-on kitchen-scale" data-mechanic="weighing"><p>Place the requested mass on the kitchen scale using its marker.</p><svg viewBox="0 0 340 150" aria-hidden="true"><path d="M80 20h180l-15 38H95Z" fill="#9fae98" stroke="#3d5a46" stroke-width="4"/><path d="M125 58h90l30 77H95Z" fill="#6b8664"/><rect x="123" y="89" width="94" height="32" rx="3" fill="#edf0d7"/><text x="170" y="111" text-anchor="middle" font-size="20">${v} g</text></svg>${slider(t.max,t.step||1,'g')}</div>`;
     if(t.kind==='measure')return `<div class="hands-on" data-mechanic="${t.unit==='ml'?'pouring':'ruler'}"><p>${t.unit==='ml'?'Move the marker to fill the jug.':'Move the marker to set the end of the measured strip.'}</p>${t.unit==='ml'?`<div class="pour-model"><div class="pour-vessel" role="img" aria-label="Jug contains ${v} ml"><div style="height:${v/t.max*100}%"></div>${[0,1,2,3,4].map(i=>`<span style="bottom:${i*24}%">${Math.round(i*t.max/4)} ml</span>`).join('')}</div></div>`:`<div class="touch-ruler" role="img" aria-label="Strip length ${v} ${esc(t.unit)}"><div style="width:${v/t.max*100}%"></div>${[0,1,2,3,4].map(i=>`<span>${i*t.max/4}</span>`).join('')}</div>`}${slider(t.max,t.step||1,t.unit)}<div class="scale-stops">${Array.from({length:5},(_,i)=>Math.round(t.max*i/4/(t.step||1))*(t.step||1)).filter((n,i,a)=>a.indexOf(n)===i&&n<=t.max).map(n=>btn(n+' '+esc(t.unit),`m-value:${n}`)).join('')}</div></div>`;
     if(t.kind==='balance')return `<div class="hands-on" data-mechanic="tile-balance"><p>Select a unit bundle to place in every x box. Make the two pans equal.</p><div class="physical-balance"><div class="balance-pan">${Array.from({length:t.coefficient},()=>`<span class="unit-bundle">${'▪'.repeat(v)}<b>x = ${v}</b></span>`).join('')}<span>+ ${t.add} fixed units</span></div><span class="balance-beam" aria-hidden="true">⚖</span><div class="balance-pan">${t.total} units</div></div><div class="bundle-rack" role="group" aria-label="Unit bundles">${Array.from({length:(t.max??12)+1},(_,n)=>btn(`<span aria-hidden="true">${'▪'.repeat(n)||'□'}</span><b>${n} units</b>`,`m-value:${n}`,`aria-pressed="${q.values.amount===n}" aria-label="Place bundle of ${n} units"`)).join('')}</div></div>`;
     if(t.kind==='ratio')return `<div class="hands-on" data-mechanic="ratio-packs"><p>Tap a blue supply position to build that many blue crates. Compare them with the green supplies.</p><div class="ratio-packs"><section><strong>Green supplies: ${t.green}</strong><div>${'<i>▣</i>'.repeat(t.green)}</div></section><section><strong>Blue supplies: ${v}</strong><div class="crate-tray">${Array.from({length:t.max||30},(_,i)=>btn('▣',`m-value:${i+1}`,`aria-label="Place ${i+1} blue crates" aria-pressed="${i<v}"`)).join('')}</div>${btn('Empty blue tray','m-value:0')}</section></div></div>`;
@@ -500,7 +501,7 @@
         t = {kind:"amount",unit:"p",responseUnit:pence?"pence":"pounds",min:0,max:100000,scale:pence?1:100};
       }
       else if (
-        /place|operations|multiply|priority|powers|factors|algebra_|stats_|ratio_|measure_|fraction_mixed/.test(
+        /number_bonds|times_tables|division_groups|fraction_parts|decimal_place|geometry_shapes|place|operations|multiply|priority|powers|factors|algebra_|stats_|ratio_|measure_|fraction_mixed/.test(
           skill.id,
         )
       )
@@ -553,7 +554,10 @@
     const v = l.manipulation || {},
       a = v.amount || 0;
     let body = "";
-    if (t.kind === "fraction")
+    if(l.qs[l.i][5]?.representation?.type==='array'){
+      const model=l.qs[l.i][5].representation;
+      body=`<p>Tap crates to count them in equal rows. Tap again to unmark a crate.</p><div class="count-array" style="--columns:${model.cols}" role="group" aria-label="${model.rows} rows of ${model.cols} crates">${Array.from({length:model.rows*model.cols},(_,i)=>btn('▣',`p5-count:${i}`,`aria-label="Crate ${i+1}" aria-pressed="${(v.selected||[]).includes(i)}"`)).join('')}</div><output>${(v.selected||[]).length} crates counted</output>`;
+    }else if (t.kind === "fraction")
       body = `<p>Shade the fraction you want to submit. These are equal parts.</p><div class="parts" data-shade-group="practice">${Array.from({ length: t.total }, (_, i) => btn("▧", `p5-shade:${i}`, `data-shade-index="${i}" aria-label="Fraction part ${i + 1}" aria-pressed="${(v.selected || []).includes(i)}"`)).join("")}</div><output>${(v.selected || []).length}/${t.total}</output>`;
     else if (t.kind === "line")
       body = `<p>Place your answer on the number line.</p><div class="numberline">${Array.from({ length: 41 }, (_, i) => btn(String(i - 20), `p5-value:${i - 20}`, `aria-pressed="${a === i - 20}"`)).join("")}</div>`;
@@ -570,6 +574,10 @@
     const t = practiceSpec({ id: l.id }, l.qs[l.i]);
     if (!t) return false;
     const v = l.manipulation || (l.manipulation = {});
+    if(action==='count'){
+      const model=l.qs[l.i][5]?.representation;if(model?.type!=='array'||!Number.isInteger(n)||n<0||n>=model.rows*model.cols)return false;
+      const selected=v.selected||[];v.selected=selected.includes(n)?selected.filter(x=>x!==n):[...selected,n];v.amount=v.selected.length;delete v.amountDraft;return true;
+    }
     if (action === "shade") {
       if (!Number.isInteger(n) || n < 0 || n >= t.total) return false;
       const selected = v.selected || [];

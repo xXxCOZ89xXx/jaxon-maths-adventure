@@ -1,0 +1,490 @@
+{
+  "version": 2,
+  "contentRevision": 3,
+  "id": "original-bolognese:1",
+  "scenario": "cook-pasta",
+  "name": "Spaghetti Bolognese",
+  "category": "Cooking",
+  "tier": 2,
+  "seed": 1,
+  "stage": 0,
+  "steps": [
+    {
+      "venue": "home",
+      "title": "Scale the recipe",
+      "kind": "amount",
+      "prompt": "The recipe card makes 2 portions. You need 4 portions. How many Spaghetti · 100 g pack are needed?",
+      "answer": 4,
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "unit": "packs",
+      "skill": "town_money",
+      "teach": "Work out the requested total or difference, using the units in the question.",
+      "example": "Three groups of 2 items contain 6 items.",
+      "hint": "Compare your model with the quantities and units in the task.",
+      "worked": "The duration is 4 minutes.",
+      "effect": {}
+    },
+    {
+      "venue": "home",
+      "title": "Inspect the kitchen stock",
+      "kind": "basket",
+      "prompt": "Look inside the cupboards and fridge. Select the quantities already available.",
+      "answer": [
+        1,
+        0,
+        1
+      ],
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "unit": "",
+      "skill": "town_money",
+      "teach": "Count each product separately and compare it with the quantities you need.",
+      "example": "Need 4 notebooks and have 1? Put 3 on the list.",
+      "hint": "Count the products inside each cupboard or fridge compartment.",
+      "worked": "Spaghetti · 100 g pack: 1; Tomatoes · tin: 0; Mince · 100 g pack: 1",
+      "effect": {},
+      "items": [
+        {
+          "name": "Spaghetti · 100 g pack",
+          "price": 65
+        },
+        {
+          "name": "Tomatoes · tin",
+          "price": 85
+        },
+        {
+          "name": "Mince · 100 g pack",
+          "price": 150
+        }
+      ],
+      "visualContext": "stock",
+      "stock": {
+        "Spaghetti · 100 g pack": 1,
+        "Tomatoes · tin": 0,
+        "Mince · 100 g pack": 1
+      },
+      "instruction": "Tap a product to collect one. Tap a basket item to put one back."
+    },
+    {
+      "venue": "home",
+      "title": "Make your shopping list",
+      "kind": "basket",
+      "prompt": "Use the recipe card and kitchen stock. List only the missing ingredients.",
+      "answer": [
+        3,
+        2,
+        3
+      ],
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "unit": "",
+      "skill": "town_money",
+      "teach": "Count each product separately and compare it with the quantities you need.",
+      "example": "Need 4 notebooks and have 1? Put 3 on the list.",
+      "hint": "Compare each basket quantity with your saved shopping list.",
+      "worked": "Spaghetti · 100 g pack: 3; Tomatoes · tin: 2; Mince · 100 g pack: 3",
+      "effect": {
+        "list": {
+          "Spaghetti · 100 g pack": 3,
+          "Tomatoes · tin": 2,
+          "Mince · 100 g pack": 3
+        }
+      },
+      "items": [
+        {
+          "name": "Spaghetti · 100 g pack",
+          "price": 65
+        },
+        {
+          "name": "Tomatoes · tin",
+          "price": 85
+        },
+        {
+          "name": "Mince · 100 g pack",
+          "price": 150
+        }
+      ],
+      "visualContext": "list",
+      "stock": {
+        "Spaghetti · 100 g pack": 1,
+        "Tomatoes · tin": 0,
+        "Mince · 100 g pack": 1
+      },
+      "instruction": "Tap a product to collect one. Tap a basket item to put one back."
+    },
+    {
+      "venue": "station",
+      "title": "Catch the bus to the supermarket",
+      "kind": "journey",
+      "prompt": "Catch the bus to the supermarket. It is 09:00. Allow 10 minutes to walk after the bus. You need to arrive by 09:40. Choose the cheapest service that gets you there in time.",
+      "answer": 2,
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "unit": "",
+      "skill": "town_money",
+      "teach": "Add walking time to each arrival before comparing eligible fares.",
+      "example": "A bus arriving at 08:00 plus a 10-minute walk reaches the destination at 08:10.",
+      "hint": "Add the walking time to each bus arrival. Compare fares only for services that arrive in time.",
+      "worked": "The local service reaches the destination at 09:35 and costs £1.25.",
+      "effect": {
+        "spend": 125,
+        "minutes": 35,
+        "receipt": "Bus to the supermarket",
+        "choice": "Local bus"
+      },
+      "destination": "the supermarket",
+      "options": [
+        {
+          "name": "Later bus",
+          "depart": 560,
+          "arrive": 580,
+          "price": 100
+        },
+        {
+          "name": "Express bus",
+          "depart": 555,
+          "arrive": 560,
+          "price": 225
+        },
+        {
+          "name": "Local bus",
+          "depart": 550,
+          "arrive": 565,
+          "price": 125
+        }
+      ],
+      "walk": 10,
+      "deadline": 580
+    },
+    {
+      "venue": "market",
+      "title": "Collect from the shelves",
+      "kind": "basket",
+      "prompt": "Use your saved shopping list. Tap shelf products to put the required quantities in your basket. Leave unneeded extras on the shelf.",
+      "answer": [
+        3,
+        2,
+        3,
+        0,
+        0
+      ],
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "unit": "",
+      "skill": "town_money",
+      "teach": "Count each product separately and compare it with the quantities you need.",
+      "example": "Need 4 notebooks and have 1? Put 3 on the list.",
+      "hint": "Compare each basket quantity with your saved shopping list.",
+      "worked": "Spaghetti · 100 g pack: 3; Tomatoes · tin: 2; Mince · 100 g pack: 3; Chocolate bar: 0; Fizzy drink: 0",
+      "effect": {},
+      "items": [
+        {
+          "name": "Spaghetti · 100 g pack",
+          "price": 65
+        },
+        {
+          "name": "Tomatoes · tin",
+          "price": 85
+        },
+        {
+          "name": "Mince · 100 g pack",
+          "price": 150
+        },
+        {
+          "name": "Chocolate bar",
+          "price": 85
+        },
+        {
+          "name": "Fizzy drink",
+          "price": 110
+        }
+      ],
+      "visualContext": "shelves",
+      "budget": 6875,
+      "stock": {
+        "Spaghetti · 100 g pack": 1,
+        "Tomatoes · tin": 0,
+        "Mince · 100 g pack": 1
+      },
+      "instruction": "Tap a product to collect one. Tap a basket item to put one back."
+    },
+    {
+      "venue": "market",
+      "title": "Pay for shopping",
+      "kind": "coins",
+      "prompt": "The bill is £8.15. Take £10.00 from your pretend purse and place it on the counter.",
+      "answer": 1000,
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "unit": "p",
+      "skill": "town_money",
+      "teach": "Build the payment from UK coin and note values.",
+      "example": "Three groups of 2 items contain 6 items.",
+      "hint": "£1 is 100p. You can remove the last token.",
+      "worked": "The payment tray needs 1000 pence.",
+      "effect": {}
+    },
+    {
+      "venue": "market",
+      "title": "Collect your change",
+      "kind": "coins",
+      "prompt": "You paid £10.00 for a £8.15 bill. Collect the change.",
+      "answer": 185,
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "unit": "p",
+      "skill": "town_money",
+      "teach": "Work out the requested total or difference, using the units in the question.",
+      "example": "Three groups of 2 items contain 6 items.",
+      "hint": "Subtract the bill from the amount paid.",
+      "worked": "£10.00 − £8.15 = £1.85.",
+      "effect": {
+        "spend": 815,
+        "receipt": "shopping",
+        "add": {
+          "Spaghetti · 100 g pack": 3,
+          "Tomatoes · tin": 2,
+          "Mince · 100 g pack": 3
+        }
+      }
+    },
+    {
+      "venue": "station",
+      "title": "Catch the bus home",
+      "kind": "journey",
+      "prompt": "Catch the bus home. It is 09:35. Allow 10 minutes to walk after the bus. You need to arrive by 10:15. Choose the cheapest service that gets you there in time.",
+      "answer": 1,
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "unit": "",
+      "skill": "town_money",
+      "teach": "Add walking time to each arrival before comparing eligible fares.",
+      "example": "A bus arriving at 08:00 plus a 10-minute walk reaches the destination at 08:10.",
+      "hint": "Add the walking time to each bus arrival. Compare fares only for services that arrive in time.",
+      "worked": "The local service reaches the destination at 10:10 and costs £1.25.",
+      "effect": {
+        "spend": 125,
+        "minutes": 35,
+        "receipt": "Bus to home",
+        "choice": "Local bus"
+      },
+      "destination": "home",
+      "options": [
+        {
+          "name": "Later bus",
+          "depart": 595,
+          "arrive": 615,
+          "price": 100
+        },
+        {
+          "name": "Local bus",
+          "depart": 585,
+          "arrive": 600,
+          "price": 125
+        },
+        {
+          "name": "Express bus",
+          "depart": 590,
+          "arrive": 595,
+          "price": 225
+        }
+      ],
+      "walk": 10,
+      "deadline": 615
+    },
+    {
+      "venue": "home",
+      "title": "Prepare Spaghetti Bolognese",
+      "kind": "order",
+      "prompt": "Open the recipe card. Arrange the preparation actions for this meal.",
+      "answer": [
+        0,
+        2,
+        1
+      ],
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "unit": "",
+      "skill": "town_money",
+      "teach": "Think about which action depends on an earlier action.",
+      "example": "For a different task: put socks on before putting shoes on.",
+      "hint": "Which action can safely happen first? What needs to be ready before the next action?",
+      "worked": "Measure the sauce ingredients → Simmer the protein with tomatoes in the pan → Cook the spaghetti and combine with the sauce",
+      "effect": {},
+      "items": [
+        "Measure the sauce ingredients",
+        "Cook the spaghetti and combine with the sauce",
+        "Simmer the protein with tomatoes in the pan"
+      ],
+      "instruction": "Tap an action, then its position. Use every action once."
+    },
+    {
+      "venue": "home",
+      "title": "Measure the water",
+      "kind": "measure",
+      "prompt": "Use the jug to measure 1 litres of water for this batch.",
+      "answer": 1000,
+      "min": 0,
+      "max": 1500,
+      "step": 50,
+      "unit": "ml",
+      "skill": "town_money",
+      "teach": "Convert the units, then position the scale marker.",
+      "example": "0.1 litre equals 100 ml.",
+      "hint": "One litre is 1,000 ml. Tap a jug scale mark, then fine-tune if needed.",
+      "worked": "1 litres = 1000 ml.",
+      "effect": {}
+    },
+    {
+      "venue": "home",
+      "title": "Set the recipe temperature",
+      "kind": "choice",
+      "prompt": "Use the temperature supplied on the recipe card for the hob. Do not guess a real food-safety temperature.",
+      "answer": 1,
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "unit": "",
+      "skill": "town_money",
+      "teach": "Check which option meets the requirement before comparing its cost.",
+      "example": "A 4-seat ticket is too small for 5 people, even when cheaper.",
+      "hint": "Find the temperature beside the cooking method on the recipe card.",
+      "worked": "This fictional recipe specifies 100 °C.",
+      "effect": {},
+      "options": [
+        {
+          "name": "80 °C",
+          "price": 0
+        },
+        {
+          "name": "100 °C",
+          "price": 0
+        },
+        {
+          "name": "120 °C",
+          "price": 0
+        }
+      ],
+      "visualContext": "temperature",
+      "equipment": "hob"
+    },
+    {
+      "venue": "home",
+      "title": "When will the meal be ready?",
+      "kind": "clock",
+      "prompt": "Start Spaghetti Bolognese at 10:10. The recipe specifies 25 minutes. Set the finishing time.",
+      "answer": 635,
+      "min": 0,
+      "max": 1439,
+      "step": 1,
+      "unit": "time",
+      "skill": "town_money",
+      "teach": "Add the duration to the start time. Carry 60 minutes into the next hour.",
+      "example": "08:45 plus 20 minutes is 09:05.",
+      "hint": "Compare your model with the quantities and units in the task.",
+      "worked": "The finish time is 10:35.",
+      "effect": {
+        "minutes": 25,
+        "consume": {
+          "Spaghetti · 100 g pack": 4,
+          "Tomatoes · tin": 2,
+          "Mince · 100 g pack": 4
+        }
+      }
+    },
+    {
+      "venue": "home",
+      "title": "Serve and tidy",
+      "kind": "order",
+      "prompt": "The meal is ready. Put these actions in a safe and useful order.",
+      "answer": [
+        2,
+        1,
+        0
+      ],
+      "min": 0,
+      "max": 100000,
+      "step": 1,
+      "unit": "",
+      "skill": "town_money",
+      "teach": "Think about which action depends on an earlier action.",
+      "example": "For a different task: put socks on before putting shoes on.",
+      "hint": "Which action can safely happen first? What needs to be ready before the next action?",
+      "worked": "Turn off the cooking equipment → Serve the meal → Wash the used equipment",
+      "effect": {},
+      "items": [
+        "Wash the used equipment",
+        "Serve the meal",
+        "Turn off the cooking equipment"
+      ],
+      "instruction": "Tap an action, then its position. Use every action once."
+    }
+  ],
+  "values": {
+    "parts": [
+      1,
+      0,
+      0
+    ]
+  },
+  "inventory": {
+    "Spaghetti · 100 g pack": 1,
+    "Tomatoes · tin": 0,
+    "Mince · 100 g pack": 1
+  },
+  "shoppingList": {},
+  "cash": 7000,
+  "time": 540,
+  "savings": 0,
+  "receipts": [],
+  "completed": [],
+  "evidence": [],
+  "solved": false,
+  "assisted": false,
+  "feedback": "",
+  "done": false,
+  "recipeCard": {
+    "name": "Spaghetti Bolognese",
+    "basePortions": 2,
+    "portions": 4,
+    "ingredients": [
+      {
+        "name": "Spaghetti · 100 g pack",
+        "base": 2,
+        "required": 4
+      },
+      {
+        "name": "Tomatoes · tin",
+        "base": 1,
+        "required": 2
+      },
+      {
+        "name": "Mince · 100 g pack",
+        "base": 2,
+        "required": 4
+      }
+    ],
+    "prep": [
+      "Measure the sauce ingredients",
+      "Simmer the protein with tomatoes in the pan",
+      "Cook the spaghetti and combine with the sauce"
+    ],
+    "liquid": "water",
+    "ml": 1000,
+    "method": "hob",
+    "temperature": 100,
+    "minutes": 25,
+    "safety": "Pretend recipe for maths only. Cooking with real food needs an adult and a real recipe."
+  },
+  "originalRecipe": "bolognese"
+}

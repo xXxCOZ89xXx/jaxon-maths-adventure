@@ -5,6 +5,7 @@
     typeof module !== "undefined"
       ? require("./adventure").V3Adventure
       : root.V3Adventure;
+  const education=typeof module!=="undefined"?require("./education").V6Education:root.V6Education;
   const T =
     typeof module !== "undefined" ? require("./town").V3Town : root.V3Town;
   const worlds = [
@@ -425,6 +426,8 @@
       c = s.checks[id] || {};
     if (mode === "check" && (!p.completed || c.reteach))
       return "Complete a practice lesson before this independent check.";
+    if (mode === "check" && education.gaps(s,id).length)
+      return "Check the starting point for "+education.gaps(s,id).map(pre=>curriculum.skills.find(k=>k.id===pre)?.name||pre).join(", ")+" before this dependent independent check. Your earlier evidence is kept.";
     if (mode === "check" && c.due > now)
       return "Your memory check is not due yet. Explore another skill in the meantime.";
     const used = new Set([
@@ -441,7 +444,7 @@
     s.learningBand = band;
     for (let t = 0; t < 100; t++, round++) {
       let sample;
-      try { sample = bank.create(id,band,round); }
+      try { sample = bank.create(id,band,round,{exclude:used}); }
       catch (error) { if(/^Duplicate questions in review/.test(error.message))continue;throw error; }
       if (sample.every((q) => !used.has(q[0]))) {
         qs = sample;
@@ -453,6 +456,9 @@
       id,
       mode,
       round,
+      policyVersion:education.enhanced.includes(id)?2:1,
+      band,
+      teachingExample:education.example(id,qs,band,round),
       qs,
       i: 0,
       correct: 0,
@@ -491,7 +497,7 @@
         ? "That works. "
         : skip
           ? "Let’s work through it. "
-          : "Here is one way to work through it. ") + q[4];
+          : "Here is one way to work through it. ") + education.explain(q);
     return correct;
   }
   function nextLearning(s, now = Date.now()) {
@@ -505,6 +511,7 @@
       l.assisted = false;
       l.answered = false;
       l.feedback = "";
+      delete l.hintLevel;
       return;
     }
     const passed = l.correct === l.qs.length;
@@ -518,7 +525,7 @@
       d.complete =
         !direction ||
         d.rounds.length >= 3 ||
-        d.band + direction < 5 ||
+        d.band + direction < education.minBand(l.id) ||
         d.band + direction > 9;
       if (!d.complete) d.band += direction;
     } else if (l.mode === "practice") {
@@ -526,7 +533,7 @@
       if (s.checks[l.id]) s.checks[l.id].reteach = false;
       s.skills[l.id] = {
         ...old,
-        practiceEvidence:[...(old.practiceEvidence||[]),{at:now,round:l.round,source:"supported-practice",responses:l.responses||[]}].slice(-8),
+        practiceEvidence:[...(old.practiceEvidence||[]),{at:now,round:l.round,source:"supported-practice",responses:l.responses||[]}],
         lastPractised: new Date(now).toISOString(),
         practiceSessions: num(old.practiceSessions) + 1,
         practiceSeen: [...(old.practiceSeen || []), ...l.qs.map((q) => q[0])],
@@ -534,8 +541,11 @@
       };
     } else {
       const previous = s.checks[l.id] || {},
-        spaced = passed && previous.stage >= 1 && previous.due <= now;
-      const stage = passed ? (spaced ? 2 : 1) : 0;
+        families=[...new Set(l.qs.map(q=>q[5]?.family).filter(Boolean))],
+        varied=l.policyVersion!==2 || (l.qs.length>=3&&(families.length>=3||l.qs.every(q=>!q[5]))),
+        prior=(old.independentEvidence||[]).filter(r=>r.correct===r.total&&r.total>=3&&r.policyVersion===2&&new Set(r.families||[]).size>=3&&r.at<=now-2*86400000),
+        spaced = passed && varied && previous.stage >= 1 && previous.due <= now && (l.policyVersion!==2 || prior.length>0);
+      const stage = passed ? (spaced || previous.stage===2 ? 2 : 1) : 0;
       if (passed && !s.achievements.includes("independent"))
         s.achievements.push("independent");
       if (spaced && !s.achievements.includes("memory"))
@@ -549,9 +559,10 @@
       };
       s.skills[l.id] = {
         ...old,
-        independentEvidence:[...(old.independentEvidence||[]),{correct:l.correct,total:l.qs.length,at:now,band:s.learningBand,responses:l.responses||[]}].slice(-8),
+        independentEvidence:[...(old.independentEvidence||[]),{correct:l.correct,total:l.qs.length,at:now,band:l.band??s.learningBand,policyVersion:l.policyVersion||1,families:l.qs.map(q=>q[5]?.family||"legacy-generator"),responses:l.responses||[]}],
         state: stage === 2 ? "mastered" : stage === 1 ? "review" : "learning",
         reviewStage: stage,
+        masteryPolicyVersion:spaced?(l.policyVersion||1):(old.masteryPolicyVersion||(previous.stage>=2?1:null)),
         lastIndependentScore: s.checks[l.id].score,
         reviewDueAt: passed ? new Date(s.checks[l.id].due).toISOString() : null,
         reviewSeen: [...(old.reviewSeen || []), ...l.qs.map((q) => q[0])],
@@ -590,7 +601,7 @@
   function startDiscovery(s, id, curriculum, helpers) {
     if (!curriculum.discovery[id]) return "Unknown skill.";
     s.discovery[id] = s.discovery[id] || {
-      band: 7,
+      band: education.minBand(id)===3?5:7,
       answers: [],
       rounds: [],
       complete: false,
@@ -604,8 +615,8 @@
         h.prompt(q[1]),
         String(q[2]),
         h.choices().map(String),
-        "Think about what each part of the question means.",
-        "The answer is " + q[2] + ".",
+        (d.band<5||education.foundations.some(f=>f[0]===id))?education.question(id,d.band,900+d.band,i)[3]:"Think about what each part of the question means.",
+        (d.band<5||education.foundations.some(f=>f[0]===id))?education.question(id,d.band,900+d.band,i)[4]:"The answer is " + q[2] + ".",
       ];
     });
     s.seen = [

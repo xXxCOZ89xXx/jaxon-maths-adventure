@@ -5,8 +5,8 @@
   const H=typeof module!=='undefined'?require('./hands-on').V5HandsOn:root.V5HandsOn;
   const copy=x=>JSON.parse(JSON.stringify(x)), money=T.money, clock=T.clock;
   const meals=[
-    {id:'pasta',name:'Tomato pasta',ingredients:['Pasta · 100 g pack','Tomatoes · tin','Cheese · 50 g pack'],need:[2,2,1],prices:[65,85,90],water:300,cook:12,prep:['Read the recipe','Boil the pasta water','Stir in tomatoes and cheese']},
-    {id:'curry',name:'Chickpea curry',ingredients:['Chickpeas · tin','Coconut milk · 200 ml carton','Rice · 100 g pack'],need:[2,1,2],prices:[75,120,60],water:400,cook:20,prep:['Rinse the rice','Cook the rice in the measured water','Simmer chickpeas in coconut milk','Serve the curry with the rice']},
+    {id:'pasta',name:'Tomato pasta',ingredients:['Pasta · 100 g pack','Tomatoes · tin','Cheese · 50 g pack'],need:[2,2,1],prices:[65,85,90],water:300,cook:12,prep:['Read the recipe and measure the pasta','Boil water and cook the pasta','Stir in tomatoes and cheese']},
+    {id:'curry',name:'Chickpea curry',ingredients:['Chickpeas · tin','Coconut milk · 200 ml carton','Rice · 100 g pack'],need:[2,1,2],prices:[75,120,60],water:400,cook:20,prep:['Measure rice and sauce ingredients','Start the chickpeas and coconut milk in the pan','Cook the rice while the sauce simmers','Serve rice with the finished curry']},
     {id:'pizza',name:'Vegetable pizza',ingredients:['Pizza base','Passata · 100 ml carton','Peppers · pair'],need:[1,2,1],prices:[150,55,110],water:100,cook:15,prep:['Spread passata on the base','Add the prepared peppers','Bake the topped pizza']},
     {id:'soup',name:'Carrot and lentil soup',ingredients:['Carrots · 200 g bag','Lentils · 100 g pack','Stock · cube'],need:[2,1,2],prices:[80,95,20],water:600,cook:25,prep:['Wash and chop the carrots','Make the stock with the measured water','Add lentils and stock to the carrots','Simmer then blend the soup']},
     {id:'pancakes',name:'Banana pancakes',ingredients:['Flour · 100 g pack','Milk · 100 ml carton','Bananas'],need:[2,3,2],prices:[45,35,30],water:150,cook:8,prep:['Mash the bananas','Mix flour, milk and banana','Cook and turn the pancakes']}

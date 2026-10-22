@@ -29,7 +29,7 @@ for(const [world,route,stage,kind] of worlds)test(`${world}: actual model, wrong
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
  if(world==='algebra')await page.screenshot({path:`tests/artifacts/quality-train-${page.viewportSize().width}.png`,fullPage:true});
 });
-for(const id of ['cook-pizza','shop-budget','travel-library','job-cafe','errand-post','original-bolognese'])test(`${id}: full touch journey, context, decisions and exact reopen`,async({camp})=>{
+for(const id of ['cook-pizza','cook-curry','cook-soup','cook-pancakes','shop-budget','travel-library','job-cafe','errand-post','original-bolognese'])test(`${id}: full touch journey, context, decisions and exact reopen`,async({camp})=>{
  const {page,key,read}=camp;await page.evaluate(({key,id})=>{let s=V3Engine.fresh();s.tourSeen=true;if(id==='original-bolognese')V5Journey.start(s,'bolognese',2);else V52TownLife.start(s,id,2);localStorage.setItem(key,JSON.stringify(s));},{key,id});await page.reload();
  let count=0;while(!(await run(page,key)).done){const j=await run(page,key),t=j.steps[j.stage];
   if(j.stage===0){await click(page,'j-submit');if(!(await run(page,key)).solved){await click(page,'j-help');await expect(page.locator('.feedback')).toBeVisible();}}

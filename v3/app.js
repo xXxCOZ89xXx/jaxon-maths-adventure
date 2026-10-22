@@ -211,8 +211,10 @@
       k = skill(l.id),
       q = l.qs[l.i];
     if (s.view === "lesson") {
-      const plan = window.JaxonTutor.plan(l.id, []);
-      return `${header("LEARN AT YOUR OWN PACE", esc(k.name), "world")}<div class="split"><section class="panel"><h2>Build the idea</h2><p class="lesson-copy">${esc(k.lesson)}</p>${plan ? `<div class="feedback"><strong>${esc(plan.title || "An easier example")}</strong><p>${esc(plan.explain || "")}</p><p>${esc(plan.question || plan.prompt || "")}</p><p>${esc(plan.worked || plan.feedback || "")}</p></div>` : ""}<div class="actions">${btn("Try supported practice →", "practice", "primary")}${btn("Save & exit", "nav:home")}</div></section><div>${art(k.world)}<p class="small muted">Practice helps you learn. Only separate fresh independent checks can establish mastery.</p></div></div>`;
+      const example=l.teachingExample;
+      const plan = example?{title:"A different example",explain:example[3],question:example[0],worked:example[4]}:window.JaxonTutor.plan(l.id, []);
+      const prerequisites=window.V6Education.gaps(s,l.id);
+      return `${header("LEARN AT YOUR OWN PACE", esc(k.name), "world")}<div class="split"><section class="panel"><h2>Build the idea</h2>${prerequisites.length?`<div class="prerequisite-path"><h3>Check the foundations</h3><p>These short starting-point checks help us find the right level. Your earlier progress stays saved.</p>${prerequisites.map(id=>btn("Discover: "+skill(id).name,"discover:"+id)).join("")}</div>`:""}<p class="lesson-copy">${esc(k.lesson)}</p>${plan ? `<div class="feedback"><strong>${esc(plan.title || "An easier example")}</strong><p>${esc(plan.explain || "")}</p><p>${esc(plan.question || plan.prompt || "")}</p><p>${esc(plan.worked || plan.feedback || "")}</p></div>` : ""}<div class="actions">${btn("Try supported practice →", "practice", "primary")}${btn("Save & exit", "nav:home")}</div></section><div>${art(k.world)}<p class="small muted">Practice helps you learn. Only separate fresh independent checks can establish mastery.</p></div></div>`;
     }
     const handsOn=window.V5HandsOn.practiceRender(l,k);
     const tools =
@@ -574,7 +576,7 @@
             if(slot>=0&&slot<order.length){for(let i=0;i<order.length;i++)if(order[i]===pick)order[i]=null;order[slot]=pick;M.edit(s,'order',order);}
           }break;
         }
-        case "p5-add": case "p5-value": case "p5-shade":
+        case "p5-add": case "p5-value": case "p5-shade": case "p5-count":
           window.V5HandsOn.practiceEdit(s.learning,name.slice(3),Number(arg));break;
         case "p5-submit":
           if (s.learning && window.V5HandsOn.invalidDraft(s.learning.manipulation,window.V5HandsOn.practiceSpec({id:s.learning.id},s.learning.qs[s.learning.i]))) break;
@@ -712,7 +714,8 @@
         case "learning-hint":
           if (s.learning && !s.learning.answered) {
             s.learning.assisted = true;
-            s.learning.feedback = s.learning.qs[s.learning.i][3];
+            s.learning.hintLevel=(s.learning.hintLevel||0)+1;
+            s.learning.feedback = window.V6Education.hints(s.learning.qs[s.learning.i],s.learning.hintLevel);
           }
           break;
         case "next-learning":
@@ -773,6 +776,7 @@
   document.addEventListener("click", async (e) => {
     const ui=e.target.closest('[data-ui]');
     if(ui){
+      if(ui.dataset.ui==='choose-town-plan'){const plans=document.getElementById('town-plans');plans?.scrollIntoView({block:'start',behavior:'instant'});plans?.focus({preventScroll:true});}
       if(ui.dataset.ui==='preview-item'||ui.dataset.ui==='clear-preview'){itemPreview=ui.dataset.item||null;render();document.getElementById('wardrobe-preview')?.focus();}
       if(ui.dataset.ui==='hide-celebration'){const banner=ui.closest('.completion-ribbon');hiddenCelebrations.add(banner.dataset.completionKey);banner.remove();document.querySelector('.recap h1,.town-complete h2')?.closest('main')?.focus();}
       return;
@@ -795,7 +799,7 @@
         "select",
         "part",
         "rotate",
-        "h-place", "h-clear", "p5-add", "p5-value", "p5-shade", "p5-submit",
+        "h-place", "h-clear", "p5-add", "p5-value", "p5-shade", "p5-count", "p5-submit",
         "m-point", "m-array", "m-layer", "m-chart", "m-budget-place",
         "solve",
         "hint",

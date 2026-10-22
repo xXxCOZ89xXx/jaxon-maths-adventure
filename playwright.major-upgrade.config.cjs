@@ -1,0 +1,1 @@
+const base=require('./playwright.quality.config.cjs');module.exports={...base,testMatch:/(?:gameplay-quality|major-upgrade)\.spec\.cjs/,reporter:[['list'],['json',{outputFile:'tests/artifacts/major-upgrade-browser.json'}]]};

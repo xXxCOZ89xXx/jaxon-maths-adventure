@@ -14,7 +14,9 @@
     stats_pie: "fractions",
     measure_speed: "measure_units",
   };
+  const education=typeof module!=="undefined"?require("./education").V6Education:root.V6Education;
   function skill(s, id) {
+    const lower=education.minBand(id);
     const rounds = (s.discovery?.[id]?.rounds || []).filter(
         (r) => r.total >= 4,
       ),
@@ -24,7 +26,7 @@
       c = s.checks?.[id];
     let band = rounds.length
         ? Math.max(
-            5,
+            lower,
             Math.min(
               9,
               rounds.at(-1).band +
@@ -35,7 +37,7 @@
                     : 0),
             ),
           )
-        : 5,
+        : lower,
       reason = rounds.length
         ? "Your short discovery round"
         : "A gentle starting point; discovery is optional";
@@ -45,7 +47,7 @@
         band = Math.min(9, band + 1);
         reason = "Two separate independent checks";
       } else if (recent.every((r) => r.correct / r.total <= 0.5)) {
-        band = Math.max(5, band - 1);
+        band = Math.max(lower, band - 1);
         reason = "More teaching after repeated independent difficulty";
       }
     }
@@ -54,17 +56,17 @@
       reason = "Fresh and spaced independent evidence";
     }
     if (c?.reteach && c.score <= 50) {
-      band = Math.max(5, band - 1);
+      band = Math.max(lower, band - 1);
       reason = "An easier teaching step after a complete check";
     }
-    const pre = prerequisites[id],
+    const pre = education.prerequisites[id]?.[0]||prerequisites[id],
       gaps =
         pre &&
         ((s.checks?.[pre]?.reteach && s.checks[pre].score <= 50) ||
           ((s.discovery?.[pre]?.rounds || []).slice(-2).length >= 2 &&
             s.discovery[pre].rounds.slice(-2).every((r) => r.correct <= 1)));
     if (gaps) {
-      band = 5;
+      band = lower;
       reason = "Revisit " + pre.replaceAll("_", " ") + " alongside this skill";
     }
     return {
@@ -72,6 +74,7 @@
       tier: band <= 6 ? 1 : band <= 8 ? 2 : 3,
       reason,
       prerequisite: pre || null,
+      prerequisiteGaps:education.gaps(s,id),
     };
   }
   function world(s, id, curriculum, ids = null) {

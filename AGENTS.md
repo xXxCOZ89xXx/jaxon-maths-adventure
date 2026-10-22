@@ -2,6 +2,10 @@
 
 This file governs V3 development, currently on `codex/v3-adventure-build` in draft PR #2. The user’s 20 October continuation approval includes Practical Maths Town as the ninth current world, deeper gameplay in all nine worlds, and explorer/camp improvements. Read `docs/V3-ADVENTURE-BRIEF.md` and `docs/V3-TEST-ISOLATION.md` first. The user has approved the complete adventure redesign and prefers one major acceptance test near completion instead of repeated requests for manual tests.
 
+## Current major-upgrade checkpoint — owner instruction, 22 October 2026
+
+The new educational/gameplay/graphics request supersedes the earlier feature freeze and automatic-release approval for this phase. Develop education, connected Town improvements and a four-screen playable visual sample on `codex/v3-adventure-build`. Keep `release/ipad` at the working `2e84e74` game. **Present the actual playable Town map, kitchen, supermarket and industrial train sample for owner visual-direction approval before redesigning other worlds/locations or promoting a release.** After that approval, complete the full upgrade and focused acceptance before automatic publication. No commercial billing/registration, Supabase changes or hosting configuration changes. Preserve historical evidence, old task snapshots, storage namespaces and immutable pending saves. Curriculum mapping is partial coverage, never a full Years 3–9 coverage claim.
+
 ## Current scope and ongoing architecture principles — owner approved
 
 The private game is feature-frozen at `2d9cb055cbdda766349189a7f1017b31948d83e4`: nine worlds, 55 skills and 27 Practical Maths Town adventures. This section takes precedence over older implementation instructions below where they imply further development. Future commercialisation and hosting portability are planning requirements, not permission to implement commercial features. Keep the shortest safe route to private iPad play; do not initiate rebuilds, migrations, deployments, broad audits or new release preparation merely to satisfy these principles.

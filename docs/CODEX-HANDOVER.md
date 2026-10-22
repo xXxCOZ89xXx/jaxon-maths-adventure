@@ -1,6 +1,18 @@
 # Codex handover — V5.1 usability and automated regression
 
-## Owner-approved interactive release — 22 October 2026
+## Major upgrade — graphical approval checkpoint, 22 October 2026
+
+New owner attachment requests education, connected Town and graphics improvements, with a mandatory four-screen playable sample before the full visual rollout. **The previous automatic-release approval does not apply to this sample. Keep `release/ipad` at `2e84e74d9fbcb22208b6332ca98f2cd7466912d3`; do not deploy or change Cloudflare/Supabase.** Owner approval of the actual sample is the next checkpoint; afterwards complete the remaining upgrade and its acceptance before automatic release.
+
+Implemented `v3/education.js`: eight foundation skills (63 total), DfE-linked partial curriculum/prerequisite mapping for all skills, six problem structures in 13 expanded skills, lower foundation bands, varied fresh rounds, misconception explanations, progressive hints, distinct examples, prerequisite evidence before dependent checks, and versioned stronger mastery evidence with a spaced revisit. Keep historical mastery/evidence intact; no migration-based reclassification or evidence truncation. See `docs/CURRICULUM-REVIEW.md` and generated `docs/CURRICULUM-MAP.json` for the actual limits. Fifty skill banks and several curriculum areas still need deeper coverage after the checkpoint; do not claim complete Years 3–9 coverage or months-long acceptance.
+
+Town keeps all 27 IDs plus Bolognese/lentil: seven jobs each have short/long shift branches with different finish time, wages and budgets. Cooking adds tray choice, batches, weighing, coordinated timings and actual elapsed preparation. Old task snapshots remain unchanged. The old published Bolognese generator was fetched read-only solely to create a synthetic compatibility fixture; no personal records were fetched. Existing immutable queues, auth/PIN/wallet/reward modules, 60-minute target and 1:1 rules are unchanged.
+
+`v3/visual-sample.js` limits new art to the Town map, kitchen, supermarket and industrial freight activity. Home opens all Town plan categories. Running screenshots and play instructions are in `docs/MAJOR-UPGRADE-SAMPLE.md`. `preview-dist/PLAY-V3.html` is a generated fictional offline artifact, never a live deployment. Other worlds/venues retain their prior art until visual approval. All tests use synthetic/offline or intercepted accounts, with external requests denied.
+
+Focused result: 48 passing representative Chromium-touch browser cases in both iPad orientations, plus six passing final curry/soup/pancake cases; 10,920 generated-question invariants; 2,091 Town stage checks and 1,107 mission definitions; 14 baseline hands-on logic groups; old V1/V2 and published V3 snapshot preservation. Rendered screens were inspected. No broad suites, SQL, hosted learner writes or physical Safari certification. Summary: `tests/artifacts/major-upgrade-summary.json`. Run `npm run test:major-upgrade` for the current focused suite.
+
+## Owner-approved interactive release — previous release, 22 October 2026
 
 **Published:** game commit `2e84e74d9fbcb22208b6332ca98f2cd7466912d3` is on `release/ipad`. GitHub push automatically built, verified and deployed successfully as Pages deployment `808e1cf8-45db-4fce-a631-e3c148a21e15`; project canonical deployment points to it. Post-publication API readback confirms parent-email-only OTP Access remains on both exact/wildcard hostnames and previews remain disabled. Same staging project `sfogrvedypgtxfvecmbx`. Authenticated physical Safari play/save/reopen remains the owner check; Codex did not use the parent’s OTP or real learner session. Reopen/refresh the existing address; never clear Safari data or pending saves for this update.
 

@@ -1984,3 +1984,41 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .cooker-window span {font-size:3rem}.temperature-dial {display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-top:16px}
 .temperature-dial button {min-width:90px;min-height:70px;border-radius:50%;border:4px solid #7e8c70}
 .temperature-dial button[aria-pressed="true"] {border-color:#325e35;background:#b8d5a1}
+
+/* Four-screen direction sample. Other worlds keep their existing appearance. */
+.direction-sample {background:#a3b6a6;border:1px solid #728973;border-radius:10px}
+.town-scene.direction-sample {filter:drop-shadow(0 12px 10px #203e3420)}
+.industrial-yard {background:#dde3d4;border:2px solid #657b65;border-radius:8px;padding:18px;color:#233c3a;overflow:hidden}
+.yard-heading {display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-bottom:2px solid #8e9f84;padding-bottom:12px;font-size:.8rem;letter-spacing:.04em}
+.freight-track {display:flex;align-items:end;overflow-x:auto;max-width:100%;padding:12px 4px 14px;background:linear-gradient(#9cad9e,#a2ae99);border-bottom:8px solid #5b6c58}
+.freight-track>span {flex:0 0 128px;margin-right:-5px}.freight-object {display:block;width:100%;height:auto;max-height:140px}
+.freight-sidings {display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:18px}
+.freight-sidings button {padding:4px;border:2px solid #859680;border-radius:5px;background:#f0f0df;min-height:90px}
+.freight-sidings button[aria-pressed="true"] {border:3px solid #365d37;background:#c0d1ad;box-shadow:0 0 0 2px #f6edc9 inset}
+.coupling-target {outline:2px dashed #466a46;outline-offset:-4px}.locomotive {min-width:142px}
+.town-stock-scene.kitchen-stock {background:#d9d9c5;border:2px solid #5d7258;border-radius:8px;padding:18px}
+.kitchen-stock .shelf-product {background:transparent;border:0;padding:0}
+.kitchen-stock .stock-door {background:repeating-linear-gradient(90deg,#698063 0,#698063 14px,#5b7255 14px,#5b7255 16px);border:6px solid #c4c5ab;box-shadow:3px 6px 0 #53674c;border-radius:4px;color:#eff0dc;min-height:155px}
+.kitchen-stock .stock-door summary {padding:18px 24px 18px 10px;color:#f0f0db;border:1px solid #455d41;background:transparent;position:relative;min-height:135px;line-height:1.5}
+.kitchen-stock .stock-door summary:after {content:'';position:absolute;right:9px;top:45px;width:5px;height:40px;background:#d1c9a4;box-shadow:2px 2px 0 #3e5941}
+.kitchen-stock .stock-door[open] {background:#e7e8d4;color:#273f30}
+.kitchen-stock .stock-door[open] summary {min-height:55px;color:#264734;background:#c4cfb5}
+.kitchen-stock .stock-door[open] summary:after {height:24px;top:15px}
+.kitchen-stock .fridge-compartment .stock-door {background:#b9cbc2;color:#233d32;border-color:#e1e4d1}
+.kitchen-stock .fridge-compartment .stock-door summary {color:#244337;border-color:#8aa195}
+.kitchen-stock .stock-objects {min-height:75px;border-bottom:5px solid #91a291;background:#f0f1dd}
+.kitchen-stock .collect-product {margin-top:10px;border-radius:4px;background:#bcd0a5}
+.supermarket-shelves {background:#d8e0c9;border:2px solid #6d8260;border-radius:8px;padding:18px}
+.supermarket-shelves .product-shelves {gap:20px 12px;border-bottom:12px solid #7b8062;padding-bottom:16px}
+.supermarket-shelves .shelf-product {border:0;border-left:5px solid #6d7f5b;border-right:5px solid #6d7f5b;border-radius:0;box-shadow:0 8px 0 #8b8a66;background:linear-gradient(#7e9676 0,#bcc9a6 70%,#d8d8b5 70%);padding:10px 4px 0}
+.supermarket-shelves .collect-product {border:0;background:transparent;box-shadow:none;min-height:175px}
+.supermarket-shelves .collect-product .product-art {filter:drop-shadow(5px 6px 2px #304d3430);height:65px}
+.supermarket-shelves .basket-model {background:repeating-linear-gradient(0deg,#c6cbb0 0,#c6cbb0 12px,#889c78 12px,#889c78 15px);border:5px solid #506848;border-radius:8px 8px 20px 20px;padding:14px;margin-top:28px;box-shadow:4px 7px 0 #50684840}
+.supermarket-shelves .basket-model h3 {background:#e0e7cc;padding:7px}.basket-model button {min-height:48px}
+.prerequisite-path {padding:16px;background:#e2e8d2;border:2px solid #6f8e59;border-radius:8px;margin-bottom:20px}.prerequisite-path button {margin:5px}
+@media(min-width:950px){.quest-layout:has(.direction-sample.location-scene) {display:grid;grid-template-columns:minmax(300px,.8fr) minmax(400px,1.2fr);align-items:start}.quest-layout:has(.direction-sample.location-scene) .stage-vista {position:sticky;top:12px}.quest-layout:has(.direction-sample.location-scene) .stage-workbench {min-width:0;padding:22px}}
+@media(max-width:949px){.quest-layout .direction-sample.location-scene {max-height:300px;object-fit:contain}.freight-track>span {flex-basis:125px}.kitchen-stock .product-shelves,.supermarket-shelves .product-shelves {grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.direction-sample,.industrial-yard *,.kitchen-stock *,.supermarket-shelves * {animation:none!important;transition:none!important}}
+.count-array {display:grid;grid-template-columns:repeat(var(--columns),minmax(44px,1fr));gap:5px;overflow:auto;padding:8px;background:#d5dfc7;border:2px solid #66835b;max-width:100%}
+.count-array button {min-width:44px;min-height:44px;background:#b3c49e;color:#304a32;border:2px solid #6d845e;border-radius:3px}
+.count-array button[aria-pressed="true"] {background:#416b40;color:#f3f0d7;box-shadow:0 0 0 2px #c4deab inset}

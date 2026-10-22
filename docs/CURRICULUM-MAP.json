@@ -1,0 +1,867 @@
+{
+  "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+  "reviewed": "2026-10-22",
+  "scope": "Partial Years 3–6 and KS3 (Years 7–9) mapping; KS3 is not prescribed by individual year",
+  "skills": [
+    {
+      "id": "place",
+      "name": "Place value",
+      "world": "number",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–6 number/place value: representing, partitioning and rounding",
+      "status": "partial",
+      "prerequisites": [
+        "number_bonds"
+      ],
+      "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "operations",
+      "name": "Addition and subtraction",
+      "world": "number",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–6 addition/subtraction: mental and written methods, inverse checking",
+      "status": "partial",
+      "prerequisites": [
+        "number_bonds",
+        "place"
+      ],
+      "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "negative",
+      "name": "Negative numbers",
+      "world": "number",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y5–6 number: integers below zero; KS3 signed arithmetic",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "multiply",
+      "name": "Multiply and divide",
+      "world": "number",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–6 multiplication/division: facts, written methods and contextual remainders",
+      "status": "partial",
+      "prerequisites": [
+        "times_tables",
+        "division_groups"
+      ],
+      "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "priority",
+      "name": "Order of operations",
+      "world": "number",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y6/KS3 number: operation priority and brackets",
+      "status": "partial",
+      "prerequisites": [
+        "multiply",
+        "operations"
+      ],
+      "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "fractions",
+      "name": "Fractions of amounts",
+      "world": "fractions",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–6 fractions: fractions of quantities",
+      "status": "partial",
+      "prerequisites": [
+        "fraction_parts",
+        "division_groups"
+      ],
+      "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "fraction_compare",
+      "name": "Compare fractions",
+      "world": "fractions",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–6 fractions: equivalent fractions and comparison",
+      "status": "partial",
+      "prerequisites": [
+        "fraction_parts"
+      ],
+      "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "fraction_operations",
+      "name": "Add and subtract fractions",
+      "world": "fractions",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–6 fractions: addition/subtraction",
+      "status": "partial",
+      "prerequisites": [
+        "fraction_parts",
+        "fractions"
+      ],
+      "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "decimals",
+      "name": "Decimals and percentages",
+      "world": "fractions",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y4–6 decimals/percentages: equivalence and conversion",
+      "status": "partial",
+      "prerequisites": [
+        "decimal_place",
+        "fraction_parts"
+      ],
+      "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "percent_change",
+      "name": "Percentage change",
+      "world": "fractions",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y6/KS3 percentages: increase/decrease",
+      "status": "partial",
+      "prerequisites": [
+        "decimals"
+      ],
+      "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "algebra_patterns",
+      "name": "Patterns and sequences",
+      "world": "algebra",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y6/KS3 algebra: generating and describing sequences",
+      "status": "partial",
+      "prerequisites": [
+        "operations"
+      ],
+      "gaps": "Inequalities, functions, nth terms, factorisation and straight-line graphs remain partial or absent.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "algebra_missing",
+      "name": "Missing numbers",
+      "world": "algebra",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y6/KS3 algebra: unknowns and equations",
+      "status": "partial",
+      "prerequisites": [
+        "number_bonds"
+      ],
+      "gaps": "Inequalities, functions, nth terms, factorisation and straight-line graphs remain partial or absent.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "algebra_expressions",
+      "name": "Expressions",
+      "world": "algebra",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "KS3 algebra: notation, substitution and collecting terms",
+      "status": "partial",
+      "prerequisites": [
+        "multiply"
+      ],
+      "gaps": "Inequalities, functions, nth terms, factorisation and straight-line graphs remain partial or absent.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "geometry_angles",
+      "name": "Angles and turns",
+      "world": "geometry",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–6/KS3 geometry: angles and turns",
+      "status": "partial",
+      "prerequisites": [
+        "geometry_shapes"
+      ],
+      "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "geometry_triangles",
+      "name": "Triangles and polygons",
+      "world": "geometry",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y4–6/KS3 geometry: classifying polygons and angle sums",
+      "status": "partial",
+      "prerequisites": [
+        "geometry_angles"
+      ],
+      "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "geometry_area",
+      "name": "Perimeter and area",
+      "world": "geometry",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y4–6/KS3 measures: perimeter and area",
+      "status": "partial",
+      "prerequisites": [
+        "times_tables",
+        "geometry_shapes"
+      ],
+      "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "ratio_basics",
+      "name": "Understanding ratios",
+      "world": "ratio",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y6/KS3 ratio: notation and equivalent ratios",
+      "status": "partial",
+      "prerequisites": [
+        "times_tables",
+        "fraction_parts"
+      ],
+      "gaps": "Inverse proportion, similarity and compound units need further development.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "ratio_sharing",
+      "name": "Sharing in a ratio",
+      "world": "ratio",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y6/KS3 ratio: unequal sharing",
+      "status": "partial",
+      "prerequisites": [
+        "ratio_basics"
+      ],
+      "gaps": "Inverse proportion, similarity and compound units need further development.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "ratio_proportion",
+      "name": "Recipes and proportion",
+      "world": "ratio",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y6/KS3 ratio: scaling recipes and direct proportion",
+      "status": "partial",
+      "prerequisites": [
+        "ratio_basics",
+        "fractions"
+      ],
+      "gaps": "Inverse proportion, similarity and compound units need further development.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "stats_averages",
+      "name": "Averages",
+      "world": "statistics",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y6/KS3 statistics: mean, median, mode and range",
+      "status": "partial",
+      "prerequisites": [
+        "division_groups"
+      ],
+      "gaps": "Sampling, grouped data, scatter graphs and comparing distributions are not comprehensively covered.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "stats_tables",
+      "name": "Tables and charts",
+      "world": "statistics",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–6/KS3 statistics: tables and charts",
+      "status": "partial",
+      "prerequisites": [
+        "stats_scale"
+      ],
+      "gaps": "Sampling, grouped data, scatter graphs and comparing distributions are not comprehensively covered.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "stats_probability_data",
+      "name": "Interpreting data",
+      "world": "statistics",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y6/KS3 statistics: interpreting proportions in data",
+      "status": "partial",
+      "prerequisites": [
+        "decimals",
+        "stats_scale"
+      ],
+      "gaps": "Sampling, grouped data, scatter graphs and comparing distributions are not comprehensively covered.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "prob_chance",
+      "name": "Chance and probability",
+      "world": "probability",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "KS3 probability: chance language and 0–1 scale",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Unequally likely events, experimental frequency, set diagrams and dependent events need further development.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "prob_events",
+      "name": "Counting outcomes",
+      "world": "probability",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "KS3 probability: enumerating equally likely outcomes",
+      "status": "partial",
+      "prerequisites": [
+        "prob_chance"
+      ],
+      "gaps": "Unequally likely events, experimental frequency, set diagrams and dependent events need further development.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "prob_compare",
+      "name": "Comparing probability",
+      "world": "probability",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "KS3 probability: comparing likelihoods",
+      "status": "partial",
+      "prerequisites": [
+        "fraction_compare"
+      ],
+      "gaps": "Unequally likely events, experimental frequency, set diagrams and dependent events need further development.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "measure_units",
+      "name": "Units and conversions",
+      "world": "measure",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–6/KS3 measures: standard units and conversion",
+      "status": "partial",
+      "prerequisites": [
+        "decimal_place",
+        "measure_mass"
+      ],
+      "gaps": "Estimation, non-decimal time, scale drawings and composite measure tasks remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "measure_volume",
+      "name": "Volume and capacity",
+      "world": "measure",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y5–6/KS3 measures: capacity and cuboid volume",
+      "status": "partial",
+      "prerequisites": [
+        "times_tables",
+        "measure_mass"
+      ],
+      "gaps": "Estimation, non-decimal time, scale drawings and composite measure tasks remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "measure_speed",
+      "name": "Speed and distance",
+      "world": "measure",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "KS3 ratio/measures: speed, distance and time",
+      "status": "partial",
+      "prerequisites": [
+        "measure_units",
+        "division_groups"
+      ],
+      "gaps": "Estimation, non-decimal time, scale drawings and composite measure tasks remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "factors",
+      "name": "Factors, multiples and primes",
+      "world": "number",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y4–6/KS3 number: factors, multiples and primes",
+      "status": "partial",
+      "prerequisites": [
+        "times_tables"
+      ],
+      "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "powers",
+      "name": "Squares, cubes and roots",
+      "world": "number",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y5–6/KS3 number: powers and roots",
+      "status": "partial",
+      "prerequisites": [
+        "times_tables"
+      ],
+      "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "fraction_mixed",
+      "name": "Mixed and improper fractions",
+      "world": "fractions",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y5–6 fractions: mixed/improper equivalence",
+      "status": "partial",
+      "prerequisites": [
+        "fraction_parts"
+      ],
+      "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "fraction_mult",
+      "name": "Multiply and divide fractions",
+      "world": "fractions",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y5–6/KS3 fractions: multiplication/division",
+      "status": "partial",
+      "prerequisites": [
+        "fractions",
+        "multiply"
+      ],
+      "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "algebra_brackets",
+      "name": "Expand brackets",
+      "world": "algebra",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "KS3 algebra: distributive law",
+      "status": "partial",
+      "prerequisites": [
+        "algebra_missing",
+        "multiply"
+      ],
+      "gaps": "Inequalities, functions, nth terms, factorisation and straight-line graphs remain partial or absent.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "algebra_coordinates",
+      "name": "Coordinates and graphs",
+      "world": "algebra",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y4–6/KS3 geometry/algebra: coordinates and graphs",
+      "status": "partial",
+      "prerequisites": [
+        "negative"
+      ],
+      "gaps": "Inequalities, functions, nth terms, factorisation and straight-line graphs remain partial or absent.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "geometry_transforms",
+      "name": "Symmetry and transformations",
+      "world": "geometry",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y4–6/KS3 geometry: translation, reflection and rotation",
+      "status": "partial",
+      "prerequisites": [
+        "algebra_coordinates"
+      ],
+      "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "geometry_circle",
+      "name": "Circles and circumference",
+      "world": "geometry",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y6/KS3 geometry: circle properties and circumference",
+      "status": "partial",
+      "prerequisites": [
+        "geometry_area"
+      ],
+      "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "ratio_rates",
+      "name": "Unit rates and best buys",
+      "world": "ratio",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "KS3 ratio: unit rates and comparisons",
+      "status": "partial",
+      "prerequisites": [
+        "division_groups"
+      ],
+      "gaps": "Inverse proportion, similarity and compound units need further development.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "stats_pie",
+      "name": "Pie charts and proportions",
+      "world": "statistics",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y6/KS3 statistics: pie charts and proportions",
+      "status": "partial",
+      "prerequisites": [
+        "fractions",
+        "geometry_angles"
+      ],
+      "gaps": "Sampling, grouped data, scatter graphs and comparing distributions are not comprehensively covered.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "measure_time",
+      "name": "Reading time and timetables",
+      "world": "measure",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–6 measurement: time and timetables",
+      "status": "partial",
+      "prerequisites": [
+        "number_bonds"
+      ],
+      "gaps": "Estimation, non-decimal time, scale drawings and composite measure tasks remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_money",
+      "name": "UK coins and notes",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: UK coins and notes",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_totals",
+      "name": "Shopping totals and change",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Shopping totals and change",
+      "status": "partial",
+      "prerequisites": [
+        "operations"
+      ],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_menu",
+      "name": "Menus and spending budgets",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Menus and spending budgets",
+      "status": "partial",
+      "prerequisites": [
+        "multiply"
+      ],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_split",
+      "name": "Sharing a bill fairly",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Sharing a bill fairly",
+      "status": "partial",
+      "prerequisites": [
+        "division_groups"
+      ],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_balance",
+      "name": "Balances, deposits and withdrawals",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Balances, deposits and withdrawals",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_interest",
+      "name": "Saving and simple interest",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Saving and simple interest",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_discounts",
+      "name": "Discounts and sale prices",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Discounts and sale prices",
+      "status": "partial",
+      "prerequisites": [
+        "decimals"
+      ],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_value",
+      "name": "Unit prices and offers",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Unit prices and offers",
+      "status": "partial",
+      "prerequisites": [
+        "division_groups"
+      ],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_timetable",
+      "name": "Timetables and journey durations",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Timetables and journey durations",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_travel",
+      "name": "Travel costs and ticket choices",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Travel costs and ticket choices",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_bills",
+      "name": "Bills and energy readings",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Bills and energy readings",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_household",
+      "name": "Household budgeting and measures",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Household budgeting and measures",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_tickets",
+      "name": "Ticket prices and allowances",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Ticket prices and allowances",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_time",
+      "name": "Planning activity times",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Planning activity times",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_wages",
+      "name": "Hours worked and gross wages",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Hours worked and gross wages",
+      "status": "partial",
+      "prerequisites": [
+        "multiply"
+      ],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "town_payslip",
+      "name": "Understanding a simple payslip",
+      "world": "town",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Applied number/measurement: Understanding a simple payslip",
+      "status": "partial",
+      "prerequisites": [
+        "operations"
+      ],
+      "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": "existing bank; further depth review pending"
+    },
+    {
+      "id": "number_bonds",
+      "name": "Number bonds and inverse facts",
+      "world": "number",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3 number: addition, subtraction and inverse checking",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "times_tables",
+      "name": "Equal groups and times-table facts",
+      "world": "number",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–4 number: multiplication/division facts through 12 × 12",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "division_groups",
+      "name": "Sharing, grouping and remainders",
+      "world": "number",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–4 number: division and interpreting remainders",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "fraction_parts",
+      "name": "Equal parts and unit fractions",
+      "world": "fractions",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3 fractions: unit/non-unit fractions and equal wholes",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "decimal_place",
+      "name": "Tenths, hundredths and decimal place value",
+      "world": "fractions",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y4–5 fractions/decimals: tenths, hundredths and place value",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "measure_mass",
+      "name": "Mass, scales and capacity foundations",
+      "world": "measure",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–4 measurement: mass/capacity and reading scaled instruments",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Estimation, non-decimal time, scale drawings and composite measure tasks remain partial.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "geometry_shapes",
+      "name": "Shape properties and classification",
+      "world": "geometry",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–4 geometry: sides, right angles, parallel/perpendicular lines",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    },
+    {
+      "id": "stats_scale",
+      "name": "Tables, pictograms and chart scales",
+      "world": "statistics",
+      "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
+      "objective": "Y3–4 statistics: scaled pictograms, bar charts and tables",
+      "status": "partial",
+      "prerequisites": [],
+      "gaps": "Sampling, grouped data, scatter graphs and comparing distributions are not comprehensively covered.",
+      "reviewed": "2026-10-22",
+      "questionStructures": 6
+    }
+  ]
+}
