@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-22",
+  "developmentBase": "eff5d677a8fa18f17de980519bae532a51f19f82",
+  "unchangedRelease": "2e84e74d9fbcb22208b6332ca98f2cd7466912d3",
+  "result": "PASS",
+  "uniquePassingCases": 14,
+  "viewports": [{"width":820,"height":1180},{"width":1180,"height":820}],
+  "browser": "Chromium touch emulation; physical Safari not tested",
+  "runs": [
+    {"command":"npx playwright test -c playwright.art-checkpoint.config.cjs", "passed":10, "scope":"Camp targets/navigation, standalone embedded assets/keyboard/reduced motion, whole connected meal and exact reopen, Town stock/shelves, freight wrong/hint/connect/order/reopen"},
+    {"command":"npx playwright test -c playwright.quality.config.cjs --grep 'original-bolognese: full touch|Mocked cloud keeps immutable pending'", "passed":4, "scope":"Existing full-touch meal and intercepted immutable offline queue/reconnection"},
+    {"command":"npx playwright test -c playwright.art-checkpoint.config.cjs --grep 'industrial freight'", "passed":2, "repeatOfExistingCases":true, "scope":"After final layout fix: every connected wagon visible without horizontal scrolling, touch/order/reopen"}
+  ],
+  "isolation":"Fictional offline or intercepted synthetic backend only; no live Supabase calls or personal progress writes",
+  "assets":14,
+  "runtimeAssetBytes":2853182,
+  "renderedScreenshots":"docs/art-direction/screenshots: six affected screens in each orientation",
+  "approval":"Owner rendered-sample approval required before Phase 3 or publication; release branch unchanged"
+}

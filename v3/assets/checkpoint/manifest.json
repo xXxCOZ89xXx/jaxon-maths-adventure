@@ -1,0 +1,131 @@
+{
+  "source": "Original assets generated for this game; no reference-board crops. PNG masters retained in workspace/generated_images.",
+  "assets": {
+    "camp": {
+      "file": "v3/assets/checkpoint/camp.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 369964,
+      "sha256": "9039b45a2c804f2fdc79278432117f980699fa8358478270192916baac93a7c4",
+      "master": "exec-728d6ab0-ff3b-440f-b6fb-c507f4572b2e.png"
+    },
+    "kitchen": {
+      "file": "v3/assets/checkpoint/kitchen.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 161130,
+      "sha256": "dbdc258f40882264e3c7263dda4e3d21251e2173635118ff5acec7a42add7899",
+      "master": "exec-4ae1a132-ed83-4689-984b-609d9e978b3d.png"
+    },
+    "market": {
+      "file": "v3/assets/checkpoint/market.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 204694,
+      "sha256": "0592df5c3771128824a57b7083b5e845a9fb372ce3924d08c2baa720f71ef71f",
+      "master": "exec-62b321f9-fe43-46a5-93ae-f58a2250e0ed.png"
+    },
+    "bus": {
+      "file": "v3/assets/checkpoint/bus.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 342230,
+      "sha256": "6568727eabfe6367a77cfff7b0c5bf656b41b1f9122ff6b58301797ab30c8248",
+      "master": "exec-2e22c59f-aade-4675-8d24-6d8859f5bf92.png"
+    },
+    "rail": {
+      "file": "v3/assets/checkpoint/rail.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 494494,
+      "sha256": "87b5da8082e7829de81d37b0c388825b7ba4fa51125f4616e894310372ae54b4",
+      "master": "exec-2338bb60-1f4f-4a25-88ff-8c5eb3033247.png"
+    },
+    "town": {
+      "file": "v3/assets/checkpoint/town.webp",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 650696,
+      "sha256": "0ab7e9d4f066311fbf586b9e676112a361f78a096db4fd01ebf940e90f7fcda2",
+      "master": "exec-fcd38016-880f-4e35-a911-76cfb94c92e1.png"
+    },
+    "wagon": {
+      "file": "v3/assets/checkpoint/wagon.webp",
+      "width": 900,
+      "height": 300,
+      "alpha": true,
+      "bytes": 50852,
+      "sha256": "240add7f9c93efecca977c150725531459722f69a754c8a1217d9c0098810315",
+      "master": "exec-11ee55ef-c87f-4df9-b71c-dec165ab4e51.png"
+    },
+    "engine": {
+      "file": "v3/assets/checkpoint/engine.webp",
+      "width": 900,
+      "height": 450,
+      "alpha": true,
+      "bytes": 66980,
+      "sha256": "85154a79aa73f605f807d5a4d9f124777ca97cfb49560fa38528c8cc63c8d6a1",
+      "master": "exec-bd655eb8-4404-4a24-96d3-d24cfacaeb31.png"
+    },
+    "explorer": {
+      "file": "v3/assets/checkpoint/explorer.webp",
+      "width": 667,
+      "height": 1000,
+      "alpha": true,
+      "bytes": 65306,
+      "sha256": "283d997bc1f6c45bec3235ab4c5c5f13166c29ed43ee1b74c00b25bb5e51c617",
+      "master": "exec-d9c67656-9bbc-40f1-83c5-754e9df1ea45.png"
+    },
+    "pantry": {
+      "file": "v3/assets/checkpoint/pantry.webp",
+      "width": 833,
+      "height": 1000,
+      "alpha": true,
+      "bytes": 106048,
+      "sha256": "a247d5943023a34b0e9d70949cfa3bc3fb485cd1fc97e70d06c7965aab7ec2b7",
+      "master": "exec-bac4d0e7-04f4-4b21-bf28-8f0ef2866878.png"
+    },
+    "fridge": {
+      "file": "v3/assets/checkpoint/fridge.webp",
+      "width": 833,
+      "height": 1000,
+      "alpha": true,
+      "bytes": 99412,
+      "sha256": "8066f7c0ef9a559dce11218d11e823ea719b3fc1e7ac9884707cb2e17d535df4",
+      "master": "exec-606b7778-7b36-4924-8a85-a9e4e3c952b2.png"
+    },
+    "pasta": {
+      "file": "v3/assets/checkpoint/pasta.webp",
+      "width": 667,
+      "height": 1000,
+      "alpha": true,
+      "bytes": 73406,
+      "sha256": "635d1f964c06582362a114cfbfca5aa0b46b77149efe2ebf51fc7a67439bd47f",
+      "master": "exec-78f4f732-0ed4-4cdc-8de2-545bb49a40ce.png"
+    },
+    "tomato": {
+      "file": "v3/assets/checkpoint/tomato.webp",
+      "width": 900,
+      "height": 822,
+      "alpha": true,
+      "bytes": 93812,
+      "sha256": "b758292f8288d350712f0da64c0bd2ced5ca067c8fb3a6e623133bfc7d4f62ab",
+      "master": "exec-42bebd2a-1e02-4686-8efe-0ee6e6bbf8dd.png"
+    },
+    "mince": {
+      "file": "v3/assets/checkpoint/mince.webp",
+      "width": 900,
+      "height": 600,
+      "alpha": true,
+      "bytes": 74158,
+      "sha256": "06e42e6c94e150b3e6399261061be056f5449ddf2df3f4c4f8202fd4f3d12e10",
+      "master": "exec-b90deb75-628d-455d-a35f-81f94321d066.png"
+    }
+  }
+}
