@@ -90,6 +90,8 @@
     if(name==='j-pick'&&Number.isInteger(+arg)&&+arg>=0&&+arg<t.items?.length){v.picked=+arg;return true;}
     if(name==='j-clear'){v.order=[];return true;}
     if(name==='j-place'&&Number.isInteger(v.picked)&&Number.isInteger(+arg)&&+arg>=0&&+arg<t.items?.length){const a=Array(t.items.length).fill(null).map((_,i)=>v.order?.[i]??null);a.forEach((x,i)=>{if(x===v.picked)a[i]=null;});a[+arg]=v.picked;v.order=a;return true;}
+    if(name==='j-budget-pick'&&t.kind==='budget'&&[1,5,100,500,1000].includes(+arg)){v.budgetToken=+arg;return true;}
+    if(name==='j-budget-place'&&t.kind==='budget'&&Number.isInteger(+arg)&&+arg>=0&&+arg<t.labels.length&&[1,5,100,500,1000].includes(v.budgetToken)){v.parts ||= t.labels.map(()=>0);v.parts[+arg]=Math.min(t.budget,v.parts[+arg]+v.budgetToken);return true;}
     if(name==='j-part'){const i=+bits[1],n=+bits[2],max=t.kind==='budget'?t.budget:12;if(!Number.isInteger(i)||i<0||i>=t.answer.length||!Number.isInteger(n)||![-1000,-500,-100,-25,-5,-1,1,5,25,100,500,1000].includes(n))return false;v.parts ||= Array(t.answer.length).fill(0);v.parts[i]=Math.max(0,Math.min(max,(v.parts[i]||0)+n));return true;}
     if(name==='j-choice'&&Number.isInteger(+arg)&&+arg>=0&&+arg<t.options?.length){v.choice=+arg;return true;}
     if(name==='j-coin'){v.coins ||= [];if(arg==='clear')v.coins=[];else if(arg==='undo')v.coins.pop();else if([1,2,5,10,20,50,100,200,500,1000,2000,5000].includes(+arg)&&v.coins.length<100)v.coins.push(+arg);else return false;return true;}

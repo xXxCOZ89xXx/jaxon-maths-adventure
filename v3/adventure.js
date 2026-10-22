@@ -810,6 +810,7 @@
     let valid = false;
     if (key === "amount")
       valid = integer(value) && value >= (t.min || 0) && value <= t.max;
+    if (key === "budgetToken") valid=t.kind==="budget" && [1,5,100,500,1000].includes(value);
     if (key === "picked") valid = integer(value) && value>=0 && value<(t.labels||t.items||[]).length;
     if (key === "order") valid = array(value) && value.length<=t.items.length && value.every(n=>n===null || integer(n)&&n>=0&&n<t.items.length) && new Set(value.filter(n=>n!==null)).size===value.filter(n=>n!==null).length;
     if (key === "parts") {

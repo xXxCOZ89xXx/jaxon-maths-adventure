@@ -528,6 +528,13 @@
             );
           break;
         }
+        case "m-budget-pick": M.edit(s,'budgetToken',Number(arg));break;
+        case "m-budget-place": {
+          const q=M.current(s),t=q?.tasks[q.i],i=Number(arg);
+          if(t?.kind==='budget'&&Number.isInteger(i)&&i>=0&&i<t.labels.length&&[1,5,100,500,1000].includes(q.values.budgetToken)){
+            const parts=[...(q.values.parts||t.labels.map(()=>0))];parts[i]=Math.min(t.budget,parts[i]+q.values.budgetToken);M.edit(s,'parts',parts);
+          }break;
+        }
         case "m-array": {
           const q=M.current(s),bits=action.split(':');if(q)M.edit(s,'parts',[Number(bits[1]),Number(bits[2]),q.values.parts?.[2]||0]);break;
         }
@@ -789,7 +796,7 @@
         "part",
         "rotate",
         "h-place", "h-clear", "p5-add", "p5-value", "p5-shade", "p5-submit",
-        "m-point", "m-array", "m-layer", "m-chart",
+        "m-point", "m-array", "m-layer", "m-chart", "m-budget-place",
         "solve",
         "hint",
         "skip",
@@ -809,7 +816,7 @@
         "m-submit",
         "m-help",
         "m-worked",
-      ].includes(name) || ["j-part","j-choice","j-coin","j-adjust","j-value","j-submit","j-help","j-place","j-clear","j-skip"].includes(name) || el.dataset.act;
+      ].includes(name) || ["j-budget-place","j-part","j-choice","j-coin","j-adjust","j-value","j-submit","j-help","j-place","j-clear","j-skip"].includes(name) || el.dataset.act;
     const evidence = () => JSON.stringify([s.quest, s.learning, M.current(s),window.V5Journey.state(s)]);
     const previous = evidence();
     await dispatch(action);

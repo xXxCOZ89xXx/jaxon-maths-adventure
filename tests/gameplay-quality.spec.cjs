@@ -1,12 +1,12 @@
 'use strict';
 const {test,expect}=require('./helpers/identities.cjs');
-async function click(page,act){await page.locator(`[data-action="${act}"]`).first().tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+async function click(page,act){const target=page.locator(`[data-action="${act}"]`).first();const door=target.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute("open"))===null)await door.locator("summary").tap();await target.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
 async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();}
 async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
 async function setRange(page,n){const range=page.locator('[data-model-range]');await range.evaluate((el,n)=>{el.value=String(n);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));},n);await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
 async function answer(page,t,choice){
  if(['order','match'].includes(t.kind)){for(let slot=0;slot<t.answer.length;slot++){await click(page,'j-pick:'+t.answer[slot]);await click(page,'j-place:'+slot);}}
- else if(['basket','budget'].includes(t.kind)){for(let i=0;i<t.answer.length;i++){let n=t.answer[i];for(const step of t.kind==='budget'?[1000,500,100,5,1]:[1])while(n>=step){await click(page,`j-part:${i}:${step}`);n-=step;}}}
+ else if(['basket','budget'].includes(t.kind)){for(let i=0;i<t.answer.length;i++){let n=t.answer[i];for(const step of t.kind==='budget'?[1000,500,100,5,1]:[1])while(n>=step){if(t.kind==='budget'){await click(page,'j-budget-pick:'+step);await click(page,'j-budget-place:'+i);}else await click(page,`j-part:${i}:${step}`);n-=step;}}}
  else if(['choice','journey'].includes(t.kind))await click(page,'j-choice:'+(choice??t.answer));
  else if(t.kind==='coins'){let n=t.answer;for(let p of [5000,2000,1000,500,200,100,50,20,10,5,2,1])while(n>=p){await click(page,'j-coin:'+p);n-=p;}}
  else if(t.kind==='clock'){const h=Math.floor(t.answer/60),m=t.answer%60;await click(page,'j-value:'+h*60);await click(page,'j-value:'+(h*60+Math.floor(m/5)*5));if(m%5)for(let i=1;i<=m%5;i++)await click(page,'j-value:'+(h*60+Math.floor(m/5)*5+i));}
@@ -29,14 +29,14 @@ for(const [world,route,stage,kind] of worlds)test(`${world}: actual model, wrong
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
  if(world==='algebra')await page.screenshot({path:`tests/artifacts/quality-train-${page.viewportSize().width}.png`,fullPage:true});
 });
-for(const id of ['cook-pizza','shop-budget','travel-library','job-cafe','errand-post'])test(`${id}: full touch journey, context, decisions and exact reopen`,async({camp})=>{
- const {page,key,read}=camp;await page.evaluate(({key,id})=>{let s=V3Engine.fresh();s.tourSeen=true;V52TownLife.start(s,id,2);localStorage.setItem(key,JSON.stringify(s));},{key,id});await page.reload();
+for(const id of ['cook-pizza','shop-budget','travel-library','job-cafe','errand-post','original-bolognese'])test(`${id}: full touch journey, context, decisions and exact reopen`,async({camp})=>{
+ const {page,key,read}=camp;await page.evaluate(({key,id})=>{let s=V3Engine.fresh();s.tourSeen=true;if(id==='original-bolognese')V5Journey.start(s,'bolognese',2);else V52TownLife.start(s,id,2);localStorage.setItem(key,JSON.stringify(s));},{key,id});await page.reload();
  let count=0;while(!(await run(page,key)).done){const j=await run(page,key),t=j.steps[j.stage];
   if(j.stage===0){await click(page,'j-submit');if(!(await run(page,key)).solved){await click(page,'j-help');await expect(page.locator('.feedback')).toBeVisible();}}
   if((await run(page,key)).solved){await click(page,'j-next');continue;}
   if(id==='travel-library')expect(t.prompt).not.toContain('Reach Library visit');
   if(t.visualContext==='stock')await expect(page.locator('.task-controls')).not.toContainText('£');
-  if(j.recipeCard){await page.locator('.recipe-card summary').tap();await expect(page.locator('.recipe-card')).toContainText('190 °C');}
+  if(j.recipeCard){await page.locator('.recipe-card summary').tap();await expect(page.locator('.recipe-card')).toContainText(j.recipeCard.temperature+' °C');}
   await answer(page,t,id==='shop-budget'&&t.lunchChoice?t.options.findIndex(o=>o.name.startsWith('Tomato')):undefined);
   if(count===0||['choice','measure','clock'].includes(t.kind)||t.visualContext==='shelves'){const exact=await run(page,key);await page.reload();expect(await run(page,key)).toEqual(exact);}
   await click(page,'j-submit');expect((await run(page,key)).solved,`${id}: ${t.title}`).toBe(true);
@@ -72,4 +72,17 @@ test('A stale range edit cannot overwrite a replacement adventure in another tab
  const other=await context.newPage();await other.goto('/v3-adventure.html');await other.evaluate(k=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,'algebra','0',1);V3Adventure.begin(s);localStorage.setItem(k,JSON.stringify(s));},key);
  await expect(page.getByRole('heading',{name:'Generator engineer',exact:true})).toBeVisible();await page.evaluate(()=>window.releaseRangeLock());await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
  const q=(await read()).adventure.active;expect(q.world).toBe('algebra');expect(q.values.amount).toBeUndefined();await other.close();
+});
+
+test('Place-value supplies and money envelopes use tap-to-place objects',async({camp})=>{
+ const {page,key,read}=camp;
+ // Use an actual generated block task, keeping its saved task identity.
+ await page.evaluate(k=>{let s=V3Engine.fresh();s.tourSeen=true;let found=false;for(const world of V3Engine.worlds){for(const r of V3Adventure.routes(world.id)){V3Adventure.start(s,world.id,r.id,1);const q=V3Adventure.current(s),i=q.tasks.findIndex(t=>t.kind==='blocks');if(i>=0){q.i=i;q.phase='play';found=true;break;}}if(found)break;}if(!found)throw Error('No place-value activity');s.view='adventure';localStorage.setItem(k,JSON.stringify(s));},key);await page.reload();
+ await expect(page.locator('.block-supply')).toBeVisible();await click(page,'m-part:0:1');await expect(page.getByRole('button',{name:'Return 100 block',exact:true})).toBeVisible();await click(page,'m-part:0:-1');expect((await read()).adventure.active.values.parts[0]).toBe(0);
+ await page.evaluate(k=>{const s=V3Engine.fresh();s.tourSeen=true;V52TownLife.start(s,'job-cafe',1);const j=V52TownLife.state(s);j.stage=j.steps.findIndex(t=>t.kind==='budget');j.completed=Array.from({length:j.stage},(_,i)=>i);s.view='journey';localStorage.setItem(k,JSON.stringify(s));},key);await page.reload();
+ await click(page,'j-budget-pick:100');await click(page,'j-budget-place:0');expect((await run(page,key)).values.parts[0]).toBe(100);await page.reload();await expect(page.getByRole('button',{name:'Return 100 pence from Savings',exact:true})).toBeVisible();await click(page,'j-part:0:-100');expect((await run(page,key)).values.parts[0]).toBe(0);
+});
+test('Parent rewards and learner shop stay separate with the new Town save',async({family})=>{
+ const parent=await family.open('parent');await expect(parent.getByRole('heading',{name:'Staging parent dashboard'})).toBeVisible();await parent.getByLabel('Action',{exact:true}).selectOption('award');await parent.getByLabel('Amount (1 to 60)',{exact:true}).fill('10');await parent.getByRole('button',{name:'Submit parent reward'}).tap();await expect.poll(()=>family.server.wallet.bonus).toBe(10);
+ const page=await family.open('learner');await expect(page.getByRole('button',{name:'Submit parent reward'})).toHaveCount(0);await click(page,'skip-tour');await page.locator('nav [data-nav="camp"]').tap();await click(page,'nav:shop');await expect(page.locator('.shop-grid')).toBeVisible();expect(family.server.wallet.bonus).toBe(10);await page.reload();expect(family.server.wallet.bonus).toBe(10);
 });

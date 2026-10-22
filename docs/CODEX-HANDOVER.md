@@ -1,6 +1,16 @@
 # Codex handover — V5.1 usability and automated regression
 
-## Gameplay quality overhaul — development only, 22 October 2026
+## Owner-approved interactive release — 22 October 2026
+
+The owner’s mandatory-interaction attachment and “I approve the changes” explicitly authorise the completed, passing development version to be promoted to `release/ipad` and automatically published through the existing GitHub-connected Cloudflare Pages project `jaxon-maths-private-git`. The address stays https://jaxon-maths-private-git.pages.dev. This approval supersedes the earlier development-only hold below; future changes still need approval before promotion.
+
+Final additions: opening cupboard/fridge doors, tap-to-place/return base-ten blocks, select-and-place money tokens in budget envelopes, visible cooking-temperature controls and train-style ordering. These complete the earlier contextual Town and interactive-world overhaul. Existing 27 plans (5 cooking, 5 shopping, 5 travel, 7 jobs, 5 errands), original Bolognese/lentil recipes, nine worlds and 55 skills remain.
+
+Acceptance: **40/40 Chromium iPad touch cases**, both orientations, including six full journey plays per orientation (all five categories plus original Bolognese), native jug gesture, placement/reopen, wrong answers/hints, legacy snapshot preservation, immutable pending-save reconnect, stale cross-tab protection, parent reward/learner separation and wardrobe access. Logic checks cover 1,983 Town stages, 1,107 mission definitions, all lunch branches and older V1/V2 saves. Configured staging build passes the existing static verifier. Rendered train and kitchen screens inspected. Physical Safari feel remains an owner device check; automated tests made no live learner/backend writes.
+
+Pre-promotion Cloudflare readback confirms exact and wildcard Access applications still have only the parent’s existing email Allow policy with the one-time-code provider; previews remain disabled and only `release/ipad` publishes automatically. Do not change these settings. Same staging Supabase project, origin, account/PIN modules, cloud adapter, wallet/reward rules, storage namespaces and immutable queue protocol. No SQL or account changes. Old runs keep their task snapshots until completed; new runs receive the improved content. Publication outcome/commit are reported by the current task and can be read from the release branch and Pages deployment.
+
+## Gameplay quality overhaul — previous development stage, 22 October 2026
 
 The owner confirms the current Cloudflare game works and saves on the physical iPad. Its published release remains `2d9cb055cbdda766349189a7f1017b31948d83e4`, on `release/ipad`, at https://jaxon-maths-private-git.pages.dev. Do not promote or deploy this continuation without separate approval. The owner’s latest gameplay request supersedes the freeze for development only.
 

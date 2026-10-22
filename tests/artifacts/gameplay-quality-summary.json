@@ -1,12 +1,11 @@
 {
-  "scope": "Development only; offline and intercepted synthetic fixtures",
-  "releaseUnchanged": "2d9cb055cbdda766349189a7f1017b31948d83e4",
+  "scope": "Owner-approved next release; offline and intercepted synthetic acceptance",
   "fullRepresentativeBrowserRun": {
-    "passed": 32,
+    "passed": 40,
     "failed": 0,
     "orientations": [
-      "820×1180",
-      "1180×820"
+      "820\u00d71180",
+      "1180\u00d7820"
     ],
     "engine": "Chromium with touch"
   },
@@ -42,5 +41,15 @@
     "lunch supermarket"
   ],
   "physicalSafari": false,
-  "hostedWrites": 0
+  "hostedWrites": 0,
+  "finalAcceptance": {
+    "allNineWorlds": true,
+    "allFiveTownCategories": true,
+    "fullOriginalBolognese": true,
+    "parentRewardsAndLearnerBoundary": true,
+    "pendingQueueReconnect": true,
+    "staleCrossTabRange": true,
+    "stagingBuildVerified": true,
+    "liveWrites": 0
+  }
 }

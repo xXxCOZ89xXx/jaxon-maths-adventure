@@ -1,6 +1,6 @@
 # Gameplay quality continuation
 
-Owner's physical iPad feedback supersedes the feature freeze for development only. Do not update `release/ipad` or deploy. The owner confirms the current hosted game saves successfully.
+Owner's physical iPad feedback supersedes the feature freeze. The subsequent mandatory-interaction instruction and explicit approval authorise the next automatic release once the focused acceptance checks pass. The owner confirms the previously hosted game saves successfully.
 
 Pre-code inventory:
 - All 27 Town plans use five category generators. `shoppingTrip` adds cupboards even to shopping with no stock. `homeCheck` supplies its own ordering answer. Travel uses full scenario titles as destinations. Non-money durations are incorrectly represented as clocks.
@@ -42,6 +42,14 @@ The focused browser suite uses synthetic offline and intercepted-family fixtures
 
 Town remains a guided simulation, not an unrestricted cooking or shopping sandbox. The lunch alternatives and acceptable substitutes are authored; cash/time/inventory are pretend. Cooking uses recipe references and ordering/measurement tasks rather than simulated heat or food preparation. Some venues still share existing Town background art. Interactions are tap-first with native range gestures and keyboard support; this is not a universal drag-and-drop system.
 
-Supported skill practice retains optional numeric entry/place-value tools for calculations and answers that need exact numerical notation; separate discovery/independent checks retain their choice format and no teaching aids. Older saved runs deliberately keep their previous content until completion. Legacy browser suites tied to removed numeric-editor/clock selectors need to use the new quality suite rather than being described as passes. A physical Safari review of the new interaction feel remains an owner acceptance step after separate protected-preview approval.
+Supported skill practice retains optional numeric entry/place-value tools for calculations and answers that need exact numerical notation; separate discovery/independent checks retain their choice format and no teaching aids. Older saved runs deliberately keep their previous content until completion. Legacy browser suites tied to removed numeric-editor/clock selectors need to use the new quality suite rather than being described as passes. A physical Safari review of the new interaction feel remains the owner’s final device check after the approved release. Automated checks use Chromium touch emulation, not physical Safari.
 
-No release branch update, deployment, live data change or Supabase migration occurred.
+## Final interaction acceptance
+
+Cupboard/fridge compartments now open before stock can be inspected. Place-value supplies place visible blocks into trays and placed blocks return on tap. Budget tokens are selected and placed into actual envelopes, with a return action. Cooking temperatures use a visible equipment control, and ordered algebra carriages use the train styling. All use existing stage values; the optional selected budget token is additive JSON. No migration, storage namespace or pending-request format change.
+
+Reviewed all 31 generated task kinds against their action wording. `tests/gameplay-action-coverage.cjs` renders 1,107 mission definitions plus 1,983 Town stages across tiers/seeds and checks controls/teaching presence, physical-model use and stock/temperature requirements. This structural coverage complements the human review and representative browser plays; it is not a claim to have manually played every possible random question.
+
+Educational/preservation exceptions: calculation/notation practice, bill/pay/discount arithmetic and independent assessments retain exact numerical or choice answers; reference recipes teach sequencing rather than physically simulating chopping/heat; unfinished older task snapshots retain their original content until completion to preserve progress. Doors and recipe-card disclosure are transient views, while recorded counts and meaningful placements save normally. Tap-first controls avoid requiring precise dragging.
+
+Release uses the existing staging build and the same protected hostname. No Supabase migration, live account write or change to PINs, wallet rules, parent controls or save namespaces is part of this work.

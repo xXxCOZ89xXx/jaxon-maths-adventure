@@ -1967,3 +1967,20 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 @media(prefers-reduced-motion:reduce){.train-cart,.collect-product,.model-slider input{transition:none;animation:none}}
 .clock-face{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}.clock-face svg{width:220px;max-width:100%;height:auto}.clock-face text{font-size:18px;fill:#25432e}.clock-face strong{font-size:34px}.clock-workbench fieldset{margin:12px 0;border:1px solid #99ad8b;padding:10px}.clock-marks{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}.clock-marks button{min-height:48px;padding:8px}.clock-marks button[aria-pressed=true]{background:#426b37;color:white;border:3px solid #263c28}
 .connected-train .train-cart::after{content:'●　●';display:block;font-size:16px;line-height:16px;color:#274533}.train-engine{width:83px;height:76px;display:inline-flex;align-items:end}.train-engine svg{width:100%;height:auto}.cupboard-compartment{background:repeating-linear-gradient(0deg,#e9ddbd,#e9ddbd 18px,#e4d6b4 19px);border-color:#877044}.shelf-product>strong{display:block;border-bottom:3px solid #8d825b;padding:5px 0 8px;margin-bottom:8px}.fridge-compartment>strong{border-color:#769c9a}.stock-objects>span{min-height:60px}.recipe-card table{table-layout:fixed}.recipe-card td:first-child,.recipe-card th:first-child{width:68%}
+
+/* Direct object placement: quiet, tap-first and usable without dragging. */
+.stock-door {width:100%;border:2px solid #698654;border-radius:8px;background:#e3dac1;padding:8px}
+.stock-door summary {min-height:48px;display:list-item;padding:12px;font-weight:700;cursor:pointer}
+.fridge-compartment .stock-door {background:#e1ece3;border-color:#748c91}
+.stock-door[open] {background:#f7f2df}
+.block-supply,.placed-money {display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.block-supply button,.base-ten-tray button {min-width:48px;min-height:48px}
+.envelope-target {width:100%;min-height:120px;display:grid;gap:10px;background:#ece2bd;border:3px solid #738750;border-radius:8px}
+.envelope-target span {font-size:2.5rem}.envelope-target:active {background:#c2dbb1}
+.empty-tray {padding:16px;color:#425947}
+
+.cooking-equipment {border:4px solid #758571;border-radius:12px;background:#dedfcd;padding:20px}
+.cooker-window {min-height:130px;display:grid;place-items:center;background:#2a4136;color:#f5f0da;border:8px solid #bdc4af;border-radius:12px}
+.cooker-window span {font-size:3rem}.temperature-dial {display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-top:16px}
+.temperature-dial button {min-width:90px;min-height:70px;border-radius:50%;border:4px solid #7e8c70}
+.temperature-dial button[aria-pressed="true"] {border-color:#325e35;background:#b8d5a1}

@@ -45,7 +45,7 @@
       buy(m.ingredients,prices,requirements,'market',have);
       order('home','Prepare '+m.name,m.prep,'Open the recipe card. Arrange the preparation actions for this meal.');
       add('home','Measure the '+liquid,'measure',`Use the jug to measure ${ml/1000} litres of ${liquid} for this batch.`,ml,{unit:'ml',max:Math.max(1000,ml+500),step:50,hint:'One litre is 1,000 ml. Tap a jug scale mark, then fine-tune if needed.',worked:`${ml/1000} litres = ${ml} ml.`});
-      choice('home','Set the recipe temperature',`Use the temperature supplied on the recipe card for the ${method}. Do not guess a real food-safety temperature.`,[temperature-20,temperature,temperature+20].map(n=>({name:n+' °C',price:0})),1,{hint:'Find the temperature beside the cooking method on the recipe card.',worked:`This fictional recipe specifies ${temperature} °C.`});
+      choice('home','Set the recipe temperature',`Use the temperature supplied on the recipe card for the ${method}. Do not guess a real food-safety temperature.`,[temperature-20,temperature,temperature+20].map(n=>({name:n+' °C',price:0})),1,{visualContext:'temperature',equipment:method,hint:'Find the temperature beside the cooking method on the recipe card.',worked:`This fictional recipe specifies ${temperature} °C.`});
       amount('home','When will the meal be ready?',`Start ${m.name} at ${clock(time)}. The recipe specifies ${minutes} minutes. Set the finishing time.`,time+minutes,'time',{minutes,consume:Object.fromEntries(m.ingredients.map((n,i)=>[n,requirements[i]]))});
       order('home','Serve and tidy',['Turn off the cooking equipment','Serve the meal','Wash the used equipment'],'The meal is ready. Put these actions in a safe and useful order.');
     }else if(meta.id==='shop-budget'){
