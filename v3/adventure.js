@@ -6,6 +6,9 @@
   const H = typeof module !== "undefined" ? require("./hands-on").V5HandsOn : root.V5HandsOn;
   const AD = typeof module !== "undefined" ? require("./adaptive").V5Adaptive : root.V5Adaptive;
   const C = typeof module !== "undefined" ? require("./curriculum").V3Curriculum : root.V3Curriculum;
+  const X = typeof module !== "undefined" ? require("./curriculum-expansion").V8Curriculum : root.V8Curriculum;
+  const XA = typeof module !== "undefined" ? require("./curriculum-activities").V8Activities : root.V8Activities;
+  const curriculumRoutes = world => (X?.routes(world)||[]).filter(r=>C.skills.some(k=>k.id===r.skills[0]));
   const copy = (x) => JSON.parse(JSON.stringify(x)),
     money = T.money,
     clock = T.clock;
@@ -104,9 +107,9 @@
       q.key === id(q.world, q.route, q.tier) &&
       Number.isInteger(q.i) &&
       q.i >= 0 &&
-      q.i < 3 &&
+      q.i < q.tasks?.length &&
       Array.isArray(q.tasks) &&
-      q.tasks.length === 3 &&
+      (q.contentVersion === 8 ? [6,12].includes(q.tasks.length) : q.tasks.length === 3) &&
       q.tasks.every(
         (t) => t && typeof t.kind === "string" && t.answer !== undefined,
       ) &&
@@ -142,28 +145,30 @@
   const id = (world, route, tier) => [world, route, tier].join("|");
   function routes(world) {
     if (world === "town")
-      return T.venues.map((v) => ({
+      return [...T.venues.map((v) => ({
         id: v.id,
         name: v.name,
         guide: v.guide,
         story: v.story,
         artefact: v.reward,
         skills: v.skills,
-      }));
+      })), ...(curriculumRoutes(world))];
     const w = stories[world];
     return w
-      ? w.routes.map((name, i) => ({
+      ? [...w.routes.map((name, i) => ({
           id: String(i),
           name,
           guide: w.guide,
           story: w.intro,
           artefact: w.artefacts[i],
           skills: [],
-        }))
+        })), ...(curriculumRoutes(world))]
       : [];
   }
   function recommendation(s, world, route=null) {
-    const ids=route?[...new Set([0,1,2].map(i=>task(world,route,1,1,i).skill))]:null;
+    const course=curriculumRoutes(world).find(r=>r.id===route);
+    if(course)return AD.skill(s,course.skills[0]).tier;
+    const ids=route?[...new Set((curriculumRoutes(world).length?expandedMissionTasks(world,route,1,1):[0,1,2].map(i=>task(world,route,1,1,i))).map(t=>t.skill))]:null;
     const curriculum=world==="town"?{skills:T.venues.flatMap(v=>v.skills.map(id=>({id,world:"town"})))}:C;
     return AD.world(s,world,curriculum,ids);
   }
@@ -743,6 +748,8 @@
     return t;
   }
   function task(world, route, tier, seed, stage) {
+    const course=curriculumRoutes(world).find(r=>r.id===route);
+    if(course)return X.task(course.skills[0],[6,7,9][tier-1],seed,stage);
     if (route === "gateway") {
       if (world === "town")
         return townTask(
@@ -755,6 +762,35 @@
     }
     return H.enrich(world === "town" ? townTask(route,tier,seed,stage) : commonTask(world,route,tier,seed,stage),world,route,tier,seed,stage);
   }
+  function expandedMissionTasks(world,route,tier,seed){
+    const courses=curriculumRoutes(world),band=[6,7,9][tier-1],offset=Number(route)||0,tasks=[];
+    for(let i=0;i<6;i++){
+      let t=i<3?task(world,route,tier,seed,i):X.task(courses[((i-3)+offset)%courses.length].skills[0],band,seed,i);
+      // Reuse the original interactions, replacing a duplicated instruction with a
+      // different authored reasoning family rather than another number substitution.
+      if(tasks.some(other=>other.prompt===t.prompt))t=X.task(courses[(i+offset)%courses.length].skills[0],band,seed,i);
+      tasks.push(t);
+    }
+    return tasks;
+  }
+  function expandedGatewayTasks(world,tier,seed){
+    const courses=curriculumRoutes(world),band=[6,7,9][tier-1];
+    // Avoid repeating the same pool, mean-bar or sequence in the longer challenge.
+    const slots=world==='statistics'?[[0,0],[1,1],[2,1],[0,1],[2,0]]:
+      world==='probability'?[[0,0],[1,1]]:
+      world==='town'?[['market',0],['bank',1],['station',2],['cafe',0],['shops',1],['home',2]]:
+      Array.from({length:6},(_,i)=>[String(i%3),(Math.floor(i/3)+i%3)%3]);
+    return Array.from({length:12},(_,i)=>{
+      if(i<slots.length)return task(world,String(slots[i][0]),tier,seed,slots[i][1]);
+      const n=i-slots.length;
+      return X.task(courses[n%courses.length].skills[0],band,seed,Math.floor(n/courses.length));
+    });
+  }
+  function rememberTeaching(s,q){
+    if(q?.contentVersion!==8)return;
+    const t=q.tasks[q.i];s.seen||=[];
+    for(const prompt of [t.prompt,t.examplePrompt])if(prompt&&!s.seen.includes(prompt))s.seen.push(prompt);
+  }
   function start(s, world, route, tier, context = null) {
     const a = state(s),
       valid =
@@ -763,6 +799,9 @@
     if (!valid) return false;
     tier = Math.max(1, Math.min(3, Math.trunc(tier) || 1));
     const key = id(world, route, tier);
+    const course = curriculumRoutes(world).find(r=>r.id===route);
+    const expandedWorld = curriculumRoutes(world).length > 0;
+    const expandedGateway = route === "gateway" && curriculumRoutes(world).length;
     if (a.active) a.suspended[a.active.key] = a.active;
     if (a.suspended[key]) a.active = a.suspended[key];
     else {
@@ -770,7 +809,8 @@
       a.attempts[key] = seed;
       a.active = {
         key,
-        context: world==="town" ? {...T.context(route,context?.entry||"direct"),...(context||{})} : {version:1,role:"explorer"},
+        ...(expandedWorld ? {contentVersion:8} : {}),
+        context: world==="town" ? {...T.context(course?"home":route,course?"journey":context?.entry||"direct"),...(course?{role:"customer",course:course.skills[0]}:{}),...(context||{})} : {version:1,role:"explorer"},
         evidence: [],
         world,
         route,
@@ -778,7 +818,7 @@
         seed,
         i: 0,
         phase: "lesson",
-        tasks: [0, 1, 2].map((i) => task(world, route, tier, seed, i)),
+        tasks: course ? Array.from({length:6},(_,i)=>X.task(course.skills[0],[6,7,9][tier-1],seed,i)) : expandedGateway ? expandedGatewayTasks(world,tier,seed) : expandedWorld ? expandedMissionTasks(world,route,tier,seed) : [0, 1, 2].map((i) => task(world, route, tier, seed, i)),
         values: {},
         assisted: false,
         unassisted: 0,
@@ -786,6 +826,7 @@
         solved: false,
       };
     }
+    rememberTeaching(s,a.active);
     s.world = world;
     s.view = "adventure";
     s.resumeView = "adventure";
@@ -797,6 +838,7 @@
   function begin(s) {
     const q = current(s);
     if (q?.phase === "lesson") {
+      rememberTeaching(s,q);
       q.phase = "play";
       state(s).taught[q.tasks[q.i].skill] = true;
     }
@@ -804,8 +846,9 @@
   function edit(s, key, value) {
     const q = current(s);
     if (!q || q.phase !== "play" || q.solved) return false;
-    const t = q.tasks[q.i],
-      integer = (n) => Number.isInteger(n),
+    const t = q.tasks[q.i];
+    if(t.kind === "curriculum" && key === "c8action")return XA.edit(t,q.values,value);
+    const integer = (n) => Number.isInteger(n),
       array = Array.isArray;
     let valid = false;
     if (key === "amount")
@@ -856,6 +899,7 @@
     return true;
   }
   function value(q, t) {
+    if(t.kind === "curriculum")return XA.value(t,q.values);
     if (["fraction", "chance", "grid"].includes(t.kind))
       return q.values.selected || [];
     if (["basket", "offers", "budget", "blocks", "array", "chart", "volume"].includes(t.kind))
@@ -868,6 +912,7 @@
     return Number(q.values.amount || 0);
   }
   function correct(q, t) {
+    if(t.kind === "curriculum")return XA.correct(t,q.values);
     const v = value(q, t);
     if (["fraction", "chance"].includes(t.kind)) return v.length === t.answer;
     if (t.kind === "bank" && (q.values.posted || 0) !== t.transactions.length)
@@ -885,6 +930,7 @@
     if (!q || q.solved) return;
     q.assisted = true;
     q.hintLevel ||= 0;
+    if(worked)q.phase="lesson";
     q.feedback = worked
       ? "Let’s work through it. " + q.tasks[q.i].worked
       : (++q.hintLevel>2?q.tasks[q.i].worked:q.hintLevel===2?q.tasks[q.i].teach:q.tasks[q.i].hint);
@@ -898,7 +944,8 @@
     if(!evidence.some(e=>e.step===q.i)) evidence.push({step:q.i,skill:t.skill,mechanic:H.mechanic(t,q.world,q.route),firstValue:copy(value(q,t)),correct:correct(q,t),assisted:q.assisted,source:'guided-adventure'});
     if (!correct(q, t)) {
       q.assisted = true;
-      q.feedback = "Not yet. " + t.hint;
+      q.feedback = "Not yet. " + t.hint + " " + t.teach;
+      q.phase = "lesson";
       return false;
     }
     q.solved = true;
@@ -910,13 +957,14 @@
     const a = state(s),
       q = a.active;
     if (!q?.solved) return false;
-    if (q.i < 2) {
+    if (q.i < q.tasks.length - 1) {
       q.i++;
       q.phase = "lesson";
       q.values = {};
       q.assisted = false;
       q.solved = false;
       q.feedback = "";q.hintLevel=0;
+      rememberTeaching(s,q);
       return false;
     }
     const old = a.records[q.key],
@@ -929,6 +977,8 @@
       world: q.world,
       route: q.route,
       tier: q.tier,
+      taskCount: q.tasks.length,
+      contentVersion:q.contentVersion||1,
       unassisted: Math.max(old?.unassisted || 0, q.unassisted),
       lastUnassisted: q.unassisted,
       evidence: copy(q.evidence || []),
@@ -943,7 +993,7 @@
       world: q.world,
       route: q.route,
       tier: q.tier,
-      assisted: q.unassisted < 3,
+      assisted: q.unassisted < q.tasks.length,
       date: new Date(now).toISOString(),
     });
     s.recent = s.recent.slice(0, 30);

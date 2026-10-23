@@ -206,6 +206,8 @@
       w = E.worlds.find((w) => w.id === q.world);
     return `${header("RESTORE THE WORLD", w.name, "world")}<div class="quest-layout world-stage stage-${w.id} ${q.solved ? "stage-restored" : ""}"><div class="stage-vista">${art(w.id).replace('viewBox="0 0 900 560"', 'viewBox="0 110 900 380" preserveAspectRatio="xMidYMid slice"')}<section class="panel guide">${A.guide(w.guide)}<div><h3>${w.guide}, your guide</h3><p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p></div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s, true)}${btn("Save & exit", "nav:home")}</div></div><section class="panel stage-workbench">${q.intro ? `<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2><p>We can restore this place with three small maths puzzles. Tap to build, move and explore.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn("Start building →", "begin", "primary")}` : puzzle(q) + `${q.solved ? `<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn(q.i < 2 ? "Next puzzle →" : "Quest recap →", "next-quest", "primary")}</div>` : `<div class="actions">${btn("Try my solution", "solve", "primary")}${btn("Hint", "hint")}${btn("I don’t know", "skip")}</div>${q.feedback ? `<div class="feedback" role="status">${esc(q.feedback)}</div>` : ""}`}`}</section></div>`;
   }
+  function learningStamp(l){return l?JSON.stringify([l.id,l.mode,l.round,l.i,l.qs?.[l.i]?.[5]?.id]):'';}
+  function c8Scope(el){const world=el.closest('.world-task-dialog');if(world)return 'world|'+world.dataset.worldScope;const learning=el.closest('[data-c8-learning]');return learning?'learning|'+learning.dataset.c8Learning:null;}
   function learning() {
     const l = s.learning,
       k = skill(l.id),
@@ -216,7 +218,8 @@
       const prerequisites=window.V6Education.gaps(s,l.id);
       return `${header("LEARN AT YOUR OWN PACE", esc(k.name), "world")}<div class="split"><section class="panel"><h2>Build the idea</h2>${prerequisites.length?`<div class="prerequisite-path"><h3>Check the foundations</h3><p>These short starting-point checks help us find the right level. Your earlier progress stays saved.</p>${prerequisites.map(id=>btn("Discover: "+skill(id).name,"discover:"+id)).join("")}</div>`:""}<p class="lesson-copy">${esc(k.lesson)}</p>${plan ? `<div class="feedback"><strong>${esc(plan.title || "An easier example")}</strong><p>${esc(plan.explain || "")}</p><p>${esc(plan.question || plan.prompt || "")}</p><p>${esc(plan.worked || plan.feedback || "")}</p></div>` : ""}<div class="actions">${btn("Try supported practice →", "practice", "primary")}${btn("Save & exit", "nav:home")}</div></section><div>${art(k.world)}<p class="small muted">Practice helps you learn. Only separate fresh independent checks can establish mastery.</p></div></div>`;
     }
-    const handsOn=window.V5HandsOn.practiceRender(l,k);
+    const c8=q[5]?.contentVersion===8;
+    const handsOn=c8&&!l.answered?`<div data-c8-learning="${esc(learningStamp(l))}">${window.V8Activities.render({answer:q[1],activity:q[5].activity,allowCalculator:q[5].allowCalculator},l.manipulation||{},"c8-p")}${btn("Check my answer","c8-check","primary")}</div>`:window.V5HandsOn.practiceRender(l,k);
     const tools =
       l.mode === "practice" && !["algebra_coordinates","geometry_transforms"].includes(k.id)
         ? (window.JaxonMathTools.render(k.id, k.world, {
@@ -230,7 +233,7 @@
             mode: "question",
           }) || "").replace('<div class="math-extra-dots"','<div role="img" class="math-extra-dots"')
         : "";
-    return `${header(l.mode === "check" ? "FRESH INDEPENDENT CHECK" : l.mode === "discovery" ? "FIND YOUR STARTING POINT" : "SUPPORTED PRACTICE", esc(k.name), "world")}<div class="split"><section class="panel"><span class="badge">QUESTION ${l.i + 1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2>${handsOn}<div class="answer-grid">${q[2].map((a, i) => btn(esc(a), "answer:" + i, "", l.answered)).join("")}</div><div class="actions">${btn("Hint", "learning-hint", "", l.answered)}${btn("I don’t know", "learning-skip", "", l.answered)}${btn("Save & exit", "nav:home")}</div>${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}${l.answered ? `<div class="actions">${btn(l.i === l.qs.length - 1 ? "See recap →" : "Next question →", "next-learning", "primary")}</div>` : ""}</section><aside><div class="panel"><h3>${l.mode === "check" ? "Your own thinking" : "Explore the idea"}</h3><p class="muted">${l.mode === "check" ? "Only the first answer without help counts as independent. Hints and “I don’t know” are always safe." : "Use the tools, take a hint, or work through an example. Practice never awards mastery."}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
+    return `${header(l.mode === "check" ? "FRESH INDEPENDENT CHECK" : l.mode === "discovery" ? "FIND YOUR STARTING POINT" : "SUPPORTED PRACTICE", esc(k.name), "world")}<div class="split"><section class="panel"><span class="badge">QUESTION ${l.i + 1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2>${handsOn}<div class="answer-grid">${(c8?[]:q[2]).map((a, i) => btn(esc(a), "answer:" + i, "", l.answered)).join("")}</div><div class="actions">${btn("Hint", "learning-hint", "", l.answered)}${btn("I don’t know", "learning-skip", "", l.answered)}${btn("Save & exit", "nav:home")}</div>${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}${l.answered ? `<div class="actions">${btn(l.i === l.qs.length - 1 ? "See recap →" : "Next question →", "next-learning", "primary")}</div>` : ""}</section><aside><div class="panel"><h3>${l.mode === "check" ? "Your own thinking" : "Explore the idea"}</h3><p class="muted">${l.mode === "check" ? "Only the first answer without help counts as independent. Hints and “I don’t know” are always safe." : "Use the tools, take a hint, or work through an example. Practice never awards mastery."}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
   }
   function townLife(j){
     const t=j.task,q={world:'town',route:j.venue,values:j.values,solved:j.solved};
@@ -456,6 +459,7 @@
       restored = false;
     await change(() => {
       if(sceneKey?.startsWith('world|')&&V7ActivityScenes.key(s)!==sceneKey.slice(6))return;
+      if(sceneKey?.startsWith('learning|')&&learningStamp(s.learning)!==sceneKey.slice(9))return;
       if(sceneKey && !sceneKey.startsWith('world|')&&name.startsWith('j-')) {
         const live=window.V5Journey.model(s);
         if(s.view!=='journey'||!live||JSON.stringify([live.id||live.scenario,live.seed,live.stage])!==sceneKey)return;
@@ -465,6 +469,9 @@
       if(name==='j-plan'||name==='j-replay'){const tier=M.state(s).difficulty.town||M.recommendation(s,'town');if(!window.V52TownLife.start(s,arg,tier,name==='j-replay'))error='This saved Town plan needs another look. It has been preserved.';return;}
       if(name==='j-start'){M.state(s);if(!window.V5Journey.start(s,arg,M.state(s).difficulty.town||M.recommendation(s,'town')))error='This saved journey cannot be opened; its original data has been preserved.';return;}
       if(name.startsWith('j-')){window.V5Journey.action(s,name,arg,action);return;}
+      if(name === 'c8-m'){M.edit(s,'c8action',action.slice(5));return;}
+      if(name === 'c8-p'){const l=s.learning;if(l&&!l.answered&&l.qs[l.i]?.[5]?.contentVersion===8){const q=l.qs[l.i];l.manipulation||={};window.V8Activities.edit({activity:q[5]?.activity,allowCalculator:q[5]?.allowCalculator},l.manipulation,action.slice(5));}return;}
+      if(name === 'c8-check'){const l=s.learning;if(l&&!l.answered&&l.qs[l.i]?.[5]?.contentVersion===8){const q=l.qs[l.i];E.answerLearning(s,window.V8Activities.value({activity:q[5]?.activity,allowCalculator:q[5]?.allowCalculator},l.manipulation));}return;}
       switch (name) {
         case "nav":
           s.view = arg;
@@ -760,7 +767,7 @@
             }
           }
       }
-    });
+    }, {renderPage: !((name==='c8-m'||name==='c8-p')&&(action.includes(':input-')||action.includes(':calc-input-')))});
     if (error) status(error);
     if (restored) sound();
     if (s.view !== oldView) {
@@ -816,7 +823,7 @@
         "part",
         "rotate",
         "h-place", "h-clear", "p5-add", "p5-value", "p5-shade", "p5-count", "p5-submit",
-        "m-point", "m-array", "m-layer", "m-chart", "m-budget-place",
+        "c8-m", "c8-p", "c8-check", "m-point", "m-array", "m-layer", "m-chart", "m-budget-place",
         "solve",
         "hint",
         "skip",
@@ -839,7 +846,7 @@
       ].includes(name) || ["j-budget-place","j-part","j-choice","j-coin","j-adjust","j-value","j-submit","j-help","j-place","j-clear","j-skip"].includes(name) || el.dataset.act;
     const evidence = () => JSON.stringify([s.quest, s.learning, M.current(s),window.V5Journey.state(s)]);
     const previous = evidence();
-    await dispatch(action, el.closest('.world-task-dialog')?.dataset.worldScope ? 'world|'+el.closest('.world-task-dialog').dataset.worldScope : el.closest('.immersive-journey')?.dataset.sceneKey || null);
+    await dispatch(action, c8Scope(el) || (el.closest('.world-task-dialog')?.dataset.worldScope ? 'world|'+el.closest('.world-task-dialog').dataset.worldScope : el.closest('.immersive-journey')?.dataset.sceneKey || null));
     if (!meaningful) activity = 0;
     else if (previous !== evidence()) activity = Date.now();
   });
@@ -1058,4 +1065,9 @@
         ? "Saved Test Camp data could not be read. This session is temporary; the saved copy has been preserved."
         : "Device storage unavailable. This session is temporary.",
     );
+  document.addEventListener('input', e=>{if(e.target.matches('[data-c8-input]')){dispatch(e.target.dataset.c8Input+':input-'+e.target.value,c8Scope(e.target));if(e.target.type==='range'){const section=e.target.closest('.c8-activity'),n=Number(e.target.value),live=section?.querySelector('[data-c8-live]');if(live)live.textContent=e.target.value;const marker=section?.querySelector('[data-c8-numberline-marker]');if(marker)marker.setAttribute('cx',30+(n-Number(e.target.min))/(Number(e.target.max)-Number(e.target.min))*300);const angle=section?.querySelector('[data-c8-angleline]');if(angle)angle.setAttribute('d',`M325 180H180L${180+145*Math.cos(n*Math.PI/180)} ${180-145*Math.sin(n*Math.PI/180)}`);}}});
+  document.addEventListener('input',e=>{if(e.target.matches('[data-c8-calc]'))dispatch(e.target.dataset.c8Calc+':calc-input-'+e.target.value,c8Scope(e.target));});
+  document.addEventListener('change',e=>{if(e.target.matches('[data-c8-cell]'))dispatch(e.target.dataset.c8Prefix+':cell-'+e.target.dataset.c8Cell+'-'+e.target.value,c8Scope(e.target));});
+  function c8Point(e){const el=e.target.closest?.('[data-c8-point]');if(el&&(e.type==='click'||e.key==='Enter'||e.key===' ')){e.preventDefault();dispatch(el.dataset.c8Prefix+':point-'+el.dataset.c8Point,c8Scope(el));}}
+  document.addEventListener('click',c8Point);document.addEventListener('keydown',c8Point);
 })();

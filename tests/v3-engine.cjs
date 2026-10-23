@@ -6,10 +6,10 @@ const E = require("../v3/engine").V3Engine,
   C = require("../v3/curriculum").V3Curriculum;
 const ctx = { window: {} };
 vm.runInNewContext(fs.readFileSync("v2-review-bank.js", "utf8"), ctx);
-const bank = require("../v3/town").V3Town.install(
+const bank = require("../v3/education").V6Education.install(C, require("../v3/town").V3Town.install(
   C,
   ctx.window.JaxonFreshReview,
-);
+));
 let checks = 0;
 function test(name, fn) {
   fn();
@@ -76,15 +76,17 @@ test("Eight world quest loops persist exact state, restore 24 landmarks and cann
   assert.equal(E.xp(s), 2400);
   assert.deepEqual(s.skills, {});
 });
-test("All 55 skills: guided practice cannot award mastery, checks are fresh, immediate retakes blocked, spaced mastery works", () => {
+test("All runtime foundation skills: guided practice cannot award mastery, checks are fresh, immediate retakes blocked, spaced mastery works", () => {
   for (const k of C.skills) {
     const s = E.fresh(),
       now = Date.UTC(2026, 9, 20);
+    // This suite isolates practice/check policy; prerequisite discovery is tested separately.
+    for(const pre of require("../v3/education").V6Education.prerequisites[k.id]||[])s.checks[pre]={stage:1};
     assert.match(E.generate(s, k.id, "check", bank, C, now), /practice/);
     assert.equal(E.generate(s, k.id, "practice", bank, C, now), null);
     const practice = s.learning.qs.map((q) => q[0]);
-    for (let i = 0; i < 3; i++) {
-      E.answerLearning(s, s.learning.qs[i][1], false, now);
+    while (s.learning) {
+      E.answerLearning(s, s.learning.qs[s.learning.i][1], false, now);
       E.nextLearning(s, now);
     }
     assert.notEqual(s.skills[k.id].state, "mastered");
@@ -94,16 +96,16 @@ test("All 55 skills: guided practice cannot award mastery, checks are fresh, imm
         (q) => !practice.includes(q[0]) && !k.qs.some((old) => old[0] === q[0]),
       ),
     );
-    for (let i = 0; i < 3; i++) {
-      E.answerLearning(s, s.learning.qs[i][1], false, now);
+    while (s.learning) {
+      E.answerLearning(s, s.learning.qs[s.learning.i][1], false, now);
       E.nextLearning(s, now);
     }
     assert.equal(s.checks[k.id].stage, 1);
     assert.match(E.generate(s, k.id, "check", bank, C, now), /not due/);
     const due = s.checks[k.id].due;
     assert.equal(E.generate(s, k.id, "check", bank, C, due), null);
-    for (let i = 0; i < 3; i++) {
-      E.answerLearning(s, s.learning.qs[i][1], false, due);
+    while (s.learning) {
+      E.answerLearning(s, s.learning.qs[s.learning.i][1], false, due);
       E.nextLearning(s, due);
     }
     assert.equal(s.skills[k.id].state, "mastered");
@@ -113,6 +115,7 @@ test("All 55 skills: guided practice cannot award mastery, checks are fresh, imm
 test("Hinted, wrong and skipped check answers never inflate mastery; failed check requires reteaching", () => {
   const s = E.fresh();
   s.practice.place = { completed: true };
+  s.checks.number_bonds = {stage:1};
   E.generate(s, "place", "check", bank, C);
   s.learning.assisted = true;
   E.answerLearning(s, s.learning.qs[0][1]);
@@ -120,13 +123,12 @@ test("Hinted, wrong and skipped check answers never inflate mastery; failed chec
   E.nextLearning(s);
   E.answerLearning(s, "wrong");
   E.nextLearning(s);
-  E.answerLearning(s, "", true);
-  E.nextLearning(s);
+  while(s.learning){E.answerLearning(s, "", true);E.nextLearning(s);}
   assert.equal(s.checks.place.score, 0);
   assert.equal(s.checks.place.reteach, true);
   assert.match(E.generate(s, "place", "check", bank, C), /practice/);
   E.generate(s, "place", "practice", bank, C);
-  for (let i = 0; i < 3; i++) {
+  while (s.learning) {
     E.answerLearning(s, "", true);
     E.nextLearning(s);
   }
@@ -198,7 +200,7 @@ test("All 1100 discovery choices remain valid; adaptive rounds choose a band wit
       assert.ok(prompts.every((q) => s.seen.includes(q)));
     }
     assert.equal(s.discovery[k.id].complete, true);
-    assert.equal(s.discovery[k.id].rounds.at(-1).band, 9);
+    assert.equal(s.discovery[k.id].rounds.at(-1).band, require("../v3/education").V6Education.minBand(k.id)===3 ? 7 : 9);
     assert.deepEqual(s.skills, {});
     assert.equal(s.coins, 0);
   }

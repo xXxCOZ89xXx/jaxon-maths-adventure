@@ -10,7 +10,7 @@ for(const name of Object.keys(names)) {
   if(name==='new') {assert.deepEqual(copy.checks,{});assert.deepEqual(copy.discovery,{});}
 }
 for(const k of C.skills) {
-  assert.equal(AD.skill(profile('foundation'),k.id).band,5);
+  assert.equal(AD.skill(profile('foundation'),k.id).band,require('../v3/education').V6Education.minBand(k.id));
   assert.equal(AD.skill(profile('advanced'),k.id).tier,3);
 }
 assert.ok(new Set(C.skills.map(k=>AD.skill(profile('developing'),k.id).tier)).size>1);

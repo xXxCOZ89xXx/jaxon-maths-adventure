@@ -318,6 +318,7 @@
     return t;
   }
   function mechanic(t, world, route) {
+    if(t.kind === "curriculum")return "curriculum-"+(t.activity?.kind||"number-builder");
     if (t.kind === "measure") return t.unit === "ml" ? "pour" : "ruler";
     if (t.kind === "chance")
       return route === "2" ? "spinner" : "probability-pool";

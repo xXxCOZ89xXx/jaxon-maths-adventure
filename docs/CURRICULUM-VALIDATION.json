@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-23",
+  "branch": "codex/years6-9-curriculum",
+  "base": "27ac8421e3dea2cf63788c435f3509484d45d5ea",
+  "scope": "Local fictional fixtures; browser contexts deny external origins. PostgreSQL containers use network=none. No production connection, account changes, release PR, merge or deployment.",
+  "coverage": {
+    "worlds": 9,
+    "skills": 96,
+    "addedSkills": 33,
+    "missionLevels": 222,
+    "objectiveGroups": 121,
+    "linkedPlayableGroups": 121,
+    "questionExamples": 1782
+  },
+  "checks": [
+    {
+      "command": "npm test",
+      "result": "PASS: legacy learning/discovery/economy, engine, missions, camp, hands-on, cloud transport, presentation, migration rehearsal and 1,107 renderer variants."
+    },
+    {
+      "command": "npm run test:curriculum",
+      "result": "PASS: 12 suites; 2,988 completed mini-tasks, all 222 mission levels, objective/question/key links, fresh mastery, guided-example exclusion, independent adaptive topics, saved snapshots and save-size budget."
+    },
+    {
+      "command": "node tests/education-depth.cjs",
+      "result": "PASS: 10,800 generated questions, fresh rounds in 50 existing banks, arithmetic oracles and historical units."
+    },
+    {
+      "command": "npx playwright test -c playwright.curriculum.config.cjs --workers=2",
+      "result": "PASS: 81 cases across 820×1180, 1180×820 and 390×844, including 15 activity accessibility scans, interactions, pause/reload, alternate cube nets and cross-tab stale-edit protection.",
+      "browser": {
+        "passed": 81,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0,
+        "seconds": 225.6
+      }
+    },
+    {
+      "command": "npx playwright test -c playwright.quality.config.cjs --workers=2",
+      "result": "PASS: 46 legacy touch cases, eight original maths models, cooking/shopping/travel/worker journeys, historical Town snapshots, parent roles and offline queues.",
+      "browser": {
+        "passed": 46,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0,
+        "seconds": 218.1
+      }
+    },
+    {
+      "command": "npm run test:ipad-release",
+      "result": "PASS: local compact-receipt database integration, idempotent purchases, batching/recovery/role guards and all 14 browser cases.",
+      "browser": {
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0,
+        "seconds": 30.1
+      }
+    }
+  ],
+  "viewports": [
+    {
+      "width": 820,
+      "height": 1180,
+      "touch": true,
+      "browser": "Chromium"
+    },
+    {
+      "width": 1180,
+      "height": 820,
+      "touch": true,
+      "browser": "Chromium"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "touch": true,
+      "browser": "Chromium"
+    }
+  ],
+  "remaining": [
+    "Physical iPad Safari visual/touch acceptance.",
+    "Learner-paced confirmation of estimated 5–10-minute inner missions and 20-minute world-end challenges.",
+    "Parent/educator acceptance of the proposed annual KS3 progression and teaching depth.",
+    "Long-term progress retains the existing 2,000,000-byte storage limit; no history or pending queues are truncated."
+  ],
+  "sourceSha256": {
+    "v3-adventure.html": "dffde9ce98617e54b65c7434ff3fb8b4a23ea3efed99d58449cb2b55a4983cf9",
+    "v3/app.js": "013dd6b3de0289efdd0bc6a4f18afc1c1d1eb028f5ab3eec8644c796c0e6693f",
+    "v3/adventure.js": "d9b46ce79cd0c616104013c15c551d7775a37df76fae193621406f920bf9150e",
+    "v3/adventure-ui.js": "2d728fd46d77150969eb5f0398012ae3c5cdaee34da4e4460bc974954ebb9c6d",
+    "v3/engine.js": "2b79f60d8ff90b0d1fc84256ea53d4562ab6b095e5c76537b85f51872a59c7b8",
+    "v3/curriculum-expansion.js": "64088ca017055dbe94b530062507866762270775f58e23281dcf4a94526099a8",
+    "v3/curriculum-activities.js": "156720520692b526bf386cb6271cbd9dd5d6e0ef36d2117912e5a50970c6fbe3",
+    "v3/curriculum-map.js": "5a2fc81ec255a0c364b9daf6fb8b08f0875639b217d6a99db0ada81c16f98a11",
+    "v3/curriculum-objectives.json": "21b960f25510d559b5b90cb8c6ed91e2899838715124d5af0b443cd821cc8e88",
+    "v3/hands-on.js": "a32e554f3b039845bd0e44dabd72a5648467c9f927ff22f23da066b02cbc70f5",
+    "v3/style.css": "397e3370303e57aea7e364c82831e5cc79e78d319d264c34e1bb4890547ed651"
+  }
+}

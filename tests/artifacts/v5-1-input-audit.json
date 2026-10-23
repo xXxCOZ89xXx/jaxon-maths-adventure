@@ -16,7 +16,7 @@
     {
       "world": "fractions",
       "tasks": 108,
-      "directScalars": 36,
+      "directScalars": 0,
       "clocks": 0,
       "models": [
         "fraction-shading",
@@ -28,7 +28,7 @@
     {
       "world": "algebra",
       "tasks": 108,
-      "directScalars": 54,
+      "directScalars": 0,
       "clocks": 0,
       "models": [
         "algebra-tiles",
@@ -40,7 +40,7 @@
     {
       "world": "geometry",
       "tasks": 108,
-      "directScalars": 9,
+      "directScalars": 0,
       "clocks": 0,
       "models": [
         "area-tiles",
@@ -52,7 +52,7 @@
     {
       "world": "ratio",
       "tasks": 108,
-      "directScalars": 90,
+      "directScalars": 0,
       "clocks": 0,
       "models": [
         "matching",
@@ -63,7 +63,7 @@
     {
       "world": "statistics",
       "tasks": 108,
-      "directScalars": 63,
+      "directScalars": 0,
       "clocks": 0,
       "models": [
         "bar-chart",
@@ -86,7 +86,7 @@
     {
       "world": "measure",
       "tasks": 108,
-      "directScalars": 99,
+      "directScalars": 0,
       "clocks": 0,
       "models": [
         "algebra-tiles",
@@ -98,7 +98,7 @@
     {
       "world": "town",
       "tasks": 243,
-      "directScalars": 99,
+      "directScalars": 54,
       "clocks": 18,
       "models": [
         "amount",
@@ -114,9 +114,9 @@
   ],
   "tasks": 1107,
   "decisions": [
-    "Direct entry for all scalar mission values and numeric constructed practice; integer pence explicitly labelled.",
+    "Scalar tasks offer direct entry or a labelled bounded slider with reachable answers; integer pence remains labelled.",
     "Small bounded grouping, shading, arrays and selection controls retained as mathematical actions.",
     "Budget envelopes keep £1 steps and add £5/£10 shortcuts; coin trays already offer UK notes.",
-    "Independent checks/discovery retain conventional choices and never render constructed-answer teaching models."
+    "Legacy independent checks/discovery retain conventional choices and never render constructed-answer teaching models."
   ]
 }
