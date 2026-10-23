@@ -19,6 +19,12 @@ html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
     const assets=Object.fromEntries(names.map(name=>[name,'data:image/webp;base64,'+fs.readFileSync(path.join(dir,name+'.webp')).toString('base64')]));
     js='window.V6AssetFiles='+JSON.stringify(assets)+';\n'+js;
   }
+  if(src === 'v3/world-art.js') {
+    const dir=path.join(root,'v3/assets/rollout');
+    const names=Object.keys(JSON.parse(fs.readFileSync(path.join(dir,'manifest.json'),'utf8')).assets);
+    const assets=Object.fromEntries(names.map(name=>[name,'data:image/webp;base64,'+fs.readFileSync(path.join(dir,name+'.webp')).toString('base64')]));
+    js='window.V7AssetFiles='+JSON.stringify(assets)+';\n'+js;
+  }
   hashes.push(
     "'sha256-" + crypto.createHash("sha256").update(js).digest("base64") + "'",
   );

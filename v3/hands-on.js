@@ -480,6 +480,17 @@
   function practiceSpec(skill, q) {
     const text = String(q[1]).trim();
     let t = null;
+    // New bank snapshots carry their response unit; old snapshots retain the old contract.
+    if(q[5]?.contentVersion===3){
+      const unit=q[5].unit||'',n=Number(text);
+      if(unit==='clock')return null;
+      if(/^\d+\/\d+$/.test(text)){const den=Number(text.split('/')[1]);return den<=12&&Number(text.split('/')[0])<=den?{kind:'fraction',total:den,min:0,max:den,skill:skill.id,format:text,practice:true}:null;}
+      if(!Number.isInteger(n)||Math.abs(n)>9999)return null;
+      if(['pence','pounds'].includes(unit)){const scale=unit==='pounds'?100:1;if(n*scale>100000)return null;return {kind:'amount',unit:'p',responseUnit:unit,scale,min:0,max:100000,skill:skill.id,format:text,practice:true};}
+      if(unit==='degrees'&&n>=0&&n<=180)return {kind:'angle',unit:'degrees',min:0,max:180,skill:skill.id,format:text,practice:true};
+      if(n<0&&n>=-20)return {kind:'line',min:-20,max:20,skill:skill.id,format:text,practice:true};
+      return n>=0?{kind:'blocks',unit,min:0,max:9999,skill:skill.id,format:text,practice:true}:null;
+    }
     if (/^-?\d+$/.test(text) && Math.abs(Number(text)) <= 9999) {
       const n = Number(text);
       if (

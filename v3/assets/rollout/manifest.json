@@ -1,0 +1,302 @@
+{
+  "source": "Purpose-made original production assets, not reference-board crops",
+  "assets": {
+    "atlas": {
+      "file": "v3/assets/rollout/atlas.webp",
+      "master": "/workspace/generated_images/exec-c183352d-394a-4127-aae4-e5d383aad5ee.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 587430,
+      "sha256": "c1b81daac61f727a6dc590fef50466bd2e69a369c7630be285bc0be16413b508"
+    },
+    "forest": {
+      "file": "v3/assets/rollout/forest.webp",
+      "master": "/workspace/generated_images/exec-424f6e94-2397-4b19-ad74-c5de697433da.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 478944,
+      "sha256": "a63b9fce80484c414613e027fa2438707723ab1b919a3c2ddc1adabad235d1ae"
+    },
+    "desert": {
+      "file": "v3/assets/rollout/desert.webp",
+      "master": "/workspace/generated_images/exec-0e04ba92-28fe-4620-98bc-1b83c0f4e7c4.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 394998,
+      "sha256": "6e6282c9cc894ce93651c85c3f5bc2ae140fc2833e704b8c8d29fb02a5a73e90"
+    },
+    "geometry": {
+      "file": "v3/assets/rollout/geometry.webp",
+      "master": "/workspace/generated_images/exec-7195478f-464a-41d6-aea3-5bceb74cc326.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 402558,
+      "sha256": "25f43ef46b7c279252686febadde68e45489254d70a5dad5fb58ec0fb7ecf9d1"
+    },
+    "ratio": {
+      "file": "v3/assets/rollout/ratio.webp",
+      "master": "/workspace/generated_images/exec-53123260-3c51-49a1-a95e-02f4321f7db7.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 350354,
+      "sha256": "2e2895e8bc609ce0d232f706fe0b93217dca5e6e52e29add630189094bfa7129"
+    },
+    "statistics": {
+      "file": "v3/assets/rollout/statistics.webp",
+      "master": "/workspace/generated_images/exec-ca1cb1f2-0029-4a6b-9915-574962c525cd.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 370574,
+      "sha256": "32b686abdf8b7bdc691aa704578163f4153e06966c38bf3ee1d4af0f55bee7f3"
+    },
+    "probability": {
+      "file": "v3/assets/rollout/probability.webp",
+      "master": "/workspace/generated_images/exec-d92465ea-10e1-4f54-9d4e-cda65b33bcbc.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 350376,
+      "sha256": "1038db42a2fab52981a9feb6d6987673ff7ecb02bbb6c7eb18b3d4da96ff2734"
+    },
+    "measure": {
+      "file": "v3/assets/rollout/measure.webp",
+      "master": "/workspace/generated_images/exec-ab89e969-c390-459d-b9ce-ca35af003bb3.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 303232,
+      "sha256": "ffca04520d5e7fa5a203cb63b6d91dbd75549bbf1f32db32b762a9b42e0582ef"
+    },
+    "home-exterior": {
+      "file": "v3/assets/rollout/home-exterior.webp",
+      "master": "/workspace/generated_images/exec-b2635e9e-2b35-4492-97f4-4b70b0ae1ea8.png",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 324096,
+      "sha256": "9104ea3cbadad223e52a7e96d14e5921eae72bc4846c561f49f4ea9a12761f33"
+    },
+    "camp1": {
+      "file": "v3/assets/rollout/camp1.webp",
+      "master": "/workspace/generated_images/exec-3d2ee767-20af-4d86-8469-007abde72e24.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 477072,
+      "sha256": "041d946a032c6ab9cc0c41c07ae055c5bb7198df3b8922f765e41a6c5e7ac76f"
+    },
+    "camp2": {
+      "file": "v3/assets/rollout/camp2.webp",
+      "master": "/workspace/generated_images/exec-8353bf8a-5129-4086-aa87-b82da25ea503.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 441368,
+      "sha256": "e820b4d41d24d20af3e041a673c55a81c134bde73ba2347e67458956588026bb"
+    },
+    "camp3": {
+      "file": "v3/assets/rollout/camp3.webp",
+      "master": "/workspace/generated_images/exec-bfbb7ce8-010e-49fb-8d45-54b7f7af9eb8.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 465990,
+      "sha256": "29f9e664c42a8a3e24a3c880f877e1a3aefd8f076986e82af2f847ff0870d423"
+    },
+    "camp4": {
+      "file": "v3/assets/rollout/camp4.webp",
+      "master": "/workspace/generated_images/exec-47c3ee76-7a3a-40da-908d-97fc467772d9.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 499416,
+      "sha256": "0c7b2422b7af997db4a0b7d5261d0f0944bd52505d752401eaaf8b86e8780290"
+    },
+    "cafe": {
+      "file": "v3/assets/rollout/cafe.webp",
+      "master": "/workspace/generated_images/exec-4017cd83-9b83-46ee-9ed9-7cf9fb6fecb2.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 263458,
+      "sha256": "d883991f774802a7d0673042cd3f34d66b18351fcedb93f0878be7b82e762a75"
+    },
+    "shops": {
+      "file": "v3/assets/rollout/shops.webp",
+      "master": "/workspace/generated_images/exec-300269c6-1cac-4f77-a419-4a2678183115.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 319414,
+      "sha256": "fa2734171004bba145b0dc86c9b7fb7c1f942f0cfa40fc776a3a5492ac02f0a9"
+    },
+    "library": {
+      "file": "v3/assets/rollout/library.webp",
+      "master": "/workspace/generated_images/exec-a8e0ef4d-7fbf-446f-b517-2ea38a2fd752.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 254994,
+      "sha256": "ae2c0566ce93c8901e7672b833c816efb880fa4ccef847d312f6997818cc1519"
+    },
+    "bank": {
+      "file": "v3/assets/rollout/bank.webp",
+      "master": "/workspace/generated_images/exec-be956b79-aa49-45d7-9e7a-54ad6594381d.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 175404,
+      "sha256": "4132e8d636b3d5ba429a9c4daa554f04990ecb67ffb62b0a444d373097e3b040"
+    },
+    "work": {
+      "file": "v3/assets/rollout/work.webp",
+      "master": "/workspace/generated_images/exec-d6f83183-7821-4711-af25-a399a52d0dc9.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 263006,
+      "sha256": "3d1d21b9ef3720c5521525e5e3e03db64861d7e771c51e3f37ad167f51c2ab9c"
+    },
+    "leisure": {
+      "file": "v3/assets/rollout/leisure.webp",
+      "master": "/workspace/generated_images/exec-54fbd2f7-2940-452f-bebe-e89508cf0615.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 204180,
+      "sha256": "ebc0a846db06d1e6ced6aa2a8f68b907503e65a3b9e8abdbb3faf4aa63c1b0b3"
+    },
+    "train-station": {
+      "file": "v3/assets/rollout/train-station.webp",
+      "master": "/workspace/generated_images/exec-a37f2f42-bbe4-49b7-a611-82d2bac7016d.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 283104,
+      "sha256": "f5a2c100cadb953ceadd7b64f4c6312d5832b8a434dfbbd0f828c66f24ef135a"
+    },
+    "post": {
+      "file": "v3/assets/rollout/post.webp",
+      "master": "/workspace/generated_images/exec-1d477b30-06dc-4946-9bd1-a554cf5b913e.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 164892,
+      "sha256": "82b42a7976206219b033c6f016403e9729960d90f3c90559891c6009c33c5363"
+    },
+    "meters": {
+      "file": "v3/assets/rollout/meters.webp",
+      "master": "/workspace/generated_images/exec-c3115473-ddbc-4321-835e-61f1627073cf.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "bytes": 223280,
+      "sha256": "e9506c62828ae5aa25b372e1c3458d54113b07ea788697735b38beae77ddf948"
+    },
+    "avatar-base": {
+      "file": "v3/assets/rollout/avatar-base.webp",
+      "master": "/workspace/generated_images/exec-693c153d-c3f9-4c94-9080-97483da265c5.png",
+      "width": 1024,
+      "height": 1536,
+      "alpha": true,
+      "bytes": 106692,
+      "sha256": "82d2a795bc3f8836dd387f7b61ddcc48ed0e82619b825c407a84527124f2f236"
+    },
+    "wear-head": {
+      "file": "v3/assets/rollout/wear-head.webp",
+      "master": "exec-b288eaeb-8489-40d7-80f0-5743d13271a3.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "bytes": 178646,
+      "sha256": "343864d2c3d7cc7748be8a0bc118fc0a1bfade3d598d9a96703d245a0305da78"
+    },
+    "wear-outfits": {
+      "file": "v3/assets/rollout/wear-outfits.webp",
+      "master": "exec-96463036-1333-4168-950b-82e70bd2ec25.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "bytes": 267096,
+      "sha256": "81171593918362caed45bfcc3fc340fb9f0610f62a61973e615bdf714801059d"
+    },
+    "wear-back": {
+      "file": "v3/assets/rollout/wear-back.webp",
+      "master": "exec-52ae135e-1e9d-4584-aa73-eb77084b8462.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "bytes": 292226,
+      "sha256": "06b9812af7b2271e7539430ad037036a9c07c41d7d0ad32dccbef0aa15efaf71"
+    },
+    "wear-accessories": {
+      "file": "v3/assets/rollout/wear-accessories.webp",
+      "master": "exec-c529a464-27a2-4422-ba78-1b3ba2628ffd.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "bytes": 176894,
+      "sha256": "d53b48342a889888f514d4850336426993f1df6ecb04a440cba77978dc17bdcb"
+    },
+    "wear-companions": {
+      "file": "v3/assets/rollout/wear-companions.webp",
+      "master": "exec-a466bade-0970-4ff6-9d3c-21bf71675047.png",
+      "width": 1774,
+      "height": 887,
+      "alpha": true,
+      "bytes": 352954,
+      "sha256": "fb5e1b5742943a66fa68404b9249869462da11279b823c0f0de3b3a29c21caae"
+    },
+    "wear-hair": {
+      "file": "v3/assets/rollout/wear-hair.webp",
+      "master": "exec-dd1b874e-627b-45c5-b4a8-705a087abdb8.png",
+      "width": 1774,
+      "height": 887,
+      "alpha": true,
+      "bytes": 287936,
+      "sha256": "2a3fe8143294300a0f1d093a315ca631c4e8f2a298fc928e255cf489d5b4e425"
+    },
+    "repair": {
+      "file": "v3/assets/rollout/repair.webp",
+      "master": "exec-49215fea-bff5-4dd2-b857-5641a30e6d18.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "bytes": 399882,
+      "sha256": "20b0c0a5c5a09b9a13c5b9c1208dbe843532efb55afb1476dc37e0ea780c1f6e"
+    },
+    "wear-faces": {
+      "file": "v3/assets/rollout/wear-faces.webp",
+      "master": "exec-17930ecf-8145-4007-b394-45fb2dd4ca92.png",
+      "width": 2172,
+      "height": 724,
+      "alpha": true,
+      "bytes": 248888,
+      "sha256": "856409e377abe882e15a1b5f55c223999ea234dc7102faa519a0b2cf8dffd643"
+    },
+    "helpers": {
+      "file": "v3/assets/rollout/helpers.webp",
+      "master": "exec-19e6497a-9352-49a9-8e6a-d72c33ccf72b.png",
+      "width": 1536,
+      "height": 1024,
+      "alpha": true,
+      "bytes": 275894,
+      "sha256": "1b96923f7b3c3923226ce10463248f55c63ca227503623de5845d0bedef38060"
+    },
+    "products-food": {
+      "file": "v3/assets/rollout/products-food.webp",
+      "master": "exec-e51760f0-f6b3-4540-b459-9cd914f6e5ef.png",
+      "width": 1295,
+      "height": 1214,
+      "alpha": true,
+      "bytes": 434970,
+      "sha256": "cc0c72f29787e411a1fd7c0823abb972b83e7ba6271ccd421cdd5d907e329a0b"
+    },
+    "products-supplies": {
+      "file": "v3/assets/rollout/products-supplies.webp",
+      "master": "exec-a3251617-f7ca-486c-b82b-3ad088f5ff29.png",
+      "width": 1328,
+      "height": 1184,
+      "alpha": true,
+      "bytes": 385264,
+      "sha256": "cd48528542f2066f42d82509ed0ca39071c7b8c658e4b00a15768379c42b722e"
+    }
+  }
+}

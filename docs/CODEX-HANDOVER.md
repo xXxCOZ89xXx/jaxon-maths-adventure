@@ -1,5 +1,21 @@
 # Codex handover — V5.1 usability and automated regression
 
+## Completed wider graphical and Stage 1 rollout — 23 October 2026
+
+The owner approved `0444e1b` and authorised the wider rollout. Development is complete for final rendered review; **no publication or release promotion**. Keep `release/ipad` at `2e84e74d9fbcb22208b6332ca98f2cd7466912d3` and the live game at its existing URL.
+
+Implemented the connected nine-island atlas with central Camp, all nine illustrated entrances and existing earned restoration layers; four Camp exterior appearances over eight retained logical stages; illustrated layered teen/40 unchanged shop items/free appearance settings; all current Town roles and remaining interiors; home meters/recycling/post using the existing snapshotted mission flow; and six question structures for each of the remaining 50 banks, alongside the earlier 13 (63 skills total). Retain the 27 Town plans and original Bolognese/lentil journeys. New response-unit metadata keeps pence/pounds/time/counts/meters appropriate without rewriting old questions. See [full scope and explicit limits](art-direction/FULL-ROLLOUT.md).
+
+**Verification:** 42 distinct passing focused Chromium-touch cases in both iPad orientations (34 rollout + 8 retained customer/queue cases). Focused follow-ups replace overlapping results for home visits saved at another difficulty, final Camp photo paint/captures and final product art; they are not counted as extra distinct coverage. Also passed: 10,800 new-bank question checks, 12 fresh rounds per remaining skill, response-unit/legacy contracts, 14 retained hands-on logic groups, all 27 Town plans/2,091 stages, and the configured static staging build verifier. No broad security suite, hosted learner write or physical Safari certification.
+
+Actual screenshots and downloads: [owner-private full visual review](https://chatgpt.com/space/page_abb67cdf3bec819184dad069092317b9). It includes all nine worlds, Camp interior/four previews, layered wardrobe, representative Town/home settings and working maths activities. These are running-game captures, not concept images. The downloadable Edge HTML embeds 50 JPGs; individual JPGs are also supplied in a ZIP. Screenshot helpers await image decoding and paint, including the below-fold Camp interior; the nested photo has an explicit paint layer.
+
+No Supabase, Auth/PIN, account/family, cloud adapter, wallet/reward rule, storage namespace or existing Town generator changes. No real progress was read/reset. Optional new appearance settings and home task metadata use the existing backward-compatible JSON; unfamiliar and unfinished snapshots and immutable pending saves stay intact. An unfinished home visit at any difficulty resumes before starting another exterior activity.
+
+Limits: fixed-camera 2.5D illustrations and composited poses, not free-walking 3D; four exterior paintings group eight logical levels; restoration clears three repair sites rather than repainting every background; curriculum mapping/discovery depth remains partial, not complete Years 3–9 coverage. No unapproved villain or commercial systems.
+
+**Minimum owner action:** open the private visual review and approve the completed visuals or request corrections. Do not promote to `release/ipad`, merge or publish until that final approval.
+
 ## Revised visual checkpoint — owner feedback, 22 October 2026
 
 The owner explicitly did NOT approve `63f787f`: scenery direction accepted, avatar scale and separate worksheet presentation rejected. Keep the original artwork and all educational/Town improvements. New `v3/scene-interactions.js` adds a teen-proportioned sprite, individually calibrated floor placement in Camp/kitchen/market/bus, object-sized Camp/building regions, in-scene recipe/storage/shelf/basket/timetable entry and keyboard/touch close-ups using existing validated actions. New empty cupboard/fridge and basket props support accurate saved stock and selected basket contents. No migration, saved-format/namespace change or reward/auth change. A scene/run/stage guard inside the existing save lock rejects stale close-up edits.

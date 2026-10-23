@@ -151,7 +151,7 @@
     return `<section class="hero"><div class="hero-copy"><div class="eyebrow">YOUR NEXT CHAPTER IS WAITING</div><h1>A little maths.<br>A big adventure.</h1><p class="muted">Build bridges. Bring worlds back to life.<br>See what your next idea can do.</p>${btn('Continue adventure <span class="arrow" aria-hidden="true">→</span>', "continue", "primary")}<p class="small muted" style="margin-top:14px">${savedJourney ? "Resume "+esc(savedJourney.name||savedJourney.recipeName)+" · step "+(savedJourney.stage+1) : M.current(s) ? "Resume your saved visit" : s.quest ? "Resume your saved quest" : s.learning ? "Resume your saved lesson" : w.name + " · " + w.tag}</p></div><div class="hero-art">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="scene-caption">${esc(w.name.toUpperCase())}</span><div class="scene-bottom"><span>CHAPTER ${E.worlds.indexOf(w) + 1} / 09</span><span>${M.visualLevel(s, w.id, E.count(s, w.id))} / 3 restored</span></div></div></section><div class="eyebrow path-label">CHOOSE YOUR PATH</div><section class="choices" aria-label="Adventure choices"><article class="choice"><span class="tile-icon" aria-hidden="true">${A.icon("medal")}</span><h3>Continue adventure</h3><p class="muted">Pick up your saved trail. Your next idea can change this world.</p>${btn('Let’s go <span aria-hidden="true">→</span>', "continue", "wide")}</article><article class="choice"><span class="tile-icon" aria-hidden="true">${A.icon("forestbg")}</span><h3>Explore worlds</h3><p class="muted">Nine places to discover. Choose your own route through the adventure.</p>${btn('Open the map <span aria-hidden="true">→</span>', "nav:map", "wide")}</article><article class="choice"><span class="tile-icon" aria-hidden="true">${A.icon("rucksack")}</span><h3>My explorer & camp</h3><p class="muted">Make yourself at home. Find your look and watch your camp grow.</p>${btn('Visit Base Camp <span aria-hidden="true">→</span>', "nav:camp", "wide")}</article></section><section class="week" aria-label="Weekly learning"><span><strong>Your week</strong> <span class="small muted">${minutes.toFixed(1)} / 60 active minutes</span></span>${bar(minutes, 60)}<span class="small muted">${cloud ? window.V3Presentation.minutes(cloud.screenTime()) : minutes.toFixed(1)} minutes screen-time ${cloud ? "available" : "earned"} · 1:1</span></section>${U.suggestion(s)}${!s.tourSeen ? `<div class="notice small">New to Test Camp? Take a quick look around. <div class="actions">${btn("Show me around", "nav:tour")}${btn("Skip tour", "skip-tour")}</div></div>` : ""}`;
   }
   function map() {
-    return `${header("THE ADVENTURE ATLAS", "Where will you go?", "home")}<div class="toolbar"><p class="muted">Every world is open. Follow your curiosity.</p>${A.explorer(s, true)}<span class="badge">${s.milestones.length} learning milestones</span></div><div class="world-grid">${E.worlds.map((w, i) => `<article class="world-card" data-world="${w.id}" style="--world-accent:${w.color}"><div class="world-vista">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="world-open">OPEN TO EXPLORE</span><span class="world-landmarks" role="img" aria-label="${M.visualLevel(s,w.id,E.count(s,w.id))} of 3 landmarks restored">${[0,1,2].map(i=>`<i class="${i<M.visualLevel(s,w.id,E.count(s,w.id))?'restored':''}" aria-hidden="true">◆</i>`).join('')}</span></div><div class="body"><div class="eyebrow">0${i + 1} · ${s.world === w.id ? "YOU ARE HERE" : "OPEN TO EXPLORE"}</div><h2>${w.name}</h2><p class="muted">${w.tag} · ${M.visualLevel(s, w.id, E.count(s, w.id))}/3 restored · ${M.completions(s, w.id).length} expeditions</p>${bar(M.visualLevel(s, w.id, E.count(s, w.id)), 3)}${btn("Explore " + w.name, "world:" + w.id)}</div></article>`).join("")}</div>`;
+    return `${header("THE ADVENTURE ATLAS", "Where will you go?", "home")}<div class="toolbar"><p class="muted">Every world is open. Follow your curiosity.</p>${A.explorer(s, true)}<span class="badge">${s.milestones.length} learning milestones</span></div>${A.atlas?A.atlas(s):""}<div class="world-grid">${E.worlds.map((w, i) => `<article class="world-card" data-world="${w.id}" style="--world-accent:${w.color}"><div class="world-vista">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="world-open">OPEN TO EXPLORE</span><span class="world-landmarks" role="img" aria-label="${M.visualLevel(s,w.id,E.count(s,w.id))} of 3 landmarks restored">${[0,1,2].map(i=>`<i class="${i<M.visualLevel(s,w.id,E.count(s,w.id))?'restored':''}" aria-hidden="true">◆</i>`).join('')}</span></div><div class="body"><div class="eyebrow">0${i + 1} · ${s.world === w.id ? "YOU ARE HERE" : "OPEN TO EXPLORE"}</div><h2>${w.name}</h2><p class="muted">${w.tag} · ${M.visualLevel(s, w.id, E.count(s, w.id))}/3 restored · ${M.completions(s, w.id).length} expeditions</p>${bar(M.visualLevel(s, w.id, E.count(s, w.id)), 3)}${btn("Explore " + w.name, "world:" + w.id)}</div></article>`).join("")}</div>`;
   }
   function worldPage() {
     const w = world(),
@@ -323,7 +323,7 @@
   function shop() {
     const slots = [...new Set(C.catalog.map((i) => i.slot))];
     const preview=C.catalog.find(i=>i.id===itemPreview),look=preview?{...s,bought:[...s.bought,preview.id],equipped:[...s.equipped.filter(id=>C.catalog.find(i=>i.id===id)?.slot!==preview.slot),preview.id]}:s;
-    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Staging wallet only. Purchases are checked securely before saving." : "Only fictional demo coins are used here."}</p>${btn("Unequip all", "unequip")}</div></div><label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All 40 items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${C.catalog
+    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar?V7Avatar.controls(s):""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Staging wallet only. Purchases are checked securely before saving." : "Only fictional demo coins are used here."}</p>${btn("Unequip all", "unequip")}</div></div><label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All 40 items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${C.catalog
       .filter(
         (i) =>
           filter === "all" ||
@@ -366,6 +366,8 @@
     return `<section class="tour">${header("WELCOME, EXPLORER", "A world you can change.", "home")}${art("number")}<div class="panel"><h2>One idea at a time.</h2><p>Choose any of nine worlds. Meet your guide, choose a difficulty and solve hands-on tasks. Return for new expeditions, practical visits and optional gateways.</p><p>Hints are always safe. Lessons and practice help you learn; separate fresh checks show what you can do independently.</p><p>Your explorer and Base Camp grow with your adventure. Progress saves automatically on this device.</p><div class="actions">${btn("Start exploring →", "finish-tour", "primary")}${btn("Skip tour", "skip-tour")}</div></div></section>`;
   }
   function render(focus = false) {
+    window.V7Avatar?.setState(s);
+    window.V7ActivityScenes?.before();
     window.V6SceneUI?.beforeRender();
     document.body.classList.toggle("animate", !!s.settings.motion);
     $("headerExplorer").innerHTML = A.explorer(s, true);
@@ -415,6 +417,7 @@
       $("main").focus();
       window.scrollTo(0, 0);
     }
+    window.V7ActivityScenes?.decorate(s);
     window.V6SceneUI?.afterRender();
   }
   document.addEventListener('v6-scene-ui',()=>render());
@@ -450,10 +453,12 @@
     let error = null,
       restored = false;
     await change(() => {
-      if(sceneKey && name.startsWith('j-')) {
+      if(sceneKey?.startsWith('world|')&&V7ActivityScenes.key(s)!==sceneKey.slice(6))return;
+      if(sceneKey && !sceneKey.startsWith('world|')&&name.startsWith('j-')) {
         const live=window.V5Journey.model(s);
         if(s.view!=='journey'||!live||JSON.stringify([live.id||live.scenario,live.seed,live.stage])!==sceneKey)return;
       }
+      if(name==='home-activity'){window.V7Home.start(s,arg,M.state(s).difficulty.town||1);return;}
       if(name==='j-work'){const tier=Number(action.split(':')[2])||M.recommendation(s,'town');if(!window.V52TownLife.start(s,'job-'+arg,tier))error='This saved Town plan needs another look. It has been preserved.';return;}
       if(name==='j-plan'||name==='j-replay'){const tier=M.state(s).difficulty.town||M.recommendation(s,'town');if(!window.V52TownLife.start(s,arg,tier,name==='j-replay'))error='This saved Town plan needs another look. It has been preserved.';return;}
       if(name==='j-start'){M.state(s);if(!window.V5Journey.start(s,arg,M.state(s).difficulty.town||M.recommendation(s,'town')))error='This saved journey cannot be opened; its original data has been preserved.';return;}
@@ -832,7 +837,7 @@
       ].includes(name) || ["j-budget-place","j-part","j-choice","j-coin","j-adjust","j-value","j-submit","j-help","j-place","j-clear","j-skip"].includes(name) || el.dataset.act;
     const evidence = () => JSON.stringify([s.quest, s.learning, M.current(s),window.V5Journey.state(s)]);
     const previous = evidence();
-    await dispatch(action, el.closest('.immersive-journey')?.dataset.sceneKey || null);
+    await dispatch(action, el.closest('.world-task-dialog')?.dataset.worldScope ? 'world|'+el.closest('.world-task-dialog').dataset.worldScope : el.closest('.immersive-journey')?.dataset.sceneKey || null);
     if (!meaningful) activity = 0;
     else if (previous !== evidence()) activity = Date.now();
   });
@@ -890,6 +895,11 @@
       filter = e.target.value;
       render();
       $("shop-filter")?.focus({ preventScroll: true });
+      return;
+    }
+    if (e.target.dataset.avatarLook) {
+      const key=e.target.dataset.avatarLook, value=Number(e.target.value);
+      if(['avatarHair','avatarFace','avatarShoes'].includes(key)&&Number.isInteger(value)&&value>=0&&value<=3)await change(()=>{s.settings[key]=value;});
       return;
     }
     if (e.target.dataset.setting) {

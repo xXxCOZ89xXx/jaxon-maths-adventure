@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "base": "0444e1b1d61d8fee0d8143787bfb56a97fd059c4",
+  "releaseUnchanged": "2e84e74d9fbcb22208b6332ca98f2cd7466912d3",
+  "distinctBrowserCases": 42,
+  "viewports": [
+    "820x1180",
+    "1180x820"
+  ],
+  "browser": "Chromium touch emulation; physical Safari not certified",
+  "rollout": 34,
+  "customerQueue": 8,
+  "overlappingFinalFollowups": [
+    "different-tier unfinished home preservation",
+    "Camp photo paint and capture",
+    "final illustrated products"
+  ],
+  "skills": 63,
+  "newDepthBanks": 50,
+  "structuresPerSkill": 6,
+  "generatedQuestionsChecked": 10800,
+  "freshRoundsPerDepthSkill": 12,
+  "townPlans": 27,
+  "townStagesChecked": 2091,
+  "catalogueItems": 40,
+  "campLogicalStages": 8,
+  "campExteriorAppearances": 4,
+  "newAssets": 34,
+  "screenshotsInGallery": 50,
+  "staticStagingBuild": "PASS",
+  "liveWrites": 0,
+  "reviewPage": "https://chatgpt.com/space/page_abb67cdf3bec819184dad069092317b9",
+  "limits": [
+    "Static 2.5D compositing",
+    "Partial curriculum/discovery coverage",
+    "Final owner visual approval outstanding",
+    "No villain storyline or commercial features"
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "source": "https://www.gov.uk/government/publications/national-curriculum-in-england-mathematics-programmes-of-study/national-curriculum-in-england-mathematics-programmes-of-study",
-  "reviewed": "2026-10-22",
-  "scope": "Partial Years 3–6 and KS3 (Years 7–9) mapping; KS3 is not prescribed by individual year",
+  "reviewed": "2026-10-23",
+  "scope": "Partial Years 3–6 and KS3 mapping; not complete Years 3–9 coverage",
   "skills": [
     {
       "id": "place",
@@ -15,7 +15,8 @@
       ],
       "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "operations",
@@ -30,7 +31,8 @@
       ],
       "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "negative",
@@ -42,7 +44,8 @@
       "prerequisites": [],
       "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "multiply",
@@ -57,7 +60,8 @@
       ],
       "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "priority",
@@ -72,7 +76,8 @@
       ],
       "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "fractions",
@@ -87,7 +92,8 @@
       ],
       "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "fraction_compare",
@@ -101,7 +107,8 @@
       ],
       "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "fraction_operations",
@@ -116,7 +123,8 @@
       ],
       "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "decimals",
@@ -131,7 +139,8 @@
       ],
       "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "percent_change",
@@ -145,7 +154,8 @@
       ],
       "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "algebra_patterns",
@@ -159,7 +169,8 @@
       ],
       "gaps": "Inequalities, functions, nth terms, factorisation and straight-line graphs remain partial or absent.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "algebra_missing",
@@ -173,7 +184,8 @@
       ],
       "gaps": "Inequalities, functions, nth terms, factorisation and straight-line graphs remain partial or absent.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "algebra_expressions",
@@ -187,7 +199,8 @@
       ],
       "gaps": "Inequalities, functions, nth terms, factorisation and straight-line graphs remain partial or absent.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "geometry_angles",
@@ -201,7 +214,8 @@
       ],
       "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "geometry_triangles",
@@ -215,7 +229,8 @@
       ],
       "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "geometry_area",
@@ -230,7 +245,8 @@
       ],
       "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "ratio_basics",
@@ -245,7 +261,8 @@
       ],
       "gaps": "Inverse proportion, similarity and compound units need further development.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "ratio_sharing",
@@ -259,7 +276,8 @@
       ],
       "gaps": "Inverse proportion, similarity and compound units need further development.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "ratio_proportion",
@@ -274,7 +292,8 @@
       ],
       "gaps": "Inverse proportion, similarity and compound units need further development.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "stats_averages",
@@ -288,7 +307,8 @@
       ],
       "gaps": "Sampling, grouped data, scatter graphs and comparing distributions are not comprehensively covered.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "stats_tables",
@@ -302,7 +322,8 @@
       ],
       "gaps": "Sampling, grouped data, scatter graphs and comparing distributions are not comprehensively covered.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "stats_probability_data",
@@ -317,7 +338,8 @@
       ],
       "gaps": "Sampling, grouped data, scatter graphs and comparing distributions are not comprehensively covered.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "prob_chance",
@@ -329,7 +351,8 @@
       "prerequisites": [],
       "gaps": "Unequally likely events, experimental frequency, set diagrams and dependent events need further development.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "prob_events",
@@ -343,7 +366,8 @@
       ],
       "gaps": "Unequally likely events, experimental frequency, set diagrams and dependent events need further development.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "prob_compare",
@@ -357,7 +381,8 @@
       ],
       "gaps": "Unequally likely events, experimental frequency, set diagrams and dependent events need further development.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "measure_units",
@@ -372,7 +397,8 @@
       ],
       "gaps": "Estimation, non-decimal time, scale drawings and composite measure tasks remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "measure_volume",
@@ -387,7 +413,8 @@
       ],
       "gaps": "Estimation, non-decimal time, scale drawings and composite measure tasks remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "measure_speed",
@@ -402,7 +429,8 @@
       ],
       "gaps": "Estimation, non-decimal time, scale drawings and composite measure tasks remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "factors",
@@ -416,7 +444,8 @@
       ],
       "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "powers",
@@ -430,7 +459,8 @@
       ],
       "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "fraction_mixed",
@@ -444,7 +474,8 @@
       ],
       "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "fraction_mult",
@@ -459,7 +490,8 @@
       ],
       "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "algebra_brackets",
@@ -474,7 +506,8 @@
       ],
       "gaps": "Inequalities, functions, nth terms, factorisation and straight-line graphs remain partial or absent.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "algebra_coordinates",
@@ -488,7 +521,8 @@
       ],
       "gaps": "Inequalities, functions, nth terms, factorisation and straight-line graphs remain partial or absent.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "geometry_transforms",
@@ -502,7 +536,8 @@
       ],
       "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "geometry_circle",
@@ -516,7 +551,8 @@
       ],
       "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "ratio_rates",
@@ -530,7 +566,8 @@
       ],
       "gaps": "Inverse proportion, similarity and compound units need further development.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "stats_pie",
@@ -545,7 +582,8 @@
       ],
       "gaps": "Sampling, grouped data, scatter graphs and comparing distributions are not comprehensively covered.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "measure_time",
@@ -559,7 +597,8 @@
       ],
       "gaps": "Estimation, non-decimal time, scale drawings and composite measure tasks remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_money",
@@ -571,7 +610,8 @@
       "prerequisites": [],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_totals",
@@ -585,7 +625,8 @@
       ],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_menu",
@@ -599,7 +640,8 @@
       ],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_split",
@@ -613,7 +655,8 @@
       ],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_balance",
@@ -625,7 +668,8 @@
       "prerequisites": [],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_interest",
@@ -637,7 +681,8 @@
       "prerequisites": [],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_discounts",
@@ -651,7 +696,8 @@
       ],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_value",
@@ -665,7 +711,8 @@
       ],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_timetable",
@@ -677,7 +724,8 @@
       "prerequisites": [],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_travel",
@@ -689,7 +737,8 @@
       "prerequisites": [],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_bills",
@@ -701,7 +750,8 @@
       "prerequisites": [],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_household",
@@ -713,7 +763,8 @@
       "prerequisites": [],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_tickets",
@@ -725,7 +776,8 @@
       "prerequisites": [],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_time",
@@ -737,7 +789,8 @@
       "prerequisites": [],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_wages",
@@ -751,7 +804,8 @@
       ],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "town_payslip",
@@ -765,7 +819,8 @@
       ],
       "gaps": "Fictional practical application supports curriculum objectives; employment/pay are life-skills extensions, not complete statutory coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": "existing bank; further depth review pending"
+      "questionStructures": 6,
+      "depthVersion": 3
     },
     {
       "id": "number_bonds",
@@ -777,7 +832,8 @@
       "prerequisites": [],
       "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "times_tables",
@@ -789,7 +845,8 @@
       "prerequisites": [],
       "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "division_groups",
@@ -801,7 +858,8 @@
       "prerequisites": [],
       "gaps": "Written methods, negative multiplication/division, approximation and standard form need deeper coverage.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "fraction_parts",
@@ -813,7 +871,8 @@
       "prerequisites": [],
       "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "decimal_place",
@@ -825,7 +884,8 @@
       "prerequisites": [],
       "gaps": "Equivalence proofs, mixed-number operations and recurring decimals remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "measure_mass",
@@ -837,7 +897,8 @@
       "prerequisites": [],
       "gaps": "Estimation, non-decimal time, scale drawings and composite measure tasks remain partial.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "geometry_shapes",
@@ -849,7 +910,8 @@
       "prerequisites": [],
       "gaps": "Constructions, nets, congruence/similarity, Pythagoras and trigonometry are not comprehensively taught.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     },
     {
       "id": "stats_scale",
@@ -861,7 +923,8 @@
       "prerequisites": [],
       "gaps": "Sampling, grouped data, scatter graphs and comparing distributions are not comprehensively covered.",
       "reviewed": "2026-10-22",
-      "questionStructures": 6
+      "questionStructures": 6,
+      "depthVersion": 2
     }
   ]
 }
