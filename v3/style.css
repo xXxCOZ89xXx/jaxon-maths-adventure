@@ -2175,3 +2175,11 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .avatar-forehead{position:absolute;left:38%;top:13.3%;width:22%;height:8%;z-index:4;pointer-events:none;clip-path:ellipse(50% 50% at 50% 50%)}
 /* Keep the headset's painted dark opening off the face; retain band and ear cups. */
 [data-worn="headphones"] .equipment-source{clip-path:polygon(0 0,100% 0,100% 100%,74% 100%,74% 25%,26% 25%,26% 100%,0 100%)}
+
+/* Hat front silhouettes exclude atlas rear rims; original face remains visible.
+   These masks apply only when a hat is worn, leaving option 0/backgrounds intact. */
+.has-hat .avatar-base:not(.avatar-skin){clip-path:inset(13% 0 0 0)}
+.has-hat.has-outfit .avatar-base:not(.avatar-skin){clip-path:inset(13% 0 76% 0)}
+.has-hat [data-attachment-category="headwear"] .equipment-source{
+ clip-path:polygon(0 0,100% 0,100% 83%,88% 81%,70% 77%,50% 75%,30% 77%,12% 81%,0 83%);
+}

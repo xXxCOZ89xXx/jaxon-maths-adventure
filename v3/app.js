@@ -321,9 +321,10 @@
       .join("")}</div></details>${U.collection(s)}`;
   }
   function shop() {
-    const slots = [...new Set(C.catalog.map((i) => i.slot))];
-    const preview=C.catalog.find(i=>i.id===itemPreview),look=preview?{...s,bought:[...s.bought,preview.id],equipped:[...s.equipped.filter(id=>C.catalog.find(i=>i.id===id)?.slot!==preview.slot),preview.id]}:s;
-    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar?V7Avatar.controls(s):""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Staging wallet only. Purchases are checked securely before saving." : "Only fictional demo coins are used here."}</p>${btn("Unequip all", "unequip")}</div></div><label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All 40 items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${C.catalog
+    const activeCatalog = C.catalog.filter(i=>!window.V7Avatar||V7Avatar.isActiveItem(i));
+    const slots = [...new Set(activeCatalog.map((i) => i.slot))];
+    const preview=activeCatalog.find(i=>i.id===itemPreview),look=preview?{...s,bought:[...s.bought,preview.id],equipped:[...s.equipped.filter(id=>C.catalog.find(i=>i.id===id)?.slot!==preview.slot),preview.id]}:s;
+    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar?V7Avatar.controls(s):""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Staging wallet only. Purchases are checked securely before saving." : "Only fictional demo coins are used here."}</p>${btn("Unequip all", "unequip")}</div></div><label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${activeCatalog
       .filter(
         (i) =>
           filter === "all" ||
@@ -440,6 +441,7 @@
   async function dispatch(action, sceneKey = null) {
     const [name, arg] = action.split(":");
     if (cloud && !cloud.isUnlocked()) return;
+    if (name === "buy" && window.V7Avatar && !V7Avatar.isActiveItem(C.catalog.find(i=>i.id===arg))) return;
     if (cloud && name === "buy" && !s.bought.includes(arg)) {
       try {
         await cloud.purchase(arg);
@@ -791,7 +793,7 @@
     if(ui){
       if(ui.dataset.ui==='open-camp-journal'){e.preventDefault();const journal=document.getElementById('camp-achievements');if(journal){journal.open=true;journal.scrollIntoView({block:'start',behavior:'instant'});journal.querySelector('summary')?.focus();}}
       if(ui.dataset.ui==='choose-town-plan'){const plans=document.getElementById('town-plans');plans?.scrollIntoView({block:'start',behavior:'instant'});plans?.focus({preventScroll:true});}
-      if(ui.dataset.ui==='preview-item'||ui.dataset.ui==='clear-preview'){itemPreview=ui.dataset.item||null;render();document.getElementById('wardrobe-preview')?.focus();}
+      if(ui.dataset.ui==='preview-item'||ui.dataset.ui==='clear-preview'){itemPreview=ui.dataset.item&&(!window.V7Avatar||V7Avatar.isActiveItem(C.catalog.find(i=>i.id===ui.dataset.item)))?ui.dataset.item:null;render();document.getElementById('wardrobe-preview')?.focus();}
       if(ui.dataset.ui==='hide-celebration'){const banner=ui.closest('.completion-ribbon');hiddenCelebrations.add(banner.dataset.completionKey);banner.remove();document.querySelector('.recap h1,.town-complete h2')?.closest('main')?.focus();}
       return;
     }
@@ -899,7 +901,7 @@
     }
     if (e.target.dataset.avatarLook) {
       const key=e.target.dataset.avatarLook, value=Number(e.target.value);
-      if(['avatarHair','avatarFace','avatarShoes'].includes(key)&&Number.isInteger(value)&&value>=0&&value<=3)await change(()=>{s.settings[key]=value;});
+      if(['avatarHair','avatarFace','avatarShoes'].includes(key)&&value===0)await change(()=>{s.settings[key]=value;});
       return;
     }
     if (e.target.dataset.setting) {
