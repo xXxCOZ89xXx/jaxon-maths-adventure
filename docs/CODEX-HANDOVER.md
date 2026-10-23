@@ -1,5 +1,18 @@
 # Codex handover — V5.1 usability and automated regression
 
+## Saving/ledger correction — 23 October 2026 — not published
+
+Owner measured 18 MB database, 7.1 MB physical ledger / 835 rows / 681 full snapshots, ~18 MB logical payload and a ~32.7 KB largest save. Current data is disposable test data, but no reset/deletion is authorised. This phase supersedes automatic publication permission: keep `release/ipad` at `15e934d` until migration and app are verified together.
+
+Implemented additive compact receipts with canonical SHA-256 request fingerprints and small operation receipts, preserving legacy full rows and exact retries/CAS/role/wallet rules. Old client works with the new backend; new client requires `saveReceiptVersion:1` before writes. Immediate local saves remain; routine uploads coalesce into ~30-second checkpoints and skip unchanged revision-only states. Reconnect/reopen/save-exit force recovery. Durable acknowledged purchase intents recover without relying on an unowned item's button, preventing the confirmed shop deadlock. No existing queue/game namespaces or progress/task snapshots are replaced.
+
+`npm run test:ipad-release` is the focused automatic CI gate, with no skip flags. It covers the actual sync/intent modules against migrated isolated PostgreSQL, 720 save requests producing zero new full snapshots, lost responses/duplicates, family/role boundaries, parent rewards, one simulated hour of upload batching, old queues, browser refresh/offline recovery and full touch Bolognese in both iPad orientations. Configured staging build/static verifier also pass. No real Supabase connection or writes occurred.
+
+Review/execution/rollback details: `SAVE-RECOVERY-UPGRADE.md`. Owner-run SQL: `supabase/v3-staging/004_compact_save_receipts.sql`, followed by `004_verify_receipts.sql`. Do not substitute the parked V5.2 package. Live baseline guard failures require review, not bypass. Old transaction rows and existing progress remain unchanged. After migration, application rollback to `15e934d` is compatible; restoring the old RPC after compact rows exist is unsafe. Independent SQL sign-off/live verification remain owner steps.
+
+GitHub workflow runs on development pushes and release PRs; only owner repository settings can require its `save-and-recovery` status before release merges. Connected tools cannot write branch rules. Configure that required check with no routine bypass before promotion. No release push, deployment, main merge, account/PIN change or destructive cleanup occurred. Years 6–9 work stays paused.
+
+
 ## Final targeted graphics release — 23 October 2026
 
 Owner approved all 50 prior screenshots and explicitly authorised these corrections followed by promotion through the existing GitHub release branch. See `art-direction/FINAL-CORRECTIONS-OWNER-INSTRUCTION.md`. The later owner instruction requires GitHub-only deployment; no Cloudflare API, Wrangler, manual upload or reconnect request.

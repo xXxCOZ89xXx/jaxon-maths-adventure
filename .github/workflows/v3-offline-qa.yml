@@ -1,39 +1,20 @@
-name: V3 isolated offline QA
+name: iPad save and recovery gate
 on:
-  pull_request:
-    paths:
-      - "v3/**"
-      - "supabase/v3-staging/**"
-      - "scripts/**"
-      - "v3-adventure.html"
-      - "v2-*.js"
-      - "tests/**"
-      - "!tests/artifacts/**"
-      - "package*.json"
-      - "playwright.config.cjs"
-      - ".github/workflows/v3-offline-qa.yml"
   push:
-    branches: ["codex/v3-adventure-build"]
-    paths:
-      - "v3/**"
-      - "supabase/v3-staging/**"
-      - "scripts/**"
-      - "v3-adventure.html"
-      - "v2-*.js"
-      - "tests/**"
-      - "!tests/artifacts/**"
-      - "package*.json"
-      - "playwright.config.cjs"
-      - ".github/workflows/v3-offline-qa.yml"
-concurrency:
-  group: v3-qa-${{ github.head_ref || github.ref_name }}
-  cancel-in-progress: true
+    branches: [codex/v3-adventure-build]
+  pull_request:
+    branches: [release/ipad, main]
+  workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: ipad-save-safety-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 jobs:
-  fictional-learner-qa:
+  save-and-recovery:
+    name: save-and-recovery
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -41,36 +22,16 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
-      - run: npx playwright install --with-deps chromium webkit
-      - name: Offline logic and compatibility
-        run: npm test
-      - name: Staging build isolation and completeness (fictional configuration)
-        run: npm run test:staging-build
-      - name: Real PostgreSQL security and migration checks
-        run: |
-          docker pull postgres:17-alpine
-          npm run test:security
-      - name: Fictional desktop and touch gameplay
-        run: npm run test:e2e
-        env:
-          V3_WEBKIT: "1"
-          V51_REPORT: "tests/artifacts/v5-1-browser-results.json"
-      - name: Summarise actual V5.1 world and skill coverage
-        if: always()
-        run: npm run report:v51
+      - run: npx playwright install --with-deps chromium
+      - run: docker pull postgres:17-alpine
+      - name: Migration, requests, offline recovery, purchases, roles and gameplay
+        run: npm run test:ipad-release
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: v3-fictional-qa
+          name: ipad-save-recovery-evidence
           path: |
-            tests/artifacts/
-            test-results/
+            tests/artifacts/compact-receipts-db.json
+            tests/artifacts/save-recovery-browser.json
+            test-results/save-recovery/
           retention-days: 14
-
-      - name: Package isolated playable preview
-        run: npm run build:preview
-      - uses: actions/upload-artifact@v4
-        with:
-          name: v3-offline-playable-preview
-          path: preview-dist/
-          retention-days: 30
