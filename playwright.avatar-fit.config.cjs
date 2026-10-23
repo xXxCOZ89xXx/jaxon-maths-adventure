@@ -1,0 +1,2 @@
+const base=require('./playwright.config.cjs');
+module.exports={...base,testMatch:/avatar-fit\.spec\.cjs/,timeout:120000,outputDir:'test-results/avatar-fit',projects:[...base.projects.filter(p=>p.name.includes('ipad')), {name:'small-touch',use:{...base.projects.find(p=>p.name==='ipad-portrait-chromium').use,viewport:{width:390,height:844}}}],reporter:[['list'],['json',{outputFile:process.env.AVATAR_REPORT||'tests/artifacts/avatar-fit-browser.json'}]]};
