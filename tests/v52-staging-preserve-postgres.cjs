@@ -1,0 +1,104 @@
+// Focused preservation delta only. Fictional data, local Docker socket, no network.
+const {execFileSync}=require('node:child_process');
+const fs=require('node:fs'),assert=require('node:assert/strict'),crypto=require('node:crypto');
+const env={...process.env};for(const k of ['DOCKER_HOST','DOCKER_CONTEXT','DOCKER_TLS','DOCKER_TLS_VERIFY','DOCKER_CERT_PATH'])delete env[k];
+const name='jaxon-v52-preserve-'+process.pid;
+const docker=(args,input)=>execFileSync('docker',['--host=unix:///var/run/docker.sock',...args],{env,input,encoding:'utf8',stdio:['pipe','pipe','pipe']}).trim();
+const sql=s=>docker(['exec','-i',name,'psql','-h','127.0.0.1','-X','-qAt','-v','ON_ERROR_STOP=1','-U','postgres'],s);
+const lit=s=>"'"+String(s).replaceAll("'","''")+"'";
+const flags="set app.v52.staging_upgrade_authorized='yes';set app.v52.staging_ref='sfogrvedypgtxfvecmbx';set app.v52.staging_backup_verified='yes';";
+const source=f=>fs.readFileSync('supabase/v52-staging-preserve/'+f+'.sql','utf8');
+const run=f=>sql(flags+source(f));
+const ids={learner:'11111111-1111-4111-8111-111111111111',parent:'22222222-2222-4222-8222-222222222222',other:'33333333-3333-4333-8333-333333333333',otherParent:'44444444-4444-4444-8444-444444444444'};
+const call=(who,fn,args='',age=0)=>sql(`set role authenticated;set request.jwt.claims=${lit(JSON.stringify({sub:ids[who],amr:[{method:'password',timestamp:Math.floor(Date.now()/1000)-age}]}))};select public.${fn}(${args});`);
+const tokens={},request=(who,op,p={})=>JSON.parse(call(who,'v3_request',[lit(tokens[who]),lit(op),lit(JSON.stringify(p))].join(',')));
+const reject=(f,re=/required|permission|Unexpected|changed|mismatch|Invalid|review|revision|retired|prepared|unknown/i)=>assert.throws(f,e=>re.test(String(e.stderr||e.message)));
+const results=[];async function test(label,f){await f();results.push(label);console.log('PASS',label);}
+(async()=>{try{
+ docker(['run','--pull=never','--rm','-d','--name',name,'--network','none','-e','POSTGRES_HOST_AUTH_METHOD=trust','postgres:17-alpine']);
+ let ready=false;for(let i=0;i<100;i++){try{sql('select 1');ready=true;break;}catch{await new Promise(r=>setTimeout(r,100));}}assert.ok(ready);
+ sql(`create role anon;create role authenticated;create role service_role bypassrls;create schema auth;
+ create table auth.users(id uuid primary key,fixture text not null default 'preserve');
+ create function auth.jwt() returns jsonb language sql stable as $$select coalesce(nullif(current_setting('request.jwt.claims',true),''),'{}')::jsonb$$;
+ create function auth.uid() returns uuid language sql stable as $$select (auth.jwt()->>'sub')::uuid$$;
+ grant usage on schema auth to anon,authenticated;grant execute on function auth.jwt(),auth.uid() to anon,authenticated;
+ alter default privileges in schema public grant execute on functions to service_role;`);
+ sql("set app.v3.staging_authorized='yes';set app.v3.staging_ref='sfogrvedypgtxfvecmbx';"+fs.readFileSync('supabase/v3-staging/001_secure_core.sql','utf8'));
+ sql(fs.readFileSync('supabase/v3-staging/002_catalog.sql','utf8'));sql(fs.readFileSync('supabase/v3-staging/003_import_compatibility.sql','utf8'));
+ sql(`revoke execute on function public.v3_admin_import(uuid,jsonb) from service_role;
+ insert into auth.users(id) values ${Object.values(ids).map(v=>'('+lit(v)+')').join(',')};
+ insert into public.maths_families values('${ids.learner}','${ids.parent}'),('${ids.other}','${ids.otherParent}');
+ insert into public.v3_progress(child_user_id,revision,progress) values('${ids.learner}',7,'{"minutes":8,"draft":"existing","unknown":{"retained":true}}'),('${ids.other}',2,'{"minutes":3}');
+ insert into public.v3_wallet(child_user_id,coins,bonus,active_seconds,redeemed,owned) values('${ids.learner}',120,35,240,1,'["helmet"]'),('${ids.other}',50,2,120,0,'["cap"]');
+ insert into public.v3_pins(user_id,hash,attempts,blocked_until,generation) select id,extensions.crypt(case when id in ('${ids.parent}','${ids.otherParent}') then '654321' else '1234' end,extensions.gen_salt('bf',4)),2,now()-interval '1 minute',9 from auth.users;`);
+ for(const who of Object.keys(ids))tokens[who]=JSON.parse(call(who,'v3_unlock',lit(who.toLowerCase().includes('parent')?'654321':'1234'))).token;
+ const oldPayload={requestId:crypto.randomUUID(),revision:7,progress:{minutes:8,draft:'saved-before-upgrade',unknown:{retained:true}},legacyExtra:'retained'};
+ const oldResult=request('learner','save',oldPayload);
+ const pinsBefore=sql('select jsonb_agg(to_jsonb(p) order by user_id) from public.v3_pins p');
+ await test('owner/ref guards and corrected importer permission are prerequisites',()=>{
+  reject(()=>sql(source('000_pause')),/required/);
+  sql('grant execute on function public.v3_admin_import(uuid,jsonb) to service_role');
+  reject(()=>run('000_pause'),/correction/);
+  assert.equal(sql("select to_regnamespace('v52_staging_private') is null"),'t');
+  sql('revoke execute on function public.v3_admin_import(uuid,jsonb) from service_role');
+ });
+ run('000_pause');
+ const before=sql('select v52_staging_private.data_digest()');
+ await test('pause blocks all runtime RPCs and a late upgrade error rolls back every change',()=>{
+  reject(()=>request('learner','read'),/permission denied/);
+  const fail=source('001_upgrade').replace("update public.v3_environment set staging_upgrade_version=2;","do $$begin raise exception 'late fixture failure';end$$;\nupdate public.v3_environment set staging_upgrade_version=2;");
+  reject(()=>sql(flags+fail),/late fixture failure/);
+  assert.equal(sql('select v52_staging_private.data_digest()'),before);
+  assert.equal(sql("select count(*) from pg_attribute where attrelid='public.v3_wallet'::regclass and attname='opening_seconds' and not attisdropped"),'0');
+  assert.equal(sql('select state from v52_staging_private.control'),'paused');
+ });
+ run('001_upgrade');
+ await test('exact installation preserves every original data field and all PIN/unlock state',()=>{
+  assert.equal(sql('select v52_staging_private.data_digest()'),before);
+  assert.equal(sql('select jsonb_agg(to_jsonb(p) order by user_id) from public.v3_pins p'),pinsBefore);
+  assert.ok(sql(source('verify')).includes('installed_closed|2|t|t|t|t|t|t'));
+  reject(()=>request('learner','read'),/permission denied/);
+  reject(()=>run('001_upgrade'),/Pause phase/);
+ });
+ run('002_resume');
+ await test('existing PIN capabilities and exact old retry survive; strict new requests and CAS remain safe',()=>{
+  assert.equal(JSON.parse(sql('set role anon;select public.v3_identity()')).stagingUpgradeVersion,2);
+  assert.deepEqual(request('learner','save',oldPayload),oldResult);
+  assert.equal(request('learner','read').revision,8);
+  reject(()=>request('learner','save',{...oldPayload,progress:{changed:true}}),/reused/);
+  reject(()=>request('learner','save',{...oldPayload,requestId:crypto.randomUUID()}),/Unexpected/);
+  assert.equal(request('learner','save',{requestId:crypto.randomUUID(),revision:1,progress:{}}).conflict,true);
+  reject(()=>request('learner','active',{requestId:crypto.randomUUID(),seconds:'NaN'}),/Invalid/);
+  reject(()=>call('learner','v3_set_pin',"'1234'",-600),/Sign in again/);
+  reject(()=>call('otherParent','v3_request',[lit(tokens.parent),lit('read'),"'{}'"].join(',')),/Unlock/);
+  assert.equal(sql('select jsonb_agg(to_jsonb(p) order by user_id) from public.v3_pins p'),pinsBefore);
+ });
+ await test('new operations retain cumulative balances, ownership and immutable history; reads do not initialise',()=>{
+  const purchase={requestId:crypto.randomUUID(),item:'cap'};
+  const bought=request('learner','buy',purchase);assert.equal(bought.wallet.coins,75);assert.deepEqual(bought.wallet.owned,['helmet','cap']);
+  assert.deepEqual(request('learner','buy',purchase),bought);
+  sql(`delete from public.v3_progress where child_user_id='${ids.other}'`);
+  reject(()=>request('other','read'),/not prepared/);
+  assert.equal(sql(`select count(*) from public.v3_progress where child_user_id='${ids.other}'`),'0');
+  sql(`insert into public.v3_progress(child_user_id,revision,progress) values('${ids.other}',2,'{"minutes":3}')`);
+  for(const role of ['anon','authenticated','service_role'])assert.equal(sql(`select has_function_privilege('${role}','public.v3_admin_import(uuid,jsonb)','EXECUTE')`),'f');
+  reject(()=>sql('set role authenticated;update public.v3_wallet set coins=999'),/permission/);
+ });
+ await test('explicit freeze/rollback retains post-upgrade purchases and request history and stays closed',()=>{
+  reject(()=>run('003_freeze'),/Incident/);
+  sql(flags+"set app.v52.rollback_authorized='yes';"+source('003_freeze'));
+  const current=sql('select v52_staging_private.data_digest()');
+  reject(()=>sql(flags+"set app.v52.rollback_authorized='yes';"+source('004_rollback')),/Explicit rollback/);
+  sql(flags+"set app.v52.rollback_authorized='yes';set app.v52.legacy_resume_risks_reviewed='yes';"+source('004_rollback'));
+  assert.equal(sql('select v52_staging_private.data_digest()'),current);
+  assert.equal(sql('select state from v52_staging_private.control'),'rolled_back');
+  reject(()=>request('learner','read'),/permission denied/);
+  assert.equal(sql(`select coins from public.v3_wallet where child_user_id='${ids.learner}'`),'75');
+  assert.equal(sql('select count(*) from public.v3_transactions'),'2');
+  reject(()=>run('002_resume'),/legacy validation risks/);
+  sql(flags+"set app.v52.legacy_resume_risks_reviewed='yes';"+source('002_resume'));
+  assert.deepEqual(request('learner','save',oldPayload),oldResult);
+ });
+ fs.mkdirSync('tests/artifacts',{recursive:true});fs.writeFileSync('tests/artifacts/v52-staging-preserve-db.json',JSON.stringify({scope:'network-disabled disposable PostgreSQL 17; fictional only',hosted:false,suites:results},null,2)+'\n');
+ console.log('PASS',results.length,'focused staging-preservation database suites; no hosted SQL');
+}finally{try{docker(['rm','-f',name]);}catch{}}})().catch(e=>{console.error(e.stderr||e.message);process.exitCode=1;});

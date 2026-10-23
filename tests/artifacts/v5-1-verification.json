@@ -1,0 +1,84 @@
+{
+  "version": "V5.1",
+  "branch": "codex/v3-adventure-build",
+  "codeCommit": "2f30f72149d53f0dbc8ed2268a1ccbffed56f6d6",
+  "local": {
+    "distinctBrowserCasesPassed": 258,
+    "unexpected": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "broadMatrixPassed": 249,
+    "finalInputRecheckPassed": 27,
+    "finalMoneyProfileRecheckPassed": 36,
+    "authenticatedJourneySupplementPassed": 3,
+    "overlappingCases": "Later focused results replace earlier file/title/project matches. Counts are not added blindly.",
+    "worlds": 9,
+    "skills": 55,
+    "profiles": [
+      "advanced",
+      "developing",
+      "foundation",
+      "new"
+    ],
+    "skillVisits": 660,
+    "completedIndependentRounds": 108,
+    "legacyJourneyRecheckPassed": 9
+  },
+  "logicAndCompatibility": "passed npm test",
+  "stagingBuildAndFixtureIsolation": "passed",
+  "rendererAuditTaskVariants": 1107,
+  "postgresSecuritySuitesPassed": 14,
+  "hostedCI": {
+    "runId": 39502533251,
+    "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39502533251",
+    "expectedBrowserCases": 344,
+    "status": "completed",
+    "commit": "a0da7d4",
+    "conclusion": "success",
+    "passedBrowserCases": 344,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "projects": {
+      "ipad-portrait-webkit": 86,
+      "desktop-chromium": 86,
+      "ipad-portrait-chromium": 86,
+      "ipad-landscape-chromium": 86
+    },
+    "worlds": 9,
+    "skills": 55,
+    "profiles": [
+      "advanced",
+      "developing",
+      "foundation",
+      "new"
+    ],
+    "skillVisits": 880,
+    "completedIndependentRounds": 144,
+    "proof": "tests/artifacts/v5-1-hosted-results.txt"
+  },
+  "safety": {
+    "protectedSourcesUnchanged": true,
+    "testData": "fictional local contexts/intercepted APIs/disposable network-disabled PostgreSQL",
+    "productionRecordsAccessed": false,
+    "remoteSchemaChanged": false,
+    "deployed": false,
+    "merged": false,
+    "hostedAuthVerified": false
+  },
+  "limits": [
+    "Local WebKit downloads were blocked by proxy policy; all 86 hosted iPad WebKit cases passed.",
+    "Physical iPad Safari, assistive technology and performance acceptance outstanding.",
+    "Actual hosted Auth/PIN/RLS, cross-device/offline recovery and deferred recovery delivery unverified."
+  ],
+  "resolvedRegression": {
+    "staleQueuedInput": "Reproduced with a failing save-lock test (expected 0, received 123); guard and all three Chromium projects now pass."
+  },
+  "qaCommit": "a0da7d44c99a606ce442263df5f9cc8b77f9c0dc",
+  "previousHostedCI": {
+    "runId": 39498386408,
+    "conclusion": "failure",
+    "reportedFailure": "Legacy all-world WebKit journey exceeded its 60-second test budget while still repeating numeric arrows. All other WebKit cases passed.",
+    "resolution": "Use direct entry, set a 120-second overall budget only for the 24-puzzle walkthrough, retain 15-second per-action limits; nine local journey/save/concurrency cases passed."
+  }
+}

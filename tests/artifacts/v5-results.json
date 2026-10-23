@@ -1,0 +1,892 @@
+{
+  "localIntegrationBrowser": {
+    "startTime": "2026-10-20T19:29:25.276Z",
+    "duration": 512175.207,
+    "expected": 111,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "localIntegrationScope": "Clean full matrix before the final pence/minute/representability fix; final hosted tree and additional unit-mapping cases recorded separately",
+  "cases": [
+    {
+      "test": "Home, tour, map and all eight interactive world quests restore and persist",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Mid-quest Save & Exit and reload resume exact puzzle, selection, hint and milestone",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Lesson, visual tools, independent freshness, help and failed check reteaching",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Shop, avatar across screens, preferences and mock parent summary",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Two tabs serialize purchases and milestones without duplicate rewards",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Responsive navigation, focus, touch targets and reduced motion",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Adaptive discovery, device isolation and offline play preserve fictional state",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Visible active learning earns time; simulated hidden and idle time stop earning",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Corrupt demo saves remain intact and show a temporary-session warning",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "menus, idle movement, no-op edits and refresh cannot renew learning rewards",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "World-stage bridge exposes every destination and moves its explorer without changing learning evidence",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Camp places are keyboard links to usable displays; navigation cannot earn rewards",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Landscape entrances open real expeditions in each original world without granting progress",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Home, tour, map and all eight interactive world quests restore and persist",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Mid-quest Save & Exit and reload resume exact puzzle, selection, hint and milestone",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Lesson, visual tools, independent freshness, help and failed check reteaching",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Shop, avatar across screens, preferences and mock parent summary",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Two tabs serialize purchases and milestones without duplicate rewards",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Responsive navigation, focus, touch targets and reduced motion",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Adaptive discovery, device isolation and offline play preserve fictional state",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Visible active learning earns time; simulated hidden and idle time stop earning",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Corrupt demo saves remain intact and show a temporary-session warning",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "menus, idle movement, no-op edits and refresh cannot renew learning rewards",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "World-stage bridge exposes every destination and moves its explorer without changing learning evidence",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Camp places are keyboard links to usable displays; navigation cannot earn rewards",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Landscape entrances open real expeditions in each original world without granting progress",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Home, tour, map and all eight interactive world quests restore and persist",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Mid-quest Save & Exit and reload resume exact puzzle, selection, hint and milestone",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Lesson, visual tools, independent freshness, help and failed check reteaching",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Shop, avatar across screens, preferences and mock parent summary",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Two tabs serialize purchases and milestones without duplicate rewards",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Responsive navigation, focus, touch targets and reduced motion",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Adaptive discovery, device isolation and offline play preserve fictional state",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Visible active learning earns time; simulated hidden and idle time stop earning",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Corrupt demo saves remain intact and show a temporary-session warning",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "menus, idle movement, no-op edits and refresh cannot renew learning rewards",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "World-stage bridge exposes every destination and moves its explorer without changing learning evidence",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Camp places are keyboard links to usable displays; navigation cannot earn rewards",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Landscape entrances open real expeditions in each original world without granting progress",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "staging fails closed before sign-in when configuration is absent",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "learner sign-in, incorrect PIN, unfinished quest, response loss, refresh and lock",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "parent evidence and server reward path remain separate from learner gameplay",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "offline edit and reconnect, competing-device conflict and server shop ownership",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "standalone downloadable preview loads as one HTML with no asset or cloud requests",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "a parent award reaches an open learner shop without a progress revision",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "private account recovery uses PKCE, changes the password and returns to sign-in",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "recovery rate limits show useful copy and never auto-retry",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "lost parent award restores the same immutable retry after refresh",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "staging fails closed before sign-in when configuration is absent",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "learner sign-in, incorrect PIN, unfinished quest, response loss, refresh and lock",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "parent evidence and server reward path remain separate from learner gameplay",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "offline edit and reconnect, competing-device conflict and server shop ownership",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "standalone downloadable preview loads as one HTML with no asset or cloud requests",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "a parent award reaches an open learner shop without a progress revision",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "private account recovery uses PKCE, changes the password and returns to sign-in",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "recovery rate limits show useful copy and never auto-retry",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "lost parent award restores the same immutable retry after refresh",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "staging fails closed before sign-in when configuration is absent",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "learner sign-in, incorrect PIN, unfinished quest, response loss, refresh and lock",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "parent evidence and server reward path remain separate from learner gameplay",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "offline edit and reconnect, competing-device conflict and server shop ownership",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "standalone downloadable preview loads as one HTML with no asset or cloud requests",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "a parent award reaches an open learner shop without a progress revision",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "private account recovery uses PKCE, changes the password and returns to sign-in",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "recovery rate limits show useful copy and never auto-retry",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "lost parent award restores the same immutable retry after refresh",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Practical Town: all eight venues teach and complete actual tasks, restore town and decorate camp",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Optional gateways across all nine worlds vary interactions and preserve finite rewards",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Hands-on town task saves exact selections, help and latest activity; higher level is freely available",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "New town lessons and fresh checks keep assistance out of mastery, even after restored town visits",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Concurrent mission completion grants one milestone and camp projects need durable evidence",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Higher levels use negative coordinates and composed clockwise/anticlockwise turns",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Purpose-built Town entrances open their own interiors and exterior views preserve the exact task",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "All eight camp homes render actual upgrades and reduced motion stops watermill machinery",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Camp upgrade celebration and previews preserve history and cannot earn a mansion, coins, mastery or time",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Practical Town: all eight venues teach and complete actual tasks, restore town and decorate camp",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Optional gateways across all nine worlds vary interactions and preserve finite rewards",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Hands-on town task saves exact selections, help and latest activity; higher level is freely available",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "New town lessons and fresh checks keep assistance out of mastery, even after restored town visits",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Concurrent mission completion grants one milestone and camp projects need durable evidence",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Higher levels use negative coordinates and composed clockwise/anticlockwise turns",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Purpose-built Town entrances open their own interiors and exterior views preserve the exact task",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "All eight camp homes render actual upgrades and reduced motion stops watermill machinery",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Camp upgrade celebration and previews preserve history and cannot earn a mansion, coins, mastery or time",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Practical Town: all eight venues teach and complete actual tasks, restore town and decorate camp",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Optional gateways across all nine worlds vary interactions and preserve finite rewards",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Hands-on town task saves exact selections, help and latest activity; higher level is freely available",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "New town lessons and fresh checks keep assistance out of mastery, even after restored town visits",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Concurrent mission completion grants one milestone and camp projects need durable evidence",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Higher levels use negative coordinates and composed clockwise/anticlockwise turns",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Purpose-built Town entrances open their own interiors and exterior views preserve the exact task",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "All eight camp homes render actual upgrades and reduced motion stops watermill machinery",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "Camp upgrade celebration and previews preserve history and cannot earn a mansion, coins, mastery or time",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 Cartesian axes use unlabelled intersections, negative ticks, arrow navigation and exact resumption",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 fraction shading supports tap, unshade and pointer painting without accidental extra toggle",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 ordering, arrays, matching and chart construction validate actual objects and preserve wrong-first evidence",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 spinner sectors and measuring ruler are usable on tablets and keep real model quantities",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 constructed practice can retry with support while independent checks never show response models",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 worker and customer roles share the supermarket; a complete recipe journey carries exact list, fare, inventory and payments",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 Cartesian axes use unlabelled intersections, negative ticks, arrow navigation and exact resumption",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 fraction shading supports tap, unshade and pointer painting without accidental extra toggle",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 ordering, arrays, matching and chart construction validate actual objects and preserve wrong-first evidence",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 spinner sectors and measuring ruler are usable on tablets and keep real model quantities",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 constructed practice can retry with support while independent checks never show response models",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 worker and customer roles share the supermarket; a complete recipe journey carries exact list, fare, inventory and payments",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 Cartesian axes use unlabelled intersections, negative ticks, arrow navigation and exact resumption",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 fraction shading supports tap, unshade and pointer painting without accidental extra toggle",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 ordering, arrays, matching and chart construction validate actual objects and preserve wrong-first evidence",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 spinner sectors and measuring ruler are usable on tablets and keep real model quantities",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 constructed practice can retry with support while independent checks never show response models",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 worker and customer roles share the supermarket; a complete recipe journey carries exact list, fare, inventory and payments",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    }
+  ],
+  "newModelSuites": 13,
+  "generatedValidatedSteps": 1107,
+  "isolatedPostgresSuites": 14,
+  "coverage": {
+    "guidedSteps": 369,
+    "handsOn": 333,
+    "allGuidedSteps": 393,
+    "conservativeAllGuidedHandsOn": 333,
+    "accessibleSkills": 55,
+    "skillsWithSampledManipulatives": 51
+  },
+  "gallery": {
+    "scope": "Packaged fictional gallery only, no external network",
+    "pages": [
+      {
+        "name": "index",
+        "images": 147,
+        "broken": 0
+      },
+      {
+        "name": "worlds",
+        "images": 18,
+        "broken": 0
+      },
+      {
+        "name": "town",
+        "images": 19,
+        "broken": 0
+      },
+      {
+        "name": "compare",
+        "images": 14,
+        "broken": 0
+      },
+      {
+        "name": "estate",
+        "images": 8,
+        "broken": 0
+      },
+      {
+        "name": "estate-compare",
+        "images": 5,
+        "broken": 0
+      },
+      {
+        "name": "architecture",
+        "images": 17,
+        "broken": 0
+      },
+      {
+        "name": "interactive",
+        "images": 55,
+        "broken": 0
+      },
+      {
+        "name": "coordinates",
+        "images": 2,
+        "broken": 0
+      }
+    ],
+    "errors": 0
+  },
+  "galleryLayout": {
+    "scope": "Local packaged static gallery only",
+    "rows": [
+      {
+        "layout": "1440x1000",
+        "page": "interactive",
+        "overflow": false,
+        "links": 110,
+        "columns": 3
+      },
+      {
+        "layout": "1440x1000",
+        "page": "coordinates",
+        "overflow": false,
+        "links": 4,
+        "columns": 3
+      },
+      {
+        "layout": "768x1024",
+        "page": "interactive",
+        "overflow": false,
+        "links": 110,
+        "columns": 2
+      },
+      {
+        "layout": "768x1024",
+        "page": "coordinates",
+        "overflow": false,
+        "links": 4,
+        "columns": 2
+      },
+      {
+        "layout": "1024x768",
+        "page": "interactive",
+        "overflow": false,
+        "links": 110,
+        "columns": 2
+      },
+      {
+        "layout": "1024x768",
+        "page": "coordinates",
+        "overflow": false,
+        "links": 4,
+        "columns": 2
+      }
+    ]
+  },
+  "freshExistingCaptures": 74,
+  "freshV5Captures": 51,
+  "albumImages": 147,
+  "liveStaging": {
+    "projectRef": "sfogrvedypgtxfvecmbx",
+    "url": "https://sfogrvedypgtxfvecmbx.supabase.co",
+    "configuration": "matched",
+    "publishableKey": "present; redacted",
+    "authenticatedTests": "not attempted; no account credentials",
+    "requests": [
+      {
+        "label": "identity",
+        "status": null,
+        "proxyStatus": 403,
+        "outcome": "proxy denied staging host; target not contacted"
+      }
+    ]
+  },
+  "finalUnitMappingBrowser": {
+    "startTime": "2026-10-20T19:42:10.859Z",
+    "duration": 11377.089,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "codeCommit": "98ff3886738f1e87f90b662419e81609bdd93789",
+  "finalV5Browser": {
+    "startTime": "2026-10-20T19:47:17.564Z",
+    "duration": 94943.328,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "practiceValidation": {
+    "supportedResponseCases": 2073,
+    "conventionalCases": 396,
+    "rejectedDuplicateRounds": 2,
+    "bands": 5,
+    "skills": 55,
+    "roundSeeds": 3
+  },
+  "finalV5Cases": [
+    {
+      "test": "V5 Cartesian axes use unlabelled intersections, negative ticks, arrow navigation and exact resumption",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 fraction shading supports tap, unshade and pointer painting without accidental extra toggle",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 ordering, arrays, matching and chart construction validate actual objects and preserve wrong-first evidence",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 spinner sectors and measuring ruler are usable on tablets and keep real model quantities",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 constructed practice can retry with support while independent checks never show response models",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 practical response builders preserve pence and minute units",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 worker and customer roles share the supermarket; a complete recipe journey carries exact list, fare, inventory and payments",
+      "project": "desktop-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 Cartesian axes use unlabelled intersections, negative ticks, arrow navigation and exact resumption",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 fraction shading supports tap, unshade and pointer painting without accidental extra toggle",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 ordering, arrays, matching and chart construction validate actual objects and preserve wrong-first evidence",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 spinner sectors and measuring ruler are usable on tablets and keep real model quantities",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 constructed practice can retry with support while independent checks never show response models",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 practical response builders preserve pence and minute units",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 worker and customer roles share the supermarket; a complete recipe journey carries exact list, fare, inventory and payments",
+      "project": "ipad-portrait-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 Cartesian axes use unlabelled intersections, negative ticks, arrow navigation and exact resumption",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 fraction shading supports tap, unshade and pointer painting without accidental extra toggle",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 ordering, arrays, matching and chart construction validate actual objects and preserve wrong-first evidence",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 spinner sectors and measuring ruler are usable on tablets and keep real model quantities",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 constructed practice can retry with support while independent checks never show response models",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 practical response builders preserve pence and minute units",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    },
+    {
+      "test": "V5 worker and customer roles share the supermarket; a complete recipe journey carries exact list, fare, inventory and payments",
+      "project": "ipad-landscape-chromium",
+      "status": "passed"
+    }
+  ],
+  "privateSourceCommit": "bf5db63681e57de429b96dded98dc8744c2a48e7",
+  "archiveSha256": "179d63a08aa707a1a7459aad2b7f61af7404d5ba0e3d53e325fbd1fe33c5bf74",
+  "archiveMatchedFiles": 183,
+  "archiveBytes": 22210560,
+  "protectedFiles": [
+    {
+      "path": "index.html",
+      "unchanged": true,
+      "baseline": "bc30d19",
+      "sha256": "22e09532651500aec9f5537a87235fa4258dc9007453bde5b4ee15b3562232a0"
+    },
+    {
+      "path": "v2-game-test.html",
+      "unchanged": true,
+      "baseline": "bc30d19",
+      "sha256": "fcea8b7881f90d4d2cf792d6301e20fe99e24b5bf0936e61fdd61820f7a1f19a"
+    },
+    {
+      "path": "v2-secure-cloud.js",
+      "unchanged": true,
+      "baseline": "bc30d19",
+      "sha256": "37e9e607e46fec0883c7baa6ca3799ac09770a2335753a8b7d1ff386462d012c"
+    },
+    {
+      "path": "supabase/setup.sql",
+      "unchanged": true,
+      "baseline": "bc30d19",
+      "sha256": "890f9e43a9d774729a228c163b2abbc872c0500333307b3d40d5e9c83fe32a54"
+    },
+    {
+      "path": "supabase/v2-bonus-shop-migration.sql",
+      "unchanged": true,
+      "baseline": "bc30d19",
+      "sha256": "08709e1f170c99309e67e9d46d73179ee84b1590592d9c808b55d3ec1a2835aa"
+    }
+  ],
+  "configuredPublicKeyAbsentFromTrackedFiles": true,
+  "finalV5BrowserScope": "21 cases passed on e1ff086; final two label corrections covered by final hosted matrix",
+  "hostedCI": {
+    "run": 39487130881,
+    "job": 118850758563,
+    "status": "completed",
+    "conclusion": "success",
+    "passed": 152,
+    "duration": "11.8m",
+    "headSha": "98ff3886738f1e87f90b662419e81609bdd93789",
+    "source": "Decoded hosted job logs and run state",
+    "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39487130881"
+  },
+  "privateSite": {
+    "version": 5,
+    "url": "https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site",
+    "ownerOnly": true,
+    "allowedRoles": [
+      "owner"
+    ],
+    "externalVisitors": 0,
+    "allowedGroups": 0,
+    "deployment": "appgdep_6ad7c9f6aa848191b85d0dfefeb99428",
+    "savedVersion": "appgprj_6ad746f124fc8191b3f3845f9dff577b~appgver_a6580019b03081919234d0e27b0d4998",
+    "nativeContentHash": "sha256:5d660395c07761c60d3b9582ecb7b291c437b7779056a75bda2803f7b6363c96",
+    "nativeArchiveFiles": 184,
+    "nativeArchiveBytes": 22200320,
+    "remoteArchiveByteComparison": "unavailable; source, native deployment and owner-only access verified"
+  }
+}

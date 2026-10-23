@@ -1,0 +1,1 @@
+const base=require('./playwright.quality.config.cjs');module.exports={...base,testMatch:/full-rollout\.spec\.cjs/,timeout:150000,reporter:[['list'],['json',{outputFile:process.env.ROLLOUT_REPORT||'tests/artifacts/full-rollout-browser.json'}]]};

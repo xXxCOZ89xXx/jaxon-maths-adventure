@@ -1,0 +1,24 @@
+
+> test:security
+> node tests/v3-postgres.cjs
+
+PASS migration refuses unverified project
+PASS privileged V2 fixture import preserves unknown fields, balances and items
+PASS PIN enrollment needs recent account-password authentication and correct role length
+PASS incorrect PIN attempts commit, throttle across sessions and recover after cooldown
+PASS PIN required on server for reads and writes; tokens cannot cross accounts
+PASS RLS and grants deny direct data access, cross-family reads, catalog and ledger tampering
+PASS parent/learner permissions are enforced in SQL independently of UI
+PASS reward and purchase retries are idempotent; request reuse and insufficient funds fail
+PASS CAS saves reject stale devices, preserve exact quest and never accept a client wallet
+PASS server time caps duplicate/concurrent active credit; redemption is parent only and 1:1
+PASS concurrent identical saves commit exactly once
+PASS delayed concurrent activity transactions cannot move reward clock backwards
+PASS parent-reviewed offline minutes reconcile 1:1 once, bounded by saved evidence
+PASS locking, expiration and password-backed PIN recovery revoke server unlocks
+14 real PostgreSQL security suites passed. No hosted Supabase or real accounts used.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

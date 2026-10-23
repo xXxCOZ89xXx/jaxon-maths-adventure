@@ -1,0 +1,669 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/work/v52-preserve/node_modules/.bin/playwright",
+      "test",
+      "-c",
+      "playwright.save-recovery.config.cjs"
+    ],
+    "configFile": "/workspace/work/v52-preserve/playwright.save-recovery.config.cjs",
+    "rootDir": "/workspace/work/v52-preserve/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": {},
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/work/v52-preserve/test-results/save-recovery",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "ipad-portrait-chromium",
+        "name": "ipad-portrait-chromium",
+        "testDir": "/workspace/work/v52-preserve/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/(?:save-recovery|scene-revision)\\.spec\\.cjs/"
+        ],
+        "timeout": 90000
+      },
+      {
+        "outputDir": "/workspace/work/v52-preserve/test-results/save-recovery",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "ipad-landscape-chromium",
+        "name": "ipad-landscape-chromium",
+        "testDir": "/workspace/work/v52-preserve/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/(?:save-recovery|scene-revision)\\.spec\\.cjs/"
+        ],
+        "timeout": 90000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": {},
+        "outputDir": "/workspace/work/v52-preserve/test-results/save-recovery",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "ipad-portrait-chromium",
+        "testDir": "/workspace/work/v52-preserve/tests",
+        "snapshotDir": "/workspace/work/v52-preserve/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 90000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 820,
+            "height": 1180
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "ipad-portrait-chromium"
+      },
+      {
+        "grep": {},
+        "grepInvert": {},
+        "outputDir": "/workspace/work/v52-preserve/test-results/save-recovery",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "ipad-landscape-chromium",
+        "testDir": "/workspace/work/v52-preserve/tests",
+        "snapshotDir": "/workspace/work/v52-preserve/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 90000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 1180,
+            "height": 820
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "ipad-landscape-chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "tests/artifacts/save-recovery-browser.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": {
+      "command": "python3 tests/serve-preview.py",
+      "url": "http://127.0.0.1:4173/v3-adventure.html",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "save-recovery.spec.cjs",
+      "file": "save-recovery.spec.cjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "purchase loseBuy: resume acknowledged intent after refresh and buy another item",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1664,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:06.542Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-d5e8ceac48e3f6a0966d",
+          "file": "save-recovery.spec.cjs",
+          "line": 4,
+          "column": 53
+        },
+        {
+          "title": "purchase failReadAfterBuy: resume acknowledged intent after refresh and buy another item",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1543,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:08.362Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-7a266d6527013aca08e5",
+          "file": "save-recovery.spec.cjs",
+          "line": 4,
+          "column": 53
+        },
+        {
+          "title": "offline edits keep the immutable request, reopen exact journey and recover on reconnect",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1554,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:09.911Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-4ab931e28c2b07fbc202",
+          "file": "save-recovery.spec.cjs",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "title": "local edits save immediately while routine uploads combine; explicit save/exit flushes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1591,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:11.469Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-c38e8913dfdd5d6c1fdd",
+          "file": "save-recovery.spec.cjs",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "parent role, reward retry and learner purchase permissions remain separate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1228,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:13.069Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-3fd8be3b5e3a1c5774ab",
+          "file": "save-recovery.spec.cjs",
+          "line": 21,
+          "column": 1
+        },
+        {
+          "title": "new app refuses an old database before game writes and preserves existing queue bytes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 418,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:14.302Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-cb152e17db155d350b5d",
+          "file": "save-recovery.spec.cjs",
+          "line": 25,
+          "column": 1
+        },
+        {
+          "title": "purchase loseBuy: resume acknowledged intent after refresh and buy another item",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1584,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:22.464Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-236adffe8d21ef724995",
+          "file": "save-recovery.spec.cjs",
+          "line": 4,
+          "column": 53
+        },
+        {
+          "title": "purchase failReadAfterBuy: resume acknowledged intent after refresh and buy another item",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1562,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:24.190Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-b7565158d4075c5e6865",
+          "file": "save-recovery.spec.cjs",
+          "line": 4,
+          "column": 53
+        },
+        {
+          "title": "offline edits keep the immutable request, reopen exact journey and recover on reconnect",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1783,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:25.758Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-e0f5aa3330a137942a27",
+          "file": "save-recovery.spec.cjs",
+          "line": 11,
+          "column": 1
+        },
+        {
+          "title": "local edits save immediately while routine uploads combine; explicit save/exit flushes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1746,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:27.546Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-7744c9ca745a93ff9e25",
+          "file": "save-recovery.spec.cjs",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "parent role, reward retry and learner purchase permissions remain separate",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1219,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:29.297Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-6547821e59e37be988f4",
+          "file": "save-recovery.spec.cjs",
+          "line": 21,
+          "column": 1
+        },
+        {
+          "title": "new app refuses an old database before game writes and preserves existing queue bytes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 484,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:30.521Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c0fd3038889f5bc0efc2-04ca5d95d656813b59bf",
+          "file": "save-recovery.spec.cjs",
+          "line": 25,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "scene-revision.spec.cjs",
+      "file": "scene-revision.spec.cjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Scene revision: full connected meal stays playable through close-up controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7414,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:14.736Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4c4771d9ca3784b8219a-684005e9e679e4685e04",
+          "file": "scene-revision.spec.cjs",
+          "line": 20,
+          "column": 1
+        },
+        {
+          "title": "Scene revision: full connected meal stays playable through close-up controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7435,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-23T01:59:31.016Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4c4771d9ca3784b8219a-ba3d4ac264ab9f77c88a",
+          "file": "scene-revision.spec.cjs",
+          "line": 20,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-23T01:59:06.210Z",
+    "duration": 32319.171000000002,
+    "expected": 14,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

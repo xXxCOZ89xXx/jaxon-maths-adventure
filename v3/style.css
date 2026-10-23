@@ -1,0 +1,2185 @@
+:root {
+  --ink: #203d33;
+  --muted: #5d7066;
+  --green: #265d44;
+  --lime: #d5ef9b;
+  --paper: #f6f5ed;
+  --line: #d7dfd3;
+  --white: #fffef8;
+  --shadow: 0 6px 0 #25473510;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font:
+    17px/1.55 system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+button,
+a,
+input,
+select {
+  touch-action: manipulation;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+  min-height: 46px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--white);
+  color: var(--ink);
+  padding: 10px 18px;
+  font-weight: 650;
+}
+button:hover {
+  background: #e9efdf;
+  border-color: #77977c;
+}
+button:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #8c4e13;
+  outline-offset: 4px;
+}
+a {
+  color: var(--green);
+}
+.skip {
+  position: fixed;
+  top: -100px;
+  z-index: 10;
+  background: white;
+  padding: 12px;
+}
+.skip:focus {
+  top: 0;
+}
+.demo-strip {
+  background: #244b3a;
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  padding: 8px 5vw;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font-weight: 800;
+}
+.demo-strip span {
+  letter-spacing: 0.3px;
+  font-weight: 400;
+  color: #e1ebd4;
+}
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1320px;
+  margin: auto;
+  padding: 24px 36px;
+  border-bottom: 1px solid var(--line);
+  gap: 20px;
+}
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 2px;
+  line-height: 1.25;
+  font-weight: 900;
+}
+.brand-mark {
+  background: var(--green);
+  color: var(--lime);
+  font-size: 35px;
+  padding: 3px 12px;
+  border-radius: 9px;
+}
+.brand-sub {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+.topbar nav {
+  display: flex;
+  gap: 8px;
+}
+.topbar nav button {
+  border-color: transparent;
+  background: none;
+  font-size: 14px;
+}
+.topbar nav button[aria-current="page"] {
+  background: #e2ead9;
+  border-color: #cbd6c1;
+}
+main {
+  max-width: 1248px;
+  margin: auto;
+  padding: 38px 36px 60px;
+  min-height: 72vh;
+}
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+h1 {
+  font-size: clamp(32px, 4.3vw, 56px);
+  line-height: 1.08;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+h2 {
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: -0.8px;
+}
+h3 {
+  font-size: 20px;
+  line-height: 1.3;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #46634f;
+  margin-bottom: 13px;
+}
+.muted {
+  color: var(--muted);
+}
+.small {
+  font-size: 13px;
+}
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.24fr;
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.hero-copy {
+  padding: 25px 0;
+}
+.hero-copy p {
+  max-width: 400px;
+}
+.hero-art {
+  border: 1px solid #b7cbb5;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  background: #c8e3cf;
+  box-shadow: var(--shadow);
+}
+.world-scene {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.hero-art .scene-caption {
+  position: absolute;
+  top: 18px;
+  left: 20px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  background: #fff9;
+  padding: 7px 11px;
+  border-radius: 5px;
+}
+.hero-art .scene-bottom {
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+}
+.primary {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+.primary:hover {
+  background: #1b4934;
+  color: #fff;
+}
+.primary .arrow {
+  margin-left: 26px;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+.wide {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.path-label {
+  margin-bottom: 14px;
+}
+.choices {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.choice {
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--white);
+  border-radius: 13px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.choice .tile-icon {
+  font-size: 28px;
+  color: var(--green);
+  background: #e8eedf;
+  border-radius: 8px;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 19px;
+}
+.choice h3 {
+  margin-bottom: 8px;
+}
+.choice p {
+  font-size: 14px;
+  flex: 1;
+}
+.choice button {
+  font-size: 14px;
+}
+.week {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 22px 0;
+  margin-top: 27px;
+  border-top: 1px solid var(--line);
+}
+.week .bar {
+  flex: 1;
+  max-width: 400px;
+}
+.bar {
+  height: 9px;
+  background: #dee6d6;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.bar > span {
+  height: 100%;
+  background: #67894c;
+  display: block;
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 26px;
+}
+.section-head h1 {
+  font-size: 40px;
+  margin: 0;
+}
+.world-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.world-card {
+  border: 1px solid var(--line);
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.world-card .world-scene {
+  border-bottom: 1px solid var(--line);
+}
+.world-card .body {
+  padding: 17px;
+}
+.world-card h2 {
+  font-size: 19px;
+  letter-spacing: -0.5px;
+}
+.world-card p {
+  font-size: 12px;
+  margin-bottom: 13px;
+}
+.world-card button {
+  font-size: 13px;
+  width: 100%;
+  padding: 8px;
+}
+.world-card .bar {
+  margin-bottom: 12px;
+  height: 5px;
+}
+.split {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 28px;
+}
+.panel {
+  padding: 26px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  box-shadow: var(--shadow);
+}
+.panel p:last-child {
+  margin-bottom: 0;
+}
+.landmark-list {
+  list-style: none;
+  margin: 16px 0;
+  padding: 0;
+}
+.landmark-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 12px;
+  font-size: 14px;
+}
+.landmark-list .done {
+  color: #326449;
+  font-weight: 700;
+}
+.skill-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.skill-list .panel {
+  padding: 20px;
+}
+.skill-list h3 {
+  font-size: 17px;
+}
+.quest-layout {
+  display: grid;
+  grid-template-columns: 0.86fr 1.14fr;
+  gap: 24px;
+  align-items: start;
+}
+.quest-layout .hero-art {
+  margin-bottom: 18px;
+}
+.guide {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.guide .portrait {
+  background: #e8dfbc;
+  border: 1px solid #b9a983;
+  border-radius: 9px;
+  min-width: 52px;
+  height: 52px;
+  font-size: 29px;
+  text-align: center;
+}
+.guide p {
+  font-size: 14px;
+  margin: 0;
+}
+.puzzle {
+  min-height: 270px;
+  padding: 22px 0;
+}
+.puzzle h2 {
+  font-size: 24px;
+  line-height: 1.4;
+}
+.numberline {
+  display: flex;
+  overflow-x: auto;
+  padding: 18px 0;
+  gap: 5px;
+  background: linear-gradient(
+    transparent 49%,
+    #aec3a0 50%,
+    #aec3a0 51%,
+    transparent 52%
+  );
+}
+.numberline button {
+  min-width: 47px;
+  padding: 8px;
+  background: #f9faf3;
+}
+.numberline button[aria-pressed="true"],
+.part[aria-pressed="true"] {
+  background: var(--green);
+  color: white;
+}
+.parts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px;
+  margin: 28px 0;
+}
+.part {
+  min-height: 95px;
+  background: #e4eee6;
+  border: 2px solid #b0c8b4;
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+}
+.stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 22px 0;
+}
+.stepper output {
+  font-size: 36px;
+  min-width: 100px;
+  text-align: center;
+  font-weight: 750;
+}
+.stepper button {
+  width: 52px;
+  padding: 10px;
+}
+.feedback {
+  background: #eaf0df;
+  border-left: 4px solid #71935a;
+  padding: 15px 18px;
+  border-radius: 0 8px 8px 0;
+  margin-top: 16px;
+  line-height: 1.6;
+}
+.puzzle-bars {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  align-items: flex-end;
+  height: 150px;
+  border-bottom: 3px solid #a2b391;
+  margin: 18px;
+}
+.puzzle-bars span {
+  background: #73936b;
+  width: 48px;
+  text-align: center;
+  color: #142e22;
+  border: 2px solid #365b3d;
+  min-height: 22px;
+}
+.rotate-area {
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+.shape {
+  font-size: 75px;
+  line-height: 1;
+  color: #658b62;
+  display: inline-block;
+  transform: rotate(var(--turn));
+}
+.token-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  justify-content: center;
+}
+.token {
+  width: 20px;
+  height: 20px;
+  background: #73a06d;
+  border: 1px solid #42603d;
+  display: block;
+}
+.token.blue {
+  background: #739fbc;
+  border-color: #4b6d83;
+}
+.ruler {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 4px solid #6e8271;
+  margin: 25px 0;
+  background: #f0dfaa;
+  padding: 12px;
+  font-size: 12px;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.badge {
+  display: inline-block;
+  background: #e9efdf;
+  color: #385737;
+  border: 1px solid #d2ddc2;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  font-weight: 750;
+}
+.explorer {
+  display: block;
+  width: 180px;
+  margin: auto;
+  max-width: 100%;
+}
+.inline-explorer {
+  width: 80px;
+  margin: 0;
+}
+.camp-art {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  background: #e4eddb;
+  border: 1px solid #c2d0b7;
+  border-radius: 12px;
+  padding: 25px;
+  gap: 18px;
+}
+.camp-buildings {
+  font-size: 15px;
+}
+.camp-buildings div {
+  margin: 8px 0;
+}
+.camp-buildings .locked {
+  opacity: 0.55;
+}
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin: 24px 0;
+}
+.stat {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fffef8;
+}
+.stat strong {
+  display: block;
+  font-size: 27px;
+}
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.shop-item {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+}
+.shop-item .ico {
+  font-size: 32px;
+}
+.shop-item h3 {
+  font-size: 15px;
+  margin: 8px 0;
+}
+.shop-item button {
+  font-size: 13px;
+  width: 100%;
+}
+.shop-preview {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 12px 24px;
+  background: #e7eddf;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  margin-bottom: 24px;
+}
+.shop-preview .explorer {
+  margin: 0;
+  width: 120px;
+}
+.achievement {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.achievement strong {
+  display: block;
+}
+.lesson-copy {
+  white-space: pre-line;
+}
+.answer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.answer-grid button {
+  min-height: 62px;
+  overflow-wrap: anywhere;
+}
+.math-tool {
+  margin: 20px 0;
+  padding: 18px;
+  background: #eaf0e3;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+.math-tool h3 {
+  font-size: 18px;
+}
+.math-tool-controls,
+.math-ratio-row,
+.math-line-scroll {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px 0;
+}
+.math-parts,
+.math-percent-grid,
+.math-extra-places,
+.math-extra-coins {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.math-part,
+.math-point,
+.math-coord,
+.math-extra-coin,
+.math-percent-cell {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 8px;
+}
+.chosen {
+  background: #c1dbae !important;
+}
+.math-numberline {
+  display: flex;
+  gap: 4px;
+  overflow: auto;
+}
+.math-coordinate-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+.math-extra-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.math-extra-dot {
+  padding: 8px;
+  background: #d7e6c7;
+}
+.math-extra-angle {
+  max-width: 180px;
+  display: block;
+  margin: auto;
+}
+.math-hand {
+  display: none;
+}
+.math-clock {
+  padding: 20px;
+  text-align: center;
+}
+.math-clock-mark {
+  margin: 8px;
+}
+.save-status {
+  position: fixed;
+  bottom: 12px;
+  right: 18px;
+  background: #254e3d;
+  color: #fff;
+  padding: 8px 13px;
+  font-size: 12px;
+  border-radius: 7px;
+  z-index: 5;
+}
+.save-status:empty {
+  display: none;
+}
+footer {
+  max-width: 1248px;
+  margin: auto;
+  padding: 20px 36px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+footer button {
+  font-size: 12px;
+  min-height: 44px;
+  padding: 8px;
+}
+select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  min-height: 46px;
+  max-width: 100%;
+  background: white;
+}
+label {
+  display: block;
+  margin: 16px 0;
+}
+input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.preferences label {
+  padding: 8px 0;
+}
+.notice {
+  background: #f1e8cc;
+  border: 1px solid #d8c697;
+  padding: 18px;
+  border-radius: 9px;
+}
+.tour {
+  max-width: 760px;
+  margin: auto;
+}
+.tour .world-scene {
+  max-height: 300px;
+}
+.empty {
+  padding: 40px;
+  text-align: center;
+}
+.recap {
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+}
+.recap .actions {
+  justify-content: center;
+}
+.recap .hero-art {
+  margin: 24px 0;
+}
+.animate .hero-art {
+  animation: arrive 0.5s ease-out;
+}
+@keyframes arrive {
+  from {
+    opacity: 0.4;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media (min-width: 1400px) {
+  main {
+    padding-top: 48px;
+  }
+  .hero {
+    gap: 50px;
+  }
+  .hero-copy {
+    padding-right: 20px;
+  }
+}
+@media (max-width: 1000px) {
+  .world-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .hero {
+    grid-template-columns: 1fr 1.1fr;
+    gap: 20px;
+  }
+  .hero h1 {
+    font-size: 40px;
+  }
+  .quest-layout {
+    grid-template-columns: 0.8fr 1fr;
+  }
+  .quest-layout .panel {
+    padding: 20px;
+  }
+  .shop-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .skill-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 700px) {
+  .topbar {
+    padding: 16px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .topbar nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .topbar nav button {
+    padding: 8px 13px;
+  }
+  .demo-strip {
+    padding: 8px 16px;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .demo-strip span {
+    font-size: 10px;
+  }
+  main {
+    padding: 25px 16px 40px;
+  }
+  .hero,
+  .quest-layout,
+  .split {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    gap: 12px;
+  }
+  .hero-copy {
+    padding: 0;
+  }
+  .hero-copy p {
+    max-width: 100%;
+  }
+  .hero-art {
+    order: 0;
+  }
+  .choices {
+    grid-template-columns: 1fr;
+  }
+  .choice {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    column-gap: 15px;
+  }
+  .choice .tile-icon {
+    grid-row: 1/4;
+    margin: 0;
+    width: 44px;
+    height: 44px;
+  }
+  .choice h3,
+  .choice p,
+  .choice button {
+    grid-column: 2;
+  }
+  .week {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .week .bar {
+    min-width: 100%;
+  }
+  .world-grid {
+    gap: 12px;
+  }
+  .world-card .body {
+    padding: 13px;
+  }
+  .world-card h2 {
+    font-size: 17px;
+  }
+  .section-head {
+    flex-wrap: wrap;
+  }
+  .section-head h1 {
+    font-size: 32px;
+  }
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .shop-item {
+    padding: 15px;
+  }
+  .shop-preview {
+    gap: 12px;
+    padding: 12px;
+  }
+  .shop-preview .explorer {
+    width: 95px;
+    flex-shrink: 0;
+  }
+  .skill-list {
+    grid-template-columns: 1fr;
+  }
+  .panel {
+    padding: 20px;
+  }
+  .stat-grid {
+    gap: 8px;
+  }
+  .stat {
+    padding: 12px;
+    font-size: 12px;
+  }
+  .stat strong {
+    font-size: 22px;
+  }
+  footer {
+    padding: 20px 16px;
+  }
+  .camp-art {
+    padding: 15px;
+    gap: 10px;
+  }
+  .toolbar {
+    flex-wrap: wrap;
+  }
+  .actions button {
+    flex-grow: 1;
+  }
+  .quest-layout .hero-art {
+    max-height: 280px;
+  }
+  .quest-layout .world-scene {
+    max-height: 280px;
+  }
+  .part {
+    min-height: 70px;
+  }
+}
+#headerExplorer {
+  margin-left: auto;
+}
+#headerExplorer .explorer {
+  width: 42px;
+  height: 49px;
+}
+.math-coordinate-grid {
+  max-width: 390px;
+  overflow: auto;
+}
+.math-clock {
+  height: 192px;
+  width: 192px;
+  position: relative;
+  margin: 16px auto;
+  background: #f4f4dc;
+  border: 7px solid #5c8063;
+  border-radius: 50%;
+  color: #244b35;
+  padding: 0;
+}
+.math-clock-mark {
+  position: absolute;
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0;
+}
+.mark12 {
+  left: 50%;
+  top: 6px;
+  transform: translateX(-50%);
+}
+.mark3 {
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.mark6 {
+  left: 50%;
+  bottom: 6px;
+  transform: translateX(-50%);
+}
+.mark9 {
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.math-hand {
+  display: block;
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: center bottom;
+  border-radius: 3px;
+  background: #275c40;
+}
+.math-hand.hour {
+  height: 48px;
+  width: 6px;
+  margin-left: -3px;
+}
+.math-hand.minute {
+  height: 67px;
+  width: 4px;
+  margin-left: -2px;
+  background: #39815d;
+}
+.math-hub {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #184a2c;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.hero > *,
+.split > *,
+.quest-layout > * {
+  min-width: 0;
+}
+.numberline {
+  max-width: 100%;
+}
+.puzzle-bars {
+  max-width: 100%;
+}
+.camp-scene {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.camp-art {
+  margin-top: 16px;
+}
+/* Nine-world expeditions and the practical high street. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.mission-board {
+  margin-top: 42px;
+}
+.mission-board .section-head {
+  align-items: flex-start;
+}
+.mission-board .section-head > div {
+  max-width: 690px;
+}
+.mission-board select {
+  display: block;
+  margin-top: 8px;
+  min-width: 220px;
+}
+.expedition-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.town-locations {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+.location-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+}
+.location-sign {
+  background: var(--location-color);
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 4px solid #203d3320;
+  color: #203d33;
+}
+.location-sign > span:first-child {
+  font-size: 34px;
+  line-height: 1;
+}
+.location-sign > span:last-child {
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+.location-body {
+  padding: 21px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.location-body h3 {
+  margin: 15px 0 10px;
+}
+.location-body > p:first-of-type {
+  flex: 1;
+}
+.location-body button {
+  font-size: 14px;
+}
+.tier-stars {
+  display: flex;
+  gap: 18px;
+  margin: 0 0 18px;
+  color: #416547;
+  font-size: 14px;
+}
+.gateway {
+  display: flex;
+  gap: 26px;
+  align-items: center;
+  margin-top: 23px;
+  background: #e7eddc;
+}
+.gateway h3 {
+  margin-top: 15px;
+}
+.gateway button {
+  flex-shrink: 0;
+}
+.town-explore-map {
+  position: relative;
+  background: #e6dfca;
+  border: 1px solid #c3cbb4;
+  border-radius: 15px;
+  overflow: hidden;
+  margin: 26px 0;
+}
+.town-hotspots {
+  position: absolute;
+  inset: 0;
+}
+.town-hotspots button {
+  position: absolute;
+  width: 54px;
+  height: 48px;
+  padding: 6px;
+  background: #fffdf0ed;
+  border: 2px solid #466b4d;
+  box-shadow: 0 4px 0 #314d3620;
+  font-size: 25px;
+}
+.task-controls {
+  margin: 26px 0;
+}
+.mission-task h2 {
+  font-size: 24px;
+  line-height: 1.4;
+}
+.amount-editor input {
+  width: 130px;
+  max-width: 50%;
+  text-align: center;
+  font-size: 26px;
+  border: 2px solid #8caa81;
+  border-radius: 9px;
+  min-height: 52px;
+  background: #fff;
+  color: var(--ink);
+  padding: 6px;
+}
+.amount-editor label {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+}
+.amount-editor .stepper {
+  gap: 14px;
+  margin: 12px 0;
+}
+.amount-display {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 750;
+  margin: 0;
+}
+.shop-counter {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.counter-product {
+  border: 1px solid var(--line);
+  background: #f3f1e7;
+  border-radius: 10px;
+  padding: 14px 8px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.product-art {
+  font-size: 40px;
+  line-height: 1.2;
+  color: #98754c;
+}
+.product-1 {
+  color: #698da1;
+}
+.product-2 {
+  color: #a3835d;
+}
+.counter-product strong {
+  font-size: 14px;
+}
+.counter-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.counter-controls button {
+  min-width: 44px;
+  padding: 6px;
+}
+.counter-controls output {
+  min-width: 20px;
+  font-weight: 750;
+}
+.receipt {
+  background: #eeeddd;
+  border: 1px dashed #8b9b7d;
+  padding: 16px;
+  margin: 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+.money-tray {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 9px;
+}
+.money-button {
+  display: grid;
+  place-items: center;
+  padding: 7px;
+  min-height: 68px;
+}
+.coin {
+  display: grid;
+  place-items: center;
+  min-width: 40px;
+  min-height: 40px;
+  border: 3px solid #b4a16c;
+  border-radius: 50%;
+  background: #f0e5bf;
+  font-size: 14px;
+}
+.note {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 30px;
+  background: #d4e2cd;
+  border: 2px solid #7c9983;
+  border-radius: 3px;
+  font-size: 14px;
+}
+.envelopes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.envelopes section {
+  background: #eee3c4;
+  border: 1px solid #b7aa85;
+  border-radius: 7px;
+  padding: 14px 8px;
+  text-align: center;
+  min-width: 0;
+}
+.envelopes strong {
+  font-size: 14px;
+}
+.envelopes output {
+  display: block;
+  font-weight: 750;
+  margin: 12px 0;
+  font-size: 22px;
+}
+.courtyard-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(44px, 1fr));
+  gap: 5px;
+  max-width: 360px;
+  margin: auto;
+}
+.courtyard-grid button {
+  padding: 5px;
+  min-width: 44px;
+  min-height: 48px;
+  background: #ece7d5;
+  border: 2px solid #c3b998;
+}
+.courtyard-grid button[aria-pressed="true"],
+.journey-option[aria-pressed="true"] {
+  background: #315c43;
+  color: white;
+  border-color: #315c43;
+}
+.coordinate-board button {
+  font-size: 13px;
+}
+.mission-parts {
+  grid-template-columns: repeat(4, 1fr);
+}
+.mission-parts .part {
+  min-height: 60px;
+}
+.timetable {
+  display: grid;
+  gap: 10px;
+}
+.journey-option {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 0.7fr;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+.bank-ledger,
+.invoice {
+  border: 1px solid #c4cfb9;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f2f0e4;
+}
+.bank-ledger > div {
+  padding: 14px;
+  border-bottom: 1px solid #d0d8c4;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  font-size: 14px;
+}
+.bank-ledger .transaction button {
+  font-size: 12px;
+}
+.invoice {
+  padding: 20px;
+}
+.invoice h3 {
+  font-size: 18px;
+}
+.invoice dl {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  font-size: 14px;
+}
+.invoice dd {
+  margin: 0;
+  text-align: right;
+}
+.sale-tag {
+  background: #f0ddbd;
+  padding: 22px;
+  border-radius: 7px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sale-tag strong {
+  font-size: 40px;
+  letter-spacing: -2px;
+}
+.balance-scene {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+  padding: 22px 10px;
+  background: #e8ecde;
+  border-bottom: 5px solid #8b9c76;
+  border-radius: 8px;
+}
+.balance-scene > span {
+  font-size: 40px;
+}
+.sequence-rail {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 0;
+  border-bottom: 5px solid #97a582;
+}
+.sequence-rail span {
+  padding: 10px 16px;
+  background: #bacdab;
+  color: #254832;
+  border-radius: 6px;
+  font-size: 24px;
+}
+.sequence-rail .new-carriage {
+  background: #e5c389;
+}
+.planning-clock {
+  text-align: center;
+  background: #e4ebdb;
+  border: 3px solid #b4c4a3;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.planning-clock strong {
+  font-size: 44px;
+}
+.planning-clock span {
+  font-size: 13px;
+}
+.measuring-jug {
+  height: 150px;
+  width: 125px;
+  border: 3px solid #6e8c78;
+  border-top: 0;
+  border-radius: 0 0 16px 16px;
+  margin: 20px auto;
+  position: relative;
+  overflow: hidden;
+  background: repeating-linear-gradient(transparent 0 28px, #9eaa8a 29px 30px);
+}
+.measuring-jug > div {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #76aebac4;
+}
+.measuring-jug > span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 750;
+  color: #173e35;
+}
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.keepsake {
+  border: 1px solid var(--line);
+  background: #fffdf2;
+  border-radius: 10px;
+  padding: 20px;
+}
+.keepsake > span {
+  font-size: 30px;
+  color: #8c744c;
+  display: block;
+}
+.keepsake > strong {
+  font-size: 15px;
+}
+.keepsake p {
+  margin: 8px 0 0;
+}
+.camp-designer label {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 200px;
+  margin-right: 20px;
+  font-size: 14px;
+}
+.camp-designer select {
+  margin-top: 8px;
+  max-width: 250px;
+}
+details {
+  margin-top: 20px;
+}
+summary {
+  cursor: pointer;
+  padding: 12px 0;
+  min-height: 44px;
+  color: #315d41;
+  font-size: 14px;
+}
+.world-card:last-child {
+  grid-column: span 2;
+}
+.world-card:last-child .world-scene {
+  max-height: 240px;
+}
+.mission-task .feedback p {
+  margin: 8px 0;
+}
+.mission-board .badge {
+  font-size: 10px;
+}
+.mission-task {
+  min-width: 0;
+}
+@media (max-width: 1100px) {
+  .town-locations {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .expedition-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .collection-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .shop-counter {
+    gap: 6px;
+  }
+  .counter-controls {
+    gap: 3px;
+  }
+  .counter-product {
+    padding: 12px 3px;
+  }
+  .envelopes {
+    gap: 6px;
+  }
+  .envelopes output {
+    font-size: 18px;
+  }
+  .envelopes section {
+    padding: 12px 4px;
+  }
+  .mission-board .section-head {
+    flex-wrap: wrap;
+  }
+  .gateway {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 700px) {
+  .expedition-grid {
+    grid-template-columns: 1fr;
+  }
+  .town-locations {
+    gap: 12px;
+  }
+  .location-body {
+    padding: 16px;
+  }
+  .location-sign {
+    padding: 14px;
+  }
+  .town-hotspots button {
+    width: 44px;
+    height: 44px;
+    font-size: 21px;
+  }
+  .town-explore-map .town-scene {
+    min-height: 280px;
+    object-fit: cover;
+  }
+  .collection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .collection-grid .keepsake {
+    padding: 15px;
+  }
+  .shop-counter {
+    gap: 7px;
+  }
+  .counter-product strong {
+    font-size: 12px;
+  }
+  .counter-product .small {
+    font-size: 11px;
+  }
+  .money-tray {
+    gap: 7px;
+  }
+  .mission-task h2 {
+    font-size: 22px;
+  }
+  .mission-board .location-body button {
+    font-size: 12px;
+    padding: 10px;
+  }
+  .mission-board .section-head h2 {
+    font-size: 27px;
+  }
+  .location-body .small {
+    font-size: 12px;
+  }
+  .town-locations .location-sign {
+    font-size: 24px;
+  }
+  .town-locations .badge {
+    font-size: 8px;
+    letter-spacing: 0.3px;
+    padding: 5px;
+  }
+  .camp-designer label {
+    display: flex;
+    margin-right: 0;
+  }
+  .camp-designer select {
+    max-width: 100%;
+  }
+  .sequence-rail {
+    gap: 6px;
+  }
+  .sequence-rail span {
+    font-size: 22px;
+    padding: 10px;
+  }
+  .courtyard-grid {
+    gap: 4px;
+  }
+  .envelopes .counter-controls button {
+    min-width: 44px;
+    padding: 5px;
+  }
+  .envelopes strong {
+    font-size: 11px;
+  }
+  .envelopes output {
+    font-size: 16px;
+  }
+  .mission-task .amount-editor input {
+    max-width: 46%;
+  }
+  .journey-option {
+    grid-template-columns: 1fr 1.1fr 0.6fr;
+    gap: 6px;
+    font-size: 12px;
+  }
+  .world-card:last-child {
+    grid-column: span 2;
+  }
+}
+.gateway .muted {
+  color: #42563f;
+}
+#arrival-time {
+  display: block;
+  width: 100%;
+  min-height: 54px;
+  background: #fffdf4;
+  border: 2px solid #91a980;
+  border-radius: 8px;
+  color: var(--ink);
+  font: 750 26px system-ui;
+  text-align: center;
+  padding: 8px;
+}
+.practice-suggestion {
+  margin: 12px 0 24px;
+}
+.portal-pool .part {
+  border-radius: 50%;
+  aspect-ratio: 1;
+  max-width: 90px;
+  background: #dfd7ed;
+  border-color: #a58ebf;
+  color: #51476c;
+}
+.portal-pool .part[aria-pressed="true"] {
+  background: #4f795c;
+  color: #fff;
+  border-color: #315b40;
+}
+.water-channels .part {
+  background: #dce9e5;
+  border-color: #93b6ac;
+}
+.water-channels .part[aria-pressed="true"] {
+  background: #376e75;
+  color: #fff;
+  border-color: #285157;
+}
+.camp-projects .panel {
+  box-shadow: none;
+}
+.town-lessons {
+  border-top: 1px solid var(--line);
+  margin-top: 34px;
+}
+.town-lessons > summary {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 22px 0;
+}
+.camp-buildings .locked {
+  opacity: 1;
+  color: #4e6247;
+}
+@media (max-width: 700px) {
+  .shop-counter {
+    grid-template-columns: 1fr;
+  }
+  .counter-product {
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    column-gap: 8px;
+    text-align: left;
+    padding: 12px;
+  }
+  .counter-product .product-art {
+    grid-row: span 2;
+    font-size: 32px;
+  }
+  .counter-product strong,
+  .counter-product .small {
+    grid-column: 2;
+  }
+  .counter-product .counter-controls {
+    grid-column: 3;
+    grid-row: 1/3;
+    gap: 6px;
+  }
+  .counter-product strong {
+    font-size: 14px;
+  }
+  .counter-product .small {
+    font-size: 12px;
+  }
+  .envelopes {
+    grid-template-columns: 1fr;
+  }
+  .envelopes section {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 12px;
+    text-align: left;
+  }
+  .envelopes strong {
+    font-size: 14px;
+  }
+  .envelopes output {
+    grid-column: 1;
+    margin: 5px 0;
+    font-size: 22px;
+  }
+  .envelopes .counter-controls {
+    grid-column: 2;
+    grid-row: 1/3;
+    gap: 12px;
+  }
+}
+/* Separate staging forms use the same comfortable touch controls as the game. */
+#cloud-form input, #reward-form input, #reward-form select {
+  display: block;
+  width: 100%;
+  max-width: 32rem;
+  min-height: 46px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--ink);
+}
+#sync-conflict {
+  max-width: min(38rem, calc(100vw - 32px));
+  border: 2px solid var(--green);
+  border-radius: 12px;
+  padding: 24px;
+  color: var(--ink);
+}
+#sync-conflict::backdrop { background: rgb(20 35 25 / 65%); }
+#sync-conflict button { margin: 8px 8px 0 0; }
+[hidden] { display: none !important; }
+
+/* Expedition journal: original voxel scenery framed by practical, readable controls. */
+:root {--ink:#203c34;--muted:#53685f;--green:#245b45;--lime:#d1e7a5;--paper:#edf0e7;--white:#fffcf3;--line:#ccd5c7;--shadow:0 6px 0 #243f3010}
+body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1px,transparent 1px),linear-gradient(90deg,#d5dfd233 1px,transparent 1px);background-size:32px 32px}
+.topbar {background:#183f34;color:#f4f1dc;border:1px solid #426451;border-radius:16px;margin-top:18px;box-shadow:0 5px 0 #122f2920;padding:17px 26px}
+.topbar .brand {color:#f3edce}.topbar .brand-sub {color:#d2dec4}.topbar .brand-mark {background:#e0c78c;color:#214738;box-shadow:inset -5px -5px #bfa76b}
+.topbar nav button {color:#edf1da;border-color:transparent;background:transparent}
+.topbar nav button:hover,.topbar nav button[aria-current="page"] {color:#213f33;background:#d2e5ad;border-color:#d2e5ad}
+.demo-strip {background:#102f29;font-size:10px}.hero {gap:36px;padding-top:20px}.hero-copy {padding:18px 0}.hero h1 {letter-spacing:-2.4px;font-weight:800;line-height:1.08}.hero .primary {background:#245c43;border-bottom:5px solid #17432e;box-shadow:0 5px 13px #1e4a3020;min-height:54px}
+.hero-art {border:1px solid #839f8b;border-radius:17px;box-shadow:0 9px 0 #234a3514,0 18px 40px #29453215;overflow:hidden;background:#b8cebc}
+.hero-art .world-scene,.hero-art .camp-scene {width:100%;height:auto;display:block;min-height:0;aspect-ratio:900/560;object-fit:contain}
+.hero-art .scene-caption {background:#173d32;color:#f5edcb;letter-spacing:2px;border:1px solid #9ab796;top:18px;left:18px;font-size:10px}
+.hero-art .scene-bottom {background:#16392ee8;color:#f4edcd;padding:10px 16px;bottom:0;left:0;right:0;font-size:10px;letter-spacing:1.3px}
+.choice {border-top:4px solid #577b55;border-radius:12px;background:linear-gradient(135deg,#fffcf3,#f4f2e5)}
+.tile-icon {background:#dce5cd;border:1px solid #bfccb1;box-shadow:inset -4px -4px #c7d4b9;color:#365c45}
+.world-grid {gap:25px}.world-card {border:1px solid #aebbab;border-radius:15px;box-shadow:0 6px 0 #314d3512;overflow:hidden;background:#fffdf3}.world-card>.world-scene {height:auto;width:100%;aspect-ratio:900/560;display:block}.world-card .body {padding:22px}.world-card h2 {font-size:24px;line-height:1.2}.world-card button {width:100%;background:#e5ead7;border-color:#bfccb5}.world-card .bar {margin-bottom:16px}
+.panel {border:1px solid #c5d0bd;border-radius:14px;background:#fffdf4;box-shadow:0 5px 0 #34513909}
+.guide {background:#e2ead6;border-color:#b5c8a5}.guide-avatar {flex:0 0 60px;width:60px;height:72px;background:#bad0a8;border:1px solid #91af86;border-radius:10px;overflow:hidden}.guide-avatar svg {width:100%;height:100%}
+.quest-layout {gap:26px;align-items:start}.quest-layout>.panel,.mission-task {border-top:5px solid #6b8e66;background:linear-gradient(#fffdf5,#f6f2e4)}
+.task-controls {padding:20px;border:1px solid #c1cdb4;border-radius:12px;background:linear-gradient(135deg,#e9eddd,#f3eedb);box-shadow:inset 0 -5px #bfccb422}
+.mission-task h2 {font-size:25px;line-height:1.35}.mission-task .feedback {background:#e2ebd2;border-color:#a4bf8f}.quest-layout .numberline {background:#d7b47c;border:8px solid #a98255;box-shadow:0 8px 0 #79614235;padding:10px;border-radius:4px}.numberline button {background:#f7e6bb;border-color:#b18e58}
+.bank-ledger,.invoice,.timetable {background:#faf6df;border:1px solid #c0b88e;border-radius:10px}.counter-product {background:#fff9e5;border:1px solid #c5cbb3;box-shadow:0 4px 0 #c2c8af}.receipt {border:1px dashed #a2946e;border-radius:8px;background:#fff9e4}
+.shop-item .ico {display:block;width:80px;height:80px;margin:auto}.item-art {width:80px;height:80px;display:block}.shop-item {border:1px solid #bcc8b0;background:#fbfaef;border-radius:12px}.shop-preview {border:1px solid #b1c1a5;background:linear-gradient(120deg,#d5e1c5,#f7f3df);border-radius:16px}.shop-preview>.explorer {max-width:180px}.camp-buildings>div {border-radius:8px}.camp-designer {background:#e4ead9}.keepsake {border-bottom:4px solid #bba271;background:#f6efd9}
+.parent-intro {max-width:760px}.wallet-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:24px 0}.wallet-card {border:1px solid #becbb5;background:#eef0df;padding:20px;border-radius:12px;min-width:0}.wallet-card strong {display:block;font-size:27px;line-height:1.3;color:#234d39;font-variant-numeric:tabular-nums}.wallet-card span {display:block;font-size:13px;color:#476251;margin-top:9px}.parent-columns {display:grid;grid-template-columns:1.15fr 1fr;gap:24px}.parent-columns>.panel {padding:24px}.evidence-row {padding:14px 0;border-bottom:1px solid #d6decd}.evidence-row strong {display:block}.evidence-row p {margin:4px 0;font-size:14px}.reward-form {display:grid;gap:12px}.reward-form label {font-weight:650}.reward-form input,.reward-form select {width:100%;max-width:100%}.reward-form .check-label {font-weight:400;display:flex;gap:10px;align-items:flex-start}.reward-form .check-label input {width:22px;height:22px;flex:0 0 22px;margin-top:3px}.auth-panel {max-width:720px;margin:40px auto}.auth-panel:has(.wallet-grid) {max-width:none}.panel h1 {line-height:1.15}.form-note {background:#e6edd9;padding:13px 16px;border-radius:8px;font-size:14px}
+.animate .feedback {animation:journal-arrival .22s ease-out}.animate .world-card:hover {transform:translateY(-3px);transition:transform .18s ease-out}.animate .scene-glow {animation:lantern-breathe 4s ease-in-out infinite}@keyframes lantern-breathe {50%{opacity:.3}}@keyframes journal-arrival {from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(max-width:1000px){.wallet-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero h1{letter-spacing:-1.6px}.topbar{padding:15px 20px}.parent-columns{grid-template-columns:1fr}.quest-layout{gap:20px}.hero{gap:25px}.world-card h2{font-size:22px}}
+@media(max-width:700px){.topbar{margin:10px 12px 0;padding:14px;border-radius:12px}.hero{padding-top:0}.hero h1{font-size:42px}.hero-copy{padding:10px 0}.hero-art .scene-bottom{font-size:9px;padding:7px 10px}.hero-art .scene-caption{top:10px;left:10px}.wallet-card{padding:15px}.wallet-card strong{font-size:23px}.mission-task h2{font-size:22px}.task-controls{padding:12px}.world-grid{gap:18px}.panel{padding:20px}.parent-columns>.panel{padding:18px}.auth-panel{margin:20px auto}}
+@media(prefers-reduced-motion:reduce){.animate .scene-glow,.animate .feedback{animation:none}.animate .world-card:hover{transform:none;transition:none}*{scroll-behavior:auto!important}}
+.parent-journal {max-width:none;margin:20px auto}.tile-icon .item-art {width:40px;height:40px}
+/* Entrances are anchored to the actual isometric venue roofs. */
+.town-explore-map {overflow-x:auto;isolation:isolate}.town-explore-map>.world-scene {min-width:620px;width:100%;height:auto;display:block}.town-hotspots {min-width:620px}.town-hotspots button {transform:translate(-50%,-50%);width:44px;height:44px;font-size:16px;font-weight:800;border-radius:50%;background:#f5ebce;color:#254d37}.town-hotspots button:hover {background:#d9e7b4;box-shadow:0 0 0 4px #d9e7b455}
+.water-channels .part[aria-pressed="true"],.parts .part[aria-pressed="true"] {background:linear-gradient(#74b7be,#4b939f);color:#fff;border-color:#386c78;box-shadow:inset 0 -6px #346c7b55}.courtyard-grid button[aria-pressed="true"] {background:#b4abbb;border-color:#726880;box-shadow:inset -4px -4px #8a8198}.token {box-shadow:inset -5px -5px #243f3525;border:1px solid #5f7e57}.rotate-area .shape {background:#d5c5b3;box-shadow:7px 7px #8a7c8544;border:1px solid #9b8e99}.planning-clock {background:#2c4b4a;color:#f0dfab;border:8px solid #9b865e;border-radius:12px}.planning-clock .clock-display {color:#f5e5af}
+.keepsake-art {width:56px;height:56px;display:block;margin:0 auto 9px}.recap>.badge {background:#e6d19a;border:1px solid #b99f61;color:#4b5636}.recap h1 {letter-spacing:-1.4px}
+
+/* A playable world stage: the landscape and foreground apparatus share one space. */
+.world-stage {display:block;position:relative;background:#214b43;border:1px solid #6d8b75;border-radius:20px;overflow:hidden;box-shadow:0 12px 30px #19382e25;padding-bottom:30px}
+.world-stage .stage-vista {position:relative;min-width:0}
+.world-stage .stage-vista>.hero-art {border:0;border-radius:0;box-shadow:none;margin:0;height:440px}
+.world-stage .stage-vista .world-scene {width:100%;height:100%;aspect-ratio:auto;object-fit:cover}
+.world-stage .stage-vista>.guide {position:relative;display:flex;margin:0!important;border:0;border-radius:0;box-shadow:none;background:#183c34;color:#f4efd9;padding:18px 30px;padding-right:160px;min-height:110px}
+.world-stage .guide h3 {color:#f4efd9;margin:0 0 8px}.world-stage .guide p{max-width:780px;font-size:14px}
+.world-stage .stage-vista>.toolbar {position:absolute;bottom:18px;right:24px;margin:0!important;gap:12px}.world-stage .stage-vista>.toolbar .explorer {width:65px;height:82px}.world-stage .stage-vista>.toolbar button{font-size:12px;padding:8px;min-height:44px}.world-stage aside>.small {margin:0;padding:10px 30px;background:#183c34;color:#dae3cc}
+.world-stage .stage-workbench {position:relative;margin:24px auto 0;width:calc(100% - 60px);max-width:1000px;border:2px solid #a58b5f;border-top:7px solid #b79b69;border-radius:7px;background:#f0e4c4;box-shadow:0 9px 0 #102e2929;padding:24px 30px}
+.world-stage .puzzle {padding:0;min-height:0}.world-stage .puzzle h2,.world-stage .mission-task h2 {font-size:25px;margin:14px 0 20px;line-height:1.4}.world-stage .task-controls {background:#e2d4b0;border:1px solid #b6a278;padding:18px;box-shadow:inset 0 -6px #a58a5c22}
+.worksite {width:100%;height:auto;max-height:210px;display:block;border-radius:8px 8px 0 0;border:1px solid #68836b;box-sizing:border-box}.line-instruction{background:#21493f;color:#f6e8c0;font-size:13px;padding:9px 12px;margin:0}
+.world-stage .numberline,.numberline {display:grid;grid-template-columns:repeat(auto-fit,minmax(46px,1fr));overflow:visible;gap:7px;padding:12px;max-width:100%;background:#d1b17a;border:4px solid #9e7c4f;box-shadow:0 5px 0 #76593633;border-radius:0 0 6px 6px}
+.numberline button {min-width:0;min-height:46px;padding:8px 4px;position:relative}.numberline button[aria-pressed=true]{background:#245b45;border:2px solid #153f32;color:#fff;box-shadow:inset 0 -4px #173f2f}
+.world-stage .numberline button[aria-pressed=true]::after {content:"";position:absolute;bottom:2px;left:calc(50% - 3px);width:6px;height:3px;background:#f3d38d}
+.world-stage.stage-restored .stage-workbench {border-color:#b7ca8e}.world-stage.stage-restored .worksite {outline:3px solid #b4ce8d;outline-offset:-3px}
+.world-grid {grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}.world-card:last-child {grid-column:auto}.world-card>.world-scene {max-height:none}.world-card .body{padding:20px}
+.camp-overview {border:1px solid #8fa88e;border-radius:18px;overflow:hidden;background:#dce5ca}.camp-map {position:relative;border:0;border-radius:0;box-shadow:none}.camp-map>.camp-scene {width:100%;height:auto;max-height:650px}.camp-hotspots a {position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px;border:2px solid #c4b17a;border-radius:8px;background:#f9edcdeF;color:#203c34;font-size:12px;font-weight:750;text-decoration:none;box-shadow:0 5px 0 #183c3426;white-space:nowrap}.camp-hotspots a:hover{background:#dbebbd;outline:3px solid #608260}.camp-dock{display:flex;gap:25px;padding:24px 30px;align-items:center;border-top:2px solid #92aa7b;background:linear-gradient(120deg,#d4dfc1,#f7efd6)}.camp-dock>.explorer {width:150px;max-height:190px;flex-shrink:0}.camp-dock h2{margin:8px 0}.camp-workshop{margin-top:28px}.camp-designer{padding:25px;border:1px solid #a5b795;border-radius:14px}.camp-placements{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.placement-site{padding:18px;border:1px solid #b7c49f;border-radius:10px;background:#f8f2db;scroll-margin-top:20px}.placement-site:target,#camp-projects:target{outline:3px solid #577d56;outline-offset:4px}.placement-site label{display:block;font-weight:700}.placement-site select{display:block;width:100%;min-height:46px;margin-top:10px;max-width:100%}.display-plinth{height:108px;display:grid;place-items:center;background:linear-gradient(150deg,#a4bba1,#d6dcba);border-bottom:9px solid #ad9263;border-radius:8px;margin-bottom:16px}.display-plinth .keepsake-art{width:75px;height:75px;margin:0;filter:drop-shadow(5px 7px 0 #28493725)}.display-plinth>span{font-size:40px;color:#536c4b}.project-site .bar{margin:16px 0}.project-art {height:110px;display:grid;place-items:center;background:linear-gradient(140deg,#c3d3b3,#ece1ba);border-radius:9px;margin-bottom:18px}.project-art .item-art,.project-art .keepsake-art{height:90px;width:90px;margin:0}.camp-journal{margin:26px 0;border:1px solid #b8c4ac;border-radius:12px;background:#fcf8e8;padding:18px 22px}.camp-journal>summary{font-size:18px;font-weight:700;min-height:44px;cursor:pointer;padding:10px}.achievement-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 25px}.camp-journal .collection-grid{margin-top:20px}.shop-preview{min-height:240px}.shop-preview>.explorer{width:200px;max-width:230px;max-height:240px;filter:drop-shadow(6px 10px 0 #30523820)}
+.recap{position:relative}.recap:before{content:"✧";display:block;font-size:60px;color:#917342;line-height:1}.animate .recap:before{animation:crest-arrive .6s ease-out}.animate .stage-restored .stage-workbench{animation:restore-arrive .5s ease-out}.animate .camp-hotspots a:hover{transform:translate(-50%,-55%);transition:transform .16s ease-out}@keyframes crest-arrive{from{transform:scale(.5) rotate(-30deg);opacity:0}to{transform:none;opacity:1}}@keyframes restore-arrive{from{box-shadow:0 0 0 12px #b7ca8e66}to{box-shadow:0 9px 0 #102e2929}}
+@media(max-width:1000px){.world-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.world-stage .stage-vista>.hero-art{height:360px}.world-stage .stage-workbench{width:calc(100% - 36px);padding:22px}.world-stage .stage-vista>.guide{padding:18px 22px;padding-right:115px}.world-stage .stage-vista>.toolbar button{display:none}.camp-map>.camp-scene{max-height:none}.camp-hotspots a{font-size:11px;padding:6px 8px}.camp-placements{gap:12px}.placement-site{padding:13px}}
+@media(max-width:700px){.world-stage{border-radius:12px;padding-bottom:18px}.world-stage .stage-vista>.hero-art{height:260px}.world-stage .stage-vista>.guide{padding:16px;padding-right:16px}.world-stage .guide-avatar{flex-basis:58px;width:58px}.world-stage .stage-vista>.toolbar{display:none}.world-stage .stage-workbench{width:calc(100% - 24px);padding:18px 14px;margin-top:14px}.world-stage .puzzle h2,.world-stage .mission-task h2{font-size:21px}.world-stage .task-controls{padding:10px}.worksite{max-height:150px}.numberline{gap:6px;grid-template-columns:repeat(auto-fit,minmax(44px,1fr));padding:8px}.numberline button{min-height:46px}.world-grid{grid-template-columns:1fr}.camp-dock{padding:20px;gap:15px;align-items:flex-start}.camp-dock>.explorer{width:80px;height:110px}.camp-dock h2{font-size:24px}.camp-hotspots a{font-size:10px;min-height:44px;white-space:normal;max-width:100px;line-height:1.2;text-align:center}.camp-designer{padding:16px}.camp-placements{grid-template-columns:1fr}.placement-site{display:grid;grid-template-columns:85px minmax(0,1fr);gap:10px 15px}.display-plinth{height:90px;grid-row:1/3;margin:0}.display-plinth .keepsake-art{width:62px;height:62px}.placement-site p{grid-column:2;margin:0}.achievement-grid{grid-template-columns:1fr}.shop-preview{min-height:190px}.shop-preview>.explorer{width:120px;max-height:175px}.camp-journal{padding:12px}.camp-journal>summary{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.animate .recap:before,.animate .stage-restored .stage-workbench{animation:none}.animate .camp-hotspots a:hover{transform:translate(-50%,-50%);transition:none}}
+.world-stage .stage-vista>.hero-art {height:300px;background:#234c43}
+.world-stage .stage-vista .world-scene {min-height:0;max-height:none}
+.world-stage .worksite {max-height:150px}
+@media(max-width:1000px){.world-stage .stage-vista>.hero-art{height:260px}}
+@media(max-width:700px){.world-stage .stage-vista>.hero-art{height:220px}}
+.product-image{width:72px;height:72px;display:block}.counter-product .product-art{display:grid;place-items:center;height:86px;font-size:0;background:linear-gradient(#dfdfbd,#ede4c7);border-bottom:7px solid #ab8b59;border-radius:5px}.project-image{width:180px;height:140px;display:block}.project-art{height:150px}.water-channels,.portal-pool{padding:22px 16px;border:6px solid #9a8359;background:repeating-linear-gradient(90deg,#96b4a4 0,#96b4a4 2px,#e3d8b5 2px,#e3d8b5 25%);box-shadow:inset 0 8px #607f7566}.water-channels .part,.portal-pool .part{min-height:70px;border-radius:3px;box-shadow:inset 0 -7px #947d5330}.stage-fractions .task-controls,.stage-ratio .task-controls{background:#ddd0a2}.stage-algebra .task-controls,.stage-measure .task-controls{background:#cbd2c8;border-color:#84988e}.stage-geometry .task-controls,.stage-probability .task-controls{background:#d5cbd3;border-color:#a898b2}.stage-town .task-controls{background:#d6ddbd}.stage-town .shop-counter{border-bottom:12px solid #a38759;padding-bottom:12px}
+@media(max-width:700px){.product-image{width:54px;height:54px}.counter-product .product-art{height:62px}}
+.camp-inventory{display:flex;flex-wrap:wrap;gap:5px 14px;color:#49654b}.camp-inventory span{white-space:nowrap}
+.world-stage .stage-workbench .muted,.world-stage .stage-workbench label{color:#344c3d}
+.world-overview{grid-template-columns:1.6fr 1fr}.world-overview>.panel{padding:24px}.world-overview .landmark-list{margin:16px 0}.world-overview .landmark-list li{padding:10px 0}
+@media(max-width:1000px){.world-overview{grid-template-columns:1fr}.world-overview>.panel{display:block}.world-overview>.panel>.explorer{display:none}}
+.world-route-map{position:relative}.world-route-pins button{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;padding:6px;background:#f1d996;border:2px solid #6b744d;border-radius:50%;color:#223e33;font-weight:800;box-shadow:0 4px 0 #183a3233}.world-route-pins .route-label{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);width:max-content;max-width:190px;white-space:normal;line-height:1.2;padding:8px;background:#173e32;color:#fff3cc;border-radius:6px;font-size:12px;visibility:hidden}.world-route-pins button:hover .route-label,.world-route-pins button:focus-visible .route-label{visibility:visible}.world-route-pins button:hover{background:#d6e9ad}
+/* Keep Save & exit visible on tablets instead of hiding it to fit the guide dock. */
+@media(max-width:1000px){.world-stage .stage-vista>.guide{padding-right:22px}.world-stage .stage-vista>.toolbar{position:relative;right:auto;bottom:auto;display:flex;justify-content:space-between;padding:0 22px 16px;background:#183c34}.world-stage .stage-vista>.toolbar button{display:inline-flex}.world-stage .stage-vista>.toolbar .explorer{width:50px;height:60px}}
+@media(max-width:700px){.camp-hotspots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:12px;background:#d5dfc5}.camp-hotspots a{position:static;transform:none!important;max-width:none;white-space:normal;font-size:12px}}
+/* Purpose-built Town architecture and the eight-stage home journey. */
+.town-explore-map>.town-scene{aspect-ratio:1200/900;min-width:780px}.town-hotspots{min-width:780px}.world-card>.town-scene{aspect-ratio:1200/900;width:100%}.town-hotspots button{background:#f6e1aa;border:2px solid #63784f;box-shadow:0 3px 0 #2c4b3933}.venue-view-controls{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:13px 22px;background:#284e40;color:#f7edce;font-size:12px;font-weight:700;letter-spacing:1px}.venue-view-controls button{font-size:13px;letter-spacing:0}.world-stage.stage-town .stage-vista>.hero-art{height:auto}.world-stage.stage-town .stage-vista .location-scene,.world-stage.stage-town .stage-vista .exterior-scene{height:auto;aspect-ratio:900/560;display:block;max-height:none}.world-stage.stage-town .stage-vista .exterior-scene{aspect-ratio:900/600}.venue-bank .stage-workbench{background:#dce0c9;border-color:#a3b4a0}.venue-cafe .stage-workbench{background:#eee0ce;border-color:#ba9f86}.venue-station .stage-workbench{background:#d8e0cf;border-color:#8da998}.venue-work .stage-workbench{background:#dedcc1;border-color:#a1aa83}.venue-leisure .stage-workbench{background:#e3d9dd;border-color:#b5a4b7}
+.camp-map>.camp-scene,.hero-art .camp-scene{aspect-ratio:1200/800;max-height:none}.camp-map>.scene-caption{display:none}.estate-planner{margin:26px 0;padding:26px}.estate-track{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.estate-track button{display:block;text-align:left;padding:13px;min-height:86px;background:#f1edd9;border:1px solid #acbb9d}.estate-track button strong,.estate-track button span{display:block}.estate-track button strong{font-size:14px;line-height:1.4}.estate-track button span{font-size:12px;margin-top:8px;color:#465a40}.estate-track button[aria-pressed=true]{background:#d7e5bf;outline:2px solid #577b50;outline-offset:-2px}.estate-plan-preview{display:grid;grid-template-columns:1.3fr 1fr;gap:25px;align-items:center;margin-top:24px}.estate-plan-preview>div{min-width:0}.estate-plan-preview .camp-scene{width:100%;height:auto;border:1px solid #a1b095;border-radius:10px}.estate-celebration{padding:20px 26px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;background:#e7d49b;color:#304b33;border-bottom:3px solid #a49564}.estate-celebration strong{font-size:21px}.estate-celebration span{font-size:14px}.estate-celebration button{margin-left:auto}.animate .mill-wheel{animation:mill-turn 18s linear infinite;transform-origin:0 0}.animate .flowing-water{animation:stream-flow 3s linear infinite}.animate .estate-unveiling>.camp-map{animation:estate-arrive .65s ease-out}.animate .camp-fire{animation:lantern-breathe 3s ease-in-out infinite}@keyframes mill-turn{to{transform:rotate(360deg)}}@keyframes stream-flow{to{stroke-dashoffset:-72}}@keyframes estate-arrive{from{opacity:.5;transform:translateY(9px)}to{opacity:1;transform:none}}
+@media(max-width:1000px){.estate-track{grid-template-columns:repeat(2,minmax(0,1fr))}.estate-plan-preview{grid-template-columns:1fr}.estate-plan-preview>div:first-child{max-width:640px;width:100%;margin:auto}.estate-celebration{padding:18px}.estate-planner{padding:20px}}
+@media(max-width:700px){.estate-track button{padding:11px}.estate-track button strong{font-size:13px}.estate-planner{padding:16px}.estate-celebration button{margin-left:0}.venue-view-controls{padding:12px 16px}.venue-view-controls span{max-width:65%}}
+@media(prefers-reduced-motion:reduce){.animate .mill-wheel,.animate .flowing-water,.animate .estate-unveiling>.camp-map,.animate .camp-fire{animation:none!important}}
+/* V5 shared manipulatives: each model has a tap/keyboard alternative. */
+.hands-on{padding:20px;margin:18px 0;background:#e8eddb;border:2px solid #96ac83;border-radius:12px;color:#243d2d}.hands-on button,.cartesian-point{min-width:44px;min-height:44px}.hands-on button[aria-pressed=true],.sample-space button[aria-pressed=true]{background:#365d40;color:#fffbe8}.hands-on output{display:block;font-size:24px;font-weight:750;margin:16px 0}.label-supply,.array-controls,.manipulate-actions,.payment-objects{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0}.label-destinations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.label-destinations section{min-width:0;background:#f8f2dd;padding:12px}.label-destinations strong{display:block;margin-bottom:12px}.movable-label{padding:12px}.cartesian-plane{max-width:520px;margin:auto}.cartesian-plot{position:relative;width:100%;aspect-ratio:1;background:#f4f1df}.cartesian-plot svg{width:100%;display:block;font:17px system-ui;fill:#254532}.cartesian-point{position:absolute;transform:translate(-50%,-50%);padding:0;border:0;background:transparent;color:#355a40;font-size:24px;z-index:1}.cartesian-point span{display:block;width:10px;height:10px;border-radius:50%;font-size:0;background:currentColor;margin:auto}.cartesian-point[aria-pressed=true]{color:#f9ebaa;background:#30553b;border-radius:50%}.cartesian-point:focus-visible{outline:3px solid #96532c;outline-offset:-3px}.construct-chart{display:flex;height:285px;padding:10px 5px 45px 35px;gap:12px;position:relative;margin-bottom:60px}.construct-chart section{flex:1;text-align:center;min-width:0}.chart-track{height:100%;display:flex;align-items:flex-end;border-bottom:2px solid #35583e;background:repeating-linear-gradient(to top,#b8c6a5 0 1px,transparent 1px 8.333%)}.chart-track div{width:80%;margin:auto auto 0;background:#57744f}.chart-scale{position:absolute;left:0;top:10px;bottom:45px;width:30px}.chart-scale span{position:absolute;right:6px;font-size:11px}.crate-array{display:grid;gap:3px;max-width:100%;overflow:auto;margin:20px 0;color:#426343}.tile-balance,.ratio-packs{display:flex;gap:20px;align-items:center;justify-content:space-around}.tile-balance>div,.ratio-packs>section{background:#f5efd7;flex:1;padding:12px}.tile-battery{display:inline-flex;flex-wrap:wrap;max-width:90px;border:2px solid #718265;margin:5px;padding:8px;gap:2px}.tile-battery small{width:100%}.ratio-packs i{display:inline-block;color:#3d6c41;font-style:normal}.ratio-packs section:last-child i{color:#416a83}.sample-space{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.model-spinner{position:relative;width:280px;height:280px;border-radius:50%;border:3px solid #425c40;margin:25px auto;background:repeating-conic-gradient(#dce4bf 0 29deg,#83966c 29deg 30deg)}.model-spinner button{position:absolute;left:calc(50% + 100px * cos(var(--angle)) - 22px);top:calc(50% + 100px * sin(var(--angle)) - 22px);border-radius:50%;background:#f1e7ca}.pour-model{text-align:center}.pour-vessel{height:260px;width:190px;border:4px solid #57756c;border-top:0;position:relative;margin:auto;background:#f3f6e8;overflow:hidden}.pour-vessel>div{background:#91c4c8;position:absolute;bottom:0;width:100%}.pour-vessel span{position:absolute;right:3px;font-size:12px;border-bottom:1px solid #567271;width:50%;text-align:right}.interactive-ruler{display:flex;flex-wrap:wrap;position:relative;padding-bottom:24px;border-bottom:6px solid #315738;margin:25px 0;gap:2px}.interactive-ruler button{font-size:12px}.ruler-rail{height:15px;position:absolute;bottom:0;left:0;background:#a37b44}.protractor svg{width:100%;max-height:280px;font:12px system-ui;fill:#2a4c35}.payment-objects span{padding:9px;background:#f8efcc;border:1px solid #9e8851;border-radius:8px}.practice-blocks{min-height:50px;display:flex;flex-wrap:wrap;gap:3px}.practice-blocks i{font-style:normal;color:#4c6943}.parts button,.mission-parts .part{touch-action:pan-y}.array-controls>div{background:#f3efd8;padding:12px}.array-controls strong{display:block}.array-controls button{margin:5px}.money-construction .money-tray{display:flex;flex-wrap:wrap;gap:8px}.money-construction .money-tray button{padding:8px}.label-destinations button{width:100%}.practice-manipulative .envelopes{grid-template-columns:repeat(4,minmax(0,1fr))}@media(max-width:700px){.hands-on{padding:14px}.label-destinations{grid-template-columns:1fr}.practice-manipulative .envelopes{grid-template-columns:repeat(2,minmax(0,1fr))}.tile-balance{gap:8px}.cartesian-plot{min-width:280px}.construct-chart{gap:7px}.model-spinner{width:250px;height:250px}}
+.base-ten-model{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.base-ten-model section{padding:12px;background:#f6f0da;min-width:0}.base-ten-model strong{display:block}.base-ten-tray{display:flex;flex-wrap:wrap;gap:5px;min-height:70px;margin:12px 0}.base-ten{display:inline-flex;background:#56764c;color:#fff4c7;align-items:center;justify-content:center;border:1px solid #304d35}.base-100{width:38px;height:38px;font-size:30px}.base-10{width:14px;height:38px}.base-1{width:14px;height:14px}.measure-ruler-scroll{overflow-x:auto;padding:0 25px}.measure-ruler-scroll .interactive-ruler{min-width:600px;height:95px;display:block;margin:20px 22px}.interactive-ruler button{position:absolute;top:0;transform:translateX(-50%);height:60px;border-radius:0;border-bottom:4px solid #35563b}.journey-progress{background:#e5ebd8;padding:15px 20px;margin:20px 0;border-radius:10px}.journey-invitation{margin:20px 0}.journey-invitation button{margin:8px}
+.fraction-mini{display:block;width:100px;height:16px;border:1px solid #58704c;background:#fcf3d8;margin:8px auto}.fraction-mini i{display:block;height:100%;background:#698b55}
+.volume-layers{display:flex;flex-wrap:wrap;gap:15px}.volume-layers section{background:#e0dbc0;padding:10px;border-bottom:5px solid #879369}.volume-layers .crate-array{margin:10px 0}
+
+/* Direct answer entry and equal-sharing teaching model. */
+.numeric-answer input {width:100%;max-width:22rem;min-height:48px;font-size:1.2rem;padding:10px;}
+.numeric-answer input[aria-invalid="true"] {border:2px solid #8e402e;}
+.share-bar,.share-people {display:flex;gap:8px;flex-wrap:wrap;margin:16px 0;}
+.share-bar span {flex:1;padding:14px;background:#e5ebd5;border:1px solid #36573e;text-align:center;}
+.share-people section {flex:1;min-width:120px;padding:14px;border:1px solid #becbb5;border-radius:10px;background:#f5f3e8;}
+.share-people p {font-size:1.4rem;font-weight:700;}
+.envelopes .counter-controls {flex-wrap:wrap;}
+
+/* Practical Town plan shelf: tablet-first, keyboard/touch-equivalent controls. */
+.town-plan-catalog{margin-top:24px}.town-plan-catalog summary{padding:16px 4px;cursor:pointer;font-weight:700;min-height:48px}.town-plan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}.town-plan-grid article{padding:14px;border:2px solid #b4c6ad;border-radius:8px}.town-plan-grid button{width:100%;min-height:48px}.town-task-prompt{font-size:1.15rem;line-height:1.6}.journey-progress{overflow-wrap:anywhere}.journey-progress summary{min-height:44px;cursor:pointer}.journey-progress li{margin:8px 0}.label-supply button,.label-destinations button{min-height:48px;white-space:normal}
+
+/* Final iPad polish. Presentation only; motion remains opt-in. */
+.world-vista{position:relative;background:#a5bc9e;border-bottom:4px solid var(--world-accent);overflow:hidden;isolation:isolate}.world-vista>.world-scene{display:block;width:100%;height:auto;aspect-ratio:900/560}.world-vista:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 7px #f7f0d12b;pointer-events:none}.world-card{border-top:5px solid var(--world-accent);background:linear-gradient(145deg,#fffdf4,#edf1e4)}.world-card[data-world=measure] .world-vista{background:#455b5a}.world-card[data-world=probability] .world-vista{background:#787d9c}.world-open{position:absolute;top:12px;left:12px;padding:6px 10px;background:#173f33;color:#f4f5df;font-size:11px;font-weight:800;letter-spacing:.6px;border:1px solid #9dbb8a;border-radius:5px}.world-landmarks{position:absolute;bottom:10px;right:12px;display:flex;gap:8px;padding:4px 10px;border-radius:6px;background:#173f33}.world-landmarks i{font-style:normal;color:#8aa398;font-size:20px}.world-landmarks i.restored{color:#e1edaa}.world-card .body h2{margin-top:8px}.world-card .bar{height:12px}.hero-copy>.primary{font-size:21px;min-height:60px;padding:15px 25px;min-width:min(100%,285px)}.hero-copy .small{font-size:16px}.hero-copy .primary:focus-visible{outline-width:4px}
+.location-vista{background:#b9c9ac;overflow:hidden;border-bottom:3px solid #638269}.location-vista .world-scene{width:100%;height:auto;display:block;aspect-ratio:900/520;object-fit:cover}.location-card{overflow:hidden}.location-sign{margin-top:10px}.town-role-key{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.town-role-key p{margin:0;padding:16px;background:#edf1e1;border:1px solid #b4c6ad;border-radius:9px}.role-chip{display:inline-block;padding:6px 10px;border:2px solid #356449;border-radius:6px;font-size:12px;font-weight:800;letter-spacing:.7px;white-space:nowrap}.role-customer{background:#e6efce;color:#214e38}.role-worker{background:#e0e9ee;color:#284b59;border-color:#526e7a}.town-role-key .role-chip{display:table;margin-bottom:9px}.location-ribbon{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;background:#e4ecd7;border:1px solid #9fb493;border-left:6px solid #326247;border-radius:10px;margin:16px 0;padding:14px 18px}.location-ribbon strong{font-size:21px}.location-ribbon>span:last-child{color:#405f4b;font-size:15px}.journey-progress.panel{margin-top:14px}.journey-progress>p{margin:8px 0}.journey-progress details{border-top:1px solid #b5c6aa;padding-top:8px}
+.task-controls button,.task-controls input,.task-controls select{min-height:52px}.task-controls button{min-width:48px}.task-controls [aria-pressed=true]{background:#d0e5b0!important;color:#173e2c!important;border:2px solid #275d40!important;box-shadow:inset 0 -4px #45734d}.label-supply,.label-destinations{gap:12px}.label-destinations button{width:100%;border:2px dashed #7f9474;min-height:58px}.label-destinations button[data-placed=true]{background:#dceac6;border-style:solid;border-color:#386446;box-shadow:inset 5px 0 #386446}.task-controls .feedback,.feedback{font-size:19px;line-height:1.65;border-left:5px solid #517b49;padding:18px 20px;color:#233f30}.stage-workbench>.actions{gap:12px}.stage-workbench>.actions>button{min-height:52px}.stage-workbench>.actions>button[data-action="nav:home"]{border:2px solid #53764e}.stage-workbench h2{line-height:1.4}.numeric-answer input{font-size:22px}.task-controls .journey-option{padding:15px;gap:8px}.task-controls .counter-controls{gap:10px}
+.shop-item{padding:20px;display:flex;flex-direction:column;align-items:stretch;gap:10px}.shop-item h3,.shop-item p{margin:0}.shop-item .ico{width:100px;height:100px}.shop-item .item-art{width:100px;height:100px}.shop-item button{min-height:50px}.shop-preview{scroll-margin-top:18px;padding:24px;gap:24px}.preview-note{padding:12px;border-left:4px solid #416b48;background:#f8f6e5}.coin-readout{padding:7px 12px;border:1px solid #a2b882;border-radius:8px;background:#d9e6ab;color:#244334;font-size:14px;font-weight:750;white-space:nowrap;font-variant-numeric:tabular-nums}.coin-readout{min-width:170px;text-align:center}.coin-readout.coin-earned{border-color:#e5d28a;background:#e6edbd}
+.completion-ribbon{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;padding:20px;margin:0 0 24px;border:2px solid #6d8a50;border-radius:12px;background:linear-gradient(120deg,#d6e7b7,#f2efd9);text-align:left}.completion-ribbon p{font-size:16px;margin:4px 0}.completion-ribbon strong{font-size:21px}.completion-crest{display:grid;place-items:center;width:58px;height:58px;background:#2b5e43;color:#e8daa3;font-size:32px;border:4px solid #b3c58c;box-shadow:3px 3px #96aa7b}.completion-ribbon button{margin-left:auto}.town-complete h2{font-size:30px}.recap:before{display:none}.recap{max-width:1000px}.topbar{flex-wrap:wrap}
+@keyframes quiet-location-arrival{from{opacity:.6;transform:translateY(5px)}to{opacity:1;transform:none}}.animate [data-scene-arrival] .location-ribbon,.animate .completion-ribbon{animation:quiet-location-arrival .28s ease-out}.animate [data-scene-arrival] .world-vista{animation:quiet-location-arrival .35s ease-out}
+@media(max-width:1000px){.topbar nav{order:3;flex-basis:100%;justify-content:center}.coin-readout{margin-left:auto}.town-role-key{grid-template-columns:1fr}.task-controls{padding:16px}.completion-ribbon{padding:16px}.completion-ribbon button{margin-left:0}.world-card h2{font-size:23px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.animate .world-card:hover{transform:none!important}}
+/* Functional, tap-first workbenches. No new motion or sound. */
+.product-shelves{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:14px;margin:16px 0}.shelf-product{border:3px solid #6e7558;border-bottom:12px solid #67533b;border-radius:4px;padding:10px;background:#edf0df;min-width:0}.fridge-compartment{border-color:#728d91;background:#e9f2ef}.collect-product{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;min-height:145px;padding:12px;color:#1e352b}.collect-product .product-art{width:80px;height:70px}.stock-objects{display:flex;flex-wrap:wrap;gap:6px;align-items:center;min-height:65px}.stock-objects>span{display:block;width:58px}.stock-objects svg{width:100%;height:60px}.basket-model{border:4px solid #658653;border-top-width:12px;background:#f0f4e7;padding:14px;display:flex;flex-wrap:wrap;gap:8px}.basket-model h3{width:100%;margin:0 0 8px}.basket-model button{min-height:52px;white-space:normal}.recipe-card{border:3px solid #537650;background:#f6f3df;margin:14px 0;padding:12px;border-radius:6px}.recipe-card summary{min-height:48px;display:list-item;cursor:pointer;font-weight:700}.recipe-card table{width:100%;border-collapse:collapse;font-size:15px}.recipe-card th,.recipe-card td{padding:8px;text-align:left;border-bottom:1px solid #b4bea2}.recipe-card ol{padding-left:25px}.recipe-card li{margin:8px 0}.connected-train,.loose-carriages{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:18px 0}.connected-train{border-bottom:7px double #65716b}.train-cart{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;min-width:80px;min-height:76px;padding:8px 12px;border:3px solid #426843;background:#e5edda;font-size:25px;font-weight:700;border-radius:5px;box-shadow:0 6px 0 #344a3c}.train-slot{border-style:dashed}.train-engine{font-size:46px;color:#345b3e}.cart-wheels{font-size:17px;line-height:18px}.train-cart[aria-pressed=true]{background:#b5d69a;border-color:#204a26;outline:3px solid #5f8252;outline-offset:3px}.build-array{display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:3px;max-width:520px}.build-array button{min-width:0;min-height:48px;padding:4px;font-size:21px;background:#e8e5d4;border:1px solid #899378}.build-array button[aria-pressed=true],.crate-tray button[aria-pressed=true]{background:#49783e;color:#fff}.layer-rack,.bundle-rack,.scale-stops{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.layer-rack button,.scale-stops button{min-height:48px}.bundle-rack button{display:flex;flex-direction:column;justify-content:space-between;gap:5px;min-width:85px;min-height:75px;font-size:16px}.bundle-rack button>span{max-width:90px;overflow-wrap:anywhere;color:#376b3e;font-size:24px}.physical-balance{display:flex;align-items:center;justify-content:space-around;gap:10px;margin:20px 0}.balance-pan{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:43%;padding:15px 5px;border-bottom:9px solid #5c704d;background:#edf1df}.unit-bundle{padding:6px;border:2px solid #658b5c;max-width:90px;overflow-wrap:anywhere}.unit-bundle b{display:block}.balance-beam{font-size:36px}.crate-tray{display:flex;flex-wrap:wrap;gap:5px}.crate-tray button{min-width:48px;min-height:48px;padding:4px;color:#326d8e}.model-slider{display:flex;flex-direction:column;gap:10px;margin:20px 0}.model-slider input{width:100%;min-height:56px;accent-color:#426e36;touch-action:pan-y}.model-slider output{font-size:24px;font-weight:700}.touch-ruler{position:relative;display:flex;justify-content:space-between;height:90px;padding:55px 4px 0;border-bottom:10px solid #6c7657;background:#ebe3c7;border:2px solid #87764f}.touch-ruler>div{position:absolute;left:0;top:12px;height:28px;background:#4e7849;border:3px solid #274c2e}.tap-chart{display:flex;gap:16px;align-items:stretch}.tap-chart section{flex:1;min-width:0;text-align:center}.tap-chart-column{display:flex;flex-direction:column;gap:2px;margin-top:10px}.tap-chart-column button{min-height:48px;padding:4px;border-radius:2px;background:#e9e7d7;border:1px solid #9ca78c}.tap-chart-column button[aria-pressed=true]{background:#4f7c43;color:white}.hands-on output{display:block;margin-top:14px}.stage-workbench{min-width:0}.town-task-prompt{font-size:21px;line-height:1.5}.movable-label[aria-pressed=true]{outline:3px solid #3c663b;outline-offset:3px}.label-destinations button[data-placed=true]{background:#dcebcf;border:3px solid #54734b}
+@media(max-width:650px){.build-array{gap:2px}.build-array button{min-height:38px}.product-shelves{grid-template-columns:repeat(2,minmax(0,1fr))}.train-cart{min-width:63px}.recipe-card{padding:8px}.recipe-card th,.recipe-card td{padding:6px}.physical-balance{gap:4px}}
+@media(prefers-reduced-motion:reduce){.train-cart,.collect-product,.model-slider input{transition:none;animation:none}}
+.clock-face{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}.clock-face svg{width:220px;max-width:100%;height:auto}.clock-face text{font-size:18px;fill:#25432e}.clock-face strong{font-size:34px}.clock-workbench fieldset{margin:12px 0;border:1px solid #99ad8b;padding:10px}.clock-marks{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}.clock-marks button{min-height:48px;padding:8px}.clock-marks button[aria-pressed=true]{background:#426b37;color:white;border:3px solid #263c28}
+.connected-train .train-cart::after{content:'●　●';display:block;font-size:16px;line-height:16px;color:#274533}.train-engine{width:83px;height:76px;display:inline-flex;align-items:end}.train-engine svg{width:100%;height:auto}.cupboard-compartment{background:repeating-linear-gradient(0deg,#e9ddbd,#e9ddbd 18px,#e4d6b4 19px);border-color:#877044}.shelf-product>strong{display:block;border-bottom:3px solid #8d825b;padding:5px 0 8px;margin-bottom:8px}.fridge-compartment>strong{border-color:#769c9a}.stock-objects>span{min-height:60px}.recipe-card table{table-layout:fixed}.recipe-card td:first-child,.recipe-card th:first-child{width:68%}
+
+/* Direct object placement: quiet, tap-first and usable without dragging. */
+.stock-door {width:100%;border:2px solid #698654;border-radius:8px;background:#e3dac1;padding:8px}
+.stock-door summary {min-height:48px;display:list-item;padding:12px;font-weight:700;cursor:pointer}
+.fridge-compartment .stock-door {background:#e1ece3;border-color:#748c91}
+.stock-door[open] {background:#f7f2df}
+.block-supply,.placed-money {display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.block-supply button,.base-ten-tray button {min-width:48px;min-height:48px}
+.envelope-target {width:100%;min-height:120px;display:grid;gap:10px;background:#ece2bd;border:3px solid #738750;border-radius:8px}
+.envelope-target span {font-size:2.5rem}.envelope-target:active {background:#c2dbb1}
+.empty-tray {padding:16px;color:#425947}
+
+.cooking-equipment {border:4px solid #758571;border-radius:12px;background:#dedfcd;padding:20px}
+.cooker-window {min-height:130px;display:grid;place-items:center;background:#2a4136;color:#f5f0da;border:8px solid #bdc4af;border-radius:12px}
+.cooker-window span {font-size:3rem}.temperature-dial {display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-top:16px}
+.temperature-dial button {min-width:90px;min-height:70px;border-radius:50%;border:4px solid #7e8c70}
+.temperature-dial button[aria-pressed="true"] {border-color:#325e35;background:#b8d5a1}
+
+/* Four-screen direction sample. Other worlds keep their existing appearance. */
+.direction-sample {background:#a3b6a6;border:1px solid #728973;border-radius:10px}
+.town-scene.direction-sample {filter:drop-shadow(0 12px 10px #203e3420)}
+.industrial-yard {background:#dde3d4;border:2px solid #657b65;border-radius:8px;padding:18px;color:#233c3a;overflow:hidden}
+.yard-heading {display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-bottom:2px solid #8e9f84;padding-bottom:12px;font-size:.8rem;letter-spacing:.04em}
+.freight-track {display:flex;align-items:end;overflow-x:auto;max-width:100%;padding:12px 4px 14px;background:linear-gradient(#9cad9e,#a2ae99);border-bottom:8px solid #5b6c58}
+.freight-track>span {flex:0 0 128px;margin-right:-5px}.freight-object {display:block;width:100%;height:auto;max-height:140px}
+.freight-sidings {display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:18px}
+.freight-sidings button {padding:4px;border:2px solid #859680;border-radius:5px;background:#f0f0df;min-height:90px}
+.freight-sidings button[aria-pressed="true"] {border:3px solid #365d37;background:#c0d1ad;box-shadow:0 0 0 2px #f6edc9 inset}
+.coupling-target {outline:2px dashed #466a46;outline-offset:-4px}.locomotive {min-width:142px}
+.town-stock-scene.kitchen-stock {background:#d9d9c5;border:2px solid #5d7258;border-radius:8px;padding:18px}
+.kitchen-stock .shelf-product {background:transparent;border:0;padding:0}
+.kitchen-stock .stock-door {background:repeating-linear-gradient(90deg,#698063 0,#698063 14px,#5b7255 14px,#5b7255 16px);border:6px solid #c4c5ab;box-shadow:3px 6px 0 #53674c;border-radius:4px;color:#eff0dc;min-height:155px}
+.kitchen-stock .stock-door summary {padding:18px 24px 18px 10px;color:#f0f0db;border:1px solid #455d41;background:transparent;position:relative;min-height:135px;line-height:1.5}
+.kitchen-stock .stock-door summary:after {content:'';position:absolute;right:9px;top:45px;width:5px;height:40px;background:#d1c9a4;box-shadow:2px 2px 0 #3e5941}
+.kitchen-stock .stock-door[open] {background:#e7e8d4;color:#273f30}
+.kitchen-stock .stock-door[open] summary {min-height:55px;color:#264734;background:#c4cfb5}
+.kitchen-stock .stock-door[open] summary:after {height:24px;top:15px}
+.kitchen-stock .fridge-compartment .stock-door {background:#b9cbc2;color:#233d32;border-color:#e1e4d1}
+.kitchen-stock .fridge-compartment .stock-door summary {color:#244337;border-color:#8aa195}
+.kitchen-stock .stock-objects {min-height:75px;border-bottom:5px solid #91a291;background:#f0f1dd}
+.kitchen-stock .collect-product {margin-top:10px;border-radius:4px;background:#bcd0a5}
+.supermarket-shelves {background:#d8e0c9;border:2px solid #6d8260;border-radius:8px;padding:18px}
+.supermarket-shelves .product-shelves {gap:20px 12px;border-bottom:12px solid #7b8062;padding-bottom:16px}
+.supermarket-shelves .shelf-product {border:0;border-left:5px solid #6d7f5b;border-right:5px solid #6d7f5b;border-radius:0;box-shadow:0 8px 0 #8b8a66;background:linear-gradient(#7e9676 0,#bcc9a6 70%,#d8d8b5 70%);padding:10px 4px 0}
+.supermarket-shelves .collect-product {border:0;background:transparent;box-shadow:none;min-height:175px}
+.supermarket-shelves .collect-product .product-art {filter:drop-shadow(5px 6px 2px #304d3430);height:65px}
+.supermarket-shelves .basket-model {background:repeating-linear-gradient(0deg,#c6cbb0 0,#c6cbb0 12px,#889c78 12px,#889c78 15px);border:5px solid #506848;border-radius:8px 8px 20px 20px;padding:14px;margin-top:28px;box-shadow:4px 7px 0 #50684840}
+.supermarket-shelves .basket-model h3 {background:#e0e7cc;padding:7px}.basket-model button {min-height:48px}
+.prerequisite-path {padding:16px;background:#e2e8d2;border:2px solid #6f8e59;border-radius:8px;margin-bottom:20px}.prerequisite-path button {margin:5px}
+@media(min-width:950px){.quest-layout:has(.direction-sample.location-scene) {display:grid;grid-template-columns:minmax(300px,.8fr) minmax(400px,1.2fr);align-items:start}.quest-layout:has(.direction-sample.location-scene) .stage-vista {position:sticky;top:12px}.quest-layout:has(.direction-sample.location-scene) .stage-workbench {min-width:0;padding:22px}}
+@media(max-width:949px){.quest-layout .direction-sample.location-scene {max-height:300px;object-fit:contain}.freight-track>span {flex-basis:125px}.kitchen-stock .product-shelves,.supermarket-shelves .product-shelves {grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.direction-sample,.industrial-yard *,.kitchen-stock *,.supermarket-shelves * {animation:none!important;transition:none!important}}
+.count-array {display:grid;grid-template-columns:repeat(var(--columns),minmax(44px,1fr));gap:5px;overflow:auto;padding:8px;background:#d5dfc7;border:2px solid #66835b;max-width:100%}
+.count-array button {min-width:44px;min-height:44px;background:#b3c49e;color:#304a32;border:2px solid #6d845e;border-radius:3px}
+.count-array button[aria-pressed="true"] {background:#416b40;color:#f3f0d7;box-shadow:0 0 0 2px #c4deab inset}
+
+/* Original asset checkpoint. Whole-scene fit preserves prop/hit-target coordinates. */
+.asset-scene {position:relative;display:block;width:100%;height:auto!important;aspect-ratio:3/2!important;overflow:hidden;background:#173d35;isolation:isolate;min-height:0!important}
+.asset-scene .scene-background {display:block;width:100%;height:100%;object-fit:contain;pointer-events:none}
+.asset-location-label {position:absolute;top:12px;left:12px;max-width:calc(100% - 24px);padding:9px 13px;background:#102c3aef;color:#fff;font-size:16px;font-weight:750;border:1px solid #b6c9bd;border-radius:7px;line-height:1.3}
+.scene-explorer {position:absolute;bottom:4%;left:44%;width:15%;height:44%;object-fit:contain;pointer-events:none;filter:drop-shadow(0 7px 4px #10221966)}
+.asset-camp .scene-explorer {left:40%;bottom:8%;width:15%;height:43%}
+.camp-map:has(.asset-camp)>.scene-caption {display:none}
+.asset-camp-nav {position:absolute;inset:0;pointer-events:none}
+.asset-camp-nav button,.asset-camp-nav a {position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);pointer-events:auto;display:flex;align-items:center;justify-content:center;min-height:48px;max-width:180px;padding:10px 13px;background:#102e3aef;color:#fff;border:2px solid #9fc79e;border-radius:7px;box-shadow:0 4px 8px #0005;font-size:16px;line-height:1.2;text-decoration:none;text-align:center;white-space:normal}
+.asset-camp-nav button:hover,.asset-camp-nav a:hover {background:#245e43}
+.asset-camp-nav :focus-visible {outline:4px solid #ffe29c;outline-offset:3px}
+.world-stage .stage-vista:has(.asset-scene)>.hero-art {height:auto;min-height:0}
+.world-stage .stage-vista .asset-scene {max-height:none}
+.town-explore-map:has(.asset-town) {overflow:visible}
+.town-explore-map>.asset-town,.town-explore-map:has(.asset-town) .town-hotspots {min-width:0}
+.town-explore-map:has(.asset-town) .town-hotspots button {height:auto;min-height:48px;width:auto;min-width:80px;max-width:160px;padding:8px 11px;border-radius:7px;font-size:15px;background:#123443ef;color:#fff;border:2px solid #b3cfb0;line-height:1.2;white-space:normal}
+/* Anchors measured against the new uncropped Town artwork, independent of old SVG plots. */
+.town-explore-map:has(.asset-town) .town-hotspots button:nth-child(1){left:50%!important;top:24%!important}
+.town-explore-map:has(.asset-town) .town-hotspots button:nth-child(2){left:30%!important;top:35%!important}
+.town-explore-map:has(.asset-town) .town-hotspots button:nth-child(3){left:69%!important;top:34%!important}
+.town-explore-map:has(.asset-town) .town-hotspots button:nth-child(4){left:87%!important;top:49%!important}
+.town-explore-map:has(.asset-town) .town-hotspots button:nth-child(5){left:14%!important;top:49%!important}
+.town-explore-map:has(.asset-town) .town-hotspots button:nth-child(6){left:32%!important;top:64%!important}
+.town-explore-map:has(.asset-town) .town-hotspots button:nth-child(7){left:72%!important;top:64%!important}
+.town-explore-map:has(.asset-town) .town-hotspots button:nth-child(8){left:52%!important;top:82%!important}
+.storage-prop {display:block;width:100%;height:190px;object-fit:contain;margin:8px auto;background:#dee5d6;border-radius:8px}
+.asset-freight {position:relative;display:block;width:100%;aspect-ratio:2.6;min-width:0}
+.asset-freight .freight-object {display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 4px 2px #102e2960)}
+.asset-freight .wagon-number {position:absolute;top:27%;left:50%;transform:translateX(-50%);display:flex;align-items:center;justify-content:center;min-width:36%;height:30%;padding:0 3px;background:#f8f2d8;color:#132e30;font-size:clamp(18px,2.5vw,30px);font-weight:800;line-height:1;border:1px solid #29443c;border-radius:2px}
+.asset-engine {aspect-ratio:2.6}
+.asset-rail-puzzle .freight-track {display:flex;gap:0;overflow:auto;align-items:end;padding:16px 5px;background:#859993;border-bottom:6px solid #283d3e}
+.asset-rail-puzzle .freight-track>span,.asset-rail-puzzle .freight-track>button {flex:1 0 112px;min-width:112px;padding:0;background:transparent;border:0}
+.asset-rail-puzzle .freight-sidings {display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.asset-rail-puzzle .freight-sidings button {min-height:74px;padding:8px;background:#e3e8da;border:2px solid #6c8170;border-radius:8px}
+.asset-rail-puzzle button[aria-pressed=true],.asset-rail-puzzle .asset-selected {outline:3px solid #1d6a42;outline-offset:-2px;background:#d3e7c1;border-radius:6px}
+.asset-rail-puzzle button:focus-visible {outline:4px solid #123f8b;outline-offset:3px}
+.asset-rail-puzzle .coupling-target {border:2px dashed #cde3bc!important;border-radius:6px}
+@media(max-width:700px){.asset-camp-nav button,.asset-camp-nav a {font-size:13px;min-height:44px;padding:7px;max-width:115px}.town-explore-map:has(.asset-town) .town-hotspots button {font-size:12px;min-width:64px;max-width:115px;padding:7px}.asset-location-label{font-size:14px;padding:7px 9px}.asset-freight .wagon-number {font-size:20px}.asset-rail-puzzle .freight-track>span,.asset-rail-puzzle .freight-track>button {flex-basis:105px;min-width:105px}}
+@media(prefers-reduced-motion:reduce){.asset-scene *,.asset-rail-puzzle *{animation:none!important;transition:none!important}}
+.ingredient-prop {width:100%;height:100%;max-height:90px;object-fit:contain;display:block}
+.stock-objects .ingredient-prop {width:44px;height:52px;object-fit:contain}
+@media(min-width:950px){.quest-layout:has(.rail-landscape) {display:grid;grid-template-columns:minmax(300px,.8fr) minmax(400px,1.2fr);align-items:start}.quest-layout:has(.rail-landscape) .stage-vista {position:sticky;top:12px}.quest-layout:has(.rail-landscape) .stage-workbench {min-width:0;padding:22px}.quest-layout:has(.rail-landscape) .stage-vista>.guide {padding:18px;min-height:0}.quest-layout:has(.rail-landscape) .stage-vista>.toolbar{position:static;padding:12px;justify-content:end}}
+/* Keep the whole connected sequence visible beside the scenery in landscape. */
+.asset-rail-puzzle .freight-track>span,.asset-rail-puzzle .freight-track>button {flex:1 1 0;min-width:64px;width:0}
+.asset-rail-puzzle .freight-track .wagon-number {font-size:18px;min-width:36%;padding:0 1px}
+
+/* Revised checkpoint: geometry-anchored teen, object hit regions and close-ups. */
+.immersive-scene .scene-teen {position:absolute;left:var(--foot-x);top:var(--foot-y);height:var(--teen-height);width:auto;max-width:none;max-height:none;transform:translate(-50%,-100%);z-index:2;pointer-events:none;object-fit:contain;filter:drop-shadow(3px 5px 2px #20312325)}
+.immersive-home .scene-teen,.immersive-camp .scene-teen {filter:sepia(.07) saturate(.94) drop-shadow(3px 5px 2px #24160b35)}
+.teen-contact {position:absolute;width:12%;height:2%;border-radius:50%;transform:translate(-50%,-70%);background:#17231d55;filter:blur(4px);z-index:1;pointer-events:none}
+.scene-object-layer,.camp-object-nav,.building-hit-layer {position:absolute;inset:0;pointer-events:none;z-index:3}
+.object-hit {position:absolute;min-width:48px;min-height:48px;padding:0;background:#d5f4ae04;border:2px solid #e8f3ca60;border-radius:8px;box-shadow:inset 0 0 12px #e9ffc010;pointer-events:auto;cursor:pointer;overflow:visible;color:#fff}
+.object-hit::after {content:'+';position:absolute;right:5px;bottom:5px;width:26px;height:26px;display:grid;place-items:center;border-radius:50%;background:#113c32e8;border:2px solid #d7efb9;font:700 21px/1 system-ui;color:#f8ffe9;box-shadow:0 2px 4px #0005}
+.object-hit:hover,.object-hit:focus-visible,.object-hit:active {background:#d4f5ad20;border-color:#e7ffbb;box-shadow:inset 0 0 0 3px #355f36,0 0 0 3px #d9f4c0;outline:0}
+.object-tag {position:absolute;bottom:0;left:50%;transform:translate(-50%,110%);display:block;width:max-content;max-width:220px;padding:6px 10px;border-radius:5px;background:#123d34f5;color:#fff;font-size:16px;line-height:1.25;opacity:0;pointer-events:none;z-index:6}
+.object-hit:focus .object-tag,.object-hit:hover .object-tag,.object-hit:active .object-tag {opacity:1}
+.building-navigation .building-hit-layer .object-hit {border:1px solid #efffc870;background:#e6f7b900;clip-path:none;border-radius:14px}
+.building-navigation .building-hit-layer .object-hit:hover,.building-navigation .building-hit-layer .object-hit:focus-visible {background:#c8f7a925;border:3px solid #efffc9;box-shadow:0 0 0 3px #174a3e}
+.building-navigation .object-tag {bottom:8%;transform:translate(-50%,0)}
+.scene-touch-help {padding:12px 18px;background:#e4ecd9;border-radius:8px;font-size:17px}
+.immersive-journey {border:1px solid #698565;border-radius:14px;overflow:hidden;background:#153e34;margin:18px 0}
+.scene-task-brief {display:flex;align-items:center;gap:18px;padding:18px 24px;background:#f4f3df;color:#173e32}
+.scene-task-brief>div {flex:1}.scene-task-brief h2 {margin:0 0 6px;font-size:24px}.scene-task-brief p {margin:0;font-size:19px;line-height:1.4}.scene-task-brief>.role-chip {font-size:12px;max-width:100px;white-space:normal}
+.immersive-journey .asset-scene {border-radius:0;border:0}
+.scene-dock {padding:16px 24px;color:#edf3dc;background:#173e34}.scene-dock>p{margin:0 0 12px}.scene-dock .actions {gap:9px;flex-wrap:wrap}.scene-dock .scene-actions {display:contents}.scene-dock .feedback {color:#1b3b30}.scene-dock details {margin-top:12px}.scene-dock summary{min-height:44px;cursor:pointer}
+.recipe-prop {background:#fff8dbed!important;border:3px solid #bb9f68!important;transform:rotate(-4deg);box-shadow:3px 5px 4px #30221940}
+.recipe-prop::before {content:'Recipe';position:absolute;inset:0;display:grid;place-items:center;color:#244b35;font:700 19px system-ui}.recipe-prop::after {right:-12px;bottom:-12px}
+.list-prop {background:#fff7d8e8!important;border:2px solid #ad9468!important;transform:rotate(2deg)}.list-prop::before{content:'Shopping list';display:block;padding:8px;color:#294b38;font:700 17px system-ui}
+.scene-shelf-products {position:absolute;inset:0;pointer-events:none}
+.shelf-touch {position:absolute;left:var(--shelf-x);top:var(--shelf-y);transform:translate(-50%,-50%);width:14%;min-width:70px;min-height:64px;padding:5px 5px 7px;display:grid;justify-items:center;gap:2px;background:#fcf7e7f2;border:2px solid #728a5c;border-bottom:6px solid #547049;border-radius:7px;pointer-events:auto;box-shadow:0 6px 5px #1d372335;line-height:1.15}
+.shelf-touch>span {width:100%;height:65px;display:block}.shelf-touch .ingredient-prop{height:65px;max-height:65px}.shelf-touch strong{font-size:14px}.shelf-touch small{font-size:17px;font-weight:800;color:#204735}.shelf-touch:active,.shelf-touch:focus-visible {background:#d9efba;outline:4px solid #174c39}
+.in-scene-basket {position:absolute;right:3%;bottom:6%;width:28%;height:28%;min-width:150px;min-height:100px;padding:0;background:transparent;border:2px solid #cce3ac88;border-radius:10px;pointer-events:auto;isolation:isolate}
+.in-scene-basket>.basket-vessel{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:1}.in-scene-basket>strong {position:absolute;bottom:-8px;left:5%;right:5%;padding:7px;background:#123d33f2;color:#fff;border-radius:5px;font-size:18px;z-index:3}
+.carried-products {position:absolute;left:22%;right:17%;top:12%;height:55%;display:flex;align-items:end;justify-content:center;z-index:2}.carried-products>span{width:32%;position:relative}.carried-products img{width:100%;height:80px;object-fit:contain}.carried-products b{position:absolute;bottom:0;right:0;background:#fff5cf;color:#173e31;padding:1px 4px;border-radius:4px;font-size:16px}
+.scene-dialog {width:min(850px,calc(100% - 28px));max-width:none;max-height:calc(100dvh - 32px);padding:24px;border:3px solid #608a55;border-radius:14px;background:#fffbee;color:#193d31;box-shadow:0 20px 70px #0008;overscroll-behavior:contain}
+.scene-dialog::backdrop{background:#102d2b99}.scene-dialog>header{display:flex;justify-content:space-between;gap:20px;align-items:center}.scene-dialog header button{min-width:110px;min-height:48px}.scene-dialog h2{font-size:28px;margin:16px 0}.scene-dialog .scene-task-prompt{font-size:21px}.scene-dialog .actions{position:sticky;bottom:-24px;background:#fffbee;padding:12px 0;z-index:5;border-top:1px solid #b5c5a5}.scene-dialog button{min-height:48px}.scene-dialog .scene-teaching{margin-top:18px}.scene-dialog summary{min-height:48px;cursor:pointer}.scene-dialog .recipe-card{background:#fff9df}.scene-dialog .timetable{display:grid;gap:12px}.scene-dialog .journey-option {font-size:20px;padding:18px}.scene-dialog .basket-model {display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.storage-closeup {position:relative;width:100%;min-height:570px;isolation:isolate;display:grid;place-items:center;margin:14px 0;background:#e9eddd;border-radius:12px}
+.empty-storage {position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:fill;z-index:0;pointer-events:none;opacity:.85}
+.live-stock-shelves {position:relative;z-index:1;display:grid;gap:12px;width:65%;padding:50px 0}
+.live-stock-item {padding:10px;background:#fff9e4f2;border:1px solid #7b9166;border-bottom:6px solid #7d6240;border-radius:6px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:center}.live-stock-item>strong,.countable-stock{grid-column:1/-1}.live-stock-item>strong{font-size:19px}.countable-stock {display:flex;flex-wrap:wrap;gap:10px;min-height:70px;align-items:center}.countable-stock>.ingredient-prop {height:75px;width:55px;object-fit:contain}.countable-stock>svg {height:75px;width:55px}.live-stock-item output{font-weight:700}.live-stock-item button {font-size:16px}
+.basket-closeup {position:relative;width:100%;height:240px;background:#e8efdc;border-radius:12px;isolation:isolate}.basket-closeup>.basket-vessel{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:0}.basket-contents {position:absolute;left:24%;right:24%;top:9%;height:60%;z-index:1;display:flex;flex-wrap:wrap;align-content:end;justify-content:center;gap:5px}.basket-contents>span {width:42px;height:70px}.basket-contents img{height:70px;max-height:70px;object-fit:contain}.scene-total{font-size:23px;background:#e3eed5;padding:16px}.scene-shopping-list li {margin:8px 0}
+@media(max-width:700px){.scene-task-brief{padding:12px;gap:10px;flex-wrap:wrap}.scene-task-brief>.role-chip{display:none}.scene-task-brief h2{font-size:21px}.scene-task-brief p{font-size:17px}.object-tag{font-size:14px}.scene-dialog{padding:16px}.scene-dialog h2{font-size:24px}.scene-dialog .scene-task-prompt{font-size:19px}.scene-dialog .actions{bottom:-16px}.shelf-touch>span,.shelf-touch .ingredient-prop{height:45px}.shelf-touch strong{font-size:11px}.shelf-touch small{font-size:14px}.in-scene-basket>strong{font-size:14px}.scene-dock{padding:14px}.storage-closeup{min-height:560px}.live-stock-shelves{width:74%}.live-stock-item{grid-template-columns:1fr}.live-stock-item>strong,.countable-stock{grid-column:1}.object-hit::after{width:24px;height:24px;font-size:20px}}
+@media(prefers-reduced-motion:reduce){.immersive-scene *,.scene-dialog *{transition:none!important;animation:none!important}}
+/* Keep product art on shelf surfaces; live price tags are separate readable UI. */
+.shelf-touch {width:12%;height:128px;min-width:70px;padding:0;background:transparent;border:0;box-shadow:none;gap:0;align-content:end;isolation:isolate}
+.shelf-touch>span {height:65px;filter:drop-shadow(2px 4px 2px #1a2d2540)}
+.shelf-touch strong,.shelf-touch small {background:#fffbeceF;width:100%;padding:3px 4px;color:#173d30;box-shadow:0 3px 2px #26342420}
+.shelf-touch strong {font-size:13px;border-radius:4px 4px 0 0;min-height:35px;display:grid;align-items:center}
+.shelf-touch small {font-size:18px;border-bottom:4px solid #547447;border-radius:0 0 4px 4px}
+.shelf-touch:active,.shelf-touch:focus-visible{background:#dbf4bd44;border-radius:7px}
+.storage-closeup {width:min(100%,600px);height:auto;min-height:0;aspect-ratio:1000/1202;margin:14px auto;background:#e7ecd8}
+.empty-storage {object-fit:contain;opacity:1}
+.live-stock-shelves {position:absolute;inset:0;width:auto;padding:0;display:block}
+.live-stock-item {position:absolute;left:19%;top:calc(12% + var(--storage-row)*26%);width:59%;padding:5px;background:transparent;border:0;border-radius:0;grid-template-columns:1fr 1fr;gap:4px}
+.live-stock-item>strong {background:#fff8dfeF;padding:4px;font-size:17px;border-radius:4px;min-height:32px}
+.countable-stock {min-height:65px;gap:5px}.countable-stock .stock-pick {padding:0;width:56px;height:72px;min-height:48px;min-width:48px;background:transparent;border:1px solid #f4efd170;border-radius:5px;box-shadow:none}
+.countable-stock .stock-pick img,.countable-stock .stock-pick svg{height:70px;width:53px;max-height:70px;object-fit:contain}
+.countable-stock .stock-pick:focus-visible,.countable-stock .stock-pick:active {background:#dcf1b5;outline:3px solid #1e633f}.countable-stock>span {background:#fff8dfee;padding:7px;border-radius:4px}
+.live-stock-item output{background:#fff8dfeF;padding:8px;font-size:16px}.live-stock-item button {font-size:15px}
+.scene-dialog>header {position:sticky;top:-24px;background:#fffbee;z-index:7;padding:5px 0}
+.skip:not(:focus){clip-path:inset(50%);width:1px;height:1px;padding:0;overflow:hidden}
+@media(max-width:700px){.shelf-touch{width:13%;min-width:66px;height:105px}.shelf-touch strong{font-size:11px;min-height:30px}.shelf-touch small{font-size:15px}.storage-closeup{min-height:0}.live-stock-item{grid-template-columns:1fr 1fr}.live-stock-item>strong,.countable-stock{grid-column:1/-1}.live-stock-item>strong{font-size:15px}.live-stock-item button{font-size:13px;min-width:48px}.scene-dialog>header{top:-16px}}
+.board-readout {position:absolute;inset:5% 7% 5% 4%;display:grid;align-content:center;gap:2px;text-align:left;color:#fff8d6;font-size:clamp(11px,1.15vw,16px);font-weight:650;line-height:1.15;pointer-events:none;padding-right:22px}.board-readout strong{color:#d9eeef}.board-readout span {white-space:nowrap}
+.scene-dialog{max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px)}
+/* Connected asset atlas and earned Camp exteriors. */
+.connected-atlas{position:relative;isolation:isolate;border:3px solid #31594a;border-radius:18px;overflow:hidden;background:#285a6c;margin:18px 0}.atlas-background{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover}.atlas-paths{position:absolute;inset:0}.atlas-paths button{position:absolute;transform:translate(-50%,-50%);display:grid;gap:4px;min-height:52px;width:17%;max-width:190px;padding:9px 5px;background:#143d36ef;color:#fff7dc;border:2px solid #c2e4ad;border-radius:10px;box-shadow:0 4px 8px #10232870;font-size:clamp(12px,1.25vw,17px);line-height:1.2;touch-action:manipulation}.atlas-paths button:hover,.atlas-paths button:focus-visible{background:#316448;outline:4px solid #fff0b0}.atlas-paths button>span{color:#d7f3b6;letter-spacing:2px}.atlas-paths .atlas-camp{width:20%;background:#245f3d}.atlas-camp>span{font-size:12px;letter-spacing:0!important}.rollout-scene{position:relative;isolation:isolate}.restoration-regions{position:absolute;inset:0;pointer-events:none;z-index:1}.repair-region{position:absolute;left:var(--repair-x);top:var(--repair-y);width:24%;height:30%;transform:translate(-50%,-50%);display:flex;align-items:end;justify-content:center}.repair-region>span{font-size:clamp(10px,1vw,14px);padding:5px 8px;border-radius:4px;background:#173f34df;color:#edf9da}.area-damaged{background:repeating-linear-gradient(72deg,transparent 0 28px,#79654f5a 29px 33px,transparent 34px 45px);border-bottom:4px solid #7b674e;backdrop-filter:saturate(.5) brightness(.85)}.area-restored{border-bottom:3px solid #acd58d}.area-damaged>span{background:#4f4238ef}.camp-home-scenes{width:100%}.camp-art-tier{position:absolute;bottom:14px;left:14px;max-width:80%;background:#173e34eb;color:#fff6d7;padding:10px 14px;border-radius:7px;font-size:17px;z-index:2}.room-divider{padding:15px 20px;margin:0;background:#173d32;color:#fff5d7;font-size:22px}.camp-map.hero-art{overflow:hidden}.camp-home-scenes .immersive-camp{aspect-ratio:3/2}.rollout-scene>.scene-background{width:100%;display:block;aspect-ratio:3/2;object-fit:cover}
+@media(max-width:700px){.connected-atlas{overflow-x:auto}.atlas-background{min-width:680px}.atlas-paths{min-width:680px}.atlas-paths button{font-size:13px}.atlas-paths .atlas-camp{font-size:14px}.camp-art-tier{font-size:14px}}
+@media(prefers-reduced-motion:reduce){.connected-atlas *,.rollout-scene *{animation:none!important;transition:none!important}}
+/* Modular original wearable assets: one base, visible layered equipment. */
+.layered-explorer{position:relative;display:inline-block;width:240px;height:360px;max-width:100%;flex-shrink:0;isolation:isolate;vertical-align:middle;overflow:visible;background:none;border:0;box-shadow:none}
+.layered-explorer .avatar-base{position:absolute;left:6%;top:8%;width:88%;height:88%;object-fit:contain;z-index:2;max-height:none}.sprite-cell{display:block;background-repeat:no-repeat;background-size:400% 200%;pointer-events:none}.layered-explorer .sprite-cell{position:absolute}.avatar-scenery{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;border-radius:15px;opacity:.85}
+.avatar-attachment{position:absolute;display:block;pointer-events:none;overflow:hidden}.equipment-source{display:block;width:100%;height:100%;background-repeat:no-repeat;pointer-events:none}.avatar-face{position:absolute;left:33.3%;top:8.9%;width:33.4%;height:21.1%;background-repeat:no-repeat;background-size:400% 100%;z-index:4}.changed-hair .avatar-base{clip-path:inset(11.6% 0 0 0)}.layered-explorer.inline-explorer{width:74px;height:111px}.scene-teen .layered-explorer{height:100%;width:auto;aspect-ratio:2/3;max-width:none}.immersive-scene .scene-teen{aspect-ratio:2/3}.illustrated-guide{position:relative;display:inline-block;width:80px;height:110px;flex:0 0 80px}.illustrated-guide .sprite-cell{position:absolute;inset:0}.item-art{position:relative;display:block;width:76px;height:92px}.item-sprite{position:absolute;inset:0}.item-art img{width:100%;height:100%;object-fit:cover;border-radius:8px}.avatar-features{display:flex;flex-wrap:wrap;gap:18px;padding:18px;background:#e9efdf;border-radius:12px;margin:18px 0}.avatar-features label{display:grid;gap:7px;font-weight:700}.avatar-features select{min-height:48px}.avatar-features p{flex-basis:100%;margin:0}.camp-dock>.layered-explorer{margin:15px 30px}
+.repair-prop{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:-1}.area-damaged{background:none;backdrop-filter:none;border:0}.area-damaged>span{z-index:1;align-self:flex-end}.home-activity-board{padding:18px;background:#e9efdf;border-radius:12px;margin-top:18px}.meter-closeup{position:relative;isolation:isolate;margin:18px 0}.meter-art{width:100%;display:block;border-radius:12px}.meter-displays{position:absolute;inset:36% 3% 10%;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.meter-live{background:#fff9e9ed;padding:12px 8px;border:2px solid #8ca187;border-radius:9px;text-align:center;align-self:center}.meter-live output{display:block;font:700 clamp(17px,2.3vw,28px) monospace;padding:10px 2px;background:#d6e7c9;color:#132c26;border:3px solid #465747;margin-top:8px}.meter-live small{font:15px system-ui}.meter-live p{font-size:14px;margin-bottom:0}.active-meter{outline:4px solid #387243}.meter-live strong{font-size:14px}
+@media(max-width:700px){.meter-displays{position:relative;inset:auto;margin-top:-12%;padding:0 8px;gap:8px}.meter-live{padding:8px 3px}.meter-live strong{font-size:11px}.meter-live output{font-size:16px}.meter-live p{font-size:12px}}
+.immersive-mission{display:flex!important;flex-direction:column!important;gap:0;border:2px solid #557459;border-radius:14px;overflow:hidden;background:#173d34}.immersive-mission>.hero-art{width:100%;order:0}.immersive-mission .asset-scene{border-radius:0}.immersive-mission>.activity-entry{order:1}.immersive-mission>.scene-support{order:2;background:#edf0e4;padding:18px;display:flex;gap:16px;flex-wrap:wrap;align-items:center}.scene-support>.panel.guide{flex:1;margin:0!important}.scene-support>.toolbar{margin:0!important}.scene-support>.small{width:100%;margin:0}.activity-explorer{position:absolute;left:61%;bottom:1%;height:44%;aspect-ratio:2/3;z-index:2;pointer-events:none}.activity-explorer>.layered-explorer{width:100%;height:100%;max-width:none}.world-tool-hit{z-index:3;pointer-events:auto}.world-task-close{position:sticky;top:-24px;display:block;margin-left:auto;z-index:20;background:#164d38;color:#fff}.world-task-dialog>h2{clear:both}.world-task-dialog .task-controls{padding:8px}.world-task-dialog .hands-on{max-width:100%}.world-task-dialog .actions{position:relative;bottom:auto}.world-task-dialog .guide{display:none}
+#headerExplorer{width:62px;height:62px;overflow:hidden;border-radius:50%;border:2px solid #90b57c;background:#dce8cc;flex:0 0 62px}#headerExplorer .layered-explorer{width:62px;height:93px;transform:scale(2.8);transform-origin:50% 0%;margin-top:-18px}
+/* Keep the compositing canvas at the base sprite's measured 2:3 ratio. */
+.camp-dock>.layered-explorer{width:160px!important;height:240px!important;aspect-ratio:2/3}
+.layered-explorer{max-height:none!important}.shop-preview>.layered-explorer{max-width:none!important;max-height:none!important;width:200px!important;height:300px!important}.camp-dock>.layered-explorer{max-height:none!important;max-width:none!important}
+.meter-window{position:absolute;z-index:2;display:flex;align-items:center;justify-content:center;background:#19261e;color:#e7ffcb;font:700 clamp(13px,2vw,23px) monospace;letter-spacing:1px;line-height:1;border:1px solid #7c8b74;border-radius:2px}.window-electricity{left:16%;top:27%;width:14%;height:6%}.window-gas{left:49%;top:36.5%;width:10%;height:6%}.window-water{left:74%;top:38%;width:10%;height:6%}
+/* Keep the nested Camp photograph in the same explicit paint layer as its props. */
+.immersive-camp{isolation:isolate}.immersive-camp>.scene-background{position:absolute;inset:0;z-index:0;object-fit:cover}
+.product-atlas{display:block;background-repeat:no-repeat;background-size:400% 400%;width:100%;height:100%;min-height:48px}.shelf-touch .product-atlas{height:65px}.countable-stock .stock-pick .product-atlas{height:70px;width:53px}.basket-contents .product-atlas{height:70px}.carried-products .product-atlas{height:80px}.product-art .product-atlas{height:90px;width:76px}
+
+/* Final owner-reviewed scene grounding: floor-space anchors, contact shadows and warm room light. */
+.scene-teen:has(.layered-explorer)::before,.activity-explorer::before{content:"";position:absolute;left:22%;bottom:1.5%;width:56%;height:4%;background:#24302565;border-radius:50%;filter:blur(3px);z-index:0}
+.immersive-bank .scene-teen,.immersive-work .scene-teen,.immersive-shops .scene-teen,.immersive-leisure .scene-teen{filter:sepia(.08) saturate(.9) drop-shadow(3px 5px 2px #382b1833)}
+.repair-region{height:34%;width:25%;display:block;background:none;border:none;backdrop-filter:none}.world-repair-object{display:block;width:100%;height:100%;background-repeat:no-repeat;background-size:300% 600%;filter:drop-shadow(2px 4px 2px #17211a55)}.repair-region>span{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:max-content;max-width:115%;text-align:center}.area-restored>span{background:#174f39ee}.area-damaged>span{background:#594533ee}
+.fraction-answer-bars{display:grid;gap:12px}.fraction-answer-bars>.parts{display:grid;grid-template-columns:repeat(var(--denominator),minmax(48px,1fr));gap:3px;overflow-x:auto}.fraction-answer-bars button{min-width:0;min-height:48px;padding:4px}.proportion-model{width:200px;aspect-ratio:1;border-radius:50%;border:3px solid #315b45;margin:16px auto}.proportion-controls{display:flex;flex-wrap:wrap;gap:8px}.practice-meter-readings{display:flex;gap:16px;flex-wrap:wrap;padding:20px;background:#253d35;color:#fff4d9;border:5px solid #a3aaa2;border-radius:12px}.practice-meter-readings section{flex:1;min-width:150px}.practice-meter-readings output{display:block;background:#d8e5bd;color:#172a20;font:700 30px monospace;padding:14px;margin-top:8px}.practice-manipulative[data-mechanic="meter-calculation"]{border:2px solid #4e6e54}
+
+/* The same attachment canvas is used at every size. Keep the wardrobe inside small screens. */
+.shop-preview>.layered-explorer{margin:12px 18px;flex:0 0 200px}
+@media(max-width:600px){.shop-preview{flex-direction:column;align-items:center}.shop-preview>.layered-explorer{margin:12px 0;flex:none}.shop-preview>div{min-width:0;width:100%}}
+
+/* A full outfit replaces the starter clothes, while retaining the original skin and soles. */
+.has-outfit .avatar-base:not(.avatar-skin){clip-path:inset(0 0 76% 0)}
+.has-outfit.changed-hair .avatar-base:not(.avatar-skin){clip-path:inset(11.6% 0 76% 0)}
+.avatar-base.avatar-left-hand{clip-path:inset(51.5% 66% 38% 23%)}
+.avatar-base.avatar-right-hand{clip-path:inset(51.5% 25% 38% 65%)}
+.avatar-base.avatar-feet{clip-path:inset(84.5% 0 0 0)}
+
+/* Expression cells contain complete heads: show only the feathered eye/mouth region. */
+.avatar-expression{position:absolute;left:40.4%;top:18.6%;width:17.2%;height:10.5%;z-index:5;pointer-events:none;mask-image:radial-gradient(ellipse,#000 58%,transparent 72%);-webkit-mask-image:radial-gradient(ellipse,#000 58%,transparent 72%)}
+.avatar-base.avatar-upgrade-shoes{clip-path:inset(84.5% 0 0 0);z-index:5}
+.footwear-1{filter:sepia(.85) saturate(1.3) hue-rotate(345deg) brightness(.75)}
+.footwear-2{filter:sepia(.9) saturate(2.5) hue-rotate(160deg)}
+.footwear-3{filter:sepia(1) saturate(2.2) hue-rotate(355deg) brightness(1.05)}
+.avatar-base.avatar-grip{z-index:9}
+
+.avatar-forehead{position:absolute;left:38%;top:13.3%;width:22%;height:8%;z-index:4;pointer-events:none;clip-path:ellipse(50% 50% at 50% 50%)}
+/* Keep the headset's painted dark opening off the face; retain band and ear cups. */
+[data-worn="headphones"] .equipment-source{clip-path:polygon(0 0,100% 0,100% 100%,74% 100%,74% 25%,26% 25%,26% 100%,0 100%)}
+
+/* Hat front silhouettes exclude atlas rear rims; original face remains visible.
+   These masks apply only when a hat is worn, leaving option 0/backgrounds intact. */
+.has-hat .avatar-base:not(.avatar-skin){clip-path:inset(13% 0 0 0)}
+.has-hat.has-outfit .avatar-base:not(.avatar-skin){clip-path:inset(13% 0 76% 0)}
+.has-hat [data-attachment-category="headwear"] .equipment-source{
+ clip-path:polygon(0 0,100% 0,100% 83%,88% 81%,70% 77%,50% 75%,30% 77%,12% 81%,0 83%);
+}

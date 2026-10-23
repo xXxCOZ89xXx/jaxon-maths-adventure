@@ -1,0 +1,26 @@
+{
+  "scope": "Packaged fictional gallery only, no external network",
+  "pages": [
+    {
+      "name": "index",
+      "images": 67,
+      "broken": 0
+    },
+    {
+      "name": "worlds",
+      "images": 18,
+      "broken": 0
+    },
+    {
+      "name": "town",
+      "images": 16,
+      "broken": 0
+    },
+    {
+      "name": "compare",
+      "images": 14,
+      "broken": 0
+    }
+  ],
+  "errors": 0
+}

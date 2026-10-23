@@ -1,0 +1,951 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/jaxon-maths-adventure/node_modules/.bin/playwright",
+      "test",
+      "--grep",
+      "staging fails|learner sign-in|parent evidence|offline edit|standalone|parent award reaches|private account recovery"
+    ],
+    "configFile": "/workspace/jaxon-maths-adventure/playwright.config.cjs",
+    "rootDir": "/workspace/jaxon-maths-adventure/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop-chromium",
+        "name": "desktop-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/v3-(browser|expeditions|cloud)\\.spec\\.cjs/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "ipad-portrait-chromium",
+        "name": "ipad-portrait-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/v3-(browser|expeditions|cloud)\\.spec\\.cjs/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "ipad-landscape-chromium",
+        "name": "ipad-landscape-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/v3-(browser|expeditions|cloud)\\.spec\\.cjs/"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "desktop-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop-chromium"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "ipad-portrait-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 820,
+            "height": 1180
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "ipad-portrait-chromium"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "ipad-landscape-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 1180,
+            "height": 820
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "ipad-landscape-chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "tests/artifacts/v3-browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": {
+      "command": "python3 -m http.server 4173 --bind 127.0.0.1",
+      "url": "http://127.0.0.1:4173/v3-adventure.html",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "v3-cloud.spec.cjs",
+      "file": "v3-cloud.spec.cjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "staging fails closed before sign-in when configuration is absent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 765,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:35.899Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-34d7f0dd220d476233fe",
+          "file": "v3-cloud.spec.cjs",
+          "line": 188,
+          "column": 1
+        },
+        {
+          "title": "learner sign-in, incorrect PIN, unfinished quest, response loss, refresh and lock",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2912,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:36.966Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-d43a2e50a2d8b9339041",
+          "file": "v3-cloud.spec.cjs",
+          "line": 206,
+          "column": 1
+        },
+        {
+          "title": "parent evidence and server reward path remain separate from learner gameplay",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2217,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:39.907Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-8b230cd82ace35401826",
+          "file": "v3-cloud.spec.cjs",
+          "line": 256,
+          "column": 1
+        },
+        {
+          "title": "offline edit and reconnect, competing-device conflict and server shop ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2396,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:42.142Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-24b56c65bd741514f9e8",
+          "file": "v3-cloud.spec.cjs",
+          "line": 294,
+          "column": 1
+        },
+        {
+          "title": "standalone downloadable preview loads as one HTML with no asset or cloud requests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 721,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:44.559Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-d2d91d8f2de02f01e64f",
+          "file": "v3-cloud.spec.cjs",
+          "line": 346,
+          "column": 1
+        },
+        {
+          "title": "a parent award reaches an open learner shop without a progress revision",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2039,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:45.292Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-39feeca634c40df55f0f",
+          "file": "v3-cloud.spec.cjs",
+          "line": 372,
+          "column": 1
+        },
+        {
+          "title": "private account recovery uses PKCE, changes the password and returns to sign-in",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1089,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:47.354Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-e74bea1f57f9c3adcec8",
+          "file": "v3-cloud.spec.cjs",
+          "line": 395,
+          "column": 1
+        },
+        {
+          "title": "staging fails closed before sign-in when configuration is absent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 768,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:49.105Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-f121442a3b6691a2b2ed",
+          "file": "v3-cloud.spec.cjs",
+          "line": 188,
+          "column": 1
+        },
+        {
+          "title": "learner sign-in, incorrect PIN, unfinished quest, response loss, refresh and lock",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2814,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:50.177Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-a1cb7c5260648077c14a",
+          "file": "v3-cloud.spec.cjs",
+          "line": 206,
+          "column": 1
+        },
+        {
+          "title": "parent evidence and server reward path remain separate from learner gameplay",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2429,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:53.009Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-09f259d565da8b91f0f2",
+          "file": "v3-cloud.spec.cjs",
+          "line": 256,
+          "column": 1
+        },
+        {
+          "title": "offline edit and reconnect, competing-device conflict and server shop ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2282,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:55.470Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-3a9f585b69dfb50e96a0",
+          "file": "v3-cloud.spec.cjs",
+          "line": 294,
+          "column": 1
+        },
+        {
+          "title": "standalone downloadable preview loads as one HTML with no asset or cloud requests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 629,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:57.765Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-b804ca03316a0cfa8f8b",
+          "file": "v3-cloud.spec.cjs",
+          "line": 346,
+          "column": 1
+        },
+        {
+          "title": "a parent award reaches an open learner shop without a progress revision",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1994,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:04:58.409Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-fb8cf8782ca1a03e5e22",
+          "file": "v3-cloud.spec.cjs",
+          "line": 372,
+          "column": 1
+        },
+        {
+          "title": "private account recovery uses PKCE, changes the password and returns to sign-in",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1078,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:05:00.426Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-a052e903343b5672af23",
+          "file": "v3-cloud.spec.cjs",
+          "line": 395,
+          "column": 1
+        },
+        {
+          "title": "staging fails closed before sign-in when configuration is absent",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 775,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:05:02.189Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-f25b7f843e5c8b941945",
+          "file": "v3-cloud.spec.cjs",
+          "line": 188,
+          "column": 1
+        },
+        {
+          "title": "learner sign-in, incorrect PIN, unfinished quest, response loss, refresh and lock",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2820,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:05:03.337Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-b52c7d974c1b189d6c91",
+          "file": "v3-cloud.spec.cjs",
+          "line": 206,
+          "column": 1
+        },
+        {
+          "title": "parent evidence and server reward path remain separate from learner gameplay",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2204,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:05:06.170Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-2a725c05ffaffb48c425",
+          "file": "v3-cloud.spec.cjs",
+          "line": 256,
+          "column": 1
+        },
+        {
+          "title": "offline edit and reconnect, competing-device conflict and server shop ownership",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2364,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:05:08.388Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-f2e5ac8e5be5dc0758f0",
+          "file": "v3-cloud.spec.cjs",
+          "line": 294,
+          "column": 1
+        },
+        {
+          "title": "standalone downloadable preview loads as one HTML with no asset or cloud requests",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 776,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:05:10.765Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-4eb412371bb45b609306",
+          "file": "v3-cloud.spec.cjs",
+          "line": 346,
+          "column": 1
+        },
+        {
+          "title": "a parent award reaches an open learner shop without a progress revision",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2521,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:05:11.556Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-96b7e6fb19ce331af5d8",
+          "file": "v3-cloud.spec.cjs",
+          "line": 372,
+          "column": 1
+        },
+        {
+          "title": "private account recovery uses PKCE, changes the password and returns to sign-in",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1214,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T07:05:14.099Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c7159a58e4b80fc58746-9555b2a5d55e6a5634c5",
+          "file": "v3-cloud.spec.cjs",
+          "line": 395,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-20T07:04:35.044Z",
+    "duration": 40460.39,
+    "expected": 21,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

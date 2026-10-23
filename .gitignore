@@ -1,0 +1,17 @@
+node_modules/
+test-results/
+playwright-report/
+staging-dist/
+staging-fixture-dist/
+.env
+.env.*
+!.env.example
+preview-dist/
+production-preparation-dist/
+production-dist/
+production-test-dist/
+release-preparation-dist/
+
+v52-staging-dist/
+v52-staging-package/
+v52-staging-test-dist/

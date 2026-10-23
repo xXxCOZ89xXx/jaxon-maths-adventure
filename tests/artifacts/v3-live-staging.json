@@ -1,0 +1,15 @@
+{
+  "projectRef": "sfogrvedypgtxfvecmbx",
+  "url": "https://sfogrvedypgtxfvecmbx.supabase.co",
+  "configuration": "matched",
+  "publishableKey": "present; redacted",
+  "authenticatedTests": "not attempted; no account credentials",
+  "requests": [
+    {
+      "label": "identity",
+      "status": null,
+      "proxyStatus": 403,
+      "outcome": "proxy denied staging host; target not contacted"
+    }
+  ]
+}

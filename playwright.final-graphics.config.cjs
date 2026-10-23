@@ -1,0 +1,1 @@
+const base=require('./playwright.quality.config.cjs');module.exports={...base,outputDir:"/tmp/jaxon-final-graphics-results",testMatch:/final-graphics\.spec\.cjs/,timeout:150000,reporter:[['list'],['json',{outputFile:'tests/artifacts/final-graphics-browser.json'}]]};

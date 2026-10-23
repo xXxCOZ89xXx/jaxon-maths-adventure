@@ -1,0 +1,33 @@
+Current continuation: [V5 interactive learning, Town contexts and connected recipe journey](V5-INTERACTIVE-LEARNING.md). See [V5 QA](V5-TEST-REPORT.md) for current automated results and private deployment. Earlier V3/V4 notes below remain historical.
+
+Current continuation: [purpose-designed Town and eight-stage estate expansion](V3-TOWN-ESTATE-EXPANSION.md), with the latest automated QA and private deployment at the top of [the QA report](V3-TEST-REPORT.md). All prior reports below are historical; no additional manual test session is requested.
+
+Current continuation: see [immersive adventure iteration](V3-IMMERSIVE-ADVENTURE.md) and the latest section of [QA report](V3-TEST-REPORT.md) for world stages, interactive camp, accessible portrait answers and private staging provenance. Prior iteration notes below are historical.
+
+# Nine-world V3 development release notes
+
+Current visual/reliability continuation: original isometric world/venue/camp artwork, SVG wardrobe/guide/keepsake art, 60-screen private review album, bounded meaningful-interaction reward timing, exact wallet/display separation, safe parent defaults and immutable retries, recovery-429 handling, synthetic migration/rollback rehearsal and a prepared production plan. See `V3-VISUAL-REVIEW.md`, `V3-TEST-REPORT.md` and `V3-OUTSTANDING-ISSUES.md`. No more manual tests are requested now; production remains unapproved.
+
+## Private staging activation (20 October 2026)
+
+The owner-completed staging project now has a configured nine-world build hosted on a separate owner-private HTTPS Site. All four Cloud variables match the staging project; its public key is never printed or committed to this GitHub repository. Mock browser builds now use a guarded separate directory and cannot replace deployable staging files. New read-only audit/completeness commands and expanded eight-table security assertions accompany the combined two-family/physical-iPad test guide. See `V3-STAGING-ACTIVATION.md` for the private link and exact remaining checks.
+
+The live identity RPC was blocked by the Cloud proxy (403), so no live authenticated or hosted-RLS success is claimed. Existing local results use isolated PostgreSQL claims and intercepted browser APIs. Production, the live homepage and GitHub Pages settings remain unchanged; PR #2 stays draft and unmerged.
+
+## Earlier offline milestone
+
+Continues draft PR #2 on `codex/v3-adventure-build`. The entry remains `v3-adventure.html`; the live homepage and V2 game are unchanged.
+
+- **Practical Maths Town is playable now:** Supermarket, Café, Bank, Shopping Centre, Station, Home, Cinema/Leisure and Workplace. Original town art has eight tap/keyboard building entrances and visible restoration.
+- **Hands-on everyday maths:** shopping/order baskets, whole-pack best-value comparisons, UK denomination change trays, bank transaction ledgers, sale labels, budget envelopes, timetable/arrival planning, meter bills, measuring jugs, timesheets and simplified payslips. All exercise money is fictional and separate from learning rewards.
+- **55 skills:** original 39 plus 16 everyday skills. Guided explanations, easier examples and the independent/spaced learning pipeline remain available. Discovery now covers 1,100 questions without changing the original bank.
+- **Longer adventures in every world:** three themed expedition routes for each original world; eight routes in Town; three selectable difficulty levels; optional mixed gateways. There are 123 mission/level combinations with three tasks each, alongside the original 24 puzzles.
+- **Return visits:** deterministic saved attempt seeds vary maths values. Supportive help preserves editable task state. Difficulty suggestions respond to recent supported/unassisted outcomes and never lock away worlds or levels.
+- **Progress and identity:** one-time milestone XP, 41 route keepsakes, expanded settlement art, new Town/gateway achievements, a keepsake journal and camp placement. Three buildable camp projects require durable evidence. All 40 shop IDs and owned/equipped cosmetics remain compatible.
+- **Learning integrity:** tasks teach before play; assisted gameplay cannot set mastery. Fresh checks exclude seen prompts, immediate retakes stay blocked, failures require reteaching, and due/struggled skills can be suggested at Home. Earned academic celebration badges persist even when a later check shows a need to revisit the skill.
+- **Usability:** native arrival-time control, tap-first keyboard-compatible counters, small-screen layouts, clear feedback focus, sensory preferences and contrast fixes. New state is versioned inside the existing save; exact tasks, seeds and selections survive reload and world switching. Concurrent completion cannot duplicate a milestone.
+- **Isolated secure staging implementation:** separate account-password/PIN login, server role checks, RLS with RPC-only data access, versioned/offline save queues, explicit device conflicts, parent evidence, idempotent rewards/purchases and parent-reviewed offline-time credit. Three new staging-only SQL migrations are prepared but have never been applied remotely. Offline Test Camp retains zero cloud networking. The 60-minute weekly target, ten coins per credited minute and 1:1 screen-time remain. Protected live files are unchanged.
+
+This is a larger offline development build, not a completed production release. Real Supabase staging auth/sync/reward validation, physical iPad Safari and consolidated user acceptance remain outstanding. A standalone downloadable HTML preview and read-only GitHub Actions build avoid changing production hosting. See the full QA report and preview walkthrough. Do not merge or publish without approval.
+
+Higher-level expeditions include negative lift coordinates and anticlockwise/composed tower turns. Generated tasks within each visit are checked for distinct mathematical content across all route/level combinations.

@@ -1,0 +1,1 @@
+const base=require('./playwright.quality.config.cjs');module.exports={...base,testMatch:/(?:art-checkpoint|major-upgrade)\.spec\.cjs/,grep:/Playable sample|Asset checkpoint/,reporter:[['list'],['json',{outputFile:'tests/artifacts/art-checkpoint-browser.json'}]]};

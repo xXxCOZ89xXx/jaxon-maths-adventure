@@ -1,0 +1,9 @@
+{
+  "scope": "offline contract, transformed transaction and queue tests; no hosted/browser claim",
+  "suites": [
+    "staging identity/version fails closed and preserves all existing namespace literals",
+    "pre-upgrade transaction retry keeps extra fields and request identity; failed retries retain exact bytes",
+    "existing save queue remains intact on rejection and commits an exact retry without reseeding",
+    "unpublished artifact is staging-only, bundles latest unchanged gameplay and refuses nonempty output"
+  ]
+}

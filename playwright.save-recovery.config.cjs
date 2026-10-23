@@ -1,0 +1,1 @@
+const base=require('./playwright.quality.config.cjs');module.exports={...base,testMatch:/(?:save-recovery|scene-revision)\.spec\.cjs/,grepInvert:/Scene revision: (?!full connected meal)/,outputDir:'test-results/save-recovery',timeout:90000,reporter:[['list'],['json',{outputFile:'tests/artifacts/save-recovery-browser.json'}]]};

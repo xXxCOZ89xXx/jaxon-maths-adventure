@@ -1,0 +1,108 @@
+{
+  "conclusion": "success",
+  "headSha": "1a1b63b2e45e1573c44e9a69520ffb9e3363a890",
+  "jobs": [
+    {
+      "completedAt": "2026-10-20T13:44:36Z",
+      "conclusion": "success",
+      "databaseId": 118659208289,
+      "name": "fictional-learner-qa",
+      "startedAt": "2026-10-20T13:37:37Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/setup-node@v4",
+          "number": 3,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run npm ci --ignore-scripts",
+          "number": 4,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run npx playwright install --with-deps chromium webkit",
+          "number": 5,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Offline logic and compatibility",
+          "number": 6,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Staging build isolation and completeness (fictional configuration)",
+          "number": 7,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Real PostgreSQL security and migration checks",
+          "number": 8,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Fictional desktop and touch gameplay",
+          "number": 9,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 10,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Package isolated playable preview",
+          "number": 11,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v4",
+          "number": 12,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/setup-node@v4",
+          "number": 23,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 24,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 25,
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/39431994656/job/118659208289"
+    }
+  ],
+  "status": "completed"
+}

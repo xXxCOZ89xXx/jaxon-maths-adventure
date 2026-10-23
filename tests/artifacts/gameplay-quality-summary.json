@@ -1,0 +1,67 @@
+{
+  "scope": "Owner-approved next release; offline and intercepted synthetic acceptance",
+  "fullRepresentativeBrowserRun": {
+    "passed": 40,
+    "failed": 0,
+    "orientations": [
+      "820\u00d71180",
+      "1180\u00d7820"
+    ],
+    "engine": "Chromium with touch"
+  },
+  "finalLunchRefinement": {
+    "passed": 2,
+    "failed": 0
+  },
+  "rangeAndCrossTabFollowup": {
+    "passed": 6,
+    "failed": 0
+  },
+  "logic": {
+    "townPlans": 27,
+    "tiers": 3,
+    "seeds": [
+      1,
+      2,
+      7
+    ],
+    "lunchBranches": 27,
+    "orderingDisplays": 21,
+    "legacyV1": true,
+    "legacyV2": true,
+    "liveWrites": 0
+  },
+  "handsOn": {
+    "groups": 14,
+    "generatedSteps": 1107
+  },
+  "screenshotsInspected": [
+    "train",
+    "Bolognese kitchen",
+    "lunch supermarket"
+  ],
+  "physicalSafari": false,
+  "hostedWrites": 0,
+  "finalAcceptance": {
+    "allNineWorlds": true,
+    "allFiveTownCategories": true,
+    "fullOriginalBolognese": true,
+    "parentRewardsAndLearnerBoundary": true,
+    "pendingQueueReconnect": true,
+    "staleCrossTabRange": true,
+    "stagingBuildVerified": true,
+    "liveWrites": 0
+  },
+  "release": {
+    "commit": "2e84e74d9fbcb22208b6332ca98f2cd7466912d3",
+    "branch": "release/ipad",
+    "url": "https://jaxon-maths-private-git.pages.dev",
+    "deployment": "808e1cf8-45db-4fce-a631-e3c148a21e15",
+    "status": "success",
+    "automaticGitHubPush": true,
+    "canonicalVerified": true,
+    "mainAndPreviewAccessVerified": true,
+    "stagingProject": "sfogrvedypgtxfvecmbx",
+    "authenticatedPhysicalSafariCheck": "owner pending"
+  }
+}

@@ -1,0 +1,543 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/jaxon-maths-adventure/node_modules/.bin/playwright",
+      "test",
+      "tests/v3-browser.spec.cjs",
+      "--grep",
+      "Home, tour, map|Mid-quest|Two tabs",
+      "--workers=2",
+      "--output=/workspace/work/v51-legacy-final-output",
+      "--reporter=line,json"
+    ],
+    "configFile": "/workspace/jaxon-maths-adventure/playwright.config.cjs",
+    "rootDir": "/workspace/jaxon-maths-adventure/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 2
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/work/v51-legacy-final-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "desktop-chromium",
+        "name": "desktop-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/(?:v3-(?:browser|expeditions|cloud)|v5-interactions|v51-regression)\\.spec\\.cjs/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/workspace/work/v51-legacy-final-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "ipad-portrait-chromium",
+        "name": "ipad-portrait-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/(?:v3-(?:browser|expeditions|cloud)|v5-interactions|v51-regression)\\.spec\\.cjs/"
+        ],
+        "timeout": 60000
+      },
+      {
+        "outputDir": "/workspace/work/v51-legacy-final-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "id": "ipad-landscape-chromium",
+        "name": "ipad-landscape-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/(?:v3-(?:browser|expeditions|cloud)|v5-interactions|v51-regression)\\.spec\\.cjs/"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/work/v51-legacy-final-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "desktop-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop-chromium"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/work/v51-legacy-final-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "ipad-portrait-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 820,
+            "height": 1180
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "ipad-portrait-chromium"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/work/v51-legacy-final-output",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 2
+        },
+        "name": "ipad-landscape-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 60000,
+        "use": {
+          "baseURL": "http://127.0.0.1:4173",
+          "actionTimeout": 15000,
+          "trace": "retain-on-failure",
+          "screenshot": "only-on-failure",
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 1180,
+            "height": 820
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "ipad-landscape-chromium"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 2,
+    "webServer": {
+      "command": "python3 tests/serve-preview.py",
+      "url": "http://127.0.0.1:4173/v3-adventure.html",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "v3-browser.spec.cjs",
+      "file": "v3-browser.spec.cjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Home, tour, map and all eight interactive world quests restore and persist",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 39303,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T21:40:59.759Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f9a68246ac24d64ac02-b5914da2d8c72b189a83",
+          "file": "v3-browser.spec.cjs",
+          "line": 105,
+          "column": 1
+        },
+        {
+          "title": "Mid-quest Save & Exit and reload resume exact puzzle, selection, hint and milestone",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2764,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T21:41:39.575Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f9a68246ac24d64ac02-0cde86adc57e08005fd4",
+          "file": "v3-browser.spec.cjs",
+          "line": 158,
+          "column": 1
+        },
+        {
+          "title": "Two tabs serialize purchases and milestones without duplicate rewards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2747,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T21:41:42.377Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f9a68246ac24d64ac02-3d3c90364a44ba419986",
+          "file": "v3-browser.spec.cjs",
+          "line": 273,
+          "column": 1
+        },
+        {
+          "title": "Home, tour, map and all eight interactive world quests restore and persist",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 38443,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T21:40:59.775Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f9a68246ac24d64ac02-278957fad4cf0073c3ba",
+          "file": "v3-browser.spec.cjs",
+          "line": 105,
+          "column": 1
+        },
+        {
+          "title": "Mid-quest Save & Exit and reload resume exact puzzle, selection, hint and milestone",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2849,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T21:41:38.733Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f9a68246ac24d64ac02-a8bb482b756b737bb275",
+          "file": "v3-browser.spec.cjs",
+          "line": 158,
+          "column": 1
+        },
+        {
+          "title": "Two tabs serialize purchases and milestones without duplicate rewards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2572,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T21:41:41.602Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f9a68246ac24d64ac02-0bb20bad482bb4950cc4",
+          "file": "v3-browser.spec.cjs",
+          "line": 273,
+          "column": 1
+        },
+        {
+          "title": "Home, tour, map and all eight interactive world quests restore and persist",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 31084,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T21:41:44.832Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f9a68246ac24d64ac02-3f4298619d2eae8993d2",
+          "file": "v3-browser.spec.cjs",
+          "line": 105,
+          "column": 1
+        },
+        {
+          "title": "Mid-quest Save & Exit and reload resume exact puzzle, selection, hint and milestone",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 2115,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T21:42:16.618Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f9a68246ac24d64ac02-70289ef41b83dc2ef4b0",
+          "file": "v3-browser.spec.cjs",
+          "line": 158,
+          "column": 1
+        },
+        {
+          "title": "Two tabs serialize purchases and milestones without duplicate rewards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 1937,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-20T21:42:18.748Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "7f9a68246ac24d64ac02-791fabec35e329696035",
+          "file": "v3-browser.spec.cjs",
+          "line": 273,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-20T21:40:58.612Z",
+    "duration": 82213.6,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

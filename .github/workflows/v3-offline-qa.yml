@@ -1,0 +1,37 @@
+name: iPad save and recovery gate
+on:
+  push:
+    branches: [codex/v3-adventure-build]
+  pull_request:
+    branches: [release/ipad, main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: ipad-save-safety-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  save-and-recovery:
+    name: ${{ github.event_name == 'pull_request' && 'save-and-recovery' || 'save-and-recovery-development' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: docker pull postgres:17-alpine
+      - name: Migration, requests, offline recovery, purchases, roles and gameplay
+        run: npm run test:ipad-release
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ipad-save-recovery-evidence
+          path: |
+            tests/artifacts/compact-receipts-db.json
+            tests/artifacts/save-recovery-browser.json
+            test-results/save-recovery/
+          retention-days: 14

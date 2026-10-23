@@ -1,0 +1,41 @@
+{
+  "scope": "Packaged fictional gallery only, no external network",
+  "pages": [
+    {
+      "name": "index",
+      "images": 92,
+      "broken": 0
+    },
+    {
+      "name": "worlds",
+      "images": 18,
+      "broken": 0
+    },
+    {
+      "name": "town",
+      "images": 19,
+      "broken": 0
+    },
+    {
+      "name": "compare",
+      "images": 14,
+      "broken": 0
+    },
+    {
+      "name": "estate",
+      "images": 8,
+      "broken": 0
+    },
+    {
+      "name": "estate-compare",
+      "images": 5,
+      "broken": 0
+    },
+    {
+      "name": "architecture",
+      "images": 17,
+      "broken": 0
+    }
+  ],
+  "errors": 0
+}

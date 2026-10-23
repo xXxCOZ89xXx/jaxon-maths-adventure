@@ -1,0 +1,47 @@
+{
+  "scope": "Local packaged static gallery only",
+  "rows": [
+    {
+      "layout": "1440x1000",
+      "page": "interactive",
+      "overflow": false,
+      "links": 110,
+      "columns": 3
+    },
+    {
+      "layout": "1440x1000",
+      "page": "coordinates",
+      "overflow": false,
+      "links": 4,
+      "columns": 3
+    },
+    {
+      "layout": "768x1024",
+      "page": "interactive",
+      "overflow": false,
+      "links": 110,
+      "columns": 2
+    },
+    {
+      "layout": "768x1024",
+      "page": "coordinates",
+      "overflow": false,
+      "links": 4,
+      "columns": 2
+    },
+    {
+      "layout": "1024x768",
+      "page": "interactive",
+      "overflow": false,
+      "links": 110,
+      "columns": 2
+    },
+    {
+      "layout": "1024x768",
+      "page": "coordinates",
+      "overflow": false,
+      "links": 4,
+      "columns": 2
+    }
+  ]
+}

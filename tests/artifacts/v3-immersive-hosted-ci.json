@@ -1,0 +1,37 @@
+{
+  "run": 39440319406,
+  "codeCommit": "924718db821bfb1797e9f514ab77a634aa90508c",
+  "status": "completed",
+  "conclusion": "success",
+  "browserPassed": 112,
+  "scope": "Hosted Chromium and iPad WebKit; fictional intercepted cloud API only",
+  "source": "Native GitHub workflow run, job and decoded job logs",
+  "logEvidence": [
+    "2026-10-20T14:34:59.2976775Z 4 cloud sync suites passed (synthetic transport, no backend connection).",
+    "2026-10-20T14:35:18.5986216Z 14 real PostgreSQL security suites passed. No hosted Supabase or real accounts used.",
+    "2026-10-20T14:35:20.3052922Z Running 112 tests using 1 worker",
+    "2026-10-20T14:44:16.7654344Z ##[notice]  112 passed (9.0m)",
+    "2026-10-20T14:44:16.7665152Z   112 passed (9.0m)"
+  ],
+  "deployment": {
+    "id": "appgdep_6ad77f0512388191a3e9bd57a0c19164",
+    "project_id": "appgprj_6ad746f124fc8191b3f3845f9dff577b",
+    "title": "Jaxon's Maths Adventure V3 — Private Staging",
+    "version_id": "appgprj_6ad746f124fc8191b3f3845f9dff577b~appgver_e936893be2f08191ad0ea49efbbeb55a",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ad746f124fc8191b3f3845f9dff577b",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-20T14:47:52.400444+00:00"
+  },
+  "siteVersion": 3,
+  "siteSourceCommit": "945512d84b4c2e7e70bec5c5341e76eb2cab235a",
+  "nativeArchiveContentHash": "sha256:ed09714178a6a403348b309d39429348b2c314e8f628cb4a9e2e2a3f1ea38e5f",
+  "localArchiveSha256": "fb225af07a673a55535c5a42d3d311ba8421fadf6b997d243097d5df39cae1df",
+  "ownerOnly": true,
+  "archiveVerification": "93 local dist files match verified build; source commit verified; native saved archive was not downloadable for independent remote-byte comparison"
+}

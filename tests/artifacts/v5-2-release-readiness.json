@@ -1,0 +1,79 @@
+{
+  "date": "2026-10-21",
+  "status": "installation package prepared for owner review; cutover blocked pending listed owner gates",
+  "audited_starting_head": "e1674ea5bf0ab838ffab15bb6dc7acee9b26fd81",
+  "github_read_only_recheck": {
+    "pr": 2,
+    "draft": true,
+    "state": "open",
+    "head": "codex/v3-adventure-build",
+    "base": "main",
+    "pages_source": "main:/",
+    "pages_https": true,
+    "production_commit": "0d0b0265d75f26efeaaaf9bfeea0f061ded2a5a0",
+    "pages_build": "built",
+    "rollback_tag": "rollback/production-before-v51-0d0b026",
+    "rollback_commit_confirmed": "0d0b0265d75f26efeaaaf9bfeea0f061ded2a5a0"
+  },
+  "owner_evidence_accepted": {
+    "full_export": true,
+    "encrypted_second_copy_and_integrity": true,
+    "windows_application_recovery": "PARTIAL/application PASS",
+    "original_archive_unchanged": true,
+    "private_backup_accessed_by_codex": false,
+    "managed_auth_recovery_verified": false
+  },
+  "new_focused_suites_passed": 7,
+  "production_build_passed": true,
+  "worlds": 9,
+  "skills": 55,
+  "legacy_routes_redirected": 6,
+  "gameplay_and_staging_source_unchanged": true,
+  "coverage": [
+    "PASS offline hashed release package: six legacy routes, .nojekyll, strict site boundary and nonempty-output refusal",
+    "PASS all-four installation is atomic on late failure; no partial backend/private schema remains",
+    "PASS atomic inactive installation preserves existing Auth/family records and creates no openings",
+    "PASS partial recovery receipt requires explicit scope and separately acknowledged managed-service safeguards, atomically",
+    "PASS canonical backup-state query and aggregate release checks match fresh zero openings/private access boundaries",
+    "PASS freeze retains legacy write guard even for privileged stale writers while backend is not ready",
+    "PASS explicit rollback alone restores legacy writes, retaining original accounts/families, new zero opening and private archive"
+  ],
+  "scope": {
+    "database": "fictional rows/claims; network-disabled disposable PG17",
+    "backup_restoration_repeated": false,
+    "full_gameplay_suite_repeated": false,
+    "production_sql": false,
+    "production_auth_requests": false,
+    "hosted_auth_verified": false,
+    "physical_ipad_tested": false,
+    "deployed": false,
+    "merged": false
+  },
+  "network": {
+    "enforced": "restricted",
+    "missing_hosts": [
+      "mbdelspbjusarbwlltol.supabase.co",
+      "xxxcoz89xxx.github.io"
+    ],
+    "configuration_editor_available": false,
+    "supported_resolution": "owner Cloud environment settings edit/apply/restart; preserve proxy/TLS; recheck status"
+  },
+  "remaining_gates": [
+    "owner managed-service recovery safeguards or explicit residual-risk decision",
+    "supported network configuration and securely provisioned fictional identities/families",
+    "private backup/current fingerprint binding and current target/schema/Auth/API configuration",
+    "separate SQL installation/fresh activation/release approvals",
+    "hosted canary/live acceptance and physical iPad"
+  ],
+  "source_sha256": {
+    "scripts/prepare-v52-release.cjs": "26bd00ae11ff82dd63c9ed9ea273387a32c27080943d030d45ebada53b603f42",
+    "scripts/build-v52-production.cjs": "8e50a48c6440f2474a6ac1cb9c6b11e0bd5c5605eb3253445fe13a96e64a62f8",
+    "docs/V52-RELEASE-VERIFY.sql": "db8cdd1a9ba3b43ae8de7250d4ce157cba45ae3827061262b6f5ff6b888d386a",
+    "tests/v52-release-readiness.cjs": "43bf9d28a6bc19a16ea561a13c93e2cd23a23cfeee724955fd3563167a4930b7",
+    "tests/v52-production-build.cjs": "dbbb2ca7a0c955d2c86d89c4248d9bb6b67dab9f64e7993cd5dcb5c1b1b8945e",
+    "supabase/v51-production/001_secure_backend.sql": "8d20b743e47647e736347d58926222fa0da7a73876c9eb37327d940fadf86ec3",
+    "supabase/v51-production/002_catalog.sql": "66296a53d344f19a0c22095ab2ca78f3edb6b81665d11b3affe15c5937b2bf2c",
+    "supabase/v51-production/003_activation.sql": "3c58d7d8b05afe45e89073ec58313c9d5fad8249957250cc0b397e503bbcb7b4",
+    "supabase/v51-production/004_fresh_start.sql": "604492886b644dc48d14a80f663355eceb24136db0698231bcea1499e9e3161e"
+  }
+}

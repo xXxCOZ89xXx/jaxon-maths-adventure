@@ -1,0 +1,16 @@
+Fictional records only; network-disabled disposable PostgreSQL 17. No production access.
+PASS pre-migration fictional backup restores Auth credentials, family links and old rewards in isolation
+PASS read-only private fingerprints match locked activation helper across timezone/search-path contexts
+PASS fresh-start needs distinct administrator approval and verified backup receipt, never a zeroed preservation manifest
+PASS unexpected balances, permissions, families and new backend rows fail without partial activation
+PASS an interrupted transaction rolls back archive, wallets, readiness, revocations and audit together
+PASS fresh activation preserves identities/links, audits its mode and is exactly-once on matching retries
+PASS all learning, wallet, ownership and historical opening values are zero with no imported evidence
+PASS private archived records remain intact and cannot be read by learner, parent or service role
+PASS legacy writes and reward manipulation remain blocked after fresh activation
+PASS PIN enrollment and invalid-PIN rejection work without changing account passwords or identity
+PASS first eligible active minute earns ten coins and one screen minute, never legacy credit
+PASS parent rewards and new purchases work; learner cannot award, edit wallet or select another family
+PASS save/resume, duplicate requests and concurrent revisions preserve new progress only
+PASS fresh-start freeze/rollback requires reconciliation and retains new and archived records
+14 fresh-start/backup suites passed; fictional records, network-disabled PostgreSQL, no production access.

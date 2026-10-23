@@ -1,0 +1,34 @@
+{
+  "scope": "Major upgrade: development-only graphical approval checkpoint",
+  "skills": 63,
+  "expandedSkills": 13,
+  "newFoundations": 8,
+  "townPlans": 27,
+  "workerShiftBranches": 14,
+  "browserFullRepresentative": {
+    "passed": 48,
+    "failed": 0,
+    "orientations": [
+      "820x1180",
+      "1180x820"
+    ],
+    "engine": "Chromium with touch"
+  },
+  "cookingFollowup": {
+    "passed": 6,
+    "failed": 0,
+    "flows": [
+      "curry",
+      "soup",
+      "pancakes"
+    ]
+  },
+  "generatedQuestionInvariantChecks": 10920,
+  "townStageChecks": 2091,
+  "missionDefinitionChecks": 1107,
+  "historicalEvidenceAndPublishedSnapshotPreserved": true,
+  "externalBackendWrites": 0,
+  "physicalSafari": false,
+  "liveReleaseUnchanged": "2e84e74d9fbcb22208b6332ca98f2cd7466912d3",
+  "nextCheckpoint": "Owner approval or revision of the four playable sample screens"
+}

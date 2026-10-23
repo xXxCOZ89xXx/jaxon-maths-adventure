@@ -1,0 +1,68 @@
+{
+  "scope": "Local packaged static gallery only",
+  "rows": [
+    {
+      "layout": "1440x1000",
+      "page": "architecture",
+      "overflow": false,
+      "links": 34,
+      "columns": 3
+    },
+    {
+      "layout": "1440x1000",
+      "page": "estate",
+      "overflow": false,
+      "links": 16,
+      "columns": 3
+    },
+    {
+      "layout": "1440x1000",
+      "page": "estate-compare",
+      "overflow": false,
+      "links": 10,
+      "columns": 5
+    },
+    {
+      "layout": "768x1024",
+      "page": "architecture",
+      "overflow": false,
+      "links": 34,
+      "columns": 2
+    },
+    {
+      "layout": "768x1024",
+      "page": "estate",
+      "overflow": false,
+      "links": 16,
+      "columns": 2
+    },
+    {
+      "layout": "768x1024",
+      "page": "estate-compare",
+      "overflow": false,
+      "links": 10,
+      "columns": 2
+    },
+    {
+      "layout": "1024x768",
+      "page": "architecture",
+      "overflow": false,
+      "links": 34,
+      "columns": 2
+    },
+    {
+      "layout": "1024x768",
+      "page": "estate",
+      "overflow": false,
+      "links": 16,
+      "columns": 2
+    },
+    {
+      "layout": "1024x768",
+      "page": "estate-compare",
+      "overflow": false,
+      "links": 10,
+      "columns": 5
+    }
+  ]
+}

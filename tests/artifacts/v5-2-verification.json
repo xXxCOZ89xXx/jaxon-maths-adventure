@@ -1,0 +1,51 @@
+{
+  "version": "5.2",
+  "metadata_records": 705,
+  "status": "implemented and rehearsed; not applied/deployed/merged",
+  "production_sql_suites_passed": 18,
+  "production_browser": {
+    "passed": 18,
+    "failed": 0,
+    "projects": [
+      "desktop",
+      "ipad-portrait",
+      "ipad-landscape"
+    ],
+    "transport": "all nonlocal requests intercepted or denied"
+  },
+  "adapter_suites_passed": 9,
+  "production_build_verified": true,
+  "configured_artifact_built_without_network": true,
+  "staging_sql_suites_passed": 14,
+  "targeted_staging_browser_passed": 4,
+  "staging_build_isolation_passed": true,
+  "npm_test_passed": true,
+  "renderer_variants": 1107,
+  "full_browser_matrix_rerun": false,
+  "scope": {
+    "database": "network-disabled disposable PostgreSQL 17 with fictional Auth claims",
+    "hosted_auth_verified": false,
+    "physical_ipad_tested": false,
+    "genuine_account_access": false,
+    "production_migration_executed": false,
+    "deployed": false,
+    "raw_csv_in_git": false
+  },
+  "release_gates": [
+    "owner private backup/restore and SQL review",
+    "trusted private opening balances/entitlements/ownership and PIN transition approval",
+    "Auth redirect/API exposure and protected fictional accounts",
+    "supported live verification access",
+    "reviewed Pages artifact cutover and real hosted/device acceptance"
+  ],
+  "source_sha256": {
+    "scripts/build-v51-production-preparation.cjs": "951a0b41e9d0492896d80f003b1d351827490860ca1aed8edfa8b436987e0860",
+    "scripts/build-v52-production.cjs": "e591070bcaf206693a98a917a4618eacc793bcd55aed22b71b746fc8cedb10aa",
+    "supabase/v51-production/001_secure_backend.sql": "8d20b743e47647e736347d58926222fa0da7a73876c9eb37327d940fadf86ec3",
+    "supabase/v51-production/002_catalog.sql": "66296a53d344f19a0c22095ab2ca78f3edb6b81665d11b3affe15c5937b2bf2c",
+    "supabase/v51-production/003_activation.sql": "7b99ead4e6c9dc188ff144ee8aa8ff042adcd71fce77dada377300b22ff2f245",
+    "v3/backend-config.js": "d9b17732615200119b708855caa0bb5d6905bd402c468a95d3e0c92f8fc5d96c",
+    "v3/production-cloud.js": "9b9b0f19fcb7f4b1179e78e1cea225032e065452413c0f321b66ee365fd3d2c8",
+    "v3/staging-app.js": "eb733e8734c75369c77dc06d00a7a218de5823cedae836b033ff1cd0bc517ef4"
+  }
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "path": "index.html",
+    "unchanged": true,
+    "baseline": "bc30d19",
+    "sha256": "22e09532651500aec9f5537a87235fa4258dc9007453bde5b4ee15b3562232a0"
+  },
+  {
+    "path": "v2-game-test.html",
+    "unchanged": true,
+    "baseline": "bc30d19",
+    "sha256": "fcea8b7881f90d4d2cf792d6301e20fe99e24b5bf0936e61fdd61820f7a1f19a"
+  },
+  {
+    "path": "v2-secure-cloud.js",
+    "unchanged": true,
+    "baseline": "bc30d19",
+    "sha256": "37e9e607e46fec0883c7baa6ca3799ac09770a2335753a8b7d1ff386462d012c"
+  },
+  {
+    "path": "supabase/setup.sql",
+    "unchanged": true,
+    "baseline": "bc30d19",
+    "sha256": "890f9e43a9d774729a228c163b2abbc872c0500333307b3d40d5e9c83fe32a54"
+  },
+  {
+    "path": "supabase/v2-bonus-shop-migration.sql",
+    "unchanged": true,
+    "baseline": "bc30d19",
+    "sha256": "08709e1f170c99309e67e9d46d73179ee84b1590592d9c808b55d3ec1a2835aa"
+  }
+]

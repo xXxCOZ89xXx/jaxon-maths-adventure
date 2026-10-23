@@ -1,0 +1,1 @@
+Extract this ZIP to a local folder. In Codex, attach that folder to the workspace and ask Codex to read CODEX_IMPLEMENTATION_PROMPT.md and README_ART_DIRECTION.md from disk. Do NOT paste the ZIP or image bytes into the chat. JPEGs here are small visual references; original PNGs can be supplied individually later for final artwork if required.
