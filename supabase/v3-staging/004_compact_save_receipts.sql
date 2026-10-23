@@ -38,6 +38,25 @@ BEGIN
 END $normal$;
 REVOKE ALL ON FUNCTION public.v3_receipt_normalize(jsonb) FROM public,anon,authenticated,service_role;
 
+-- Also cover an old RPC invocation already in flight at the migration boundary.
+-- Legacy rows are untouched; only future inserts pass through this guard.
+CREATE FUNCTION public.v3_compact_receipt_insert() RETURNS trigger
+LANGUAGE plpgsql SET search_path='' AS $insert$
+BEGIN
+ IF NEW.request_fingerprint IS NULL THEN
+  NEW.request_fingerprint:=extensions.digest(convert_to(public.v3_receipt_normalize(NEW.payload)::text,'UTF8'),'sha256');
+  NEW.payload:=jsonb_build_object('requestId',NEW.request_id)||case NEW.operation
+   when 'save' then jsonb_build_object('revision',NEW.payload->'revision')
+   when 'buy' then jsonb_build_object('item',NEW.payload->'item')
+   when 'active' then jsonb_build_object('seconds',NEW.payload->'seconds')
+   else jsonb_build_object('amount',NEW.payload->'amount') end;
+ END IF;
+ RETURN NEW;
+END $insert$;
+REVOKE ALL ON FUNCTION public.v3_compact_receipt_insert() FROM public,anon,authenticated,service_role;
+CREATE TRIGGER v3_compact_receipts_insert BEFORE INSERT ON public.v3_transactions
+ FOR EACH ROW EXECUTE FUNCTION public.v3_compact_receipt_insert();
+
 create or replace function public.v3_request(p_token text,p_operation text,p_args jsonb default '{}') returns jsonb
 language plpgsql security definer set search_path='' as $$
 declare r jsonb:=public.v3_role(); c uuid:=(r->>'child')::uuid; w public.v3_wallet; pr public.v3_progress;
