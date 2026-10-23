@@ -309,10 +309,11 @@
         worked: "Favourable outcomes: "+labels.filter(test).join("; ")+". Each listed outcome is equally likely.",
       };
     }
-    t.hint = t.teach;
+    const hints={rotate:'A quarter turn is 90°. Follow the direction in the question. Count quarter turns from the starting shape.',fraction:'Each part is an equal share of the same whole. The denominator counts all equal parts; the numerator counts chosen parts.',order:world==='fractions'?'Use equal-sized wholes. With equal denominators, compare the numerators. Otherwise compare equivalent fractions.':'Compare consecutive values. Which value belongs before the others?',sequence:'Find the change between consecutive carriage numbers. Apply the same change to the last given carriage.',balance:'Subtract the fixed units from both sides, then divide the remaining units equally among the x groups.',ratio:'Find how many equal groups the known colour makes. Use the same number of groups for the other colour.',chart:'Read each category and its count. Start its bar at zero and place its top at that count.',measure:t.unit==='ml'?'Convert litres to millilitres: multiply by 1,000. Read the jug scale from zero.':'Measure from zero. Keep the same unit and read the numbered scale marks.',angle:'Start at zero on the baseline and read the degree scale. A right angle is 90°.',array:'Rows × crates in each row gives the total. Build equal-length rows.',chance:'Count favourable outcomes and all equally likely outcomes separately.'};
+    t.hint = hints[t.kind] || (t.unit==='p'?'Convert pounds to pence using 100p = £1. Use the stated operation and check the amount.':t.hint||t.teach);
     if(t.kind==='sequence')t.example='A separate train: 51, 54, 57. Each carriage adds 3, so connect 60 next.';
     if(t.kind==='balance')t.example='A separate balance: 2x + 3 = 29. Remove 3, then share 26 between 2 boxes: x = 13.';
-    if(t.hint===t.teach)t.hint='Start with the known quantities and units. Which operation or placement does the task need?';
+
     t.interactionVersion = 1;
     return t;
   }
@@ -330,7 +331,9 @@
     if (t.kind === "ratio") return "ratio-groups";
     if (t.kind === "sequence") return "sequence-rail";
     if (t.kind === "bars" || t.kind === "chart") return "bar-chart";
-    if (t.kind === "fraction") return "fraction-shading";
+    if (["fraction","fraction-calc"].includes(t.kind)) return "fraction-shading";
+    if(t.kind==="proportion")return "proportional-chart";
+    if(t.kind==="meter")return "meter-calculation";
     if (t.kind === "blocks") return "place-value";
     if (t.kind === "line") return "number-line";
     if (t.kind === "rotate") return "rotation";
@@ -480,6 +483,28 @@
   function practiceSpec(skill, q) {
     const text = String(q[1]).trim();
     let t = null;
+    const prompt=String(q[0]),unit=q[5]?.unit||'',n=Number(text);
+    if(/^fraction_/.test(skill.id)&&q[5]?.contentVersion===3){
+      const denominators=[...prompt.matchAll(/\d+\/(\d+)/g)].map(m=>Number(m[1]));
+      const gcd=(a,b)=>b?gcd(b,a%b):a;
+      let den=denominators.reduce((a,b)=>a*b/gcd(a,b),1);
+      if(skill.id==='fraction_mult'){
+        if(/×/.test(prompt)&&denominators.length===2)den=denominators[0]*denominators[1];
+        const divisor=prompt.match(/÷ (\d+) =/);if(divisor)den*=Number(divisor[1]);
+        if(/^Half of/.test(prompt))den*=2;
+      }
+      if(denominators.length&&den<=24&& !/what numerator|How many whole/i.test(prompt)&&(text.includes('/')?Number(text.split('/')[0])/Number(text.split('/')[1]):Number(text))<=3)return {kind:'fraction-calc',denominator:den,total:3*den,min:0,max:3*den,skill:skill.id,format:text,practice:true};
+      return null;
+    }
+    if(skill.id==='stats_pie'){
+      if(!Number.isInteger(n))return null;
+      const count=prompt.match(/(?:has|Of) (\d+) (?:people|responses)/i);
+      const total=unit==='people'&&count?Number(count[1]):unit==='degrees'||/angle|degrees/i.test(prompt)&&unit!=='percent'?360:100;
+      return {kind:'proportion',total,unit:unit||'degrees',min:0,max:total,skill:skill.id,format:text,practice:true};
+    }
+    if(skill.id==='town_bills'&&q[5]?.contentVersion===3){const readings=prompt.match(/(?:previous|from) (\d+)(?:, current| to) (\d+)/);return {kind:'meter',readings:readings?[readings[1],readings[2]]:null,unit,min:0,max:100000,scale:1,skill:skill.id,format:text,practice:true};}
+    // Scalar calculation is better than unrelated blocks for these topics.
+    if(/^(?:stats_|algebra_|ratio_|measure_|geometry_)/.test(skill.id)&&!['geometry_angles','geometry_triangles'].includes(skill.id))return null;
     // New bank snapshots carry their response unit; old snapshots retain the old contract.
     if(q[5]?.contentVersion===3){
       const unit=q[5].unit||'',n=Number(text);
@@ -568,6 +593,13 @@
     if(l.qs[l.i][5]?.representation?.type==='array'){
       const model=l.qs[l.i][5].representation;
       body=`<p>Tap crates to count them in equal rows. Tap again to unmark a crate.</p><div class="count-array" style="--columns:${model.cols}" role="group" aria-label="${model.rows} rows of ${model.cols} crates">${Array.from({length:model.rows*model.cols},(_,i)=>btn('▣',`p5-count:${i}`,`aria-label="Crate ${i+1}" aria-pressed="${(v.selected||[]).includes(i)}"`)).join('')}</div><output>${(v.selected||[]).length} crates counted</output>`;
+    }else if(t.kind==='fraction-calc'){
+      const selected=v.selected||Array.from({length:Math.max(0,Math.min(t.total,Math.round(a*t.denominator)))},(_,i)=>i);
+      body=`<p>Build your answer using equal-sized fraction parts. Each bar is one whole split into ${t.denominator} parts. Tap a part to shade or unshade it. Simplify when you calculate.</p><div class="fraction-answer-bars" style="--denominator:${t.denominator}">${[0,1,2].map(row=>`<div class="parts" aria-label="Whole ${row+1}">${Array.from({length:t.denominator},(_,i)=>{const j=row*t.denominator+i;return btn('▧',`p5-shade:${j}`,`aria-label="Whole ${row+1}, part ${i+1}" aria-pressed="${selected.includes(j)}"`);}).join('')}</div>`).join('')}</div><output>${selected.length}/${t.denominator} shaded</output>`;
+    }else if(t.kind==='proportion'){
+      body=`<p>Build the category's share of the whole chart. Whole = ${t.total} ${esc(t.unit)}. Change your proposed value; the shaded share follows your calculation.</p><div class="proportion-model" role="img" aria-label="Your proposed share ${a} of ${t.total}" style="background:conic-gradient(#458657 ${a/t.total*360}deg,#e4e6d5 0)"></div><div class="proportion-controls">${[-10,-1,1,10].map(x=>btn((x>0?'+':'')+x,`p5-add:${x}`)).join('')}</div>`;
+    }else if(t.kind==='meter'){
+      body=(t.readings?`<div class="practice-meter-readings" role="group" aria-label="Meter readings"><section>Previous reading<output>${esc(t.readings[0])} ${esc(t.unit)}</output></section><section>Current reading<output>${esc(t.readings[1])} ${esc(t.unit)}</output></section></div>`:'')+`<p>${t.readings?'Subtract the previous reading from the current reading.':'Use the supplied units, rate and any stated fixed charge.'} Enter your calculation result below.</p>`;
     }else if (t.kind === "fraction")
       body = `<p>Shade the fraction you want to submit. These are equal parts.</p><div class="parts" data-shade-group="practice">${Array.from({ length: t.total }, (_, i) => btn("▧", `p5-shade:${i}`, `data-shade-index="${i}" aria-label="Fraction part ${i + 1}" aria-pressed="${(v.selected || []).includes(i)}"`)).join("")}</div><output>${(v.selected || []).length}/${t.total}</output>`;
     else if (t.kind === "line")
@@ -578,7 +610,7 @@
       body = `<svg viewBox="0 0 400 220" role="img" aria-label="Your angle ${a} degrees"><path d="M370 200H200l${160 * Math.cos((a * Math.PI) / 180)} ${-160 * Math.sin((a * Math.PI) / 180)}" fill="none" stroke="#34563e" stroke-width="5"/><text x="200" y="80">${a}°</text></svg><div>${Array.from({length:19},(_,i)=>btn(i*10+"°",`p5-value:${i*10}`,`aria-pressed="${a===i*10}"`)).join("")}</div>`;
     else
       body = sharing(t,a) + `<p>Construct the answer in ${t.responseUnit} using fictional money. 100p = £1.</p><div class="money-tray">${coins.map((n) => btn(money(n), `p5-add:${n}`, `aria-label="Add ${n} pence"`)).join("")}</div>${btn("Remove 1p", "p5-add:-1")}${btn("Clear", "p5-value:0")}<output>${money(a)}${t.responseUnit==="pence"?" · "+a+"p":""}</output>`;
-    return `<section class="hands-on practice-manipulative" data-mechanic="${mechanic(t)}"><h3>Build your answer</h3><div class="practice-model">${body}</div>${t.kind !== "fraction" ? numericInput(t,a,v.amountDraft,"practice") : ""}<div>${btn("Try constructed answer", "p5-submit", 'class="primary"')}</div><p class="small">You may also use the answer choices. Supported practice never awards mastery.</p></section>`;
+    return `<section class="hands-on practice-manipulative" data-mechanic="${mechanic(t)}"><h3>Build your answer</h3><div class="practice-model">${body}</div>${!["fraction","fraction-calc"].includes(t.kind) ? numericInput(t,a,v.amountDraft,"practice") : ""}<div>${btn("Try constructed answer", "p5-submit", 'class="primary"')}</div><p class="small">You may also use the answer choices. Supported practice never awards mastery.</p></section>`;
   }
   function practiceEdit(l, action, n) {
     if (!l || l.mode !== "practice" || l.answered) return false;
@@ -591,7 +623,7 @@
     }
     if (action === "shade") {
       if (!Number.isInteger(n) || n < 0 || n >= t.total) return false;
-      const selected = v.selected || [];
+      const selected = v.selected || (t.kind==='fraction-calc'?Array.from({length:Math.max(0,Math.min(t.total,Math.round((v.amount||0)*t.denominator)))},(_,i)=>i):[]);
       v.selected = selected.includes(n)
         ? selected.filter((x) => x !== n)
         : [...selected, n];
@@ -607,6 +639,7 @@
     const t = practiceSpec({ id: l.id }, l.qs[l.i]),
       v = l.manipulation || {};
     if (!t) return "";
+    if(t.kind==='fraction-calc'){if(!v.selected)return String(v.amount||0);const a=v.selected.length,b=t.denominator,gcd=(x,y)=>y?gcd(y,x%y):x,g=gcd(a,b);return b/g===1?String(a/g):(a/g)+'/'+(b/g);}
     if (t.kind === "fraction") return (v.selected || []).length + "/" + t.total;
     if (t.scale) return String((v.amount || 0) / t.scale);
     return String(v.amount || 0);

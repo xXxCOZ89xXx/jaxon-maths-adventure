@@ -297,6 +297,14 @@
       "alpha": true,
       "bytes": 385264,
       "sha256": "cd48528542f2066f42d82509ed0ca39071c7b8c658e4b00a15768379c42b722e"
+    },
+    "restoration-worlds": {
+      "file": "v3/assets/rollout/restoration-worlds.webp",
+      "master": "/workspace/generated_images/exec-cf27b5d1-0971-47ba-a9de-7f4de9c3f042.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 654082,
+      "sha256": "3e445ab73011e39ceb783e1f3cb1cac6e0934f0eec908f4b0bdb882249f7e61c"
     }
   }
 }
