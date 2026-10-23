@@ -57,7 +57,7 @@ test('Bolognese starts the full recipe; native iPad jug gesture and price-free c
 });
 test('Mocked cloud keeps immutable pending saves while new Town stock selections reconnect',async({family})=>{
  const page=await family.open('learner'),key=`jaxon_v3_staging:${family.ref}:${family.uid}:game`,queue=key+':queue';await click(page,'skip-tour');await page.locator('nav [data-nav="map"]').tap();await click(page,'world:town');await page.locator('.town-plan-catalog details').filter({has:page.locator('summary',{hasText:'Cooking'})}).locator('summary').tap();await click(page,'j-plan:cook-pasta');
- family.server.loseSave=true;await click(page,'j-part:0:1');await expect.poll(()=>page.evaluate(k=>JSON.parse(localStorage.getItem(k))?.pending?.requestId,queue)).toBeTruthy();const pending=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)).pending,queue);
+ family.server.loseSave=true;await click(page,'j-part:0:1');await page.evaluate(()=>window.dispatchEvent(new Event('online')));await expect.poll(()=>page.evaluate(k=>JSON.parse(localStorage.getItem(k))?.pending?.requestId,queue)).toBeTruthy();const pending=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)).pending,queue);
  await page.context().setOffline(true);await click(page,'j-part:1:1');expect(await page.evaluate(k=>JSON.parse(localStorage.getItem(k)).pending,queue)).toEqual(pending);const exact=await run(page,key);
  await page.context().setOffline(false);await page.evaluate(()=>window.dispatchEvent(new Event('online')));await expect.poll(()=>family.server.progress.adventure?.townLifeV2?.runs[exact.id]?.values).toEqual(exact.values);await page.reload();expect(await run(page,key)).toEqual(exact);
 });

@@ -67,7 +67,7 @@ async function mock(page, server, options = {}) {
     else if (u.pathname === "/auth/v1/recover") data = {};
     else if (u.pathname === "/auth/v1/logout") data = {};
     else if (u.pathname === "/rest/v1/rpc/v3_identity")
-      data = { name: options.projectName || "jaxon-maths-v3-staging", projectRef: targetRef,
+      data = { name: options.projectName || "jaxon-maths-v3-staging", projectRef: targetRef,saveReceiptVersion:server.receiptVersion??1,
         ...(options.identity || {}) };
     else if (u.pathname === "/rest/v1/rpc/v3_role")
       data = {
@@ -98,6 +98,8 @@ async function mock(page, server, options = {}) {
       if (server.tokens.get(body.p_token) !== user.id) {
         status = 403;
         data = { code: "P0001", message: "Unlock required" };
+      } else if (body.p_operation === "read" && server.failNextRead) {
+        server.failNextRead=false;return route.abort();
       } else if (body.p_operation === "read")
         data = {
           revision: server.revision,
@@ -159,6 +161,8 @@ async function mock(page, server, options = {}) {
           server.transactions.set(a.requestId, { wallet: server.wallet });
         }
         data = { wallet: server.wallet };
+        if(server.failReadAfterBuy){server.failReadAfterBuy=false;server.failNextRead=true;}
+        if(server.loseBuy){server.loseBuy=false;return route.abort();}
       } else data = { wallet: server.wallet };
     } else {
       errors.push("Unmocked backend route " + u.pathname);

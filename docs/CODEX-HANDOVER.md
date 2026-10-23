@@ -1,5 +1,18 @@
 # Codex handover — V5.1 usability and automated regression
 
+## Saving/ledger correction — 23 October 2026 — not published
+
+Owner measured 18 MB database, 7.1 MB physical ledger / 835 rows / 681 full snapshots, ~18 MB logical payload and a ~32.7 KB largest save. Current data is disposable test data, but no reset/deletion is authorised. This phase supersedes automatic publication permission: keep `release/ipad` at `15e934d` until migration and app are verified together.
+
+Implemented additive compact receipts with canonical SHA-256 request fingerprints and small operation receipts, preserving legacy full rows and exact retries/CAS/role/wallet rules. Old client works with the new backend; new client requires `saveReceiptVersion:1` before writes. Immediate local saves remain; routine uploads coalesce into ~30-second checkpoints and skip unchanged revision-only states. Reconnect/reopen/save-exit force recovery. Durable acknowledged purchase intents recover without relying on an unowned item's button, preventing the confirmed shop deadlock. No existing queue/game namespaces or progress/task snapshots are replaced.
+
+`npm run test:ipad-release` is the focused automatic CI gate, with no skip flags. It covers the actual sync/intent modules against migrated isolated PostgreSQL, 720 save requests producing zero new full snapshots, lost responses/duplicates, family/role boundaries, parent rewards, one simulated hour of upload batching, old queues, browser refresh/offline recovery and full touch Bolognese in both iPad orientations. Configured staging build/static verifier also pass. No real Supabase connection or writes occurred.
+
+Review/execution/rollback details: `SAVE-RECOVERY-UPGRADE.md`. Owner-run SQL: `supabase/v3-staging/004_compact_save_receipts.sql`, followed by `004_verify_receipts.sql`. Do not substitute the parked V5.2 package. Live baseline guard failures require review, not bypass. Old transaction rows and existing progress remain unchanged. After migration, application rollback to `15e934d` is compatible; restoring the old RPC after compact rows exist is unsafe. Independent SQL sign-off/live verification remain owner steps.
+
+GitHub workflow runs on development pushes and release PRs; only owner repository settings can require its `save-and-recovery` status before release merges. Connected tools cannot write branch rules. Configure that required check with no routine bypass before promotion. No release push, deployment, main merge, account/PIN change or destructive cleanup occurred. Years 6–9 work stays paused.
+
+
 ## Final targeted graphics release — 23 October 2026
 
 Owner approved all 50 prior screenshots and explicitly authorised these corrections followed by promotion through the existing GitHub release branch. See `art-direction/FINAL-CORRECTIONS-OWNER-INSTRUCTION.md`. The later owner instruction requires GitHub-only deployment; no Cloudflare API, Wrangler, manual upload or reconnect request.
@@ -12,7 +25,7 @@ Focused verification: 10 final graphics browser cases, 6 customer/immutable pend
 
 Small before/after review (10 actual screenshots, downloadable self-contained HTML): https://chatgpt.com/space/page_215e0b7729088191b691090c8691f968 . Local source `/workspace/artifacts/final-graphics/`. The game remains fixed-camera 2.5D, with paired restoration props rather than replacement world paintings. Curriculum coverage remains partial. Next development phase is a dedicated Years 6–9 educational review, not implemented in this release.
 
-Release status will be recorded after promotion. GitHub check-run access works. Direct HTTPS checks of the main and preview hostnames are blocked by the execution proxy (`Tunnel connection failed: 403 Forbidden`); this is not evidence that the game is down. No Access changes are made, and current policy/after-login gameplay cannot be independently reverified through this unavailable network route. Owner physical Safari play/save/reopen remains the device check; do not clear Safari data or pending saves.
+**Published game commit:** `15e934d6829d8e14a0ec593ea4f943333c7a87d9`, fast-forwarded from the prior working release onto `release/ipad`. GitHub Cloudflare Pages check run `120180603830` reports **completed / success / Deployed successfully**, for the exact game SHA and existing project `jaxon-maths-private-git`; deployment `43660fb2-6164-4ee2-be5d-ef4227844616`. Verified at https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/runs/120180603830 . Existing URL: https://jaxon-maths-private-git.pages.dev . No `main` merge or hosting/Access/Supabase configuration changes. Documentation-only follow-up stays on the development branch; it does not trigger another release. GitHub check-run access works. Direct HTTPS checks of the main and preview hostnames are blocked by the execution proxy (`Tunnel connection failed: 403 Forbidden`); this is not evidence that the game is down. No Access changes are made, and current policy/after-login gameplay cannot be independently reverified through this unavailable network route. Owner physical Safari play/save/reopen remains the device check; do not clear Safari data or pending saves.
 
 
 ## Completed wider graphical and Stage 1 rollout — 23 October 2026

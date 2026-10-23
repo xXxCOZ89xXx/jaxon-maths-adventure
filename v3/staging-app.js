@@ -13,7 +13,9 @@ let client,
   runningGame = false,
   expires = 0,
   timeout,
-  saveTimer;
+  saveTimer,
+  intents,
+  lastSaveAttempt = 0;
 let busy = false,
   operationPending = null,
   releaseTab;
@@ -146,6 +148,7 @@ async function pinScreen() {
   }
 }
 async function lock() {
+  await Promise.race([flush(true),new Promise(resolve=>setTimeout(resolve,1500))]);
   const old = unlock;
   unlock = null;
   expires = 0;
@@ -190,6 +193,10 @@ async function open(u) {
     );
   }
   wallet = remote.wallet;
+  intents=window.V3CloudSync.createIntents({storage:localStorage,key:`v3-intent:${c.projectRef}:${identity.user}`,rpc,
+    allowed:identity.role==='learner'?['buy']:['award','redeem','confirm_offline']});
+  // Recover purchases independently of the item button, even when ownership already refreshed.
+  if(identity.role==='learner'&&navigator.onLine){try{const recovered=await intents.recover();if(recovered){remote=recovered;wallet=remote.wallet;localStorage.setItem(cacheKey,JSON.stringify(remote));}}catch{message('A purchase is awaiting confirmation. Its retry is preserved.');}}
   if (identity.role === "parent") {
     document.querySelector("nav").hidden = true;
     await parent(remote);
@@ -245,9 +252,9 @@ async function open(u) {
       Math.max(0, Number(wallet.active_seconds) / 60 - Number(wallet.redeemed)),
     applyWallet,
     onSave(state) {
-      sync.enqueue(state);
-      clearTimeout(saveTimer);
-      saveTimer = setTimeout(flush, 400);
+      if(!sync.enqueue(state))return;
+      if(state.view==='home'){queueMicrotask(()=>flush(true));return;}
+      if(!saveTimer)saveTimer=setTimeout(()=>{saveTimer=null;flush();},30000);
     },
     onActive(ms) {
       heartbeat(ms / 1000);
@@ -267,18 +274,18 @@ async function open(u) {
     document.body.append(script);
   }
   if (local.conflict) conflictUI();
-  else await flush();
-  window.addEventListener("online", flush);
+  else await flush(true);
+  window.addEventListener("online", () => {flush(true);recoverPurchase();});
+  window.addEventListener('pagehide',()=>flush(true));
   document.addEventListener("visibilitychange", () => {
-    if (!document.hidden) {
-      if (!active()) lock();
-      else flush();
-    }
+    if (!active()) {if(!document.hidden)lock();}
+    else flush(true);
   });
   // Polling uses HTTPS and works when a WebSocket or background tab is unavailable.
   setInterval(async () => {
     if (!active() || document.hidden) return;
     await flush();
+    await recoverPurchase();
     if (
       sync.snapshot().pending ||
       sync.snapshot().latest ||
@@ -323,18 +330,26 @@ function applyWallet(s) {
   s.bought = [...wallet.owned];
   s.equipped = s.equipped.filter((id) => s.bought.includes(id));
 }
-async function flush() {
-  if (!sync || !active()) return;
-  try {
-    await sync.flush();
-    if (!sync.snapshot().conflict)
-      message("Saved to staging · 60-minute weekly goal · screen time 1:1");
-  } catch {
-    message(
-      "Not synced. Your changes remain on this device; reconnect and unlock to retry.",
-    );
-  }
+async function flush(force=false) {
+  if(!sync||!active())return;
+  const dirty=sync.snapshot();
+  if(!dirty.pending&&!dirty.latest)return;
+  if(!force&&Date.now()-lastSaveAttempt<30000)return;
+  lastSaveAttempt=Date.now();
+  try{
+    await sync.flush({oneRequest:!force});
+    const next=sync.snapshot();
+    if(!next.conflict)message(next.pending||next.latest?'Saved on this device · waiting for staging sync':'Saved to staging · 60-minute weekly goal · screen time 1:1');
+  }catch{message('Not synced. Your changes remain on this device; reconnect and unlock to retry.');}
 }
+async function recoverPurchase(){
+  if(!active()||identity.role!=='learner'||!navigator.onLine)return;
+  try{if(!intents.pending())return;const remote=await intents.recover();if(remote){wallet=remote.wallet;localStorage.setItem(`v3-last-remote:${c.projectRef}:${identity.user}`,JSON.stringify(remote));
+      const key=window.V3CloudContext?.key;
+      if(key&&!document.documentElement.hasAttribute('data-saving')){const state=JSON.parse(localStorage.getItem(key));applyWallet(state);localStorage.setItem(key,JSON.stringify(state));window.dispatchEvent(new StorageEvent('storage',{key}));}}}
+  catch{message('A purchase is awaiting confirmation. Its retry is preserved.');}
+}
+
 function conflictUI() {
   // A blocking separate panel stops game edits while preserving both entire versions.
   let dialog = $("sync-conflict");
@@ -358,36 +373,13 @@ function conflictUI() {
       await flush();
     };
 }
-async function transaction(op, payload) {
-  // Persist intent BEFORE the request. Retrying after response loss uses the same ID and content.
-  const key = `v3-intent:${c.projectRef}:${identity.user}`,
-    raw = localStorage.getItem(key);
-  const intent = raw
-    ? JSON.parse(raw)
-    : { op, payload: { ...payload, requestId: crypto.randomUUID() } };
-  if (
-    intent.op !== op ||
-    JSON.stringify({ ...intent.payload, requestId: undefined }) !==
-      JSON.stringify({ ...payload, requestId: undefined })
-  )
-    throw Error("A previous transaction is pending. Retry that action first.");
-  localStorage.setItem(key, JSON.stringify(intent));
-  try {
-    await rpc(op, intent.payload);
-  } catch (err) {
-    // Server rejections are final; transport failures preserve the exact intent for retry.
-    if (err.code && err.code !== "PGRST000") localStorage.removeItem(key);
-    throw err;
-  }
-  const latest = await rpc("read");
-  wallet = latest.wallet;
-  localStorage.setItem(
-    `v3-last-remote:${c.projectRef}:${identity.user}`,
-    JSON.stringify(latest),
-  );
-  localStorage.removeItem(key);
+async function transaction(op,payload) {
+  const latest=await intents.run(op,payload);
+  wallet=latest.wallet;
+  localStorage.setItem(`v3-last-remote:${c.projectRef}:${identity.user}`,JSON.stringify(latest));
   return latest;
 }
+
 async function heartbeat(seconds) {
   if (operationPending || !active() || !navigator.onLine) return;
   operationPending = true;
@@ -498,11 +490,11 @@ async function boot() {
       },
     });
     const check = await client.rpc("v3_identity");
-    const verifiedKey = "v3-verified:" + c.projectRef;
+    const verifiedKey = "v3-verified:" + c.projectRef, receiptVerifiedKey="v3-verified-receipts:"+c.projectRef;
     if (check.error) {
       if (
         navigator.onLine ||
-        sessionStorage.getItem(verifiedKey) !== c.projectRef
+        sessionStorage.getItem(verifiedKey) !== c.projectRef || sessionStorage.getItem(receiptVerifiedKey)!=='1'
       )
         throw Error("Staging identity was not verified. Sign-in is disabled.");
     } else {
@@ -511,11 +503,14 @@ async function boot() {
         check.data?.projectRef !== c.projectRef
       )
         throw Error("Staging identity mismatch. Sign-in disabled.");
+      if(check.data?.saveReceiptVersion!==1)throw Error('The saving upgrade has not been verified on this server. Existing saved data is preserved.');
       sessionStorage.setItem(verifiedKey, c.projectRef);
+      sessionStorage.setItem(receiptVerifiedKey,'1');
     }
     $("cloud-lock").onclick = lock;
     $("cloud-signout").onclick = async () => {
       try {
+        await Promise.race([flush(true),new Promise(resolve=>setTimeout(resolve,1500))]);
         if (active()) await rpc("lock");
       } finally {
         unlock = null;
