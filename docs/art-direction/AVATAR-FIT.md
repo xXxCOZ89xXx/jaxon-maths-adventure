@@ -1,25 +1,28 @@
-# Avatar attachment fit
+# Avatar attachment fit — owner review only
 
-Scope: visual placement only, based on development baseline `f321852`. No catalogue, price, ownership, save, reward, authentication or backend changes.
+The current follow-up compares against `a1f14cf`. It changes presentation only: existing catalogue IDs, artwork files, prices, ownership, economy, gameplay, saved JSON, namespaces, authentication and backend configuration are unchanged. Keep `release/ipad` and the live game unchanged.
 
-`v3/avatar-art.js` defines named anatomy anchors and category rules, with explicit fit entries for all 34 wearable catalogue items. The six backgrounds retain their existing scenery treatment. Original atlas cells remain the source artwork; measured CSS crop windows remove transparent padding before positioning, so cell padding no longer sets apparent size. The original base proportions are retained with headroom reserved inside the shared 2:3 canvas.
+## Atlas and placement corrections
 
-- Headwear rests at the forehead; tall hats have silhouette-specific widths.
-- Sunglasses align with the eyes; scarves/medals attach at the neck and watches at the wrist.
-- Outfits span shoulders to ankles with item-specific widths; no blanket clothing reduction.
-- Packs, shields, wings and the shoulder dragon render behind the body. Wings have their own span; backpack details stay near the upper back rather than below the hips.
-- Gloves use separate left/right hand crop windows. Sword/wand handles align with the hand.
-- Footwear sits on a shared sole line; companions have individual ground/hover sizes.
-- All attachment coordinates are proportional and deterministic; CSS provides a stacked small-screen shop without changing the existing preview interaction.
+- Explorer helmet and hard hat use individual widths and cropped front brims, excluding the rear opening/strap silhouette. Headphones have their own smaller fit.
+- Jacket and hoodie use separate shoulder and leg crops joined at the waist. The source's detached collar/hood artwork is excluded, retaining the original base head, hair, hands and soles.
+- Back items have raised upper-back anchors and individual offsets, with z-order below the body. Wings are raised without changing their span. Packs/shield/parachute retain recognisable edge silhouettes.
+- Sunglasses are smaller. Medal/scarf attach at the neck. The watch rotates around the wrist above the hand. Glove crops swap sides and rotate fingers downward. Sword/wand handles pivot at the hand and render behind an original hand fragment.
+- All seven catalogue companions restore the pre-`a1f14cf` attachment frame: left 76%, top 66%, width 40%, height 32%. Their intentional overflow is allowed by the geometry checks.
+- Expression atlas cells contain complete heads. Only their inner face is now shown; no complete extra head, hair or ear is drawn. Non-default hair masks the original upper hair. A small skin-only sample from the same atlas fills the exposed forehead behind the new hair; this prevents a transparent forehead gap.
+- **Footwear limitation:** the upgrade atlas contains angled shoes, not front-facing pairs. Options 1–3 now reuse the existing front-facing starter sole/geometry with brown, blue and gold material colours. They do not introduce newly illustrated boot shapes. This corrects orientation while keeping the artwork source unchanged; distinct front-facing boot silhouettes would require separately approved artwork.
+- Free appearance option 0 and all six background presentations are preserved pixel-for-pixel in the focused browser comparisons.
 
 ## Focused local review
 
-Run `npx playwright test -c playwright.avatar-fit.config.cjs`. Existing fictional camp fixtures block every external origin, including both real Supabase hosts. The tests capture seven actual shop combinations plus all 40 items/free appearance choices at 820×1180, 1180×820 and 390×844; exercise every item through equip/reload/unequip/reload without coin or ownership changes; verify proportional geometry, bounds and back/body layering at three avatar sizes; and confirm existing unowned previews never alter saved ownership/equipment.
+`npx playwright test -c playwright.avatar-fit.config.cjs` runs 18 cases: six per viewport at 820×1180, 1180×820 and 390×844. Existing camp fixtures deny every external origin, including both actual Supabase hosts. Coverage includes all 40 catalogue items, equip/reload/unequip/reload with unchanged coins/ownership, existing read-only unowned preview, proportional geometry/layering, single-head expression cropping, frontal footwear, wrist/grip placement, restored companion dimensions, and byte-identical rendered PNG comparisons for option 0/backgrounds against the baseline.
 
-For baseline captures: `AVATAR_PHASE=before AVATAR_REPORT=/workspace/artifacts/avatar-fit/before-results.json npx playwright test -c playwright.avatar-fit.config.cjs`. This serves the committed `f321852` renderer/CSS locally; gameplay files are not rewritten. Only the three capture cases run in baseline mode; new-behaviour assertions are explicitly skipped.
+Baseline captures: `AVATAR_PHASE=before AVATAR_REPORT=/workspace/artifacts/avatar-fit-followup/before-results.json npx playwright test -c playwright.avatar-fit.config.cjs --grep 'actual shop combinations'`. It serves committed `a1f14cf` renderer/CSS locally without rewriting gameplay files. Baseline capture runs three cases; final assertions run without skips.
 
-Then run `node scripts/build-avatar-fit-gallery.cjs`. It embeds the actual PNGs into `/workspace/artifacts/avatar-fit/REVIEW.html` for offline Edge review. `AVATAR_SHOTS` overrides the capture root; pass the same root to the gallery script. The catalogue contact sheets are test-only renderer displays, clearly distinguished from actual shop screenshots.
+`node scripts/build-avatar-fit-gallery.cjs` creates `/workspace/artifacts/avatar-fit-followup/REVIEW.html` and three smaller self-contained HTML galleries. Pass a root directory as the first argument to change the gallery destination; `AVATAR_SHOTS` changes test capture destination. Each viewport includes seven actual shop equipment combinations, four actual free-appearance shop screenshots and a contact sheet of all 40 items/options 0–3. Contact sheets are clearly labelled test-only displays using the actual renderer. Original and revised captures remain paired; no concept art is substituted.
 
-Existing artwork is fixed front-view 2.5D: outfits and footwear remain separate illustrated layers rather than rigged/animated clothing. Back equipment is intentionally partly occluded from the front. Full outfits mask only the starter clothing; original head, hands and soles remain visible through separate CSS-clipped instances of the original base asset. The space-suit crop excludes a neighbouring cape fringe in the source atlas. Owner visual approval remains required; no release promotion is authorised.
+Existing wardrobe compatibility check: `ROLLOUT_REPORT=/workspace/artifacts/avatar-fit-followup/retained-wardrobe-results.json npx playwright test -c playwright.rollout.config.cjs --grep 'Layered wardrobe'`.
 
-Focused validation: 12 avatar-fit cases (four per viewport) and two retained wardrobe compatibility cases pass in local touch Chromium. Baseline capture produced three capture passes. Physical iPad Safari and owner visual approval are not claimed. No external connections or live-account tests were used.
+The art remains fixed-view 2.5D, not a rigged character. Back equipment is intentionally partly occluded. Physical iPad Safari and owner approval are not claimed. No release publication is authorised.
+
+Validation for this follow-up: 18 focused cases passed (no skips/flakes/failures), two retained wardrobe compatibility cases passed, and all 12 visual/geometry/preservation cases passed again after the final headphone-opening mask. Baseline capture: three cases passed. The gallery contains 72 paired PNGs across the three viewports, including appearance options 0–3. All screenshots use local fictional state; no real account or pending save was read or altered.
