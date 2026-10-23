@@ -1,3 +1,5 @@
+> Historical Stage 1 checkpoint. Current Years 6–9 implementation, objective mapping, tests and remaining acceptance work are documented in [YEARS6-9-CURRICULUM.md](YEARS6-9-CURRICULUM.md).
+
 # Major upgrade: educational review and implemented foundations
 
 Development checkpoint, 22 October 2026. The live game remains on `release/ipad` at `2e84e74`; this is not a full curriculum/release acceptance claim.

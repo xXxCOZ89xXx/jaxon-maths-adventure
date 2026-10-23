@@ -1,5 +1,9 @@
 # Codex build instructions — Jaxon's Maths Adventure V3
 
+## Curriculum development — 23 October 2026
+
+The current owner brief authorises implementation of Years 6–9 curriculum and playable missions, superseding earlier planning-only/freeze/release instructions for this phase. Start at released `27ac8421e3dea2cf63788c435f3509484d45d5ea` (contains approved avatar `3823ecb`) on `codex/years6-9-curriculum`. Commit/push development work only. No release PR, merge, deployment, real account/learner access, Supabase changes or production-service calls. Preserve immutable queues, existing IDs, old question/task snapshots and independent topic progression. Use fictional local tests and the existing external-origin denial fixtures. Run `npm test`, `npm run test:curriculum`, `npm run test:curriculum-browser` and `npm run test:ipad-release`. See `docs/YEARS6-9-CURRICULUM.md` and the current objective registry/audit. Physical iPad acceptance remains pending.
+
 This file governs V3 development, currently on `codex/v3-adventure-build` in draft PR #2. The user’s 20 October continuation approval includes Practical Maths Town as the ninth current world, deeper gameplay in all nine worlds, and explorer/camp improvements. Read `docs/V3-ADVENTURE-BRIEF.md` and `docs/V3-TEST-ISOLATION.md` first. The user has approved the complete adventure redesign and prefers one major acceptance test near completion instead of repeated requests for manual tests.
 
 ## Save-growth correction — 23 October 2026

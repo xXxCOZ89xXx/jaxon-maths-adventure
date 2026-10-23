@@ -466,7 +466,7 @@
       feedback: "",
       answered: false,
     };
-    s.seen = [...s.seen, ...qs.map((q) => q[0])];
+    s.seen = [...s.seen, ...qs.map((q) => q[0]), ...(mode === "practice" && s.learning.teachingExample?.[5]?.contentVersion === 8 ? [s.learning.teachingExample[0]] : [])];
     s.view = mode === "check" ? "check" : "lesson";
     s.resumeView = s.view;
     return null;
@@ -474,13 +474,14 @@
   function answerLearning(s, value, skip = false, now = Date.now()) {
     const l = s.learning;
     if (!l || l.answered) return;
-    const q = l.qs[l.i],
-      normal = (x) => String(x).replace(/−/g, "-").trim().toLowerCase(),
-      correct =
-        !skip &&
-        (l.mode === "discovery"
-          ? Math.abs(parseNumber(value) - Number(q[1])) < 1e-8
-          : normal(value) === normal(q[1]));
+    const q = l.qs[l.i];
+    // Newly authored supported practice must pass through its teaching screen.
+    // Existing saved questions keep their original response contract.
+    if(q[5]?.contentVersion === 8 && l.mode === "practice" && !l.started)return;
+    const normal = (x) => String(x).replace(/−/g, "-").trim().toLowerCase(),
+      correct = !skip && (q[5]?.contentVersion === 8
+        ? (typeof module !== "undefined" ? require('./curriculum-activities').V8Activities : root.V8Activities).matches({answer:q[1],activity:q[5].activity},String(value)) && (q[5].activity?.kind!=='experiment'||l.manipulation?.c8?.trials===q[5].activity.outcomes.length)
+        : l.mode === "discovery" ? Math.abs(parseNumber(value)-Number(q[1])) < 1e-8 : normal(value) === normal(q[1]));
     if (correct && !l.assisted) l.correct++;
     if (l.mode === "discovery")
       l.answers.push({
@@ -616,7 +617,7 @@
         String(q[2]),
         h.choices().map(String),
         (d.band<5||education.foundations.some(f=>f[0]===id))?education.question(id,d.band,900+d.band,i)[3]:"Think about what each part of the question means.",
-        (d.band<5||education.foundations.some(f=>f[0]===id))?education.question(id,d.band,900+d.band,i)[4]:"The answer is " + q[2] + ".",
+        (d.band<5||education.foundations.some(f=>f[0]===id))?education.question(id,d.band,900+d.band,i)[4]:q[4] || "The answer is " + q[2] + ".",
       ];
     });
     s.seen = [

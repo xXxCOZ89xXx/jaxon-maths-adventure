@@ -1,9 +1,26 @@
 'use strict';
 const {test,expect}=require('./helpers/identities.cjs');
-async function click(page,act){const target=page.locator(`[data-action="${act}"]`).first();const door=target.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute("open"))===null)await door.locator("summary").tap();await target.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
-async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();}
+require('node:fs').mkdirSync('work/quality-shots',{recursive:true});
+async function openScene(page,mode){const d=page.locator('.immersive-journey .scene-dialog');if(await d.isVisible())await d.locator('[data-scene-close]').tap();const opener=page.locator(`[data-scene-open="${mode}"]`).first();if(await opener.count())await opener.tap();}
+async function openCurrent(page){const world=page.locator('dialog.world-task-dialog');if(await world.count()&&!await world.isVisible())await page.locator('.activity-entry [data-world-task-open]').tap();const d=page.locator('.immersive-journey .scene-dialog');if(await d.count()&&!await d.isVisible())await page.locator('.scene-dock [data-scene-open]').first().tap();}
+async function target(page,act){
+ await openCurrent(page);const selector=`[data-action="${act}"]`;
+ const world=page.locator('dialog.world-task-dialog[open]');if(await world.count()&&await world.locator(selector).count())return world.locator(selector).first();
+ const dialog=page.locator('.immersive-journey .scene-dialog[open]');if(await dialog.count()&&await dialog.locator(selector).count())return dialog.locator(selector).first();
+ for(const mode of ['task','pantry','fridge','basket','timetable','ticket'])if(await page.locator(`[data-scene-open="${mode}"]`).count()){await openScene(page,mode);const d=page.locator('.scene-dialog[open]');if(await d.locator(selector).count())return d.locator(selector).first();}
+ const overlay=page.locator('.immersive-journey .scene-dialog[open]');if(await overlay.count())await overlay.locator('[data-scene-close]').tap();
+ return page.locator(selector).first();
+}
+async function click(page,act){const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
 async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
-async function setRange(page,n){const range=page.locator('[data-model-range]');await range.evaluate((el,n)=>{el.value=String(n);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));},n);await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+async function setRange(page,n){
+ await openCurrent(page);const opener=page.locator('.scene-dock [data-scene-open]').first();if(await opener.count())await openScene(page,await opener.getAttribute('data-scene-open'));
+ const range=page.locator('[data-model-range]').filter({visible:true}).first();
+ if(await range.count())await range.evaluate((el,n)=>{el.value=String(n);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));},n);
+ else await page.locator('[data-numeric-answer]').filter({visible:true}).first().fill(String(n));
+ await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+}
 async function answer(page,t,choice){
  if(['order','match'].includes(t.kind)){for(let slot=0;slot<t.answer.length;slot++){await click(page,'j-pick:'+t.answer[slot]);await click(page,'j-place:'+slot);}}
  else if(['basket','budget'].includes(t.kind)){for(let i=0;i<t.answer.length;i++){let n=t.answer[i];for(const step of t.kind==='budget'?[1000,500,100,5,1]:[1])while(n>=step){if(t.kind==='budget'){await click(page,'j-budget-pick:'+step);await click(page,'j-budget-place:'+i);}else await click(page,`j-part:${i}:${step}`);n-=step;}}}
@@ -16,7 +33,7 @@ async function answer(page,t,choice){
 const worlds=[['number','2',1,'array'],['fractions','1',1,'order'],['algebra','1',0,'sequence'],['geometry','0',0,'rotate'],['ratio','0',0,'ratio'],['statistics','0',0,'chart'],['probability','2',0,'chance'],['measure','0',0,'measure']];
 for(const [world,route,stage,kind] of worlds)test(`${world}: actual model, wrong answer, hint and saved placement`,async({camp})=>{
  const {page,key,read}=camp;await seed(page,key,world,route,stage);let q=(await read()).adventure.active,t=q.tasks[q.i];expect(t.kind).toBe(kind);
- await click(page,'m-submit');expect((await read()).adventure.active.solved).toBe(false);await click(page,'m-help');await expect(page.locator('.feedback')).toBeVisible();
+ await click(page,'m-submit');expect((await read()).adventure.active.solved).toBe(false);expect((await read()).adventure.active.phase).toBe('lesson');await click(page,'m-begin');await click(page,'m-help');await expect(page.locator('.feedback').filter({visible:true}).first()).toBeVisible();
  if(kind==='array')await click(page,`m-array:${t.answer[0]}:${t.answer[1]}`);
  else if(kind==='order'){for(let i=0;i<t.answer.length;i++){await click(page,'h-pick:'+t.answer[i]);await click(page,'h-place:'+i);}}
  else if(kind==='sequence'){await expect(page.getByRole('group',{name:'Loose train carriages'})).toBeVisible();await click(page,'m-value:'+t.answer);}
@@ -25,45 +42,45 @@ for(const [world,route,stage,kind] of worlds)test(`${world}: actual model, wrong
  else if(kind==='chart')for(let i=0;i<t.answer.length;i++)await click(page,`m-chart:${i}:${t.answer[i]}`);
  else if(kind==='chance')for(let i=0;i<t.answer;i++)await click(page,'m-select:'+i);
  else await setRange(page,t.answer);
- const exact=(await read()).adventure.active;await page.reload();expect((await read()).adventure.active).toEqual(exact);await click(page,'m-submit');expect((await read()).adventure.active.solved).toBe(true);expect((await read()).checks).toEqual({});
+ const exact=(await read()).adventure.active;await page.reload();await openCurrent(page);expect((await read()).adventure.active).toEqual(exact);await click(page,'m-submit');expect((await read()).adventure.active.solved).toBe(true);expect((await read()).checks).toEqual({});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
- if(world==='algebra')await page.screenshot({path:`tests/artifacts/quality-train-${page.viewportSize().width}.png`,fullPage:true});
+ if(world==='algebra')await page.screenshot({path:`work/quality-shots/quality-train-${page.viewportSize().width}.png`,fullPage:true});
 });
 for(const id of ['cook-pizza','cook-curry','cook-soup','cook-pancakes','shop-budget','travel-library','job-cafe','errand-post','original-bolognese'])test(`${id}: full touch journey, context, decisions and exact reopen`,async({camp})=>{
- const {page,key,read}=camp;await page.evaluate(({key,id})=>{let s=V3Engine.fresh();s.tourSeen=true;if(id==='original-bolognese')V5Journey.start(s,'bolognese',2);else V52TownLife.start(s,id,2);localStorage.setItem(key,JSON.stringify(s));},{key,id});await page.reload();
- let count=0;while(!(await run(page,key)).done){const j=await run(page,key),t=j.steps[j.stage];
-  if(j.stage===0){await click(page,'j-submit');if(!(await run(page,key)).solved){await click(page,'j-help');await expect(page.locator('.feedback')).toBeVisible();}}
+ const {page,key,read}=camp;await page.evaluate(({key,id})=>{let s=V3Engine.fresh();s.tourSeen=true;if(id==='original-bolognese')V5Journey.start(s,'bolognese',2);else V52TownLife.start(s,id,2);localStorage.setItem(key,JSON.stringify(s));},{key,id});await page.reload();await openCurrent(page);
+ let count=0;while(!(await run(page,key)).done){await openCurrent(page);const j=await run(page,key),t=j.steps[j.stage];
+  if(j.stage===0){await click(page,'j-submit');if(!(await run(page,key)).solved){await click(page,'j-help');await expect(page.locator('.feedback').filter({visible:true}).first()).toBeVisible();}}
   if((await run(page,key)).solved){await click(page,'j-next');continue;}
   if(id==='travel-library')expect(t.prompt).not.toContain('Reach Library visit');
-  if(t.visualContext==='stock')await expect(page.locator('.task-controls')).not.toContainText('£');
-  if(j.recipeCard){await page.locator('.recipe-card summary').tap();await expect(page.locator('.recipe-card')).toContainText(j.recipeCard.temperature+' °C');}
+  if(t.visualContext==='stock')await expect(page.locator('.scene-dialog[open] .scene-closeup-controls,.task-controls').filter({visible:true}).first()).not.toContainText('£');
+  if(j.recipeCard){if(await page.locator('[data-scene-open="recipe"]').count())await openScene(page,'recipe');await page.locator('.recipe-card summary').tap();await expect(page.locator('.recipe-card')).toContainText(j.recipeCard.temperature+' °C');}
   await answer(page,t,id==='shop-budget'&&t.lunchChoice?t.options.findIndex(o=>o.name.startsWith('Tomato')):undefined);
-  if(count===0||['choice','measure','clock'].includes(t.kind)||t.visualContext==='shelves'){const exact=await run(page,key);await page.reload();expect(await run(page,key)).toEqual(exact);}
+  if(count===0||['choice','measure','clock'].includes(t.kind)||t.visualContext==='shelves'){const exact=await run(page,key);await page.reload();await openCurrent(page);expect(await run(page,key)).toEqual(exact);}
   await click(page,'j-submit');expect((await run(page,key)).solved,`${id}: ${t.title}`).toBe(true);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
-  if(t.visualContext==='shelves'||t.visualContext==='stock')await page.screenshot({path:`tests/artifacts/quality-${id}-${t.visualContext}-${page.viewportSize().width}.png`,fullPage:true});
+  if(t.visualContext==='shelves'||t.visualContext==='stock')await page.screenshot({path:`work/quality-shots/quality-${id}-${t.visualContext}-${page.viewportSize().width}.png`,fullPage:true});
   await click(page,'j-next');expect(++count).toBeLessThan(25);
  }
  const j=await run(page,key);expect(j.receipts.length).toBeGreaterThan(1);if(id==='shop-budget'){expect(j.decisions.map(d=>d.choice).join(' ')).toContain('Tomato pasta');expect(j.inventory['Rice · bag']).toBe(1);}
- const final=await read();expect(final.coins).toBe(0);expect(final.checks).toEqual({});await page.reload();expect(await run(page,key)).toEqual(j);
+ const final=await read();expect(final.coins).toBe(final.earned);expect(final.earned).toBe(Math.floor(final.minutes*10+1e-9));expect(final.checks).toEqual({});await page.reload();await openCurrent(page);expect(await run(page,key)).toEqual(j);
 });
 test('Bolognese starts the full recipe; native iPad jug gesture and price-free cupboards',async({camp})=>{
- const {page,key,read}=camp;await page.evaluate(k=>{const s=V3Engine.fresh();s.tourSeen=true;V5Journey.start(s,'bolognese');localStorage.setItem(k,JSON.stringify(s));},key);await page.reload();
- await expect(page.locator('.recipe-card summary')).toContainText('Spaghetti Bolognese');await expect(page.locator('.kitchen-stock')).toBeVisible();await expect(page.locator('.task-controls')).not.toContainText('£');
- await page.screenshot({path:`tests/artifacts/quality-bolognese-${page.viewportSize().width}.png`,fullPage:true});
+ const {page,key,read}=camp;await page.evaluate(k=>{const s=V3Engine.fresh();s.tourSeen=true;V5Journey.start(s,'bolognese');localStorage.setItem(k,JSON.stringify(s));},key);await page.reload();await openCurrent(page);
+ await openScene(page,'recipe');await expect(page.locator('.recipe-card summary')).toContainText('Spaghetti Bolognese');await openScene(page,'pantry');await expect(page.locator('.countable-stock').first()).toBeVisible();await expect(page.locator('.scene-dialog[open] .scene-closeup-controls,.task-controls').filter({visible:true}).first()).not.toContainText('£');
+ await page.screenshot({path:`work/quality-shots/quality-bolognese-${page.viewportSize().width}.png`,fullPage:true});
  // Separate synthetic state at a measure stage. Interact with the actual range track using touch.
- await page.evaluate(k=>{const s=JSON.parse(localStorage.getItem(k)),j=V52TownLife.state(s);j.stage=j.steps.findIndex(t=>t.kind==='measure');j.completed=Array.from({length:j.stage},(_,i)=>i);j.values={};localStorage.setItem(k,JSON.stringify(s));},key);await page.reload();
- const range=page.locator('[data-model-range]');await range.scrollIntoViewIfNeeded();const box=await range.boundingBox();await page.touchscreen.tap(box.x+box.width*.6,box.y+box.height/2);await expect.poll(async()=>((await run(page,key)).values.amount||0)).toBeGreaterThan(0);const exact=await run(page,key);await page.reload();expect(await run(page,key)).toEqual(exact);
+ await page.evaluate(k=>{const s=JSON.parse(localStorage.getItem(k)),j=V52TownLife.state(s);j.stage=j.steps.findIndex(t=>t.kind==='measure');j.completed=Array.from({length:j.stage},(_,i)=>i);j.values={};localStorage.setItem(k,JSON.stringify(s));},key);await page.reload();await openCurrent(page);
+ const range=page.locator('[data-model-range]');await range.scrollIntoViewIfNeeded();const box=await range.boundingBox();await page.touchscreen.tap(box.x+box.width*.6,box.y+box.height/2);await expect.poll(async()=>((await run(page,key)).values.amount||0)).toBeGreaterThan(0);const exact=await run(page,key);await page.reload();await openCurrent(page);expect(await run(page,key)).toEqual(exact);
 });
 test('Mocked cloud keeps immutable pending saves while new Town stock selections reconnect',async({family})=>{
  const page=await family.open('learner'),key=`jaxon_v3_staging:${family.ref}:${family.uid}:game`,queue=key+':queue';await click(page,'skip-tour');await page.locator('nav [data-nav="map"]').tap();await click(page,'world:town');await page.locator('.town-plan-catalog details').filter({has:page.locator('summary',{hasText:'Cooking'})}).locator('summary').tap();await click(page,'j-plan:cook-pasta');
  family.server.loseSave=true;await click(page,'j-part:0:1');await page.evaluate(()=>window.dispatchEvent(new Event('online')));await expect.poll(()=>page.evaluate(k=>JSON.parse(localStorage.getItem(k))?.pending?.requestId,queue)).toBeTruthy();const pending=await page.evaluate(k=>JSON.parse(localStorage.getItem(k)).pending,queue);
  await page.context().setOffline(true);await click(page,'j-part:1:1');expect(await page.evaluate(k=>JSON.parse(localStorage.getItem(k)).pending,queue)).toEqual(pending);const exact=await run(page,key);
- await page.context().setOffline(false);await page.evaluate(()=>window.dispatchEvent(new Event('online')));await expect.poll(()=>family.server.progress.adventure?.townLifeV2?.runs[exact.id]?.values).toEqual(exact.values);await page.reload();expect(await run(page,key)).toEqual(exact);
+ await page.context().setOffline(false);await page.evaluate(()=>window.dispatchEvent(new Event('online')));await expect.poll(()=>family.server.progress.adventure?.townLifeV2?.runs[exact.id]?.values).toEqual(exact.values);await page.reload();await openCurrent(page);expect(await run(page,key)).toEqual(exact);
 });
 test('Balance bundles and old V2 snapshots retain their saved meaning',async({camp})=>{
  const {page,key,read}=camp;await seed(page,key,'algebra','0',0);let q=(await read()).adventure.active,t=q.tasks[0];await expect(page.getByRole('group',{name:'Unit bundles'})).toBeVisible();await click(page,'m-value:'+t.answer);await click(page,'m-submit');expect((await read()).adventure.active.solved).toBe(true);
- const book=require('./fixtures/town-v2-before-quality.json');await page.evaluate(({key,book})=>{const s=V3Engine.fresh();s.tourSeen=true;s.adventure={townLifeV2:book,townActive:2};s.view=s.resumeView='journey';s.world='town';localStorage.setItem(key,JSON.stringify(s));},{key,book});await page.reload();expect((await run(page,key)).steps).toEqual(book.runs[book.active].steps);await expect(page.locator('.shop-counter')).toBeVisible();const exact=await run(page,key);await click(page,'nav:home');await click(page,'continue');expect(await run(page,key)).toEqual(exact);
+ const book=require('./fixtures/town-v2-before-quality.json');await page.evaluate(({key,book})=>{const s=V3Engine.fresh();s.tourSeen=true;s.adventure={townLifeV2:book,townActive:2};s.view=s.resumeView='journey';s.world='town';localStorage.setItem(key,JSON.stringify(s));},{key,book});await page.reload();await openCurrent(page);expect((await run(page,key)).steps).toEqual(book.runs[book.active].steps);await expect(page.locator('.shop-counter')).toBeVisible();const exact=await run(page,key);await click(page,'nav:home');await click(page,'continue');expect(await run(page,key)).toEqual(exact);
 });
 test('A stale range edit cannot overwrite a replacement adventure in another tab',async({camp})=>{
  const {page,context,key,read}=camp;await seed(page,key,'measure','0');
@@ -77,12 +94,12 @@ test('A stale range edit cannot overwrite a replacement adventure in another tab
 test('Place-value supplies and money envelopes use tap-to-place objects',async({camp})=>{
  const {page,key,read}=camp;
  // Use an actual generated block task, keeping its saved task identity.
- await page.evaluate(k=>{let s=V3Engine.fresh();s.tourSeen=true;let found=false;for(const world of V3Engine.worlds){for(const r of V3Adventure.routes(world.id)){V3Adventure.start(s,world.id,r.id,1);const q=V3Adventure.current(s),i=q.tasks.findIndex(t=>t.kind==='blocks');if(i>=0){q.i=i;q.phase='play';found=true;break;}}if(found)break;}if(!found)throw Error('No place-value activity');s.view='adventure';localStorage.setItem(k,JSON.stringify(s));},key);await page.reload();
+ await page.evaluate(k=>{let s=V3Engine.fresh();s.tourSeen=true;let found=false;for(const world of V3Engine.worlds){for(const r of V3Adventure.routes(world.id)){V3Adventure.start(s,world.id,r.id,1);const q=V3Adventure.current(s),i=q.tasks.findIndex(t=>t.kind==='blocks');if(i>=0){q.i=i;q.phase='play';found=true;break;}}if(found)break;}if(!found)throw Error('No place-value activity');s.view='adventure';localStorage.setItem(k,JSON.stringify(s));},key);await page.reload();await openCurrent(page);
  await expect(page.locator('.block-supply')).toBeVisible();await click(page,'m-part:0:1');await expect(page.getByRole('button',{name:'Return 100 block',exact:true})).toBeVisible();await click(page,'m-part:0:-1');expect((await read()).adventure.active.values.parts[0]).toBe(0);
- await page.evaluate(k=>{const s=V3Engine.fresh();s.tourSeen=true;V52TownLife.start(s,'job-cafe',1);const j=V52TownLife.state(s);j.stage=j.steps.findIndex(t=>t.kind==='budget');j.completed=Array.from({length:j.stage},(_,i)=>i);s.view='journey';localStorage.setItem(k,JSON.stringify(s));},key);await page.reload();
- await click(page,'j-budget-pick:100');await click(page,'j-budget-place:0');expect((await run(page,key)).values.parts[0]).toBe(100);await page.reload();await expect(page.getByRole('button',{name:'Return 100 pence from Savings',exact:true})).toBeVisible();await click(page,'j-part:0:-100');expect((await run(page,key)).values.parts[0]).toBe(0);
+ await page.evaluate(k=>{const s=V3Engine.fresh();s.tourSeen=true;V52TownLife.start(s,'job-cafe',1);const j=V52TownLife.state(s);j.stage=j.steps.findIndex(t=>t.kind==='budget');j.completed=Array.from({length:j.stage},(_,i)=>i);s.view='journey';localStorage.setItem(k,JSON.stringify(s));},key);await page.reload();await openCurrent(page);
+ await click(page,'j-budget-pick:100');await click(page,'j-budget-place:0');expect((await run(page,key)).values.parts[0]).toBe(100);await page.reload();await openCurrent(page);await expect(page.getByRole('button',{name:'Return 100 pence from Savings',exact:true})).toBeVisible();await click(page,'j-part:0:-100');expect((await run(page,key)).values.parts[0]).toBe(0);
 });
 test('Parent rewards and learner shop stay separate with the new Town save',async({family})=>{
  const parent=await family.open('parent');await expect(parent.getByRole('heading',{name:'Staging parent dashboard'})).toBeVisible();await parent.getByLabel('Action',{exact:true}).selectOption('award');await parent.getByLabel('Amount (1 to 60)',{exact:true}).fill('10');await parent.getByRole('button',{name:'Submit parent reward'}).tap();await expect.poll(()=>family.server.wallet.bonus).toBe(10);
- const page=await family.open('learner');await expect(page.getByRole('button',{name:'Submit parent reward'})).toHaveCount(0);await click(page,'skip-tour');await page.locator('nav [data-nav="camp"]').tap();await click(page,'nav:shop');await expect(page.locator('.shop-grid')).toBeVisible();expect(family.server.wallet.bonus).toBe(10);await page.reload();expect(family.server.wallet.bonus).toBe(10);
+ const page=await family.open('learner');await expect(page.getByRole('button',{name:'Submit parent reward'})).toHaveCount(0);await click(page,'skip-tour');await page.locator('nav [data-nav="camp"]').tap();await click(page,'nav:shop');await expect(page.locator('.shop-grid')).toBeVisible();expect(family.server.wallet.bonus).toBe(10);await page.reload();await openCurrent(page);expect(family.server.wallet.bonus).toBe(10);
 });

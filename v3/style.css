@@ -2154,6 +2154,17 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .fraction-answer-bars{display:grid;gap:12px}.fraction-answer-bars>.parts{display:grid;grid-template-columns:repeat(var(--denominator),minmax(48px,1fr));gap:3px;overflow-x:auto}.fraction-answer-bars button{min-width:0;min-height:48px;padding:4px}.proportion-model{width:200px;aspect-ratio:1;border-radius:50%;border:3px solid #315b45;margin:16px auto}.proportion-controls{display:flex;flex-wrap:wrap;gap:8px}.practice-meter-readings{display:flex;gap:16px;flex-wrap:wrap;padding:20px;background:#253d35;color:#fff4d9;border:5px solid #a3aaa2;border-radius:12px}.practice-meter-readings section{flex:1;min-width:150px}.practice-meter-readings output{display:block;background:#d8e5bd;color:#172a20;font:700 30px monospace;padding:14px;margin-top:8px}.practice-manipulative[data-mechanic="meter-calculation"]{border:2px solid #4e6e54}
 
 /* The same attachment canvas is used at every size. Keep the wardrobe inside small screens. */
+.c8-activity{max-width:100%;overflow-wrap:anywhere;font-size:18px}
+.c8-options{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.c8-options button,.c8-activity>button{min-height:48px;min-width:48px;white-space:normal;text-align:left;max-width:100%;margin:4px 0}
+.c8-options button[aria-pressed=true]{border:3px solid #204e39;background:#d1e6c2}
+.c8-activity li{margin:12px 0;padding:6px}
+.c8-value{display:block;font:700 28px monospace;background:#e4edd8;padding:16px;border:2px solid #446d4b;margin:12px 0}
+.c8-input{width:100%;max-width:320px;min-height:48px;font-size:20px;margin:8px}
+.c8-graph{display:block;width:100%;max-width:480px;min-width:0;touch-action:manipulation}
+.c8-graph [role=button]{cursor:pointer}
+.c8-graph [role=button]:focus{outline:none;fill:#bdd9ad;stroke:#152f21;stroke-width:2px}
+@media(max-width:600px){.c8-options button{flex:1 1 125px}.c8-input{margin:8px 0;max-width:100%}.c8-activity ol{padding-left:24px}}
 .shop-preview>.layered-explorer{margin:12px 18px;flex:0 0 200px}
 @media(max-width:600px){.shop-preview{flex-direction:column;align-items:center}.shop-preview>.layered-explorer{margin:12px 0;flex:none}.shop-preview>div{min-width:0;width:100%}}
 
@@ -2183,3 +2194,6 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .has-hat [data-attachment-category="headwear"] .equipment-source{
  clip-path:polygon(0 0,100% 0,100% 83%,88% 81%,70% 77%,50% 75%,30% 77%,12% 81%,0 83%);
 }
+.c8-pie{width:min(100%,240px);aspect-ratio:1;border-radius:50%;border:3px solid #203b2e;margin:18px auto}
+.c8-activity table{border-collapse:collapse;width:100%;font-size:16px}.c8-activity th,.c8-activity td{padding:6px;border:1px solid #687f60;overflow-wrap:anywhere}.c8-activity td input{width:75px;max-width:100%;min-height:48px;font-size:18px}.c8-activity td button{min-width:48px;min-height:48px;padding:4px}.c8-cell-grid{display:grid;grid-template-columns:repeat(var(--columns),minmax(44px,1fr));gap:4px;max-width:360px}.c8-cell-grid button{min-width:44px;min-height:48px;padding:4px}.c8-cell-grid button[aria-pressed=true]{background:#397b50;color:white}
+.c8-activity input[type=range]{display:block;width:100%;min-height:48px;touch-action:pan-y}.c8-activity fieldset{min-width:0;max-width:100%;padding:10px}.c8-calculator input{max-width:100%;min-height:48px;font-size:18px}

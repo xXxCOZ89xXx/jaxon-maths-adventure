@@ -1,0 +1,36 @@
+name: Curriculum development checks
+on:
+  push:
+    branches: [codex/years6-9-curriculum]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  curriculum:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - run: npm run test:curriculum
+      - run: npm run test:curriculum-browser
+      - run: npm run test:gameplay-quality
+        env:
+          QUALITY_REPORT: work/gameplay-quality-browser.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: curriculum-fictional-review
+          path: |
+            work/curriculum-browser.json
+            work/curriculum-shots/
+            work/gameplay-quality-browser.json
+            work/quality-shots/
+            docs/CURRICULUM-COVERAGE.json
+          retention-days: 14

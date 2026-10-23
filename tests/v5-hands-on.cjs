@@ -75,6 +75,8 @@ test("Every generated mechanic validates wrong/correct attempts, hints, exact sa
             assert.equal(M.submit(s), false, t.kind);
             M.help(s);
             assert.ok(q.assisted);
+            assert.equal(q.phase,"lesson","Wrong answers route through teaching");
+            M.begin(s);
             answer(s, t);
             const snapshot = JSON.stringify(q);
             s = E.migrate(JSON.parse(JSON.stringify(s)));
