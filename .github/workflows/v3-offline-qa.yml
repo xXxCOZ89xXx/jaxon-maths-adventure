@@ -8,11 +8,11 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: ipad-save-safety-${{ github.head_ref || github.ref_name }}
+  group: ipad-save-safety-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
   save-and-recovery:
-    name: save-and-recovery
+    name: ${{ github.event_name == 'pull_request' && 'save-and-recovery' || 'save-and-recovery-development' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
