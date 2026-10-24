@@ -53,6 +53,7 @@
   }
   function recipe(card){if(!card)return '';return `<details class="recipe-card"><summary>Open recipe card · ${esc(card.name)}</summary><p>Recipe for ${card.basePortions} portions · making ${card.portions} portions</p><table><caption>Ingredients</caption><thead><tr><th>Ingredient</th><th>For 2 portions</th></tr></thead><tbody>${card.ingredients.map(i=>`<tr><td>${esc(i.name)}</td><td>${i.base}</td></tr>`).join('')}</tbody></table><ol>${card.prep.map(p=>`<li>${esc(p)}</li>`).join('')}</ol><p>${card.prepMinutes?'Allow '+card.prepMinutes+' minutes of preparation. ':''}Measure ${card.ml} ml of ${esc(card.liquid)}. Use the ${esc(card.method)} at the supplied ${card.temperature} °C for ${card.minutes} minutes.</p><p class="small">${esc(card.safety)}</p></details>`;}
   function controls(q, t) {
+    if(t.direct)return window.V9Touch.render(t.direct,q.values,"d9-m");
     if(t.kind === "curriculum")return window.V8Activities.render(t,q.values);
     let html = "";
     const v = q.values.amount || 0;

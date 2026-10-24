@@ -1,14 +1,14 @@
 name: Curriculum development checks
 on:
   push:
-    branches: [codex/years6-9-curriculum]
+    branches: [codex/years6-9-curriculum, codex/touch-interactions]
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   curriculum:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,6 +19,10 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm test
       - run: npm run test:curriculum
+      - run: npm run test:touch
+      - run: npm run test:touch-browser
+      - run: node scripts/build-touch-review.cjs && node scripts/check-touch-preview.cjs
+      - run: git diff --exit-code -- docs/TOUCH-COVERAGE.json docs/TOUCH-INTERACTIONS.md docs/review/TOUCH-PLAYABLE.html
       - run: npm run test:curriculum-browser
       - run: npm run test:gameplay-quality
         env:
@@ -28,6 +32,9 @@ jobs:
         with:
           name: curriculum-fictional-review
           path: |
+            work/touch-browser.json
+            work/touch-shots/
+            docs/TOUCH-COVERAGE.json
             work/curriculum-browser.json
             work/curriculum-shots/
             work/gameplay-quality-browser.json

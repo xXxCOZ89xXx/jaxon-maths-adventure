@@ -787,7 +787,7 @@
     });
   }
   function rememberTeaching(s,q){
-    if(q?.contentVersion!==8)return;
+    if(![8,9].includes(q?.contentVersion))return;
     const t=q.tasks[q.i];s.seen||=[];
     for(const prompt of [t.prompt,t.examplePrompt])if(prompt&&!s.seen.includes(prompt))s.seen.push(prompt);
   }
@@ -818,7 +818,7 @@
         seed,
         i: 0,
         phase: "lesson",
-        tasks: course ? Array.from({length:6},(_,i)=>X.task(course.skills[0],[6,7,9][tier-1],seed,i)) : expandedGateway ? expandedGatewayTasks(world,tier,seed) : expandedWorld ? expandedMissionTasks(world,route,tier,seed) : [0, 1, 2].map((i) => task(world, route, tier, seed, i)),
+        tasks: (course ? Array.from({length:6},(_,i)=>X.task(course.skills[0],[6,7,9][tier-1],seed,i)) : expandedGateway ? expandedGatewayTasks(world,tier,seed) : expandedWorld ? expandedMissionTasks(world,route,tier,seed) : [0, 1, 2].map((i) => task(world, route, tier, seed, i))).map((t,i)=>root.V9TouchContent?root.V9TouchContent.task(t,[6,7,9][tier-1],seed,i):t),
         values: {},
         assisted: false,
         unassisted: 0,
@@ -847,6 +847,7 @@
     const q = current(s);
     if (!q || q.phase !== "play" || q.solved) return false;
     const t = q.tasks[q.i];
+    if(t.direct&&key==="direct")return root.V9Touch.edit(t.direct,q.values,value);
     if(t.kind === "curriculum" && key === "c8action")return XA.edit(t,q.values,value);
     const integer = (n) => Number.isInteger(n),
       array = Array.isArray;
@@ -899,6 +900,7 @@
     return true;
   }
   function value(q, t) {
+    if(t.direct)return root.V9Touch.value(t.direct,q.values);
     if(t.kind === "curriculum")return XA.value(t,q.values);
     if (["fraction", "chance", "grid"].includes(t.kind))
       return q.values.selected || [];
@@ -912,6 +914,7 @@
     return Number(q.values.amount || 0);
   }
   function correct(q, t) {
+    if(t.direct)return root.V9Touch.matches(t.direct,t.answer,q.values);
     if(t.kind === "curriculum")return XA.correct(t,q.values);
     const v = value(q, t);
     if (["fraction", "chance"].includes(t.kind)) return v.length === t.answer;

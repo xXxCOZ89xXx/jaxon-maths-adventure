@@ -1,0 +1,11 @@
+'use strict';
+const demos=[['Groceries into a basket','town_totals',0],['Number-line marker','negative',0],['Move and align a ruler','geometry_construction',0],['Pour and measure liquid','measure_volume',0],['Build a fraction','fraction_parts',0],['Drag a coordinate point','algebra_coordinates',0],['Sort outcomes into groups','prob_events',0]];
+const KEY='jaxon_touch_review_fictional_v1';let store={selected:0,values:{}};
+try{const saved=JSON.parse(localStorage.getItem(KEY));if(saved&&Number.isInteger(saved.selected)&&saved.selected>=0&&saved.selected<demos.length&&saved.values&&typeof saved.values==='object')store=saved;}catch{}
+const $=id=>document.getElementById(id),question=()=>V9TouchContent.row(demos[store.selected][1],7,1,demos[store.selected][2]);
+function render(){const focus=document.activeElement?.dataset?.d9Focus;const q=question();$('title').textContent=demos[store.selected][0];$('prompt').textContent=q[0];$('model').innerHTML=V9Touch.render(q[5].direct,store.values[store.selected]||{},'d9-review');$('feedback').textContent='Drag an object or use the equivalent buttons. Your work saves when you release.';document.querySelectorAll('#examples button').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===store.selected)));if(focus)[...document.querySelectorAll('[data-d9-focus]')].find(el=>el.dataset.d9Focus===focus)?.focus({preventScroll:true});}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));$('saved').textContent='Saved only in this fictional review preview. Reopening resumes your positions.';}catch{$('saved').textContent='Device storage unavailable; keep this page open.';}}
+demos.forEach(([label],i)=>{const b=document.createElement('button');b.textContent=label;b.type='button';b.onclick=()=>{store.selected=i;save();render();};$('examples').append(b);});
+V9Touch.bind(document,(_,action)=>{const q=question(),values=store.values[store.selected]||(store.values[store.selected]={});V9Touch.edit(q[5].direct,values,JSON.parse(decodeURIComponent(action.slice(action.indexOf(':')+1))));save();render();});
+$('check').onclick=()=>{const q=question(),correct=V9Touch.matches(q[5].direct,q[1],store.values[store.selected]||{});$('feedback').textContent=correct?'That works. '+q[4]:'Not yet. '+q[3]+' '+q[4];};
+$('hint').onclick=()=>{const q=question();$('feedback').textContent=q[3]+' '+q[4];};render();

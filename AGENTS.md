@@ -1,5 +1,9 @@
 # Codex build instructions — Jaxon's Maths Adventure V3
 
+## Direct touch interactions — 24 October 2026
+
+The owner authorises direct-manipulation activities in normal post-assessment lessons and missions, an isolated playable review preview, audit/coverage and fictional tests on `codex/touch-interactions`, based on released `3334875`. Commit/push development only. No release PR, merge, deployment, production-service calls, accounts/data/coins/Supabase changes. Keep avatar/profile-picture centring for a future project. Preserve independent topic progression, historical question/task snapshots and immutable save queues. Run baseline, curriculum, touch, gameplay quality and iPad save/recovery checks. Physical iPad Safari remains untested. Current user instructions supersede earlier release permissions below.
+
 ## Curriculum development — 23 October 2026
 
 The current owner brief authorises implementation of Years 6–9 curriculum and playable missions, superseding earlier planning-only/freeze/release instructions for this phase. Start at released `27ac8421e3dea2cf63788c435f3509484d45d5ea` (contains approved avatar `3823ecb`) on `codex/years6-9-curriculum`. Commit/push development work only. No release PR, merge, deployment, real account/learner access, Supabase changes or production-service calls. Preserve immutable queues, existing IDs, old question/task snapshots and independent topic progression. Use fictional local tests and the existing external-origin denial fixtures. Run `npm test`, `npm run test:curriculum`, `npm run test:curriculum-browser` and `npm run test:ipad-release`. See `docs/YEARS6-9-CURRICULUM.md` and the current objective registry/audit. Physical iPad acceptance remains pending.

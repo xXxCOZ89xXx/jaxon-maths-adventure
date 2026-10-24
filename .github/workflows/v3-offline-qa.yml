@@ -1,7 +1,7 @@
 name: iPad save and recovery gate
 on:
   push:
-    branches: [codex/v3-adventure-build]
+    branches: [codex/v3-adventure-build, codex/touch-interactions]
   pull_request:
     branches: [release/ipad, main]
   workflow_dispatch:
