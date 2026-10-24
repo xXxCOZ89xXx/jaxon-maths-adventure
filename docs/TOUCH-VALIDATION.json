@@ -1,0 +1,125 @@
+{
+  "date": "2026-10-24",
+  "baseline": "3334875b60c58e1d4d74aa4683ab2cac764f949d",
+  "branch": "codex/touch-interactions",
+  "scope": "Fictional local fixtures only. No real account, learner record, coin balance, Supabase connection, production service, merge or deployment. Avatar unchanged.",
+  "coverage": {
+    "worlds": 9,
+    "skills": 96,
+    "missionLevels": 222,
+    "directSkills": 21,
+    "auditedQuestions": 4608,
+    "directQuestions": 336,
+    "directPractice": 168,
+    "directChecks": 168,
+    "directMissionTasks": 138,
+    "directMissionLevels": 105
+  },
+  "checks": [
+    {
+      "command": "npm test",
+      "result": "PASS: existing learning/discovery/economy, engine, camp, cloud transport, presentation, migration fixtures and 1,107 legacy renderer variants."
+    },
+    {
+      "command": "npm run test:curriculum",
+      "result": "PASS: 12 retained curriculum suites, 2,988 completed mini-tasks."
+    },
+    {
+      "command": "npm run test:touch",
+      "result": "PASS: 9 suites, 1,494 integrated mini-tasks across all 222 current mission/level combinations; printed-maths oracles, exact reachable report, historical released snapshots, independent progression, fresh/spaced mastery and save-size budget."
+    },
+    {
+      "command": "npx playwright test -c playwright.touch.config.cjs",
+      "result": "PASS: ten normal lesson flows, trusted touch gestures, cancellation, release, reset, tap/keyboard alternatives, UI assessment-to-practice navigation, stale-question edits, bounded active time, save/reload and 21 accessibility scans.",
+      "browser": {
+        "passed": 57,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0,
+        "seconds": 118,
+        "started": "2026-10-24T11:00:01.465Z"
+      }
+    },
+    {
+      "command": "npm run test:curriculum-browser",
+      "result": "PASS: retained curriculum activity and save/resume checks in three touch viewports.",
+      "browser": {
+        "passed": 81,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0,
+        "seconds": 247.8,
+        "started": "2026-10-24T10:57:55.855Z"
+      }
+    },
+    {
+      "command": "QUALITY_REPORT=work/touch-gameplay-browser.json npm run test:gameplay-quality",
+      "result": "PASS: original world mechanics, new Statistics/Measurement models, released chart snapshot, Town journeys, legacy sliders, offline queues and parent/learner role separation.",
+      "browser": {
+        "passed": 48,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0,
+        "seconds": 268.7,
+        "started": "2026-10-24T10:52:41.599Z"
+      }
+    },
+    {
+      "command": "npm run test:ipad-release",
+      "result": "PASS: local network-disabled PostgreSQL receipt integration and all save/recovery browser cases. No hosted database connection.",
+      "browser": {
+        "passed": 14,
+        "failed": 0,
+        "skipped": 0,
+        "flaky": 0,
+        "seconds": 30.9,
+        "started": "2026-10-24T10:57:18.962Z"
+      }
+    },
+    {
+      "command": "node scripts/check-touch-preview.cjs",
+      "result": "PASS: seven playable models, 72 coverage rows, no external requests/runtime errors. Standalone HTML served as an intercepted local document then tested with networking disabled."
+    }
+  ],
+  "viewports": [
+    {
+      "width": 820,
+      "height": 1180,
+      "touch": true,
+      "browser": "Chromium"
+    },
+    {
+      "width": 1180,
+      "height": 820,
+      "touch": true,
+      "browser": "Chromium"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "touch": true,
+      "browser": "Chromium"
+    }
+  ],
+  "remaining": [
+    "Physical iPad Safari touch/visual testing has not been performed.",
+    "Learner-paced drag comfort and educator acceptance remain manual follow-ups.",
+    "Managed Chromium blocks direct file:// navigation. The same portable HTML was tested offline after intercepted local document loading; desktop/device file opening is not certified.",
+    "The existing 2,000,000-byte save ceiling remains; histories and pending queues are not truncated."
+  ],
+  "sourceSha256": {
+    "v3-adventure.html": "7e548cf90ff5f202aaebf522bf7f122052f1ce729b168773b64357c7d5fbef8a",
+    "v3/app.js": "61efef78f091decf927c91b3458144215447f46fff0cdd273381da7e85c99411",
+    "v3/engine.js": "dbc7fedfb04348599ff2d6eb8f5106d4828330ab4318646b6147465aef094c0b",
+    "v3/adventure.js": "cecf308ca5f2b508c4efcbdbc899e805b98d5bbff64872e4dc6a4745988da8a4",
+    "v3/adventure-ui.js": "e11f7ed0b6e031571d9b2aa5845ba91ffc7cb24ef70dc14037be0d3576b6d3c9",
+    "v3/hands-on.js": "92a58c4bc6ed4cd86d6a4fe15ac3dab66da31ed04839de5184a222c0b17228d0",
+    "v3/touch-activities.js": "5032b204dbcfe74e626c6d9b5aa8951cc8298329fb096a0bb57707ff854e21fe",
+    "v3/touch-activities.css": "b4c1e263bc7d5e65dbfb1c9d911abcede66bcc58b7adde57f7aeecbba085d300",
+    "v3/touch-content.js": "16a9e0bffd462df5f602521a09d21c7788b27456973e076eb152efd23d9eda0c",
+    "dev/touch-preview.html": "6c575e2b3c31156422e5c85c9162f04a8fb03375115bd96394c6951880886f97",
+    "dev/touch-preview.js": "5250d3704d3e8c3beedaaa7b9022c71e45588940719fa04b9a46f9599d8ee851",
+    "docs/review/TOUCH-PLAYABLE.html": "cba6e9f0a9c2c36f03016cae88cae602fea7f36510198f1642add209834b0254",
+    "docs/TOUCH-COVERAGE.json": "24f45571287150ca8ada8317e12d8e9a3f123c63752bf72eef99c995ce0fe68d"
+  }
+}

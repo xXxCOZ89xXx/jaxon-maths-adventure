@@ -466,7 +466,7 @@
       feedback: "",
       answered: false,
     };
-    s.seen = [...s.seen, ...qs.map((q) => q[0]), ...(mode === "practice" && s.learning.teachingExample?.[5]?.contentVersion === 8 ? [s.learning.teachingExample[0]] : [])];
+    s.seen = [...s.seen, ...qs.map((q) => q[0]), ...(mode === "practice" && [8,9].includes(s.learning.teachingExample?.[5]?.contentVersion) ? [s.learning.teachingExample[0]] : [])];
     s.view = mode === "check" ? "check" : "lesson";
     s.resumeView = s.view;
     return null;
@@ -477,9 +477,12 @@
     const q = l.qs[l.i];
     // Newly authored supported practice must pass through its teaching screen.
     // Existing saved questions keep their original response contract.
-    if(q[5]?.contentVersion === 8 && l.mode === "practice" && !l.started)return;
+    if((q[5]?.contentVersion === 8||q[5]?.direct) && l.mode === "practice" && !l.started)return;
+    if(q[5]?.direct&&l.needsTeaching)return;
     const normal = (x) => String(x).replace(/−/g, "-").trim().toLowerCase(),
-      correct = !skip && (q[5]?.contentVersion === 8
+      correct = !skip && (q[5]?.direct
+        ? (typeof module !== "undefined" ? require('./touch-activities').V9Touch : root.V9Touch).matches(q[5].direct,q[1],l.manipulation||{})
+        : q[5]?.contentVersion === 8
         ? (typeof module !== "undefined" ? require('./curriculum-activities').V8Activities : root.V8Activities).matches({answer:q[1],activity:q[5].activity},String(value)) && (q[5].activity?.kind!=='experiment'||l.manipulation?.c8?.trials===q[5].activity.outcomes.length)
         : l.mode === "discovery" ? Math.abs(parseNumber(value)-Number(q[1])) < 1e-8 : normal(value) === normal(q[1]));
     if (correct && !l.assisted) l.correct++;
@@ -499,6 +502,7 @@
         : skip
           ? "Let’s work through it. "
           : "Here is one way to work through it. ") + education.explain(q);
+    if(q[5]?.direct&&!correct){l.answered=false;l.assisted=true;l.needsTeaching=true;s.view="lesson";s.resumeView="lesson";}
     return correct;
   }
   function nextLearning(s, now = Date.now()) {

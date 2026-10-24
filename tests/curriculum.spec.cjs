@@ -5,7 +5,7 @@ async function saved(p){await p.waitForFunction(()=>!document.documentElement.ha
 async function open(p){const dialog=p.locator('dialog.world-task-dialog');if(!await dialog.isVisible())await p.locator('.activity-entry [data-world-task-open]').tap();await expect(dialog).toBeVisible();return dialog;}
 async function start(p,key,world,route,tier=1){await p.evaluate(({key,world,route,tier})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,tier);localStorage.setItem(key,JSON.stringify(s));},{key,world,route,tier});await p.reload();await saved(p);return open(p);}
 async function bounds(p){expect(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);const d=p.locator('dialog[open]');if(await d.count())expect(await d.evaluate(e=>e.scrollWidth<=e.clientWidth+2)).toBe(true);}
-async function selectAnswer(p,t){if(!t.activity){await p.locator('[data-c8-input]').fill(t.answer);await saved(p);}
+async function selectAnswer(p,t){if(t.direct){await require('./helpers/direct.cjs').alternative(p,t.direct,t.answer);return;}if(!t.activity){await p.locator('[data-c8-input]').fill(t.answer);await saved(p);}
  else if(['order','match'].includes(t.activity.kind))for(const i of JSON.parse(t.answer)){await p.locator(`[data-action="c8-m:place-${i}"]`).tap();await saved(p);}
  else if(t.activity.kind==='coordinate'){const [x,y]=JSON.parse(t.answer);await p.locator(`[data-c8-point="${x},${y}"]`).tap();await saved(p);}
  else {await p.locator(`[data-action="c8-m:choice-${t.answer}"]`).tap();await saved(p);}}

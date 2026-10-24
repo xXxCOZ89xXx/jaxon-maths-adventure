@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; script-src 'unsafe-inline'"><title>Direct touch review · fictional data</title><style>.d9-board{border:2px solid #6d876a;border-radius:12px;padding:14px;background:#f5f1df;color:#173d30;max-width:100%;box-sizing:border-box;overflow-wrap:anywhere}.d9-board button{font:inherit;min-height:48px;min-width:48px;padding:10px;border:2px solid #6d876a;background:#fffdf5;color:#173d30;border-radius:8px;cursor:pointer}.d9-board button:focus-visible{outline:4px solid #175dab;outline-offset:3px}.d9-board [aria-pressed=true]{background:#d6e6b5;border-color:#174f39}.d9-board output{display:block;font-size:1.1em;font-weight:700;margin:12px 0}.d9-board .d9-canvas{width:100%;max-width:620px;display:block;overflow:visible;font:24px system-ui}.d9-handle,.d9-piece{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}.d9-handle:active,.d9-piece:active{cursor:grabbing}.d9-controls,.d9-tray{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.d9-tray{min-height:90px;background:#e6dfc3;border:2px dashed #6d876a;padding:12px;border-radius:8px}.d9-targets{display:flex;flex-wrap:wrap;gap:12px}.d9-target{flex:1 1 200px;border:3px dashed #6d876a;min-height:150px;padding:10px;background:#deead5}.d9-target-button{width:100%;font-weight:bold!important}.d9-target .d9-piece{display:inline-block;margin:5px}.d9-moving{z-index:100000;box-shadow:0 4px 12px #0006;max-width:180px}.d9-fractions{display:grid;grid-template-columns:repeat(var(--d9-cols),minmax(0,1fr));gap:8px}.d9-slot{background:#deead5;border:2px dashed #6d876a;min-height:105px;padding:4px}.d9-slot button{font-size:.8em;max-width:100%;width:100%;padding:5px;min-width:0}.d9-slot .d9-piece{background:#77a180;color:#102b20}.d9-live{min-height:2.5em}.touch-review-shell{font:18px/1.5 system-ui;max-width:900px;margin:auto;padding:18px;background:#f0f3e7;color:#173d30}.touch-review-shell h1{line-height:1.2}.touch-review-shell nav{display:flex;flex-wrap:wrap;gap:8px}.touch-review-shell nav button,.touch-review-shell>button{font:inherit;padding:12px;min-height:48px}.touch-review-shell .review-feedback{background:#fff9dd;border-left:5px solid #6d876a;padding:12px}.touch-review-shell a{color:#175dab}.touch-review-link{display:block;text-align:center;padding:12px}.touch-review-link[hidden]{display:none}@media(max-width:480px){.d9-board{padding:8px}.d9-target{flex-basis:100%}.d9-controls button{flex:1 1 auto}.d9-tray .d9-piece{flex:1 1 100px}}
+
+.d9-canvas{touch-action:none}
+
+.d9-over{outline:4px solid #175dab;outline-offset:2px}
+
+.d9-whole{min-width:0;margin:12px 0;padding:8px;border:2px solid #34563e}.d9-filled{background:#77a180}
+</style></head>
+<body class="touch-review-shell"><header><h1>Direct touch review</h1><p>Development preview · fictional isolated data. These are the same questions and controls used in normal lessons. This is not a learner world. Nothing connects to an account or earns rewards.</p></header><nav id="examples" aria-label="Choose an interaction"></nav><main><h2 id="title"></h2><p id="prompt"></p><div id="model"></div><button id="check">Check answer</button><button id="hint">Hint / teaching</button><p id="feedback" role="status" class="review-feedback"></p><p id="saved" role="status"></p></main><footer><p>Standalone fictional review. No account, game data or network connection is used.</p><details><summary>Coverage in normal post-assessment questions</summary><p>Direct formats have equivalent tap and keyboard answers; sliders are not counted as direct movement.</p><div style="overflow:auto"><table><tr><th>World</th><th>Band</th><th>Stage</th><th>Questions</th><th>Direct</th><th>Select options</th><th>Sliders</th></tr><tr><td>number</td><td>6</td><td>practice</td><td>90</td><td>4</td><td>59</td><td>0</td></tr><tr><td>number</td><td>6</td><td>check</td><td>90</td><td>4</td><td>59</td><td>0</td></tr><tr><td>number</td><td>7</td><td>practice</td><td>90</td><td>4</td><td>59</td><td>0</td></tr><tr><td>number</td><td>7</td><td>check</td><td>90</td><td>4</td><td>59</td><td>0</td></tr><tr><td>number</td><td>8</td><td>practice</td><td>90</td><td>4</td><td>59</td><td>1</td></tr><tr><td>number</td><td>8</td><td>check</td><td>90</td><td>4</td><td>59</td><td>1</td></tr><tr><td>number</td><td>9</td><td>practice</td><td>90</td><td>4</td><td>59</td><td>1</td></tr><tr><td>number</td><td>9</td><td>check</td><td>90</td><td>4</td><td>59</td><td>1</td></tr><tr><td>fractions</td><td>6</td><td>practice</td><td>60</td><td>8</td><td>46</td><td>0</td></tr><tr><td>fractions</td><td>6</td><td>check</td><td>60</td><td>8</td><td>46</td><td>0</td></tr><tr><td>fractions</td><td>7</td><td>practice</td><td>60</td><td>8</td><td>46</td><td>0</td></tr><tr><td>fractions</td><td>7</td><td>check</td><td>60</td><td>8</td><td>46</td><td>0</td></tr><tr><td>fractions</td><td>8</td><td>practice</td><td>60</td><td>8</td><td>46</td><td>0</td></tr><tr><td>fractions</td><td>8</td><td>check</td><td>60</td><td>8</td><td>46</td><td>0</td></tr><tr><td>fractions</td><td>9</td><td>practice</td><td>60</td><td>8</td><td>46</td><td>0</td></tr><tr><td>fractions</td><td>9</td><td>check</td><td>60</td><td>8</td><td>46</td><td>0</td></tr><tr><td>algebra</td><td>6</td><td>practice</td><td>72</td><td>4</td><td>32</td><td>0</td></tr><tr><td>algebra</td><td>6</td><td>check</td><td>72</td><td>4</td><td>32</td><td>0</td></tr><tr><td>algebra</td><td>7</td><td>practice</td><td>72</td><td>4</td><td>32</td><td>0</td></tr><tr><td>algebra</td><td>7</td><td>check</td><td>72</td><td>4</td><td>32</td><td>0</td></tr><tr><td>algebra</td><td>8</td><td>practice</td><td>72</td><td>4</td><td>32</td><td>0</td></tr><tr><td>algebra</td><td>8</td><td>check</td><td>72</td><td>4</td><td>32</td><td>0</td></tr><tr><td>algebra</td><td>9</td><td>practice</td><td>72</td><td>4</td><td>32</td><td>0</td></tr><tr><td>algebra</td><td>9</td><td>check</td><td>72</td><td>4</td><td>32</td><td>0</td></tr><tr><td>geometry</td><td>6</td><td>practice</td><td>84</td><td>2</td><td>41</td><td>1</td></tr><tr><td>geometry</td><td>6</td><td>check</td><td>84</td><td>2</td><td>41</td><td>1</td></tr><tr><td>geometry</td><td>7</td><td>practice</td><td>84</td><td>2</td><td>41</td><td>1</td></tr><tr><td>geometry</td><td>7</td><td>check</td><td>84</td><td>2</td><td>41</td><td>1</td></tr><tr><td>geometry</td><td>8</td><td>practice</td><td>84</td><td>2</td><td>39</td><td>1</td></tr><tr><td>geometry</td><td>8</td><td>check</td><td>84</td><td>2</td><td>39</td><td>1</td></tr><tr><td>geometry</td><td>9</td><td>practice</td><td>84</td><td>2</td><td>39</td><td>1</td></tr><tr><td>geometry</td><td>9</td><td>check</td><td>84</td><td>2</td><td>39</td><td>1</td></tr><tr><td>ratio</td><td>6</td><td>practice</td><td>48</td><td>2</td><td>25</td><td>0</td></tr><tr><td>ratio</td><td>6</td><td>check</td><td>48</td><td>2</td><td>25</td><td>0</td></tr><tr><td>ratio</td><td>7</td><td>practice</td><td>48</td><td>2</td><td>25</td><td>0</td></tr><tr><td>ratio</td><td>7</td><td>check</td><td>48</td><td>2</td><td>25</td><td>0</td></tr><tr><td>ratio</td><td>8</td><td>practice</td><td>48</td><td>2</td><td>25</td><td>0</td></tr><tr><td>ratio</td><td>8</td><td>check</td><td>48</td><td>2</td><td>25</td><td>0</td></tr><tr><td>ratio</td><td>9</td><td>practice</td><td>48</td><td>2</td><td>25</td><td>0</td></tr><tr><td>ratio</td><td>9</td><td>check</td><td>48</td><td>2</td><td>25</td><td>0</td></tr><tr><td>statistics</td><td>6</td><td>practice</td><td>48</td><td>6</td><td>28</td><td>0</td></tr><tr><td>statistics</td><td>6</td><td>check</td><td>48</td><td>6</td><td>28</td><td>0</td></tr><tr><td>statistics</td><td>7</td><td>practice</td><td>48</td><td>6</td><td>28</td><td>0</td></tr><tr><td>statistics</td><td>7</td><td>check</td><td>48</td><td>6</td><td>28</td><td>0</td></tr><tr><td>statistics</td><td>8</td><td>practice</td><td>48</td><td>6</td><td>27</td><td>0</td></tr><tr><td>statistics</td><td>8</td><td>check</td><td>48</td><td>6</td><td>27</td><td>0</td></tr><tr><td>statistics</td><td>9</td><td>practice</td><td>48</td><td>6</td><td>27</td><td>0</td></tr><tr><td>statistics</td><td>9</td><td>check</td><td>48</td><td>6</td><td>27</td><td>0</td></tr><tr><td>probability</td><td>6</td><td>practice</td><td>30</td><td>4</td><td>17</td><td>0</td></tr><tr><td>probability</td><td>6</td><td>check</td><td>30</td><td>4</td><td>17</td><td>0</td></tr><tr><td>probability</td><td>7</td><td>practice</td><td>30</td><td>4</td><td>17</td><td>0</td></tr><tr><td>probability</td><td>7</td><td>check</td><td>30</td><td>4</td><td>17</td><td>0</td></tr><tr><td>probability</td><td>8</td><td>practice</td><td>30</td><td>4</td><td>17</td><td>0</td></tr><tr><td>probability</td><td>8</td><td>check</td><td>30</td><td>4</td><td>17</td><td>0</td></tr><tr><td>probability</td><td>9</td><td>practice</td><td>30</td><td>4</td><td>17</td><td>0</td></tr><tr><td>probability</td><td>9</td><td>check</td><td>30</td><td>4</td><td>17</td><td>0</td></tr><tr><td>measure</td><td>6</td><td>practice</td><td>42</td><td>4</td><td>28</td><td>0</td></tr><tr><td>measure</td><td>6</td><td>check</td><td>42</td><td>4</td><td>28</td><td>0</td></tr><tr><td>measure</td><td>7</td><td>practice</td><td>42</td><td>4</td><td>28</td><td>0</td></tr><tr><td>measure</td><td>7</td><td>check</td><td>42</td><td>4</td><td>28</td><td>0</td></tr><tr><td>measure</td><td>8</td><td>practice</td><td>42</td><td>4</td><td>28</td><td>0</td></tr><tr><td>measure</td><td>8</td><td>check</td><td>42</td><td>4</td><td>28</td><td>0</td></tr><tr><td>measure</td><td>9</td><td>practice</td><td>42</td><td>4</td><td>28</td><td>0</td></tr><tr><td>measure</td><td>9</td><td>check</td><td>42</td><td>4</td><td>28</td><td>0</td></tr><tr><td>town</td><td>6</td><td>practice</td><td>102</td><td>8</td><td>91</td><td>0</td></tr><tr><td>town</td><td>6</td><td>check</td><td>102</td><td>8</td><td>91</td><td>0</td></tr><tr><td>town</td><td>7</td><td>practice</td><td>102</td><td>8</td><td>91</td><td>0</td></tr><tr><td>town</td><td>7</td><td>check</td><td>102</td><td>8</td><td>91</td><td>0</td></tr><tr><td>town</td><td>8</td><td>practice</td><td>102</td><td>8</td><td>91</td><td>0</td></tr><tr><td>town</td><td>8</td><td>check</td><td>102</td><td>8</td><td>91</td><td>0</td></tr><tr><td>town</td><td>9</td><td>practice</td><td>102</td><td>8</td><td>91</td><td>0</td></tr><tr><td>town</td><td>9</td><td>check</td><td>102</td><td>8</td><td>91</td><td>0</td></tr></table></div></details><p>Physical iPad Safari remains untested.</p></footer><script>/* Shared pointer/tap/keyboard models. Pointer previews stay transient until release.
+ * Only the caller's normal save transaction can commit an answer. No rewards/network. */
+(function(root){
+'use strict';
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const copy=x=>JSON.parse(JSON.stringify(x)),clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
+const snap=(n,min,max,step=1)=>Number(clamp(min+Math.round((n-min)/step)*step,min,max).toFixed(6));
+function edit(a,values,action){
+ if(!action||typeof action!=='object')return false;
+ const v=values.d9||(values.d9={}),number=Number.isFinite;
+ if(action.op==='reset'){values.d9={};return true;}
+ if(action.op==='pick'){if(!Number.isInteger(action.item)||action.item<0||action.item>=(a.items?.length||a.pieces||0))return false;v.picked=action.item;return true;}
+ if(action.op==='drop'){
+  const count=a.items?.length||a.pieces||0,target=action.target,item=action.item??v.picked;
+  if(!['fraction','groups','basket'].includes(a.kind)||!Number.isInteger(item)||item<0||item>=count||!Number.isInteger(target)||target< -1||target>=(a.kind==='fraction'?a.slots:a.targets.length))return false;
+  v.placements||={};if(a.kind==='fraction'&&target>=0&&Object.entries(v.placements).some(([i,n])=>Number(i)!==item&&n===target))return false;
+  if(target===-1)delete v.placements[item];else v.placements[item]=target;delete v.picked;return true;
+ }
+ if(action.op==='value'&&['numberline','jug'].includes(a.kind)&&number(action.value)){v.value=snap(action.value,a.min,a.max,a.step);return true;}
+ if(action.op==='point'&&a.kind==='grid'&&Array.isArray(action.point)&&action.point.length===2&&action.point.every(number)){v.point=action.point.map(n=>snap(n,a.min,a.max));return true;}
+ if(action.op==='ruler'&&a.kind==='ruler'&&number(action.x)&&number(action.y)){v.ruler=[snap(action.x,0,170,1),snap(action.y,65,235,1)];return true;}
+ if(action.op==='reading'&&a.kind==='ruler'&&number(action.value)){v.reading=snap(action.value,0,a.max,a.step);return true;}
+ return false;
+}
+function value(a,values={}){const v=values.d9||{},p=v.placements||{};
+ if(a.kind==='grid')return JSON.stringify(v.point||[0,0]);
+ if(a.kind==='ruler')return String(v.reading??0);
+ if(a.kind==='fraction')return String(Object.keys(p).length/a.denominator);
+ if(a.kind==='groups')return JSON.stringify(a.counts?a.targets.map((_,n)=>Object.values(p).filter(x=>x===n).length):a.items.map((_,i)=>p[i]??-1));
+ if(a.kind==='basket')return String(Object.keys(p).reduce((sum,i)=>sum+a.items[i].price,0));
+ return String(v.value??a.min??0);
+}
+function matches(a,answer,values={}){
+ const v=values.d9||{},actual=value(a,values);
+ if(a.kind==='grid'&&!Array.isArray(v.point))return false;
+ if(['numberline','jug'].includes(a.kind)&&v.value===undefined)return false;
+ if(a.kind==='ruler'){const [x,y]=v.ruler||[25,225];if(Math.abs(x-a.objectX)>6||Math.abs(y-a.objectY)>6)return false;}
+ if(a.kind==='basket'&&Object.keys(v.placements||{}).length!==a.requiredCount)return false;
+ if(a.kind==='groups'&&Object.keys(v.placements||{}).length!==a.items.length)return false;
+ if(['grid','groups'].includes(a.kind))return actual===String(answer);
+ const parse=x=>{const p=String(x).split('/');return p.length===2?Number(p[0])/Number(p[1]):Number(x);};
+ return Number.isFinite(parse(answer))&&Math.abs(Number(actual)-parse(answer))<1e-7;
+}
+function body(a,values={},prefix='d9-p',preview=false){
+ const v=values.d9||{},p=v.placements||{};
+ const button=(label,action,attrs='')=>`<button type="button" data-d9-action="${esc(JSON.stringify(action))}" data-d9-focus="${esc(action.op==='pick'?'item-'+action.item:label)}" ${attrs}>${esc(label)}</button>`;
+ const handle=(kind,x,y,label)=>`<g data-d9-handle="${kind}" class="d9-handle"><circle cx="${x}" cy="${y}" r="42" fill="transparent"/><circle cx="${x}" cy="${y}" r="17" fill="#174f39" stroke="white" stroke-width="3"/><text x="${x}" y="${y+5}" text-anchor="middle" fill="white" font-size="16">↔</text><title>${esc(label)}</title></g>`;
+ const svg=(label,content)=>`<svg class="d9-canvas" viewBox="0 0 600 320" role="group" aria-label="${esc(label)}">${content}</svg>`;
+ const tick=(x,y,text)=>`<path d="M${x} ${y-6}v12" stroke="#34563e"/><text x="${x}" y="${y+30}" text-anchor="middle">${esc(text)}</text>`;
+ const selected=v.picked===undefined?'No item selected':`Selected item ${v.picked+1}`;
+ let html='';
+ if(['basket','groups','fraction'].includes(a.kind)){
+  const items=a.items||Array.from({length:a.pieces},(_,i)=>({label:`Piece ${i+1}: 1/${a.denominator}`}));
+  const item=(i)=>button(items[i].label+(items[i].price!==undefined?` · ${items[i].price}p`:''),{op:'pick',item:i},`data-d9-handle="item" data-d9-item="${i}" class="d9-piece" ${items[i].value===undefined?'':'aria-label="'+esc(items[i].label)+', observation '+(i+1)+'"'} aria-pressed="${v.picked===i}"`);
+  html=`<p>Drag an object into a target. To move it without dragging, select the object, then select a target. Return an object to the tray to undo it.</p><div class="d9-tray" data-d9-target="-1" aria-label="Object tray">${items.map((_,i)=>p[i]===undefined?item(i):'').join('')||'<span>All objects placed</span>'}</div>`;
+  if(a.kind==='fraction'){
+   const slot=n=>{const i=Object.keys(p).find(i=>p[i]===n),label='Part '+(n%a.denominator+1)+' of whole '+(Math.floor(n/a.denominator)+1);return `<div class="d9-slot ${i===undefined?'':'d9-filled'}" data-d9-target="${n}">${button(label,{op:'drop',target:n},'aria-label="'+label+'. Place selected piece in slot '+(n+1)+'"')}${i===undefined?'':item(Number(i))}</div>`;};
+   html+=`<p>One whole has ${a.denominator} equal parts.</p>${Array.from({length:a.slots/a.denominator},(_,whole)=>`<fieldset class="d9-whole"><legend>Whole ${whole+1} · ${a.denominator} equal parts</legend><div class="d9-fractions" style="--d9-cols:${Math.min(a.denominator,5)}">${Array.from({length:a.denominator},(_,i)=>slot(whole*a.denominator+i)).join('')}</div></fieldset>`).join('')}<output>${Object.keys(p).length}/${a.denominator} of a whole</output>`;
+  }
+  else html+=`<div class="d9-targets">${a.targets.map((label,n)=>`<section data-d9-target="${n}" class="d9-target">${button(label,{op:'drop',target:n},'class="d9-target-button" aria-label="Place selected object in '+esc(label)+'"')}<div>${items.map((_,i)=>p[i]===n?item(i):'').join('')}</div><output>${Object.values(p).filter(x=>x===n).length} items</output></section>`).join('')}</div>${a.kind==='basket'?`<output>Basket total: ${value(a,values)}p · ${Object.keys(p).length} items</output>`:''}`;
+  html+=`<p role="status">${selected}</p>${button('Return selected object to tray',{op:'drop',target:-1})}`;
+ }else if(a.kind==='numberline'){
+  const n=v.value??a.min,pos=n=>60+(n-a.min)/(a.max-a.min)*480;
+  html=`<p>Drag the marker along the labelled number line. The buttons provide the same answer without dragging. ${esc(a.scaleNote||'')}</p>`+svg(`Number line, ${a.min} to ${a.max}`,`<path d="M60 140H540" stroke="#203b2e" stroke-width="4"/>${Array.from({length:11},(_,i)=>{const x=a.min+(a.max-a.min)*i/10;return tick(pos(x),140,i%(a.labelsEvery||1)?'':Number(x.toFixed(2)));}).join('')}${handle('line',pos(n),140,'Move the number-line marker')}`)+`<div class="d9-controls">${[-1,1].map(d=>button(d<0?'One step left':'One step right',{op:'value',value:n+d*a.step})).join('')}${Array.from({length:11},(_,i)=>{const x=snap(a.min+(a.max-a.min)*i/10,a.min,a.max,a.step);return button(String(x),{op:'value',value:x});}).join('')}</div><output>Marker: ${n} ${esc(a.unit)}</output>`;
+ }else if(a.kind==='grid'){
+  const point=v.point||[0,0],pos=n=>60+(n-a.min)/(a.max-a.min)*480,ticks=Array.from({length:a.max-a.min+1},(_,i)=>a.min+i);
+  // Square grid: its own viewBox keeps mathematical and pointer coordinates equal.
+  html=`<p>Drag the point to a numbered intersection. Alternatively select an intersection or use the four movement buttons.</p><svg class="d9-canvas d9-grid" viewBox="0 0 600 600" role="group" aria-label="Numbered Cartesian x and y grid">${ticks.map(n=>`<path d="M${pos(n)} 60V540 M60 ${pos(n)}H540" stroke="#b0bda5"/><text x="${pos(n)}" y="570" text-anchor="middle">${n}</text><text x="30" y="${pos(-n)+5}" text-anchor="middle">${n}</text>`).join('')}<path d="M300 45V550 M45 300H550" stroke="#203b2e" stroke-width="4"/><text x="570" y="290">x</text><text x="315" y="30">y</text>${ticks.flatMap(x=>ticks.map(y=>`<circle cx="${pos(x)}" cy="${pos(-y)}" r="18" fill="transparent" data-d9-action="${esc(JSON.stringify({op:'point',point:[x,y]}))}" role="button" tabindex="-1" aria-label="Intersection x ${x}, y ${y}"/>`)).join('')}${handle('point',pos(point[0]),pos(-point[1]),'Move the plotted point')}</svg><div class="d9-controls">${[['Left',0,-1],['Right',0,1],['Down',1,-1],['Up',1,1]].map(([label,i,d])=>{const p=[...point];p[i]+=d;return button(label,{op:'point',point:p});}).join('')}</div><output>Point: x ${point[0]}, y ${point[1]}</output>`;
+ }else if(a.kind==='ruler'){
+  const [x,y]=v.ruler||[25,225],reading=v.reading||0,scale=36;
+  html=`<p>Drag the ruler using its round handle. Align zero with the left end of the strip. Then drag the reading marker along the ruler to the other end.</p>`+svg('Moveable ruler and wooden strip',`<text x="${a.objectX}" y="70">${esc(a.label)}</text><rect x="${a.objectX}" y="85" width="${a.length*scale}" height="30" rx="5" fill="#ad773d"/><path d="M${a.objectX} 80V130 M${a.objectX+a.length*scale} 80V130" stroke="#203b2e" stroke-dasharray="3 3"/><g><rect x="${x-8}" y="${y}" width="450" height="52" fill="#e9d191" stroke="#314f3b"/>${Array.from({length:a.max*2+1},(_,i)=>{const n=i/2;return `<path d="M${x+n*scale} ${y}v${i%2?9:16}" stroke="#203b2e"/>${i%2?'':`<text x="${x+n*scale}" y="${y+38}" text-anchor="middle">${n}</text>`}`;}).join('')}${handle('ruler',x+205,y+25,'Move the ruler')}<text x="${x+205}" y="${y+75}" text-anchor="middle">Move ruler</text>${handle('reading',x+reading*scale,y-12,'Move the reading marker')}<text x="${x+reading*scale}" y="${y-55}" text-anchor="middle">Read here</text></g>`)+`<div class="d9-controls">${[['Ruler left',-5,0],['Ruler right',5,0],['Ruler up',0,-5],['Ruler down',0,5]].map(([label,dx,dy])=>button(label,{op:'ruler',x:x+dx,y:y+dy})).join('')}${button('Align ruler zero with strip',{op:'ruler',x:a.objectX,y:a.objectY})}${[-1,1].map(d=>button(d<0?'Read one step less':'Read one step more',{op:'reading',value:reading+d*a.step})).join('')}</div><output>Reading: ${reading} cm · ${Math.abs(x-a.objectX)<=6&&Math.abs(y-a.objectY)<=6?"Ruler zero aligned with strip":"Align zero with the left end of the strip"}</output>`;
+ }else if(a.kind==='jug'){
+  const n=v.value||0,handleX=75+n/a.max*190;
+  html=`<p>Drag the round pour handle to the right to pour more, or left to return liquid. The receiving container shows the measured amount. Release to save; there is no timer.</p>`+svg('Pouring jug and measured receiving container',`<g transform="rotate(${n?Math.min(45,n/a.max*45):0} 130 170)"><path d="M55 80H195L180 205H70Z" fill="#bdd8e2" stroke="#274d56" stroke-width="4"/><path d="M55 100H25V165H65" fill="none" stroke="#274d56" stroke-width="10"/><text x="85" y="160">Jug</text></g>${preview?'<path d="M190 100Q300 80 410 130" fill="none" stroke="#448eaa" stroke-width="8"/>':''}<rect x="360" y="55" width="170" height="210" fill="#f6fbff" stroke="#274d56" stroke-width="4"/><rect x="363" y="${263-n/a.max*200}" width="164" height="${n/a.max*200}" fill="#448eaa" opacity=".65"/>${Array.from({length:11},(_,i)=>`<path d="M360 ${263-i*20}h16" stroke="#274d56"/><text x="385" y="${268-i*20}">${i*100} ml</text>`).join('')}<path d="M75 255H265" stroke="#274d56" stroke-width="4"/>${handle('pour',handleX,255,'Move the jug pour control')}`)+`<div class="d9-controls">${[-1,1].map(d=>button(d<0?'Return 25 ml':'Pour 25 ml',{op:'value',value:n+d*a.step})).join('')}${button('Empty receiving container',{op:'value',value:0})}</div><output>Receiving container: ${n} ml</output>`;
+ }
+ return html+`<p class="d9-live" aria-live="polite">${preview?'Moving — release to save this position.':'Position saved when you release or use a button.'}</p><div>${button('Reset activity',{op:'reset'})}</div>`;
+}
+function render(a,values={},prefix='d9-p'){
+ return `<section class="d9-board" data-d9-prefix="${prefix}" data-d9-spec="${esc(JSON.stringify(a))}" data-d9-values="${esc(JSON.stringify(values))}" data-direct-kind="${a.kind}" aria-label="Direct movement activity">${body(a,values,prefix)}</section>`;
+}
+function bind(doc,commit){
+ if(doc.__v9Bound)return;doc.__v9Bound=true;let drag=null,suppressUntil=0;
+ const send=(board,action)=>{const spec=JSON.parse(board.dataset.d9Spec),draft=JSON.parse(board.dataset.d9Values);if(!edit(spec,draft,action)){board.querySelector('.d9-live').textContent='Select an object first and choose a valid target. Fraction slots hold one piece each.';return;}commit(board,board.dataset.d9Prefix+':'+encodeURIComponent(JSON.stringify(action)));};
+ const paint=(d,values,preview=false)=>{if(d.board.isConnected)d.board.innerHTML=body(d.spec,values,d.board.dataset.d9Prefix,preview);};
+ function cancel(){if(!drag)return;const d=drag;drag=null;paint(d,d.initial);if(d.board.isConnected){const live=d.board.querySelector('.d9-live');if(live)live.textContent='Movement cancelled. Your saved position is unchanged.';}}
+ function point(board,e){const svg=board.querySelector('svg');if(!svg)return null;const matrix=svg.getScreenCTM();if(!matrix)return null;const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(matrix.inverse());}
+ function action(d,e){const pos=point(d.board,e),a=d.spec,v=d.initial.d9||{};
+  if(d.handle==='item'){const target=doc.elementFromPoint(e.clientX,e.clientY)?.closest('[data-d9-target]');return target&&d.board.contains(target)?{op:'drop',item:d.item,target:Number(target.dataset.d9Target)}:null;}
+  if(!pos)return null;
+  if(d.handle==='line')return {op:'value',value:a.min+(pos.x-60)/480*(a.max-a.min)};
+  if(d.handle==='point')return {op:'point',point:[a.min+(pos.x-60)/480*(a.max-a.min),a.max-(pos.y-60)/480*(a.max-a.min)]};
+  if(d.handle==='pour')return {op:'value',value:(v.value||0)+(pos.x-d.start.x)/190*a.max};
+  if(d.handle==='ruler'){const [x,y]=v.ruler||[25,225];return {op:'ruler',x:x+pos.x-d.start.x,y:y+pos.y-d.start.y};}
+  if(d.handle==='reading')return {op:'reading',value:(pos.x-(v.ruler||[25,225])[0])/36};
+  return null;
+ }
+ doc.addEventListener('pointerdown',e=>{
+  if(drag||e.isPrimary===false||e.button!==0)return;const handle=e.target.closest?.('[data-d9-handle]'),board=handle?.closest('.d9-board');if(!board||board.closest('[inert]'))return;
+  drag={board,spec:JSON.parse(board.dataset.d9Spec),initial:JSON.parse(board.dataset.d9Values),handle:handle.dataset.d9Handle,item:Number(handle.dataset.d9Item),id:e.pointerId,client:[e.clientX,e.clientY],start:point(board,e),moved:false};
+ });
+ doc.addEventListener('pointermove',e=>{
+  const d=drag;if(!d||d.id!==e.pointerId)return;if(!d.board.isConnected){cancel();return;}
+  if(!d.moved&&Math.hypot(e.clientX-d.client[0],e.clientY-d.client[1])<5)return;
+  if(!d.moved){d.moved=true;try{d.board.setPointerCapture(e.pointerId);}catch{cancel();return;}}
+  e.preventDefault();const op=action(d,e);
+  if(d.handle==='item'){
+   // Keep the source's space and all target bounds stable until release.
+   if(!d.ghost){const source=d.board.querySelector(`[data-d9-item="${d.item}"]`);if(source){const width=source.getBoundingClientRect().width;d.ghost=source.cloneNode(true);d.ghost.classList.add('d9-moving');d.ghost.style.cssText=`position:fixed;width:${width}px;transform:translate(-50%,-50%);pointer-events:none`;source.style.visibility='hidden';d.board.append(d.ghost);}}
+   if(d.ghost){d.ghost.style.left=e.clientX+'px';d.ghost.style.top=e.clientY+'px';}
+   d.board.querySelectorAll('[data-d9-target]').forEach(el=>el.classList.toggle('d9-over',op?.target===Number(el.dataset.d9Target)));
+   d.board.querySelector('.d9-live').textContent=op?'Release inside this target to save.':'Move over a target; release outside to cancel.';
+  }else if(op){const next=copy(d.initial);edit(d.spec,next,op);paint(d,next,true);}
+ },{passive:false});
+ doc.addEventListener('pointerup',e=>{const d=drag;if(!d||d.id!==e.pointerId)return;const op=action(d,e);drag=null;if(!d.moved)return;suppressUntil=Date.now()+1;paint(d,d.initial);if(d.board.isConnected){if(op)send(d.board,op);else d.board.querySelector('.d9-live').textContent='Drop inside a target. Your saved position is unchanged.';}});
+ doc.addEventListener('pointercancel',e=>{if(drag?.id===e.pointerId)cancel();});
+ doc.addEventListener('lostpointercapture',e=>{if(drag?.id===e.pointerId&&e.target===drag.board)cancel();});
+ doc.addEventListener('keydown',e=>{if(e.key==='Escape')cancel();});
+ doc.addEventListener('visibilitychange',()=>{if(doc.hidden)cancel();});
+ doc.defaultView?.addEventListener('blur',cancel);
+ doc.addEventListener('click',e=>{const el=e.target.closest?.('[data-d9-action]'),board=el?.closest('.d9-board');if(!board)return;e.preventDefault();if(e.detail!==0&&Date.now()<suppressUntil)return;send(board,JSON.parse(el.dataset.d9Action));});
+ return {cancel};
+}
+root.V9Touch={edit,value,matches,render,bind};if(typeof module!=='undefined')module.exports={V9Touch:root.V9Touch};
+})(typeof window==='undefined'?globalThis:window);
+</script><script>/* Versioned questions served by the normal bank. No fixtures, accounts or rewards. */
+(function(root){
+'use strict';
+const kinds={place:['round','round'],negative:['line','line'],decimal_place:['line','line'],fractions:['fraction','fraction'],fraction_parts:['fraction','fraction'],fraction_operations:['fraction','fraction'],algebra_coordinates:['grid','grid'],algebra_graphs:['grid','grid'],geometry_construction:['ruler','ruler'],ratio_sharing:['share','share'],stats_averages:['mean','mean'],stats_tables:['groups','groups'],statistics_distributions:['groups','groups'],prob_events:['events','events'],probability_sets:['events','events'],measure_units:['ruler','jug'],measure_volume:['jug','jug'],town_totals:['basket','basket'],town_value:['basket','basket'],town_household:['basket','jug'],town_planning:['basket','jug']};
+function row(id,band,seed,family=0){
+ const type=kinds[id]?.[family];if(!type)return null;
+ const n=1+((seed*13+band*3+family*3)%7),m=2+((seed*7+band+family*2)%5),step=band>=8?.5:1;
+ let prompt,answer,spec,hint,worked;
+ if(type==='round'){
+  const scale=band>=8?1000:band>=7?100:10,raw=n*scale+m*scale/10+(scale>10?scale/100:0);answer=String(Math.round(raw/scale)*scale);spec={kind:'numberline',min:0,max:scale*10,step:scale,unit:'units',labelsEvery:scale>=100?2:1,scaleNote:'Each short division is '+scale+' units.'};prompt=`Round ${raw} to the nearest ${scale}. Drag the marker to the rounded value.`;hint=`Find the neighbouring multiples of ${scale}. Choose the closer one; a halfway value rounds up.`;worked=`${raw} rounds to ${answer} to the nearest ${scale}. Check the marker against the labelled scale.`;
+ }else if(type==='line'){
+  const decimal=id==='decimal_place',a=decimal?(n*10+m)/10:-n,b=decimal?m/10:(family?m:-m);
+  answer=Number((a+b).toFixed(2));spec={kind:'numberline',min:decimal?0:-20,max:decimal?10:20,step:decimal?.1:1,unit:decimal?'units':'units'};
+  prompt=`${a} + (${b}) = ? Move the marker to the sum.`;hint='Start at the first value. Move right to add a positive value; left to add a negative value.';worked=`${a} + (${b}) = ${answer}. The marker represents this value on the labelled line.`;
+ }else if(type==='fraction'){
+  const den=[4,5,8,10][(seed+band+family)%4],a=1+n%(den-1),b=id==='fraction_operations'?1+m%(den-1):0,count=a+b;
+  answer=String(count/den);spec={kind:'fraction',denominator:den,slots:den*(count>den?2:1),pieces:den*(count>den?2:1)};
+  prompt=b?`Build ${a}/${den} + ${b}/${den} using equal fraction pieces.`:`Build ${a}/${den} of a whole using equal fraction pieces.`;
+  hint=`Each piece is 1/${den} of one whole. Count the equal pieces, keeping the denominator ${den}.`;worked=`${a}${b?' + '+b:''} = ${count} equal pieces. ${count}/${den} = ${answer} of a whole. Any distinct slots are accepted.`;
+ }else if(type==='grid'){
+  const x=n-4,slope=band>=8?2:1,intercept=m-3,y=id==='algebra_graphs'?slope*x+intercept:family?m-4:4-m;
+  // Keep the authored relation visible within this plane, rather than clipping answers.
+  const px=id==='algebra_graphs'?((seed+family)%3)-1:x,py=id==='algebra_graphs'?slope*px+intercept:y;
+  answer=JSON.stringify([px,py]);spec={kind:'grid',min:-5,max:5};prompt=id==='algebra_graphs'?`For y = ${slope}x ${intercept<0?'− '+(-intercept):'+ '+intercept}, plot the point where x = ${px}.`:`Move the point to (${px}, ${py}). Read x first, then y.`;
+  hint='Use the horizontal x axis first, then the vertical y axis. Each grid division is one unit.';worked=`The horizontal coordinate is ${px}; the vertical coordinate is ${py}. The point is (${px}, ${py}).`;
+ }else if(type==='ruler'){
+  const length=2+n*step,label=String.fromCharCode(65+Math.round(length*2));answer=String(length);spec={kind:'ruler',length,label,unit:'cm',max:12,step:band>=8?.5:1,objectX:80,objectY:115};
+  // The diagram label is stable for identical geometry, never a fresh round suffix.
+  prompt=`Measure ${id==='geometry_construction'?'construction segment':'wooden strip'} ${label} in centimetres. Align the ruler's zero with its left end, then move the reading marker to the right end.`;
+  hint='Move the ruler, not the object. Put the zero at the left end. Read the scale at the other end; count divisions, not tick marks.';worked=`When zero is at the left end, the right end is at ${length} cm. The length is ${length} cm, even if the ruler started elsewhere.`;
+ }else if(type==='jug'){
+  const volume=(n+2)*50+(band>=8?25:0);answer=String(volume);spec={kind:'jug',min:0,max:1000,step:25,unit:'ml'};
+  prompt=`Measure ${volume/1000} litres of water for a recipe. Drag the jug's pour handle to fill the receiving container, in millilitres.`;
+  hint='One litre is 1000 ml. Convert the target first. Move the pour handle slowly; release to save. You can return liquid or empty the jug.';worked=`${volume/1000} × 1000 = ${volume} ml. Read the receiving container's scale and stop at ${volume} ml.`;
+ }else if(type==='basket'){
+  const price=20+n*5,prices=[price,price+15,price+40,price+75];answer=String(2*price+40);
+  spec={kind:'basket',items:['Apples','Milk','Bread','Rice'].map((label,i)=>({label,price:prices[i]})),targets:['Shopping basket'],requiredCount:2};
+  prompt=`You are a customer. Buy exactly two different groceries with a total of ${answer}p. Drag them into the basket. Check all four prices before choosing.`;
+  hint='Add the prices of two different items. Compare the total with your budget. Return an item to the shelf to compare another pair.';worked=`Apples ${price}p + bread ${price+40}p = ${answer}p. That is two different groceries with the requested total.`;
+ }else if(type==='share'){
+  const ratio=2+family,scale=1+n%3,total=(ratio+1)*scale;answer=JSON.stringify([ratio*scale,scale]);
+  spec={kind:'groups',items:Array.from({length:total},(_,i)=>({label:'Token '+(i+1)})),targets:['Alex','Sam'],counts:true};
+  prompt=`Share ${total} tokens between Alex and Sam in the ratio ${ratio}:1. Drag every token into a group.`;hint=`There are ${ratio+1} ratio parts. Divide ${total} by ${ratio+1}, then give Alex ${ratio} parts and Sam one.`;worked=`Each part is ${scale}. Alex gets ${ratio*scale} and Sam gets ${scale}. The identities of equal tokens do not matter.`;
+ }else{
+  const start=n,limit=start+2,events=type==='events';
+  const items=(events?Array.from({length:6},(_,i)=>start+i):[n%6,m%6,(n+m)%6,(2*n)%6,(m+2)%6,5].map(x=>start+x)).sort((a,b)=>a-b);
+  // The same data multiset/property always has the same order. Shuffling alone
+  // therefore cannot manufacture a fresh independent question.
+  let rng=2166136261;for(const ch of items.join(',')+':'+(events?m:limit))rng=Math.imul(rng^ch.charCodeAt(0),16777619)>>>0;
+  for(let i=items.length-1;i>0;i--){rng=(Math.imul(rng,1664525)+1013904223)>>>0;const j=rng%(i+1);[items[i],items[j]]=[items[j],items[i]];}
+
+  const expected=items.map(x=>events?x%m===0?0:1:x<=limit?0:1);
+  answer=JSON.stringify(expected);spec={kind:'groups',items:items.map(x=>({label:String(x),value:x})),targets:events?[`Multiples of ${m}`,'Other outcomes']:[`${start} to ${limit} inclusive`,`${limit+1} to ${start+5} inclusive`],counts:false};
+  prompt=events?`The possible equally likely outcomes are ${items.join(', ')}. Sort every outcome into “multiple of ${m}” or “other”.`:`Build two frequency groups. Sort the observations ${items.join(', ')} into the displayed inclusive class intervals.`;
+  hint=events?`A multiple of ${m} divides by ${m} with no remainder. Classify each outcome once.`:'Inclusive means both end values belong in that interval. Sort each observation once; the group count is its frequency.';worked=items.map((x,i)=>`${x}: ${spec.targets[expected[i]]}`).join('; ')+'.';
+ }
+ if(type==='mean'){
+  const mean=n,delta=m;answer=String(mean);spec={kind:'numberline',min:0,max:20,step:1,unit:'units'};
+  prompt=`The observations are ${mean-delta}, ${mean}, ${mean+delta}. Calculate the mean and move the marker to it.`;hint='Add all three observations, then divide by three. The marker shows the mean, not the total.';worked=`(${mean-delta} + ${mean} + ${mean+delta}) ÷ 3 = ${mean}.`;
+ }
+ const meta={contentVersion:9,id:`${id}:direct-v1:b${band}:s${seed}:f${family}`,family:`${id}:direct:${family}`,band,direct:{...spec,version:1},misconception:worked};
+ return [prompt,String(answer),[],hint,worked,meta];
+}
+function install(B,ED){const before=ED.example;ED.example=(id,qs,band,round)=>{if(kinds[id])for(let seed=round+101;seed<round+201;seed++){const q=row(id,band,seed,1);if(!qs.some(x=>x[0]===q[0]||x[1]===q[1]))return q;}return before(id,qs,band,round);};
+ return {...B,create(id,band,round,options={}){const qs=B.create(id,band,round,options);if(!kinds[id])return qs;const used=new Set(options.exclude||[]);for(const q of qs)used.add(q[0]);for(const [family,index]of [[0,0],[1,3]]){for(let attempt=0;attempt<100;attempt++){const q=row(id,band,round+attempt,family);if(!used.has(q[0])){qs[index]=q;used.add(q[0]);break;}}}return qs;}};
+}
+// Only newly created mission snapshots receive new tasks. Old saved tasks are untouched.
+function task(t,band,seed,index){if(!kinds[t.skill]||t.skill==='place'||index%3!==0)return t;const q=row(t.skill,band,seed+index*11,Math.floor(index/3)%2);return {kind:'direct',skill:t.skill,band,contentVersion:9,questionId:q[5].id,prompt:q[0],answer:q[1],direct:q[5].direct,teach:q[3],hint:q[3],worked:q[4],example:row(t.skill,Math.max(5,band-1),seed+101,1)[4],examplePrompt:row(t.skill,Math.max(5,band-1),seed+101,1)[0]};}
+root.V9TouchContent={kinds,row,task,install};
+if(root.JaxonFreshReview&&root.V6Education)root.JaxonFreshReview=install(root.JaxonFreshReview,root.V6Education);
+if(typeof module!=='undefined')module.exports={V9TouchContent:root.V9TouchContent};
+})(typeof window==='undefined'?globalThis:window);
+</script><script>'use strict';
+const demos=[['Groceries into a basket','town_totals',0],['Number-line marker','negative',0],['Move and align a ruler','geometry_construction',0],['Pour and measure liquid','measure_volume',0],['Build a fraction','fraction_parts',0],['Drag a coordinate point','algebra_coordinates',0],['Sort outcomes into groups','prob_events',0]];
+const KEY='jaxon_touch_review_fictional_v1';let store={selected:0,values:{}};
+try{const saved=JSON.parse(localStorage.getItem(KEY));if(saved&&Number.isInteger(saved.selected)&&saved.selected>=0&&saved.selected<demos.length&&saved.values&&typeof saved.values==='object')store=saved;}catch{}
+const $=id=>document.getElementById(id),question=()=>V9TouchContent.row(demos[store.selected][1],7,1,demos[store.selected][2]);
+function render(){const focus=document.activeElement?.dataset?.d9Focus;const q=question();$('title').textContent=demos[store.selected][0];$('prompt').textContent=q[0];$('model').innerHTML=V9Touch.render(q[5].direct,store.values[store.selected]||{},'d9-review');$('feedback').textContent='Drag an object or use the equivalent buttons. Your work saves when you release.';document.querySelectorAll('#examples button').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===store.selected)));if(focus)[...document.querySelectorAll('[data-d9-focus]')].find(el=>el.dataset.d9Focus===focus)?.focus({preventScroll:true});}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store));$('saved').textContent='Saved only in this fictional review preview. Reopening resumes your positions.';}catch{$('saved').textContent='Device storage unavailable; keep this page open.';}}
+demos.forEach(([label],i)=>{const b=document.createElement('button');b.textContent=label;b.type='button';b.onclick=()=>{store.selected=i;save();render();};$('examples').append(b);});
+V9Touch.bind(document,(_,action)=>{const q=question(),values=store.values[store.selected]||(store.values[store.selected]={});V9Touch.edit(q[5].direct,values,JSON.parse(decodeURIComponent(action.slice(action.indexOf(':')+1))));save();render();});
+$('check').onclick=()=>{const q=question(),correct=V9Touch.matches(q[5].direct,q[1],store.values[store.selected]||{});$('feedback').textContent=correct?'That works. '+q[4]:'Not yet. '+q[3]+' '+q[4];};
+$('hint').onclick=()=>{const q=question();$('feedback').textContent=q[3]+' '+q[4];};render();
+</script></body></html>

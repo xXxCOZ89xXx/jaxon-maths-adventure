@@ -32,9 +32,10 @@ async function answer(page,t,choice){
 }
 const worlds=[['number','2',1,'array'],['fractions','1',1,'order'],['algebra','1',0,'sequence'],['geometry','0',0,'rotate'],['ratio','0',0,'ratio'],['statistics','0',0,'chart'],['probability','2',0,'chance'],['measure','0',0,'measure']];
 for(const [world,route,stage,kind] of worlds)test(`${world}: actual model, wrong answer, hint and saved placement`,async({camp})=>{
- const {page,key,read}=camp;await seed(page,key,world,route,stage);let q=(await read()).adventure.active,t=q.tasks[q.i];expect(t.kind).toBe(kind);
+ const {page,key,read}=camp;await seed(page,key,world,route,stage);let q=(await read()).adventure.active,t=q.tasks[q.i];if(t.direct){expect(t.kind).toBe('direct');expect(t.direct.kind).toBe(world==='statistics'?'groups':'ruler');}else expect(t.kind).toBe(kind);
  await click(page,'m-submit');expect((await read()).adventure.active.solved).toBe(false);expect((await read()).adventure.active.phase).toBe('lesson');await click(page,'m-begin');await click(page,'m-help');await expect(page.locator('.feedback').filter({visible:true}).first()).toBeVisible();
- if(kind==='array')await click(page,`m-array:${t.answer[0]}:${t.answer[1]}`);
+ if(t.direct)await require('./helpers/direct.cjs').alternative(page,t.direct,t.answer);
+ else if(kind==='array')await click(page,`m-array:${t.answer[0]}:${t.answer[1]}`);
  else if(kind==='order'){for(let i=0;i<t.answer.length;i++){await click(page,'h-pick:'+t.answer[i]);await click(page,'h-place:'+i);}}
  else if(kind==='sequence'){await expect(page.getByRole('group',{name:'Loose train carriages'})).toBeVisible();await click(page,'m-value:'+t.answer);}
  else if(kind==='rotate')for(let n=0;n<t.answer;n+=90)await click(page,'m-turn');
@@ -83,7 +84,7 @@ test('Balance bundles and old V2 snapshots retain their saved meaning',async({ca
  const book=require('./fixtures/town-v2-before-quality.json');await page.evaluate(({key,book})=>{const s=V3Engine.fresh();s.tourSeen=true;s.adventure={townLifeV2:book,townActive:2};s.view=s.resumeView='journey';s.world='town';localStorage.setItem(key,JSON.stringify(s));},{key,book});await page.reload();await openCurrent(page);expect((await run(page,key)).steps).toEqual(book.runs[book.active].steps);await expect(page.locator('.shop-counter')).toBeVisible();const exact=await run(page,key);await click(page,'nav:home');await click(page,'continue');expect(await run(page,key)).toEqual(exact);
 });
 test('A stale range edit cannot overwrite a replacement adventure in another tab',async({camp})=>{
- const {page,context,key,read}=camp;await seed(page,key,'measure','0');
+ const {page,context,key,read}=camp;await seed(page,key,'measure','0',1);
  await page.evaluate(k=>new Promise(held=>{navigator.locks.request(k+':transaction',()=>new Promise(release=>{window.releaseRangeLock=release;held();}));}),key);
  await page.locator('[data-model-range]').evaluate(el=>{el.value='125';el.dispatchEvent(new Event('change',{bubbles:true}));});
  const other=await context.newPage();await other.goto('/v3-adventure.html');await other.evaluate(k=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,'algebra','0',1);V3Adventure.begin(s);localStorage.setItem(k,JSON.stringify(s));},key);
@@ -103,3 +104,5 @@ test('Parent rewards and learner shop stay separate with the new Town save',asyn
  const parent=await family.open('parent');await expect(parent.getByRole('heading',{name:'Staging parent dashboard'})).toBeVisible();await parent.getByLabel('Action',{exact:true}).selectOption('award');await parent.getByLabel('Amount (1 to 60)',{exact:true}).fill('10');await parent.getByRole('button',{name:'Submit parent reward'}).tap();await expect.poll(()=>family.server.wallet.bonus).toBe(10);
  const page=await family.open('learner');await expect(page.getByRole('button',{name:'Submit parent reward'})).toHaveCount(0);await click(page,'skip-tour');await page.locator('nav [data-nav="camp"]').tap();await click(page,'nav:shop');await expect(page.locator('.shop-grid')).toBeVisible();expect(family.server.wallet.bonus).toBe(10);await page.reload();await openCurrent(page);expect(family.server.wallet.bonus).toBe(10);
 });
+
+test('Released statistics chart snapshots still render and validate their original bar construction',async({camp})=>{const{page,key,read}=camp;const fixture=require('./fixtures/touch-released-snapshot.json');await page.evaluate(({key,fixture})=>{const s=V3Engine.fresh();s.tourSeen=true;s.adventure=fixture.adventure;s.adventure.active.phase='play';s.view='adventure';s.world='statistics';localStorage.setItem(key,JSON.stringify(s));},{key,fixture});await page.reload();await openCurrent(page);const t=(await read()).adventure.active.tasks[0];expect(t.kind).toBe('chart');for(let i=0;i<t.answer.length;i++)await click(page,`m-chart:${i}:${t.answer[i]}`);await click(page,'m-submit');expect((await read()).adventure.active.solved).toBe(true);});
