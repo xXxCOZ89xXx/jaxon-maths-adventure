@@ -28,7 +28,7 @@ for(const [world,[guide,name]] of Object.entries(worlds))test(`${world}: correct
  await p.screenshot({path:`${dir}/${world}-context.png`,fullPage:false,animations:'disabled'});
  fs.writeFileSync(`${dir}/${world}-checks.json`,JSON.stringify({world,guide,layout:info.project.name,geometry,backgroundPixelsUnchanged:true,backgroundSHA256:crypto.createHash('sha256').update(sceneAfter).digest('hex')},null,2));
 });
-test('all nine originals embedded unchanged with alpha; portraits independent from art and absent from ordinary entry',async({page:p})=>{
+test('all nine originals embedded unchanged with alpha; portraits independent from art and shared renderer in ordinary entry without controls',async({page:p})=>{
  const files=await p.evaluate(()=>window.WorldGuidePortraitFiles);
  const audit=JSON.parse(fs.readFileSync('v3/assets/world-guide-portraits-preview/manifest.json'));
  for(const [world,[guide,name]] of Object.entries(worlds)){

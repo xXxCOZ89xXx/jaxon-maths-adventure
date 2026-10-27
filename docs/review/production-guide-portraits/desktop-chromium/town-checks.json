@@ -1,0 +1,24 @@
+{
+  "world": "town",
+  "guide": "Ellis",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 163237,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "5d0f67b0b56fe689cc0d413e3ef5be64833030d82d406e1870a514cd902e97f4"
+}

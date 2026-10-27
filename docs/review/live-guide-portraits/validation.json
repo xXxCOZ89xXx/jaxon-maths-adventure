@@ -1,0 +1,78 @@
+{
+  "baseline": "5ed0f4c6f00cc050bfc69c9d2c881dbd23d6c4e5",
+  "approvedPortraits": "d2703f4",
+  "browserChecksPassed": 174,
+  "physicalIPadSafariTested": false,
+  "commands": [
+    {
+      "command": "npm test",
+      "result": "passed",
+      "log": "work/portrait-release-logic.log"
+    },
+    {
+      "command": "npm run test:curriculum",
+      "result": "passed",
+      "log": "work/portrait-release-curriculum.log"
+    },
+    {
+      "command": "npm run test:touch",
+      "result": "passed",
+      "log": "work/portrait-release-touch.log"
+    },
+    {
+      "command": "npm run test:production-build",
+      "result": "passed",
+      "log": "work/portrait-release-production-build.log"
+    },
+    {
+      "command": "npm run test:staging-build",
+      "result": "passed",
+      "log": "work/portrait-release-live-build.log"
+    },
+    {
+      "command": "npm run build:preview",
+      "result": "passed",
+      "log": "work/portrait-release-preview.log"
+    },
+    {
+      "command": "production browser regression (24)",
+      "result": "passed",
+      "log": "work/portrait-release-production-browser-final-verified.log"
+    },
+    {
+      "command": "production portraits and identity (45)",
+      "result": "passed",
+      "log": "work/portrait-release-production-portraits-final-verified.log"
+    },
+    {
+      "command": "live game builder portraits (27)",
+      "result": "passed",
+      "log": "work/portrait-release-live-portraits-verified.log"
+    },
+    {
+      "command": "preview portraits regression (30)",
+      "result": "passed",
+      "log": "work/portrait-release-offline-browser.log"
+    },
+    {
+      "command": "forest fallback regression (9)",
+      "result": "passed",
+      "log": "work/portrait-release-forest.log"
+    },
+    {
+      "command": "desert fallback regression (9)",
+      "result": "passed",
+      "log": "work/portrait-release-desert.log"
+    },
+    {
+      "command": "iPad save/recovery (14)",
+      "result": "passed",
+      "log": "work/portrait-release-ipad.log"
+    },
+    {
+      "command": "gameplay quality scoped models (16)",
+      "result": "passed",
+      "log": "work/portrait-release-quality.log"
+    }
+  ]
+}

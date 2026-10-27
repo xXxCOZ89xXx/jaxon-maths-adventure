@@ -1,0 +1,24 @@
+{
+  "world": "probability",
+  "guide": "Nova",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 155909,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "e3e188ef3716186990337a36c2fa9b1d716f7a48b97acee7ccda84e92c71cb37"
+}

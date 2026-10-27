@@ -38,7 +38,8 @@ for (const file of [
   "v2-maths-tools.js",
   "v2-extra-tools.js",
 ])
-  fs.cpSync(path.join(repo, file), path.join(out, file), { recursive: true });
+  fs.cpSync(path.join(repo, file), path.join(out, file), { recursive: true,
+    filter: source => !['painted-forest-preview','fraction-desert-preview','painted-forest-preview.js','painted-forest-preview.css','painted-desert-preview.js','painted-desert-preview.css','guide-portraits-preview.js','guide-portraits-preview.css'].includes(path.basename(source)) });
 let html = fs.readFileSync(path.join(repo, "v3-adventure.html"), "utf8");
 html = html
   .replace("connect-src 'none'", `connect-src 'self' ${c.url}`)

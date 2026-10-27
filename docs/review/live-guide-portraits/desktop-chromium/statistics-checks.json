@@ -1,0 +1,24 @@
+{
+  "world": "statistics",
+  "guide": "Ada",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 174715,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "f08d8f34096c0dca722395323286e11fc4739d5e4cd39e85e58325165bc1bfc0"
+}

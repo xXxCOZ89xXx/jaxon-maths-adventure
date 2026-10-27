@@ -1,0 +1,24 @@
+{
+  "world": "fractions",
+  "guide": "Saff",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 149965,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "96a0455fc2e23d5ab2f6ebc0e8e48c0dc78343e6a9d41feafd38f54e86a0acd4"
+}

@@ -1,0 +1,24 @@
+{
+  "world": "measure",
+  "guide": "Flint",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 164934,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "c54d800f71e569a8824de460ecb7ac89c84f21e420116f3e4c4005eb864dba89"
+}

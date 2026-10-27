@@ -1,0 +1,24 @@
+{
+  "world": "number",
+  "guide": "Rowan",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 167132,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "0399dd35ec19df0c13aa3d283c73120a62110edbeb9ddb7685e8459b22e9b6c1"
+}

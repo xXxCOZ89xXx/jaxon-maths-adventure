@@ -1,0 +1,24 @@
+{
+  "world": "ratio",
+  "guide": "Marin",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 153622,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "27103c7ce8ad80048b51c9b0f223642042f50e773521310ebada3fae8c41de8b"
+}

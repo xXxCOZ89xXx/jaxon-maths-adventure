@@ -1,0 +1,24 @@
+{
+  "world": "geometry",
+  "guide": "Kit",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 167396,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "0a04e769824f9e9bad070753a30ff627f856f3ae22dfa709e971a5b4dc5469aa"
+}

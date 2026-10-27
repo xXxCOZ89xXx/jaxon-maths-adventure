@@ -1,0 +1,24 @@
+{
+  "world": "algebra",
+  "guide": "Finn",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 164407,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "5874507b6af37c72e77ad3a0ef24b65bddd9810e521d9467fdbcea03e6fddebe"
+}

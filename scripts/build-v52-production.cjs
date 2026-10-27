@@ -12,8 +12,15 @@ function entry() {
   s = once(s, 'window.V3CloudSync.config(window.V3StagingConfig)', 'Backend.productionConfig(window.V51ProductionConfig)');
   s = once(s, '"jaxon_v3_staging_auth:" + c.projectRef', 'Backend.namespace(c, "auth")');
   s = once(s, '    } else {\n      if (\n        check.data?.name', '    } else {\n      Backend.verifyIdentity(c, check.data);\n      productionEpoch=Backend.activationEpoch(check.data);\n      if (\n        check.data?.name');
-  s = once(s, '    if (check.error) {\n      if (\n        navigator.onLine ||\n        sessionStorage.getItem(verifiedKey) !== c.projectRef\n      )\n        throw Error("Staging identity was not verified. Sign-in is disabled.");',
-    '    if (check.error) {\n      throw Error("Reconnect to verify the active family release before opening saved progress.");');
+  // Match the identity-error branch independently of formatting. Fail closed if
+  // staging's offline verification contract changes; production always reconnects.
+  const identityError = /if\s*\(check\.error\)\s*\{([\s\S]*?)\}\s*else\s*\{/g;
+  const branches = [...s.matchAll(identityError)];
+  assert.equal(branches.length, 1, 'Expected one identity error branch');
+  const guard = branches[0][1].replace(/\s+/g, '');
+  assert.equal(guard, `if(navigator.onLine||sessionStorage.getItem(verifiedKey)!==c.projectRef||sessionStorage.getItem(receiptVerifiedKey)!=='1')throwError("Stagingidentitywasnotverified.Sign-inisdisabled.");`,
+    'Staging identity/offline receipt guard changed; review before building');
+  s = s.replace(identityError, 'if (check.error) {\n      throw Error("Reconnect to verify the active family release before opening saved progress.");\n    } else {');
   s = once(s, 'const key = `jaxon_v3_staging:${c.projectRef}:${identity.user}:game`,',
     'const key = `jaxon_v51_production:${c.projectRef}:${productionEpoch}:${identity.user}:game`,');
   s = s.replaceAll('"v3-unlock:" + c.projectRef', '"v3-unlock:" + c.projectRef + ":" + productionEpoch')
@@ -45,7 +52,8 @@ function build(config, out) {
   if (fs.existsSync(out) && fs.readdirSync(out).length) throw Error('Production output must be empty');
   fs.mkdirSync(out, { recursive: true });
   for (const file of ['v3','icon.svg','v2-review-bank.js','v2-guided-teaching.js','v2-maths-tools.js','v2-extra-tools.js'])
-    fs.cpSync(path.join(root,file),path.join(out,file),{recursive:true});
+    fs.cpSync(path.join(root,file),path.join(out,file),{recursive:true,
+      filter: source => !['painted-forest-preview','fraction-desert-preview','painted-forest-preview.js','painted-forest-preview.css','painted-desert-preview.js','painted-desert-preview.css','guide-portraits-preview.js','guide-portraits-preview.css'].includes(path.basename(source))});
   let html = fs.readFileSync(path.join(root,'v3-adventure.html'),'utf8');
   html = once(html,"connect-src 'none'",`connect-src 'self' ${c.url}`);
   html = html.replaceAll('V5 Interactive Test Camp','V5.2 Maths Adventure').replaceAll('V3 TEST CAMP','V5.2 FAMILY ADVENTURE')

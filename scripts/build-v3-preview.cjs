@@ -8,10 +8,11 @@ fs.mkdirSync(out, { recursive: true });
 let html = fs.readFileSync(path.join(root, "v3-adventure.html"), "utf8"),
   hashes = [];
 // Inject the art experiment only into the offline development artifact.
-// Staging/production builds continue to use the unchanged source entry point.
+// Production uses only the shared portrait renderer from the source entry point.
 html = html
+  .replace('<script src="v3/guide-portraits.js"></script>', '')
   .replace('</head>', '<link rel="stylesheet" href="v3/painted-forest-preview.css" />\n<link rel="stylesheet" href="v3/painted-desert-preview.css" />\n<link rel="stylesheet" href="v3/guide-portraits-preview.css" />\n</head>')
-  .replace('<script src="v3/app.js"></script>', '<script src="v3/painted-forest-preview.js"></script>\n<script src="v3/painted-desert-preview.js"></script>\n<script src="v3/guide-portraits-preview.js"></script>\n<script src="v3/app.js"></script>');
+  .replace('<script src="v3/app.js"></script>', '<script src="v3/painted-forest-preview.js"></script>\n<script src="v3/painted-desert-preview.js"></script>\n<script src="v3/guide-portraits.js"></script>\n<script src="v3/guide-portraits-preview.js"></script>\n<script src="v3/app.js"></script>');
 html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
   if (src.includes("cloud") || src.includes("staging"))
     throw Error("Cloud code forbidden in offline artifact");
@@ -46,7 +47,7 @@ html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
     };
     js='window.FractionDesertPreviewFiles='+JSON.stringify(assets)+';\n'+js;
   }
-  if(src === 'v3/guide-portraits-preview.js') {
+  if(src === 'v3/guide-portraits.js') {
     const dir=path.join(root,'v3/assets/world-guide-portraits-preview');
     const assets=Object.fromEntries(JSON.parse(fs.readFileSync(path.join(dir,'manifest.json'),'utf8')).assets.map(asset=>[
       asset.file.replace('-guide.webp',''), 'data:image/webp;base64,'+fs.readFileSync(path.join(dir,asset.file)).toString('base64')
