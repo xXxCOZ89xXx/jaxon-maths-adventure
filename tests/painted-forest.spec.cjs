@@ -2,7 +2,7 @@
 const {test, expect} = require('@playwright/test');
 const fs = require('node:fs');
 const key = 'jaxon_v3_fictional_demo_2026';
-const root = 'docs/review/painted-forest-preview';
+const root = process.env.PAINTED_FOREST_SHOTS || 'docs/review/painted-forest-preview';
 const url = '/preview-dist/PLAY-V3.html';
 async function loaded(page) {
   await page.locator('#main h1').waitFor();
@@ -43,7 +43,7 @@ test.afterEach(async ({page}) => {
 
 test('art comparison preserves saves, avatars, geometry and readable restoration layers', async ({page}, info) => {
   await seed(page);
-  const select = page.getByRole('combobox', {name:'Compare Number Forest artwork'});
+  const select = page.getByRole('combobox', {name:'Compare preview artwork'});
   const current = page.locator('.painted-forest-scene > .scene-background');
   const backdrop = page.locator('.painted-forest-backdrop');
   await select.selectOption('current');
@@ -106,7 +106,7 @@ test('painted world remains playable and restores bridge progress across reloads
   expect((await state(page)).quest.solved).toBe(true);
   await page.locator('[data-world-task-open]').first().click();
   await page.locator('[data-action="next-quest"]').click();
-  expect((await state(page)).quest.i).toBe(1);
+  await expect.poll(async () => (await state(page)).quest.i).toBe(1);
 });
 
 test('standalone embeds original bytes; other worlds and non-preview entry stay current', async ({page}) => {
@@ -114,7 +114,7 @@ test('standalone embeds original bytes; other worlds and non-preview entry stay 
     files:window.PaintedForestPreviewFiles,
     standalone:![...document.querySelectorAll('script[src],link[rel=stylesheet]')].length,
     csp:document.querySelector('meta[http-equiv="Content-Security-Policy"]').content,
-    otherWorld:V3Art.scene('fractions',0), otherGuide:V3Art.guide('Saff'),
+    otherWorld:V3Art.scene('algebra',0), otherGuide:V3Art.guide('Finn'),
   }));
   expect(result.standalone).toBe(true); expect(result.csp).toContain("connect-src 'none'");
   for(const [name,file] of Object.entries({forest:'number-forest-painted-backdrop.jpg',rowan:'rowan-guide-portrait-transparent.webp'})) {
@@ -137,6 +137,6 @@ test('standalone embeds original bytes; other worlds and non-preview entry stay 
   expect(transparency).toEqual({width:512,height:640,clear:140438,visible:187242,corners:[0,0,0,0]});
   const alpha = await page.locator('.rowan-painted-art').count(); expect(alpha).toBe(0);
   await page.goto('/v3-adventure.html'); await loaded(page);
-  await expect(page.getByRole('combobox',{name:'Compare Number Forest artwork'})).toHaveCount(0);
+  await expect(page.getByRole('combobox',{name:'Compare preview artwork'})).toHaveCount(0);
   expect(await page.evaluate(() => window.PaintedForestPreviewFiles)).toBeUndefined();
 });

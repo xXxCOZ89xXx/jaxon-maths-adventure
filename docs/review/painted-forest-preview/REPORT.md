@@ -15,7 +15,7 @@ npm run preview
 
 Open <http://localhost:4173/preview-dist/PLAY-V3.html>.
 Use **Development art preview** in the Test Camp strip to switch between
-**Painted forest + Rowan** and **Current artwork** without reloading or editing
+**Painted worlds + guides** and **Current artwork** without reloading or editing
 the save. `?art=current` opens directly with the fallback. The preference is
 transient; a normal reload defaults to painted unless the URL selects current.
 

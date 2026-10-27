@@ -29,8 +29,8 @@
   label.className = 'painted-art-control';
   label.append('Development art preview ');
   const select = document.createElement('select');
-  select.setAttribute('aria-label', 'Compare Number Forest artwork');
-  for (const [value, text] of [['painted', 'Painted forest + Rowan'], ['current', 'Current artwork']]) {
+  select.setAttribute('aria-label', 'Compare preview artwork');
+  for (const [value, text] of [['painted', 'Painted worlds + guides'], ['current', 'Current artwork']]) {
     const option = document.createElement('option');
     option.value = value; option.textContent = text; select.append(option);
   }
