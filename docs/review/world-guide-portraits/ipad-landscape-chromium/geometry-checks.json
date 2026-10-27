@@ -1,0 +1,19 @@
+{
+  "world": "geometry",
+  "guide": "Kit",
+  "layout": "ipad-landscape-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "d392f2f0b7fc80481b923e7cc684de2efee4d0643f5f5be74afdabfd56c02dac"
+}

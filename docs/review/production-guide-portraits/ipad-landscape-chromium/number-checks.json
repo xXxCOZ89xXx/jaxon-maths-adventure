@@ -1,0 +1,42 @@
+{
+  "world": "number",
+  "guide": "Rowan",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 167132,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "captureScope": "background image layer only; foreground controls checked separately",
+  "backgroundPixelsUnchanged": true,
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/production-test-dist/v3/assets/rollout/forest.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      39,
+      287.734375,
+      1102,
+      734.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "e858ade7a1426a84dce9fd7ad5021cbdbeb1ffa9fd57e8768ac73c4d34365747"
+}

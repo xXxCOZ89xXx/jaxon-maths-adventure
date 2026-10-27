@@ -1,0 +1,42 @@
+{
+  "world": "ratio",
+  "guide": "Marin",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 153622,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "captureScope": "background image layer only; foreground controls checked separately",
+  "backgroundPixelsUnchanged": true,
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/production-test-dist/v3/assets/rollout/ratio.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      39,
+      349.734375,
+      742,
+      494.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "7b5df7d318a1aa567375103fe0673b9ed5becd46c7ae575d91638cec0f5fcfc4"
+}

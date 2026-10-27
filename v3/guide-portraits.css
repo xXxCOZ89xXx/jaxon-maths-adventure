@@ -1,0 +1,18 @@
+/* Fixed panel slot; contain preserves the supplied transparent portrait uncropped. */
+.world-guide-comparison {
+  display: inline-flex;
+  flex: 0 0 80px;
+  width: 80px;
+  height: 110px;
+}
+.world-guide-portrait { display: none; }
+[data-guide-portraits="supplied"] .portrait-ready .world-guide-previous { display: none; }
+[data-guide-portraits="supplied"] .portrait-ready .world-guide-portrait {
+  display: block;
+  width: 80px;
+  height: 110px;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  border: 0;
+}

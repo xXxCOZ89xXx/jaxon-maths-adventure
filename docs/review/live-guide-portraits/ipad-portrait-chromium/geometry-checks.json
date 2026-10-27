@@ -1,0 +1,42 @@
+{
+  "world": "geometry",
+  "guide": "Kit",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 167396,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "captureScope": "background image layer only; foreground controls checked separately",
+  "backgroundPixelsUnchanged": true,
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/staging-fixture-dist/v3/assets/rollout/geometry.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      39,
+      349.734375,
+      742,
+      494.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "42ec54a8cfdfc030aeed4fb9b0738cd7326f664a8e6ec300de75cf61335c29ee"
+}

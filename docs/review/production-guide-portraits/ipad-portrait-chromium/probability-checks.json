@@ -1,0 +1,42 @@
+{
+  "world": "probability",
+  "guide": "Nova",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 155909,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "captureScope": "background image layer only; foreground controls checked separately",
+  "backgroundPixelsUnchanged": true,
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/production-test-dist/v3/assets/rollout/probability.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      39,
+      349.734375,
+      742,
+      494.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "f99f8fb5c90eb99340ac54c6c376bf8d1d12cdae98711d85f871da84eb7d7aa6"
+}

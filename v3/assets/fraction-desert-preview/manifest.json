@@ -1,0 +1,40 @@
+{
+  "source": "fraction-desert-art-assets.zip; owner supplied, copied without re-encoding",
+  "assets": [
+    {
+      "file": "fraction-desert-guide-transparent.webp",
+      "format": "WEBP",
+      "dimensions": [
+        560,
+        700
+      ],
+      "bytes": 134880,
+      "sha256": "c1c7b768ac55a1281ce7f6077310e18d63715998a1bbb02eb4e2b30dd55e41cb",
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "transparent": 149965,
+        "partial": 241203,
+        "opaque": 832,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "fraction-desert-painted-backdrop.jpg",
+      "format": "JPEG",
+      "dimensions": [
+        1200,
+        750
+      ],
+      "bytes": 348958,
+      "sha256": "70f3512816ce8b54dffce5e3f32b2d14ff6c4d7066cfe88864052c80d6c57194"
+    }
+  ]
+}

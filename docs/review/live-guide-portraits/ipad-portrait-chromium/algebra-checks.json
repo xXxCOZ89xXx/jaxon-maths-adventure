@@ -1,0 +1,42 @@
+{
+  "world": "algebra",
+  "guide": "Finn",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 164407,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "captureScope": "background image layer only; foreground controls checked separately",
+  "backgroundPixelsUnchanged": true,
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/staging-fixture-dist/v3/assets/checkpoint/rail.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      40,
+      350.734375,
+      740,
+      492.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "1db9f92f37d5165eb6aa19dc37d30754a7187f6aeaa69c409d9a1635982f9338"
+}

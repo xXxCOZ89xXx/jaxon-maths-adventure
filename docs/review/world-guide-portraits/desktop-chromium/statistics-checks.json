@@ -1,0 +1,19 @@
+{
+  "world": "statistics",
+  "guide": "Ada",
+  "layout": "desktop-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "da9ae7a9a495f861515a43a90de773363488e6a47326a5dac0cae21cd8134c77"
+}

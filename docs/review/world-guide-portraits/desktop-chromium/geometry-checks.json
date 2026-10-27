@@ -1,0 +1,19 @@
+{
+  "world": "geometry",
+  "guide": "Kit",
+  "layout": "desktop-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "a7ad56d85426871068e5ae5cc6d13e19c4395f77856e93a9fe8c154593efe8d7"
+}

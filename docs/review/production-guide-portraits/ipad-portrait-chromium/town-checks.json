@@ -1,0 +1,42 @@
+{
+  "world": "town",
+  "guide": "Ellis",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "inside": true,
+    "overlap": false,
+    "transparent": 163237,
+    "corners": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "captureScope": "background image layer only; foreground controls checked separately",
+  "backgroundPixelsUnchanged": true,
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/production-test-dist/v3/assets/checkpoint/town.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      40,
+      350.734375,
+      740,
+      492.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "cad146eb883511c378c472dd4fb2c1dfae59c444b3921e8676464f791de0b53e"
+}

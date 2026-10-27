@@ -26,6 +26,13 @@ jobs:
       - run: docker pull postgres:17-alpine
       - name: Migration, requests, offline recovery, purchases, roles and gameplay
         run: npm run test:ipad-release
+      - name: Production build and guide portraits with fictional intercepted data
+        run: |
+          npm run test:production-build
+          npm run test:staging-build
+          npx playwright test -c playwright.production.config.cjs
+          npx playwright test -c playwright.production-portraits.config.cjs
+          GUIDE_BUILD=live npx playwright test -c playwright.production-portraits.config.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -34,4 +41,10 @@ jobs:
             tests/artifacts/compact-receipts-db.json
             tests/artifacts/save-recovery-browser.json
             test-results/save-recovery/
+            test-results/production-browser/
+            test-results/production-portraits/
+            work/production-portraits/browser-results.json
+            work/production-portraits/live-results.json
+            test-results/live-portraits/
+            tests/artifacts/v5-2-production-browser.json
           retention-days: 14

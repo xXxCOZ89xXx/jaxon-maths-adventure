@@ -1,0 +1,253 @@
+{
+  "branch": "codex/painted-forest-preview",
+  "base": "79cb584afc386fe8529ec9cd413a7a098ebf200e",
+  "finalChecks": [
+    {
+      "command": "npm run test:curriculum",
+      "exitCode": 0,
+      "seconds": 6.0
+    },
+    {
+      "command": "npm run test:touch",
+      "exitCode": 0,
+      "seconds": 11.0
+    },
+    {
+      "label": "build-preview",
+      "command": [
+        "npm",
+        "run",
+        "build:preview"
+      ],
+      "exitCode": 0,
+      "seconds": 0.5
+    },
+    {
+      "label": "baseline",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exitCode": 0,
+      "seconds": 3.5
+    },
+    {
+      "label": "desert-preview",
+      "command": [
+        "npx",
+        "playwright",
+        "test",
+        "-c",
+        "playwright.painted-desert.config.cjs"
+      ],
+      "exitCode": 0,
+      "seconds": 35.8
+    },
+    {
+      "label": "forest-regression",
+      "command": [
+        "npx",
+        "playwright",
+        "test",
+        "-c",
+        "playwright.painted-forest.config.cjs"
+      ],
+      "exitCode": 0,
+      "seconds": 35.7
+    },
+    {
+      "label": "ipad-release",
+      "command": [
+        "npm",
+        "run",
+        "test:ipad-release"
+      ],
+      "exitCode": 0,
+      "seconds": 57.7
+    },
+    {
+      "label": "curriculum-browser-final",
+      "command": [
+        "npm",
+        "run",
+        "test:curriculum-browser",
+        "--",
+        "--grep",
+        "fractions:"
+      ],
+      "exitCode": 0,
+      "seconds": 20.1
+    },
+    {
+      "label": "gameplay-quality-final",
+      "command": [
+        "npm",
+        "run",
+        "test:gameplay-quality",
+        "--",
+        "--grep",
+        "fractions:"
+      ],
+      "exitCode": 0,
+      "seconds": 13.7
+    },
+    {
+      "label": "timer-isolated",
+      "command": [
+        "npx",
+        "playwright",
+        "test",
+        "-c",
+        "playwright.touch.config.cjs",
+        "--grep",
+        "Cancelled movement and Escape"
+      ],
+      "exitCode": 1,
+      "seconds": 12.1
+    }
+  ],
+  "browserStats": {
+    "desert-preview": {
+      "startTime": "2026-10-27T19:28:08.603Z",
+      "duration": 35078.213,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "forest-preview": {
+      "startTime": "2026-10-27T19:28:44.415Z",
+      "duration": 34968.077,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "curriculum-fractions": {
+      "startTime": "2026-10-27T19:31:12.706Z",
+      "duration": 18848.478,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "gameplay-fractions": {
+      "startTime": "2026-10-27T19:31:35.669Z",
+      "duration": 9635.143,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "timer-isolated": {
+      "startTime": "2026-10-27T19:31:46.081Z",
+      "duration": 11266.771,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "ipad-save-recovery": {
+      "startTime": "2026-10-27T19:29:55.915Z",
+      "duration": 42873.835,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "fractionDirectPractice": {
+    "passed": 3,
+    "layouts": [
+      "ipad-portrait",
+      "ipad-landscape",
+      "small-touch"
+    ],
+    "initialCombinedTouchRun": {
+      "passed": 5,
+      "failed": 1
+    }
+  },
+  "remainingFailure": {
+    "test": "Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window",
+    "layout": "ipad-portrait-chromium",
+    "assertion": "Expected minutes > 0 after committed edit; received 0",
+    "reproducedAlone": true,
+    "source": "Uses ordinary v3-adventure.html; art experiment is not loaded. Source entry, app/engine/touch code and the test are byte-identical to base 79cb584. No timer or gameplay changes made."
+  },
+  "scope": "Curriculum, touch and gameplay browser runs target fractions; full iPad save/recovery gate and baseline logic suites run. Browser tests run serially; all external origins denied. Only synthetic local fixtures and network-disabled local PostgreSQL used.",
+  "assets": {
+    "source": "fraction-desert-art-assets.zip; owner supplied, copied without re-encoding",
+    "assets": [
+      {
+        "file": "fraction-desert-guide-transparent.webp",
+        "format": "WEBP",
+        "dimensions": [
+          560,
+          700
+        ],
+        "bytes": 134880,
+        "sha256": "c1c7b768ac55a1281ce7f6077310e18d63715998a1bbb02eb4e2b30dd55e41cb",
+        "alpha": {
+          "range": [
+            0,
+            255
+          ],
+          "transparent": 149965,
+          "partial": 241203,
+          "opaque": 832,
+          "corners": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "file": "fraction-desert-painted-backdrop.jpg",
+        "format": "JPEG",
+        "dimensions": [
+          1200,
+          750
+        ],
+        "bytes": 348958,
+        "sha256": "70f3512816ce8b54dffce5e3f32b2d14ff6c4d7066cfe88864052c80d6c57194"
+      }
+    ]
+  },
+  "unchangedComparedWithBase": [
+    "v3-adventure.html",
+    "v3/app.js",
+    "v3/engine.js",
+    "v3/touch-activities.js",
+    "v3/avatar-art.js",
+    "v3/style.css",
+    "tests/touch.spec.cjs",
+    "scripts/build-v52-production.cjs"
+  ],
+  "physicalIPadSafari": "not tested",
+  "screenshots": [
+    "desktop-chromium/after-guide-panel.png",
+    "desktop-chromium/after-guide.png",
+    "desktop-chromium/after-restored.png",
+    "desktop-chromium/after-world.png",
+    "desktop-chromium/before-guide-panel.png",
+    "desktop-chromium/before-guide.png",
+    "desktop-chromium/before-world.png",
+    "ipad-landscape-chromium/after-guide-panel.png",
+    "ipad-landscape-chromium/after-guide.png",
+    "ipad-landscape-chromium/after-restored.png",
+    "ipad-landscape-chromium/after-world.png",
+    "ipad-landscape-chromium/before-guide-panel.png",
+    "ipad-landscape-chromium/before-guide.png",
+    "ipad-landscape-chromium/before-world.png",
+    "ipad-portrait-chromium/after-guide-panel.png",
+    "ipad-portrait-chromium/after-guide.png",
+    "ipad-portrait-chromium/after-restored.png",
+    "ipad-portrait-chromium/after-world.png",
+    "ipad-portrait-chromium/before-guide-panel.png",
+    "ipad-portrait-chromium/before-guide.png",
+    "ipad-portrait-chromium/before-world.png"
+  ]
+}

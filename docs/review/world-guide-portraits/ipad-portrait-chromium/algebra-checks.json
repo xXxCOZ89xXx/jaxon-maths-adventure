@@ -1,0 +1,19 @@
+{
+  "world": "algebra",
+  "guide": "Finn",
+  "layout": "ipad-portrait-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "ce4862842646dd39d9c0880852b6370a2256b49b811b3e06da90dd476a6a686c"
+}

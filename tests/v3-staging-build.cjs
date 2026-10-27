@@ -12,6 +12,13 @@ const real=path.join(root,'staging-dist'), before=snapshot(real);
 execFileSync(process.execPath,['tests/prepare-v3.cjs'],{cwd:root,stdio:'pipe'});
 assert.deepEqual(snapshot(real),before,'Mock preparation overwrote deployable staging bytes');
 verify(path.join(root,'staging-fixture-dist'),'abcdefghijklmnopqrst');
+const site=path.join(root,'staging-fixture-dist'),html=fs.readFileSync(path.join(site,'index.html'),'utf8');
+assert.ok(html.includes('src="v3/guide-portraits.js"')&&html.includes('href="v3/guide-portraits.css"'));
+for(const file of ['painted-forest-preview.js','painted-desert-preview.js','guide-portraits-preview.js','assets/painted-forest-preview','assets/fraction-desert-preview'])
+ assert.ok(!fs.existsSync(path.join(site,'v3',file)),'No preview experiment in live build: '+file);
+for(const asset of JSON.parse(fs.readFileSync('v3/assets/world-guide-portraits-preview/manifest.json')).assets)
+ assert.ok(fs.readFileSync(path.join(site,'v3/assets/world-guide-portraits-preview',asset.file)).equals(fs.readFileSync(path.join('v3/assets/world-guide-portraits-preview',asset.file))));
+
 const invalid={...process.env,V3_STAGING_BUILD_FIXTURE:'1',
   V3_STAGING_PROJECT_REF:'sfogrvedypgtxfvecmbx', V3_STAGING_AUTHORIZED_REF:'sfogrvedypgtxfvecmbx',
   V3_STAGING_URL:'https://sfogrvedypgtxfvecmbx.supabase.co',

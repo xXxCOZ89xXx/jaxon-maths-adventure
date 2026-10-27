@@ -7,6 +7,12 @@ const root = path.resolve(__dirname, ".."),
 fs.mkdirSync(out, { recursive: true });
 let html = fs.readFileSync(path.join(root, "v3-adventure.html"), "utf8"),
   hashes = [];
+// Inject the art experiment only into the offline development artifact.
+// Production uses only the shared portrait renderer from the source entry point.
+html = html
+  .replace('<script src="v3/guide-portraits.js"></script>', '')
+  .replace('</head>', '<link rel="stylesheet" href="v3/painted-forest-preview.css" />\n<link rel="stylesheet" href="v3/painted-desert-preview.css" />\n<link rel="stylesheet" href="v3/guide-portraits-preview.css" />\n</head>')
+  .replace('<script src="v3/app.js"></script>', '<script src="v3/painted-forest-preview.js"></script>\n<script src="v3/painted-desert-preview.js"></script>\n<script src="v3/guide-portraits.js"></script>\n<script src="v3/guide-portraits-preview.js"></script>\n<script src="v3/app.js"></script>');
 html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
   if (src.includes("cloud") || src.includes("staging"))
     throw Error("Cloud code forbidden in offline artifact");
@@ -25,6 +31,30 @@ html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
     const assets=Object.fromEntries(names.map(name=>[name,'data:image/webp;base64,'+fs.readFileSync(path.join(dir,name+'.webp')).toString('base64')]));
     js='window.V7AssetFiles='+JSON.stringify(assets)+';\n'+js;
   }
+  if(src === 'v3/painted-forest-preview.js') {
+    const dir=path.join(root,'v3/assets/painted-forest-preview');
+    const assets={
+      forest:'data:image/jpeg;base64,'+fs.readFileSync(path.join(dir,'number-forest-painted-backdrop.jpg')).toString('base64'),
+      rowan:'data:image/webp;base64,'+fs.readFileSync(path.join(dir,'rowan-guide-portrait-transparent.webp')).toString('base64'),
+    };
+    js='window.PaintedForestPreviewFiles='+JSON.stringify(assets)+';\n'+js;
+  }
+  if(src === 'v3/painted-desert-preview.js') {
+    const dir=path.join(root,'v3/assets/fraction-desert-preview');
+    const assets={
+      desert:'data:image/jpeg;base64,'+fs.readFileSync(path.join(dir,'fraction-desert-painted-backdrop.jpg')).toString('base64'),
+      saff:'data:image/webp;base64,'+fs.readFileSync(path.join(dir,'fraction-desert-guide-transparent.webp')).toString('base64'),
+    };
+    js='window.FractionDesertPreviewFiles='+JSON.stringify(assets)+';\n'+js;
+  }
+  if(src === 'v3/guide-portraits.js') {
+    const dir=path.join(root,'v3/assets/world-guide-portraits-preview');
+    const assets=Object.fromEntries(JSON.parse(fs.readFileSync(path.join(dir,'manifest.json'),'utf8')).assets.map(asset=>[
+      asset.file.replace('-guide.webp',''), 'data:image/webp;base64,'+fs.readFileSync(path.join(dir,asset.file)).toString('base64')
+    ]));
+    const names={number:'number-forest',fractions:'fraction-desert',algebra:'algebra-peaks',geometry:'geometry-kingdom',ratio:'ratio-island',statistics:'statistics-city',probability:'probability-portal',measure:'measurement-mines',town:'practical-maths-town'};
+    js='window.WorldGuidePortraitFiles='+JSON.stringify(Object.fromEntries(Object.entries(names).map(([world,name])=>[world,assets[name]])))+';\n'+js;
+  }
   hashes.push(
     "'sha256-" + crypto.createHash("sha256").update(js).digest("base64") + "'",
   );
@@ -33,10 +63,8 @@ html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
 html = html
   .replace("script-src 'self'", "script-src " + hashes.join(" "))
   .replace(
-    '<link rel="stylesheet" href="v3/style.css" />',
-    "<style>" +
-      fs.readFileSync(path.join(root, "v3/style.css"), "utf8") +
-      "</style>",
+    /<link rel="stylesheet" href="(v3\/[^"\s]+\.css)" \/>/g,
+    (_, src) => "<style>" + fs.readFileSync(path.join(root, src), "utf8") + "</style>",
   )
   .replace(
     'href="icon.svg"',
