@@ -1,0 +1,19 @@
+{
+  "world": "town",
+  "guide": "Ellis",
+  "layout": "desktop-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "b7313812b94e3d908f2c36e2d25a748f2f8dd4c76f797835f98f893c7272d9b4"
+}

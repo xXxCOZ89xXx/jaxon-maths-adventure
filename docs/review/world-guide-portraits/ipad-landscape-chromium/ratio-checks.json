@@ -1,0 +1,19 @@
+{
+  "world": "ratio",
+  "guide": "Marin",
+  "layout": "ipad-landscape-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "1a5be15d262bc030a8bb8f9845332cec9bf54b21174470ae3e855199e566caba"
+}

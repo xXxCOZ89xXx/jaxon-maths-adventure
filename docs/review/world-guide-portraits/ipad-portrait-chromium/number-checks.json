@@ -1,0 +1,19 @@
+{
+  "world": "number",
+  "guide": "Rowan",
+  "layout": "ipad-portrait-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "467df9acbf6380326c6d6ccd39e685b09be89544490a3f7ef8cda490c72a4f73"
+}

@@ -1,0 +1,19 @@
+{
+  "world": "town",
+  "guide": "Ellis",
+  "layout": "ipad-landscape-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "a8668ff0f134e4ee23122572ad7dbcaf99feb69ecccb6b6febff3fb2c8133b9c"
+}

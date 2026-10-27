@@ -1,0 +1,890 @@
+{
+  "branch": "codex/painted-forest-preview",
+  "base": "d0dcacacdd654c86887ee083a2716ee30d00f3e5",
+  "commands": [
+    {
+      "label": "build-preview",
+      "command": [
+        "npm",
+        "run",
+        "build:preview"
+      ],
+      "exitCode": 0,
+      "seconds": 0.5
+    },
+    {
+      "label": "guide-portraits",
+      "command": [
+        "npx",
+        "playwright",
+        "test",
+        "-c",
+        "playwright.guide-portraits.config.cjs"
+      ],
+      "exitCode": 0,
+      "seconds": 105.1
+    },
+    {
+      "label": "forest-regression",
+      "command": [
+        "npx",
+        "playwright",
+        "test",
+        "-c",
+        "playwright.painted-forest.config.cjs"
+      ],
+      "exitCode": 0,
+      "seconds": 35.2
+    },
+    {
+      "label": "desert-regression",
+      "command": [
+        "npx",
+        "playwright",
+        "test",
+        "-c",
+        "playwright.painted-desert.config.cjs"
+      ],
+      "exitCode": 0,
+      "seconds": 38.1
+    },
+    {
+      "label": "baseline",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exitCode": 0,
+      "seconds": 4.1
+    },
+    {
+      "label": "curriculum",
+      "command": [
+        "npm",
+        "run",
+        "test:curriculum"
+      ],
+      "exitCode": 0,
+      "seconds": 5.2
+    },
+    {
+      "label": "touch",
+      "command": [
+        "npm",
+        "run",
+        "test:touch"
+      ],
+      "exitCode": 0,
+      "seconds": 9.4
+    },
+    {
+      "label": "gameplay-quality",
+      "command": [
+        "npm",
+        "run",
+        "test:gameplay-quality",
+        "--",
+        "--grep",
+        "actual model, wrong answer, hint and saved placement"
+      ],
+      "exitCode": 0,
+      "seconds": 54.9
+    },
+    {
+      "label": "ipad-release",
+      "command": [
+        "npm",
+        "run",
+        "test:ipad-release"
+      ],
+      "exitCode": 0,
+      "seconds": 59.8
+    }
+  ],
+  "browserStats": {
+    "guide-portraits": {
+      "startTime": "2026-10-27T20:03:32.812Z",
+      "duration": 104345.905,
+      "expected": 30,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "forest": {
+      "startTime": "2026-10-27T20:05:18.004Z",
+      "duration": 34398.59,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "desert": {
+      "startTime": "2026-10-27T20:05:53.275Z",
+      "duration": 37274.39599999999,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "gameplay-models": {
+      "startTime": "2026-10-27T20:06:52.866Z",
+      "duration": 51260.952000000005,
+      "expected": 16,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "save-recovery": {
+      "startTime": "2026-10-27T20:07:59.183Z",
+      "duration": 44780.441000000006,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "browserPassed": 78,
+  "browserFailed": 0,
+  "portraitLayouts": [
+    {
+      "world": "algebra",
+      "guide": "Finn",
+      "layout": "desktop-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "1a769d7cc5250478b0f996fcde34a38773800fbb0b5daa78388cda0c15775e3c"
+    },
+    {
+      "world": "fractions",
+      "guide": "Saff",
+      "layout": "desktop-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "78cdb8d2970ec71c440ae39fb8966fdca4390d3909f54412319fe6bfa265a765"
+    },
+    {
+      "world": "geometry",
+      "guide": "Kit",
+      "layout": "desktop-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "a7ad56d85426871068e5ae5cc6d13e19c4395f77856e93a9fe8c154593efe8d7"
+    },
+    {
+      "world": "measure",
+      "guide": "Flint",
+      "layout": "desktop-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "a9b3ef5ea0076b94165162cabc9da347cba1a74528fd9efcd4bc2287b9bcaf52"
+    },
+    {
+      "world": "number",
+      "guide": "Rowan",
+      "layout": "desktop-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "ae7650e2366f217995ac791eb3c64ac4ae42dd0d9c4c1f8fae15ac728c918d1d"
+    },
+    {
+      "world": "probability",
+      "guide": "Nova",
+      "layout": "desktop-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "23c2ec474fe7a51a67f4c579e4e1260d08af060383c634a4ab000f0c09314d46"
+    },
+    {
+      "world": "ratio",
+      "guide": "Marin",
+      "layout": "desktop-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "d92fb468dd77db4695c9b4fa19c8c05b755efb571ab256b73525c918f718d43a"
+    },
+    {
+      "world": "statistics",
+      "guide": "Ada",
+      "layout": "desktop-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "da9ae7a9a495f861515a43a90de773363488e6a47326a5dac0cae21cd8134c77"
+    },
+    {
+      "world": "town",
+      "guide": "Ellis",
+      "layout": "desktop-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "b7313812b94e3d908f2c36e2d25a748f2f8dd4c76f797835f98f893c7272d9b4"
+    },
+    {
+      "world": "algebra",
+      "guide": "Finn",
+      "layout": "ipad-landscape-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "5a23c6e2cc16adced324b2b60c32d81b2d92ed80c43d530791b22713b1441f2d"
+    },
+    {
+      "world": "fractions",
+      "guide": "Saff",
+      "layout": "ipad-landscape-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "2fbd19706245fa0387335bb143efd439912e2e49423d3b634db745a773d7733e"
+    },
+    {
+      "world": "geometry",
+      "guide": "Kit",
+      "layout": "ipad-landscape-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "d392f2f0b7fc80481b923e7cc684de2efee4d0643f5f5be74afdabfd56c02dac"
+    },
+    {
+      "world": "measure",
+      "guide": "Flint",
+      "layout": "ipad-landscape-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "9d99dce9800c4eae6416bc0aa521a5d1e1987514bf06de1d5be47ca7aeafbd73"
+    },
+    {
+      "world": "number",
+      "guide": "Rowan",
+      "layout": "ipad-landscape-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "8c62ef5b6f97de7eb09020423156b7f44ef0ed48e0758fc32a43587dd4afeec5"
+    },
+    {
+      "world": "probability",
+      "guide": "Nova",
+      "layout": "ipad-landscape-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "dfa32c7600b826fe886a993273bfb48eb3e5ef489a1b5e77ba4c14f4be47b319"
+    },
+    {
+      "world": "ratio",
+      "guide": "Marin",
+      "layout": "ipad-landscape-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "1a5be15d262bc030a8bb8f9845332cec9bf54b21174470ae3e855199e566caba"
+    },
+    {
+      "world": "statistics",
+      "guide": "Ada",
+      "layout": "ipad-landscape-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "dd1dfebfe7d2a53d0a590c416f27e82b450d3d9b5bcb72c70f0e4aa0f01f20b0"
+    },
+    {
+      "world": "town",
+      "guide": "Ellis",
+      "layout": "ipad-landscape-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "a8668ff0f134e4ee23122572ad7dbcaf99feb69ecccb6b6febff3fb2c8133b9c"
+    },
+    {
+      "world": "algebra",
+      "guide": "Finn",
+      "layout": "ipad-portrait-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "ce4862842646dd39d9c0880852b6370a2256b49b811b3e06da90dd476a6a686c"
+    },
+    {
+      "world": "fractions",
+      "guide": "Saff",
+      "layout": "ipad-portrait-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "84d8201e55aa1832ac91b00bb4988388698652d5ce4d525433ceacabea377995"
+    },
+    {
+      "world": "geometry",
+      "guide": "Kit",
+      "layout": "ipad-portrait-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "d318ba95aa435aa3c3ec4dab6022374d2b5a878338de4df960f169cfa2a6fcdb"
+    },
+    {
+      "world": "measure",
+      "guide": "Flint",
+      "layout": "ipad-portrait-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "4d8555f539e923d4ab1ac47212aca98ac8c9727eebe200ecdd048176e9f54da4"
+    },
+    {
+      "world": "number",
+      "guide": "Rowan",
+      "layout": "ipad-portrait-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "467df9acbf6380326c6d6ccd39e685b09be89544490a3f7ef8cda490c72a4f73"
+    },
+    {
+      "world": "probability",
+      "guide": "Nova",
+      "layout": "ipad-portrait-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "be76bcbaf76c9368ca63ece9d89619a8f957f27205192cacbc68f24395e028ac"
+    },
+    {
+      "world": "ratio",
+      "guide": "Marin",
+      "layout": "ipad-portrait-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "5425087c9570fabe822eedf922f625410cae01e8dc467ba89e85feb0e4959f3b"
+    },
+    {
+      "world": "statistics",
+      "guide": "Ada",
+      "layout": "ipad-portrait-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "c1a1be83381deb8c56704bed02e86d39443336282f536cf6e7a9231e1e5b1661"
+    },
+    {
+      "world": "town",
+      "guide": "Ellis",
+      "layout": "ipad-portrait-chromium",
+      "geometry": {
+        "width": 80,
+        "height": 110,
+        "natural": [
+          560,
+          700
+        ],
+        "fit": "contain",
+        "background": "rgba(0, 0, 0, 0)",
+        "inside": true,
+        "overlap": false
+      },
+      "backgroundPixelsUnchanged": true,
+      "backgroundSHA256": "b016cdbb0a2e8add3294cb831d3d6647f883aedba61538c06b67fc558a037057"
+    }
+  ],
+  "originalAssetAudit": {
+    "source": "all-world-guide-portraits.zip; supplied WebPs copied without re-encoding",
+    "assets": [
+      {
+        "file": "algebra-peaks-guide.webp",
+        "format": "WEBP",
+        "dimensions": [
+          560,
+          700
+        ],
+        "sha256": "3b9819ff117802b8db0e677732b1cee48adaa9fa4c4f6ae0991cabe0ce6058a3",
+        "alpha": {
+          "range": [
+            0,
+            255
+          ],
+          "transparent": 164407,
+          "partial": 226686,
+          "opaque": 907,
+          "corners": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "file": "fraction-desert-guide.webp",
+        "format": "WEBP",
+        "dimensions": [
+          560,
+          700
+        ],
+        "sha256": "fb9eb47ecc9ab7695d08dc35278596d71d07ee882647fdb6d63a9e8fcb05f291",
+        "alpha": {
+          "range": [
+            0,
+            255
+          ],
+          "transparent": 149965,
+          "partial": 241203,
+          "opaque": 832,
+          "corners": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "file": "geometry-kingdom-guide.webp",
+        "format": "WEBP",
+        "dimensions": [
+          560,
+          700
+        ],
+        "sha256": "e8a84d2df320fd887e4267e50a0502b4493913be78cdac81dcc1f1da7f4bca74",
+        "alpha": {
+          "range": [
+            0,
+            255
+          ],
+          "transparent": 167396,
+          "partial": 223670,
+          "opaque": 934,
+          "corners": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "file": "measurement-mines-guide.webp",
+        "format": "WEBP",
+        "dimensions": [
+          560,
+          700
+        ],
+        "sha256": "333095aaaf6494f252715b61c0b9db957f687d28c479e273da4bc797a0e82617",
+        "alpha": {
+          "range": [
+            0,
+            255
+          ],
+          "transparent": 164934,
+          "partial": 225875,
+          "opaque": 1191,
+          "corners": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "file": "number-forest-guide.webp",
+        "format": "WEBP",
+        "dimensions": [
+          560,
+          700
+        ],
+        "sha256": "084ef98e3136bc60b6b45cad690cbad4c08992fdec69f912ebe5a93799391784",
+        "alpha": {
+          "range": [
+            0,
+            255
+          ],
+          "transparent": 167132,
+          "partial": 223372,
+          "opaque": 1496,
+          "corners": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "file": "practical-maths-town-guide.webp",
+        "format": "WEBP",
+        "dimensions": [
+          560,
+          700
+        ],
+        "sha256": "5285ffcfdf1a1660a9ee08676760c47e87d4aa764add9db54793a5a69a902237",
+        "alpha": {
+          "range": [
+            0,
+            255
+          ],
+          "transparent": 163237,
+          "partial": 227899,
+          "opaque": 864,
+          "corners": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "file": "probability-portal-guide.webp",
+        "format": "WEBP",
+        "dimensions": [
+          560,
+          700
+        ],
+        "sha256": "b495fc1052435ee8dfe5faed9e56b024b06b0a77e30c4fbfb5c755a2fa32f300",
+        "alpha": {
+          "range": [
+            0,
+            255
+          ],
+          "transparent": 155909,
+          "partial": 235280,
+          "opaque": 811,
+          "corners": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "file": "ratio-island-guide.webp",
+        "format": "WEBP",
+        "dimensions": [
+          560,
+          700
+        ],
+        "sha256": "8dcf04affd6317df29c2379503e2caf78e67f620b3ac9567ab45e02108b58e93",
+        "alpha": {
+          "range": [
+            0,
+            255
+          ],
+          "transparent": 153622,
+          "partial": 237528,
+          "opaque": 850,
+          "corners": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "file": "statistics-city-guide.webp",
+        "format": "WEBP",
+        "dimensions": [
+          560,
+          700
+        ],
+        "sha256": "808bf347e2b0ff2ed3d0b4437cafe533e6b0c67b69086c8a1f83c8669e42a930",
+        "alpha": {
+          "range": [
+            0,
+            255
+          ],
+          "transparent": 174715,
+          "partial": 216357,
+          "opaque": 928,
+          "corners": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    ]
+  },
+  "existingTrackedV3FilesModifiedOrDeleted": [],
+  "backgrounds": "All pre-existing v3 source/styles/assets unchanged from base. All 27 scene PNG comparisons identical when toggling guide portraits. Existing background selection unchanged.",
+  "scope": "Primary world guides only; distinct Town venue hosts retain their old appearances. New guide preference is transient and independent of the prior background/art selector.",
+  "regressionScope": "Full baseline/curriculum/touch logic, 18 prior art browser tests, 16 all-world gameplay model browser checks, full local iPad save/recovery logic/database plus 14 browser tests. Prior timer issue is unchanged and not part of this portrait-only run.",
+  "physicalIPadSafari": "not tested",
+  "isolation": "Fresh fictional contexts; external requests blocked or fulfilled by synthetic fixture transports. No real accounts or learner data. Database tests use local network-disabled PostgreSQL."
+}

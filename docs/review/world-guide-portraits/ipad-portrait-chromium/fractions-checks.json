@@ -1,0 +1,19 @@
+{
+  "world": "fractions",
+  "guide": "Saff",
+  "layout": "ipad-portrait-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "84d8201e55aa1832ac91b00bb4988388698652d5ce4d525433ceacabea377995"
+}

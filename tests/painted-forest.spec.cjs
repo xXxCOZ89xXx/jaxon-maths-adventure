@@ -3,7 +3,7 @@ const {test, expect} = require('@playwright/test');
 const fs = require('node:fs');
 const key = 'jaxon_v3_fictional_demo_2026';
 const root = process.env.PAINTED_FOREST_SHOTS || 'docs/review/painted-forest-preview';
-const url = '/preview-dist/PLAY-V3.html';
+const url = '/preview-dist/PLAY-V3.html' + (process.env.PREVIOUS_GUIDES ? '?guides=previous' : '');
 async function loaded(page) {
   await page.locator('#main h1').waitFor();
   await page.evaluate(() => Promise.all([...document.images].map(i => i.decode().catch(() => {}))));
@@ -77,7 +77,7 @@ test('art comparison preserves saves, avatars, geometry and readable restoration
   await page.locator('.guide').scrollIntoViewIfNeeded();
   await shot(page, info.project.name, 'before-rowan');
   expect(await state(page)).toEqual(questBefore);
-  await page.goto(url+'?art=current'); await loaded(page);
+  await page.goto(url+(url.includes('?')?'&':'?')+'art=current'); await loaded(page);
   await expect(select).toHaveValue('current');
   await seed(page, 'world', true);
   await select.selectOption('painted');

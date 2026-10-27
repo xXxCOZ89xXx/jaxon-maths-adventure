@@ -1,0 +1,221 @@
+{
+  "source": "all-world-guide-portraits.zip; supplied WebPs copied without re-encoding",
+  "assets": [
+    {
+      "file": "algebra-peaks-guide.webp",
+      "format": "WEBP",
+      "dimensions": [
+        560,
+        700
+      ],
+      "sha256": "3b9819ff117802b8db0e677732b1cee48adaa9fa4c4f6ae0991cabe0ce6058a3",
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "transparent": 164407,
+        "partial": 226686,
+        "opaque": 907,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "fraction-desert-guide.webp",
+      "format": "WEBP",
+      "dimensions": [
+        560,
+        700
+      ],
+      "sha256": "fb9eb47ecc9ab7695d08dc35278596d71d07ee882647fdb6d63a9e8fcb05f291",
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "transparent": 149965,
+        "partial": 241203,
+        "opaque": 832,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "geometry-kingdom-guide.webp",
+      "format": "WEBP",
+      "dimensions": [
+        560,
+        700
+      ],
+      "sha256": "e8a84d2df320fd887e4267e50a0502b4493913be78cdac81dcc1f1da7f4bca74",
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "transparent": 167396,
+        "partial": 223670,
+        "opaque": 934,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "measurement-mines-guide.webp",
+      "format": "WEBP",
+      "dimensions": [
+        560,
+        700
+      ],
+      "sha256": "333095aaaf6494f252715b61c0b9db957f687d28c479e273da4bc797a0e82617",
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "transparent": 164934,
+        "partial": 225875,
+        "opaque": 1191,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "number-forest-guide.webp",
+      "format": "WEBP",
+      "dimensions": [
+        560,
+        700
+      ],
+      "sha256": "084ef98e3136bc60b6b45cad690cbad4c08992fdec69f912ebe5a93799391784",
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "transparent": 167132,
+        "partial": 223372,
+        "opaque": 1496,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "practical-maths-town-guide.webp",
+      "format": "WEBP",
+      "dimensions": [
+        560,
+        700
+      ],
+      "sha256": "5285ffcfdf1a1660a9ee08676760c47e87d4aa764add9db54793a5a69a902237",
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "transparent": 163237,
+        "partial": 227899,
+        "opaque": 864,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "probability-portal-guide.webp",
+      "format": "WEBP",
+      "dimensions": [
+        560,
+        700
+      ],
+      "sha256": "b495fc1052435ee8dfe5faed9e56b024b06b0a77e30c4fbfb5c755a2fa32f300",
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "transparent": 155909,
+        "partial": 235280,
+        "opaque": 811,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "ratio-island-guide.webp",
+      "format": "WEBP",
+      "dimensions": [
+        560,
+        700
+      ],
+      "sha256": "8dcf04affd6317df29c2379503e2caf78e67f620b3ac9567ab45e02108b58e93",
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "transparent": 153622,
+        "partial": 237528,
+        "opaque": 850,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "file": "statistics-city-guide.webp",
+      "format": "WEBP",
+      "dimensions": [
+        560,
+        700
+      ],
+      "sha256": "808bf347e2b0ff2ed3d0b4437cafe533e6b0c67b69086c8a1f83c8669e42a930",
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "transparent": 174715,
+        "partial": 216357,
+        "opaque": 928,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ]
+}

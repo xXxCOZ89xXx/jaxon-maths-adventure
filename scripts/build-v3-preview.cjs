@@ -10,8 +10,8 @@ let html = fs.readFileSync(path.join(root, "v3-adventure.html"), "utf8"),
 // Inject the art experiment only into the offline development artifact.
 // Staging/production builds continue to use the unchanged source entry point.
 html = html
-  .replace('</head>', '<link rel="stylesheet" href="v3/painted-forest-preview.css" />\n<link rel="stylesheet" href="v3/painted-desert-preview.css" />\n</head>')
-  .replace('<script src="v3/app.js"></script>', '<script src="v3/painted-forest-preview.js"></script>\n<script src="v3/painted-desert-preview.js"></script>\n<script src="v3/app.js"></script>');
+  .replace('</head>', '<link rel="stylesheet" href="v3/painted-forest-preview.css" />\n<link rel="stylesheet" href="v3/painted-desert-preview.css" />\n<link rel="stylesheet" href="v3/guide-portraits-preview.css" />\n</head>')
+  .replace('<script src="v3/app.js"></script>', '<script src="v3/painted-forest-preview.js"></script>\n<script src="v3/painted-desert-preview.js"></script>\n<script src="v3/guide-portraits-preview.js"></script>\n<script src="v3/app.js"></script>');
 html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
   if (src.includes("cloud") || src.includes("staging"))
     throw Error("Cloud code forbidden in offline artifact");
@@ -45,6 +45,14 @@ html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
       saff:'data:image/webp;base64,'+fs.readFileSync(path.join(dir,'fraction-desert-guide-transparent.webp')).toString('base64'),
     };
     js='window.FractionDesertPreviewFiles='+JSON.stringify(assets)+';\n'+js;
+  }
+  if(src === 'v3/guide-portraits-preview.js') {
+    const dir=path.join(root,'v3/assets/world-guide-portraits-preview');
+    const assets=Object.fromEntries(JSON.parse(fs.readFileSync(path.join(dir,'manifest.json'),'utf8')).assets.map(asset=>[
+      asset.file.replace('-guide.webp',''), 'data:image/webp;base64,'+fs.readFileSync(path.join(dir,asset.file)).toString('base64')
+    ]));
+    const names={number:'number-forest',fractions:'fraction-desert',algebra:'algebra-peaks',geometry:'geometry-kingdom',ratio:'ratio-island',statistics:'statistics-city',probability:'probability-portal',measure:'measurement-mines',town:'practical-maths-town'};
+    js='window.WorldGuidePortraitFiles='+JSON.stringify(Object.fromEntries(Object.entries(names).map(([world,name])=>[world,assets[name]])))+';\n'+js;
   }
   hashes.push(
     "'sha256-" + crypto.createHash("sha256").update(js).digest("base64") + "'",

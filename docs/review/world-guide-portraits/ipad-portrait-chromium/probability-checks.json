@@ -1,0 +1,19 @@
+{
+  "world": "probability",
+  "guide": "Nova",
+  "layout": "ipad-portrait-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "be76bcbaf76c9368ca63ece9d89619a8f957f27205192cacbc68f24395e028ac"
+}

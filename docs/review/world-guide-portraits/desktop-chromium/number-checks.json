@@ -1,0 +1,19 @@
+{
+  "world": "number",
+  "guide": "Rowan",
+  "layout": "desktop-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "ae7650e2366f217995ac791eb3c64ac4ae42dd0d9c4c1f8fae15ac728c918d1d"
+}

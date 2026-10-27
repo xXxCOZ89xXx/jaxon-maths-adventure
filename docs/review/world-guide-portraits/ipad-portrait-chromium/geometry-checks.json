@@ -1,0 +1,19 @@
+{
+  "world": "geometry",
+  "guide": "Kit",
+  "layout": "ipad-portrait-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "d318ba95aa435aa3c3ec4dab6022374d2b5a878338de4df960f169cfa2a6fcdb"
+}

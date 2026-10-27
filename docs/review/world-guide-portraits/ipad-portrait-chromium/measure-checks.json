@@ -1,0 +1,19 @@
+{
+  "world": "measure",
+  "guide": "Flint",
+  "layout": "ipad-portrait-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "4d8555f539e923d4ab1ac47212aca98ac8c9727eebe200ecdd048176e9f54da4"
+}

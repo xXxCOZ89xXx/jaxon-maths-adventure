@@ -1,0 +1,19 @@
+{
+  "world": "measure",
+  "guide": "Flint",
+  "layout": "desktop-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "a9b3ef5ea0076b94165162cabc9da347cba1a74528fd9efcd4bc2287b9bcaf52"
+}

@@ -1,0 +1,19 @@
+{
+  "world": "statistics",
+  "guide": "Ada",
+  "layout": "ipad-portrait-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "c1a1be83381deb8c56704bed02e86d39443336282f536cf6e7a9231e1e5b1661"
+}

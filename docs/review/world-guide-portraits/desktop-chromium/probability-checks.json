@@ -1,0 +1,19 @@
+{
+  "world": "probability",
+  "guide": "Nova",
+  "layout": "desktop-chromium",
+  "geometry": {
+    "width": 80,
+    "height": 110,
+    "natural": [
+      560,
+      700
+    ],
+    "fit": "contain",
+    "background": "rgba(0, 0, 0, 0)",
+    "inside": true,
+    "overlap": false
+  },
+  "backgroundPixelsUnchanged": true,
+  "backgroundSHA256": "23c2ec474fe7a51a67f4c579e4e1260d08af060383c634a4ab000f0c09314d46"
+}
