@@ -1,0 +1,40 @@
+{
+  "source": "graphics-first-test-assets.zip supplied by the owner; originals copied without re-encoding",
+  "assets": [
+    {
+      "file": "number-forest-painted-backdrop.jpg",
+      "format": "JPEG",
+      "dimensions": [
+        1200,
+        750
+      ],
+      "bytes": 326604,
+      "sha256": "0130ff1901bac64a8dfa8c69eac72de3a4ca54b401be6d2838ee8fb1fc661518"
+    },
+    {
+      "file": "rowan-guide-portrait-transparent.webp",
+      "format": "WEBP",
+      "dimensions": [
+        512,
+        640
+      ],
+      "bytes": 74802,
+      "sha256": "87762c0b85789101cd9f8f73c6e7ae3c24406f9e66a1d7a5fda57f6f52702cf7",
+      "alpha": {
+        "range": [
+          0,
+          255
+        ],
+        "fullyTransparentPixels": 140438,
+        "partiallyTransparentPixels": 186027,
+        "opaquePixels": 1215,
+        "corners": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ]
+}

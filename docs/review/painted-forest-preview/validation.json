@@ -1,0 +1,119 @@
+{
+  "branch": "codex/painted-forest-preview",
+  "base": "5ed0f4c6f00cc050bfc69c9d2c881dbd23d6c4e5",
+  "previewURL": "http://localhost:4173/preview-dist/PLAY-V3.html",
+  "commands": [
+    {
+      "suite": "test",
+      "exitCode": 0,
+      "seconds": 3.5
+    },
+    {
+      "suite": "test:curriculum",
+      "exitCode": 0,
+      "seconds": 4.7
+    },
+    {
+      "suite": "test:touch",
+      "exitCode": 0,
+      "seconds": 9.4
+    },
+    {
+      "suite": "test:touch-browser",
+      "exitCode": 1,
+      "seconds": 160.2
+    },
+    {
+      "suite": "test:curriculum-browser",
+      "exitCode": 0,
+      "seconds": 312.1
+    },
+    {
+      "suite": "test:gameplay-quality",
+      "exitCode": 0,
+      "seconds": 379.3
+    },
+    {
+      "suite": "test:ipad-release",
+      "exitCode": 0,
+      "seconds": 53.7
+    }
+  ],
+  "browserStats": {
+    "painted-forest": {
+      "startTime": "2026-10-27T18:45:11.333Z",
+      "duration": 41691.681000000004,
+      "expected": 9,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "touch-browser-initial": {
+      "startTime": "2026-10-27T18:43:54.538Z",
+      "duration": 158979.465,
+      "expected": 55,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "curriculum-browser": {
+      "startTime": "2026-10-27T18:46:34.625Z",
+      "duration": 311039.466,
+      "expected": 81,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "gameplay-quality-browser": {
+      "startTime": "2026-10-27T18:51:49.317Z",
+      "duration": 375582.777,
+      "expected": 48,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "save-recovery-browser": {
+      "startTime": "2026-10-27T18:58:17.290Z",
+      "duration": 41349.578,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "timerRetry": {
+    "command": "npx playwright test -c playwright.touch.config.cjs --grep 'Cancelled movement and Escape' --reporter=list,json",
+    "exitCode": 0,
+    "passed": 3,
+    "failed": 0,
+    "note": "The initial broad touch run overlapped separate browser work. Its two failures were focus-sensitive active-minute assertions (expected >0, received 0). All three layout variants passed when rerun alone. This test uses the unchanged ordinary source entry point, without the art experiment."
+  },
+  "directFileLaunch": {
+    "passed": null,
+    "method": "Attempt to open standalone PLAY-V3.html directly via file://",
+    "blockedByEnvironment": "Chromium rejected file navigation with net::ERR_BLOCKED_BY_ADMINISTRATOR before application load. Localhost standalone-artifact tests passed with no external requests; direct-file launch is unverified."
+  },
+  "screenshots": [
+    "desktop-chromium/after-restored.png",
+    "desktop-chromium/after-rowan-panel.png",
+    "desktop-chromium/after-rowan.png",
+    "desktop-chromium/after-world.png",
+    "desktop-chromium/before-rowan.png",
+    "desktop-chromium/before-world.png",
+    "ipad-landscape-chromium/after-restored.png",
+    "ipad-landscape-chromium/after-rowan-panel.png",
+    "ipad-landscape-chromium/after-rowan.png",
+    "ipad-landscape-chromium/after-world.png",
+    "ipad-landscape-chromium/before-rowan.png",
+    "ipad-landscape-chromium/before-world.png",
+    "ipad-portrait-chromium/after-restored.png",
+    "ipad-portrait-chromium/after-rowan-panel.png",
+    "ipad-portrait-chromium/after-rowan.png",
+    "ipad-portrait-chromium/after-world.png",
+    "ipad-portrait-chromium/before-rowan.png",
+    "ipad-portrait-chromium/before-world.png"
+  ],
+  "newAssetSource": "graphics-first-test-assets.zip; supplied JPEG/WebP originals preserved byte-for-byte",
+  "physicalIPadSafari": "not tested",
+  "network": "External origins denied in browser tests; database tests used disposable network-disabled local PostgreSQL; no real accounts or learner data."
+}
