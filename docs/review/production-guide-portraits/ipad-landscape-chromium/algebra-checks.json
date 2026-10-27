@@ -19,6 +19,24 @@
       0
     ]
   },
+  "captureScope": "background image layer only; foreground controls checked separately",
   "backgroundPixelsUnchanged": true,
-  "backgroundSHA256": "87c467d8f2cd7dd2c7373742456fe158f3082db48d509bc5265291c3929f857f"
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/production-test-dist/v3/assets/checkpoint/rail.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      40,
+      288.734375,
+      1100,
+      732.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "7d5d2a05ea6252b6cadde093725dd7a50ed5f6b66e2b2481bd064127d0eb029e"
 }

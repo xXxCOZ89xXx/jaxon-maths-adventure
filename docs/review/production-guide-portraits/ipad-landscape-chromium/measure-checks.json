@@ -19,6 +19,24 @@
       0
     ]
   },
+  "captureScope": "background image layer only; foreground controls checked separately",
   "backgroundPixelsUnchanged": true,
-  "backgroundSHA256": "2fa73d4a99e36cf2b3a52fda3e051b8bb5c711a4fd21f564b721f268ca8bc993"
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/production-test-dist/v3/assets/rollout/measure.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      39,
+      287.734375,
+      1102,
+      734.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "c267cbe46b9844c71cfb1f395c836bc50149f55f3b7d1871be8a5f7a6b5ecef7"
 }

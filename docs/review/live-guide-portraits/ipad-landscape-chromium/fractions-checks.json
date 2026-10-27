@@ -19,6 +19,24 @@
       0
     ]
   },
+  "captureScope": "background image layer only; foreground controls checked separately",
   "backgroundPixelsUnchanged": true,
-  "backgroundSHA256": "a4c6a302b44fe30134919ef75982b3d45ffa7089c1814fa55a5a4c41371ba91a"
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/staging-fixture-dist/v3/assets/rollout/desert.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      39,
+      287.734375,
+      1102,
+      734.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "56241b21e072f1e230aad85bd73628576de09ab6d28fe9e5846cb16b33b8d439"
 }

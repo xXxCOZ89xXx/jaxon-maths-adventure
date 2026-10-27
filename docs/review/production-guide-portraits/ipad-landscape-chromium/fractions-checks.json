@@ -19,6 +19,24 @@
       0
     ]
   },
+  "captureScope": "background image layer only; foreground controls checked separately",
   "backgroundPixelsUnchanged": true,
-  "backgroundSHA256": "b95eefa5df2dcdea9cd7b317808672075d104418009a995fbeb6ef6983987e87"
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/production-test-dist/v3/assets/rollout/desert.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      39,
+      287.734375,
+      1102,
+      734.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "56241b21e072f1e230aad85bd73628576de09ab6d28fe9e5846cb16b33b8d439"
 }

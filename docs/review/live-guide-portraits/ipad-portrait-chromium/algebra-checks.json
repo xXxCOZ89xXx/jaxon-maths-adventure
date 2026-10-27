@@ -19,6 +19,24 @@
       0
     ]
   },
+  "captureScope": "background image layer only; foreground controls checked separately",
   "backgroundPixelsUnchanged": true,
-  "backgroundSHA256": "025d26ad86a89f289656aa8c4beac8d81700fcc39919987472539ab285cd0bae"
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/staging-fixture-dist/v3/assets/checkpoint/rail.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      40,
+      350.734375,
+      740,
+      492.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "1db9f92f37d5165eb6aa19dc37d30754a7187f6aeaa69c409d9a1635982f9338"
 }

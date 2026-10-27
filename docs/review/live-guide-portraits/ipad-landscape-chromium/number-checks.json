@@ -19,6 +19,24 @@
       0
     ]
   },
+  "captureScope": "background image layer only; foreground controls checked separately",
   "backgroundPixelsUnchanged": true,
-  "backgroundSHA256": "9f4cc4650fd14a97b39df7961d814d744ade13ce35b9c5529f90bcc9099bb882"
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/staging-fixture-dist/v3/assets/rollout/forest.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      39,
+      287.734375,
+      1102,
+      734.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "e858ade7a1426a84dce9fd7ad5021cbdbeb1ffa9fd57e8768ac73c4d34365747"
 }

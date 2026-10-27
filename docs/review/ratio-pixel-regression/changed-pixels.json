@@ -1,0 +1,190 @@
+{
+  "dimensions": [
+    1102,
+    736
+  ],
+  "changedPixels": 12,
+  "maxChannelDifference": 3,
+  "pixels": [
+    {
+      "x": 522,
+      "y": 398,
+      "before": [
+        231,
+        254,
+        185
+      ],
+      "after": [
+        231,
+        255,
+        187
+      ],
+      "maximumChannelDifference": 2
+    },
+    {
+      "x": 877,
+      "y": 398,
+      "before": [
+        229,
+        252,
+        184
+      ],
+      "after": [
+        231,
+        255,
+        187
+      ],
+      "maximumChannelDifference": 3
+    },
+    {
+      "x": 519,
+      "y": 401,
+      "before": [
+        230,
+        254,
+        185
+      ],
+      "after": [
+        231,
+        255,
+        187
+      ],
+      "maximumChannelDifference": 2
+    },
+    {
+      "x": 880,
+      "y": 401,
+      "before": [
+        230,
+        253,
+        185
+      ],
+      "after": [
+        231,
+        255,
+        187
+      ],
+      "maximumChannelDifference": 2
+    },
+    {
+      "x": 518,
+      "y": 403,
+      "before": [
+        203,
+        216,
+        156
+      ],
+      "after": [
+        202,
+        215,
+        156
+      ],
+      "maximumChannelDifference": 1
+    },
+    {
+      "x": 520,
+      "y": 403,
+      "before": [
+        123,
+        146,
+        100
+      ],
+      "after": [
+        124,
+        145,
+        99
+      ],
+      "maximumChannelDifference": 1
+    },
+    {
+      "x": 879,
+      "y": 403,
+      "before": [
+        114,
+        137,
+        87
+      ],
+      "after": [
+        113,
+        136,
+        86
+      ],
+      "maximumChannelDifference": 1
+    },
+    {
+      "x": 881,
+      "y": 403,
+      "before": [
+        205,
+        218,
+        154
+      ],
+      "after": [
+        205,
+        217,
+        153
+      ],
+      "maximumChannelDifference": 1
+    },
+    {
+      "x": 879,
+      "y": 404,
+      "before": [
+        75,
+        108,
+        64
+      ],
+      "after": [
+        74,
+        108,
+        64
+      ],
+      "maximumChannelDifference": 1
+    },
+    {
+      "x": 881,
+      "y": 404,
+      "before": [
+        220,
+        239,
+        172
+      ],
+      "after": [
+        219,
+        238,
+        172
+      ],
+      "maximumChannelDifference": 1
+    },
+    {
+      "x": 633,
+      "y": 473,
+      "before": [
+        100,
+        89,
+        65
+      ],
+      "after": [
+        99,
+        89,
+        65
+      ],
+      "maximumChannelDifference": 1
+    },
+    {
+      "x": 799,
+      "y": 612,
+      "before": [
+        118,
+        96,
+        72
+      ],
+      "after": [
+        119,
+        97,
+        72
+      ],
+      "maximumChannelDifference": 1
+    }
+  ]
+}

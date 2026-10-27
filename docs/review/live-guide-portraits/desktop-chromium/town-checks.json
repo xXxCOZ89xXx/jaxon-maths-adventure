@@ -19,6 +19,24 @@
       0
     ]
   },
+  "captureScope": "background image layer only; foreground controls checked separately",
   "backgroundPixelsUnchanged": true,
-  "backgroundSHA256": "df56306bc3af5e1b836a6f6365197c13d701e8bf16c7a9293a4cee88841a84ca"
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/staging-fixture-dist/v3/assets/checkpoint/town.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      136,
+      298.734375,
+      1168,
+      778
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "e359e86423181e9283c9f196d40e76984bdc2e4f79e9cb3975012fc600e4db0b"
 }

@@ -19,6 +19,24 @@
       0
     ]
   },
+  "captureScope": "background image layer only; foreground controls checked separately",
   "backgroundPixelsUnchanged": true,
-  "backgroundSHA256": "25ba7e7abdf20cb6b5ca171f80ef6039fa3599d7bc6104b67a3e8b8b3c330d56"
+  "backgroundLayout": {
+    "src": "http://127.0.0.1:4173/staging-fixture-dist/v3/assets/rollout/geometry.webp",
+    "natural": [
+      1536,
+      1024
+    ],
+    "rect": [
+      39,
+      349.734375,
+      742,
+      494.65625
+    ],
+    "fit": "cover",
+    "filter": "none",
+    "opacity": "1",
+    "transform": "none"
+  },
+  "backgroundSHA256": "42ec54a8cfdfc030aeed4fb9b0738cd7326f664a8e6ec300de75cf61335c29ee"
 }

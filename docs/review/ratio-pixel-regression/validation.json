@@ -1,0 +1,25 @@
+{
+  "originalCIRun": 40580721607,
+  "originalCommit": "9270e93fd1ccf5af24fa423799803fd0f8494a15",
+  "reproducedCompositeChangedPixels": 12,
+  "maxChannelDifference": 3,
+  "localReproductionCycle": 2,
+  "backgroundLayerPNGIdentical": true,
+  "backgroundPNG_SHA256": "cb1484a2f6aa0fde720408ab71cc7059102d729bfb0fdec0d1f52ec4299744e9",
+  "focusedIPadLandscapePasses": 10,
+  "localBuilds": "Production and private-game build artifacts, fictional intercepted accounts only",
+  "testCorrection": "Full image layer byte equality; foreground and guide checked separately; hover and grayscale positive controls",
+  "physicalIPadSafariTested": false,
+  "localChecks": {
+    "productionPortraitsAndIdentity": 45,
+    "privateGamePortraits": 27,
+    "productionRegression": 24,
+    "saveRecovery": 14,
+    "offlinePreviewPortraits": 30,
+    "focusedRatioLandscapeRepeats": 10,
+    "productionBuild": "passed",
+    "privateGameBuild": "passed",
+    "baselineLogic": "passed"
+  },
+  "applicationAndArtworkChanges": []
+}
