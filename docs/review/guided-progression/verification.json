@@ -1,0 +1,167 @@
+{
+  "branch": "codex/guided-progression-recovery",
+  "baseCommit": "7f51c046ee732e8000b675ed0b43d4dd1412585a",
+  "releaseUnchanged": true,
+  "releasePRMergeDeployment": false,
+  "fictionalFixturesOnly": true,
+  "productionServiceAccess": false,
+  "checks": [
+    {
+      "check": "npm test",
+      "result": "passed, including 16 new progression/recovery groups",
+      "logs": [
+        "logic-final.log"
+      ]
+    },
+    {
+      "check": "Town logic",
+      "result": "27 scenarios / 2091 stages passed",
+      "logs": [
+        "ipad-release.log"
+      ]
+    },
+    {
+      "check": "Curriculum logic and audit",
+      "result": "passed",
+      "logs": [
+        "curriculum-logic-final.log"
+      ]
+    },
+    {
+      "check": "Touch logic and audit",
+      "result": "passed",
+      "logs": [
+        "touch-logic-final.log"
+      ]
+    },
+    {
+      "check": "Production and staging builds",
+      "result": "passed",
+      "logs": [
+        "production-build-final.log",
+        "staging-build-final.log"
+      ]
+    },
+    {
+      "check": "Save/recovery and local PostgreSQL",
+      "result": "14 browser cases, 10 database groups, immutable queues and lost responses passed; database network disabled",
+      "logs": [
+        "ipad-release.log"
+      ]
+    },
+    {
+      "check": "Production connected browser",
+      "result": "24 cases passed using intercepted fictional services",
+      "logs": [
+        "production-browser.log"
+      ]
+    },
+    {
+      "check": "New progression browser",
+      "result": "100 unique cases passed after isolated reruns of 2 deleted-trace failures; desktop, iPad portrait/landscape and 360x800 touch",
+      "logs": [
+        "browser-final.log",
+        "browser-recheck.log",
+        "browser-fractions-recheck.log"
+      ]
+    },
+    {
+      "check": "Curriculum browser",
+      "result": "81 unique cases passed after isolated reruns of 2 deleted-trace failures; both iPads and 390x844 touch",
+      "logs": [
+        "curriculum-browser.log",
+        "curriculum-browser-recheck.log",
+        "curriculum-stats-recheck.log"
+      ]
+    },
+    {
+      "check": "Gameplay quality",
+      "result": "48 unique browser cases passed after isolated reruns of 2 deleted-trace failures; all quality/action/Town/hands-on logic passed",
+      "logs": [
+        "gameplay-quality-final.log",
+        "gameplay-quality-recheck.log",
+        "gameplay-quality-pancakes-recheck.log",
+        "jug-fixed.log"
+      ]
+    },
+    {
+      "check": "Touch browser",
+      "result": "57 unique cases passed after trace and heartbeat reruns; both iPads and small touch",
+      "logs": [
+        "touch-browser.log",
+        "touch-browser-final-recheck.log",
+        "touch-clock-diagnostic.log"
+      ]
+    },
+    {
+      "check": "Focused Town browser",
+      "result": "16 unique cases passed after updating visible-control, clock and batching fixtures; 2 pre-existing landscape plan omissions, covered in other suites",
+      "logs": [
+        "town-browser-verified.log",
+        "town-browser-final-controls.log",
+        "town-clock-final.log"
+      ]
+    },
+    {
+      "check": "Production portraits and art preservation",
+      "result": "45 unique cases passed after one deleted-trace rerun; all 9 portraits, alpha, fallback, exact background pixels, original avatar/save invariance",
+      "logs": [
+        "production-portraits.log",
+        "production-portraits-recheck.log"
+      ]
+    },
+    {
+      "check": "Final standalone offline artifact",
+      "result": "4 cases passed, each checking all 9 worlds; original art, no comparison controls, no external requests",
+      "logs": [
+        "preview-browser-final.log"
+      ]
+    },
+    {
+      "check": "Portable ZIP reconstruction",
+      "result": "entry modules match source hashes; original local images decode; no HTTP/runtime errors or external requests",
+      "logs": []
+    },
+    {
+      "check": "Baseline reproduction at untouched release",
+      "result": "4 cases reproduced completed cook-pasta Continue entering market",
+      "logs": [
+        "baseline.log"
+      ]
+    }
+  ],
+  "sourceSHA256": {
+    "v3/app.js": "3e0c26499a53a0d34ef53e643047f6087af9884269d2da4c0d5915cfd198070f",
+    "v3/engine.js": "e5d148167c7cf94c145d976948e33dc5014e6a6e62b49b5725c3712bc1201208",
+    "v3/town-life.js": "a85d812dfd6f0406288ebf5da484d4a55c18cc88dc886c36d971255451756d4b",
+    "v3/restoration.js": "d20ac70aac16a86961f7c24ec2a89f808b5dd7c65d53eaea4275c81b47e72d8a",
+    "v3/activity-navigation.js": "97bf57b62e1ffc3b9fe72a94ff57cad59b11f46bb4a54a5a1194eaddac91ab8a",
+    "v3-adventure.html": "8f96b56c9c0090096285f8776f5b32d71e74c9b89e34c57c3c32288a553a3e62"
+  },
+  "downloads": {
+    "preview-code.zip": {
+      "bytes": 312327,
+      "sha256": "a54c9e51c6dabb4c9985efceaabff9abde7f98ac10bf59ba8d6b2ca992034bae"
+    },
+    "preview-art-1.zip": {
+      "bytes": 8001375,
+      "sha256": "78fc59f5972e8bc8198f6c84eba8bf706b744b1dd319cd77ba6ea5fec4597b3e"
+    },
+    "preview-art-2.zip": {
+      "bytes": 7993781,
+      "sha256": "600dd06f178d82431ccafd01c8ff81b5a91f724dc9c0a5b5841c84474244a384"
+    }
+  },
+  "limits": [
+    "Physical iPad Safari untested",
+    "15\u201320 minutes is an intended duration, not measured child playtesting",
+    "Exact owner label Restore Community 3 not located in released code; no real learner save inspected"
+  ],
+  "harnessCorrections": [
+    "Town output now isolated to avoid deleting other runners traces",
+    "Town helper follows real close-up navigation and hour/minute controls",
+    "Connected Town fixtures trigger existing online flush rather than assuming immediate saves",
+    "Active-learning test focuses before commit and waits one full existing 5-second heartbeat; no timer/credit behavior changed"
+  ],
+  "saveGrowthFixtureBytes": 294532
+}

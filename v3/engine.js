@@ -119,12 +119,15 @@
     },
     T.world,
   ];
+  const R=typeof module!=="undefined"?require("./restoration").V10Restoration:root.V10Restoration;
+  const N=typeof module!=="undefined"?require("./activity-navigation").V10Navigation:root.V10Navigation;
   const clone = (x) => JSON.parse(JSON.stringify(x));
   const num = (x, d = 0) =>
     Number.isFinite(Number(x)) ? Math.max(0, Number(x)) : d;
   function fresh() {
     return {
       version: 3,
+      guidedProgressionVersion: 1,
       revision: 0,
       skills: {},
       coins: 0,
@@ -229,6 +232,7 @@
       ],
     ])
       if (earned && !s.achievements.includes(badge)) s.achievements.push(badge);
+    if(!old.guidedProgressionVersion){R.preserveLegacy(s);s.guidedProgressionVersion=1;}
     M.state(s);
     if (s.view === "adventure" && !s.adventure.active) s.view = "home";
     if (s.quest) s.quests[s.quest.world] = s.quest;
@@ -331,38 +335,8 @@
     }
   }
   function startQuest(s, id) {
-    if (id === "town") return;
-    if (!worlds.some((w) => w.id === id)) return;
-    for (const [badge, earned] of [
-      [
-        "independent",
-        Object.values(s.checks).some((c) => c?.stage >= 1) ||
-          Object.values(s.skills).some((k) => k?.reviewStage >= 1),
-      ],
-      [
-        "memory",
-        Object.values(s.checks).some((c) => c?.stage >= 2) ||
-          Object.values(s.skills).some((k) => k?.state === "mastered"),
-      ],
-    ])
-      if (earned && !s.achievements.includes(badge)) s.achievements.push(badge);
-    M.state(s);
-    if (s.view === "adventure" && !s.adventure.active) s.view = "home";
-    if (s.quest) s.quests[s.quest.world] = s.quest;
-    s.world = id;
-    s.quest = s.quests[id] || {
-      world: id,
-      i: 0,
-      value: 0,
-      selected: [],
-      assisted: false,
-      solved: false,
-      feedback: "",
-      intro: true,
-    };
-    s.quests[id] = s.quest;
-    s.view = "quest";
-    s.resumeView = "quest";
+    const stage=[0,1,2].find(i=>!s.milestones.includes(id+':'+i));
+    return R.start(s,id,stage===undefined?2:stage);
   }
 
   function help(s) {
@@ -372,7 +346,7 @@
   }
   function answerQuest(s, skip = false) {
     const q = s.quest;
-    if (!q || q.intro || q.solved) return false;
+    if (!q || q.intro || q.solved || !R.gate(s,q.world,q.i).ready) return false;
     const p = puzzle(q.world, q.i),
       v = ["fraction", "chance"].includes(p.kind) ? q.selected.length : q.value;
     if (skip || v !== p.answer) {
@@ -399,27 +373,14 @@
   function nextQuest(s) {
     const q = s.quest;
     if (!q?.solved) return;
-    if (q.i < 2) {
-      s.quest = {
-        world: q.world,
-        i: q.i + 1,
-        value: 0,
-        selected: [],
-        assisted: false,
-        solved: false,
-        feedback: "",
-        intro: false,
-      };
-      s.quests[q.world] = s.quest;
-    } else {
-      delete s.quests[q.world];
-      s.resumeView = null;
-      s.lastResult = { type: "quest", world: q.world };
-      s.quest = null;
-      s.view = "recap";
-    }
+    // Finish this earlier saved snapshot only; subsequent stages use the new
+    // assessed multi-step plan instead of creating another fixed legacy puzzle.
+    delete s.quests[q.world];s.quest=null;s.resumeView=null;
+    s.lastResult={type:'restoration',world:q.world,stage:q.i,legacy:true};s.view='recap';
   }
+
   function generate(s, id, mode, bank, curriculum, now = Date.now()) {
+    if(N.restoreLearning(s,id,mode))return null;
     const skill = curriculum.skills.find((k) => k.id === id);
     if (!skill) return "Unknown skill.";
     const p = s.practice[id] || {},
@@ -452,6 +413,7 @@
       }
     }
     if (!qs) return "Fresh questions are unavailable. Try a different skill.";
+    if(!N.stashLearning(s))return 'Your saved lessons need review. Their original state has been preserved.';
     s.learning = {
       id,
       mode,
@@ -604,6 +566,7 @@
     return b ? a / b : NaN;
   }
   function startDiscovery(s, id, curriculum, helpers) {
+    if(N.restoreLearning(s,id,"discovery"))return null;
     if (!curriculum.discovery[id]) return "Unknown skill.";
     s.discovery[id] = s.discovery[id] || {
       band: education.minBand(id)===3?5:7,
@@ -631,6 +594,7 @@
         ...qs.map((q) => q[0]),
       ]),
     ];
+    if(!N.stashLearning(s))return 'Your saved lessons need review. Their original state has been preserved.';
     s.learning = {
       id,
       mode: "discovery",

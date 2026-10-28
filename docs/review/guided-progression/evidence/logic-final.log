@@ -1,0 +1,82 @@
+
+> test
+> node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-estate.cjs && node tests/v5-hands-on.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs && node tests/v51-fixtures.cjs && node scripts/audit-v51-inputs.cjs && node tests/guided-progression.cjs
+
+PASS: 39 skills, 4680 generated review questions, 39 repeat-practice flows, 25 skills with safe touch tools.
+PASS: 780 discovery questions, 4 distinct options and 1 valid answer per question.
+PASS: missing-schema compatibility, learner bonus balance, server-only purchases, parent/unlinked permissions.
+PASS: Migration preserves synthetic V2 fields, unknown data, balances, ownership and mastery
+PASS: Earlier saved quest loops persist exact state, restore 24 landmarks and cannot farm XP or coins
+PASS: All runtime foundation skills: guided practice cannot award mastery, checks are fresh, immediate retakes blocked, spaced mastery works
+PASS: Hinted, wrong and skipped check answers never inflate mastery; failed check requires reteaching
+PASS: Active time and coins are bounded, 60-minute goal is unmodified, reward conversion remains 1:1
+PASS: 40 unchanged catalogue IDs, unaffordable purchase rejection, equip slot and repeated purchase safety
+PASS: No cloud scripts, production keys or external assets in V3 entrypoint
+PASS: All 1100 discovery choices remain valid; adaptive rounds choose a band without granting mastery
+PASS: Changing worlds preserves assessed restoration snapshots without rewarding navigation
+PASS: 9 V3 suites, original eight quest worlds and all 55 skills. Fictional fixtures only.
+PASS: Nine worlds, eight town venues, sixteen new skills, unchanged forty shop IDs
+PASS: 123 mission/difficulty combinations across twelve repeat seeds are solvable and teach every task first
+PASS: Fresh task values vary on replay, resume preserves exact state and switching worlds keeps unfinished visits
+PASS: Guided missions preserve rewards but cannot establish ability or independent mastery
+PASS: Town restoration requires distinct completed venues, collections are per route, and camp decoration cannot farm rewards
+PASS: Invalid moves, counterfeit denominations and out-of-sequence ledger posting are rejected
+PASS: Camp projects require durable milestones and malformed new state does not break V2 migration
+PASS: Academic celebration badges survive later struggle without falsely preserving current mastery
+PASS: Higher-level coordinates and turn composition match worked mathematical examples
+PASS: Fresh practical checks vary answer-producing quantities across rounds
+PASS: Best-value shopping varies the cheaper pack and cinema offers cover the requested group
+PASS: 11 expedition suites; 4466 generated tasks solved using fictional data.
+PASS estate: Eight exact thresholds, finite capacity and mansion without level-three or perfect mastery
+PASS estate: Duplicates, arbitrary strings, invalid routes and navigation do not advance upgrades or award coins
+PASS estate: Repeated actual expedition completions keep one milestone; a new stage celebrates once
+PASS estate: Backward-compatible history, equipment, projects and camp placements survive; earned home cannot downgrade
+PASS estate: All eight architectural scenes and home stages render bounded original SVG with machinery and old projects
+5 camp/architecture suites passed; no accounts, network or learning records used.
+PASS V5: Every generated mechanic validates wrong/correct attempts, hints, exact save/resume and three tiers without mastery
+PASS V5: Coverage has at least three actual model types per world and exceeds 70 percent; 55 skills remain accessible
+PASS V5: Cartesian axes and intersections expose no printed coordinate labels or target answer marker
+PASS V5: Adaptive levels depend on multi-question discovery, repeated independent checks and prerequisites, never one guided answer
+PASS V5: Practice components keep supported responses separate; independent assessment does not render aids
+PASS V5: Connected journey carries inventory, list, fare, payments and cooking; interruption and duplicate completion are safe
+PASS V5: Unsupported journey versions and malformed snapshots are preserved, never silently replaced
+PASS V5: All eight buildings share validated worker/customer context metadata and retain their venue identity
+PASS V5: Missing journey context is retained and fails closed instead of crashing
+PASS V5: Completed constructed-practice evidence survives recap without becoming independent mastery
+PASS V5: Every supported practice response is constructible in the question's units across all 55 skills and bands
+PASS V5: Practice generation skips a rejected duplicate round and serves a validated fresh set
+PASS V5: Ordering and matching supply positions vary deterministically rather than repeating an answer-slot pattern
+PASS V5: V5.1 strict numeric drafts prevent stale submissions without recording learning evidence
+14 V5 suites, 1107 generated task steps; fictional fixtures only.
+PASS configuration fails closed without an explicitly pinned staging identity
+PASS lost response retries exact immutable save and retains later edits
+PASS cross-device CAS conflict preserves complete local and remote learning evidence
+PASS parallel flush calls share one request and corrupt caches remain untouched
+4 cloud sync suites passed (synthetic transport, no backend connection).
+PASS display-only coin/time formatting and non-sensitive recovery/invalid-date handling
+PASS synthetic migration rehearsal: verified immutable backup; all skills/evidence, exact balances, time, items, parent/family and unknown fields retained; idempotent migration and byte-equivalent rollback
+PASS V5.1 fictional profiles: 55 skills, nine worlds, adaptive gaps/strengths, deterministic independent resets, no application test-auth hooks, clock draft validation.
+PASS V5.1 input audit: 1107 task variants across nine worlds, all routes and three tiers.
+PASS completed Town plans and missions Continue to completion, never supermarket
+PASS fresh Continue offers routes; saved learning and selected activities resume exactly
+PASS all 27 stages gate on completed relevant starting-point rounds, not guided or mastery markers
+PASS all worlds adapt, snapshot, resume, and complete every stage without mastery or wallet changes
+PASS adaptive recommendations use independent evidence only and resume does not rescale questions
+PASS recovery preserves completed steps, unrelated Town runs, wallets and assessments; stale confirmation refuses
+PASS restoration/mission recovery keeps previous completed stages and unrelated saved visits
+PASS assessment restart retains first answers/help; exit pauses the exact round; no whole-save clearing
+PASS legacy visual completion is retained, optional new visits do not restore unassessed stages
+PASS Continue finalises the last solved task once, without starting a replacement activity
+27-stage fictional save bytes: 294700
+PASS all 27 completed stage snapshots stay below the unchanged save payload limit
+PASS unsupported restoration and recovery maps fail closed without losing saved data
+PASS multi-skill stages use the gentlest assessed recommendation and require every objective
+PASS scoped restoration restart and exit work in every world and keep another world’s exact visit
+PASS Continue returns a saved lesson to its own world after visiting another map
+PASS resuming a supported retry keeps its teaching screen and assisted evidence
+16 guided progression/recovery groups passed, fictional fixtures only.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

@@ -1,0 +1,72 @@
+
+> test:ipad-release
+> node tests/v3-cloud.cjs && node tests/save-recovery.cjs && node tests/ipad-release-gate.cjs && node tests/compact-receipts-db.cjs && node tests/town-life.cjs && node tests/v5-hands-on.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.save-recovery.config.cjs
+
+PASS configuration fails closed without an explicitly pinned staging identity
+PASS lost response retries exact immutable save and retains later edits
+PASS cross-device CAS conflict preserves complete local and remote learning evidence
+PASS parallel flush calls share one request and corrupt caches remain untouched
+4 cloud sync suites passed (synthetic transport, no backend connection).
+PASS lost purchase response, confirmed receipt/read loss, legacy intent, different item and reopen
+PASS parallel identical purchase retries, corrupt intent, role and auth failures preserve safety
+PASS unchanged revisions are deduplicated; legacy queue bytes and later edits survive
+PASS actual adapter batches one hour of 720 local checkpoints into at most 121 uploads
+4 save/purchase recovery groups passed; no external network.
+PASS release preflight: exact successful check, migration attestation, skip-flag and failed-check refusal. No network.
+PASS wrong project and changed baseline fail closed
+PASS late error rolls the entire migration back
+PASS all existing data and legacy exact retries remain compatible
+PASS new save receipts omit full JSON and preserve CAS and content binding
+PASS one simulated extended session retains zero new full snapshots
+PASS purchases and parent rewards deduct/credit exactly once across retries
+PASS heartbeat retries and screen-time redemption remain exactly once
+PASS an old in-flight writer is compacted at the migration boundary and retried by new RPC
+PASS identity version, isolation, direct grants and helper privacy
+PASS actual browser sync and intent modules recover lost responses against migrated PostgreSQL
+10 receipt migration checks passed; no remote connection.
+PASS Town Life: 27 scenarios, 2091 stages across 3 tiers × 3 replay seeds; kinds basket, journey, coins, order, measure, choice, clock, amount, budget; legacy/unknown preservation, drafts, receipts, cash and immutable completion.
+PASS V5: Every generated mechanic validates wrong/correct attempts, hints, exact save/resume and three tiers without mastery
+PASS V5: Coverage has at least three actual model types per world and exceeds 70 percent; 55 skills remain accessible
+PASS V5: Cartesian axes and intersections expose no printed coordinate labels or target answer marker
+PASS V5: Adaptive levels depend on multi-question discovery, repeated independent checks and prerequisites, never one guided answer
+PASS V5: Practice components keep supported responses separate; independent assessment does not render aids
+PASS V5: Connected journey carries inventory, list, fare, payments and cooking; interruption and duplicate completion are safe
+PASS V5: Unsupported journey versions and malformed snapshots are preserved, never silently replaced
+PASS V5: All eight buildings share validated worker/customer context metadata and retain their venue identity
+PASS V5: Missing journey context is retained and fails closed instead of crashing
+PASS V5: Completed constructed-practice evidence survives recap without becoming independent mastery
+PASS V5: Every supported practice response is constructible in the question's units across all 55 skills and bands
+PASS V5: Practice generation skips a rejected duplicate round and serves a validated fresh set
+PASS V5: Ordering and matching supply positions vary deterministically rather than repeating an answer-slot pattern
+PASS V5: V5.1 strict numeric drafts prevent stale submissions without recording learning evidence
+14 V5 suites, 1107 generated task steps; fictional fixtures only.
+Built staging-fixture-dist. Separate private HTTPS hosting required; no deployment performed.
+Built preview-dist/PLAY-V3.html (standalone offline game).
+
+Running 14 tests using 1 worker
+
+(node:130509) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:4:53 › purchase loseBuy: resume acknowledged intent after refresh and buy another item (5.7s)
+  ✓   2 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:4:53 › purchase failReadAfterBuy: resume acknowledged intent after refresh and buy another item (5.8s)
+  ✓   3 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:11:1 › offline edits keep the immutable request, reopen exact journey and recover on reconnect (6.3s)
+  ✓   4 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:16:1 › local edits save immediately while routine uploads combine; explicit save/exit flushes (7.3s)
+  ✓   5 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:21:1 › parent role, reward retry and learner purchase permissions remain separate (6.8s)
+  ✓   6 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:25:1 › new app refuses an old database before game writes and preserves existing queue bytes (2.7s)
+  ✓   7 [ipad-portrait-chromium] › tests/scene-revision.spec.cjs:20:1 › Scene revision: full connected meal stays playable through close-up controls (25.0s)
+(node:136471) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:4:53 › purchase loseBuy: resume acknowledged intent after refresh and buy another item (8.2s)
+  ✓   9 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:4:53 › purchase failReadAfterBuy: resume acknowledged intent after refresh and buy another item (7.0s)
+  ✓  10 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:11:1 › offline edits keep the immutable request, reopen exact journey and recover on reconnect (8.1s)
+  ✓  11 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:16:1 › local edits save immediately while routine uploads combine; explicit save/exit flushes (7.8s)
+  ✓  12 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:21:1 › parent role, reward retry and learner purchase permissions remain separate (6.8s)
+  ✓  13 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:25:1 › new app refuses an old database before game writes and preserves existing queue bytes (2.1s)
+  ✓  14 [ipad-landscape-chromium] › tests/scene-revision.spec.cjs:20:1 › Scene revision: full connected meal stays playable through close-up controls (21.4s)
+
+  14 passed (2.1m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

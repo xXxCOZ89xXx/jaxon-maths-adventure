@@ -42,14 +42,19 @@ test("Migration preserves synthetic V2 fields, unknown data, balances, ownership
     "home",
   );
 });
-test("Eight world quest loops persist exact state, restore 24 landmarks and cannot farm XP or coins", () => {
+test("Earlier saved quest loops persist exact state, restore 24 landmarks and cannot farm XP or coins", () => {
   let s = E.fresh();
   for (const w of E.worlds.filter((w) => w.id !== "town")) {
     assert.ok(C.skills.some((k) => k.id === w.skill));
-    E.startQuest(s, w.id);
+    const R=require('../v3/restoration').V10Restoration;
+    for(const id of R.mapping[w.id].flat())s.discovery[id]={complete:true,rounds:[{band:5,correct:2,total:4}]};
+    // Released three-task snapshots remain resumable; new starts use assessed plans.
+    s.quest={world:w.id,i:0,value:0,selected:[],assisted:false,solved:false,feedback:'',intro:true};
+    s.quests[w.id]=s.quest;s.view='quest';s.resumeView='quest';
     assert.equal(s.quest.intro, true);
     s.quest.intro = false;
     for (let i = 0; i < 3; i++) {
+      s.quest={world:w.id,i,value:0,selected:[],assisted:false,solved:false,feedback:'',intro:false};s.quests[w.id]=s.quest;s.view='quest';
       const p = E.puzzle(w.id, i);
       E.help(s);
       E.answerQuest(s, true);
@@ -70,9 +75,8 @@ test("Eight world quest loops persist exact state, restore 24 landmarks and cann
   assert.equal(E.xp(s), 2400);
   assert.equal(s.coins, 0);
   E.startQuest(s, "number");
-  s.quest.intro = false;
-  s.quest.value = 2;
-  E.answerQuest(s);
+  assert.equal(s.quest,null);
+  assert.equal(s.view,'recap');
   assert.equal(E.xp(s), 2400);
   assert.deepEqual(s.skills, {});
 });
@@ -205,24 +209,14 @@ test("All 1100 discovery choices remain valid; adaptive rounds choose a band wit
     assert.equal(s.coins, 0);
   }
 });
-test("Changing worlds preserves suspended quest selections without rewarding navigation", () => {
-  let s = E.fresh();
-  E.startQuest(s, "number");
-  s.quest.intro = false;
-  s.quest.value = 1;
-  E.help(s);
-  E.startQuest(s, "fractions");
-  s.quest.intro = false;
-  s.quest.selected = [0, 1];
-  s = E.migrate(s);
-  E.startQuest(s, "number");
-  assert.equal(s.quest.value, 1);
-  assert.equal(s.quest.assisted, true);
-  E.startQuest(s, "fractions");
-  assert.deepEqual(s.quest.selected, [0, 1]);
-  assert.equal(s.coins, 0);
-  assert.equal(E.xp(s), 0);
+test("Changing worlds preserves assessed restoration snapshots without rewarding navigation", () => {
+ const R=require('../v3/restoration').V10Restoration,M=require('../v3/adventure').V3Adventure,s=E.fresh();
+ for(const world of ['number','fractions'])for(const id of R.mapping[world][0])s.discovery[id]={complete:true,rounds:[{band:5,correct:2,total:4}]};
+ E.startQuest(s,'number');M.begin(s);M.current(s).values={c8:{draft:'1'}};M.help(s);const number=JSON.parse(JSON.stringify(M.current(s)));
+ E.startQuest(s,'fractions');M.begin(s);M.current(s).values={c8:{draft:'1/2'}};const fraction=JSON.parse(JSON.stringify(M.current(s)));
+ const reloaded=E.migrate(s);E.startQuest(reloaded,'number');assert.deepEqual(M.current(reloaded),number);E.startQuest(reloaded,'fractions');assert.deepEqual(M.current(reloaded),fraction);assert.equal(reloaded.coins,0);assert.equal(E.xp(reloaded),0);
 });
+
 console.log(
   `PASS: ${checks} V3 suites, original eight quest worlds and all 55 skills. Fictional fixtures only.`,
 );

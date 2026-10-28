@@ -7,7 +7,7 @@ const worlds={number:['Rowan','number-forest'],fractions:['Saff','fraction-deser
 async function account(p){await p.goto(site);await p.getByLabel('Email',{exact:true}).fill('learner@fictional.invalid');await p.getByLabel('Account password',{exact:true}).fill('fictional-only-password');await p.getByRole('button',{name:'Continue',exact:true}).click()}
 for(const [world,[guide,name]] of Object.entries(worlds))test(`${world}: production portrait, alpha, fallback and unchanged world`,async({page:p},info)=>{
  const server=fixture(),errors=await mock(p,server,options);await p.emulateMedia({reducedMotion:'reduce'});await account(p);
- server.progress=await p.evaluate(w=>{const s=V3Engine.fresh();s.tourSeen=true;s.settings.motion=false;s.world=w;if(w==='town'){V3Adventure.start(s,'town','gateway',1);s.view='adventure'}else V3Engine.startQuest(s,w);return s},world);
+ server.progress=await p.evaluate(w=>{const s=V3Engine.fresh();s.tourSeen=true;s.settings.motion=false;s.world=w;if(w==='town'){V3Adventure.start(s,'town','gateway',1);s.view='adventure'}else {for(const id of V10Restoration.mapping[w][0])s.discovery[id]={complete:true,rounds:[{band:5,correct:2,total:4}]};V3Engine.startQuest(s,w);}return s},world);
  await p.getByLabel('PIN',{exact:true}).fill('1234');await p.getByRole('button',{name:'Continue',exact:true}).click();
  const panel=p.locator('.panel.guide'),image=panel.locator('.world-guide-portrait');await expect(image).toBeVisible();
  await p.evaluate(()=>Promise.all([...document.images].map(i=>i.decode().catch(()=>{}))));await panel.scrollIntoViewIfNeeded();

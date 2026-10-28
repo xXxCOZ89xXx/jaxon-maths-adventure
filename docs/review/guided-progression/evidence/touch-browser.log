@@ -1,0 +1,171 @@
+
+> test:touch-browser
+> node tests/prepare-v3.cjs && playwright test -c playwright.touch.config.cjs
+
+Built staging-fixture-dist. Separate private HTTPS hosting required; no deployment performed.
+Built preview-dist/PLAY-V3.html (standalone offline game).
+
+Running 57 tests using 1 worker
+
+(node:145186) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal place practice serves a visible direct model with equivalent keyboard answers and saved progress (8.3s)
+  ✓   2 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal negative practice serves a visible direct model with equivalent keyboard answers and saved progress (8.3s)
+  ✓   3 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal fraction_parts practice serves a visible direct model with equivalent keyboard answers and saved progress (8.2s)
+  ✓   4 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal algebra_coordinates practice serves a visible direct model with equivalent keyboard answers and saved progress (7.2s)
+  ✓   5 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal geometry_construction practice serves a visible direct model with equivalent keyboard answers and saved progress (8.6s)
+  ✓   6 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal ratio_sharing practice serves a visible direct model with equivalent keyboard answers and saved progress (7.5s)
+  ✓   7 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal stats_tables practice serves a visible direct model with equivalent keyboard answers and saved progress (9.4s)
+  ✓   8 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal prob_events practice serves a visible direct model with equivalent keyboard answers and saved progress (8.2s)
+  ✓   9 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal measure_volume practice serves a visible direct model with equivalent keyboard answers and saved progress (8.1s)
+  ✓  10 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal town_totals practice serves a visible direct model with equivalent keyboard answers and saved progress (7.8s)
+  ✓  11 [ipad-portrait-chromium] › tests/touch.spec.cjs:10:1 › Trusted touch dragging moves a grid point, commits only on release, cancels safely and preserves tap intersections (7.6s)
+  ✓  12 [ipad-portrait-chromium] › tests/touch.spec.cjs:11:1 › Number-line marker and jug pour handle are direct touch objects, not range sliders (9.0s)
+  ✓  13 [ipad-portrait-chromium] › tests/touch.spec.cjs:12:1 › Move and align the ruler, then directly drag the read-off marker; alignment is part of checking (6.6s)
+  ✘  14 [ipad-portrait-chromium] › tests/touch.spec.cjs:13:1 › Grocery and fraction objects genuinely move between targets and return to the tray (13.9s)
+(node:156869) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  15 [ipad-portrait-chromium] › tests/touch.spec.cjs:14:1 › Unknown/wrong direct answers open teaching and preserve first-attempt evidence through a supported retry (10.9s)
+  ✓  16 [ipad-portrait-chromium] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic (8.2s)
+  ✓  17 [ipad-portrait-chromium] › tests/touch.spec.cjs:16:1 › Review preview is easy to find, isolated from game saves, playable, keyboard usable and accessible (23.3s)
+  ✓  18 [ipad-portrait-chromium] › tests/touch.spec.cjs:18:1 › A queued drag cannot edit a different question after another saved state takes over (5.8s)
+  ✓  19 [ipad-portrait-chromium] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window (11.4s)
+(node:162606) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  20 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal place practice serves a visible direct model with equivalent keyboard answers and saved progress (10.1s)
+  ✓  21 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal negative practice serves a visible direct model with equivalent keyboard answers and saved progress (8.1s)
+  ✓  22 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal fraction_parts practice serves a visible direct model with equivalent keyboard answers and saved progress (8.5s)
+  ✓  23 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal algebra_coordinates practice serves a visible direct model with equivalent keyboard answers and saved progress (7.0s)
+  ✓  24 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal geometry_construction practice serves a visible direct model with equivalent keyboard answers and saved progress (8.7s)
+  ✓  25 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal ratio_sharing practice serves a visible direct model with equivalent keyboard answers and saved progress (9.3s)
+  ✓  26 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal stats_tables practice serves a visible direct model with equivalent keyboard answers and saved progress (9.5s)
+  ✓  27 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal prob_events practice serves a visible direct model with equivalent keyboard answers and saved progress (9.5s)
+  ✓  28 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal measure_volume practice serves a visible direct model with equivalent keyboard answers and saved progress (11.1s)
+  ✓  29 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal town_totals practice serves a visible direct model with equivalent keyboard answers and saved progress (7.9s)
+  ✓  30 [ipad-landscape-chromium] › tests/touch.spec.cjs:10:1 › Trusted touch dragging moves a grid point, commits only on release, cancels safely and preserves tap intersections (7.5s)
+  ✓  31 [ipad-landscape-chromium] › tests/touch.spec.cjs:11:1 › Number-line marker and jug pour handle are direct touch objects, not range sliders (7.2s)
+  ✓  32 [ipad-landscape-chromium] › tests/touch.spec.cjs:12:1 › Move and align the ruler, then directly drag the read-off marker; alignment is part of checking (5.2s)
+  ✓  33 [ipad-landscape-chromium] › tests/touch.spec.cjs:13:1 › Grocery and fraction objects genuinely move between targets and return to the tray (9.0s)
+  ✓  34 [ipad-landscape-chromium] › tests/touch.spec.cjs:14:1 › Unknown/wrong direct answers open teaching and preserve first-attempt evidence through a supported retry (5.7s)
+  ✓  35 [ipad-landscape-chromium] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic (5.0s)
+  ✓  36 [ipad-landscape-chromium] › tests/touch.spec.cjs:16:1 › Review preview is easy to find, isolated from game saves, playable, keyboard usable and accessible (16.7s)
+  ✓  37 [ipad-landscape-chromium] › tests/touch.spec.cjs:18:1 › A queued drag cannot edit a different question after another saved state takes over (3.8s)
+  ✘  38 [ipad-landscape-chromium] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window (6.8s)
+(node:176265) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  39 [small-touch] › tests/touch.spec.cjs:8:2 › Normal place practice serves a visible direct model with equivalent keyboard answers and saved progress (5.1s)
+  ✓  40 [small-touch] › tests/touch.spec.cjs:8:2 › Normal negative practice serves a visible direct model with equivalent keyboard answers and saved progress (6.9s)
+  ✓  41 [small-touch] › tests/touch.spec.cjs:8:2 › Normal fraction_parts practice serves a visible direct model with equivalent keyboard answers and saved progress (8.8s)
+  ✓  42 [small-touch] › tests/touch.spec.cjs:8:2 › Normal algebra_coordinates practice serves a visible direct model with equivalent keyboard answers and saved progress (8.1s)
+  ✓  43 [small-touch] › tests/touch.spec.cjs:8:2 › Normal geometry_construction practice serves a visible direct model with equivalent keyboard answers and saved progress (10.4s)
+  ✓  44 [small-touch] › tests/touch.spec.cjs:8:2 › Normal ratio_sharing practice serves a visible direct model with equivalent keyboard answers and saved progress (9.8s)
+  ✓  45 [small-touch] › tests/touch.spec.cjs:8:2 › Normal stats_tables practice serves a visible direct model with equivalent keyboard answers and saved progress (9.4s)
+  ✓  46 [small-touch] › tests/touch.spec.cjs:8:2 › Normal prob_events practice serves a visible direct model with equivalent keyboard answers and saved progress (9.4s)
+  ✓  47 [small-touch] › tests/touch.spec.cjs:8:2 › Normal measure_volume practice serves a visible direct model with equivalent keyboard answers and saved progress (10.6s)
+  ✓  48 [small-touch] › tests/touch.spec.cjs:8:2 › Normal town_totals practice serves a visible direct model with equivalent keyboard answers and saved progress (8.7s)
+  ✓  49 [small-touch] › tests/touch.spec.cjs:10:1 › Trusted touch dragging moves a grid point, commits only on release, cancels safely and preserves tap intersections (7.1s)
+  ✓  50 [small-touch] › tests/touch.spec.cjs:11:1 › Number-line marker and jug pour handle are direct touch objects, not range sliders (8.9s)
+  ✓  51 [small-touch] › tests/touch.spec.cjs:12:1 › Move and align the ruler, then directly drag the read-off marker; alignment is part of checking (6.4s)
+  ✓  52 [small-touch] › tests/touch.spec.cjs:13:1 › Grocery and fraction objects genuinely move between targets and return to the tray (9.9s)
+  ✓  53 [small-touch] › tests/touch.spec.cjs:14:1 › Unknown/wrong direct answers open teaching and preserve first-attempt evidence through a supported retry (7.6s)
+  ✓  54 [small-touch] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic (6.0s)
+  ✓  55 [small-touch] › tests/touch.spec.cjs:16:1 › Review preview is easy to find, isolated from game saves, playable, keyboard usable and accessible (18.1s)
+  ✓  56 [small-touch] › tests/touch.spec.cjs:18:1 › A queued drag cannot edit a different question after another saved state takes over (5.1s)
+  ✘  57 [small-touch] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window (5.8s)
+
+
+  1) [ipad-portrait-chromium] › tests/touch.spec.cjs:13:1 › Grocery and fraction objects genuinely move between targets and return to the tray 
+
+    Error: browserContext.close: ENOENT: no such file or directory, open '/workspace/jaxon-maths-adventure/test-results/touch/.playwright-artifacts-0/traces/2108cdd735af9f1e8b0d-b2e051e4922041a10f2b-recording26.trace'
+
+       at helpers/identities.cjs:39
+
+      37 |     try {await use({page,context,key:KEY,read:()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),KEY)});}
+      38 |     finally {
+    > 39 |       await context.close();
+         |       ^
+      40 |       expect(blocked,'No external destinations permitted for fictional camp').toEqual([]);
+      41 |       expect(errors,'No browser runtime errors').toEqual([]);
+      42 |     }
+        at Object.camp (/workspace/jaxon-maths-adventure/tests/helpers/identities.cjs:39:7)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/touch/touch-Grocery-and-fraction-8ab6f-gets-and-return-to-the-tray-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/touch/touch-Grocery-and-fraction-8ab6f-gets-and-return-to-the-tray-ipad-portrait-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/touch/touch-Grocery-and-fraction-8ab6f-gets-and-return-to-the-tray-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/touch/touch-Grocery-and-fraction-8ab6f-gets-and-return-to-the-tray-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [ipad-landscape-chromium] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 0
+    Received:   0
+
+      17 |
+      18 | test('A queued drag cannot edit a different question after another saved state takes over',async({camp})=>{const{page:p,key,read}=camp,q=await practice(p,key,'algebra_coordinates');await p.locator('.d9-canvas').evaluate(e=>e.scrollIntoView({block:'center'}));const [x,y]=JSON.parse(q[1]),to=await svgPoint(p,60+(x+5)*48,60+(5-y)*48);await drag(p,'[data-d9-handle="point"]',to,{midway:async()=>{await p.evaluate(key=>{const s=JSON.parse(localStorage.getItem(key));s.learning.i=1;delete s.learning.manipulation;localStorage.setItem(key,JSON.stringify(s));},key);}});const s=await read();expect(s.learning.i).toBe(1);expect(s.learning.manipulation).toBeUndefined();});
+    > 19 | test('Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window',async({camp})=>{const{page:p,key,read}=camp;await p.clock.install();const q=await practice(p,key,'negative'),a=q[5].direct;await p.locator('.d9-canvas').evaluate(e=>e.scrollIntoView({block:'center'}));const to=await svgPoint(p,60+(Number(q[1])-a.min)/(a.max-a.min)*480,140);await drag(p,'[data-d9-handle="line"]',to,{cancel:true});await p.clock.runFor(2000);await saved(p);expect((await read()).minutes).toBe(0);await drag(p,'[data-d9-handle="line"]',to,{midway:()=>p.keyboard.press('Escape')});await p.clock.runFor(2000);await saved(p);expect((await read()).minutes).toBe(0);await drag(p,'[data-d9-handle="line"]',to);await p.bringToFront();await expect.poll(()=>p.evaluate(()=>document.hasFocus())).toBe(true);await p.clock.runFor(3000);await saved(p);expect((await read()).minutes).toBeGreaterThan(0);});
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+      20 |
+        at /workspace/jaxon-maths-adventure/tests/touch.spec.cjs:19:910
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/touch/touch-Cancelled-movement-a-db1ae-the-existing-bounded-window-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/touch/touch-Cancelled-movement-a-db1ae-the-existing-bounded-window-ipad-landscape-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/touch/touch-Cancelled-movement-a-db1ae-the-existing-bounded-window-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/touch/touch-Cancelled-movement-a-db1ae-the-existing-bounded-window-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [small-touch] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window 
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 0
+    Received:   0
+
+      17 |
+      18 | test('A queued drag cannot edit a different question after another saved state takes over',async({camp})=>{const{page:p,key,read}=camp,q=await practice(p,key,'algebra_coordinates');await p.locator('.d9-canvas').evaluate(e=>e.scrollIntoView({block:'center'}));const [x,y]=JSON.parse(q[1]),to=await svgPoint(p,60+(x+5)*48,60+(5-y)*48);await drag(p,'[data-d9-handle="point"]',to,{midway:async()=>{await p.evaluate(key=>{const s=JSON.parse(localStorage.getItem(key));s.learning.i=1;delete s.learning.manipulation;localStorage.setItem(key,JSON.stringify(s));},key);}});const s=await read();expect(s.learning.i).toBe(1);expect(s.learning.manipulation).toBeUndefined();});
+    > 19 | test('Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window',async({camp})=>{const{page:p,key,read}=camp;await p.clock.install();const q=await practice(p,key,'negative'),a=q[5].direct;await p.locator('.d9-canvas').evaluate(e=>e.scrollIntoView({block:'center'}));const to=await svgPoint(p,60+(Number(q[1])-a.min)/(a.max-a.min)*480,140);await drag(p,'[data-d9-handle="line"]',to,{cancel:true});await p.clock.runFor(2000);await saved(p);expect((await read()).minutes).toBe(0);await drag(p,'[data-d9-handle="line"]',to,{midway:()=>p.keyboard.press('Escape')});await p.clock.runFor(2000);await saved(p);expect((await read()).minutes).toBe(0);await drag(p,'[data-d9-handle="line"]',to);await p.bringToFront();await expect.poll(()=>p.evaluate(()=>document.hasFocus())).toBe(true);await p.clock.runFor(3000);await saved(p);expect((await read()).minutes).toBeGreaterThan(0);});
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+      20 |
+        at /workspace/jaxon-maths-adventure/tests/touch.spec.cjs:19:910
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/touch/touch-Cancelled-movement-a-db1ae-the-existing-bounded-window-small-touch/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/touch/touch-Cancelled-movement-a-db1ae-the-existing-bounded-window-small-touch/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/touch/touch-Cancelled-movement-a-db1ae-the-existing-bounded-window-small-touch/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/touch/touch-Cancelled-movement-a-db1ae-the-existing-bounded-window-small-touch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [ipad-portrait-chromium] › tests/touch.spec.cjs:13:1 › Grocery and fraction objects genuinely move between targets and return to the tray 
+    [ipad-landscape-chromium] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window 
+    [small-touch] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window 
+  54 passed (8.5m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

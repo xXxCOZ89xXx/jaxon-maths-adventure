@@ -9,7 +9,7 @@ let html = fs.readFileSync(path.join(root, "v3-adventure.html"), "utf8"),
   hashes = [];
 // Inject the art experiment only into the offline development artifact.
 // Production uses only the shared portrait renderer from the source entry point.
-html = html
+if(process.env.V3_PREVIEW_ART !== 'current') html = html
   .replace('<script src="v3/guide-portraits.js"></script>', '')
   .replace('</head>', '<link rel="stylesheet" href="v3/painted-forest-preview.css" />\n<link rel="stylesheet" href="v3/painted-desert-preview.css" />\n<link rel="stylesheet" href="v3/guide-portraits-preview.css" />\n</head>')
   .replace('<script src="v3/app.js"></script>', '<script src="v3/painted-forest-preview.js"></script>\n<script src="v3/painted-desert-preview.js"></script>\n<script src="v3/guide-portraits.js"></script>\n<script src="v3/guide-portraits-preview.js"></script>\n<script src="v3/app.js"></script>');

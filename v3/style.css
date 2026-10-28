@@ -2197,3 +2197,17 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .c8-pie{width:min(100%,240px);aspect-ratio:1;border-radius:50%;border:3px solid #203b2e;margin:18px auto}
 .c8-activity table{border-collapse:collapse;width:100%;font-size:16px}.c8-activity th,.c8-activity td{padding:6px;border:1px solid #687f60;overflow-wrap:anywhere}.c8-activity td input{width:75px;max-width:100%;min-height:48px;font-size:18px}.c8-activity td button{min-width:48px;min-height:48px;padding:4px}.c8-cell-grid{display:grid;grid-template-columns:repeat(var(--columns),minmax(44px,1fr));gap:4px;max-width:360px}.c8-cell-grid button{min-width:44px;min-height:48px;padding:4px}.c8-cell-grid button[aria-pressed=true]{background:#397b50;color:white}
 .c8-activity input[type=range]{display:block;width:100%;min-height:48px;touch-action:pan-y}.c8-activity fieldset{min-width:0;max-width:100%;padding:10px}.c8-calculator input{max-width:100%;min-height:48px;font-size:18px}
+
+/* Guided progression: always-available exits and an activity-scoped confirmation. */
+.activity-safety {display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 18px}
+.activity-safety button {min-height:44px}
+#recovery-dialog {width:680px;max-width:calc(100vw - 28px);max-height:90vh;overflow:auto;border:2px solid #557459;border-radius:14px;background:#edf0e4;color:#183c34;padding:24px}
+#recovery-dialog::backdrop {background:#102e29aa}
+.restoration-path {margin:28px 0}
+.restoration-path .panel {min-width:0}
+
+/* Keep close-up controls in normal flow: a sticky footer can cover the jug
+   track after activity navigation increases the dialog content height. */
+.scene-dialog .scene-actions {position:static}
+/* The extra help entry must wrap with the main navigation on narrow screens. */
+.topbar nav {flex-wrap:wrap;min-width:0}

@@ -1,0 +1,36 @@
+
+> test:guided-preview
+> npm run build:guided-preview && playwright test -c playwright.guided-preview.config.cjs
+
+
+> build:guided-preview
+> node -e "process.env.V3_PREVIEW_ART='current';require('./scripts/build-v3-preview.cjs')"
+
+Built preview-dist/PLAY-V3.html (standalone offline game).
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
+
+Running 4 tests using 1 worker
+
+(node:225293) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop-chromium] › tests/guided-preview.spec.cjs:3:1 › standalone review game includes assessed restoration and original art in all nine worlds (10.8s)
+(node:226073) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [ipad-portrait-chromium] › tests/guided-preview.spec.cjs:3:1 › standalone review game includes assessed restoration and original art in all nine worlds (8.8s)
+(node:226658) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [ipad-landscape-chromium] › tests/guided-preview.spec.cjs:3:1 › standalone review game includes assessed restoration and original art in all nine worlds (8.8s)
+(node:227106) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 [small-touch] › tests/guided-preview.spec.cjs:3:1 › standalone review game includes assessed restoration and original art in all nine worlds (8.6s)
+
+  4 passed (41.2s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

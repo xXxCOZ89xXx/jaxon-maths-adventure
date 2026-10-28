@@ -35,16 +35,17 @@ test('normal learner login, wrong PIN, save response loss, resume and lock',asyn
  await expect(page.getByRole('heading',{name:'A little maths. A big adventure.'})).toBeVisible();
  await expect(page.getByRole('button',{name:'Demo parent summary'})).toHaveCount(0);
  await page.getByRole('button',{name:'Continue adventure',exact:false}).first().click();
+ await page.locator('[data-action^="mission:number:0:"]').first().click();
  await page.getByRole('button',{name:'Use number workshop',exact:true}).first().click();
- await page.getByRole('button',{name:'Start building',exact:false}).click();
+ await page.getByRole('button',{name:'Try this task',exact:false}).click();
  s.loseSave=true;await page.getByRole('button',{name:'Hint',exact:true}).click();
  // Routine edits batch for 30 seconds; reconnect forces the existing recovery path.
  await page.evaluate(()=>window.dispatchEvent(new Event('online')));
  // The lost acknowledgement intentionally leaves a pending request; reload recovers it.
  await expect.poll(()=>s.loseSave).toBe(false);await page.reload();
- await expect.poll(()=>s.progress.quest?.assisted).toBe(true);
+ await expect.poll(()=>s.progress.adventure?.active?.assisted).toBe(true);
  await page.getByRole('button',{name:'Use number workshop',exact:true}).first().click();
- await expect(page.getByRole('button',{name:'Try my solution'})).toBeVisible();
+ await expect(page.getByRole('button',{name:'Check answer'})).toBeVisible();
  await page.locator('[data-world-task-close]').click();
  await page.getByRole('button',{name:'Lock account',exact:true}).click();
  await expect(page.getByRole('heading',{name:'Unlock your learner account'})).toBeVisible();
@@ -100,13 +101,14 @@ test('fresh release ignores previous game caches and queues, preserves them priv
  const current=await page.evaluate(({ref,epoch})=>JSON.parse(localStorage.getItem(`jaxon_v51_production:${ref}:${epoch}:11111111-1111-4111-8111-111111111111:game`)),{ref:B.production.projectRef,epoch:freshEpoch});
  expect(current.coins).toBe(0);expect(current.minutes).toBe(0);expect(current.bought).toEqual([]);expect(current.achievements).toEqual([]);expect(current.discovery).toEqual({});expect(current.skills).toEqual({});
  await page.getByRole('button',{name:'Continue adventure',exact:false}).first().click();
+ await page.locator('[data-action^="mission:number:0:"]').first().click();
  await page.getByRole('button',{name:'Use number workshop',exact:true}).first().click();
- await page.getByRole('button',{name:'Start building',exact:false}).click();await page.getByRole('button',{name:'Hint',exact:true}).click();
+ await page.getByRole('button',{name:'Try this task',exact:false}).click();await page.getByRole('button',{name:'Hint',exact:true}).click();
  // Routine edits batch for 30 seconds; reconnect forces the existing recovery path.
  await page.evaluate(()=>window.dispatchEvent(new Event('online')));
- await expect.poll(()=>s.progress.quest?.assisted).toBe(true);await page.reload();
+ await expect.poll(()=>s.progress.adventure?.active?.assisted).toBe(true);await page.reload();
  await page.getByRole('button',{name:'Use number workshop',exact:true}).first().click();
- await expect(page.getByRole('button',{name:'Try my solution'})).toBeVisible();
+ await expect(page.getByRole('button',{name:'Check answer'})).toBeVisible();
  expect(s.progress.achievements).toEqual([]);expect(s.wallet.coins).toBe(0);
  expect(await page.evaluate(()=>localStorage.getItem('legacy-device-pin-sentinel'))).toBe('fictional-preserved');
  expect(await page.evaluate(ref=>JSON.parse(localStorage.getItem(`jaxon_v51_production:${ref}:11111111-1111-4111-8111-111111111111:game`)).coins,B.production.projectRef)).toBe(9999);

@@ -1,7 +1,7 @@
 // Reproduce real post-discovery selection in an isolated browser-module VM.
 const fs=require('node:fs'),vm=require('node:vm'),cp=require('node:child_process');
 const BASE='3334875b60c58e1d4d74aa4683ab2cac764f949d';
-const files=['v3/curriculum.js','v2-review-bank.js','v3/town.js','v3/education.js','v3/education-depth.js','v3/curriculum-expansion.js','v3/curriculum-activities.js','v3/curriculum-map.js','v3/adaptive.js','v3/hands-on.js','v3/touch-activities.js','v3/touch-content.js','v3/adventure.js','v3/engine.js','v3/discovery.js'];
+const files=['v3/curriculum.js','v2-review-bank.js','v3/town.js','v3/education.js','v3/education-depth.js','v3/curriculum-expansion.js','v3/curriculum-activities.js','v3/curriculum-map.js','v3/adaptive.js','v3/hands-on.js','v3/touch-activities.js','v3/touch-content.js','v3/restoration.js','v3/activity-navigation.js','v3/adventure.js','v3/engine.js','v3/discovery.js'];
 function load(ref){const c={};c.window=c;vm.createContext(c);for(const f of files){if(ref&&f.includes('/touch-'))continue;if(!ref&&!fs.existsSync(f))continue;vm.runInContext(ref?cp.execFileSync('git',['show',ref+':'+f],{encoding:'utf8',maxBuffer:8e6}):fs.readFileSync(f,'utf8'),c,{filename:f});}return c;}
 function classify(c,q,mode,skill){
  const direct=!!q[5]?.direct;
