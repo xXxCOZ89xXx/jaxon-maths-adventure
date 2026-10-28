@@ -20,7 +20,7 @@ function label(s,kind,q){const C=typeof module!=='undefined'?require('./curricul
  if(kind==='learning')return `${q.mode==='discovery'?'Starting-point assessment':q.mode==='check'?'Independent check':'Lesson / practice'}: ${C.skills.find(k=>k.id===q.id)?.name||q.id}`;
  if(kind==='town'||kind==='legacy-town')return q.name||q.recipeName||(q.recipe?modules().J.recipes[q.recipe]?.name:null)||'Town journey';
  if(kind==='quest')return `Saved restoration in ${q.world}`;
- return q.restoration?`${q.world} restoration stage ${q.restoration.stage+1}`:`${q.world}: ${q.route} visit`;
+ const world=modules().E.worlds.find(w=>w.id===q.world)?.name||'your world';return q.restoration?(q.world==='town'?'Restore Community '+(q.restoration.stage+1):`${world} restoration stage ${q.restoration.stage+1}`):(modules().M.routes(q.world).find(r=>r.id===q.route)?.name||world+' visit');
 }
 function target(s){const{M,J}=modules();let kind,q;
  if(s.view==='journey'){q=J.state(s);if(q&&!q.done)kind=q.version===2?'town':'legacy-town';}

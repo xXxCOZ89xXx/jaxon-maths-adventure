@@ -1,0 +1,142 @@
+
+> test:guided-progression
+> node tests/guided-progression.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.guided-progression.config.cjs
+
+PASS completed Town plans and missions Continue to completion, never supermarket
+PASS fresh Continue offers routes; saved learning and selected activities resume exactly
+PASS all 27 stages gate on completed relevant starting-point rounds, not guided or mastery markers
+PASS all worlds adapt, snapshot, resume, and complete every stage without mastery or wallet changes
+PASS adaptive recommendations use independent evidence only and resume does not rescale questions
+PASS recovery preserves completed steps, unrelated Town runs, wallets and assessments; stale confirmation refuses
+PASS restoration/mission recovery keeps previous completed stages and unrelated saved visits
+PASS assessment restart retains first answers/help; exit pauses the exact round; no whole-save clearing
+PASS legacy visual completion is retained, optional new visits do not restore unassessed stages
+PASS Continue finalises the last solved task once, without starting a replacement activity
+27-stage fictional save bytes: 297097
+PASS all 27 completed stage snapshots stay below the unchanged save payload limit
+PASS unsupported restoration and recovery maps fail closed without losing saved data
+PASS multi-skill stages use the gentlest assessed recommendation and require every objective
+PASS scoped restoration restart and exit work in every world and keep another world’s exact visit
+PASS Continue returns a saved lesson to its own world after visiting another map
+PASS resuming a supported retry keeps its teaching screen and assisted evidence
+16 guided progression/recovery groups passed, fictional fixtures only.
+Built staging-fixture-dist. Separate private HTTPS hosting required; no deployment performed.
+Built preview-dist/PLAY-V3.html (standalone offline game).
+
+Running 100 tests using 1 worker
+
+(node:69760) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓    1 [desktop-chromium] › tests/guided-progression.spec.cjs:9:34 › completed Town plan Continue shows its recap without new supermarket or day (3.6s)
+  ✓    2 [desktop-chromium] › tests/guided-progression.spec.cjs:9:34 › completed Town recipe Continue shows its recap without new supermarket or day (3.9s)
+  ✓    3 [desktop-chromium] › tests/guided-progression.spec.cjs:16:1 › completed Town mission and final task Continue are idempotent recaps (2.5s)
+  ✓    4 [desktop-chromium] › tests/guided-progression.spec.cjs:19:45 › number: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (6.7s)
+  ✓    5 [desktop-chromium] › tests/guided-progression.spec.cjs:19:45 › fractions: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (5.7s)
+  ✓    6 [desktop-chromium] › tests/guided-progression.spec.cjs:19:45 › algebra: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (5.4s)
+  ✓    7 [desktop-chromium] › tests/guided-progression.spec.cjs:19:45 › geometry: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.4s)
+  ✓    8 [desktop-chromium] › tests/guided-progression.spec.cjs:19:45 › ratio: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.3s)
+  ✓    9 [desktop-chromium] › tests/guided-progression.spec.cjs:19:45 › statistics: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.2s)
+  ✓   10 [desktop-chromium] › tests/guided-progression.spec.cjs:19:45 › probability: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.5s)
+  ✓   11 [desktop-chromium] › tests/guided-progression.spec.cjs:19:45 › measure: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.6s)
+  ✓   12 [desktop-chromium] › tests/guided-progression.spec.cjs:19:45 › town: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.4s)
+  ✓   13 [desktop-chromium] › tests/guided-progression.spec.cjs:35:1 › Get unstuck confirms the named activity, supports cancellation and preserves other plans (2.4s)
+  ✓   14 [desktop-chromium] › tests/guided-progression.spec.cjs:42:1 › How to play is always available and keeps a saved restoration intact (1.9s)
+  ✓   15 [desktop-chromium] › tests/guided-progression.spec.cjs:45:45 › number: reasoning controls and final restoration completion survive Continue (4.0s)
+  ✓   16 [desktop-chromium] › tests/guided-progression.spec.cjs:45:45 › fractions: reasoning controls and final restoration completion survive Continue (4.2s)
+  ✓   17 [desktop-chromium] › tests/guided-progression.spec.cjs:45:45 › algebra: reasoning controls and final restoration completion survive Continue (3.6s)
+  ✓   18 [desktop-chromium] › tests/guided-progression.spec.cjs:45:45 › geometry: reasoning controls and final restoration completion survive Continue (3.6s)
+  ✓   19 [desktop-chromium] › tests/guided-progression.spec.cjs:45:45 › ratio: reasoning controls and final restoration completion survive Continue (3.4s)
+  ✓   20 [desktop-chromium] › tests/guided-progression.spec.cjs:45:45 › statistics: reasoning controls and final restoration completion survive Continue (3.9s)
+  ✓   21 [desktop-chromium] › tests/guided-progression.spec.cjs:45:45 › probability: reasoning controls and final restoration completion survive Continue (3.6s)
+  ✓   22 [desktop-chromium] › tests/guided-progression.spec.cjs:45:45 › measure: reasoning controls and final restoration completion survive Continue (3.7s)
+  ✓   23 [desktop-chromium] › tests/guided-progression.spec.cjs:45:45 › town: reasoning controls and final restoration completion survive Continue (5.4s)
+  ✓   24 [desktop-chromium] › tests/guided-progression.spec.cjs:53:1 › a real starting-point assessment opens its stage without awarding mastery (5.3s)
+  ✓   25 [desktop-chromium] › tests/guided-progression.spec.cjs:62:1 › independent-check recovery retains prior answers and resumes the exact paused question (2.2s)
+(node:78988) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   26 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:9:34 › completed Town plan Continue shows its recap without new supermarket or day (2.7s)
+  ✓   27 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:9:34 › completed Town recipe Continue shows its recap without new supermarket or day (2.5s)
+  ✓   28 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:16:1 › completed Town mission and final task Continue are idempotent recaps (2.0s)
+  ✓   29 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:19:45 › number: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.5s)
+  ✓   30 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:19:45 › fractions: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.2s)
+  ✓   31 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:19:45 › algebra: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (5.2s)
+  ✓   32 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:19:45 › geometry: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.6s)
+  ✓   33 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:19:45 › ratio: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.8s)
+  ✓   34 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:19:45 › statistics: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (5.5s)
+  ✓   35 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:19:45 › probability: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (5.5s)
+  ✓   36 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:19:45 › measure: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (6.3s)
+  ✓   37 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:19:45 › town: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (6.7s)
+  ✓   38 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:35:1 › Get unstuck confirms the named activity, supports cancellation and preserves other plans (3.5s)
+  ✓   39 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:42:1 › How to play is always available and keeps a saved restoration intact (3.0s)
+  ✓   40 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:45:45 › number: reasoning controls and final restoration completion survive Continue (6.1s)
+  ✓   41 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:45:45 › fractions: reasoning controls and final restoration completion survive Continue (5.8s)
+  ✓   42 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:45:45 › algebra: reasoning controls and final restoration completion survive Continue (6.0s)
+  ✓   43 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:45:45 › geometry: reasoning controls and final restoration completion survive Continue (5.1s)
+  ✓   44 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:45:45 › ratio: reasoning controls and final restoration completion survive Continue (4.8s)
+  ✓   45 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:45:45 › statistics: reasoning controls and final restoration completion survive Continue (4.9s)
+  ✓   46 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:45:45 › probability: reasoning controls and final restoration completion survive Continue (5.3s)
+  ✓   47 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:45:45 › measure: reasoning controls and final restoration completion survive Continue (5.2s)
+  ✓   48 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:45:45 › town: reasoning controls and final restoration completion survive Continue (5.6s)
+  ✓   49 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:53:1 › a real starting-point assessment opens its stage without awarding mastery (5.5s)
+  ✓   50 [ipad-portrait-chromium] › tests/guided-progression.spec.cjs:62:1 › independent-check recovery retains prior answers and resumes the exact paused question (2.7s)
+(node:92361) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   51 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:9:34 › completed Town plan Continue shows its recap without new supermarket or day (3.7s)
+  ✓   52 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:9:34 › completed Town recipe Continue shows its recap without new supermarket or day (3.1s)
+  ✓   53 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:16:1 › completed Town mission and final task Continue are idempotent recaps (2.2s)
+  ✓   54 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:19:45 › number: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (6.6s)
+  ✓   55 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:19:45 › fractions: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.2s)
+  ✓   56 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:19:45 › algebra: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (5.2s)
+  ✓   57 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:19:45 › geometry: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (5.7s)
+  ✓   58 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:19:45 › ratio: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (5.3s)
+  ✓   59 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:19:45 › statistics: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.9s)
+  ✓   60 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:19:45 › probability: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.8s)
+  ✓   61 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:19:45 › measure: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.8s)
+  ✓   62 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:19:45 › town: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.6s)
+  ✓   63 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:35:1 › Get unstuck confirms the named activity, supports cancellation and preserves other plans (2.4s)
+  ✓   64 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:42:1 › How to play is always available and keeps a saved restoration intact (2.1s)
+  ✓   65 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:45:45 › number: reasoning controls and final restoration completion survive Continue (3.9s)
+  ✓   66 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:45:45 › fractions: reasoning controls and final restoration completion survive Continue (4.2s)
+  ✓   67 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:45:45 › algebra: reasoning controls and final restoration completion survive Continue (3.9s)
+  ✓   68 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:45:45 › geometry: reasoning controls and final restoration completion survive Continue (3.4s)
+  ✓   69 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:45:45 › ratio: reasoning controls and final restoration completion survive Continue (3.7s)
+  ✓   70 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:45:45 › statistics: reasoning controls and final restoration completion survive Continue (3.9s)
+  ✓   71 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:45:45 › probability: reasoning controls and final restoration completion survive Continue (3.4s)
+  ✓   72 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:45:45 › measure: reasoning controls and final restoration completion survive Continue (3.7s)
+  ✓   73 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:45:45 › town: reasoning controls and final restoration completion survive Continue (3.9s)
+  ✓   74 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:53:1 › a real starting-point assessment opens its stage without awarding mastery (4.1s)
+  ✓   75 [ipad-landscape-chromium] › tests/guided-progression.spec.cjs:62:1 › independent-check recovery retains prior answers and resumes the exact paused question (2.1s)
+(node:100784) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   76 [small-touch] › tests/guided-progression.spec.cjs:9:34 › completed Town plan Continue shows its recap without new supermarket or day (2.5s)
+  ✓   77 [small-touch] › tests/guided-progression.spec.cjs:9:34 › completed Town recipe Continue shows its recap without new supermarket or day (2.3s)
+  ✓   78 [small-touch] › tests/guided-progression.spec.cjs:16:1 › completed Town mission and final task Continue are idempotent recaps (1.7s)
+  ✓   79 [small-touch] › tests/guided-progression.spec.cjs:19:45 › number: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.6s)
+  ✓   80 [small-touch] › tests/guided-progression.spec.cjs:19:45 › fractions: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.0s)
+  ✓   81 [small-touch] › tests/guided-progression.spec.cjs:19:45 › algebra: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.4s)
+  ✓   82 [small-touch] › tests/guided-progression.spec.cjs:19:45 › geometry: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (4.8s)
+  ✓   83 [small-touch] › tests/guided-progression.spec.cjs:19:45 › ratio: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (5.7s)
+  ✓   84 [small-touch] › tests/guided-progression.spec.cjs:19:45 › statistics: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (5.3s)
+  ✓   85 [small-touch] › tests/guided-progression.spec.cjs:19:45 › probability: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (8.8s)
+  ✓   86 [small-touch] › tests/guided-progression.spec.cjs:19:45 › measure: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (10.6s)
+  ✓   87 [small-touch] › tests/guided-progression.spec.cjs:19:45 › town: assessment gate, adaptive restoration, real answer, pause/reload and reliable exits (7.8s)
+  ✓   88 [small-touch] › tests/guided-progression.spec.cjs:35:1 › Get unstuck confirms the named activity, supports cancellation and preserves other plans (3.7s)
+  ✓   89 [small-touch] › tests/guided-progression.spec.cjs:42:1 › How to play is always available and keeps a saved restoration intact (3.3s)
+  ✓   90 [small-touch] › tests/guided-progression.spec.cjs:45:45 › number: reasoning controls and final restoration completion survive Continue (5.9s)
+  ✓   91 [small-touch] › tests/guided-progression.spec.cjs:45:45 › fractions: reasoning controls and final restoration completion survive Continue (6.2s)
+  ✓   92 [small-touch] › tests/guided-progression.spec.cjs:45:45 › algebra: reasoning controls and final restoration completion survive Continue (5.9s)
+  ✓   93 [small-touch] › tests/guided-progression.spec.cjs:45:45 › geometry: reasoning controls and final restoration completion survive Continue (6.2s)
+  ✓   94 [small-touch] › tests/guided-progression.spec.cjs:45:45 › ratio: reasoning controls and final restoration completion survive Continue (6.4s)
+  ✓   95 [small-touch] › tests/guided-progression.spec.cjs:45:45 › statistics: reasoning controls and final restoration completion survive Continue (6.4s)
+  ✓   96 [small-touch] › tests/guided-progression.spec.cjs:45:45 › probability: reasoning controls and final restoration completion survive Continue (4.9s)
+  ✓   97 [small-touch] › tests/guided-progression.spec.cjs:45:45 › measure: reasoning controls and final restoration completion survive Continue (4.5s)
+  ✓   98 [small-touch] › tests/guided-progression.spec.cjs:45:45 › town: reasoning controls and final restoration completion survive Continue (4.5s)
+  ✓   99 [small-touch] › tests/guided-progression.spec.cjs:53:1 › a real starting-point assessment opens its stage without awarding mastery (4.9s)
+  ✓  100 [small-touch] › tests/guided-progression.spec.cjs:62:1 › independent-check recovery retains prior answers and resumes the exact paused question (3.0s)
+
+  100 passed (7.6m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

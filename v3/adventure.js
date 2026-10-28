@@ -813,7 +813,7 @@
         seed,
         i: 0,
         phase: "lesson",
-        tasks: (course ? Array.from({length:6},(_,i)=>X.task(course.skills[0],[6,7,9][tier-1],seed,i)) : expandedGateway ? expandedGatewayTasks(world,tier,seed) : expandedWorld ? expandedMissionTasks(world,route,tier,seed) : [0, 1, 2].map((i) => task(world, route, tier, seed, i))).map((t,i)=>root.V9TouchContent?root.V9TouchContent.task(t,[6,7,9][tier-1],seed,i):t),
+        tasks: (course ? Array.from({length:6},(_,i)=>X.task(course.skills[0],[6,7,9][tier-1],seed,i)) : expandedGateway ? expandedGatewayTasks(world,tier,seed) : expandedWorld ? expandedMissionTasks(world,route,tier,seed) : [0, 1, 2].map((i) => task(world, route, tier, seed, i))).map((t,i)=>{const task=root.V9TouchContent?root.V9TouchContent.task(t,[6,7,9][tier-1],seed,i):t;return world==='town'?T.taskDetails(task,{route,context:course?{venue:'home'}:context},i):task;}),
         values: {},
         assisted: false,
         unassisted: 0,
@@ -943,7 +943,7 @@
     if (!correct(q, t)) {
       q.assisted = true;
       q.feedback = "Not yet. " + t.hint + " " + t.teach;
-      q.phase = "lesson";
+      // Keep the question and its first-attempt evidence visible for a safe retry.
       return false;
     }
     q.solved = true;

@@ -21,6 +21,26 @@ function gate(s,world,stage){
  return{ready:!missing.length&&!prior,missing,prior,skills:skills.slice(),reason:missing.length?'Find your starting point for this stage first.':prior?'Finish the earlier restoration stage first.':''};
 }
 function level(s,world,stage){const skills=mapping[world][stage],evidence=Object.fromEntries(skills.map(id=>[id,AD.skill(s,id)]));return{band:Math.min(...Object.values(evidence).map(x=>x.band)),tier:Math.min(...Object.values(evidence).map(x=>x.tier)),evidence:copy(evidence)};}
+// A recommendation explains the route; only gate() controls restoration access.
+function recommend(s,world,stage){
+ const ED=typeof module!=='undefined'?require('./education').V6Education:root.V6Education;
+ if(stage===undefined)stage=[0,1,2].find(i=>!s.milestones.includes(world+':'+i));
+ if(stage===undefined)return{type:'complete'};
+ if(stage>0&&!s.milestones.includes(world+':'+(stage-1)))return recommend(s,world,stage-1);
+ const g=gate(s,world,stage);
+ if(g.missing.length)return{type:'discover',id:g.missing[0],stage};
+ const active=[s.adventure?.active,...Object.values(s.adventure?.suspended||{})].find(q=>q?.world===world&&q.restoration?.stage===stage);
+ if(active)return{type:'restore',stage};
+ function learning(id,seen=[]){
+  if(seen.includes(id))return{type:'learn',id,stage};
+  if(!assessed(s,id))return{type:'discover',id,stage};
+  if(!s.practice[id]?.completed||s.checks[id]?.reteach)return{type:'learn',id,stage};
+  if(!s.checks[id]?.stage){const pre=ED.gaps(s,id)[0];return pre?learning(pre,[...seen,id]):{type:'check',id,stage};}
+  return null;
+ }
+ for(const id of g.skills){const n=learning(id);if(n)return n;}
+ return{type:'restore',stage};
+}
 function scenario(world,stage,band,seed,cycle){
  const a=2+(seed+cycle*3)%7+(band>=9?23:band>=7?7:0),b=2+(seed*3+cycle)%5,n=2+(seed+cycle)%4+(band>=9?11:band>=7?5:0),c=2+(seed*2+cycle)%6;
  const item=(prompt,answer,worked)=>({prompt,answer:String(answer),worked});let p,q,v,reason;
@@ -69,7 +89,7 @@ function tasks(world,stage,band,seed){return Array.from({length:12},(_,i)=>{
  measure:['Multiply by 100 when converting centimetres into metres.','An area in square units measures a tank’s volume.','Ignore loading and waiting time when finding total elapsed time.'],
  town:['Subtract the money handed over from the bill to find change.','Compare ticket prices but leave transport out of the shared cost.','An arrival time is found by subtracting the journey duration.']};
  const choices=[spec.reason,...misconceptions[world]];const shift=(seed+cycle)%choices.length,options=choices.map((_,k)=>choices[(k+shift)%choices.length]);
- return{kind:'curriculum',contentVersion:8,skill:skills[(slot===1||slot===3)?skills.length-1:0],band,questionId:`restore:${world}:${stage}:v1:b${band}:s${seed}:t${i}`,restorationContext:true,
+ return{...(world==='town'?{venue:['shops','station','leisure'][stage],title:'Restore Community '+(stage+1)+' · case '+(cycle+1)+' · '+['Plan','Apply','Explain','Check'][slot]}:{}),kind:'curriculum',contentVersion:8,skill:skills[(slot===1||slot===3)?skills.length-1:0],band,questionId:`restore:${world}:${stage}:v1:b${band}:s${seed}:t${i}`,restorationContext:true,
  prompt:`Case ${cycle+1} · ${['Plan','Apply','Explain','Check'][slot]}: ${part?part.prompt:'Which explanation fits this plan?'}`,answer:part?part.answer:String((4-shift)%4),
  activity:part?null:{kind:'choice',labels:options},teach:spec.reason,example:({number:'Start at −2 and move 5 right: −2 + 5 = 3.',fractions:'One quarter of 20 L is 20 ÷ 4 = 5 L.',algebra:'If x + 3 = 8, subtract 3 from both sides: x = 5.',geometry:'A 3 m by 4 m rectangle covers 12 square metres.',ratio:'Sharing 10 in a 2:3 ratio gives 5 parts of 2, so the shares are 4 and 6.',statistics:'The mean of 2, 4 and 6 is (2 + 4 + 6) ÷ 3 = 4.',probability:'One winning slot in four equally likely slots gives probability 1/4.',measure:'Two metres is 200 cm. A 3 m by 2 m floor covers 6 square metres.',town:'Three tickets at 200p each cost 600p. A 1,000p payment gives 400p change.'})[world],hint:slot===2?'Explain how the quantities relate; do not choose from the size of a number alone.':'Break the plan into steps. Check the unit and the order of operations.',worked:part?part.worked:spec.reason};
  });}
@@ -92,5 +112,5 @@ function complete(s,q,now){const r=book(s);if(!r)return false;const stage=q.rest
 }
 function valid(q){return q?.restoration?.version===1&&Number.isInteger(q.restoration.stage)&&mapping[q.world]?.[q.restoration.stage]&&q.route==='restore-'+q.restoration.stage&&q.tasks?.length===12;}
 function preserveLegacy(s){const r=book(s);if(!r)return;for(const world of Object.keys(mapping)){const routes=new Set(Object.values(s.adventure?.records||{}).filter(x=>x?.world===world&&x.route!=='gateway').map(x=>x.route)).size;const visual=world==='town'?(routes>=8?3:routes>=4?2:routes?1:0):Math.min(3,routes);r.legacyVisual[world]=Math.max(r.legacyVisual[world]||0,visual);}}
-root.V10Restoration={mapping,book,assessed,gate,level,tasks,scenario,start,complete,valid,preserveLegacy};if(typeof module!=='undefined')module.exports={V10Restoration:root.V10Restoration};
+root.V10Restoration={mapping,book,assessed,gate,level,recommend,tasks,scenario,start,complete,valid,preserveLegacy};if(typeof module!=='undefined')module.exports={V10Restoration:root.V10Restoration};
 })(typeof window==='undefined'?globalThis:window);

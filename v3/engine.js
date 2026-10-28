@@ -448,7 +448,7 @@
         ? (typeof module !== "undefined" ? require('./curriculum-activities').V8Activities : root.V8Activities).matches({answer:q[1],activity:q[5].activity},String(value)) && (q[5].activity?.kind!=='experiment'||l.manipulation?.c8?.trials===q[5].activity.outcomes.length)
         : l.mode === "discovery" ? Math.abs(parseNumber(value)-Number(q[1])) < 1e-8 : normal(value) === normal(q[1]));
     if (correct && !l.assisted) l.correct++;
-    if (l.mode === "discovery")
+    if (l.mode === "discovery" && !l.answers.some(a=>a.q===q[0]))
       l.answers.push({
         q: q[0],
         correct: correct && !l.assisted,
@@ -464,7 +464,7 @@
         : skip
           ? "Let’s work through it. "
           : "Here is one way to work through it. ") + education.explain(q);
-    if(q[5]?.direct&&!correct){l.answered=false;l.assisted=true;l.needsTeaching=true;s.view="lesson";s.resumeView="lesson";}
+    if(!correct&&!skip){l.answered=false;l.assisted=true;l.retrying=true;delete l.needsTeaching;}
     return correct;
   }
   function nextLearning(s, now = Date.now()) {

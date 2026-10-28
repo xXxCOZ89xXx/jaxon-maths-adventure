@@ -1,0 +1,70 @@
+
+Running 52 tests using 1 worker
+
+(node:77972) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop-chromium] › tests/owner-review.spec.cjs:9:1 › Base Camp starts home; eight subject worlds and a separate Town with named next steps (4.7s)
+  ✓   2 [desktop-chromium] › tests/owner-review.spec.cjs:15:1 › curriculum Town has a real location; one-action direct and typed answers keep the same open activity (3.9s)
+  ✓   3 [desktop-chromium] › tests/owner-review.spec.cjs:21:50 › town: reasoning choice submits on one tap, wrong retry preserves first evidence (2.2s)
+  ✓   4 [desktop-chromium] › tests/owner-review.spec.cjs:21:50 › number: reasoning choice submits on one tap, wrong retry preserves first evidence (2.0s)
+  ✓   5 [desktop-chromium] › tests/owner-review.spec.cjs:21:50 › fractions: reasoning choice submits on one tap, wrong retry preserves first evidence (2.5s)
+  ✓   6 [desktop-chromium] › tests/owner-review.spec.cjs:24:63 › cook-pasta: start to completion, one-tap choices, interruption and completed Continue (14.7s)
+  ✓   7 [desktop-chromium] › tests/owner-review.spec.cjs:24:63 › travel-library: start to completion, one-tap choices, interruption and completed Continue (7.8s)
+  ✓   8 [desktop-chromium] › tests/owner-review.spec.cjs:24:63 › shop-budget: start to completion, one-tap choices, interruption and completed Continue (12.9s)
+  ✓   9 [desktop-chromium] › tests/owner-review.spec.cjs:32:1 › Town learning choice retries in place, with no independent credit after a wrong first answer (3.7s)
+  ✓  10 [desktop-chromium] › tests/owner-review.spec.cjs:35:1 › all Community stages complete, unlock in order and resume exact assessed tasks (23.1s)
+  ✓  11 [desktop-chromium] › tests/owner-review.spec.cjs:50:1 › Get unstuck resets only the named current plan and completed Continue stays complete (3.6s)
+  ✓  12 [desktop-chromium] › tests/owner-review.spec.cjs:54:1 › supermarket answer and Next keep the same route and workbench open (4.7s)
+  ✓  13 [desktop-chromium] › tests/owner-review.spec.cjs:59:1 › a queued choice cannot answer or replace another activity opened in another tab (4.4s)
+(node:88881) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  14 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:9:1 › Base Camp starts home; eight subject worlds and a separate Town with named next steps (4.1s)
+  ✓  15 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:15:1 › curriculum Town has a real location; one-action direct and typed answers keep the same open activity (4.4s)
+  ✓  16 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:21:50 › town: reasoning choice submits on one tap, wrong retry preserves first evidence (2.9s)
+  ✓  17 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:21:50 › number: reasoning choice submits on one tap, wrong retry preserves first evidence (3.2s)
+  ✓  18 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:21:50 › fractions: reasoning choice submits on one tap, wrong retry preserves first evidence (2.7s)
+  ✓  19 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:24:63 › cook-pasta: start to completion, one-tap choices, interruption and completed Continue (20.1s)
+  ✓  20 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:24:63 › travel-library: start to completion, one-tap choices, interruption and completed Continue (10.0s)
+  ✓  21 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:24:63 › shop-budget: start to completion, one-tap choices, interruption and completed Continue (12.0s)
+  ✓  22 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:32:1 › Town learning choice retries in place, with no independent credit after a wrong first answer (3.1s)
+  ✓  23 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:35:1 › all Community stages complete, unlock in order and resume exact assessed tasks (18.3s)
+  ✓  24 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:50:1 › Get unstuck resets only the named current plan and completed Continue stays complete (2.6s)
+  ✓  25 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:54:1 › supermarket answer and Next keep the same route and workbench open (2.9s)
+  ✓  26 [ipad-portrait-chromium] › tests/owner-review.spec.cjs:59:1 › a queued choice cannot answer or replace another activity opened in another tab (2.9s)
+(node:96766) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  27 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:9:1 › Base Camp starts home; eight subject worlds and a separate Town with named next steps (3.2s)
+  ✓  28 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:15:1 › curriculum Town has a real location; one-action direct and typed answers keep the same open activity (3.7s)
+  ✓  29 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:21:50 › town: reasoning choice submits on one tap, wrong retry preserves first evidence (3.1s)
+  ✓  30 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:21:50 › number: reasoning choice submits on one tap, wrong retry preserves first evidence (2.2s)
+  ✓  31 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:21:50 › fractions: reasoning choice submits on one tap, wrong retry preserves first evidence (2.3s)
+  ✓  32 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:24:63 › cook-pasta: start to completion, one-tap choices, interruption and completed Continue (14.7s)
+  ✓  33 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:24:63 › travel-library: start to completion, one-tap choices, interruption and completed Continue (7.3s)
+  ✓  34 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:24:63 › shop-budget: start to completion, one-tap choices, interruption and completed Continue (10.9s)
+  ✓  35 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:32:1 › Town learning choice retries in place, with no independent credit after a wrong first answer (2.5s)
+  ✓  36 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:35:1 › all Community stages complete, unlock in order and resume exact assessed tasks (15.3s)
+  ✓  37 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:50:1 › Get unstuck resets only the named current plan and completed Continue stays complete (2.3s)
+  ✓  38 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:54:1 › supermarket answer and Next keep the same route and workbench open (3.3s)
+  ✓  39 [ipad-landscape-chromium] › tests/owner-review.spec.cjs:59:1 › a queued choice cannot answer or replace another activity opened in another tab (3.1s)
+(node:103397) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  40 [small-touch] › tests/owner-review.spec.cjs:9:1 › Base Camp starts home; eight subject worlds and a separate Town with named next steps (4.7s)
+  ✓  41 [small-touch] › tests/owner-review.spec.cjs:15:1 › curriculum Town has a real location; one-action direct and typed answers keep the same open activity (4.1s)
+  ✓  42 [small-touch] › tests/owner-review.spec.cjs:21:50 › town: reasoning choice submits on one tap, wrong retry preserves first evidence (3.2s)
+  ✓  43 [small-touch] › tests/owner-review.spec.cjs:21:50 › number: reasoning choice submits on one tap, wrong retry preserves first evidence (4.9s)
+  ✓  44 [small-touch] › tests/owner-review.spec.cjs:21:50 › fractions: reasoning choice submits on one tap, wrong retry preserves first evidence (4.7s)
+  ✓  45 [small-touch] › tests/owner-review.spec.cjs:24:63 › cook-pasta: start to completion, one-tap choices, interruption and completed Continue (25.1s)
+  ✓  46 [small-touch] › tests/owner-review.spec.cjs:24:63 › travel-library: start to completion, one-tap choices, interruption and completed Continue (11.6s)
+  ✓  47 [small-touch] › tests/owner-review.spec.cjs:24:63 › shop-budget: start to completion, one-tap choices, interruption and completed Continue (18.6s)
+  ✓  48 [small-touch] › tests/owner-review.spec.cjs:32:1 › Town learning choice retries in place, with no independent credit after a wrong first answer (4.1s)
+  ✓  49 [small-touch] › tests/owner-review.spec.cjs:35:1 › all Community stages complete, unlock in order and resume exact assessed tasks (18.5s)
+  ✓  50 [small-touch] › tests/owner-review.spec.cjs:50:1 › Get unstuck resets only the named current plan and completed Continue stays complete (2.5s)
+  ✓  51 [small-touch] › tests/owner-review.spec.cjs:54:1 › supermarket answer and Next keep the same route and workbench open (2.5s)
+  ✓  52 [small-touch] › tests/owner-review.spec.cjs:59:1 › a queued choice cannot answer or replace another activity opened in another tab (2.4s)
+
+  52 passed (6.1m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

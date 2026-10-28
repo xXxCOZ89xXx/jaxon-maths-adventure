@@ -2211,3 +2211,13 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .scene-dialog .scene-actions {position:static}
 /* The extra help entry must wrap with the main navigation on narrow screens. */
 .topbar nav {flex-wrap:wrap;min-width:0}
+.home-path .actions {display:flex;flex-wrap:wrap;gap:10px}
+.recommended-next {border-left:5px solid #486d42;padding:12px 18px;margin:16px 0;background:#eef2dc}
+.restoration-path li {margin:12px 0}
+.restoration-path button {white-space:normal;max-width:100%}
+.town-task-guide {display:flex;align-items:flex-start;gap:16px;margin:0;flex:1;min-width:0}
+.town-task-guide h3 {margin:0 0 8px}
+.town-task-guide h2 {margin:0 0 8px}
+.town-task-guide>svg {width:80px;flex:0 0 80px}
+@media(max-width:600px){.town-task-guide{padding:14px;gap:10px}.scene-task-brief{flex-wrap:wrap}.home-path .actions>button{width:100%}}
+@media(max-width:600px){.scene-task-brief .town-task-guide{flex-basis:100%;width:100%}.scene-task-brief>.badge{order:-1}}

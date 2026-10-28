@@ -11,7 +11,7 @@ async function target(page,act){
  const overlay=page.locator('.immersive-journey .scene-dialog[open]');if(await overlay.count())await overlay.locator('[data-scene-close]').tap();
  return page.locator(selector).first();
 }
-async function click(page,act){const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
 async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
 async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
 async function setRange(page,n){
@@ -33,7 +33,7 @@ async function answer(page,t,choice){
 const worlds=[['number','2',1,'array'],['fractions','1',1,'order'],['algebra','1',0,'sequence'],['geometry','0',0,'rotate'],['ratio','0',0,'ratio'],['statistics','0',0,'chart'],['probability','2',0,'chance'],['measure','0',0,'measure']];
 for(const [world,route,stage,kind] of worlds)test(`${world}: actual model, wrong answer, hint and saved placement`,async({camp})=>{
  const {page,key,read}=camp;await seed(page,key,world,route,stage);let q=(await read()).adventure.active,t=q.tasks[q.i];if(t.direct){expect(t.kind).toBe('direct');expect(t.direct.kind).toBe(world==='statistics'?'groups':'ruler');}else expect(t.kind).toBe(kind);
- await click(page,'m-submit');expect((await read()).adventure.active.solved).toBe(false);expect((await read()).adventure.active.phase).toBe('lesson');await click(page,'m-begin');await click(page,'m-help');await expect(page.locator('.feedback').filter({visible:true}).first()).toBeVisible();
+ await click(page,'m-submit');expect((await read()).adventure.active.solved).toBe(false);expect((await read()).adventure.active.phase).toBe('play');await click(page,'m-help');await expect(page.locator('.feedback').filter({visible:true}).first()).toBeVisible();
  if(t.direct)await require('./helpers/direct.cjs').alternative(page,t.direct,t.answer);
  else if(kind==='array')await click(page,`m-array:${t.answer[0]}:${t.answer[1]}`);
  else if(kind==='order'){for(let i=0;i<t.answer.length;i++){await click(page,'h-pick:'+t.answer[i]);await click(page,'h-place:'+i);}}
@@ -50,7 +50,7 @@ for(const [world,route,stage,kind] of worlds)test(`${world}: actual model, wrong
 for(const id of ['cook-pizza','cook-curry','cook-soup','cook-pancakes','shop-budget','travel-library','job-cafe','errand-post','original-bolognese'])test(`${id}: full touch journey, context, decisions and exact reopen`,async({camp})=>{
  const {page,key,read}=camp;await page.evaluate(({key,id})=>{let s=V3Engine.fresh();s.tourSeen=true;if(id==='original-bolognese')V5Journey.start(s,'bolognese',2);else V52TownLife.start(s,id,2);localStorage.setItem(key,JSON.stringify(s));},{key,id});await page.reload();await openCurrent(page);
  let count=0;while(!(await run(page,key)).done){await openCurrent(page);const j=await run(page,key),t=j.steps[j.stage];
-  if(j.stage===0){await click(page,'j-submit');if(!(await run(page,key)).solved){await click(page,'j-help');await expect(page.locator('.feedback').filter({visible:true}).first()).toBeVisible();}}
+  if(j.stage===0){if(['choice','journey'].includes(t.kind)){const wrong=t.options.findIndex((_,i)=>i!==t.answer&&!t.allowedChoices?.includes(i));if(wrong>=0)await click(page,'j-choice:'+wrong);}else await click(page,'j-submit');if(!(await run(page,key)).solved){await click(page,'j-help');await expect(page.locator('.feedback').filter({visible:true}).first()).toBeVisible();}}
   if((await run(page,key)).solved){await click(page,'j-next');continue;}
   if(id==='travel-library')expect(t.prompt).not.toContain('Reach Library visit');
   if(t.visualContext==='stock')await expect(page.locator('.scene-dialog[open] .scene-closeup-controls,.task-controls').filter({visible:true}).first()).not.toContainText('£');

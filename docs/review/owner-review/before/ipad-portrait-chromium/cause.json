@@ -1,0 +1,32 @@
+{
+  "key": "town|curr-town_planning|1",
+  "taskIndex": 1,
+  "taskMetadata": [
+    {
+      "title": null,
+      "venue": null
+    },
+    {
+      "title": null,
+      "venue": null
+    },
+    {
+      "title": null,
+      "venue": null
+    },
+    {
+      "title": null,
+      "venue": null
+    },
+    {
+      "title": null,
+      "venue": null
+    },
+    {
+      "title": null,
+      "venue": null
+    }
+  ],
+  "workbenchClosed": true,
+  "actualRouteChanged": false
+}

@@ -2,7 +2,7 @@
   "name": "jaxon-adventure-preview",
   "private": true,
   "scripts": {
-    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-estate.cjs && node tests/v5-hands-on.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs && node tests/v51-fixtures.cjs && node scripts/audit-v51-inputs.cjs && node tests/guided-progression.cjs",
+    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-estate.cjs && node tests/v5-hands-on.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs && node tests/v51-fixtures.cjs && node scripts/audit-v51-inputs.cjs && node tests/guided-progression.cjs && node tests/owner-review.cjs",
     "test:e2e": "playwright test",
     "preview": "python3 -m http.server 4173 --bind 0.0.0.0",
     "build:staging": "node scripts/build-v3-staging.cjs",
@@ -47,7 +47,8 @@
     "preview:touch": "python3 tests/serve-preview.py",
     "test:guided-progression": "node tests/guided-progression.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.guided-progression.config.cjs",
     "build:guided-preview": "node -e \"process.env.V3_PREVIEW_ART='current';require('./scripts/build-v3-preview.cjs')\"",
-    "test:guided-preview": "npm run build:guided-preview && playwright test -c playwright.guided-preview.config.cjs"
+    "test:guided-preview": "npm run build:guided-preview && playwright test -c playwright.guided-preview.config.cjs",
+    "test:owner-review": "node tests/owner-review.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.owner-review.config.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

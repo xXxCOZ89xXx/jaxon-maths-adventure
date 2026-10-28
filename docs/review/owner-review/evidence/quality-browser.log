@@ -1,0 +1,500 @@
+
+> test:gameplay-quality
+> node tests/gameplay-quality.cjs && node tests/gameplay-action-coverage.cjs && node tests/town-life.cjs && node tests/v5-hands-on.cjs && node tests/prepare-v3.cjs && playwright test --config playwright.quality.config.cjs
+
+PASS gameplay quality {
+  townPlans: 27,
+  tiers: 3,
+  seeds: [ 1, 2, 7 ],
+  lunchBranches: 27,
+  orderingDisplays: 21,
+  legacyV1: true,
+  legacyV2: true,
+  liveWrites: 0
+}
+PASS action/render coverage {
+  worlds: 9,
+  skills: 63,
+  townPlans: 27,
+  missionDefinitions: 1107,
+  townStages: 2091,
+  kinds: {
+    line: 54,
+    blocks: 36,
+    order: 153,
+    array: 9,
+    fraction: 45,
+    match: 36,
+    measure: 225,
+    balance: 63,
+    sequence: 45,
+    coordinate: 63,
+    rotate: 54,
+    grid: 54,
+    angle: 9,
+    ratio: 54,
+    chart: 18,
+    bars: 36,
+    chance: 90,
+    volume: 9,
+    basket: 273,
+    offers: 15,
+    coins: 414,
+    amount: 552,
+    bank: 18,
+    discount: 9,
+    budget: 81,
+    journey: 441,
+    clock: 144,
+    bill: 9,
+    timesheet: 9,
+    payslip: 9,
+    choice: 171
+  },
+  exceptions: [
+    'Exact numerical/notation calculation practice and independent assessment',
+    'Pre-existing journey snapshots retain original tasks until completed; no rewriting saved answers or ledgers',
+    'Recipe preparation is sequenced from reference instructions; food/heat are not physically simulated'
+  ],
+  liveWrites: 0
+}
+PASS Town Life: 27 scenarios, 2091 stages across 3 tiers × 3 replay seeds; kinds basket, journey, coins, order, measure, choice, clock, amount, budget; legacy/unknown preservation, drafts, receipts, cash and immutable completion.
+PASS V5: Every generated mechanic validates wrong/correct attempts, hints, exact save/resume and three tiers without mastery
+PASS V5: Coverage has at least three actual model types per world and exceeds 70 percent; 55 skills remain accessible
+PASS V5: Cartesian axes and intersections expose no printed coordinate labels or target answer marker
+PASS V5: Adaptive levels depend on multi-question discovery, repeated independent checks and prerequisites, never one guided answer
+PASS V5: Practice components keep supported responses separate; independent assessment does not render aids
+PASS V5: Connected journey carries inventory, list, fare, payments and cooking; interruption and duplicate completion are safe
+PASS V5: Unsupported journey versions and malformed snapshots are preserved, never silently replaced
+PASS V5: All eight buildings share validated worker/customer context metadata and retain their venue identity
+PASS V5: Missing journey context is retained and fails closed instead of crashing
+PASS V5: Completed constructed-practice evidence survives recap without becoming independent mastery
+PASS V5: Every supported practice response is constructible in the question's units across all 55 skills and bands
+PASS V5: Practice generation skips a rejected duplicate round and serves a validated fresh set
+PASS V5: Ordering and matching supply positions vary deterministically rather than repeating an answer-slot pattern
+PASS V5: V5.1 strict numeric drafts prevent stale submissions without recording learning evidence
+14 V5 suites, 1107 generated task steps; fictional fixtures only.
+Built staging-fixture-dist. Separate private HTTPS hosting required; no deployment performed.
+Built preview-dist/PLAY-V3.html (standalone offline game).
+
+Running 48 tests using 1 worker
+
+(node:15807) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › number: actual model, wrong answer, hint and saved placement (4.4s)
+  ✓   2 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › fractions: actual model, wrong answer, hint and saved placement (4.6s)
+  ✓   3 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › algebra: actual model, wrong answer, hint and saved placement (6.0s)
+  ✓   4 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › geometry: actual model, wrong answer, hint and saved placement (4.7s)
+  ✓   5 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › ratio: actual model, wrong answer, hint and saved placement (3.9s)
+  ✓   6 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › statistics: actual model, wrong answer, hint and saved placement (5.3s)
+  ✓   7 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › probability: actual model, wrong answer, hint and saved placement (4.7s)
+  ✓   8 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › measure: actual model, wrong answer, hint and saved placement (4.8s)
+  ✓   9 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-pizza: full touch journey, context, decisions and exact reopen (28.8s)
+  ✓  10 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-curry: full touch journey, context, decisions and exact reopen (49.2s)
+  ✓  11 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-soup: full touch journey, context, decisions and exact reopen (39.7s)
+  ✓  12 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-pancakes: full touch journey, context, decisions and exact reopen (41.2s)
+  ✘  13 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › shop-budget: full touch journey, context, decisions and exact reopen (18.6s)
+(node:37059) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  14 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › travel-library: full touch journey, context, decisions and exact reopen (15.3s)
+  ✘  15 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › job-cafe: full touch journey, context, decisions and exact reopen (18.5s)
+(node:39737) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  16 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › errand-post: full touch journey, context, decisions and exact reopen (18.0s)
+(node:41830) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  17 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › original-bolognese: full touch journey, context, decisions and exact reopen (47.2s)
+  ✓  18 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:68:1 › Bolognese starts the full recipe; native iPad jug gesture and price-free cupboards (7.4s)
+  ✘  19 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:76:1 › Mocked cloud keeps immutable pending saves while new Town stock selections reconnect (2.3s)
+(node:47432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  20 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:82:1 › Balance bundles and old V2 snapshots retain their saved meaning (8.1s)
+  ✓  21 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:86:1 › A stale range edit cannot overwrite a replacement adventure in another tab (5.2s)
+  ✓  22 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:95:1 › Place-value supplies and money envelopes use tap-to-place objects (5.9s)
+  ✘  23 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:103:1 › Parent rewards and learner shop stay separate with the new Town save (18.8s)
+(node:51699) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  24 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:108:1 › Released statistics chart snapshots still render and validate their original bar construction (2.7s)
+(node:52138) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  25 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › number: actual model, wrong answer, hint and saved placement (4.9s)
+  ✓  26 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › fractions: actual model, wrong answer, hint and saved placement (5.3s)
+  ✓  27 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › algebra: actual model, wrong answer, hint and saved placement (4.8s)
+  ✓  28 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › geometry: actual model, wrong answer, hint and saved placement (3.1s)
+  ✓  29 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › ratio: actual model, wrong answer, hint and saved placement (3.1s)
+  ✓  30 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › statistics: actual model, wrong answer, hint and saved placement (4.3s)
+  ✓  31 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › probability: actual model, wrong answer, hint and saved placement (4.0s)
+  ✓  32 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › measure: actual model, wrong answer, hint and saved placement (5.9s)
+  ✓  33 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-pizza: full touch journey, context, decisions and exact reopen (32.7s)
+  ✓  34 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-curry: full touch journey, context, decisions and exact reopen (30.9s)
+  ✓  35 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-soup: full touch journey, context, decisions and exact reopen (34.7s)
+  ✓  36 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-pancakes: full touch journey, context, decisions and exact reopen (32.6s)
+  ✘  37 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › shop-budget: full touch journey, context, decisions and exact reopen (17.1s)
+(node:63493) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  38 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › travel-library: full touch journey, context, decisions and exact reopen (14.0s)
+  ✘  39 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › job-cafe: full touch journey, context, decisions and exact reopen (17.9s)
+(node:65178) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  40 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › errand-post: full touch journey, context, decisions and exact reopen (17.3s)
+(node:65569) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  41 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › original-bolognese: full touch journey, context, decisions and exact reopen (23.6s)
+  ✓  42 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:68:1 › Bolognese starts the full recipe; native iPad jug gesture and price-free cupboards (3.8s)
+  ✘  43 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:76:1 › Mocked cloud keeps immutable pending saves while new Town stock selections reconnect (16.4s)
+(node:67369) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  44 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:82:1 › Balance bundles and old V2 snapshots retain their saved meaning (2.7s)
+  ✓  45 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:86:1 › A stale range edit cannot overwrite a replacement adventure in another tab (2.1s)
+  ✓  46 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:95:1 › Place-value supplies and money envelopes use tap-to-place objects (3.3s)
+  ✘  47 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:103:1 › Parent rewards and learner shop stay separate with the new Town save (17.0s)
+(node:68375) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  48 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:108:1 › Released statistics chart snapshots still render and validate their original bar construction (2.1s)
+
+
+  1) [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › shop-budget: full touch journey, context, decisions and exact reopen 
+
+    TimeoutError: locator.tap: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="j-submit"]').first()
+
+
+      12 |  return page.locator(selector).first();
+      13 | }
+    > 14 | async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^
+      15 | async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
+      16 | async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
+      17 | async function setRange(page,n){
+        at click (/workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:14:449)
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:53:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-shop-budg-a2bd8--decisions-and-exact-reopen-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-shop-budg-a2bd8--decisions-and-exact-reopen-ipad-portrait-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-shop-budg-a2bd8--decisions-and-exact-reopen-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-shop-budg-a2bd8--decisions-and-exact-reopen-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › job-cafe: full touch journey, context, decisions and exact reopen 
+
+    TimeoutError: locator.tap: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="j-submit"]').first()
+
+
+      12 |  return page.locator(selector).first();
+      13 | }
+    > 14 | async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^
+      15 | async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
+      16 | async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
+      17 | async function setRange(page,n){
+        at click (/workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:14:449)
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:53:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-job-cafe--72ee9--decisions-and-exact-reopen-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-job-cafe--72ee9--decisions-and-exact-reopen-ipad-portrait-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-job-cafe--72ee9--decisions-and-exact-reopen-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-job-cafe--72ee9--decisions-and-exact-reopen-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › errand-post: full touch journey, context, decisions and exact reopen 
+
+    TimeoutError: locator.tap: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="j-submit"]').first()
+
+
+      12 |  return page.locator(selector).first();
+      13 | }
+    > 14 | async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^
+      15 | async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
+      16 | async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
+      17 | async function setRange(page,n){
+        at click (/workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:14:449)
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:53:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-errand-po-f44a1--decisions-and-exact-reopen-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-errand-po-f44a1--decisions-and-exact-reopen-ipad-portrait-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-errand-po-f44a1--decisions-and-exact-reopen-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-errand-po-f44a1--decisions-and-exact-reopen-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:76:1 › Mocked cloud keeps immutable pending saves while new Town stock selections reconnect 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Base Camp' })
+    Expected: visible
+    Error: strict mode violation: getByRole('heading', { name: 'Base Camp' }) resolved to 2 elements:
+        1) <h1>Base Camp</h1> aka getByRole('heading', { name: 'Base Camp', exact: true })
+        2) <h2 class="room-divider">Inside your Base Camp</h2> aka getByRole('heading', { name: 'Inside your Base Camp' })
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Base Camp' }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Base Camp' })
+
+
+       at helpers/identities.cjs:52
+
+      50 |       await installSession(page,server,role);
+      51 |       await page.goto('/staging-fixture-dist/');
+    > 52 |       await expect(page.getByRole('heading',{name:role==='parent'?'Staging parent dashboard':'Base Camp',exact:true})).toBeVisible();
+         |                                                                                                             ^
+      53 |       return page;
+      54 |     }
+      55 |     try {await use({server,open,ref,uid,parentUid});}
+        at Object.open (/workspace/jaxon-maths-adventure/tests/helpers/identities.cjs:52:109)
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:77:13
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-Mocked-cl-d6b72--stock-selections-reconnect-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-Mocked-cl-d6b72--stock-selections-reconnect-ipad-portrait-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-Mocked-cl-d6b72--stock-selections-reconnect-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-Mocked-cl-d6b72--stock-selections-reconnect-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:103:1 › Parent rewards and learner shop stay separate with the new Town save 
+
+    TimeoutError: locator.tap: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="skip-tour"]').first()
+
+
+      12 |  return page.locator(selector).first();
+      13 | }
+    > 14 | async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^
+      15 | async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
+      16 | async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
+      17 | async function setRange(page,n){
+        at click (/workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:14:449)
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:105:126
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-Parent-re-e4c1b-rate-with-the-new-Town-save-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-Parent-re-e4c1b-rate-with-the-new-Town-save-ipad-portrait-chromium/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-Parent-re-e4c1b-rate-with-the-new-Town-save-ipad-portrait-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-Parent-re-e4c1b-rate-with-the-new-Town-save-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-Parent-re-e4c1b-rate-with-the-new-Town-save-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › shop-budget: full touch journey, context, decisions and exact reopen 
+
+    TimeoutError: locator.tap: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="j-submit"]').first()
+
+
+      12 |  return page.locator(selector).first();
+      13 | }
+    > 14 | async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^
+      15 | async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
+      16 | async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
+      17 | async function setRange(page,n){
+        at click (/workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:14:449)
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:53:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-shop-budg-a2bd8--decisions-and-exact-reopen-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-shop-budg-a2bd8--decisions-and-exact-reopen-ipad-landscape-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-shop-budg-a2bd8--decisions-and-exact-reopen-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-shop-budg-a2bd8--decisions-and-exact-reopen-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  7) [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › job-cafe: full touch journey, context, decisions and exact reopen 
+
+    TimeoutError: locator.tap: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="j-submit"]').first()
+
+
+      12 |  return page.locator(selector).first();
+      13 | }
+    > 14 | async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^
+      15 | async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
+      16 | async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
+      17 | async function setRange(page,n){
+        at click (/workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:14:449)
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:53:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-job-cafe--72ee9--decisions-and-exact-reopen-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-job-cafe--72ee9--decisions-and-exact-reopen-ipad-landscape-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-job-cafe--72ee9--decisions-and-exact-reopen-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-job-cafe--72ee9--decisions-and-exact-reopen-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  8) [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › errand-post: full touch journey, context, decisions and exact reopen 
+
+    TimeoutError: locator.tap: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="j-submit"]').first()
+
+
+      12 |  return page.locator(selector).first();
+      13 | }
+    > 14 | async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^
+      15 | async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
+      16 | async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
+      17 | async function setRange(page,n){
+        at click (/workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:14:449)
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:53:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-errand-po-f44a1--decisions-and-exact-reopen-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-errand-po-f44a1--decisions-and-exact-reopen-ipad-landscape-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-errand-po-f44a1--decisions-and-exact-reopen-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-errand-po-f44a1--decisions-and-exact-reopen-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  9) [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:76:1 › Mocked cloud keeps immutable pending saves while new Town stock selections reconnect 
+
+    TimeoutError: locator.tap: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="skip-tour"]').first()
+
+
+      12 |  return page.locator(selector).first();
+      13 | }
+    > 14 | async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^
+      15 | async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
+      16 | async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
+      17 | async function setRange(page,n){
+        at click (/workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:14:449)
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:77:117
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-Mocked-cl-d6b72--stock-selections-reconnect-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-Mocked-cl-d6b72--stock-selections-reconnect-ipad-landscape-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-Mocked-cl-d6b72--stock-selections-reconnect-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-Mocked-cl-d6b72--stock-selections-reconnect-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10) [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:103:1 › Parent rewards and learner shop stay separate with the new Town save 
+
+    TimeoutError: locator.tap: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="skip-tour"]').first()
+
+
+      12 |  return page.locator(selector).first();
+      13 | }
+    > 14 | async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').tap();await control.tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^
+      15 | async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
+      16 | async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
+      17 | async function setRange(page,n){
+        at click (/workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:14:449)
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:105:126
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-Parent-re-e4c1b-rate-with-the-new-Town-save-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-Parent-re-e4c1b-rate-with-the-new-Town-save-ipad-landscape-chromium/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-Parent-re-e4c1b-rate-with-the-new-Town-save-ipad-landscape-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-Parent-re-e4c1b-rate-with-the-new-Town-save-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-Parent-re-e4c1b-rate-with-the-new-Town-save-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  10 failed
+    [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › shop-budget: full touch journey, context, decisions and exact reopen 
+    [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › job-cafe: full touch journey, context, decisions and exact reopen 
+    [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › errand-post: full touch journey, context, decisions and exact reopen 
+    [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:76:1 › Mocked cloud keeps immutable pending saves while new Town stock selections reconnect 
+    [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:103:1 › Parent rewards and learner shop stay separate with the new Town save 
+    [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › shop-budget: full touch journey, context, decisions and exact reopen 
+    [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › job-cafe: full touch journey, context, decisions and exact reopen 
+    [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › errand-post: full touch journey, context, decisions and exact reopen 
+    [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:76:1 › Mocked cloud keeps immutable pending saves while new Town stock selections reconnect 
+    [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:103:1 › Parent rewards and learner shop stay separate with the new Town save 
+  38 passed (11.4m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

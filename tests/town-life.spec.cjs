@@ -12,7 +12,7 @@ async function target(page,act){
  const overlay=page.locator('.immersive-journey .scene-dialog[open]');if(await overlay.count())await overlay.locator('[data-scene-close]').click();
  return page.locator(selector).first();
 }
-async function click(page,act){const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').click();await control.click();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').click();await control.click();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
 async function town(page){const map=page.locator('dialog[open] [data-action="nav:map"]');if(await map.count())await map.first().click();else await page.locator('.topbar [data-nav="map"]').click();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));await click(page,'world:town');}
 async function current(page,key){return page.evaluate(key=>V52TownLife.state(JSON.parse(localStorage.getItem(key))),key);}
 async function setRange(page,n){

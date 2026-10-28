@@ -349,7 +349,7 @@ const guides={number:'Rowan',fractions:'Saff',algebra:'Finn',geometry:'Kit',rati
 function routes(world){return packs.filter(p=>p.world===world).map(p=>({id:'curr-'+p.id,name:p.name,guide:guides[world],story:p.lesson,artefact:p.name+' field notes',skills:[p.id],contentVersion:8}));}
 function task(id,band,seed,stage){
  const p=packs.find(p=>p.id===id),row=rows(id,band,seed)[stage%6],m=row[5],example=rows(id,Math.max(5,band-1),seed+1001)[(stage+1)%4];
- return {kind:'curriculum',skill:id,questionId:m.id,contentVersion:8,prompt:row[0],answer:row[1],responseOptions:row[2],activity:m.activity,allowCalculator:m.allowCalculator,teach:p.lesson,example:example[4],examplePrompt:example[0],hint:p.lesson,worked:row[4],band};
+ return {...(p.world==='town'?{venue:['home','shops','station','home','home','shops'][stage%6],title:p.name+' · step '+(stage%6+1)}:{}),kind:'curriculum',skill:id,questionId:m.id,contentVersion:8,prompt:row[0],answer:row[1],responseOptions:row[2],activity:m.activity,allowCalculator:m.allowCalculator,teach:p.lesson,example:example[4],examplePrompt:example[0],hint:p.lesson,worked:row[4],band};
 }
 function install(C,B,ED){
  if(C.skills.some(k=>k.id===packs[0].id))return B;

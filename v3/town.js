@@ -415,7 +415,9 @@
     if((!v&&venue!=='gateway')||!['direct','journey'].includes(entry))return null;
     return {version:1,venue,entry,role:entry==='journey'?(venue==='home'?'home cook':venue==='station'?'passenger':'customer'):'worker',objective:entry==='journey'?customer[venue]||'Continue your plan.':v?.story||'Help at the Town festival.'};
   }
-  root.V3Town = { world, venues, lessons, question, money, clock, install, context };
+  function locationFor(q={},t={}){return [t.venue,q.context?.venue,q.route].find(id=>venues.some(v=>v.id===id))||'home';}
+  function taskDetails(t,q={},index=0){return {...t,venue:locationFor(q,t),title:typeof t.title==='string'&&t.title.trim()?t.title:t.prompt||'Town task '+(index+1)};}
+  root.V3Town = { world, venues, lessons, question, money, clock, install, context, locationFor, taskDetails };
   if (root.V3Curriculum && root.JaxonFreshReview)
     root.JaxonFreshReview = install(root.V3Curriculum, root.JaxonFreshReview);
 })(typeof module !== "undefined" ? module.exports : window);

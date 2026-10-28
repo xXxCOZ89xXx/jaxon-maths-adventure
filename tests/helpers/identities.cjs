@@ -49,7 +49,7 @@ const test=base.extend({
       const page=await context.newPage();errors.push(await mock(page,server));
       await installSession(page,server,role);
       await page.goto('/staging-fixture-dist/');
-      await expect(page.getByRole('heading',{name:role==='parent'?'Staging parent dashboard':'A little maths. A big adventure.'})).toBeVisible();
+      await expect(page.getByRole('heading',{name:role==='parent'?'Staging parent dashboard':'Base Camp',exact:true})).toBeVisible();
       return page;
     }
     try {await use({server,open,ref,uid,parentUid});}

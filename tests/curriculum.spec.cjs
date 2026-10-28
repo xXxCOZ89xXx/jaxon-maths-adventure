@@ -15,15 +15,15 @@ for(const [world,route]of [['number','written_methods'],['fractions','fraction_r
   for(let i=0;i<6;i++){
    await p.locator('[data-action="m-begin"]').tap();await saved(p);const t=(await read()).adventure.active.tasks[i];await selectAnswer(p,t);await bounds(p);
    if(i===4){await p.screenshot({path:path.join(out,`${world}-${p.viewportSize().width}.png`),fullPage:false});const before=(await read()).adventure.active;await p.reload();await saved(p);await open(p);expect((await read()).adventure.active).toEqual(before);}
-   await p.locator('[data-action="m-submit"]').tap();await saved(p);expect((await read()).adventure.active.solved,t.prompt).toBe(true);
+   if(t.activity?.kind!=='choice')await p.locator('[data-action="m-submit"]').tap();await saved(p);expect((await read()).adventure.active.solved,t.prompt).toBe(true);
    await p.locator('[data-action="m-next"]').tap();await saved(p);if(i<5)await open(p);
   }
   const s=await read();expect(s.view).toBe('recap');expect(s.adventure.records[`${world}|curr-${route}|2`].taskCount).toBe(6);expect(s.skills).toEqual({});expect(s.coins).toBe(s.earned);expect(s.earned).toBe(Math.floor(s.minutes*10+1e-9));
  });
 }
 test('Wrong answers and I do not know open teaching, keep the model and do not earn independent mastery',async({camp})=>{
- const{page:p,key,read}=camp;await start(p,key,'number','curr-written_methods');await p.locator('[data-action="m-begin"]').tap();await p.locator('[data-c8-input]').fill('wrong');await saved(p);await p.locator('[data-action="m-submit"]').tap();await saved(p);await expect(p.locator('[data-action="m-begin"]')).toBeVisible();expect((await read()).adventure.active.phase).toBe('lesson');await expect(p.locator('.feedback').last()).toContainText('example');
- await p.locator('[data-action="m-begin"]').tap();await p.locator('[data-action="m-worked"]').tap();await saved(p);expect((await read()).adventure.active.phase).toBe('lesson');expect((await read()).adventure.active.assisted).toBe(true);await bounds(p);
+ const{page:p,key,read}=camp;await start(p,key,'number','curr-written_methods');await p.locator('[data-action="m-begin"]').tap();await p.locator('[data-c8-input]').fill('wrong');await saved(p);await p.locator('[data-action="m-submit"]').tap();await saved(p);await expect(p.locator('[data-action="m-begin"]')).toHaveCount(0);expect((await read()).adventure.active.phase).toBe('play');await expect(p.locator('.feedback').last()).toContainText((await read()).adventure.active.tasks[0].teach);
+ await p.locator('[data-action="m-worked"]').tap();await saved(p);expect((await read()).adventure.active.phase).toBe('lesson');expect((await read()).adventure.active.assisted).toBe(true);await bounds(p);
 });
 test('Coordinate activity has real axes, no visible coordinate-pair answers, and keyboard movement alternatives',async({camp})=>{
  const{page:p,key,read}=camp;await start(p,key,'algebra','curr-algebra_graphs');await p.evaluate(key=>{const s=JSON.parse(localStorage.getItem(key));s.adventure.active.i=4;localStorage.setItem(key,JSON.stringify(s));},key);await p.reload();await open(p);await p.locator('[data-action="m-begin"]').tap();await expect(p.locator('.c8-graph')).toBeVisible();await expect(p.locator('.c8-graph text')).toHaveCount(24);expect(await p.locator('.c8-graph').textContent()).not.toMatch(/\(-?\d,\s*-?\d\)/);
