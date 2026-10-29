@@ -22,6 +22,10 @@ A selectable girl explorer uses a new original transparent sprite in the approve
 
 No production learner records or services are used in these reviews. Production release uses the existing protected PR and Git-connected Cloudflare process only; no hosting/access/backend settings are changed.
 
+## CI history dependency
+
+The first PR #8 run passed the save/recovery, production/guide, 60 starting-profile and 16 family/character cases, then failed before comparing avatar pixels: the default depth-one checkout did not contain approved historical source commit `8023a7ce5130b96bb67d163e7701cb6ecf238b9d`. The workflow now checks out history so the existing strict preservation comparison can execute. Its assertions are unchanged, and its report/traces are included in CI artifacts. The current playable package and screenshots are unaffected by this CI-only correction.
+
 ## Strict pixel-check diagnosis
 
 The original viewport screenshot comparison failed locally for several worlds after the profile-centering layout correction. In the Algebra Peaks iPad portrait case, the 740 × 493 screenshot differed along one output-pixel column (129 changed pixels, maximum channel difference 7), while source, natural dimensions, document rectangle, filter, opacity and transform were identical. The CSS image rectangle was fractional (740 × 492.65625 at y=427.078125). Pinning the scroll origin alone did not remove the seam. Town/Geometry captures showed similarly sparse differences. The decoded source/layer did not change; the old viewport capture included unstable resampling/compositing of the image.

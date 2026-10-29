@@ -17,6 +17,9 @@ jobs:
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The avatar preservation test renders the approved historical source.
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -44,6 +47,8 @@ jobs:
         with:
           name: ipad-save-recovery-evidence
           path: |
+            work/family-release/avatar-preservation.json
+            test-results/avatar-fit/
             work/family-release/browser-results.json
             test-results/family-release/
             work/starting-profile/browser-results.json
