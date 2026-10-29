@@ -1,3 +1,9 @@
+# Working local setup clarification — 29 October 2026
+
+The one-parent/one-child identity bridge and real local Supabase setup are now implemented on the feature branch. See [working setup, exact staging steps and secret names](SINGLE-CHILD-SETUP.md). Real Auth/email/JWT/PostgREST checks are local, not hosted. The earlier foundation-only identity blocker below is historical; production and hosted staging remain unchanged/unverified. No release PR, merge, deployment or production migration is authorised.
+
+---
+
 # One-parent, one-child readiness — 29 October 2026
 
 ## Current architecture and evidence

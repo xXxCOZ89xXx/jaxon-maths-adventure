@@ -50,7 +50,10 @@
     "test:guided-preview": "npm run build:guided-preview && playwright test -c playwright.guided-preview.config.cjs",
     "test:starting-profile": "node tests/starting-profile.cjs && node tests/prepare-v3.cjs && node tests/prepare-v52-production.cjs && playwright test -c playwright.starting-profile.config.cjs",
     "test:owner-review": "node tests/owner-review.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.owner-review.config.cjs",
-    "test:single-child": "node tests/single-child-unit.cjs && node tests/single-child-security.cjs && playwright test -c playwright.single-child.config.cjs"
+    "test:single-child": "node tests/single-child-unit.cjs && node tests/single-child-security.cjs && playwright test -c playwright.single-child.config.cjs",
+    "build:single-child": "node scripts/single-child/build.cjs",
+    "test:single-child-bridge": "node tests/single-child-bridge.cjs",
+    "test:single-child-local": "node tests/single-child-live-local.cjs && playwright test -c playwright.single-child-local.config.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

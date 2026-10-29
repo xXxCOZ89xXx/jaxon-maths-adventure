@@ -24,5 +24,11 @@ const assert=require('node:assert/strict'),{create}=require('../server/pairing-g
  let resolve;const pending=Setup.create({auth,request:()=>new Promise(r=>resolve=r)});const turn=pending.parent('read');await new Promise(r=>setTimeout(r,0));pending.invalidate();resolve({});await assert.rejects(()=>turn,/Account changed/);
  const fs=require('node:fs'),vm=require('node:vm'),source=fs.readFileSync('v3/staging-app.js','utf8');
  let deliver;const ctx={unlock:'old',identity:{user:'fictional'},active:()=>!!ctx.unlock,client:{rpc:()=>new Promise(r=>deliver=r)}};vm.createContext(ctx);vm.runInContext(source.slice(source.indexOf('async function rpc('),source.indexOf('function authForm()'))+';globalThis.testRpc=rpc;',ctx);const late=ctx.testRpc('read');ctx.unlock=null;deliver({data:{progress:{private:true}}});await assert.rejects(()=>late,/Account changed/);
- console.log('PASS gateway origins, payloads, trusted throttling, secure cookies, no game bridge, redacted errors, mandatory email verification and stale-response isolation');
+ const Server=require('../server/single-child-server.cjs');
+ assert.throws(()=>Server.publicConfiguration({V13_STAGING_PROJECT_REF:'mbdelspbjusarbwlltol'}));
+ assert.throws(()=>Server.configuration({}));
+ result={revision:1,progress:{fictional:true}};
+ const game=await req('/setup/game',{operation:'read',args:{}},{cookie:'__Host-jaxon-grant='+'c'.repeat(64)});assert.equal(game.status,200);assert.equal(calls.at(-1)[0],'v13_device_request');assert.equal(calls.at(-1)[1].p_grant,'c'.repeat(64));
+ assert.equal((await req('/setup/game',{operation:'read',args:{},child:'forged'},{cookie:'__Host-jaxon-grant='+'c'.repeat(64)})).status,401);
+ console.log('PASS gateway origins, payloads, trusted throttling, secure cookies, private game bridge, production-config refusal, redacted errors, mandatory email verification and stale-response isolation');
 })().catch(e=>{console.error(e);process.exitCode=1});

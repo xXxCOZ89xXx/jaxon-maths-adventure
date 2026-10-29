@@ -1,0 +1,7 @@
+// Loopback forwarding for the dedicated INTERNAL Docker fixture network.
+// Docker's internal network does not publish ports; this never forwards an external host.
+const http=require('node:http'),{execFileSync}=require('node:child_process');const env={...process.env};for(const k of ['DOCKER_HOST','DOCKER_CONTEXT','DOCKER_TLS','DOCKER_TLS_VERIFY','DOCKER_CERT_PATH'])delete env[k];
+for(const [name,port,inside]of [['auth',54321,9999],['rest',54322,3000],['mail',54324,8025]]){
+ const address=()=>{const ip=execFileSync('docker',['--host=unix:///var/run/docker.sock','inspect','--format','{{(index .NetworkSettings.Networks "jaxon-local-supabase").IPAddress}}','jaxon-local-'+name],{env,encoding:'utf8'}).trim();if(!/^172\.(1[6-9]|2\d|3[01])\.\d+\.\d+$/.test(ip))throw Error('Expected local Docker fixture address');return ip;};
+ http.createServer(async(req,res)=>{try{const ip=address();const parts=[];for await(const c of req)parts.push(c);const r=await fetch(`http://${ip}:${inside}`+req.url,{method:req.method,redirect:'manual',headers:{...req.headers,host:ip+':'+inside},...(!['GET','HEAD'].includes(req.method)?{body:Buffer.concat(parts)}:{})});res.writeHead(r.status,{...Object.fromEntries([...r.headers].filter(([k])=>!['content-encoding','content-length','transfer-encoding','connection'].includes(k))),'x-jaxon-local-fixture':'true'});res.end(Buffer.from(await r.arrayBuffer()));}catch{res.writeHead(503);res.end('Local fixture unavailable');}}).listen(port,'127.0.0.1');
+}

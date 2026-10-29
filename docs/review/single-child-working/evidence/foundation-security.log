@@ -1,0 +1,10 @@
+PASS email verification, non-anonymous identity, recent password and parent role are enforced in SQL
+PASS all new tables have RLS, deny clients and service direct access; functions have narrow grants
+PASS code is server-random 128-bit, hashed only, short lived, child bound and replaced safely
+PASS racing pair requests allow exactly one use; raw device tokens never persist
+PASS expired pairing, guess throttling, generation throttling and cancellation fail safely
+PASS persistent child PIN limits cannot be avoided with a new device bucket; unlock and scope bind family
+PASS wrong parent cannot revoke device; reset revokes grants/codes, preserving profile and legacy progress
+PASS lost device revoked by verified parent; replacement rejoins same child without child email
+PASS existing Auth, family IDs and exact saved progress untouched; no new game grants or anonymous users
+9 foundation security groups passed. Hosted verification and game identity bridge NOT established.

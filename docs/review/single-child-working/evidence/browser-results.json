@@ -1,0 +1,427 @@
+{
+  "config": {
+    "argv": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "/workspace/jaxon-maths-adventure/node_modules/.bin/playwright",
+      "test",
+      "-c",
+      "playwright.single-child-local.config.cjs"
+    ],
+    "configFile": "/workspace/jaxon-maths-adventure/playwright.single-child-local.config.cjs",
+    "rootDir": "/workspace/jaxon-maths-adventure/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results/single-child-local",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "desktop-chromium",
+        "name": "desktop-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/single-child-local\\.spec\\.cjs/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results/single-child-local",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "ipad-portrait-chromium",
+        "name": "ipad-portrait-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/single-child-local\\.spec\\.cjs/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results/single-child-local",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "ipad-landscape-chromium",
+        "name": "ipad-landscape-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/single-child-local\\.spec\\.cjs/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results/single-child-local",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "small-touch",
+        "name": "small-touch",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/single-child-local\\.spec\\.cjs/"
+        ],
+        "timeout": 120000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results/single-child-local",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "desktop-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 120000,
+        "use": {
+          "baseURL": "https://127.0.0.1:4443",
+          "actionTimeout": 15000,
+          "trace": "off",
+          "screenshot": "off",
+          "ignoreHTTPSErrors": true,
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 1440,
+            "height": 1000
+          }
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "desktop-chromium"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results/single-child-local",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "ipad-portrait-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 120000,
+        "use": {
+          "baseURL": "https://127.0.0.1:4443",
+          "actionTimeout": 15000,
+          "trace": "off",
+          "screenshot": "off",
+          "ignoreHTTPSErrors": true,
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 820,
+            "height": 1180
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "ipad-portrait-chromium"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results/single-child-local",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "ipad-landscape-chromium",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 120000,
+        "use": {
+          "baseURL": "https://127.0.0.1:4443",
+          "actionTimeout": 15000,
+          "trace": "off",
+          "screenshot": "off",
+          "ignoreHTTPSErrors": true,
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 1180,
+            "height": 820
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "ipad-landscape-chromium"
+      },
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "/workspace/jaxon-maths-adventure/test-results/single-child-local",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "small-touch",
+        "testDir": "/workspace/jaxon-maths-adventure/tests",
+        "snapshotDir": "/workspace/jaxon-maths-adventure/tests",
+        "testIgnore": [],
+        "testMatch": {},
+        "timeout": 120000,
+        "use": {
+          "baseURL": "https://127.0.0.1:4443",
+          "actionTimeout": 15000,
+          "trace": "off",
+          "screenshot": "off",
+          "ignoreHTTPSErrors": true,
+          "browserName": "chromium",
+          "launchOptions": {
+            "executablePath": "/usr/bin/chromium",
+            "args": [
+              "--no-sandbox"
+            ]
+          },
+          "viewport": {
+            "width": 390,
+            "height": 844
+          },
+          "isMobile": true,
+          "hasTouch": true
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": "small-touch"
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "work/single-child-integration/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "single-child-local.spec.cjs",
+      "file": "single-child-local.spec.cjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "real local email → nickname → pair → learner PIN → exact game resume → parent reset/revoke/replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop-chromium",
+              "projectName": "desktop-chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12635,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T13:40:57.638Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f521941e84fef19c9d0-f61bf62223a37afec38a",
+          "file": "single-child-local.spec.cjs",
+          "line": 10,
+          "column": 1
+        },
+        {
+          "title": "real local email → nickname → pair → learner PIN → exact game resume → parent reset/revoke/replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-portrait-chromium",
+              "projectName": "ipad-portrait-chromium",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12363,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T13:41:11.095Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f521941e84fef19c9d0-ad558b6c51f862bc2ddc",
+          "file": "single-child-local.spec.cjs",
+          "line": 10,
+          "column": 1
+        },
+        {
+          "title": "real local email → nickname → pair → learner PIN → exact game resume → parent reset/revoke/replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ipad-landscape-chromium",
+              "projectName": "ipad-landscape-chromium",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12505,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T13:41:24.317Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f521941e84fef19c9d0-2486239d55e12851485c",
+          "file": "single-child-local.spec.cjs",
+          "line": 10,
+          "column": 1
+        },
+        {
+          "title": "real local email → nickname → pair → learner PIN → exact game resume → parent reset/revoke/replacement",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "small-touch",
+              "projectName": "small-touch",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13494,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-29T13:41:37.665Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "1f521941e84fef19c9d0-f9a6764b06781fa578b5",
+          "file": "single-child-local.spec.cjs",
+          "line": 10,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-29T13:40:56.933Z",
+    "duration": 54585.255000000005,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

@@ -1,3 +1,7 @@
+# Local identity bridge update — 29 October 2026
+
+Email-free child identities and paired-device access now work in the isolated local Supabase review, using a private canonical registry and the shared game transaction core. See [current implementation and staging gates](SINGLE-CHILD-SETUP.md). Earlier statements below that the bridge is still unimplemented describe the prior foundation checkpoint. No hosted migration/deployment or real records were used. Retention/export/deletion and wider-family privacy decisions below remain outstanding.
+
 # Child privacy and security readiness
 
 29 October 2026. Engineering review for **one parent and one child**, not a legal-compliance statement or a DPIA. No advertising, analytics, social features, public profiles or location tracking were introduced. No real records were inspected.

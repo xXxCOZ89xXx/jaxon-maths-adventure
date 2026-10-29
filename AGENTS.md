@@ -1,5 +1,9 @@
 # Codex build instructions — Jaxon's Maths Adventure V3
 
+## Working local single-child integration — 29 October 2026
+
+The latest owner instruction authorises the real canonical child identity bridge, parent signup/verification, nickname-only profile, secure pairing into the existing learner flow, parent PIN reset/code reissue/device revocation, local Supabase tests with fictional accounts, and commit/push on `codex/single-child-readiness` from `b7fb87d`. New setup may run in the isolated local/staging review build; do not keep the old foundation-only block as a reason to stop local implementation. No fake child emails, permanent anonymous Auth, multi-child support, production credentials/data/migration/settings, release PR, merge or deployment. Hosted staging access is unavailable; document exact setup and secret names without displaying values. See `docs/SINGLE-CHILD-SETUP.md`. Preserve existing UUIDs, progress, queues, wallet and independent evidence.
+
 ## Single-child readiness — 29 October 2026
 
 The current owner request authorises a new feature branch from verified release `e3550ec`, one-parent/one-child account/pairing foundations, fictional local security/accessibility QA, review package and commit/push only. No multi-child support, release PR, merge, deploy, remote migration, production settings or real learner/service access. Current Auth-child foreign keys require a separately reviewed identity bridge: keep new setup inactive, never use fake child email, parent-session sharing or recoverability-unsafe anonymous Auth. See `docs/SINGLE-CHILD-READINESS.md`. This hold supersedes the earlier release authorisation below for this update.

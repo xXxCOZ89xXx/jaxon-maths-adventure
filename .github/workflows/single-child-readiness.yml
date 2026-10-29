@@ -36,3 +36,39 @@ jobs:
             test-results/single-child/
             docs/review/single-child-readiness/
           retention-days: 14
+  real-local-supabase:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - name: Pull local fixture images only
+        run: |
+          docker pull postgres:17-alpine
+          docker pull supabase/gotrue:v2.197.0
+          docker pull postgrest/postgrest:v14.18
+          docker pull axllent/mailpit:v1.27.1
+      - name: Real local Auth, PostgREST, captured mail and reviewed bridge
+        run: |
+          mkdir -p work/single-child-integration
+          node scripts/single-child/local-stack.cjs
+          node scripts/single-child/build.cjs
+          openssl req -x509 -newkey rsa:2048 -nodes -keyout work/single-child-integration/localhost-key.pem -out work/single-child-integration/localhost-cert.pem -days 7 -subj '/CN=127.0.0.1' -addext 'subjectAltName=IP:127.0.0.1' >work/single-child-integration/cert.log 2>&1
+          node server/single-child-server.cjs --local >work/single-child-integration/server.log 2>&1 &
+          node tests/single-child-bridge.cjs
+          node tests/single-child-live-local.cjs
+          npx playwright test -c playwright.single-child-local.config.cjs
+          node scripts/scan-readiness-secrets.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: single-child-real-local-supabase-evidence
+          path: |
+            work/single-child-integration/browser-results.json
+            docs/review/single-child-working/
+          retention-days: 14

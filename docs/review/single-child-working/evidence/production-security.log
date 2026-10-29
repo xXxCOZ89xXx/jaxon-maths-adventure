@@ -1,0 +1,28 @@
+
+> test:production-security
+> node tests/v52-production-postgres.cjs
+
+PASS targeted release preflight executes as a read-only catalog query
+PASS installation refuses missing review; production baseline grants and identity generation reconstructed
+PASS inactive additive backend preserves legacy/family records and exposes no protected operations
+PASS bad review rolls back opening writes atomically; admin functions unavailable to clients
+PASS activation copies reviewed rewards once, preserves history and does not mint JSON learning credit
+PASS cutover revokes TRUNCATE/legacy RPC access; database guard blocks privileged old writers too
+PASS PIN enrollment requires fresh nonfuture password AMR and role-specific digits
+PASS incorrect PIN counters persist and cooldown cannot be bypassed by a new request
+PASS all protected tables reject clients despite hostile default grants; cross-user tokens denied
+PASS role and argument checks prevent parent saves, learner awards and caller-selected child/wallet
+PASS CAS saves and immutable retries preserve complete drafts while ignoring client coin authority
+PASS purchases use server prices, unique ownership and stored exact-once results
+PASS nonfinite values cannot manipulate rewards or active-time credit
+PASS server clock caps credit across concurrent devices and repeated requests
+PASS reviewed opening entitlement redeems without fabricated learning; offline confirmation is parent-only and once
+PASS PIN recovery, explicit lock and expiration revoke server capabilities
+PASS rollback freezes new backend, preserves all new records and restores safe legacy access
+PASS pre-migration fictional schema/data backup restores into a separate disposable database
+18 production migration/security rehearsal suites passed. Network-disabled PostgreSQL; fictional Auth claims, no production access.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
