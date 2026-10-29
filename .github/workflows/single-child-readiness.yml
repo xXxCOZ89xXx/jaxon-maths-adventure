@@ -1,0 +1,38 @@
+name: Single-child readiness foundations
+on:
+  push:
+    branches: [codex/single-child-readiness]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fictional-readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: docker pull postgres:17-alpine
+      - name: Fictional logic and existing production security compatibility
+        run: |
+          npm test
+          npm run test:production-security
+          npm run test:production-build
+      - name: New pairing, revocation, accessibility and production-entry checks
+        run: npm run test:single-child
+      - name: Bounded source and built-browser secret scan
+        run: node scripts/scan-readiness-secrets.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: single-child-readiness-evidence
+          path: |
+            work/single-child-readiness/browser-results.json
+            test-results/single-child/
+            docs/review/single-child-readiness/
+          retention-days: 14

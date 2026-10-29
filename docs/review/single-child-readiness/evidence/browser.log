@@ -1,0 +1,185 @@
+Built production-test-dist with fictional public key; browser tests deny unhandled remote traffic.
+
+Running 12 tests using 1 worker
+
+(node:273633) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop-chromium] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (6.6s)
+  ✓   2 [desktop-chromium] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (3.0s)
+  ✘   3 [desktop-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (2.4s)
+(node:274036) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   4 [ipad-portrait-chromium] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (5.8s)
+  ✓   5 [ipad-portrait-chromium] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (3.4s)
+  ✘   6 [ipad-portrait-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (2.3s)
+(node:274432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 [ipad-landscape-chromium] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (7.2s)
+  ✓   8 [ipad-landscape-chromium] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (4.4s)
+  ✘   9 [ipad-landscape-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (3.1s)
+(node:276802) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 [small-touch] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (7.7s)
+  ✓  11 [small-touch] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (5.2s)
+  ✘  12 [small-touch] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (3.1s)
+
+
+  1) [desktop-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('status')
+    Expected pattern: /Saved|synced/
+    Error: strict mode violation: getByRole('status') resolved to 2 elements:
+        1) <div role="status" id="coin-readout" aria-live="polite" class="coin-readout" aria-label="Learning coin balance 200">200 coins</div> aka getByRole('status', { name: 'Learning coin balance' })
+        2) <div id="status" role="status" aria-live="polite" class="save-status">Saved on this device · waiting for sync</div> aka getByText('Saved on this device ·')
+
+    Call log:
+      - Expect "toContainText" getByRole('status') with timeout 5000ms
+      - waiting for getByRole('status')
+
+
+      21 | test('actual production entry: protected parent evidence and saved status remain usable; setup stays absent',async({page:p},info)=>{
+      22 |  const s=fixture();s.progress=F.fresh();const errors=await mock(p,s,{projectRef:B.production.projectRef,projectName:B.production.projectName,identity:{contractVersion:1,ready:true}});await login(p);await expect(p.locator('#main h1')).toHaveText('Base Camp');await expect(p.locator('.starting-parent')).toHaveCount(0);await expect(p.locator('script[src*="family-setup"]')).toHaveCount(0);await shot(p,info,'production-base-camp');
+    > 23 |  await p.getByRole('button',{name:'Customise explorer',exact:true}).click();await p.locator('[data-character-choice]').selectOption('girl');await expect(p.getByRole('status')).toContainText(/Saved|synced/);await p.reload();await expect(p.locator('[data-character-choice]')).toHaveValue('girl');expect(errors).toEqual([]);
+         |                                                                                                                                                                                 ^
+      24 | });
+      25 |
+        at /workspace/jaxon-maths-adventure/tests/single-child.spec.cjs:23:177
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-desktop-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-desktop-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-desktop-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-desktop-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [ipad-portrait-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('status')
+    Expected pattern: /Saved|synced/
+    Error: strict mode violation: getByRole('status') resolved to 2 elements:
+        1) <div role="status" id="coin-readout" aria-live="polite" class="coin-readout" aria-label="Learning coin balance 200">200 coins</div> aka getByRole('status', { name: 'Learning coin balance' })
+        2) <div id="status" role="status" aria-live="polite" class="save-status">Saved on this device · waiting for sync</div> aka getByText('Saved on this device ·')
+
+    Call log:
+      - Expect "toContainText" getByRole('status') with timeout 5000ms
+      - waiting for getByRole('status')
+
+
+      21 | test('actual production entry: protected parent evidence and saved status remain usable; setup stays absent',async({page:p},info)=>{
+      22 |  const s=fixture();s.progress=F.fresh();const errors=await mock(p,s,{projectRef:B.production.projectRef,projectName:B.production.projectName,identity:{contractVersion:1,ready:true}});await login(p);await expect(p.locator('#main h1')).toHaveText('Base Camp');await expect(p.locator('.starting-parent')).toHaveCount(0);await expect(p.locator('script[src*="family-setup"]')).toHaveCount(0);await shot(p,info,'production-base-camp');
+    > 23 |  await p.getByRole('button',{name:'Customise explorer',exact:true}).click();await p.locator('[data-character-choice]').selectOption('girl');await expect(p.getByRole('status')).toContainText(/Saved|synced/);await p.reload();await expect(p.locator('[data-character-choice]')).toHaveValue('girl');expect(errors).toEqual([]);
+         |                                                                                                                                                                                 ^
+      24 | });
+      25 |
+        at /workspace/jaxon-maths-adventure/tests/single-child.spec.cjs:23:177
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-ipad-portrait-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [ipad-landscape-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('status')
+    Expected pattern: /Saved|synced/
+    Error: strict mode violation: getByRole('status') resolved to 2 elements:
+        1) <div role="status" id="coin-readout" aria-live="polite" class="coin-readout" aria-label="Learning coin balance 200">200 coins</div> aka getByRole('status', { name: 'Learning coin balance' })
+        2) <div id="status" role="status" aria-live="polite" class="save-status">Saved on this device · waiting for sync</div> aka getByText('Saved on this device ·')
+
+    Call log:
+      - Expect "toContainText" getByRole('status') with timeout 5000ms
+      - waiting for getByRole('status')
+
+
+      21 | test('actual production entry: protected parent evidence and saved status remain usable; setup stays absent',async({page:p},info)=>{
+      22 |  const s=fixture();s.progress=F.fresh();const errors=await mock(p,s,{projectRef:B.production.projectRef,projectName:B.production.projectName,identity:{contractVersion:1,ready:true}});await login(p);await expect(p.locator('#main h1')).toHaveText('Base Camp');await expect(p.locator('.starting-parent')).toHaveCount(0);await expect(p.locator('script[src*="family-setup"]')).toHaveCount(0);await shot(p,info,'production-base-camp');
+    > 23 |  await p.getByRole('button',{name:'Customise explorer',exact:true}).click();await p.locator('[data-character-choice]').selectOption('girl');await expect(p.getByRole('status')).toContainText(/Saved|synced/);await p.reload();await expect(p.locator('[data-character-choice]')).toHaveValue('girl');expect(errors).toEqual([]);
+         |                                                                                                                                                                                 ^
+      24 | });
+      25 |
+        at /workspace/jaxon-maths-adventure/tests/single-child.spec.cjs:23:177
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-ipad-landscape-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [small-touch] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('status')
+    Expected pattern: /Saved|synced/
+    Error: strict mode violation: getByRole('status') resolved to 2 elements:
+        1) <div role="status" id="coin-readout" aria-live="polite" class="coin-readout" aria-label="Learning coin balance 200">200 coins</div> aka getByRole('status', { name: 'Learning coin balance' })
+        2) <div id="status" role="status" aria-live="polite" class="save-status">Saved on this device · waiting for sync</div> aka getByText('Saved on this device ·')
+
+    Call log:
+      - Expect "toContainText" getByRole('status') with timeout 5000ms
+      - waiting for getByRole('status')
+
+
+      21 | test('actual production entry: protected parent evidence and saved status remain usable; setup stays absent',async({page:p},info)=>{
+      22 |  const s=fixture();s.progress=F.fresh();const errors=await mock(p,s,{projectRef:B.production.projectRef,projectName:B.production.projectName,identity:{contractVersion:1,ready:true}});await login(p);await expect(p.locator('#main h1')).toHaveText('Base Camp');await expect(p.locator('.starting-parent')).toHaveCount(0);await expect(p.locator('script[src*="family-setup"]')).toHaveCount(0);await shot(p,info,'production-base-camp');
+    > 23 |  await p.getByRole('button',{name:'Customise explorer',exact:true}).click();await p.locator('[data-character-choice]').selectOption('girl');await expect(p.getByRole('status')).toContainText(/Saved|synced/);await p.reload();await expect(p.locator('[data-character-choice]')).toHaveValue('girl');expect(errors).toEqual([]);
+         |                                                                                                                                                                                 ^
+      24 | });
+      25 |
+        at /workspace/jaxon-maths-adventure/tests/single-child.spec.cjs:23:177
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-small-touch/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-small-touch/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-small-touch/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/single-child/single-child-actual-produc-c3420-n-usable-setup-stays-absent-small-touch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [desktop-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent 
+    [ipad-portrait-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent 
+    [ipad-landscape-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent 
+    [small-touch] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent 
+  8 passed (1.0m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

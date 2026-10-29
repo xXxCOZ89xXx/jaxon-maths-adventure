@@ -1,5 +1,9 @@
 # Codex build instructions — Jaxon's Maths Adventure V3
 
+## Single-child readiness — 29 October 2026
+
+The current owner request authorises a new feature branch from verified release `e3550ec`, one-parent/one-child account/pairing foundations, fictional local security/accessibility QA, review package and commit/push only. No multi-child support, release PR, merge, deploy, remote migration, production settings or real learner/service access. Current Auth-child foreign keys require a separately reviewed identity bridge: keep new setup inactive, never use fake child email, parent-session sharing or recoverability-unsafe anonymous Auth. See `docs/SINGLE-CHILD-READINESS.md`. This hold supersedes the earlier release authorisation below for this update.
+
 ## Owner release authorisation — 29 October 2026
 
 The owner’s pasted release request supersedes the earlier preview-only holds for `codex/guided-progression-recovery`. Recovered assessment/pause work is preserved at `cdd0116` (from `bc4a601`). Complete the nine-area starting profile, parent evidence view, reliable activity-local resume, existing connected Town journey, centred profile portrait and additional girl character using the approved asset/wardrobe system. Keep the original boy and world backgrounds, approved guides, retired-item policy, save IDs, coins and independent mastery semantics. Run fictional/intercepted tests and normal required CI; publish only through a PR to `release/ipad`, never by direct release push or protection bypass, and verify the exact merge commit’s existing Git-connected Cloudflare deployment. No learner-record/service access, accounts, Supabase migrations, analytics, hosting/access settings or unrelated production configuration changes. Physical iPad Safari remains untested. Document broader family-account gaps rather than inventing child switching.

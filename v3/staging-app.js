@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-// Only included by the explicit staging builder. Test Camp never imports this file.
+// Connected UI shared by the staging and production builders. Offline Camp does not import it.
 const $ = (id) => document.getElementById(id),
   esc = window.V3Art.esc,
   E = window.V3Engine,
@@ -24,6 +24,13 @@ const main = $("main"),
 function message(s) {
   status.textContent = s;
 }
+function safeActionError(err) {
+  if (Number(err?.status) === 429) return "Too many attempts. Please wait before trying again.";
+  if (err?.message?.startsWith('Sign-in failed.')) return "Sign-in failed. Check the account details.";
+  if (err?.message?.startsWith('PIN was not recognised')) return "PIN was not recognised. Try again or ask your parent for help.";
+  if (err?.message?.includes('five minutes')) return "Too many PIN attempts. Wait five minutes before trying again.";
+  return "This action could not be confirmed. Check your connection and try again. Your saved work is preserved.";
+}
 function panel(title, body) {
   main.innerHTML = `<section class="panel auth-panel"><h1>${esc(title)}</h1>${body}</section>`;
   main.focus();
@@ -46,12 +53,12 @@ function form(title, body, action) {
     e.preventDefault();
     if (busy) return;
     busy = true;
-    const b = e.submitter;
+    const b = e.submitter || $("cloud-form").querySelector('button[type="submit"],button.primary');
     b.disabled = true;
     try {
       await action();
     } catch (err) {
-      message(err.message);
+      message(safeActionError(err));
     } finally {
       busy = false;
       if (b.isConnected) b.disabled = false;
@@ -60,11 +67,15 @@ function form(title, body, action) {
 }
 async function rpc(op, args = {}) {
   if (!active()) throw Error("Unlock your account to continue");
+  const token = unlock, who = identity;
   const { data, error } = await client.rpc("v3_request", {
     p_token: unlock,
     p_operation: op,
     p_args: args,
   });
+  // A late response must not reopen data after lock, expiry or an account change.
+  if (!active() || unlock !== token || identity !== who)
+    throw Error("Account changed. Unlock again to continue.");
   if (error) throw error;
   if (data?.error) throw Error(data.error);
   return data;

@@ -1,0 +1,41 @@
+Built production-test-dist with fictional public key; browser tests deny unhandled remote traffic.
+
+Running 24 tests using 1 worker
+
+(node:287462) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop] › tests/v52-production.spec.cjs:5:1 › old bookmarked game route redirects to the protected production home (1.6s)
+  ✓   2 [desktop] › tests/v52-production.spec.cjs:22:1 › unready or wrong-contract backend cannot display login (1.2s)
+  ✓   3 [desktop] › tests/v52-production.spec.cjs:29:1 › normal learner login, wrong PIN, save response loss, resume and lock (5.0s)
+  ✓   4 [desktop] › tests/v52-production.spec.cjs:55:1 › explicit first server PIN enrollment follows password sign-in (1.5s)
+  ✓   5 [desktop] › tests/v52-production.spec.cjs:62:1 › parent history, reviewed opening entitlement and server reward action remain separate (1.5s)
+  ✓   6 [desktop] › tests/v52-production.spec.cjs:74:1 › password recovery uses SDK PKCE and the intended production application redirect (1.3s)
+  ✓   7 [desktop] › tests/v52-production.spec.cjs:96:1 › fresh release ignores previous game caches and queues, preserves them privately, and resumes only new progress (3.5s)
+  ✓   8 [desktop] › tests/v52-production.spec.cjs:117:1 › fresh parent dashboard starts at zero and ignores a previous release reward intent (1.6s)
+(node:289094) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [ipad-portrait] › tests/v52-production.spec.cjs:5:1 › old bookmarked game route redirects to the protected production home (1.8s)
+  ✓  10 [ipad-portrait] › tests/v52-production.spec.cjs:22:1 › unready or wrong-contract backend cannot display login (1.1s)
+  ✓  11 [ipad-portrait] › tests/v52-production.spec.cjs:29:1 › normal learner login, wrong PIN, save response loss, resume and lock (4.2s)
+  ✓  12 [ipad-portrait] › tests/v52-production.spec.cjs:55:1 › explicit first server PIN enrollment follows password sign-in (1.5s)
+  ✓  13 [ipad-portrait] › tests/v52-production.spec.cjs:62:1 › parent history, reviewed opening entitlement and server reward action remain separate (1.5s)
+  ✓  14 [ipad-portrait] › tests/v52-production.spec.cjs:74:1 › password recovery uses SDK PKCE and the intended production application redirect (1.2s)
+  ✓  15 [ipad-portrait] › tests/v52-production.spec.cjs:96:1 › fresh release ignores previous game caches and queues, preserves them privately, and resumes only new progress (3.1s)
+  ✓  16 [ipad-portrait] › tests/v52-production.spec.cjs:117:1 › fresh parent dashboard starts at zero and ignores a previous release reward intent (1.7s)
+(node:290715) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  17 [ipad-landscape] › tests/v52-production.spec.cjs:5:1 › old bookmarked game route redirects to the protected production home (1.8s)
+  ✓  18 [ipad-landscape] › tests/v52-production.spec.cjs:22:1 › unready or wrong-contract backend cannot display login (1.2s)
+  ✓  19 [ipad-landscape] › tests/v52-production.spec.cjs:29:1 › normal learner login, wrong PIN, save response loss, resume and lock (4.1s)
+  ✓  20 [ipad-landscape] › tests/v52-production.spec.cjs:55:1 › explicit first server PIN enrollment follows password sign-in (1.4s)
+  ✓  21 [ipad-landscape] › tests/v52-production.spec.cjs:62:1 › parent history, reviewed opening entitlement and server reward action remain separate (1.3s)
+  ✓  22 [ipad-landscape] › tests/v52-production.spec.cjs:74:1 › password recovery uses SDK PKCE and the intended production application redirect (900ms)
+  ✓  23 [ipad-landscape] › tests/v52-production.spec.cjs:96:1 › fresh release ignores previous game caches and queues, preserves them privately, and resumes only new progress (3.3s)
+  ✓  24 [ipad-landscape] › tests/v52-production.spec.cjs:117:1 › fresh parent dashboard starts at zero and ignores a previous release reward intent (1.4s)
+
+  24 passed (52.4s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

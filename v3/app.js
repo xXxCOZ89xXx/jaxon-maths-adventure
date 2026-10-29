@@ -80,7 +80,7 @@
       coinFeedback();
       status(
         cloud
-          ? "Saved on this device · waiting for sync"
+          ? "Saved on this device · cloud confirmation pending. Keep this browser data."
           : "Saved on this device · offline demo",
       );
     } catch {

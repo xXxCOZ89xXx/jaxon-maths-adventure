@@ -1,3 +1,11 @@
+# Current architecture clarification — 29 October 2026
+
+The current live merge is `e3550ec202d30c407b1d5653f06c081eba014938`. The production builder bundles `v3/staging-app.js`; only the separate `production-cloud.js` module is preparation-only. Deployment success is verified through GitHub, not hosted API/grant/Auth acceptance. New one-parent/one-child setup is an inactive local/staging foundation; no production migration or setup enablement is authorised in this update. See [current architecture, integration blockers and tests](SINGLE-CHILD-READINESS.md) and [child privacy/security review](CHILD-PRIVACY-SECURITY-READINESS.md). Current credentials identify the separate staging project, but its host is excluded by this session's enforced network policy. No real learner/service calls were made.
+
+The dated material below is historical evidence. Earlier PR/release holds, staging URLs, provider setup and reported results must not be treated as freshly verified configuration or a present release decision.
+
+---
+
 # V3 reliability and security review — 20 October 2026
 
 Review of the current client, sync adapter, staging SQL and fixture tests. No real passwords/PINs, real learner records, staging account mutations or production requests were used. Owner-reported hosted successes and unverified live boundaries are separated in `V3-OUTSTANDING-ISSUES.md`.

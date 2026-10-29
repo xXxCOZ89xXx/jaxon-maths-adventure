@@ -1,0 +1,35 @@
+Built production-test-dist with fictional public key; browser tests deny unhandled remote traffic.
+
+Running 16 tests using 1 worker
+
+(node:303465) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop-chromium] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (8.7s)
+  ✓   2 [desktop-chromium] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (4.3s)
+  ✓   3 [desktop-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (3.1s)
+  ✓   4 [desktop-chromium] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (3.0s)
+(node:304297) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 [ipad-portrait-chromium] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (7.1s)
+  ✓   6 [ipad-portrait-chromium] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (4.0s)
+  ✓   7 [ipad-portrait-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (3.1s)
+  ✓   8 [ipad-portrait-chromium] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (3.3s)
+(node:305064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [ipad-landscape-chromium] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (7.8s)
+  ✓  10 [ipad-landscape-chromium] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (4.0s)
+  ✓  11 [ipad-landscape-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (3.5s)
+  ✓  12 [ipad-landscape-chromium] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (3.2s)
+(node:306219) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  13 [small-touch] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (7.7s)
+  ✓  14 [small-touch] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (3.7s)
+  ✓  15 [small-touch] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (2.5s)
+  ✓  16 [small-touch] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (3.1s)
+
+  16 passed (1.3m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

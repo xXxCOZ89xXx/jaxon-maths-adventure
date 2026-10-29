@@ -1,0 +1,23 @@
+Built production-test-dist with fictional public key; browser tests deny unhandled remote traffic.
+
+Running 4 tests using 1 worker
+
+(node:301944) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop-chromium] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (4.0s)
+(node:302192) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [ipad-portrait-chromium] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (3.7s)
+(node:302456) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [ipad-landscape-chromium] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (3.7s)
+(node:302751) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 [small-touch] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (4.1s)
+
+  4 passed (19.6s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

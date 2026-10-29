@@ -1,0 +1,2 @@
+const base=require('./playwright.config.cjs');
+module.exports={...base,testMatch:/single-child\.spec\.cjs/,timeout:90000,globalSetup:require.resolve('./tests/prepare-v52-production.cjs'),outputDir:'test-results/single-child',projects:[...base.projects,{name:'small-touch',use:{...base.projects.find(p=>p.name==='ipad-portrait-chromium').use,viewport:{width:390,height:844}}}],reporter:[['list'],['json',{outputFile:'work/single-child-readiness/browser-results.json'}]]};

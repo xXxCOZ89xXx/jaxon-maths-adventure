@@ -1,0 +1,28 @@
+const assert=require('node:assert/strict'),{create}=require('../server/pairing-gateway.cjs'),Setup=require('../v3/family-setup.js');
+(async()=>{
+ const calls=[],secret=Buffer.alloc(32,7);let result={};const gateway=create({origin:'https://family.invalid',rateSecret:secret,parentRpc:async(...a)=>{calls.push(a);return result;},serviceRpc:async(...a)=>{calls.push(a);return result;}});
+ const req=(url,body={},extra={})=>gateway({method:'POST',url,body:JSON.stringify(body),remoteAddress:'192.0.2.1',headers:{origin:'https://family.invalid','content-type':'application/json',...extra}});
+ assert.equal((await req('/setup/pair',{code:'a'.repeat(32)},{origin:'https://evil.invalid'})).status,400);
+ assert.equal((await req('/setup/pair?code=secret',{code:'a'.repeat(32)})).status,400);
+ assert.equal((await req('/setup/pair',{code:'a'.repeat(32),bucket:'chosen'})).status,400);
+ assert.equal((await req('/setup/parent',{action:'read'})).status,401);
+ result={nickname:'Explorer',gameReady:false};assert.equal((await req('/setup/parent',{action:'read'},{authorization:'Bearer '+'a'.repeat(40)})).status,200);assert.equal(calls.at(-1)[0],'a'.repeat(40));
+ result={deviceToken:'b'.repeat(64),device:'fictional-device'};const paired=await req('/setup/pair',{code:'a'.repeat(32)});
+ assert.equal(paired.status,200);assert.equal(paired.body.includes(result.deviceToken),false);assert.equal(paired.headers['Cache-Control'],'no-store');
+ assert.ok(paired.headers['Set-Cookie'][0].includes('HttpOnly; Secure; SameSite=Strict'));
+ assert.match(calls.at(-1)[1].p_bucket,/^[a-f0-9]{64}$/);assert.notEqual(calls.at(-1)[1].p_bucket,'192.0.2.1');
+ result={grantToken:'c'.repeat(64)};const unlocked=await req('/setup/unlock',{pin:'1234'},{cookie:'__Host-jaxon-device='+'b'.repeat(64)});assert.equal(unlocked.status,200);assert.equal(unlocked.body.includes(result.grantToken),false);
+ assert.equal((await req('/setup/read',{})).status,404); // No unreviewed game adapter.
+ assert.equal((await req('/setup/lock',{}, {cookie:'__Host-jaxon-grant='+'c'.repeat(64)})).status,200);
+ const bad=create({origin:'https://family.invalid',rateSecret:secret,parentRpc:async()=>{throw Error('secret SQL credential');},serviceRpc:async()=>{throw Error('secret SQL credential');}});
+ const error=await bad({method:'POST',url:'/setup/pair',headers:{origin:'https://family.invalid','content-type':'application/json'},body:'{"code":"x"}',remoteAddress:'192.0.2.1'});assert.equal(error.body.includes('credential'),false);
+ let user={email_confirmed_at:null},signedOut=0,signUpArgs;
+ const auth={signUp:async a=>{signUpArgs=a;return {data:{session:{}}}},signOut:async()=>{signedOut++},getUser:async()=>({data:{user}})};
+ const client=Setup.create({auth,request:async(path,args)=>({path,args,gameReady:false})});assert.deepEqual(await client.register('parent@fictional.invalid','fictional-password'),{verificationRequired:true});assert.equal(signedOut,1);assert.deepEqual(Object.keys(signUpArgs).sort(),['email','password']);
+ await assert.rejects(()=>client.parent('create',{nickname:'Explorer'}),/Verify/);user={email_confirmed_at:'2026-10-29',is_anonymous:true};await assert.rejects(()=>client.parent('read'),/Verify/);
+ user.is_anonymous=false;assert.equal((await client.parent('read')).path,'/setup/parent');assert.equal((await client.pair('aaaa aaaa aaaa aaaa aaaa aaaa aaaa aaaa')).args.code,'a'.repeat(32));
+ let resolve;const pending=Setup.create({auth,request:()=>new Promise(r=>resolve=r)});const turn=pending.parent('read');await new Promise(r=>setTimeout(r,0));pending.invalidate();resolve({});await assert.rejects(()=>turn,/Account changed/);
+ const fs=require('node:fs'),vm=require('node:vm'),source=fs.readFileSync('v3/staging-app.js','utf8');
+ let deliver;const ctx={unlock:'old',identity:{user:'fictional'},active:()=>!!ctx.unlock,client:{rpc:()=>new Promise(r=>deliver=r)}};vm.createContext(ctx);vm.runInContext(source.slice(source.indexOf('async function rpc('),source.indexOf('function authForm()'))+';globalThis.testRpc=rpc;',ctx);const late=ctx.testRpc('read');ctx.unlock=null;deliver({data:{progress:{private:true}}});await assert.rejects(()=>late,/Account changed/);
+ console.log('PASS gateway origins, payloads, trusted throttling, secure cookies, no game bridge, redacted errors, mandatory email verification and stale-response isolation');
+})().catch(e=>{console.error(e);process.exitCode=1});

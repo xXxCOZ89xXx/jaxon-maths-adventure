@@ -53,7 +53,7 @@ function build(config, out) {
   fs.mkdirSync(out, { recursive: true });
   for (const file of ['v3','icon.svg','v2-review-bank.js','v2-guided-teaching.js','v2-maths-tools.js','v2-extra-tools.js'])
     fs.cpSync(path.join(root,file),path.join(out,file),{recursive:true,
-      filter: source => !['painted-forest-preview','fraction-desert-preview','painted-forest-preview.js','painted-forest-preview.css','painted-desert-preview.js','painted-desert-preview.css','guide-portraits-preview.js','guide-portraits-preview.css'].includes(path.basename(source))});
+      filter: source => !['family-setup.js','painted-forest-preview','fraction-desert-preview','painted-forest-preview.js','painted-forest-preview.css','painted-desert-preview.js','painted-desert-preview.css','guide-portraits-preview.js','guide-portraits-preview.css'].includes(path.basename(source))});
   let html = fs.readFileSync(path.join(root,'v3-adventure.html'),'utf8');
   html = once(html,"connect-src 'none'",`connect-src 'self' ${c.url}`);
   html = html.replaceAll('V5 Interactive Test Camp','V5.2 Maths Adventure').replaceAll('V3 TEST CAMP','V5.2 FAMILY ADVENTURE')

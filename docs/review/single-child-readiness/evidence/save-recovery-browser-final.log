@@ -1,0 +1,28 @@
+
+Running 14 tests using 1 worker
+
+(node:293281) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:4:53 › purchase loseBuy: resume acknowledged intent after refresh and buy another item (3.3s)
+  ✓   2 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:4:53 › purchase failReadAfterBuy: resume acknowledged intent after refresh and buy another item (3.0s)
+  ✓   3 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:11:1 › offline edits keep the immutable request, reopen exact journey and recover on reconnect (3.7s)
+  ✓   4 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:16:1 › local edits save immediately while routine uploads combine; explicit save/exit flushes (3.3s)
+  ✓   5 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:21:1 › parent role, reward retry and learner purchase permissions remain separate (3.1s)
+  ✓   6 [ipad-portrait-chromium] › tests/save-recovery.spec.cjs:25:1 › new app refuses an old database before game writes and preserves existing queue bytes (1.1s)
+  ✓   7 [ipad-portrait-chromium] › tests/scene-revision.spec.cjs:20:1 › Scene revision: full connected meal stays playable through close-up controls (12.4s)
+(node:294898) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   8 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:4:53 › purchase loseBuy: resume acknowledged intent after refresh and buy another item (3.7s)
+  ✓   9 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:4:53 › purchase failReadAfterBuy: resume acknowledged intent after refresh and buy another item (3.1s)
+  ✓  10 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:11:1 › offline edits keep the immutable request, reopen exact journey and recover on reconnect (3.4s)
+  ✓  11 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:16:1 › local edits save immediately while routine uploads combine; explicit save/exit flushes (3.0s)
+  ✓  12 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:21:1 › parent role, reward retry and learner purchase permissions remain separate (3.2s)
+  ✓  13 [ipad-landscape-chromium] › tests/save-recovery.spec.cjs:25:1 › new app refuses an old database before game writes and preserves existing queue bytes (1.2s)
+  ✓  14 [ipad-landscape-chromium] › tests/scene-revision.spec.cjs:20:1 › Scene revision: full connected meal stays playable through close-up controls (12.6s)
+
+  14 passed (1.0m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

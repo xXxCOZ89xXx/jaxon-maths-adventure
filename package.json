@@ -49,7 +49,8 @@
     "build:guided-preview": "node -e \"process.env.V3_PREVIEW_ART='current';require('./scripts/build-v3-preview.cjs')\"",
     "test:guided-preview": "npm run build:guided-preview && playwright test -c playwright.guided-preview.config.cjs",
     "test:starting-profile": "node tests/starting-profile.cjs && node tests/prepare-v3.cjs && node tests/prepare-v52-production.cjs && playwright test -c playwright.starting-profile.config.cjs",
-    "test:owner-review": "node tests/owner-review.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.owner-review.config.cjs"
+    "test:owner-review": "node tests/owner-review.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.owner-review.config.cjs",
+    "test:single-child": "node tests/single-child-unit.cjs && node tests/single-child-security.cjs && playwright test -c playwright.single-child.config.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
