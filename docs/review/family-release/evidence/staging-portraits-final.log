@@ -1,0 +1,45 @@
+Built staging-fixture-dist. Separate private HTTPS hosting required; no deployment performed.
+Built preview-dist/PLAY-V3.html (standalone offline game).
+
+Running 27 tests using 1 worker
+
+(node:228657) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › number: production portrait, alpha, fallback and unchanged world (2.2s)
+  ✓   2 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › fractions: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓   3 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › algebra: production portrait, alpha, fallback and unchanged world (1.8s)
+  ✓   4 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › geometry: production portrait, alpha, fallback and unchanged world (2.0s)
+  ✓   5 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › ratio: production portrait, alpha, fallback and unchanged world (4.4s)
+  ✓   6 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › statistics: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓   7 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › probability: production portrait, alpha, fallback and unchanged world (2.1s)
+  ✓   8 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › measure: production portrait, alpha, fallback and unchanged world (2.0s)
+  ✓   9 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › town: production portrait, alpha, fallback and unchanged world (2.2s)
+(node:229526) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › number: production portrait, alpha, fallback and unchanged world (2.1s)
+  ✓  11 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › fractions: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓  12 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › algebra: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓  13 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › geometry: production portrait, alpha, fallback and unchanged world (2.0s)
+  ✓  14 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › ratio: production portrait, alpha, fallback and unchanged world (3.9s)
+  ✓  15 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › statistics: production portrait, alpha, fallback and unchanged world (1.8s)
+  ✓  16 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › probability: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓  17 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › measure: production portrait, alpha, fallback and unchanged world (1.8s)
+  ✓  18 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › town: production portrait, alpha, fallback and unchanged world (1.9s)
+(node:230387) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  19 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › number: production portrait, alpha, fallback and unchanged world (2.2s)
+  ✓  20 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › fractions: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓  21 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › algebra: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓  22 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › geometry: production portrait, alpha, fallback and unchanged world (2.0s)
+  ✓  23 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › ratio: production portrait, alpha, fallback and unchanged world (5.0s)
+  ✓  24 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › statistics: production portrait, alpha, fallback and unchanged world (2.4s)
+  ✓  25 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › probability: production portrait, alpha, fallback and unchanged world (2.7s)
+  ✓  26 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › measure: production portrait, alpha, fallback and unchanged world (2.4s)
+  ✓  27 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › town: production portrait, alpha, fallback and unchanged world (2.6s)
+
+  27 passed (1.1m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

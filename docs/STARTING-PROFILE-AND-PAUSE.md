@@ -1,6 +1,6 @@
 # Nine-area starting profile and pause/resume
 
-Owner review only on `codex/guided-progression-recovery`, based on `bc4a601`. Release stays `7f51c046ee732e8000b675ed0b43d4dd1412585a`. No PR, merge, deployment, account change, production-service request, database migration or production-setting change is part of this work.
+Assessment/pause design recovered at `cdd0116` on `codex/guided-progression-recovery`, continuing from `bc4a601`. The owner’s 29 October release instruction authorises normal protected-PR publication after checks. See `FAMILY-READINESS-REVIEW.md` for the release follow-up, character options and family-account limits. No learner-record/service access, accounts, backend migrations or production-setting changes are authorised.
 
 ## First play and admission
 

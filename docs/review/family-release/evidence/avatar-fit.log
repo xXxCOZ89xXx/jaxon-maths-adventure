@@ -1,0 +1,204 @@
+
+Running 18 tests using 1 worker
+
+(node:141184) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:7:1 › actual shop combinations and complete 40-item renderer contact sheet (48.5s)
+  ✘   2 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:14:1 › active choices equip and reopen; retired choices retain ownership without rendering (2.0m)
+(node:158209) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   3 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:27:1 › all retained attachments scale within canvas; companions fit actual shop and viewport (22.2s)
+  ✓   4 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:34:1 › existing unowned previews do not equip or change saved state (12.0s)
+  ✓   5 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:36:1 › legacy appearances use one unchanged original head and shoes; hats and collar crops are explicit (21.1s)
+  ✓   6 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:49:1 › option zero, jacket, hoodie and six backgrounds remain pixel-identical to 8023a7c (13.9s)
+(node:165666) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:7:1 › actual shop combinations and complete 40-item renderer contact sheet (48.3s)
+  ✘   8 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:14:1 › active choices equip and reopen; retired choices retain ownership without rendering (2.1m)
+(node:182754) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:27:1 › all retained attachments scale within canvas; companions fit actual shop and viewport (9.6s)
+  ✓  10 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:34:1 › existing unowned previews do not equip or change saved state (5.0s)
+  ✓  11 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:36:1 › legacy appearances use one unchanged original head and shoes; hats and collar crops are explicit (8.2s)
+  ✓  12 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:49:1 › option zero, jacket, hoodie and six backgrounds remain pixel-identical to 8023a7c (6.3s)
+(node:185843) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  13 [small-touch] › tests/avatar-fit.spec.cjs:7:1 › actual shop combinations and complete 40-item renderer contact sheet (20.2s)
+  ✓  14 [small-touch] › tests/avatar-fit.spec.cjs:14:1 › active choices equip and reopen; retired choices retain ownership without rendering (1.2m)
+  ✓  15 [small-touch] › tests/avatar-fit.spec.cjs:27:1 › all retained attachments scale within canvas; companions fit actual shop and viewport (6.4s)
+  ✓  16 [small-touch] › tests/avatar-fit.spec.cjs:34:1 › existing unowned previews do not equip or change saved state (3.6s)
+  ✓  17 [small-touch] › tests/avatar-fit.spec.cjs:36:1 › legacy appearances use one unchanged original head and shoes; hats and collar crops are explicit (5.7s)
+  ✘  18 [small-touch] › tests/avatar-fit.spec.cjs:49:1 › option zero, jacket, hoodie and six backgrounds remain pixel-identical to 8023a7c (1.9s)
+
+
+  1) [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:14:1 › active choices equip and reopen; retired choices retain ownership without rendering
+
+    Test timeout of 120000ms exceeded.
+
+    Error: page.reload: Target page, context or browser has been closed
+    Call log:
+      - waiting for navigation until "load"
+        - navigated to "http://127.0.0.1:4173/v3-adventure.html"
+
+
+      18 |  for(const [filter,count]of [['Back items',1],['Accessories',1],['owned',29],['affordable',29],['all',29]]){await p.locator('#shop-filter').selectOption(filter);await ready(p);await expect(p.locator('.shop-item')).toHaveCount(count);expect(await read()).toEqual(unchanged);}
+      19 |
+    > 20 |  for(const item of catalog){await p.locator(`[data-action="buy:${item.id}"]`).tap();await ready(p);expect((await read()).equipped).toContain(item.id);await expect(p.locator('#wardrobe-preview .explorer')).toHaveAttribute('data-avatar-items',new RegExp(`\\b${item.id}\\b`));await p.reload();await ready(p);expect((await read()).equipped).toContain(item.id);await p.locator(`[data-action="buy:${item.id}"]`).tap();await ready(p);await p.reload();await ready(p);expect((await read()).equipped).not.toContain(item.id);expect((await read()).coins).toBe(1234);expect((await read()).bought).toHaveLength(40);const state=await read();equipmentSaves+=2;expect(state.revision).toBe(unchanged.revision+equipmentSaves);for(const field of ['skills','weekly','practice','checks','discovery','quests','coins','earned','minutes','bought','settings','adventure','rewardClaims'])expect(state[field],field).toEqual(unchanged[field]);}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
+      21 |  const retired=await p.evaluate(()=>V7Avatar.retiredItems);expect(retired).toHaveLength(11);
+      22 |  for(const id of retired){await expect(p.locator(`[data-action="buy:${id}"]`)).toHaveCount(0);await expect(p.locator(`[data-ui="preview-item"][data-item="${id}"]`)).toHaveCount(0);}
+      23 |  await seed(p,key,retired);const before=await read();await p.reload();await ready(p);expect(await read()).toEqual(before);await expect(p.locator('#wardrobe-preview [data-worn]')).toHaveCount(0);
+        at /workspace/jaxon-maths-adventure/tests/avatar-fit.spec.cjs:20:436
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/avatar-fit/avatar-fit-active-choices--cf220-ownership-without-rendering-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/avatar-fit/avatar-fit-active-choices--cf220-ownership-without-rendering-ipad-portrait-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/avatar-fit/avatar-fit-active-choices--cf220-ownership-without-rendering-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/avatar-fit/avatar-fit-active-choices--cf220-ownership-without-rendering-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:14:1 › active choices equip and reopen; retired choices retain ownership without rendering
+
+    Test timeout of 120000ms exceeded.
+
+    Error: page.reload: net::ERR_ABORTED; maybe frame was detached?
+    Call log:
+      - waiting for navigation until "load"
+
+
+      18 |  for(const [filter,count]of [['Back items',1],['Accessories',1],['owned',29],['affordable',29],['all',29]]){await p.locator('#shop-filter').selectOption(filter);await ready(p);await expect(p.locator('.shop-item')).toHaveCount(count);expect(await read()).toEqual(unchanged);}
+      19 |
+    > 20 |  for(const item of catalog){await p.locator(`[data-action="buy:${item.id}"]`).tap();await ready(p);expect((await read()).equipped).toContain(item.id);await expect(p.locator('#wardrobe-preview .explorer')).toHaveAttribute('data-avatar-items',new RegExp(`\\b${item.id}\\b`));await p.reload();await ready(p);expect((await read()).equipped).toContain(item.id);await p.locator(`[data-action="buy:${item.id}"]`).tap();await ready(p);await p.reload();await ready(p);expect((await read()).equipped).not.toContain(item.id);expect((await read()).coins).toBe(1234);expect((await read()).bought).toHaveLength(40);const state=await read();equipmentSaves+=2;expect(state.revision).toBe(unchanged.revision+equipmentSaves);for(const field of ['skills','weekly','practice','checks','discovery','quests','coins','earned','minutes','bought','settings','adventure','rewardClaims'])expect(state[field],field).toEqual(unchanged[field]);}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                    ^
+      21 |  const retired=await p.evaluate(()=>V7Avatar.retiredItems);expect(retired).toHaveLength(11);
+      22 |  for(const id of retired){await expect(p.locator(`[data-action="buy:${id}"]`)).toHaveCount(0);await expect(p.locator(`[data-ui="preview-item"][data-item="${id}"]`)).toHaveCount(0);}
+      23 |  await seed(p,key,retired);const before=await read();await p.reload();await ready(p);expect(await read()).toEqual(before);await expect(p.locator('#wardrobe-preview [data-worn]')).toHaveCount(0);
+        at /workspace/jaxon-maths-adventure/tests/avatar-fit.spec.cjs:20:436
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/avatar-fit/avatar-fit-active-choices--cf220-ownership-without-rendering-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/avatar-fit/avatar-fit-active-choices--cf220-ownership-without-rendering-ipad-landscape-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/avatar-fit/avatar-fit-active-choices--cf220-ownership-without-rendering-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/avatar-fit/avatar-fit-active-choices--cf220-ownership-without-rendering-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [small-touch] › tests/avatar-fit.spec.cjs:49:1 › option zero, jacket, hoodie and six backgrounds remain pixel-identical to 8023a7c
+
+    Error: option zero
+
+    expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 14
+    + Received  + 14
+
+    @@ -150,15 +150,15 @@
+          213,
+          250,
+          34,
+          251,
+          231,
+    -     28,
+    -     63,
+    -     8,
+    -     84,
+    -     69,
+    +     156,
+    +     32,
+    +     12,
+    +     20,
+    +     89,
+          97,
+          23,
+          236,
+          172,
+          191,
+    @@ -4135,14 +4135,14 @@
+          10,
+          128,
+          41,
+          180,
+          95,
+    -     27,
+    -     178,
+    -     193,
+    -     8,
+    +     185,
+    +     199,
+    +     232,
+    +     105,
+          0,
+          0,
+          16,
+          0,
+          73,
+    @@ -32571,17 +32571,17 @@
+          65,
+          84,
+          3,
+          0,
+          220,
+    -     132,
+    +     168,
+          90,
+          254,
+    -     38,
+    -     141,
+    -     180,
+    -     214,
+    +     23,
+    +     218,
+    +     11,
+    +     82,
+          0,
+          0,
+          0,
+          0,
+          73,
+
+      50 |  test.skip(phase==='before','Preservation comparison is for revised renderer');const{page:p,context}=camp,cp=require('node:child_process'),reference=await context.newPage();
+      51 |  try{for(const file of ['avatar-art.js','style.css'])await reference.route('**/v3/'+file,r=>r.fulfill({contentType:file.endsWith('.css')?'text/css':'application/javascript',body:cp.execFileSync('git',['show','8023a7ce5130b96bb67d163e7701cb6ecf238b9d:v3/'+file],{encoding:'utf8'})}));await reference.goto('/v3-adventure.html');expect(await p.evaluate(()=>V3Curriculum.catalog)).toEqual(await reference.evaluate(()=>V3Curriculum.catalog));
+    > 52 |  for(const id of [null,'forestbg','desertbg','spacebg','castlebg','mountainbg','neonbg','jacket','hoodie']){for(const page of [p,reference]){await page.evaluate(id=>{const el=document.createElement('section');el.id='preservation-sample';el.style='width:200px;height:300px;background:#e7eddf;overflow:visible';el.innerHTML=V3Art.explorer({bought:id?[id]:[],equipped:id?[id]:[],settings:{avatarHair:0,avatarFace:0,avatarShoes:0}});el.firstChild.style.cssText='width:200px;height:300px';document.querySelector('main').replaceChildren(el);},id);await ready(page);}expect(await p.locator('#preservation-sample').screenshot(),id||'option zero').toEqual(await reference.locator('#preservation-sample').screenshot());}
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ^
+      53 |  }finally{await reference.close();}
+      54 | });
+      55 |
+        at /workspace/jaxon-maths-adventure/tests/avatar-fit.spec.cjs:52:640
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/avatar-fit/avatar-fit-option-zero-jac-1b3df--pixel-identical-to-8023a7c-small-touch/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/avatar-fit/avatar-fit-option-zero-jac-1b3df--pixel-identical-to-8023a7c-small-touch/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/avatar-fit/avatar-fit-option-zero-jac-1b3df--pixel-identical-to-8023a7c-small-touch/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/avatar-fit/avatar-fit-option-zero-jac-1b3df--pixel-identical-to-8023a7c-small-touch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:14:1 › active choices equip and reopen; retired choices retain ownership without rendering
+    [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:14:1 › active choices equip and reopen; retired choices retain ownership without rendering
+    [small-touch] › tests/avatar-fit.spec.cjs:49:1 › option zero, jacket, hoodie and six backgrounds remain pixel-identical to 8023a7c
+  15 passed (9.5m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

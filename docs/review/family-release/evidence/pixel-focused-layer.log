@@ -1,0 +1,15 @@
+Built production-test-dist with fictional public key; browser tests deny unhandled remote traffic.
+
+Running 2 tests using 1 worker
+
+(node:199072) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › algebra: production portrait, alpha, fallback and unchanged world (2.5s)
+  ✓  2 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › ratio: production portrait, alpha, fallback and unchanged world (5.1s)
+
+  2 passed (8.7s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

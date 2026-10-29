@@ -1,0 +1,62 @@
+Built production-test-dist with fictional public key; browser tests deny unhandled remote traffic.
+
+Running 45 tests using 1 worker
+
+(node:223914) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › number: production portrait, alpha, fallback and unchanged world (3.0s)
+  ✓   2 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › fractions: production portrait, alpha, fallback and unchanged world (2.8s)
+  ✓   3 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › algebra: production portrait, alpha, fallback and unchanged world (2.6s)
+  ✓   4 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › geometry: production portrait, alpha, fallback and unchanged world (2.6s)
+  ✓   5 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › ratio: production portrait, alpha, fallback and unchanged world (5.6s)
+  ✓   6 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › statistics: production portrait, alpha, fallback and unchanged world (2.4s)
+  ✓   7 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › probability: production portrait, alpha, fallback and unchanged world (2.4s)
+  ✓   8 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › measure: production portrait, alpha, fallback and unchanged world (2.5s)
+  ✓   9 [desktop-chromium] › tests/production-portraits.spec.cjs:8:58 › town: production portrait, alpha, fallback and unchanged world (2.7s)
+  ✓  10 [desktop-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses wrong project (831ms)
+  ✓  11 [desktop-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses wrong name (803ms)
+  ✓  12 [desktop-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses unready (759ms)
+  ✓  13 [desktop-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses wrong contract (859ms)
+  ✓  14 [desktop-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses missing receipt (784ms)
+  ✓  15 [desktop-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses identity RPC error (775ms)
+(node:225889) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  16 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › number: production portrait, alpha, fallback and unchanged world (2.6s)
+  ✓  17 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › fractions: production portrait, alpha, fallback and unchanged world (2.9s)
+  ✓  18 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › algebra: production portrait, alpha, fallback and unchanged world (2.2s)
+  ✓  19 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › geometry: production portrait, alpha, fallback and unchanged world (2.1s)
+  ✓  20 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › ratio: production portrait, alpha, fallback and unchanged world (4.3s)
+  ✓  21 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › statistics: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓  22 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › probability: production portrait, alpha, fallback and unchanged world (2.0s)
+  ✓  23 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › measure: production portrait, alpha, fallback and unchanged world (2.1s)
+  ✓  24 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:8:58 › town: production portrait, alpha, fallback and unchanged world (2.2s)
+  ✓  25 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses wrong project (644ms)
+  ✓  26 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses wrong name (671ms)
+  ✓  27 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses unready (629ms)
+  ✓  28 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses wrong contract (602ms)
+  ✓  29 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses missing receipt (605ms)
+  ✓  30 [ipad-portrait-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses identity RPC error (623ms)
+(node:227251) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  31 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › number: production portrait, alpha, fallback and unchanged world (2.4s)
+  ✓  32 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › fractions: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓  33 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › algebra: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓  34 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › geometry: production portrait, alpha, fallback and unchanged world (2.0s)
+  ✓  35 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › ratio: production portrait, alpha, fallback and unchanged world (4.5s)
+  ✓  36 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › statistics: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓  37 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › probability: production portrait, alpha, fallback and unchanged world (2.0s)
+  ✓  38 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › measure: production portrait, alpha, fallback and unchanged world (1.9s)
+  ✓  39 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:8:58 › town: production portrait, alpha, fallback and unchanged world (2.0s)
+  ✓  40 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses wrong project (603ms)
+  ✓  41 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses wrong name (594ms)
+  ✓  42 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses unready (654ms)
+  ✓  43 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses wrong contract (622ms)
+  ✓  44 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses missing receipt (558ms)
+  ✓  45 [ipad-landscape-chromium] › tests/production-portraits.spec.cjs:79:4 › production identity refuses identity RPC error (665ms)
+
+  45 passed (1.4m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
