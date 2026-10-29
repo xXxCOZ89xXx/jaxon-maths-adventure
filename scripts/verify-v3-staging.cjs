@@ -29,4 +29,4 @@ function verify(out, expectedRef) {
   console.log('PASS staging build: pinned configuration (key redacted), sign-in/PIN entry, all assets, nine worlds, 40 catalogue items');
 }
 module.exports={verify};
-if(require.main===module) verify(path.resolve(__dirname,'../staging-dist'),'sfogrvedypgtxfvecmbx');
+if(require.main===module) verify(path.resolve(__dirname,'../staging-dist'),require('../v3/staging-policy.js').assertRef(process.env.V3_STAGING_PROJECT_REF));

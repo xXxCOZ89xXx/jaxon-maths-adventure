@@ -1,8 +1,16 @@
 -- Read-only guard isolation ONLY; not a permission correction.
--- Owner: verify staging sfogrvedypgtxfvecmbx in the dashboard.
+-- Owner: verify staging <NEW_STAGING_REF> in the dashboard.
 -- Use a NEW SQL Editor query as postgres. Share only the one result row.
 -- No function calls to application code, definitions, user data or permission changes.
 BEGIN TRANSACTION READ ONLY;
+DO $staging_target$ BEGIN
+ IF coalesce(current_setting('app.v3.staging_ref',true),'') !~ '^[a-z]{20}$'
+ OR current_setting('app.v3.staging_ref',true) IN ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol')
+ THEN RAISE EXCEPTION 'New isolated staging target required; Main and deleted project forbidden'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM public.v3_environment WHERE name='jaxon-maths-v3-staging' AND project_ref=current_setting('app.v3.staging_ref',true))
+ THEN RAISE EXCEPTION 'Staging marker mismatch; verify dashboard identity independently'; END IF;
+END $staging_target$;
+
 SET LOCAL statement_timeout = '10s';
 WITH expected AS (
  SELECT 'a1d3a5958ad9c360d0fd9b2f6eab6159'::text AS body_md5

@@ -1,5 +1,10 @@
 -- STAGING ONLY; apply after 001. Prices match the preserved 40-item catalog.
 begin;
+do $target$ begin
+ if not (select count(*)=1 and coalesce(bool_and(name='jaxon-maths-v3-staging' and project_ref ~ '^[a-z]{20}$' and project_ref not in ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol')),false) from public.v3_environment)
+ then raise exception 'New isolated staging marker required; Main and deleted project forbidden'; end if;
+end $target$;
+
 insert into public.v3_catalog(item_id,cost) values
 ('helmet',100),
 ('cap',45),

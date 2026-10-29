@@ -5,7 +5,7 @@ set local lock_timeout='5s';
 do $$ begin
  if current_user<>'postgres' or current_setting('app.v13.bridge_reviewed',true) is distinct from 'yes'
  or coalesce(current_setting('app.v12.target_ref',true),'') !~ '^[a-z]{20}$'
- or current_setting('app.v12.target_ref',true)='mbdelspbjusarbwlltol'
+ or current_setting('app.v12.target_ref',true) in ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol')
  or not exists(select 1 from public.v3_environment where name='jaxon-maths-v3-staging' and project_ref=current_setting('app.v12.target_ref',true))
  then raise exception 'Reviewed distinct staging bridge target required'; end if;
  if encode(extensions.digest((select prosrc from pg_proc where oid='public.v3_request(text,text,jsonb)'::regprocedure),'sha256'),'hex')<>'ca2432d4745cee13a1ce8a5c47176d76ab1c41dbafd8f4191fbdb84b78a4c698'

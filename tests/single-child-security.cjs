@@ -25,7 +25,7 @@ const test=async(label,f)=>{await f();console.log('PASS',label);count++;};
  insert into public.maths_families values('${ids.legacyC}','${ids.legacyP}');
  insert into public.v3_progress(child_user_id,revision,progress) values('${ids.legacyC}',7,'{"coins":45,"startingProfile":{"version":1},"draft":"saved"}');`);
  const before=sql('select jsonb_agg(to_jsonb(p)) from public.v3_progress p;select jsonb_agg(to_jsonb(f)) from public.maths_families f;select count(*) from auth.users;');
- const migration=fs.readFileSync('supabase/single-child-draft/001_pairing_foundation.sql','utf8');fail(()=>sql(migration));sql("set app.v12.foundation_reviewed='yes';set app.v12.target_ref='abcdefghijklmnopqrst';"+migration);
+ const migration=fs.readFileSync('supabase/single-child-draft/001_pairing_foundation.sql','utf8');fail(()=>sql(migration));for(const denied of ['sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol'])fail(()=>sql("set app.v12.foundation_reviewed='yes';set app.v12.target_ref='"+denied+"';"+migration));sql("set app.v12.foundation_reviewed='yes';set app.v12.target_ref='abcdefghijklmnopqrst';"+migration);
  await test('email verification, non-anonymous identity, recent password and parent role are enforced in SQL',()=>{
   for(const who of ['unverified','anonymous','legacyC'])fail(()=>parent(who,'create',{nickname:'Explorer'}));
   for(const age of [null,600,-600])fail(()=>parent('p','create',{nickname:'Explorer'},age));

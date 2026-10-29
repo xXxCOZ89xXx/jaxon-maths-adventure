@@ -1,9 +1,17 @@
 -- PROPOSAL ONLY. DO NOT RUN until separately approved by the owner.
--- Staging sfogrvedypgtxfvecmbx ONLY; verify the dashboard project ref first.
+-- Staging <NEW_STAGING_REF> ONLY; verify the dashboard project ref first.
 -- Run the WHOLE file in a new SQL Editor query as postgres after approval.
 -- Exactly one persistent change: revoke one function's EXECUTE from service_role.
 -- No application function calls, data writes, role/default-privilege changes or CASCADE.
 BEGIN;
+DO $staging_target$ BEGIN
+ IF coalesce(current_setting('app.v3.staging_ref',true),'') !~ '^[a-z]{20}$'
+ OR current_setting('app.v3.staging_ref',true) IN ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol')
+ THEN RAISE EXCEPTION 'New isolated staging target required; Main and deleted project forbidden'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM public.v3_environment WHERE name='jaxon-maths-v3-staging' AND project_ref=current_setting('app.v3.staging_ref',true))
+ THEN RAISE EXCEPTION 'Staging marker mismatch; verify dashboard identity independently'; END IF;
+END $staging_target$;
+
 SET LOCAL lock_timeout = '3s';
 SET LOCAL statement_timeout = '15s';
 
@@ -13,7 +21,7 @@ BEGIN
   RAISE EXCEPTION 'Use the reviewed postgres owner role';
  END IF;
  IF NOT (SELECT count(*)=1 AND coalesce(bool_and(
-     name='jaxon-maths-v3-staging' AND project_ref='sfogrvedypgtxfvecmbx'),false)
+     name='jaxon-maths-v3-staging' AND project_ref=current_setting('app.v3.staging_ref',true)),false)
      FROM public.v3_environment) THEN
   RAISE EXCEPTION 'Expected staging marker missing; stop without changes';
  END IF;

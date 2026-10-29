@@ -1,0 +1,7 @@
+PASS owner/ref guards and corrected importer permission are prerequisites
+PASS pause blocks all runtime RPCs and a late upgrade error rolls back every change
+PASS exact installation preserves every original data field and all PIN/unlock state
+PASS existing PIN capabilities and exact old retry survive; strict new requests and CAS remain safe
+PASS new operations retain cumulative balances, ownership and immutable history; reads do not initialise
+PASS explicit freeze/rollback retains post-upgrade purchases and request history and stays closed
+PASS 6 focused staging-preservation database suites; no hosted SQL

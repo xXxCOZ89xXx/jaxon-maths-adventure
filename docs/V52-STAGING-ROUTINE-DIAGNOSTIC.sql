@@ -1,10 +1,18 @@
--- STAGING ONLY: sfogrvedypgtxfvecmbx; owner verifies dashboard ref first.
+-- STAGING ONLY: <NEW_STAGING_REF>; owner verifies dashboard ref first.
 -- New SQL Editor query, postgres role; run the WHOLE file, share only six rows.
 -- Reference: staging 001/003 at branch head 8cf12fc; baseline literals contain repository code only.
 -- Catalogs only. No application routines invoked and no account/data tables read.
 -- Baseline source below is a quoted comparison value, NEVER executed.
 -- PASS means equivalent to the legacy staging baseline, NOT V5.2 security approval.
 BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY;
+DO $staging_target$ BEGIN
+ IF coalesce(current_setting('app.v3.staging_ref',true),'') !~ '^[a-z]{20}$'
+ OR current_setting('app.v3.staging_ref',true) IN ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol')
+ THEN RAISE EXCEPTION 'New isolated staging target required; Main and deleted project forbidden'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM public.v3_environment WHERE name='jaxon-maths-v3-staging' AND project_ref=current_setting('app.v3.staging_ref',true))
+ THEN RAISE EXCEPTION 'Staging marker mismatch; verify dashboard identity independently'; END IF;
+END $staging_target$;
+
 SET LOCAL statement_timeout = '15s';
 WITH expected(ord,sig,definer,lang,argnames,body) AS (VALUES
  (1,'public.v3_identity()',true,'sql',NULL::text[],$baseline$

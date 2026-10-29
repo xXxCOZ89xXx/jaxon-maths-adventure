@@ -1,0 +1,3 @@
+Confirmed by loading scripts/build-v52-staging.cjs from git show 1615476 in a Node Module and invoking entry():
+Confirmed pre-existing archived builder contract mismatch: Staging source changed:     if (check.error) {
+No remote requests. Archived test remains failing; no assertion weakened.

@@ -6,7 +6,7 @@ const name='jaxon-v52-preserve-'+process.pid;
 const docker=(args,input)=>execFileSync('docker',['--host=unix:///var/run/docker.sock',...args],{env,input,encoding:'utf8',stdio:['pipe','pipe','pipe']}).trim();
 const sql=s=>docker(['exec','-i',name,'psql','-h','127.0.0.1','-X','-qAt','-v','ON_ERROR_STOP=1','-U','postgres'],s);
 const lit=s=>"'"+String(s).replaceAll("'","''")+"'";
-const flags="set app.v52.staging_upgrade_authorized='yes';set app.v52.staging_ref='sfogrvedypgtxfvecmbx';set app.v52.staging_backup_verified='yes';";
+const flags="set app.v52.staging_upgrade_authorized='yes';set app.v52.staging_ref='abcdefghijklmnopqrst';set app.v52.staging_backup_verified='yes';";
 const source=f=>fs.readFileSync('supabase/v52-staging-preserve/'+f+'.sql','utf8');
 const run=f=>sql(flags+source(f));
 const ids={learner:'11111111-1111-4111-8111-111111111111',parent:'22222222-2222-4222-8222-222222222222',other:'33333333-3333-4333-8333-333333333333',otherParent:'44444444-4444-4444-8444-444444444444'};
@@ -23,7 +23,7 @@ const results=[];async function test(label,f){await f();results.push(label);cons
  create function auth.uid() returns uuid language sql stable as $$select (auth.jwt()->>'sub')::uuid$$;
  grant usage on schema auth to anon,authenticated;grant execute on function auth.jwt(),auth.uid() to anon,authenticated;
  alter default privileges in schema public grant execute on functions to service_role;`);
- sql("set app.v3.staging_authorized='yes';set app.v3.staging_ref='sfogrvedypgtxfvecmbx';"+fs.readFileSync('supabase/v3-staging/001_secure_core.sql','utf8'));
+ sql("set app.v3.staging_authorized='yes';set app.v3.staging_ref='abcdefghijklmnopqrst';"+fs.readFileSync('supabase/v3-staging/001_secure_core.sql','utf8'));
  sql(fs.readFileSync('supabase/v3-staging/002_catalog.sql','utf8'));sql(fs.readFileSync('supabase/v3-staging/003_import_compatibility.sql','utf8'));
  sql(`revoke execute on function public.v3_admin_import(uuid,jsonb) from service_role;
  insert into auth.users(id) values ${Object.values(ids).map(v=>'('+lit(v)+')').join(',')};
@@ -56,7 +56,7 @@ const results=[];async function test(label,f){await f();results.push(label);cons
  await test('exact installation preserves every original data field and all PIN/unlock state',()=>{
   assert.equal(sql('select v52_staging_private.data_digest()'),before);
   assert.equal(sql('select jsonb_agg(to_jsonb(p) order by user_id) from public.v3_pins p'),pinsBefore);
-  assert.ok(sql(source('verify')).includes('installed_closed|2|t|t|t|t|t|t'));
+  assert.ok(sql(flags+source('verify')).includes('installed_closed|2|t|t|t|t|t|t'));
   reject(()=>request('learner','read'),/permission denied/);
   reject(()=>run('001_upgrade'),/Pause phase/);
  });

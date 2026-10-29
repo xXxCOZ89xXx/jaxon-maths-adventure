@@ -1,3 +1,5 @@
+> **Owner-confirmed project correction, 29 October 2026:** `sfogrvedypgtxfvecmbx` is **Jaxon’s Maths Adventure - Main**, never a staging target. `mbdelspbjusarbwlltol` was deleted. No hosted staging project currently exists. Earlier labels/instructions below are historical and must not be used to access either ref. Use [the current isolation handoff](STAGING-ISOLATION-STATUS.md) and [working setup guide](SINGLE-CHILD-SETUP.md); never run old commands against Main.
+
 # V5 interactive expansion — verified QA and private preview
 
 Final application tree: `98ff3886738f1e87f90b662419e81609bdd93789` on `codex/v3-adventure-build`, draft PR #2. [World/55-skill coverage, complete journey and limits](V5-INTERACTIVE-LEARNING.md) · [V4/V5 coordinate comparison](https://jaxon-maths-v3-private-staging.orion-shared-7254.chatgpt.site/review/coordinates.html).

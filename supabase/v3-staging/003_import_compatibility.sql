@@ -1,6 +1,11 @@
 -- Administrator-only import of a REVIEWED FICTIONAL V2 fixture into STAGING.
 -- No client RPC grant. Never run against or export a real learner record for QA.
 begin;
+do $target$ begin
+ if not (select count(*)=1 and coalesce(bool_and(name='jaxon-maths-v3-staging' and project_ref ~ '^[a-z]{20}$' and project_ref not in ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol')),false) from public.v3_environment)
+ then raise exception 'New isolated staging marker required; Main and deleted project forbidden'; end if;
+end $target$;
+
 create function public.v3_admin_import(p_child uuid,p_progress jsonb) returns void
 language plpgsql set search_path='' as $$
 declare oldcoins numeric; oldearned numeric; oldminutes numeric; items jsonb;

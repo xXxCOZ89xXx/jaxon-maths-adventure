@@ -1,5 +1,9 @@
 # Codex build instructions — Jaxon's Maths Adventure V3
 
+## Owner-confirmed staging isolation — 29 October 2026
+
+Main is `sfogrvedypgtxfvecmbx`; `mbdelspbjusarbwlltol` was deleted. Never connect/query/migrate Main or use either ref for staging. Existing V3_STAGING bindings are mislabelled Main bindings and must fail closed. No hosted staging exists. Use only new independently verified staging configuration, or the loopback local fixture marker `abcdefghijklmnopqrst`. Continue from `1615476` on `codex/single-child-readiness`, preserving work. Project creation requires existing authenticated Supabase access, unambiguous organization, secure secret storage and no unexpected charge/upgrade; all are currently unavailable/unverified. Finish local guards/docs/tests/package and push feature only; no release PR, merge, deploy, Main settings/data or production migration. No secrets in chat. See `docs/STAGING-ISOLATION-STATUS.md`.
+
 ## Working local single-child integration — 29 October 2026
 
 The latest owner instruction authorises the real canonical child identity bridge, parent signup/verification, nickname-only profile, secure pairing into the existing learner flow, parent PIN reset/code reissue/device revocation, local Supabase tests with fictional accounts, and commit/push on `codex/single-child-readiness` from `b7fb87d`. New setup may run in the isolated local/staging review build; do not keep the old foundation-only block as a reason to stop local implementation. No fake child emails, permanent anonymous Auth, multi-child support, production credentials/data/migration/settings, release PR, merge or deployment. Hosted staging access is unavailable; document exact setup and secret names without displaying values. See `docs/SINGLE-CHILD-SETUP.md`. Preserve existing UUIDs, progress, queues, wallet and independent evidence.

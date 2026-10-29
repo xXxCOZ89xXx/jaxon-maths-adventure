@@ -12,6 +12,7 @@
       c.environment !== "staging" ||
       c.projectName !== "jaxon-maths-v3-staging" ||
       !/^[a-z]{20}$/.test(c.projectRef) ||
+      ["sfogrvedypgtxfvecmbx", "mbdelspbjusarbwlltol"].includes(c.projectRef) ||
       c.projectRef !== c.authorizedRef
     )
       throw Error(

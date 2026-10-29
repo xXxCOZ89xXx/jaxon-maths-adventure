@@ -1,0 +1,23 @@
+AssertionError [ERR_ASSERTION]: Staging source changed:     if (check.error) {
+      if (
+        navigator.onLine |
+
+1 !== 2
+
+    at once (/workspace/jaxon-maths-adventure/scripts/build-v52-staging.cjs:6:29)
+    at entry (/workspace/jaxon-maths-adventure/scripts/build-v52-staging.cjs:12:4)
+    at /workspace/jaxon-maths-adventure/tests/v52-staging-preserve.cjs:13:62
+    at test (/workspace/jaxon-maths-adventure/tests/v52-staging-preserve.cjs:8:53)
+    at /workspace/jaxon-maths-adventure/tests/v52-staging-preserve.cjs:10:8
+    at Object.<anonymous> (/workspace/jaxon-maths-adventure/tests/v52-staging-preserve.cjs:60:3)
+    at Module._compile (node:internal/modules/cjs/loader:1872:14)
+    at Object..js (node:internal/modules/cjs/loader:2003:10)
+    at Module.load (node:internal/modules/cjs/loader:1594:32)
+    at Module._load (node:internal/modules/cjs/loader:1396:12) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 1,
+  expected: 2,
+  operator: 'strictEqual',
+  diff: 'simple'
+}

@@ -20,6 +20,7 @@ jobs:
       - run: docker pull postgres:17-alpine
       - name: Fictional logic and existing production security compatibility
         run: |
+          node tests/staging-isolation.cjs
           npm test
           npm run test:production-security
           npm run test:production-build

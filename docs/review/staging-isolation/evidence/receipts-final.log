@@ -1,0 +1,11 @@
+PASS wrong project and changed baseline fail closed
+PASS late error rolls the entire migration back
+PASS all existing data and legacy exact retries remain compatible
+PASS new save receipts omit full JSON and preserve CAS and content binding
+PASS one simulated extended session retains zero new full snapshots
+PASS purchases and parent rewards deduct/credit exactly once across retries
+PASS heartbeat retries and screen-time redemption remain exactly once
+PASS an old in-flight writer is compacted at the migration boundary and retried by new RPC
+PASS identity version, isolation, direct grants and helper privacy
+PASS actual browser sync and intent modules recover lost responses against migrated PostgreSQL
+10 receipt migration checks passed; no remote connection.

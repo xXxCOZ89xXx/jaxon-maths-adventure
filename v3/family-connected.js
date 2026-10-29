@@ -1,6 +1,7 @@
+import Policy from './staging-policy.js';
 // Explicit local/staging account build only. Device authority is always server-side.
 const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function config(c){if(c?.kind!=='single-child-review'||c.url!==location.origin+'/supabase'||c.projectRef==='mbdelspbjusarbwlltol'||!/^https:/.test(location.origin))throw Error('Reviewed isolated account build required');return c;}
+function config(c){Policy.assertRef(c?.projectRef,{allowLocal:location.hostname==='127.0.0.1'});if(c?.kind!=='single-child-review'||c.url!==location.origin+'/supabase'||c.projectRef==='mbdelspbjusarbwlltol'||!/^https:/.test(location.origin))throw Error('Reviewed isolated account build required');return c;}
 async function post(path,data={}){const r=await fetch(path,{method:'POST',credentials:'same-origin',headers:{'content-type':'application/json'},body:JSON.stringify(data)});const x=await r.json();if(!r.ok||x.error){const e=Error('This request could not be confirmed. Reconnect, wait or ask your parent. Saved learning is preserved.');e.status=r.status;throw e;}return x;}
 function client(createClient,url,key,options){
  const sdk=createClient(url,key,options);let device=false,scope=null;

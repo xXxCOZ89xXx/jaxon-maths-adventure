@@ -30,8 +30,8 @@ function entry(){
 }
 function build(input,out){
  const c=config(input);
- assert.equal(c.projectRef,Preserve.projectRef,'Only the existing fictional staging project is allowed');
- assert.equal(c.url,`https://${Preserve.projectRef}.supabase.co`);
+ // config() rejects Main and the deleted project; no hosted staging default exists.
+ assert.equal(c.url,`https://${c.projectRef}.supabase.co`);
  assert.ok(!fs.existsSync(out)||fs.readdirSync(out).length===0,'Output must be empty; never clear an existing artifact');
  fs.mkdirSync(out,{recursive:true});
  for(const f of ['v3','icon.svg','v2-review-bank.js','v2-guided-teaching.js','v2-maths-tools.js','v2-extra-tools.js'])

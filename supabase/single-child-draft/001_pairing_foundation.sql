@@ -6,7 +6,7 @@ do $$ begin
  if current_user <> 'postgres' or current_setting('app.v12.foundation_reviewed',true) is distinct from 'yes'
  then raise exception 'Reviewed local/staging foundation only'; end if;
  if coalesce(current_setting('app.v12.target_ref',true),'') !~ '^[a-z]{20}$'
- or current_setting('app.v12.target_ref',true) = 'mbdelspbjusarbwlltol'
+ or current_setting('app.v12.target_ref',true) in ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol')
  or not exists(select 1 from public.v3_environment where name='jaxon-maths-v3-staging'
  and project_ref=current_setting('app.v12.target_ref',true))
  then raise exception 'Distinct verified staging target required; production refused'; end if;

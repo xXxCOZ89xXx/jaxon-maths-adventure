@@ -1,3 +1,5 @@
+> **Owner-confirmed project correction, 29 October 2026:** `sfogrvedypgtxfvecmbx` is **Jaxon’s Maths Adventure - Main**, never a staging target. `mbdelspbjusarbwlltol` was deleted. No hosted staging project currently exists. Earlier labels/instructions below are historical and must not be used to access either ref. Use [the current isolation handoff](STAGING-ISOLATION-STATUS.md) and [working setup guide](SINGLE-CHILD-SETUP.md); never run old commands against Main.
+
 # V5.2 staging preservation upgrade — prepared implementation
 
 22 October 2026. **Code, owner-run SQL and an unpublished matching staging build are prepared; no Supabase migration or publication occurred.** Target: `sfogrvedypgtxfvecmbx` only. Read the [execution/acceptance runbook](V52-STAGING-PRESERVE-RELEASE.md), [source review](V52-STAGING-PRESERVE-REVIEW.md) and [readiness report](V52-STAGING-PRESERVE-READINESS.md).

@@ -1,3 +1,5 @@
+> **Owner-confirmed project correction, 29 October 2026:** `sfogrvedypgtxfvecmbx` is **Jaxon’s Maths Adventure - Main**, never a staging target. `mbdelspbjusarbwlltol` was deleted. No hosted staging project currently exists. Earlier labels/instructions below are historical and must not be used to access either ref. Use [the current isolation handoff](STAGING-ISOLATION-STATUS.md) and [working setup guide](SINGLE-CHILD-SETUP.md); never run old commands against Main.
+
 # Saving and receipt upgrade — development only
 
 Owner measurements: database 18 MB; ledger 7.1 MB physical, 835 rows including 681 full snapshots (~18 MB logical payload); largest save ~32.7 KB. No space emergency or reset is needed. Test data is disposable only with separate reset approval.

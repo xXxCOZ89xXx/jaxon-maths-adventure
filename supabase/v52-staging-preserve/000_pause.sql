@@ -1,4 +1,4 @@
--- PREPARED ONLY. Owner approval required. Staging sfogrvedypgtxfvecmbx only.
+-- PREPARED ONLY. Owner approval required. New independently verified staging only; Main and deleted project forbidden.
 -- Never executed by builder/CI. Each phase is a complete error-stopping transaction.
 begin;
 set local search_path='';
@@ -6,9 +6,9 @@ set local lock_timeout='3s';
 set local statement_timeout='30s';
 do $guard$ begin
 if current_user<>'postgres' or current_setting('app.v52.staging_upgrade_authorized',true) is distinct from 'yes'
- or current_setting('app.v52.staging_ref',true) is distinct from 'sfogrvedypgtxfvecmbx'
+ or (coalesce(current_setting('app.v52.staging_ref',true),'') !~ '^[a-z]{20}$' or current_setting('app.v52.staging_ref',true) in ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol'))
  then raise exception 'Reviewed staging-only owner execution required'; end if;
- if not (select count(*)=1 and coalesce(bool_and(name='jaxon-maths-v3-staging' and project_ref='sfogrvedypgtxfvecmbx'),false) from public.v3_environment)
+ if not (select count(*)=1 and coalesce(bool_and(name='jaxon-maths-v3-staging' and project_ref=current_setting('app.v52.staging_ref',true)),false) from public.v3_environment)
  then raise exception 'Staging identity mismatch'; end if;
  if current_setting('app.v52.staging_backup_verified',true) is distinct from 'yes' then raise exception 'Private current staging recovery coverage required'; end if;
  if to_regnamespace('v52_staging_private') is not null or to_regclass('public.v3_activation') is not null or to_regnamespace('v51_private') is not null
@@ -50,9 +50,9 @@ alter table v52_staging_private.control enable row level security;
 revoke all on v52_staging_private.control from public,anon,authenticated,service_role;
 create function v52_staging_private.assert_target() returns void language plpgsql set search_path='' as $fn$ begin
 if current_user<>'postgres' or current_setting('app.v52.staging_upgrade_authorized',true) is distinct from 'yes'
- or current_setting('app.v52.staging_ref',true) is distinct from 'sfogrvedypgtxfvecmbx'
+ or (coalesce(current_setting('app.v52.staging_ref',true),'') !~ '^[a-z]{20}$' or current_setting('app.v52.staging_ref',true) in ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol'))
  then raise exception 'Reviewed staging-only owner execution required'; end if;
- if not (select count(*)=1 and coalesce(bool_and(name='jaxon-maths-v3-staging' and project_ref='sfogrvedypgtxfvecmbx'),false) from public.v3_environment)
+ if not (select count(*)=1 and coalesce(bool_and(name='jaxon-maths-v3-staging' and project_ref=current_setting('app.v52.staging_ref',true)),false) from public.v3_environment)
  then raise exception 'Staging identity mismatch'; end if;
 end $fn$;
 create function v52_staging_private.routine_state() returns jsonb language sql set search_path='' as $fn$

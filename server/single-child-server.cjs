@@ -2,10 +2,12 @@
  * --local uses generated fictional-only local Supabase config.
  * Otherwise only an explicitly pinned, NON-production staging project is accepted.
  */
+const Policy=require('../v3/staging-policy.js');
 const fs=require('node:fs'),https=require('node:https'),path=require('node:path'),{create}=require('./pairing-gateway.cjs');
-function publicConfiguration(env){const ref=env.V13_STAGING_PROJECT_REF,url=env.V13_STAGING_URL,origin=env.V13_REVIEW_ORIGIN;if(!/^[a-z]{20}$/.test(ref||'')||ref==='mbdelspbjusarbwlltol'||env.V13_AUTHORIZED_STAGING_REF!==ref||url!==`https://${ref}.supabase.co`||!/^https:\/\/[^/]+$/.test(origin||'')||origin.includes('jaxon-maths-private-git.pages.dev'))throw Error('Distinct reviewed staging configuration required');require('../v3/backend-config.js').publicKey(env.V13_STAGING_ANON_KEY,ref);return {projectRef:ref,origin,authUrl:url+'/auth/v1',restUrl:url+'/rest/v1',anonKey:env.V13_STAGING_ANON_KEY};}
+function publicConfiguration(env){Policy.assertRef(env.V13_STAGING_PROJECT_REF);const ref=env.V13_STAGING_PROJECT_REF,url=env.V13_STAGING_URL,origin=env.V13_REVIEW_ORIGIN;if(!/^[a-z]{20}$/.test(ref||'')||ref==='mbdelspbjusarbwlltol'||env.V13_AUTHORIZED_STAGING_REF!==ref||url!==`https://${ref}.supabase.co`||!/^https:\/\/[^/]+$/.test(origin||'')||origin.includes('jaxon-maths-private-git.pages.dev'))throw Error('Distinct reviewed staging configuration required');require('../v3/backend-config.js').publicKey(env.V13_STAGING_ANON_KEY,ref);return {projectRef:ref,origin,authUrl:url+'/auth/v1',restUrl:url+'/rest/v1',anonKey:env.V13_STAGING_ANON_KEY};}
 function configuration(env,local=false){
  if(local){const c=JSON.parse(fs.readFileSync('work/single-child-integration/local-private.json'));if(c.localOnly!==true||c.origin!=='https://127.0.0.1:4443'||!['authUrl','restUrl'].every(k=>/^http:\/\/127\.0\.0\.1:\d+$/.test(c[k])))throw Error('Invalid local review configuration');return c;}
+ Policy.assertRef(env.V13_STAGING_PROJECT_REF);
  const ref=env.V13_STAGING_PROJECT_REF,url=env.V13_STAGING_URL,origin=env.V13_REVIEW_ORIGIN;
  if(!/^[a-z]{20}$/.test(ref||'')||ref==='mbdelspbjusarbwlltol'||env.V13_AUTHORIZED_STAGING_REF!==ref||url!==`https://${ref}.supabase.co`||!/^https:\/\/[^/]+$/.test(origin||'')||origin.includes('jaxon-maths-private-git.pages.dev'))throw Error('Distinct reviewed staging configuration required');
  const B=require('../v3/backend-config.js');B.publicKey(env.V13_STAGING_ANON_KEY,ref);
@@ -14,6 +16,7 @@ function configuration(env,local=false){
  return {origin,authUrl:url+'/auth/v1',restUrl:url+'/rest/v1',anonKey:env.V13_STAGING_ANON_KEY,serviceKey:env.V13_STAGING_SERVICE_ROLE_KEY,rateSecret:env.V13_PAIRING_RATE_SECRET};
 }
 function createServer(c,{cert,key,dir='single-child-dist'}={}){
+ Policy.assertEndpoint(c.authUrl,{allowLocal:c.localOnly===true});Policy.assertEndpoint(c.restUrl,{allowLocal:c.localOnly===true});
  const rpc=async(token,name,args)=>{const r=await fetch(c.restUrl+'/rpc/'+name,{method:'POST',headers:{apikey:token===c.serviceKey?c.serviceKey:c.anonKey,authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify(args)});if(!r.ok){const value=await r.json().catch(()=>({}));const e=Error('Request refused');if(['Unlock required','Unlock this connected device again'].includes(value.message))e.status=401;else if(['Parent account required','Learner account required'].includes(value.message))e.status=403;throw e;}return r.json();};
  const gateway=create({origin:c.origin,rateSecret:Buffer.from(c.rateSecret,'hex'),parentRpc:(token,name,args)=>rpc(token,name,args),serviceRpc:(name,args)=>rpc(c.serviceKey,name,args)});
  const headers={'Cache-Control':'no-store','Referrer-Policy':'no-referrer','X-Content-Type-Options':'nosniff','Permissions-Policy':'camera=(), microphone=(), geolocation=()','Content-Security-Policy':"default-src 'self'; connect-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'; object-src 'none'; base-uri 'none'; form-action 'self'"};

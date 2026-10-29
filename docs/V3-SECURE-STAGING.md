@@ -1,3 +1,5 @@
+> **Owner-confirmed project correction, 29 October 2026:** `sfogrvedypgtxfvecmbx` is **Jaxon’s Maths Adventure - Main**, never a staging target. `mbdelspbjusarbwlltol` was deleted. No hosted staging project currently exists. Earlier labels/instructions below are historical and must not be used to access either ref. Use [the current isolation handoff](STAGING-ISOLATION-STATUS.md) and [working setup guide](SINGLE-CHILD-SETUP.md); never run old commands against Main.
+
 # Working local setup clarification — 29 October 2026
 
 The one-parent/one-child identity bridge and real local Supabase setup are now implemented on the feature branch. See [working setup, exact staging steps and secret names](SINGLE-CHILD-SETUP.md). Real Auth/email/JWT/PostgREST checks are local, not hosted. The earlier foundation-only identity blocker below is historical; production and hosted staging remain unchanged/unverified. No release PR, merge, deployment or production migration is authorised.

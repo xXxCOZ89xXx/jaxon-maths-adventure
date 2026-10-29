@@ -20,8 +20,8 @@ for(const asset of JSON.parse(fs.readFileSync('v3/assets/world-guide-portraits-p
  assert.ok(fs.readFileSync(path.join(site,'v3/assets/world-guide-portraits-preview',asset.file)).equals(fs.readFileSync(path.join('v3/assets/world-guide-portraits-preview',asset.file))));
 
 const invalid={...process.env,V3_STAGING_BUILD_FIXTURE:'1',
-  V3_STAGING_PROJECT_REF:'sfogrvedypgtxfvecmbx', V3_STAGING_AUTHORIZED_REF:'sfogrvedypgtxfvecmbx',
-  V3_STAGING_URL:'https://sfogrvedypgtxfvecmbx.supabase.co',
+  V3_STAGING_PROJECT_REF:'zzzzzzzzzzzzzzzzzzzz', V3_STAGING_AUTHORIZED_REF:'zzzzzzzzzzzzzzzzzzzz',
+  V3_STAGING_URL:'https://zzzzzzzzzzzzzzzzzzzz.supabase.co',
   V3_STAGING_ANON_KEY:'sb_publishable_fictional_test_only'};
 assert.throws(()=>execFileSync(process.execPath,['scripts/build-v3-staging.cjs'],{cwd:root,env:invalid,stdio:'pipe'}),
   e=>String(e.stderr).includes('Fixture output requires fictional configuration'));

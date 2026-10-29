@@ -8,6 +8,10 @@ const exists=name=>{try{return !!docker(['inspect',name]);}catch{return false;}}
 const jwt=(role,secret)=>{const h=Buffer.from(JSON.stringify({alg:'HS256',typ:'JWT'})).toString('base64url'),p=Buffer.from(JSON.stringify({role,iss:'supabase-local',iat:Math.floor(Date.now()/1000),exp:Math.floor(Date.now()/1000)+86400*30})).toString('base64url');return h+'.'+p+'.'+crypto.createHmac('sha256',secret).update(h+'.'+p).digest('base64url');};
 const cfgPath=root+'/local-private.json';let cfg;
 if(fs.existsSync(cfgPath))cfg=JSON.parse(fs.readFileSync(cfgPath));else{const secret=crypto.randomBytes(32).toString('hex');cfg={localOnly:true,origin:'https://127.0.0.1:4443',authUrl:'http://127.0.0.1:54321',restUrl:'http://127.0.0.1:54322',mailUrl:'http://127.0.0.1:54324',jwtSecret:secret,anonKey:jwt('anon',secret),serviceKey:jwt('service_role',secret),rateSecret:crypto.randomBytes(32).toString('hex')};fs.writeFileSync(cfgPath,JSON.stringify(cfg),{mode:0o600});}
+const Policy=require('../../v3/staging-policy.js');
+if(cfg.localOnly!==true||cfg.origin!=='https://127.0.0.1:4443')throw Error('Local fixture configuration required');
+Policy.assertEndpoint(cfg.authUrl,{allowLocal:true});Policy.assertEndpoint(cfg.restUrl,{allowLocal:true});
+if(!['authUrl','restUrl'].every(k=>/^http:\/\/127\.0\.0\.1:\d+$/.test(cfg[k])))throw Error('Local fixture endpoints required');
 const sql=s=>docker(['exec','-i','jaxon-local-db','psql','-h','127.0.0.1','-U','postgres','-XqAt','-v','ON_ERROR_STOP=1'],s);
 (async()=>{
  if(!exists('jaxon-local-supabase'))docker(['network','create','--internal','jaxon-local-supabase']);
@@ -31,12 +35,14 @@ const sql=s=>docker(['exec','-i','jaxon-local-db','psql','-h','127.0.0.1','-U','
  create or replace function auth.uid() returns uuid language sql stable as $$select (auth.jwt()->>'sub')::uuid$$;
  grant execute on function auth.jwt(),auth.uid() to anon,authenticated,service_role;`);
  if(sql("select to_regclass('public.v3_environment') is not null")!=='t'){
-  sql("set app.v3.staging_authorized='yes';set app.v3.staging_ref='sfogrvedypgtxfvecmbx';"+fs.readFileSync('supabase/v3-staging/001_secure_core.sql','utf8'));
+  sql("set app.v3.staging_authorized='yes';set app.v3.staging_ref='abcdefghijklmnopqrst';"+fs.readFileSync('supabase/v3-staging/001_secure_core.sql','utf8'));
   sql(fs.readFileSync('supabase/v3-staging/002_catalog.sql','utf8'));
-  sql(fs.readFileSync('supabase/v3-staging/004_compact_save_receipts.sql','utf8'));
-  sql("set app.v12.foundation_reviewed='yes';set app.v12.target_ref='sfogrvedypgtxfvecmbx';"+fs.readFileSync('supabase/single-child-draft/001_pairing_foundation.sql','utf8'));
+  sql("set app.v3.staging_ref='abcdefghijklmnopqrst';"+fs.readFileSync('supabase/v3-staging/004_compact_save_receipts.sql','utf8'));
+  sql("set app.v12.foundation_reviewed='yes';set app.v12.target_ref='abcdefghijklmnopqrst';"+fs.readFileSync('supabase/single-child-draft/001_pairing_foundation.sql','utf8'));
  }
- if(sql("select to_regclass('v12_private.children') is not null")!=='t')sql("set app.v13.bridge_reviewed='yes';set app.v12.target_ref='sfogrvedypgtxfvecmbx';"+fs.readFileSync('supabase/single-child-draft/002_identity_bridge.sql','utf8'));
+ // Relabel an older LOCAL fixture marker only; retain all fictional accounts/saves.
+ sql("update public.v3_environment set project_ref='abcdefghijklmnopqrst' where project_ref in ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol');");
+ if(sql("select to_regclass('v12_private.children') is not null")!=='t')sql("set app.v13.bridge_reviewed='yes';set app.v12.target_ref='abcdefghijklmnopqrst';"+fs.readFileSync('supabase/single-child-draft/002_identity_bridge.sql','utf8'));
  if(!exists('jaxon-local-rest'))docker(['run','--pull=never','-d','--name','jaxon-local-rest','--network','jaxon-local-supabase','-p','127.0.0.1:54322:3000','-e','PGRST_DB_URI=postgres://authenticator:local-fictional-rest-only@jaxon-local-db:5432/postgres','-e','PGRST_DB_SCHEMAS=public','-e','PGRST_DB_ANON_ROLE=anon','-e','PGRST_JWT_SECRET='+cfg.jwtSecret,'-e','PGRST_DB_EXTRA_SEARCH_PATH=extensions','postgrest/postgrest:v14.18']);
  sql("notify pgrst,'reload schema'");
  let forwarded=false;try{const r=await fetch(cfg.authUrl+'/health');forwarded=r.ok&&r.headers.get('x-jaxon-local-fixture')==='true';}catch{}

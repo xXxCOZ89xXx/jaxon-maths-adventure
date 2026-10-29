@@ -3,7 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const {execFileSync} = require('node:child_process');
 const {config} = require('../v3/cloud-sync.js');
-const expected = 'sfogrvedypgtxfvecmbx';
+const Policy=require('../v3/staging-policy.js');
+const expected=Policy.assertRef(process.env.V3_STAGING_PROJECT_REF);
 async function main() {
   const c = config({environment:'staging', projectName:'jaxon-maths-v3-staging',
     projectRef:process.env.V3_STAGING_PROJECT_REF,

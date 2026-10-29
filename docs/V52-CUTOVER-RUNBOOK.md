@@ -1,3 +1,5 @@
+> **Owner-confirmed project correction, 29 October 2026:** `sfogrvedypgtxfvecmbx` is **Jaxon’s Maths Adventure - Main**, never a staging target. `mbdelspbjusarbwlltol` was deleted. No hosted staging project currently exists. Earlier labels/instructions below are historical and must not be used to access either ref. Use [the current isolation handoff](STAGING-ISOLATION-STATUS.md) and [working setup guide](SINGLE-CHILD-SETUP.md); never run old commands against Main.
+
 # V5.2 final installation and cutover runbook — 21 October 2026
 
 **Prepared for owner review, not executed. No production SQL, account provisioning, merge or deployment is authorised in this task.** The full encrypted export, second protected copy, integrity testing and successful Windows application recovery are accepted as completed owner evidence. The private report says PARTIAL/application PASS and archive unchanged. Do not request the backup or repeat its local restoration test.

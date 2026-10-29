@@ -1,4 +1,4 @@
--- Owner-run documentation check ONLY: staging sfogrvedypgtxfvecmbx.
+-- Owner-run documentation check ONLY: staging <NEW_STAGING_REF>.
 -- First verify the project ref in the Supabase dashboard URL; SQL markers alone
 -- cannot prove the physical project. Run the WHOLE file in a new SQL Editor query.
 -- No application RPCs, DDL, DML, account/PIN changes or learning-record reads.
@@ -6,6 +6,14 @@
 -- tables/columns and views. No supplied SQL or row contents are interpolated.
 -- Source contract: codex/v3-adventure-build @ f0b2d50.
 BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY;
+DO $staging_target$ BEGIN
+ IF coalesce(current_setting('app.v3.staging_ref',true),'') !~ '^[a-z]{20}$'
+ OR current_setting('app.v3.staging_ref',true) IN ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol')
+ THEN RAISE EXCEPTION 'New isolated staging target required; Main and deleted project forbidden'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM public.v3_environment WHERE name='jaxon-maths-v3-staging' AND project_ref=current_setting('app.v3.staging_ref',true))
+ THEN RAISE EXCEPTION 'Staging marker mismatch; verify dashboard identity independently'; END IF;
+END $staging_target$;
+
 SET LOCAL statement_timeout = '15s';
 SET LOCAL lock_timeout = '3s';
 WITH
@@ -98,7 +106,7 @@ samples(key, doc) AS (
   false,false,'') END FROM gate
  UNION ALL SELECT 'environment', CASE WHEN ok THEN query_to_xml(
   'SELECT count(*) AS n, coalesce(bool_and(name=''jaxon-maths-v3-staging''
-   AND project_ref=''sfogrvedypgtxfvecmbx''),false) AS ok FROM public.v3_environment',
+   AND project_ref=current_setting(''app.v3.staging_ref'')),false) AS ok FROM public.v3_environment',
   false,false,'') END FROM gate
  UNION ALL SELECT 'catalog', CASE WHEN ok THEN query_to_xml(
   $catalog$WITH expected(item_id,cost) AS (VALUES ('helmet',100),
@@ -181,7 +189,7 @@ findings(ord, check_name, status, detail) AS (
   'Read-only snapshot; aggregate reads require postgres with RLS bypass and the expected base-table columns.' FROM gate
  UNION ALL SELECT 2, 'Staging marker (owner must verify dashboard ref)',
   CASE WHEN n IS NULL THEN 'REVIEW' WHEN n=1 AND ok THEN 'PASS' ELSE 'FAIL' END,
-  'Expected exactly one jaxon-maths-v3-staging marker for sfogrvedypgtxfvecmbx; a marker is not independent project identity.'
+  'Expected exactly one jaxon-maths-v3-staging marker for <NEW_STAGING_REF>; a marker is not independent project identity.'
  FROM stats WHERE key='environment'
  UNION ALL SELECT 3, 'Installed staging table contract',
   CASE WHEN missing=0 AND coalesce(ordinary_tables,false) THEN 'PASS' ELSE 'FAIL' END,

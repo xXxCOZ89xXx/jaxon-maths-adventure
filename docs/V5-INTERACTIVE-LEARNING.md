@@ -1,3 +1,5 @@
+> **Owner-confirmed project correction, 29 October 2026:** `sfogrvedypgtxfvecmbx` is **Jaxon’s Maths Adventure - Main**, never a staging target. `mbdelspbjusarbwlltol` was deleted. No hosted staging project currently exists. Earlier labels/instructions below are historical and must not be used to access either ref. Use [the current isolation handoff](STAGING-ISOLATION-STATUS.md) and [working setup guide](SINGLE-CHILD-SETUP.md); never run old commands against Main.
+
 # V5 interactive learning expansion
 
 Continues V4 on `codex/v3-adventure-build`, draft PR #2. The nine worlds, 55 skills, original discovery bank, three freely selectable difficulty levels, eight Town architectures, eight estate stages, wardrobe IDs, learning history and secure staging adapter remain in place. Storage still uses the compatible version-3 envelope; new state is additive and versioned within it.

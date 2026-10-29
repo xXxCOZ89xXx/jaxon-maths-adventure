@@ -1,0 +1,50 @@
+
+> test:single-child
+> node tests/single-child-unit.cjs && node tests/single-child-security.cjs && playwright test -c playwright.single-child.config.cjs
+
+PASS gateway origins, payloads, trusted throttling, secure cookies, private game bridge, production-config refusal, redacted errors, mandatory email verification and stale-response isolation
+PASS email verification, non-anonymous identity, recent password and parent role are enforced in SQL
+PASS all new tables have RLS, deny clients and service direct access; functions have narrow grants
+PASS code is server-random 128-bit, hashed only, short lived, child bound and replaced safely
+PASS racing pair requests allow exactly one use; raw device tokens never persist
+PASS expired pairing, guess throttling, generation throttling and cancellation fail safely
+PASS persistent child PIN limits cannot be avoided with a new device bucket; unlock and scope bind family
+PASS wrong parent cannot revoke device; reset revokes grants/codes, preserving profile and legacy progress
+PASS lost device revoked by verified parent; replacement rejoins same child without child email
+PASS existing Auth, family IDs and exact saved progress untouched; no new game grants or anonymous users
+9 foundation security groups passed. Hosted verification and game identity bridge NOT established.
+Built production-test-dist with fictional public key; browser tests deny unhandled remote traffic.
+
+Running 16 tests using 1 worker
+
+(node:459688) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop-chromium] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (6.9s)
+  ✓   2 [desktop-chromium] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (3.4s)
+  ✓   3 [desktop-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (2.5s)
+  ✓   4 [desktop-chromium] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (3.3s)
+(node:460423) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 [ipad-portrait-chromium] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (8.6s)
+  ✓   6 [ipad-portrait-chromium] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (4.7s)
+  ✓   7 [ipad-portrait-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (3.9s)
+  ✓   8 [ipad-portrait-chromium] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (4.0s)
+(node:462297) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [ipad-landscape-chromium] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (9.3s)
+  ✓  10 [ipad-landscape-chromium] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (4.5s)
+  ✓  11 [ipad-landscape-chromium] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (2.8s)
+  ✓  12 [ipad-landscape-chromium] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (3.4s)
+(node:463495) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  13 [small-touch] › tests/single-child.spec.cjs:7:1 › nickname-only setup, one-use pairing, learner PIN, parent reset and device revocation (6.5s)
+  ✓  14 [small-touch] › tests/single-child.spec.cjs:15:1 › keyboard, focus, text scaling, reduced motion, error announcements and help (3.2s)
+  ✓  15 [small-touch] › tests/single-child.spec.cjs:21:1 › actual production entry: protected parent evidence and saved status remain usable; setup stays absent (2.6s)
+  ✓  16 [small-touch] › tests/single-child.spec.cjs:25:1 › production sign-in and parent profile: accessible names, contrast, focus and no setup bypass (2.5s)
+
+  16 passed (1.3m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

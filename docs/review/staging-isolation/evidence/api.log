@@ -1,0 +1,11 @@
+PASS real email confirmation required and actual password JWT permits one nickname profile
+PASS all new private tables and service-only RPCs deny public/authenticated direct access
+PASS expiry, replacement, parent binding and concurrent single-use pairing execute in database
+PASS persistent guessing and generation limits reject retries without using an expired credential
+PASS PIN cooldown persists across address changes; server resolves learner family and refuses parent actions
+PASS paired learner uses same CAS/compact-receipt game core; no fabricated wallet or cross-family data
+PASS verified parent can use existing parent PIN/progress API while learner cannot act as parent
+PASS parent PIN reset invalidates grants; lost-device revoke and replacement preserve exact same child progress
+PASS disabled parent is denied even with a still-signed JWT; paired game scope is blocked too
+PASS in-flight save and revocation serialize on the same profile without losing the committed save
+10 real LOCAL Supabase account/device/game groups passed. No hosted verification claimed.

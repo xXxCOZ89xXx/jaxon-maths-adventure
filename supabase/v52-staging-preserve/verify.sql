@@ -1,6 +1,7 @@
 -- Owner-only aggregate post-upgrade check. Read only; never calls application RPCs.
 begin read only;
 set local search_path='';
+select v52_staging_private.assert_target();
 select (select state from v52_staging_private.control) as state,
  (select staging_upgrade_version from public.v3_environment) as staging_version,
  v52_staging_private.data_digest()=(select before_digest from v52_staging_private.control) as original_data_unchanged_before_testing,

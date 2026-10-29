@@ -20,22 +20,22 @@ const test=async(label,f)=>{await f();console.log('PASS',label);count++;};
  create function auth.jwt() returns jsonb language sql stable as $$select coalesce(nullif(current_setting('request.jwt.claims',true),''),'{}')::jsonb$$;
  create function auth.uid() returns uuid language sql stable as $$select (auth.jwt()->>'sub')::uuid$$;
  grant usage on schema auth to authenticated;grant execute on function auth.jwt(),auth.uid() to authenticated;`);
- sql("set app.v3.staging_authorized='yes';set app.v3.staging_ref='sfogrvedypgtxfvecmbx';"+fs.readFileSync('supabase/v3-staging/001_secure_core.sql','utf8'));
+ sql("set app.v3.staging_authorized='yes';set app.v3.staging_ref='abcdefghijklmnopqrst';"+fs.readFileSync('supabase/v3-staging/001_secure_core.sql','utf8'));
  sql(`insert into auth.users(id,email_confirmed_at,is_anonymous) values ${Object.entries(ids).map(([k,id])=>`('${id}',${k==='unverified'?'null':'now()'},${k==='anonymous'})`).join(',')};
  insert into public.maths_families values('${ids.legacyC}','${ids.legacyP}');
  insert into public.v3_progress(child_user_id,revision,progress) values('${ids.legacyC}',7,'{"coins":45,"startingProfile":{"version":1},"draft":"saved"}');`);
- sql(fs.readFileSync('supabase/v3-staging/004_compact_save_receipts.sql','utf8'));
+ sql("set app.v3.staging_ref='abcdefghijklmnopqrst';"+fs.readFileSync('supabase/v3-staging/004_compact_save_receipts.sql','utf8'));
  sql(`insert into public.v3_wallet(child_user_id,coins,bonus,owned) values('${ids.legacyC}',33,17,'[\"cap\"]');`);
  const before=sql('select jsonb_agg(to_jsonb(p)) from public.v3_progress p;select jsonb_agg(to_jsonb(f)) from public.maths_families f;select count(*) from auth.users;');
 
  sql('alter table auth.users add column banned_until timestamptz, add column deleted_at timestamptz');
  const legacyPrefix=claims('legacyC');sql(legacyPrefix+"select public.v3_set_pin('1234')");const legacyUnlock=JSON.parse(sql(legacyPrefix+"select public.v3_unlock('1234')")).token;const pinBefore=sql('select jsonb_agg(to_jsonb(p)) from public.v3_pins p;select jsonb_agg(to_jsonb(u)) from public.v3_unlocks u;');
  const foundation=fs.readFileSync('supabase/single-child-draft/001_pairing_foundation.sql','utf8');
- sql("set app.v12.foundation_reviewed='yes';set app.v12.target_ref='sfogrvedypgtxfvecmbx';"+foundation);
+ sql("set app.v12.foundation_reviewed='yes';set app.v12.target_ref='abcdefghijklmnopqrst';"+foundation);
  const migration=fs.readFileSync('supabase/single-child-draft/002_identity_bridge.sql','utf8');
- const reviewed="set app.v13.bridge_reviewed='yes';set app.v12.target_ref='sfogrvedypgtxfvecmbx';";
+ const reviewed="set app.v13.bridge_reviewed='yes';set app.v12.target_ref='abcdefghijklmnopqrst';";
  await test('bridge refuses missing review, production target, changed core and late migration failure atomically',()=>{
-  fail(()=>sql(migration));fail(()=>sql("set app.v13.bridge_reviewed='yes';set app.v12.target_ref='mbdelspbjusarbwlltol';"+migration));
+  fail(()=>sql(migration));for(const denied of ['sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol'])fail(()=>sql("set app.v13.bridge_reviewed='yes';set app.v12.target_ref='"+denied+"';"+migration));
   sql('alter function public.v3_request(text,text,jsonb) rename to v3_request_original;create function public.v3_request(text,text,jsonb) returns jsonb language sql as $$select null::jsonb$$;');fail(()=>sql(reviewed+migration));sql('drop function public.v3_request(text,text,jsonb);alter function public.v3_request_original(text,text,jsonb) rename to v3_request;');
   fail(()=>sql(reviewed+migration.replace(/commit;\s*$/, "do $$begin raise exception 'late failure';end$$;commit;")));
   assert.equal(sql("select to_regclass('v12_private.children') is null"),'t');

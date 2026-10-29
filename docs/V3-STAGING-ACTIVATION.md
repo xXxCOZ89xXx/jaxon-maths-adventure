@@ -1,3 +1,5 @@
+> **Owner-confirmed project correction, 29 October 2026:** `sfogrvedypgtxfvecmbx` is **Jaxon’s Maths Adventure - Main**, never a staging target. `mbdelspbjusarbwlltol` was deleted. No hosted staging project currently exists. Earlier labels/instructions below are historical and must not be used to access either ref. Use [the current isolation handoff](STAGING-ISOLATION-STATUS.md) and [working setup guide](SINGLE-CHILD-SETUP.md); never run old commands against Main.
+
 # V5 continuation of the existing combined acceptance session
 
 No additional session is requested now. When the owner chooses to run the already-planned family/iPad session, include the V5 checks below in that same session. Use the existing fictional families privately inside the app; never send credentials or PINs in chat or documents.

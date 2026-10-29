@@ -1,4 +1,4 @@
--- OWNER-RUN ONLY after review. Target: sfogrvedypgtxfvecmbx. Never run by the build.
+-- OWNER-RUN ONLY after review. Target: newly verified staging ref; never Main or deleted. Never run by the build.
 -- Additive migration: no existing progress, wallets, PINs or transaction rows are changed.
 -- Old clients remain compatible. Do not restore the old RPC after compact receipts exist.
 BEGIN;
@@ -6,7 +6,8 @@ SET LOCAL lock_timeout='5s';
 SET LOCAL statement_timeout='60s';
 DO $guard$
 BEGIN
- IF NOT EXISTS(SELECT 1 FROM public.v3_environment WHERE name='jaxon-maths-v3-staging' AND project_ref='sfogrvedypgtxfvecmbx')
+ IF coalesce(current_setting('app.v3.staging_ref',true),'') !~ '^[a-z]{20}$' OR current_setting('app.v3.staging_ref',true) IN ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol') THEN RAISE EXCEPTION 'Wrong project: Main and deleted project forbidden'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM public.v3_environment WHERE name='jaxon-maths-v3-staging' AND project_ref=current_setting('app.v3.staging_ref',true))
  THEN RAISE EXCEPTION 'Wrong project: compact receipts require the existing staging project'; END IF;
  IF EXISTS(SELECT 1 FROM pg_attribute WHERE attrelid='public.v3_transactions'::regclass AND attname='request_fingerprint' AND NOT attisdropped)
  THEN RAISE EXCEPTION 'Receipt migration already present: run verification instead'; END IF;

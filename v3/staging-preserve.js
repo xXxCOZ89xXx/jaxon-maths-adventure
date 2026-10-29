@@ -5,8 +5,10 @@
  else root.V52StagingPreserve=api;
 })(typeof window==='object'?window:globalThis,function(){
  'use strict';
- const projectRef='sfogrvedypgtxfvecmbx',version=2;
+ const projectRef=null,version=2; // No hosted staging project has been provisioned.
  function verify(config,identity){
+  const projectRef=config.projectRef;
+  if(!/^[a-z]{20}$/.test(projectRef||'')||['sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol'].includes(projectRef))throw Error('New isolated staging target required');
   if(config.environment!=='staging'||config.projectRef!==projectRef||config.authorizedRef!==projectRef||
      config.url!==`https://${projectRef}.supabase.co`||config.projectName!=='jaxon-maths-v3-staging'||
      identity?.name!==config.projectName||identity?.projectRef!==projectRef||identity?.stagingUpgradeVersion!==version)

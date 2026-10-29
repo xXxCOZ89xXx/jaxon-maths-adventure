@@ -1,3 +1,5 @@
+> **Owner-confirmed project correction, 29 October 2026:** `sfogrvedypgtxfvecmbx` is **Jaxon’s Maths Adventure - Main**, never a staging target. `mbdelspbjusarbwlltol` was deleted. No hosted staging project currently exists. Earlier labels/instructions below are historical and must not be used to access either ref. Use [the current isolation handoff](STAGING-ISOLATION-STATUS.md) and [working setup guide](SINGLE-CHILD-SETUP.md); never run old commands against Main.
+
 # V5.2 production integration release package — 21 October 2026
 
 **Implemented and locally rehearsed; not applied, deployed or merged.** No genuine account, PIN, family, progress or reward record was accessed or altered. No remote Supabase call or proxy workaround was attempted. The owner-supplied CSV remains outside Git. The next steps concern release review and hosted acceptance, not rebuilding gameplay.

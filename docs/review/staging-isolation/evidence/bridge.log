@@ -1,0 +1,6 @@
+PASS bridge refuses missing review, production target, changed core and late migration failure atomically
+PASS migration preserves exact legacy IDs, progress, wallets, grants and Auth rows
+PASS existing family adopts its original child without adding an Auth identity or overwriting saved evidence
+PASS legacy Auth learner still uses its original role/PIN/game path after FK migration
+PASS canonical core is private and every new/retargeted table denies direct client grants
+5 identity-bridge preservation/rollback groups passed; network-disabled PostgreSQL, fictional legacy records.

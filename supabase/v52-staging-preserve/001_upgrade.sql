@@ -1,4 +1,4 @@
--- PREPARED ONLY. Owner approval required. Staging sfogrvedypgtxfvecmbx only.
+-- PREPARED ONLY. Owner approval required. New independently verified staging only; Main and deleted project forbidden.
 -- Never executed by builder/CI. Each phase is a complete error-stopping transaction.
 begin;
 set local search_path='';

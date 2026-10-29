@@ -5,6 +5,7 @@ create schema if not exists extensions;
 create extension if not exists pgcrypto with schema extensions;
 do $$ begin
  if current_setting('app.v3.staging_authorized',true) is distinct from 'yes'
+ or current_setting('app.v3.staging_ref',true) in ('sfogrvedypgtxfvecmbx','mbdelspbjusarbwlltol')
  or coalesce(current_setting('app.v3.staging_ref',true),'') !~ '^[a-z]{20}$'
  then raise exception 'Verify and authorise the separate staging project first'; end if;
 end $$;

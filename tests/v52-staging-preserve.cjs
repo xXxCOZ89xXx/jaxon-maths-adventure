@@ -2,9 +2,9 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),vm=require('node:vm');
 const P=require('../v3/staging-preserve.js'),Sync=require('../v3/cloud-sync.js');
 const {build,entry}=require('../scripts/build-v52-staging.cjs');
-const config={environment:'staging',projectName:'jaxon-maths-v3-staging',projectRef:P.projectRef,authorizedRef:P.projectRef,
- url:`https://${P.projectRef}.supabase.co`,anonKey:'sb_publishable_fictional_preservation_fixture_only_0000'};
-const id={name:config.projectName,projectRef:P.projectRef,stagingUpgradeVersion:2};
+const config={environment:'staging',projectName:'jaxon-maths-v3-staging',projectRef:'abcdefghijklmnopqrst',authorizedRef:'abcdefghijklmnopqrst',
+ url:`https://abcdefghijklmnopqrst.supabase.co`,anonKey:'sb_publishable_fictional_preservation_fixture_only_0000'};
+const id={name:config.projectName,projectRef:'abcdefghijklmnopqrst',stagingUpgradeVersion:2};
 const results=[];async function test(label,f){await f();results.push(label);console.log('PASS',label);}
 (async()=>{
  await test('staging identity/version fails closed and preserves all existing namespace literals',()=>{
@@ -19,16 +19,16 @@ const results=[];async function test(label,f){await f();results.push(label);cons
  await test('pre-upgrade transaction retry keeps extra fields and request identity; failed retries retain exact bytes',async()=>{
   const source=entry().split('async function transaction(op, payload) {')[1].split('async function heartbeat')[0];
   const saved=' {"op":"award","payload":{"amount":5,"requestId":"old-request-id","legacyExtra":"keep"}} ';
-  const data=new Map([[`v3-intent:${P.projectRef}:fictional-parent`,saved]]);let sent,fail=true,ids=0;
+  const data=new Map([[`v3-intent:abcdefghijklmnopqrst:fictional-parent`,saved]]);let sent,fail=true,ids=0;
   const ctx={Preserve:P,c:config,identity:{user:'fictional-parent'},wallet:null,crypto:{randomUUID(){ids++;return 'new-id';}},
    localStorage:{getItem:k=>data.get(k)||null,setItem:(k,v)=>data.set(k,v),removeItem:k=>data.delete(k)},
    rpc:async(op,p)=>{if(op==='read')return {wallet:{coins:7},revision:3,progress:{}};sent=p;if(fail)throw {code:'P0001',message:'Review required'};return {wallet:{coins:7}};}};
   vm.runInNewContext('async function transaction(op,payload){'+source+'\nthis.transaction=transaction;',ctx);
   await assert.rejects(ctx.transaction('award',{amount:5}));
-  assert.equal(data.get(`v3-intent:${P.projectRef}:fictional-parent`),saved);
+  assert.equal(data.get(`v3-intent:abcdefghijklmnopqrst:fictional-parent`),saved);
   assert.equal(sent.requestId,'old-request-id');assert.equal(sent.legacyExtra,'keep');assert.equal(ids,0);
   fail=false;await ctx.transaction('award',{amount:5});
-  assert.ok(!data.has(`v3-intent:${P.projectRef}:fictional-parent`));assert.equal(ids,0);
+  assert.ok(!data.has(`v3-intent:abcdefghijklmnopqrst:fictional-parent`));assert.equal(ids,0);
  });
  await test('existing save queue remains intact on rejection and commits an exact retry without reseeding',async()=>{
   const key='existing-queue',doc={version:1,revision:7,pending:{requestId:'same-id',revision:7,progress:{draft:'keep'}},latest:null,conflict:null,archives:[{old:'retained'}]};
