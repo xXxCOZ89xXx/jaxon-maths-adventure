@@ -1,0 +1,18 @@
+'use strict';
+const assert=require('node:assert/strict'),{load}=require('../scripts/audit-curriculum.cjs');
+const c=load(),{V3Engine:E,V3Adventure:M,V3Town:T,V10Restoration:R}=c;
+const L=require('../v3/town-life').V52TownLife;
+const clone=x=>JSON.parse(JSON.stringify(x));let generated=0;
+function valid(t,label){assert(T.venues.some(v=>v.id===t.venue),label+': '+t.venue);if(t.direct?.kind==='basket')assert.equal(t.venue,'market','Grocery basket belongs in the supermarket');assert.equal(typeof t.title,'string');assert(t.title.trim()&&!t.title.includes('undefined'));generated++;}
+for(const route of [...M.routes('town').map(r=>r.id),'gateway'])for(const tier of [1,2,3])for(const seed of [1,2,7]){const s=E.fresh();M.state(s).attempts[M.id('town',route,tier)]=seed-1;assert(M.start(s,'town',route,tier));M.current(s).tasks.forEach(t=>valid(t,route));}
+for(const scenario of L.catalog)for(const tier of [1,2,3])for(const seed of [1,2,7])L.make(scenario.id,tier,seed).steps.forEach(t=>{valid(t,scenario.id);for(const branch of Object.values(t.branches||{}))branch.forEach(t=>valid(t,scenario.id));});
+for(let stage=0;stage<3;stage++)for(const band of [5,7,9])R.tasks('town',stage,band,2).forEach(t=>valid(t,'restoration'));
+const vm=require('node:vm'),fs=require('node:fs');const home=vm.createContext({V3Art:{esc:String},V3Adventure:M,V3Town:T,V7WorldArt:{},V3AdventureUI:{controls(){}}});home.window=home;vm.runInContext(fs.readFileSync('v3/home-activities.js','utf8'),home);for(const kind of home.V7Home.kinds)for(const tier of [1,2,3])for(const seed of [1,2,7])home.V7Home.tasks(kind,tier,seed).forEach(t=>valid(t,'home '+kind));
+console.log('PASS',generated,'generated Town tasks have valid titles and venues, including curriculum, direct, restoration and branch tasks.');
+let s=E.fresh();assert.equal(R.recommend(s,'town').type,'discover');assert.equal(R.recommend(s,'town').id,'town_money');assert(!R.gate(s,'town',0).ready);
+for(const id of R.mapping.town.flat())s.discovery[id]={complete:true,rounds:[{band:7,correct:4,total:4}]};assert(R.gate(s,'town',0).ready);assert(!R.gate(s,'town',1).ready);assert.equal(R.recommend(s,'town').type,'learn');
+for(const id of R.mapping.town[0]){s.practice[id]={completed:true};s.checks[id]={stage:1};}assert.equal(R.recommend(s,'town').type,'restore');R.start(s,'town',0);const snap=clone(M.current(s));assert.equal(R.recommend(s,'town').type,'restore');assert.deepEqual(clone(M.current(s)),snap);
+for(const world of E.worlds){const state=E.fresh(),id=c.V3Curriculum.skills.find(k=>k.world===world.id).id;const q=c.JaxonFreshReview.create(id,7,901)[1];state.learning={id,mode:'check',started:true,qs:[q],i:0,correct:0,answered:false,assisted:false,answers:[]};state.view=state.resumeView='check';const before=clone(state.learning.qs);E.answerLearning(state,'wrong');assert(!state.learning.answered);assert(state.learning.assisted);assert.equal(state.view,'check');assert.deepEqual(clone(state.learning.qs),before);assert.equal(state.learning.responses[0].firstIndependent,false);E.answerLearning(state,'',true);assert(state.learning.answered);assert.equal(state.learning.correct,0);assert.deepEqual(clone(state.skills),{});}
+// Older saved tasks retain their bytes. Location fallback is a read-only adapter.
+s=E.fresh();M.start(s,'town','curr-town_planning',1);const q=M.current(s);q.tasks.forEach(t=>{delete t.venue;delete t.title;});const old=clone(q.tasks);const migrated=E.migrate(clone(s));assert.deepEqual(clone(M.current(migrated).tasks),old);assert.equal(T.locationFor(q,q.tasks[0]),'home');
+console.log('PASS named assessment path, prior-stage gates, saved level, retry evidence and legacy snapshots.');

@@ -1,0 +1,21 @@
+
+> test:touch
+> node scripts/audit-touch-flow.cjs && node tests/touch.cjs
+
+docs/TOUCH-COVERAGE.json: 4608 selected questions; 336 direct; 138 direct mission tasks
+PASS: Reachable post-discovery coverage matches real selection, all bands/worlds/modes and mission links
+PASS: All direct contracts accept touch-equivalent edits and reject wrong, incomplete and malformed answers
+PASS: Mathematics keys agree with quantities printed in each authored interaction
+PASS: Wrong answers retain the question with teaching; retries and skips cannot earn independent mastery
+PASS: Independent discovery and prerequisites stay separate; actual completed discovery reaches drag questions
+PASS: Historical released task/question snapshots and unknown queued fields are not rewritten
+PASS: All mission snapshots fit the existing storage budget without truncating retained history
+Integrated mini-tasks: 1494
+PASS: Integrated missions all teach, complete and retain their exact resumed snapshot
+PASS: Fresh and spaced checks use actual constructed answers without bypassing prerequisites or mastery policy
+PASS: 9 direct-interaction suites, fictional fixtures only.
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

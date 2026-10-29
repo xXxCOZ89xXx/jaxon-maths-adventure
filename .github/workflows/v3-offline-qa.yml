@@ -14,9 +14,12 @@ jobs:
   save-and-recovery:
     name: ${{ github.event_name == 'pull_request' && 'save-and-recovery' || 'save-and-recovery-development' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The avatar preservation test renders the approved historical source.
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -33,11 +36,23 @@ jobs:
           npx playwright test -c playwright.production.config.cjs
           npx playwright test -c playwright.production-portraits.config.cjs
           GUIDE_BUILD=live npx playwright test -c playwright.production-portraits.config.cjs
+      - name: Starting profile, family onboarding and characters (fictional only)
+        run: |
+          npm test
+          npx playwright test -c playwright.starting-profile.config.cjs
+          npx playwright test -c playwright.family-release.config.cjs
+          AVATAR_SHOTS=work/family-release/avatar-shots AVATAR_REPORT=work/family-release/avatar-preservation.json npx playwright test -c playwright.avatar-fit.config.cjs --grep 'option zero'
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ipad-save-recovery-evidence
           path: |
+            work/family-release/avatar-preservation.json
+            test-results/avatar-fit/
+            work/family-release/browser-results.json
+            test-results/family-release/
+            work/starting-profile/browser-results.json
+            test-results/starting-profile/
             tests/artifacts/compact-receipts-db.json
             tests/artifacts/save-recovery-browser.json
             test-results/save-recovery/

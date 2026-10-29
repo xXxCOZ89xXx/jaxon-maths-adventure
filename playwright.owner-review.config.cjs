@@ -1,0 +1,1 @@
+const base=require('./playwright.guided-progression.config.cjs');module.exports={...base,testMatch:/owner-review\.spec\.cjs/,outputDir:'test-results/owner-review',reporter:[['list'],['json',{outputFile:'work/owner-review/browser-results.json'}]]};

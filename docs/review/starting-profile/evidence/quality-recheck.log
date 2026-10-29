@@ -1,0 +1,16 @@
+
+Running 2 tests using 1 worker
+
+(node:58107) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:86:1 › A stale range edit cannot overwrite a replacement adventure in another tab (7.7s)
+(node:59034) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:86:1 › A stale range edit cannot overwrite a replacement adventure in another tab (8.3s)
+
+  2 passed (20.3s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

@@ -1,0 +1,10 @@
+
+> build:guided-preview
+> node -e "process.env.V3_PREVIEW_ART='current';require('./scripts/build-v3-preview.cjs')"
+
+Built preview-dist/PLAY-V3.html (standalone offline game).
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

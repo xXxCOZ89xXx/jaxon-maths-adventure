@@ -22,7 +22,7 @@ let s=E.fresh();s.adventure={townLifeV2:require('./fixtures/town-v2-before-quali
 const oldDone=copy(L.state(s));L.start(s,'cook-pasta',1,true);assert.deepEqual(L.book(s).runs[oldDone.id],oldDone);assert.equal(L.state(s).contentRevision,3);
 // New original journeys use the full recipe while an unfinished V1 remains exact and can still finish.
 s=E.fresh();require('./helpers/legacy-town.cjs')(s);const v1=copy(s.adventure.journeyV1);assert(J.start(s,'bolognese'));assert.deepEqual(J.state(s),v1);assert(J.validState(J.state(s)));
-s=E.fresh();assert(J.start(s,'bolognese'));assert.equal(J.state(s).recipeCard.name,'Spaghetti Bolognese');while(!L.state(s).done)solve(s);const before=copy(L.state(s));J.start(s,'bolognese');assert.deepEqual(L.book(s).runs[before.id],before);assert.equal(L.state(s).seed,2);
+s=E.fresh();assert(J.start(s,'bolognese'));assert.equal(J.state(s).recipeCard.name,'Spaghetti Bolognese');while(!L.state(s).done)solve(s);const before=copy(L.state(s));J.start(s,'bolognese');assert.deepEqual(L.state(s),before);J.start(s,'bolognese',1,true);assert.deepEqual(L.book(s).runs[before.id],before);assert.equal(L.state(s).seed,2);
 // New display order cannot be a complete answer, including older already-sorted snapshots.
 let orderChecks=0;for(const world of E.worlds)for(const r of M.routes(world.id))for(const tier of [1,2,3])for(let stage=0;stage<3;stage++){
  const t=M.task(world.id,r.id,tier,1,stage);if(['order','match'].includes(t.kind)){const html=H.render({world:world.id,route:r.id,values:{}},t),shown=[...html.matchAll(/data-action="h-pick:(\d+)"/g)].map(m=>+m[1]);assert.notDeepEqual(shown,t.answer);orderChecks++;}}

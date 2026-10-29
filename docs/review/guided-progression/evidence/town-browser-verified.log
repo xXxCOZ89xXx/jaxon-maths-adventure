@@ -1,0 +1,231 @@
+
+Running 18 tests using 1 worker
+
+(node:182408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop-chromium] › tests/town-life.spec.cjs:34:26 › Town plan cook-pasta: touch completion, exact reload and fresh replay (44.8s)
+  ✓   2 [desktop-chromium] › tests/town-life.spec.cjs:34:26 › Town plan shop-budget: touch completion, exact reload and fresh replay (30.9s)
+  ✓   3 [desktop-chromium] › tests/town-life.spec.cjs:34:26 › Town plan travel-library: touch completion, exact reload and fresh replay (17.8s)
+  ✘   4 [desktop-chromium] › tests/town-life.spec.cjs:65:1 › Expanded plans preserve legacy drafts, switch/resume and refuse an incomplete clock (21.8s)
+(node:193192) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 [desktop-chromium] › tests/town-life.spec.cjs:74:1 › Expanded cooking plan saves every stage through the existing staging JSON contract (43.6s)
+  ✓   6 [desktop-chromium] › tests/town-life.spec.cjs:92:1 › An offline Town draft retains its original pending save and resumes after reconnect (5.4s)
+(node:197076) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 [ipad-portrait-chromium] › tests/town-life.spec.cjs:34:26 › Town plan cook-pasta: touch completion, exact reload and fresh replay (32.9s)
+  ✓   8 [ipad-portrait-chromium] › tests/town-life.spec.cjs:34:26 › Town plan shop-budget: touch completion, exact reload and fresh replay (26.0s)
+  ✓   9 [ipad-portrait-chromium] › tests/town-life.spec.cjs:34:26 › Town plan travel-library: touch completion, exact reload and fresh replay (13.8s)
+  ✘  10 [ipad-portrait-chromium] › tests/town-life.spec.cjs:65:1 › Expanded plans preserve legacy drafts, switch/resume and refuse an incomplete clock (22.1s)
+(node:205715) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  11 [ipad-portrait-chromium] › tests/town-life.spec.cjs:74:1 › Expanded cooking plan saves every stage through the existing staging JSON contract (51.0s)
+  ✓  12 [ipad-portrait-chromium] › tests/town-life.spec.cjs:92:1 › An offline Town draft retains its original pending save and resumes after reconnect (7.1s)
+(node:211330) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  -  13 [ipad-landscape-chromium] › tests/town-life.spec.cjs:34:26 › Town plan cook-pasta: touch completion, exact reload and fresh replay
+  ✓  14 [ipad-landscape-chromium] › tests/town-life.spec.cjs:34:26 › Town plan shop-budget: touch completion, exact reload and fresh replay (21.2s)
+  -  15 [ipad-landscape-chromium] › tests/town-life.spec.cjs:34:26 › Town plan travel-library: touch completion, exact reload and fresh replay
+  ✘  16 [ipad-landscape-chromium] › tests/town-life.spec.cjs:65:1 › Expanded plans preserve legacy drafts, switch/resume and refuse an incomplete clock (23.0s)
+(node:215863) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  17 [ipad-landscape-chromium] › tests/town-life.spec.cjs:74:1 › Expanded cooking plan saves every stage through the existing staging JSON contract (21.3s)
+(node:218561) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  18 [ipad-landscape-chromium] › tests/town-life.spec.cjs:92:1 › An offline Town draft retains its original pending save and resumes after reconnect (19.1s)
+
+
+  1) [desktop-chromium] › tests/town-life.spec.cjs:65:1 › Expanded plans preserve legacy drafts, switch/resume and refuse an incomplete clock 
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-life-clock]')
+
+
+      67 |   await page.evaluate(key=>{const s=JSON.parse(localStorage.getItem(key));V5Journey.start(s,'bolognese');V5Journey.state(s).values.parts=[1,1,0];V52TownLife.start(s,'travel-swim');localStorage.setItem(key,JSON.stringify(s));},key);await page.reload();
+      68 |   let j=await current(page,key);while(j.steps[j.stage].kind!=='clock'){await answer(page,j.steps[j.stage]);await click(page,'j-submit');await click(page,'j-next');j=await current(page,key);}
+    > 69 |   const t=j.steps[j.stage];await openCurrent(page);await page.locator('[data-life-clock]').fill('');await page.reload();await openCurrent(page);await expect(page.locator('[data-life-clock]')).toHaveValue('');await expect(page.locator('[data-life-clock]')).toHaveAttribute('aria-invalid','true');
+         |                                                                                            ^
+      70 |   await page.locator('[data-life-clock]').fill(String(Math.floor(t.answer/60)).padStart(2,'0')+':'+String(t.answer%60).padStart(2,'0'));await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));await click(page,'j-submit');expect((await current(page,key)).solved).toBe(true);
+      71 |   const snapshot=await current(page,key);await click(page,'world:town');await page.locator('.town-plan-catalog details').filter({has:page.locator('summary',{hasText:'Cooking'})}).locator('summary').click();await click(page,'j-plan:cook-pizza');await click(page,'world:town');await page.locator('.town-plan-catalog details').filter({has:page.locator('summary',{hasText:'Travel'})}).locator('summary').click();await click(page,'j-plan:travel-swim');expect(await current(page,key)).toEqual(snapshot);
+      72 |   await click(page,'world:town');await click(page,'j-start:bolognese');expect(await page.evaluate(key=>V5Journey.state(JSON.parse(localStorage.getItem(key))).values.parts,key)).toEqual([1,1,0]);
+        at /workspace/jaxon-maths-adventure/tests/town-life.spec.cjs:69:92
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-desktop-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-desktop-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-desktop-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-desktop-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [ipad-portrait-chromium] › tests/town-life.spec.cjs:65:1 › Expanded plans preserve legacy drafts, switch/resume and refuse an incomplete clock 
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-life-clock]')
+
+
+      67 |   await page.evaluate(key=>{const s=JSON.parse(localStorage.getItem(key));V5Journey.start(s,'bolognese');V5Journey.state(s).values.parts=[1,1,0];V52TownLife.start(s,'travel-swim');localStorage.setItem(key,JSON.stringify(s));},key);await page.reload();
+      68 |   let j=await current(page,key);while(j.steps[j.stage].kind!=='clock'){await answer(page,j.steps[j.stage]);await click(page,'j-submit');await click(page,'j-next');j=await current(page,key);}
+    > 69 |   const t=j.steps[j.stage];
+         |                            ^
+      70 |   // Older saves may retain an incomplete typed-time draft. The current clock
+      71 |   // uses hour/minute buttons; it must still refuse that draft until edited.
+      72 |   await page.evaluate(key=>{const s=JSON.parse(localStorage.getItem(key));V52TownLife.state(s).values.clockDraft='';localStorage.setItem(key,JSON.stringify(s));},key);await page.reload();await openCurrent(page);await click(page,'j-submit');expect((await current(page,key)).solved).toBe(false);expect((await current(page,key)).values.clockDraft).toBe('');
+        at /workspace/jaxon-maths-adventure/tests/town-life.spec.cjs:69:92
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-ipad-portrait-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [ipad-landscape-chromium] › tests/town-life.spec.cjs:65:1 › Expanded plans preserve legacy drafts, switch/resume and refuse an incomplete clock 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="world:town"]').first()
+
+
+      13 |  return page.locator(selector).first();
+      14 | }
+    > 15 | async function click(page,act){const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').click();await control.click();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+         |                                                                                                                                                                                                                                                                         ^
+      16 | async function current(page,key){return page.evaluate(key=>V52TownLife.state(JSON.parse(localStorage.getItem(key))),key);}
+      17 | async function setRange(page,n){
+      18 |  await openCurrent(page);const opener=page.locator('.scene-dock [data-scene-open]').first();if(await opener.count())await openScene(page,await opener.getAttribute('data-scene-open'));
+        at click (/workspace/jaxon-maths-adventure/tests/town-life.spec.cjs:15:265)
+        at /workspace/jaxon-maths-adventure/tests/town-life.spec.cjs:74:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-ipad-landscape-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/town-final/town-life-Expanded-plans-p-36eb4--refuse-an-incomplete-clock-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [ipad-landscape-chromium] › tests/town-life.spec.cjs:74:1 › Expanded cooking plan saves every stage through the existing staging JSON contract 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="nav:map"]').first()
+        - locator resolved to <button data-action="nav:map">Pause and open world map</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+          - waiting 100ms
+        28 × waiting for element to be visible, enabled and stable
+           - element is not visible
+         - retrying click action
+           - waiting 500ms
+
+
+      41 |   }else{
+      42 |     await page.locator('.town-plan-catalog details').filter({has:page.locator('summary',{hasText:c.category})}).locator('summary').click();
+    > 43 |     await click(page,'j-plan:'+c.id);
+         |                 ^
+      44 |   }
+      45 |   const initial=await read();let visits=0;
+      46 |   while(!(await current(page,key)).done){
+        at click (/workspace/jaxon-maths-adventure/tests/town-life.spec.cjs:43:17)
+        at /workspace/jaxon-maths-adventure/tests/town-life.spec.cjs:244:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/town-final/town-life-Expanded-cooking-7a8d4-sting-staging-JSON-contract-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/town-final/town-life-Expanded-cooking-7a8d4-sting-staging-JSON-contract-ipad-landscape-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/town-final/town-life-Expanded-cooking-7a8d4-sting-staging-JSON-contract-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/town-final/town-life-Expanded-cooking-7a8d4-sting-staging-JSON-contract-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [ipad-landscape-chromium] › tests/town-life.spec.cjs:92:1 › An offline Town draft retains its original pending save and resumes after reconnect 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('[data-action="nav:map"]').first()
+        - locator resolved to <button data-action="nav:map">Pause and open world map</button>
+      - attempting click action
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+        - waiting 20ms
+        2 × waiting for element to be visible, enabled and stable
+          - element is not visible
+        - retrying click action
+          - waiting 100ms
+        29 × waiting for element to be visible, enabled and stable
+           - element is not visible
+         - retrying click action
+           - waiting 500ms
+
+
+      13 |  return page.locator(selector).first();
+      14 | }
+    > 15 | async function click(page,act){const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').click();await control.click();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+         |                                                                                                                                                                                                                                                                         ^
+      16 | async function current(page,key){return page.evaluate(key=>V52TownLife.state(JSON.parse(localStorage.getItem(key))),key);}
+      17 | async function setRange(page,n){
+      18 |  await openCurrent(page);const opener=page.locator('.scene-dock [data-scene-open]').first();if(await opener.count())await openScene(page,await opener.getAttribute('data-scene-open'));
+        at click (/workspace/jaxon-maths-adventure/tests/town-life.spec.cjs:15:265)
+        at /workspace/jaxon-maths-adventure/tests/town-life.spec.cjs:97:84
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/town-final/town-life-An-offline-Town--4c743-and-resumes-after-reconnect-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/town-final/town-life-An-offline-Town--4c743-and-resumes-after-reconnect-ipad-landscape-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/town-final/town-life-An-offline-Town--4c743-and-resumes-after-reconnect-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/town-final/town-life-An-offline-Town--4c743-and-resumes-after-reconnect-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5 failed
+    [desktop-chromium] › tests/town-life.spec.cjs:65:1 › Expanded plans preserve legacy drafts, switch/resume and refuse an incomplete clock 
+    [ipad-portrait-chromium] › tests/town-life.spec.cjs:65:1 › Expanded plans preserve legacy drafts, switch/resume and refuse an incomplete clock 
+    [ipad-landscape-chromium] › tests/town-life.spec.cjs:65:1 › Expanded plans preserve legacy drafts, switch/resume and refuse an incomplete clock 
+    [ipad-landscape-chromium] › tests/town-life.spec.cjs:74:1 › Expanded cooking plan saves every stage through the existing staging JSON contract 
+    [ipad-landscape-chromium] › tests/town-life.spec.cjs:92:1 › An offline Town draft retains its original pending save and resumes after reconnect 
+  2 skipped
+  11 passed (7.0m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

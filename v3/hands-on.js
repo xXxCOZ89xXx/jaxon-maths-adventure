@@ -612,7 +612,7 @@
       body = `<svg viewBox="0 0 400 220" role="img" aria-label="Your angle ${a} degrees"><path d="M370 200H200l${160 * Math.cos((a * Math.PI) / 180)} ${-160 * Math.sin((a * Math.PI) / 180)}" fill="none" stroke="#34563e" stroke-width="5"/><text x="200" y="80">${a}°</text></svg><div>${Array.from({length:19},(_,i)=>btn(i*10+"°",`p5-value:${i*10}`,`aria-pressed="${a===i*10}"`)).join("")}</div>`;
     else
       body = sharing(t,a) + `<p>Construct the answer in ${t.responseUnit} using fictional money. 100p = £1.</p><div class="money-tray">${coins.map((n) => btn(money(n), `p5-add:${n}`, `aria-label="Add ${n} pence"`)).join("")}</div>${btn("Remove 1p", "p5-add:-1")}${btn("Clear", "p5-value:0")}<output>${money(a)}${t.responseUnit==="pence"?" · "+a+"p":""}</output>`;
-    return `<section class="hands-on practice-manipulative" data-mechanic="${mechanic(t)}"><h3>Build your answer</h3><div class="practice-model">${body}</div>${!["fraction","fraction-calc"].includes(t.kind) ? numericInput(t,a,v.amountDraft,"practice") : ""}<div>${btn("Try constructed answer", "p5-submit", 'class="primary"')}</div><p class="small">You may also use the answer choices. Supported practice never awards mastery.</p></section>`;
+    return `<section class="hands-on practice-manipulative" data-mechanic="${mechanic(t)}"><h3>Build your answer</h3><div class="practice-model">${body}</div>${!["fraction","fraction-calc"].includes(t.kind) ? numericInput(t,a,v.amountDraft,"practice") : ""}<div>${btn("Submit answer", "p5-submit", 'class="primary"')}</div><p class="small">You may also use the answer choices. Supported practice never awards mastery.</p></section>`;
   }
   function practiceEdit(l, action, n) {
     if (!l || l.mode !== "practice" || l.answered) return false;

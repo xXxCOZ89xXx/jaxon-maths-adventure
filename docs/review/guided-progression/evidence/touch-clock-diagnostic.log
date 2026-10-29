@@ -1,0 +1,16 @@
+
+Running 1 test using 1 worker
+
+(node:203867) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+CLOCK before { now: 1793147861890, perf: 7049, focus: true, hidden: false }
+CLOCK 3s 0 { now: 1793147864929, perf: 10088, focus: true, hidden: false }
+CLOCK 5s 0.08333333333333333
+  ✓  1 [ipad-landscape-chromium] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window (4.8s)
+
+  1 passed (6.4s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

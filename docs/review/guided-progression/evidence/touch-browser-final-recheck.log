@@ -1,0 +1,22 @@
+
+Running 6 tests using 1 worker
+
+(node:206064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [ipad-portrait-chromium] › tests/touch.spec.cjs:13:1 › Grocery and fraction objects genuinely move between targets and return to the tray (12.5s)
+  ✓  2 [ipad-portrait-chromium] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window (6.4s)
+(node:207901) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [ipad-landscape-chromium] › tests/touch.spec.cjs:13:1 › Grocery and fraction objects genuinely move between targets and return to the tray (8.9s)
+  ✓  4 [ipad-landscape-chromium] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window (5.5s)
+(node:209295) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 [small-touch] › tests/touch.spec.cjs:13:1 › Grocery and fraction objects genuinely move between targets and return to the tray (11.2s)
+  ✓  6 [small-touch] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window (6.1s)
+
+  6 passed (56.7s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

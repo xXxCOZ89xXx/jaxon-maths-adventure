@@ -3,6 +3,8 @@
   const M = window.V3Adventure,
     U = window.V3AdventureUI,
     T = window.V3Town;
+  const R=window.V10Restoration,N=window.V10Navigation,P=window.V11StartingProfile;
+  let recoveryChoice=null;
   const E = window.V3Engine,
     C = window.V3Curriculum,
     A = window.V3Art,
@@ -47,7 +49,7 @@
   }
   function locationTrail(j){
     const venue=id=>T.venues.find(v=>v.id===id)?.name||'Home',previous=j.steps?.[j.stage-1]?.venue;
-    return `<div class="location-ribbon" aria-label="Current Town location"><span class="role-chip ${j.category==='Employment'?'role-worker':'role-customer'}">${j.category==='Employment'?'EMPLOYEE':'CUSTOMER'}</span><strong>${esc(venue(j.venue))}</strong><span>${previous&&previous!==j.venue?'From '+esc(venue(previous)):'Continue at this location'}</span></div>`;
+    return `<div class="location-ribbon" aria-label="Current Town location"><strong>${esc(venue(j.venue))}</strong><span>${previous&&previous!==j.venue?'From '+esc(venue(previous)):'Continue at this location'}</span></div>`;
   }
   function presentationFinish(){
     coinFeedback();
@@ -78,7 +80,7 @@
       coinFeedback();
       status(
         cloud
-          ? "Saved on this device · waiting for staging sync"
+          ? "Saved on this device · waiting for sync"
           : "Saved on this device · offline demo",
       );
     } catch {
@@ -142,21 +144,20 @@
   const art = (id, level = E.count(s, id)) =>
     `<div class="hero-art">${A.scene(id, M.visualLevel(s, id, level), before, M.completions(s, id).length)}</div>`;
   function header(eyebrow, title, back = "map") {
-    return `<div class="section-head"><div><div class="eyebrow">${eyebrow}</div><h1>${title}</h1></div>${btn("← Back", "nav:" + back)}</div>`;
+    return `<div class="section-head"><div><div class="eyebrow">${eyebrow}</div><h1>${title}</h1></div>${back?btn("← Back", "nav:" + back):""}</div>`;
   }
-  function home() {
-    const savedJourney=s.resumeView==='journey'?window.V5Journey.model(s):null;
-    const w = world(),
-      minutes = s.weekly[E.weekKey(Date.now())] || 0;
-    return `<section class="hero"><div class="hero-copy"><div class="eyebrow">YOUR NEXT CHAPTER IS WAITING</div><h1>A little maths.<br>A big adventure.</h1><p class="muted">Build bridges. Bring worlds back to life.<br>See what your next idea can do.</p>${btn('Continue adventure <span class="arrow" aria-hidden="true">→</span>', "continue", "primary")}<p class="small muted" style="margin-top:14px">${savedJourney ? "Resume "+esc(savedJourney.name||savedJourney.recipeName)+" · step "+(savedJourney.stage+1) : M.current(s) ? "Resume your saved visit" : s.quest ? "Resume your saved quest" : s.learning ? "Resume your saved lesson" : w.name + " · " + w.tag}</p></div><div class="hero-art">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="scene-caption">${esc(w.name.toUpperCase())}</span><div class="scene-bottom"><span>CHAPTER ${E.worlds.indexOf(w) + 1} / 09</span><span>${M.visualLevel(s, w.id, E.count(s, w.id))} / 3 restored</span></div></div></section><div class="eyebrow path-label">CHOOSE YOUR PATH</div><section class="choices" aria-label="Adventure choices"><article class="choice"><span class="tile-icon" aria-hidden="true">${A.icon("medal")}</span><h3>Continue adventure</h3><p class="muted">Pick up your saved trail. Your next idea can change this world.</p>${btn('Let’s go <span aria-hidden="true">→</span>', "continue", "wide")}</article><article class="choice"><span class="tile-icon" aria-hidden="true">${A.icon("forestbg")}</span><h3>Explore worlds</h3><p class="muted">Nine places to discover. Choose your own route through the adventure.</p>${btn('Open the map <span aria-hidden="true">→</span>', "nav:map", "wide")}</article><article class="choice"><span class="tile-icon" aria-hidden="true">${A.icon("rucksack")}</span><h3>My explorer & camp</h3><p class="muted">Make yourself at home. Find your look and watch your camp grow.</p>${btn('Visit Base Camp <span aria-hidden="true">→</span>', "nav:camp", "wide")}</article></section><section class="week" aria-label="Weekly learning"><span><strong>Your week</strong> <span class="small muted">${minutes.toFixed(1)} / 60 active minutes</span></span>${bar(minutes, 60)}<span class="small muted">${cloud ? window.V3Presentation.minutes(cloud.screenTime()) : minutes.toFixed(1)} minutes screen-time ${cloud ? "available" : "earned"} · 1:1</span></section>${U.suggestion(s)}${!s.tourSeen ? `<div class="notice small">New to Test Camp? Take a quick look around. <div class="actions">${btn("Show me around", "nav:tour")}${btn("Skip tour", "skip-tour")}</div></div>` : ""}`;
-  }
+  function home(){return camp();}
+  function starting(){const done=P.complete(s);return `${header('YOUR STARTING POINTS','Find my starting points','home')}<section class="panel"><p>Four little questions in each place. No timer. Pick any area, pause whenever you like, and say “I don’t know” if you need to.</p><p>${done?'All nine samples are saved. Learning adventures are now open.':'Explore the maps while we find your starting points. Lessons and adventures open when all nine areas are done.'}</p><p>${Object.keys(P.areas).filter(id=>P.valid(s.startingProfile?.areas?.[id])).length} / 9 areas complete. These short samples suggest a starting range; they do not prove mastery.</p></section><div class="starting-results">${E.worlds.map(w=>{const a=s.startingProfile?.areas?.[w.id],ready=P.valid(a);return `<article class="panel"><h2>${esc(w.name)}</h2><p>${ready?'Sample complete':a?.responses?.length?'Paused · '+a.responses.length+' / 4 saved':'Not assessed yet'}</p>${ready?'':btn(a?.question?'Resume this area':'Find this starting point','starting:'+w.id,'primary')}${done?`<details><summary>Your saved answers explained</summary>${a.responses.map(r=>`<p>${esc(r.prompt)}</p><p>You chose: ${esc(r.skipped?'I don’t know':r.value)}. ${esc(r.explanation)}</p>`).join('')}</details>`:''}</article>`;}).join('')}</div>${done?btn('Choose a learning adventure','nav:map','primary'):''}`;}
+  function startingArea(){const id=s.startingProfile?.active,a=s.startingProfile?.areas?.[id],q=a?.question;if(!q||!Array.isArray(q.choices)||typeof q.prompt!=='string')return starting();return `${header('FIND YOUR STARTING POINT',esc(E.worlds.find(w=>w.id===id).name),'starting')}<section class="panel baseline-question" data-baseline-scope="${esc(JSON.stringify([id,a.responses.length,q.prompt,a.answered]))}"><p>Question ${Math.min(a.responses.length+(a.answered?0:1),4)} / 4 · no timer</p><h2>${esc(q.prompt)}</h2>${a.answered?`<p role="status">Answer saved. We’ll explain the answers after all nine areas are done.</p>${btn('Next question','starting-next','primary')}`:`<div class="actions baseline-choices">${q.choices.map((v,i)=>btn(esc(v),'starting-choice:'+i)).join('')}</div><label>Your answer <input data-baseline-draft inputmode="decimal" value="${esc(a.draft||'')}" autocomplete="off"></label><div class="actions">${btn('Submit answer','starting-submit','primary',!a.draft?.trim())}${btn('I don’t know','starting-skip')}</div>`}<p>Use your own ideas. It’s safe not to know.</p>${a.validation?`<p role="alert">${esc(a.validation)}</p>`:""}</section>`;}
+  function savedActivities(){const entries=N.saved(s);return entries.length?`<section class="panel saved-activities"><h2>Your paused activities</h2><p>Pick one to return to the exact saved question, answer and tools.</p>${entries.map(x=>btn(esc(x.label),`resume-saved:${x.kind}:${encodeURIComponent(x.key)}`)).join('')}</section>`:'';}
+
   function map() {
-    return `${header("THE ADVENTURE ATLAS", "Where will you go?", "home")}<div class="toolbar"><p class="muted">Every world is open. Follow your curiosity.</p>${A.explorer(s, true)}<span class="badge">${s.milestones.length} learning milestones</span></div>${A.atlas?A.atlas(s):""}<div class="world-grid">${E.worlds.map((w, i) => `<article class="world-card" data-world="${w.id}" style="--world-accent:${w.color}"><div class="world-vista">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="world-open">OPEN TO EXPLORE</span><span class="world-landmarks" role="img" aria-label="${M.visualLevel(s,w.id,E.count(s,w.id))} of 3 landmarks restored">${[0,1,2].map(i=>`<i class="${i<M.visualLevel(s,w.id,E.count(s,w.id))?'restored':''}" aria-hidden="true">◆</i>`).join('')}</span></div><div class="body"><div class="eyebrow">0${i + 1} · ${s.world === w.id ? "YOU ARE HERE" : "OPEN TO EXPLORE"}</div><h2>${w.name}</h2><p class="muted">${w.tag} · ${M.visualLevel(s, w.id, E.count(s, w.id))}/3 restored · ${M.completions(s, w.id).length} expeditions</p>${bar(M.visualLevel(s, w.id, E.count(s, w.id)), 3)}${btn("Explore " + w.name, "world:" + w.id)}</div></article>`).join("")}</div>`;
+    return `${header("THE ADVENTURE ATLAS", "Where will you go?", "home")}<div class="toolbar"><p class="muted">Choose a subject world. Town has its own destination from Base Camp or the Town button.</p>${A.explorer(s, true)}<span class="badge">${s.milestones.length} learning milestones</span></div>${A.atlas?A.atlas(s):""}<div class="world-grid">${E.worlds.filter(w=>w.id!=='town').map((w, i) => `<article class="world-card" data-world="${w.id}" style="--world-accent:${w.color}"><div class="world-vista">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="world-open">OPEN TO EXPLORE</span><span class="world-landmarks" role="img" aria-label="${M.visualLevel(s,w.id,E.count(s,w.id))} of 3 landmarks restored">${[0,1,2].map(i=>`<i class="${i<M.visualLevel(s,w.id,E.count(s,w.id))?'restored':''}" aria-hidden="true">◆</i>`).join('')}</span></div><div class="body"><div class="eyebrow">0${i + 1} · ${s.world === w.id ? "YOU ARE HERE" : "OPEN TO EXPLORE"}</div><h2>${w.name}</h2><p class="muted">${w.tag} · ${M.visualLevel(s, w.id, E.count(s, w.id))}/3 restored · ${M.completions(s, w.id).length} expeditions</p>${bar(M.visualLevel(s, w.id, E.count(s, w.id)), 3)}${btn("Explore " + w.name, "world:" + w.id)}</div></article>`).join("")}</div>`;
   }
   function worldPage() {
     const w = world(),
       n = M.visualLevel(s, w.id, E.count(s, w.id));
-    return `${header("WORLD " + (E.worlds.indexOf(w) + 1) + " / 09", w.name)}<div class="split world-overview"><div><div class="world-route-map">${art(w.id)}${w.id !== "town" ? `<nav class="world-route-pins" aria-label="Explore ${esc(w.name)} landmarks">${M.routes(w.id).map((r,i)=>`<button data-action="scene-mission:${w.id}:${r.id}:${M.state(s).difficulty[w.id] || M.recommendation(s,w.id)}" style="left:${[39,62,49][i]}%;top:${[53,64,35][i]}%" aria-label="Visit ${esc(r.name)}"><span aria-hidden="true">${i+1}</span><span class="route-label">${esc(r.name)}</span></button>`).join("")}</nav>` : ""}</div><div class="actions">${btn(before ? "Show restored world" : "View before restoration", "before")}${w.id === "town" ? btn("Visit the supermarket →", "mission:town:market:1", "primary") : btn("Meet " + w.guide + " →", "quest:" + w.id, "primary")}</div></div><section class="panel"><span class="badge">${n}/3 LANDMARKS RESTORED</span><h2 style="margin-top:20px">${w.tag}</h2><p class="muted">${w.goal}</p><ul class="landmark-list">${w.stages.map((name, i) => `<li class="${n > i ? "done" : ""}"><span aria-hidden="true">${n > i ? "◆" : "◇"}</span>${name}</li>`).join("")}</ul><p class="small muted">Story restoration grows from solved puzzles. Independent mastery has its own fresh checks.</p>${A.explorer(s, true)}</section></div>${U.board(s, w)}${w.id === "town" ? '<details class="town-lessons"><summary>Maths lessons and independent checks · 16 skills</summary>' : ""}<h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills
+    return `${header("WORLD " + (E.worlds.indexOf(w) + 1) + " / 09", w.name)}${w.id==='town'?restorationBoard(w):''}<div class="split world-overview"><div><div class="world-route-map">${art(w.id)}${w.id !== "town" ? `<nav class="world-route-pins" aria-label="Explore ${esc(w.name)} landmarks">${M.routes(w.id).map((r,i)=>`<button data-action="scene-mission:${w.id}:${r.id}:${M.state(s).difficulty[w.id] || M.recommendation(s,w.id)}" style="left:${[39,62,49][i]}%;top:${[53,64,35][i]}%" aria-label="Visit ${esc(r.name)}"><span aria-hidden="true">${i+1}</span><span class="route-label">${esc(r.name)}</span></button>`).join("")}</nav>` : ""}</div><div class="actions">${btn(before ? "Show restored world" : "View before restoration", "before")}${btn("Your next learning step", "next-path:"+w.id,"primary")}</div></div><section class="panel"><span class="badge">${n}/3 LANDMARKS RESTORED</span><h2 style="margin-top:20px">${w.tag}</h2><p class="muted">${w.goal}</p><ul class="landmark-list">${w.stages.map((name, i) => `<li class="${n > i ? "done" : ""}"><span aria-hidden="true">${n > i ? "◆" : "◇"}</span>${name}</li>`).join("")}</ul><p class="small muted">Story restoration grows from solved puzzles. Independent mastery has its own fresh checks.</p>${A.explorer(s, true)}</section></div>${w.id!=='town'?restorationBoard(w):''}<h2>Optional exploration</h2><p>Try a mission, a Town plan or Base Camp whenever you like. These are separate from your starting-point and independent checks.</p>${U.board(s, w)}${w.id === "town" ? '<details class="town-lessons"><summary>Maths lessons and independent checks · 16 skills</summary>' : ""}<h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills
       .filter((k) => k.world === w.id)
       .map((k) => {
         const c = s.checks[k.id],
@@ -165,6 +166,8 @@
       })
       .join("")}</section>${w.id === "town" ? "</details>" : ""}`;
   }
+  function nextButton(world,stage){const n=R.recommend(s,world,stage),name=skill(n.id)?.name||n.id;const label=n.type==='discover'?'Starting point: '+name:n.type==='learn'?'Learn and practise: '+name:n.type==='check'?'Independent check: '+name:n.type==='restore'?(world==='town'?'Restore Community ':'Restore stage ')+(n.stage+1):'Choose an optional adventure';return btn(label,n.type==='restore'?`restore:${world}:${n.stage}`:n.type==='complete'?`world:${world}`:`${n.type}:${n.id}`,'primary');}
+  function restorationBoard(w){return `<section class="restoration-path panel" id="${w.id==='town'?'town-restoration':'restoration-path'}"><h2>${w.id==='town'?'Restore the Town community':'Your restoration path'}</h2><p>Find your starting point, learn and practise, try an independent check, then restore. Hints are safe.</p><div class="recommended-next"><h3>Your next step</h3>${nextButton(w.id)}</div><div class="skill-list">${w.stages.map((name,i)=>{const g=R.gate(s,w.id,i),done=s.milestones.includes(w.id+':'+i);return `<article class="panel"><h3>${w.id==='town'?'Restore Community':'Stage'} ${i+1}: ${esc(name)}</h3><p>Maths for this stage: ${g.skills.map(id=>esc(skill(id)?.name||id)).join(' · ')}</p>${done?'<p>Completed work stays saved.</p>':`<p>${g.ready?'Ready to restore. No timer; pause whenever you need.':'Before this stage:'}</p>${g.prior?`<p>Finish ${w.id==='town'?'Restore Community':'Stage'} ${i}: ${esc(w.stages[i-1])}.</p>${nextButton(w.id,i-1)}`:''}${g.missing.length?`<ul>${g.missing.map(id=>`<li>Complete the starting point for ${esc(skill(id)?.name||id)}. ${btn('Starting point: '+(skill(id)?.name||id),'discover:'+id)}</li>`).join('')}</ul>`:''}`}<div class="actions">${done||g.ready?btn(done?'View restoration recap':'Start or resume restoration',`restore:${w.id}:${i}`,'primary'):''}</div></article>`;}).join('')}</div></section>`;}
   function stepper(q, p, unit = "") {
     return `<div class="stepper">${btn("−", "adjust:-" + (p.step || 1), "", q.value <= (p.min || 0))}${window.V5HandsOn.numericInput({...p,unit:unit.trim()},q.value,q.amountDraft,"quest")}${btn("+", "adjust:" + (p.step || 1), "", q.value >= p.max)}</div>`;
   }
@@ -204,7 +207,8 @@
   function quest() {
     const q = s.quest,
       w = E.worlds.find((w) => w.id === q.world);
-    return `${header("RESTORE THE WORLD", w.name, "world")}<div class="quest-layout world-stage stage-${w.id} ${q.solved ? "stage-restored" : ""}"><div class="stage-vista">${art(w.id).replace('viewBox="0 0 900 560"', 'viewBox="0 110 900 380" preserveAspectRatio="xMidYMid slice"')}<section class="panel guide">${A.guide(w.guide)}<div><h3>${w.guide}, your guide</h3><p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p></div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s, true)}${btn("Save & exit", "nav:home")}</div></div><section class="panel stage-workbench">${q.intro ? `<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2><p>We can restore this place with three small maths puzzles. Tap to build, move and explore.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn("Start building →", "begin", "primary")}` : puzzle(q) + `${q.solved ? `<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn(q.i < 2 ? "Next puzzle →" : "Quest recap →", "next-quest", "primary")}</div>` : `<div class="actions">${btn("Try my solution", "solve", "primary")}${btn("Hint", "hint")}${btn("I don’t know", "skip")}</div>${q.feedback ? `<div class="feedback" role="status">${esc(q.feedback)}</div>` : ""}`}`}</section></div>`;
+    if(!R.gate(s,w.id,q.i).ready)return `${header("SAVED RESTORATION",w.name,"world")}<div class="panel"><h2>Find your starting point first</h2><p>Your earlier puzzle stays saved. This stage needs its starting-point checks before you continue.</p>${R.gate(s,w.id,q.i).missing.map(id=>btn("Starting point: "+(skill(id)?.name||id),"discover:"+id)).join("")}</div>`;
+    return `${header("RESTORE THE WORLD", w.name, "world")}<div class="quest-layout world-stage stage-${w.id} ${q.solved ? "stage-restored" : ""}"><div class="stage-vista">${art(w.id).replace('viewBox="0 0 900 560"', 'viewBox="0 110 900 380" preserveAspectRatio="xMidYMid slice"')}<section class="panel guide">${A.guide(w.guide)}<div><h3>${w.guide}, your guide</h3><p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p></div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s, true)}${btn("Save & exit", "nav:home")}</div></div><section class="panel stage-workbench">${q.intro ? `<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2><p>This is your earlier saved puzzle. Finish it here; later stages use your assessed maths in a longer plan.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn("Start building →", "begin", "primary")}` : puzzle(q) + `${q.solved ? `<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn("Stage recap →", "next-quest", "primary")}</div>` : `<div class="actions">${btn("Submit answer", "solve", "primary")}${btn("Hint", "hint")}${btn("I don’t know", "skip")}</div>${q.feedback ? `<div class="feedback" role="status">${esc(q.feedback)}</div>` : ""}`}`}</section></div>`;
   }
   function learningStamp(l){return l?JSON.stringify([l.id,l.mode,l.round,l.i,l.qs?.[l.i]?.[5]?.id]):'';}
   function c8Scope(el){const world=el.closest('.world-task-dialog');if(world)return 'world|'+world.dataset.worldScope;const learning=el.closest('[data-c8-learning]');return learning?'learning|'+learning.dataset.c8Learning:null;}
@@ -228,7 +232,7 @@
     }
     const direct=q[5]?.direct;
     const c8=q[5]?.contentVersion===8;
-    const handsOn=direct&&!l.answered?`<div data-c8-learning="${esc(learningStamp(l))}">${window.V9Touch.render(direct,l.manipulation||{},"d9-p")}${btn("Check my answer","d9-check","primary")}</div>`:c8&&!l.answered?`<div data-c8-learning="${esc(learningStamp(l))}">${window.V8Activities.render({answer:q[1],activity:q[5].activity,allowCalculator:q[5].allowCalculator},l.manipulation||{},"c8-p")}${btn("Check my answer","c8-check","primary")}</div>`:window.V5HandsOn.practiceRender(l,k);
+    const handsOn=direct&&!l.answered?`<div data-c8-learning="${esc(learningStamp(l))}">${window.V9Touch.render(direct,l.manipulation||{},"d9-p")}${btn("Submit answer","d9-check","primary")}</div>`:c8&&!l.answered?`<div data-c8-learning="${esc(learningStamp(l))}">${window.V8Activities.render({answer:q[1],activity:q[5].activity,allowCalculator:q[5].allowCalculator},l.manipulation||{},"c8-p")}${(q[5].activity?.kind==='choice'?'':btn("Submit answer","c8-check","primary"))}</div>`:window.V5HandsOn.practiceRender(l,k);
     const tools =
       l.mode === "practice" && !direct && !["algebra_coordinates","geometry_transforms"].includes(k.id)
         ? (window.JaxonMathTools.render(k.id, k.world, {
@@ -248,19 +252,19 @@
     const t=j.task,q={world:'town',route:j.venue,values:j.values,solved:j.solved};
     const controls=t?U.controls(q,t).replaceAll('data-action="m-','data-action="j-').replaceAll('data-action="h-','data-action="j-').replaceAll('mission-amount','journey-amount').replaceAll('mission-number-help','journey-number-help').replace('data-numeric-answer="mission"','data-numeric-answer="journey"').replace('data-mission-clock="true"','data-life-clock="true"'):'';
     if(window.V6SceneUI?.supports(j))return `${header(j.category+' · LEVEL '+j.tier,esc(j.name),'world')}${locationTrail(j)}${window.V6SceneUI.journey(j,controls)}`;
-    return `${header(j.category+' · LEVEL '+j.tier,esc(j.name),'world')}${locationTrail(j)}<div class="journey-progress panel"><p>Stage ${Math.min(j.stage+1,j.steps.length)} / ${j.steps.length} · ${esc(j.context.role)} context · ${T.clock(j.time)} · pretend cash ${t?.title==='Count your remaining cash'?'use your receipts':T.money(j.cash)} · savings plan ${T.money(j.savings)}</p><p>List: ${Object.entries(j.shoppingList).map(([k,v])=>esc(k)+' × '+v).join(' · ')||'No shopping needed yet'}</p><details><summary>Carried inventory</summary><p>${Object.entries(j.inventory).map(([k,v])=>esc(k)+' × '+v).join(' · ')||'Nothing carried yet'}</p></details><details><summary>Receipts · ${j.receipts.length}</summary><ul>${j.receipts.map(r=>`<li>${esc(r.label)} · ${T.clock(r.time)} · paid ${T.money(r.spent)} · received ${T.money(r.earned)}${r.sale?' · customer sale '+T.money(r.sale):''}${r.saved?' · moved to savings '+T.money(r.saved):''}${Object.keys(r.items||{}).length?' · '+Object.entries(r.items).map(([k,v])=>esc(k)+' × '+v).join(', '):''}${r.choice?' · '+esc(r.choice):''}</li>`).join('')}</ul></details><p class="small">Fictional Town cash. Learning coins, mastery and parent rewards stay separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Ellis')}<p>${esc(j.context.objective)}</p></div></aside><section class="panel stage-workbench">${j.done?`<div class="town-complete"><h2>Town plan complete.</h2><p>You finished ${esc(j.name)}. Your receipts and decisions are saved. Replay starts a fresh day with different values and keeps this completed day.</p><div class="actions">${btn('Try another day',j.originalRecipe?'j-start:'+j.originalRecipe:'j-replay:'+j.scenario,'primary')}${btn('Choose another Town plan','world:town')}</div></div>`:`<h2>${esc(j.title)}</h2>${U.recipe(j.recipeCard)}<p class="town-task-prompt">${esc(t.prompt)}</p><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${controls}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===j.steps.length-1?'Complete Town plan':'Continue plan','j-next','primary'):btn('Check answer','j-submit','primary')}${btn('Hint','j-help')}${btn('I don’t know','j-skip')}${btn('Save & exit','nav:home')}${btn('Choose a different plan','world:town')}</div>`}</section></div>`;
+    return `${header(j.category+' · LEVEL '+j.tier,esc(j.name),'world')}${locationTrail(j)}<div class="journey-progress panel"><p>Stage ${Math.min(j.stage+1,j.steps.length)} / ${j.steps.length} · ${T.clock(j.time)} · pretend cash ${t?.title==='Count your remaining cash'?'use your receipts':T.money(j.cash)} · savings plan ${T.money(j.savings)}</p><p>List: ${Object.entries(j.shoppingList).map(([k,v])=>esc(k)+' × '+v).join(' · ')||'No shopping needed yet'}</p><details><summary>Carried inventory</summary><p>${Object.entries(j.inventory).map(([k,v])=>esc(k)+' × '+v).join(' · ')||'Nothing carried yet'}</p></details><details><summary>Receipts · ${j.receipts.length}</summary><ul>${j.receipts.map(r=>`<li>${esc(r.label)} · ${T.clock(r.time)} · paid ${T.money(r.spent)} · received ${T.money(r.earned)}${r.sale?' · customer sale '+T.money(r.sale):''}${r.saved?' · moved to savings '+T.money(r.saved):''}${Object.keys(r.items||{}).length?' · '+Object.entries(r.items).map(([k,v])=>esc(k)+' × '+v).join(', '):''}${r.choice?' · '+esc(r.choice):''}</li>`).join('')}</ul></details><p class="small">Fictional Town cash. Learning coins, mastery and parent rewards stay separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Ellis')}<p>${esc(j.context.objective)}</p></div></aside><section class="panel stage-workbench">${j.done?`<div class="town-complete"><h2>Town plan complete.</h2><p>You finished ${esc(j.name)}. Your receipts and decisions are saved. Replay starts a fresh day with different values and keeps this completed day.</p><div class="actions">${btn('Try another day',j.originalRecipe?'j-recipe-replay:'+j.originalRecipe:'j-replay:'+j.scenario,'primary')}${btn('Choose another Town plan','world:town')}</div></div>`:`<h2>${esc(j.title)}</h2>${U.recipe(j.recipeCard)}<p class="town-task-prompt">${esc(t.prompt)}</p><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${controls}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===j.steps.length-1?'Complete Town plan':'Continue plan','j-next','primary'):(['choice','journey'].includes(t.kind)?'':btn('Submit answer','j-submit','primary'))}${btn('Hint','j-help')}${btn('I don’t know','j-skip')}${btn('Save & exit','nav:home')}${btn('Choose a different plan','world:town')}</div>`}</section></div>`;
   }
   function journey(){
     const J=window.V5Journey,j=J.model(s);if(!j)return `<section class="panel"><h1>This journey needs another look.</h1><p>The saved copy has been preserved. Other learning remains available.</p>${btn('Back home','nav:home')}</section>`;
     if(j.version===2)return townLife(j);
     const t=j.task,q={world:'town',route:j.venue,values:j.values,solved:j.solved},role=j.context.role;
-    return `${header('ADVENTURE JOURNEY · '+j.recipeName,esc(j.title),'world')}<div class="journey-progress"><p>Step ${Math.min(8,j.stage+1)} of 8 · ${esc(role)} context · cash ${T.money(j.cash)}</p><p>Shopping list: ${j.shoppingList?`pasta ${j.shoppingList[0]} packs · tomatoes ${j.shoppingList[1]} tins · protein ${j.shoppingList[2]} packs`:'not prepared yet'} · Inventory: pasta ${j.inventory[0]} packs · tomatoes ${j.inventory[1]} tins · protein ${j.inventory[2]} packs</p><p class="small">Fictional journey inventory and money. Your learning coins and mastery are separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Jess')}<p>Your same Town, seen through a different role.</p></div></aside><section class="panel stage-workbench">${j.done?`<h2>The recipe is ready.</h2><p>Your shopping, change and cooking were saved together. Reopening this journey cannot repeat a payment or consume ingredients again.</p>${btn('Back to Town','world:town','primary')}`:`<h2>${esc(t.prompt)}</h2><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${U.controls(q,t).replaceAll('data-action="m-','data-action="j-').replaceAll('mission-amount','journey-amount').replaceAll('mission-number-help','journey-number-help').replace('data-numeric-answer="mission"','data-numeric-answer="journey"')}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===7?'Prepare dinner':'Continue journey','j-next','primary'):btn('Check answer','j-submit','primary')}${btn('Hint','j-help')}${btn('I don’t know','j-skip')}${btn('Save & exit','nav:home')}</div>`}</section></div>`;
+    return `${header('ADVENTURE JOURNEY · '+j.recipeName,esc(j.title),'world')}<div class="journey-progress"><p>Step ${Math.min(8,j.stage+1)} of 8 · cash ${T.money(j.cash)}</p><p>Shopping list: ${j.shoppingList?`pasta ${j.shoppingList[0]} packs · tomatoes ${j.shoppingList[1]} tins · protein ${j.shoppingList[2]} packs`:'not prepared yet'} · Inventory: pasta ${j.inventory[0]} packs · tomatoes ${j.inventory[1]} tins · protein ${j.inventory[2]} packs</p><p class="small">Fictional journey inventory and money. Your learning coins and mastery are separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Jess')}<p>Your same Town, seen through a different role.</p></div></aside><section class="panel stage-workbench">${j.done?`<h2>The recipe is ready.</h2><p>Your shopping, change and cooking were saved together. Reopening this journey cannot repeat a payment or consume ingredients again.</p>${btn('Back to Town','world:town','primary')}`:`<h2>${esc(t.prompt)}</h2><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${U.controls(q,t).replaceAll('data-action="m-','data-action="j-').replaceAll('mission-amount','journey-amount').replaceAll('mission-number-help','journey-number-help').replace('data-numeric-answer="mission"','data-numeric-answer="journey"')}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===7?'Prepare dinner':'Continue journey','j-next','primary'):(['choice','journey'].includes(t.kind)?'':btn('Submit answer','j-submit','primary'))}${btn('Hint','j-help')}${btn('I don’t know','j-skip')}${btn('Save & exit','nav:home')}</div>`}</section></div>`;
   }
   function recap() {
     const r = s.lastResult;
     if (!r) return home();
     const w = r.world || skill(r.id)?.world || s.world;
-    return `<section class="recap"><span class="badge">A CHAPTER IN YOUR JOURNEY</span><h1 style="margin-top:22px">${r.type === "expedition" ? "A visit worth remembering." : r.type === "quest" ? "Look what you restored." : r.type === "discovery" ? "Your starting point" : r.type === "check" ? "Your independent check" : "Another idea explored."}</h1><p class="muted">${r.type === "expedition" ? (r.newReward ? "A new milestone and keepsake are saved. Your maths has helped this place grow." : "A fresh visit complete. Your earlier rewards are safe; replaying does not duplicate them.") : r.type === "quest" ? "Three landmarks, brought back to life through your maths. Your progress is saved." : r.type === "discovery" ? "A starting point helps us choose suitable fresh practice. Discovery does not award mastery." : r.type === "check" ? r.correct + " / " + r.total + " first answers without help. " + (s.checks[r.id]?.stage >= 2 ? "Spaced mastery demonstrated." : s.checks[r.id]?.stage === 1 ? "Independently practised. Come back for a memory check in two days." : "Revisit the lesson before your next fresh check.") : "Guided practice complete. Your next step can be a separate fresh independent check."}</p>${art(w)}<div class="actions">${btn("Explore this world", "world:" + w, "primary")}${r.type === "practice" ? btn("Try a fresh independent check", "check:" + r.id) : r.type === "discovery" && !s.discovery[r.id]?.complete ? btn("Continue discovery", "discover:" + r.id) : ""}${r.type === "expedition" ? btn("Learn the maths behind this visit", "learn:" + (M.routes(w).find((v) => v.id === r.route)?.skills[0] || E.worlds.find((v) => v.id === w).skill)) : ""}${btn("Visit Base Camp", "nav:camp")}${btn("Save & exit", "nav:home")}</div></section>`;
+    return `<section class="recap"><span class="badge">A CHAPTER IN YOUR JOURNEY</span><h1 style="margin-top:22px">${r.type === "expedition" ? "A visit worth remembering." : r.type === "restoration" ? "Your restoration stage is complete." : r.type === "quest" ? "Look what you restored." : r.type === "discovery" ? "Your starting point" : r.type === "check" ? "Your independent check" : "Another idea explored."}</h1><p class="muted">${r.type === "expedition" ? (r.newReward ? "A new milestone and keepsake are saved. Your maths has helped this place grow." : "A fresh visit complete. Your earlier rewards are safe; replaying does not duplicate them.") : r.type === "restoration" ? (r.legacy ? "Your earlier saved puzzle is complete. Later stages use your assessed maths in a longer plan. Restoration stays separate from independent mastery." : "You applied your assessed maths in a longer plan. Your work is saved as restoration practice, not independent mastery.") : r.type === "quest" ? "Three landmarks, brought back to life through your maths. Your progress is saved." : r.type === "discovery" ? "A starting point helps us choose suitable fresh practice. Discovery does not award mastery." : r.type === "check" ? r.correct + " / " + r.total + " first answers without help. " + (s.checks[r.id]?.stage >= 2 ? "Spaced mastery demonstrated." : s.checks[r.id]?.stage === 1 ? "Independently practised. Come back for a memory check in two days." : "Revisit the lesson before your next fresh check.") : "Guided practice complete. Your next step can be a separate fresh independent check."}</p>${art(w)}<div class="actions">${btn("Explore this world", "world:" + w, "primary")}${r.type === "practice" ? btn("Try a fresh independent check", "check:" + r.id) : r.type === "discovery" && !s.discovery[r.id]?.complete ? btn("Continue discovery", "discover:" + r.id) : ""}${r.type === "expedition" ? btn("Learn the maths behind this visit", "learn:" + (M.routes(w).find((v) => v.id === r.route)?.skills[0] || E.worlds.find((v) => v.id === w).skill)) : ""}${btn("Visit Base Camp", "nav:camp")}${btn("Save & exit", "nav:home")}</div></section>`;
   }
   const campNames = [
     "Camp foundations",
@@ -277,7 +281,7 @@
   }
   function camp() {
     const progress=M.campProgress(s),n=progress.count;
-    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Welcome to Base Camp.", "home")}<section class="camp-overview ${progress.pending ? "estate-unveiling" : ""}">${progress.pending ? `<div class="estate-celebration" role="status"><strong>Your ${esc(progress.current.name)} is ready.</strong><span>Built through your adventures. No coins spent.</span>${btn("Enjoy the new home", "camp-celebrate")}</div>` : ""}<div class="camp-map hero-art">${A.camp(s)}<span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>${esc(progress.current.name)}</h2><p class="muted">Choose a place in camp to continue, explore or view your progress. Every earned upgrade stays with you.</p><p class="camp-inventory small">${campNames.filter((_,i)=>n>=campThresholds[i]).map(name=>`<span>◆ ${name}</span>`).join(" ")}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section>${campPlanner(progress)}<details class="camp-journal" id="camp-achievements"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
+    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Base Camp", null)}<section class="home-path panel" aria-label="Choose your adventure"><h2>Where next?</h2>${!P.complete(s)?`<div class="notice"><h3>Start with your starting points</h3><p>A few questions in all nine areas help us choose where to begin. Explore freely; learning opens after your profile is complete.</p>${btn("Find my starting points","nav:starting","primary")}</div>`:btn("Your starting points","nav:starting")}${!s.tourSeen?`<div class="notice"><p>New here? Your guide can show you the way.</p><div class="actions">${btn("Show me how","nav:tour")}${btn("Start exploring","skip-tour")}</div></div>`:""}<p>${esc(P.complete(s)?N.summary(s):'Find starting points in all nine areas. Your paused activities will wait for you.')}</p><div class="actions">${btn('Continue adventure','continue','primary')}${btn('Subject worlds','nav:map')}${btn('Town and Restore Community','world:town')}${btn('How to play','nav:tour')}</div><p>${!P.complete(s)?'You can explore the maps between questions.':s.world==='town'?nextButton('town'):btn('Your next learning step','next-path:'+s.world)}</p></section>${savedActivities()}<section class="camp-overview ${progress.pending ? "estate-unveiling" : ""}">${progress.pending ? `<div class="estate-celebration" role="status"><strong>Your ${esc(progress.current.name)} is ready.</strong><span>Built through your adventures. No coins spent.</span>${btn("Enjoy the new home", "camp-celebrate")}</div>` : ""}<div class="camp-map hero-art">${A.camp(s)}<span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>${esc(progress.current.name)}</h2><p class="muted">Choose a place in camp to continue, explore or view your progress. Every earned upgrade stays with you.</p><p class="camp-inventory small">${campNames.filter((_,i)=>n>=campThresholds[i]).map(name=>`<span>◆ ${name}</span>`).join(" ")}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section>${campPlanner(progress)}<details class="camp-journal" id="camp-achievements"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
       ["First steps", n >= 1, "Restore your first landmark."],
       [
         "Forest keeper",
@@ -336,7 +340,7 @@
     const activeCatalog = C.catalog.filter(i=>!window.V7Avatar||V7Avatar.isActiveItem(i));
     const slots = [...new Set(activeCatalog.map((i) => i.slot))];
     const preview=activeCatalog.find(i=>i.id===itemPreview),look=preview?{...s,bought:[...s.bought,preview.id],equipped:[...s.equipped.filter(id=>C.catalog.find(i=>i.id===id)?.slot!==preview.slot),preview.id]}:s;
-    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar?V7Avatar.controls(s):""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Staging wallet only. Purchases are checked securely before saving." : "Only fictional demo coins are used here."}</p>${btn("Unequip all", "unequip")}</div></div><label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${activeCatalog
+    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar?V7Avatar.controls(s):""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p>${btn("Unequip all", "unequip")}</div></div><label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${activeCatalog
       .filter(
         (i) =>
           filter === "all" ||
@@ -352,7 +356,7 @@
       .join("")}</div>`;
   }
   function settings() {
-    return `${header("PLAY YOUR WAY", "Settings", "home")}<div class="panel preferences"><h2>Comfort comes first</h2><label><input type="checkbox" data-setting="motion" ${s.settings.motion ? "checked" : ""}>Gentle scene animation (system reduced-motion preference takes priority)</label><label><input type="checkbox" data-setting="sound" ${s.settings.sound ? "checked" : ""}>Quiet restoration sound</label><p class="muted">Sound and animation start off. All puzzles work with tapping and a keyboard; dragging is optional.</p><div class="actions">${btn("Replay the welcome tour", "nav:tour")}</div>${cloud ? "<h3>Separate staging account</h3><p>Progress saves on this device and syncs to the verified staging project. Purchases need a connection. Lock or sign out on a shared device.</p>" : '<h3>Fictional Test Camp</h3><p class="small muted">This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.</p>'}</div>`;
+    return `${header("PLAY YOUR WAY", "Settings", "home")}<div class="panel preferences"><h2>Comfort comes first</h2><label><input type="checkbox" data-setting="motion" ${s.settings.motion ? "checked" : ""}>Gentle scene animation (system reduced-motion preference takes priority)</label><label><input type="checkbox" data-setting="sound" ${s.settings.sound ? "checked" : ""}>Quiet restoration sound</label><p class="muted">Sound and animation start off. All puzzles work with tapping and a keyboard; dragging is optional.</p><div class="actions">${btn("Replay the welcome tour", "nav:tour")}</div>${cloud ? "<h3>Account and privacy</h3><p>Lock or sign out on shared devices. Parents use their own account and parent PIN to see the starting profile and independent evidence. This device keeps an offline copy and pending saves; reconnect before changing devices. Get unstuck never clears a learner profile. This release supports one linked learner per family; it has no child-switching control.</p>" : '<h3>Fictional Test Camp</h3><p class="small muted">This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.</p>'}</div>`;
   }
   function parent() {
     const minutes = s.weekly[E.weekKey(Date.now())] || 0;
@@ -376,9 +380,23 @@
     }</section></div>`;
   }
   function tour() {
-    return `<section class="tour">${header("WELCOME, EXPLORER", "A world you can change.", "home")}${art("number")}<div class="panel"><h2>One idea at a time.</h2><p>Choose any of nine worlds. Meet your guide, choose a difficulty and solve hands-on tasks. Return for new expeditions, practical visits and optional gateways.</p><p>Hints are always safe. Lessons and practice help you learn; separate fresh checks show what you can do independently.</p><p>Your explorer and Base Camp grow with your adventure. Progress saves automatically on this device.</p><div class="actions">${btn("Start exploring →", "finish-tour", "primary")}${btn("Skip tour", "skip-tour")}</div></div></section>`;
+    return `<section class="tour">${header('YOUR ADVENTURE GUIDE','How to play','home')}<div class="panel"><h2>Follow four small steps</h2><ol><li><strong>Find your starting point.</strong> A few questions help your guide choose a level. You can say “I don’t know”.</li><li><strong>Learn and practise.</strong> Try an example, move the maths tools and ask for hints.</li><li><strong>Try an independent check.</strong> Use your own thinking. Help is still safe; it just stays separate from independent answers.</li><li><strong>Restore your world.</strong> Use the ideas in a longer plan. Each stage opens after its starting-point checks. Restoration is practice, not proof of mastery.</li></ol><h2>Explore your way</h2><p>Other missions, Town plans and Base Camp are optional adventures. You can visit another world at any time. First, find starting points in all nine areas; then learning adventures open. The short profile is a starting suggestion, not mastery.</p><h2>Pause or get unstuck</h2><p>Pause and explore saves your question and tools. Home and World map also leave your activity saved. Base Camp lists your paused activities. Continue brings you back; a finished activity shows its recap. Get unstuck names exactly what a restart or exit resets before you confirm. Completed work, coins and learning evidence stay saved.</p><p>Lessons and checks restart only the current question’s draft. Earlier answers stay. A restarted Town plan or mission keeps its earlier steps in Earlier attempts.</p><div class="actions">${btn('Continue my activity','continue','primary')}${btn('Choose a world','nav:map')}${btn('Finish guide','skip-tour')}</div></div>${s.activityArchives?.length?`<details class="panel"><summary>Earlier attempts · ${s.activityArchives.length}</summary>${s.activityArchives.map(x=>`<article><h3>${esc(x.name)}</h3><p>${x.snapshot.completed?.length??x.snapshot.i??0} earlier steps kept. ${x.snapshot.receipts?.length||0} receipts kept.</p>${x.snapshot.receipts?.length?`<ul>${x.snapshot.receipts.map(r=>`<li>${esc(r.label)}</li>`).join('')}</ul>`:''}</article>`).join('')}</details>`:''}</section>`;
+
+  }
+  function closeDialogs(){document.querySelectorAll('dialog[open]').forEach(d=>d.close());}
+  function safetyButtons(){return `${btn("Pause and explore","pause-explore")}${btn('Home','nav:home')}${btn('World map','nav:map')}${btn('How to play','nav:tour')}${N.target(s)?btn('Get unstuck','recover-open'):''}`;}
+  function activitySafety(){
+    if(!document.getElementById('town-entry')){const b=document.createElement('button');b.id='town-entry';b.dataset.action='world:town';b.textContent='Town';document.querySelector('.topbar nav').append(b);}
+    if(!document.getElementById('play-help')){const b=document.createElement('button');b.id='play-help';b.dataset.action='nav:tour';b.textContent='How to play';document.querySelector('.topbar nav').append(b);}
+    if(!document.getElementById('recovery-dialog')){const d=document.createElement('dialog');d.id='recovery-dialog';d.setAttribute('aria-label','Get unstuck confirmation');d.innerHTML='<h2>Get unstuck</h2><p class="recovery-copy"></p><div class="actions"><button data-action="recover-apply:restart" data-recovery-confirm>Confirm restart</button><button data-action="recover-apply:exit" data-recovery-confirm>Exit this activity</button><button data-action="recover-cancel">Keep playing</button><button data-action="nav:home">Pause and go home</button><button data-action="nav:map">Pause and open world map</button></div>';document.body.append(d);}
+    if(['quest','adventure','journey','lesson','practice','check','discovery','starting-area'].includes(s.view)){
+      const dock=document.createElement('nav');dock.className='activity-safety';dock.setAttribute('aria-label','Activity help and leaving');dock.innerHTML=safetyButtons();document.getElementById('main').prepend(dock);
+      document.querySelectorAll('#main dialog').forEach(d=>{const n=document.createElement('nav');n.className='activity-safety';n.setAttribute('aria-label','Activity help and leaving');n.innerHTML=safetyButtons();d.prepend(n);});
+    }
   }
   function render(focus = false) {
+    if(!P.complete(s)&&P.views.includes(s.view))s.view='starting';
+
     window.V7Avatar?.setState(s);
     window.V7ActivityScenes?.before();
     window.V6SceneUI?.beforeRender();
@@ -386,6 +404,8 @@
     $("headerExplorer").innerHTML = A.explorer(s, true);
     const screens = {
       home,
+      starting,
+      "starting-area":startingArea,
       map,
       world: worldPage,
       quest,
@@ -425,6 +445,10 @@
         else el.removeAttribute("aria-current");
       }
     });
+    if(!P.complete(s)){
+      document.querySelectorAll('#main [data-action]').forEach(el=>{if(!P.allowed(s,el.dataset.action)){if(el.dataset.action==='continue'){el.dataset.action='nav:starting';el.textContent='Continue starting points';}else{el.disabled=true;el.title='Find all nine starting points first';}}});
+      if(s.view==='world'){const notice=document.createElement('section');notice.className='notice';notice.innerHTML='<p>Look around freely. Find all nine starting points before learning adventures begin.</p>'+btn('Find my starting points','nav:starting','primary');$('main').prepend(notice);}
+    }
     presentationFinish();
     if (focus) {
       $("main").focus();
@@ -432,6 +456,7 @@
     }
     window.V7ActivityScenes?.decorate(s);
     window.V6SceneUI?.afterRender();
+    activitySafety();
   }
   document.addEventListener('v6-scene-ui',()=>render());
   function sound() {
@@ -452,6 +477,7 @@
   }
   async function dispatch(action, sceneKey = null) {
     const [name, arg] = action.split(":");
+    if(["pause-explore","nav","world","resume-saved","starting"].includes(name))activity=0;
     if (cloud && !cloud.isUnlocked()) return;
     if (name === "buy" && window.V7Avatar && !V7Avatar.isActiveItem(C.catalog.find(i=>i.id===arg))) return;
     if (cloud && name === "buy" && !s.bought.includes(arg)) {
@@ -463,27 +489,49 @@
         return;
       }
     }
+    if(name==='recover-open'){
+      recoveryChoice=N.target(s);closeDialogs();
+      const d=document.getElementById('recovery-dialog');
+      d.querySelector('.recovery-copy').textContent=recoveryChoice?`Get unstuck: ${recoveryChoice.label}. ${recoveryChoice.reset}`:'No unfinished activity needs a reset. Your completed work is safe.';
+      d.querySelectorAll('[data-recovery-confirm]').forEach(b=>b.hidden=!recoveryChoice);
+      d.querySelector('[data-action="recover-apply:restart"]').hidden=!recoveryChoice||['learning','baseline'].includes(recoveryChoice.kind)&&recoveryChoice.snapshot.answered;
+      d.showModal();return;
+    }
+    if(name==='recover-cancel'){document.getElementById('recovery-dialog').close();recoveryChoice=null;return;}
+    if(['nav','world','continue','recover-apply','pause-explore','resume-saved'].includes(name))closeDialogs();
     const oldView = s.view;
     let error = null,
       restored = false;
     await change(() => {
+      if(sceneKey?.startsWith('baseline|')){const id=s.startingProfile?.active,a=s.startingProfile?.areas?.[id];if(JSON.stringify([id,a?.responses.length,a?.question?.prompt,a?.answered])!==sceneKey.slice(9))return;}
       if(sceneKey?.startsWith('world|')&&V7ActivityScenes.key(s)!==sceneKey.slice(6))return;
       if(sceneKey?.startsWith('learning|')&&learningStamp(s.learning)!==sceneKey.slice(9))return;
       if(sceneKey && !sceneKey.startsWith('world|')&&name.startsWith('j-')) {
         const live=window.V5Journey.model(s);
         if(s.view!=='journey'||!live||JSON.stringify([live.id||live.scenario,live.seed,live.stage])!==sceneKey)return;
       }
+      if(!P.allowed(s,action)){s.view='starting';error='Find all nine starting points first. Your saved work is safe.';return;}
+      if(['nav','world'].includes(name)&&['quest','adventure','journey','lesson','practice','check','discovery','starting-area'].includes(s.view)&&!P.views.includes(arg)){error=N.pause(s);if(error)return;}
+      if(name==='pause-explore'){error=N.pause(s);return;}
+      if(name==='resume-saved'){const bits=action.split(':');error=N.openSaved(s,bits[1],decodeURIComponent(bits.slice(2).join(':')));return;}
+      if(name==='starting'){error=P.start(s,arg,C);return;}
+      if(name==='starting-choice'||name==='starting-submit'||name==='starting-skip'){const id=s.startingProfile?.active,a=s.startingProfile?.areas?.[id];P.answer(s,id,name==='starting-choice'?a?.question?.choices[Number(arg)]:a?.draft,name==='starting-skip');return;}
+      if(name==='starting-next'){P.advance(s,s.startingProfile?.active,C);return;}
       if(name==='home-activity'){window.V7Home.start(s,arg,M.state(s).difficulty.town||1);return;}
       if(name==='j-work'){const tier=Number(action.split(':')[2])||M.recommendation(s,'town');if(!window.V52TownLife.start(s,'job-'+arg,tier))error='This saved Town plan needs another look. It has been preserved.';return;}
       if(name==='j-plan'||name==='j-replay'){const tier=M.state(s).difficulty.town||M.recommendation(s,'town');if(!window.V52TownLife.start(s,arg,tier,name==='j-replay'))error='This saved Town plan needs another look. It has been preserved.';return;}
+      if(name==='j-recipe-replay'){window.V52TownLife.startRecipe(s,arg,M.state(s).difficulty.town||1,true);return;}
       if(name==='j-start'){M.state(s);if(!window.V5Journey.start(s,arg,M.state(s).difficulty.town||M.recommendation(s,'town')))error='This saved journey cannot be opened; its original data has been preserved.';return;}
-      if(name.startsWith('j-')){window.V5Journey.action(s,name,arg,action);return;}
+      if(name.startsWith('j-')){const changed=window.V5Journey.action(s,name,arg,action);if(changed&&name==='j-choice')window.V5Journey.action(s,'j-submit');return;}
       if(name === 'd9-m'){try{const q=M.current(s),intent=JSON.parse(decodeURIComponent(arg));if(q)editDirectModel(q.values,intent,()=>M.edit(s,'direct',intent));}catch{}return;}
       if(name === 'd9-p'){const l=s.learning;if(l&&!l.answered&&!l.needsTeaching&&l.qs[l.i]?.[5]?.direct){try{l.manipulation||={};const intent=JSON.parse(decodeURIComponent(arg));editDirectModel(l.manipulation,intent,()=>window.V9Touch.edit(l.qs[l.i][5].direct,l.manipulation,intent));}catch{}}return;}
       if(name === 'd9-check'){const l=s.learning;if(l&&!l.answered&&l.qs[l.i]?.[5]?.direct)E.answerLearning(s,window.V9Touch.value(l.qs[l.i][5].direct,l.manipulation));return;}
-      if(name === 'c8-m'){M.edit(s,'c8action',action.slice(5));return;}
-      if(name === 'c8-p'){const l=s.learning;if(l&&!l.answered&&l.qs[l.i]?.[5]?.contentVersion===8){const q=l.qs[l.i];l.manipulation||={};window.V8Activities.edit({activity:q[5]?.activity,allowCalculator:q[5]?.allowCalculator},l.manipulation,action.slice(5));}return;}
+      if(name === 'c8-m'){const q=M.current(s);if(M.edit(s,'c8action',action.slice(5))&&q?.tasks[q.i].activity?.kind==='choice'&&action.includes(':choice-'))M.submit(s);return;}
+      if(name === 'c8-p'){const l=s.learning;if(l&&!l.answered&&l.qs[l.i]?.[5]?.contentVersion===8){const q=l.qs[l.i];l.manipulation||={};window.V8Activities.edit({activity:q[5]?.activity,allowCalculator:q[5]?.allowCalculator},l.manipulation,action.slice(5));if(q[5]?.activity?.kind==='choice'&&action.includes(':choice-'))E.answerLearning(s,window.V8Activities.value({activity:q[5].activity},l.manipulation));}return;}
       if(name === 'c8-check'){const l=s.learning;if(l&&!l.answered&&l.qs[l.i]?.[5]?.contentVersion===8){const q=l.qs[l.i];E.answerLearning(s,window.V8Activities.value({activity:q[5]?.activity,allowCalculator:q[5]?.allowCalculator},l.manipulation));}return;}
+      if(name==='next-path'){const n=R.recommend(s,arg);s.world=arg;if(n.type==='restore')error=R.start(s,arg,n.stage);else if(n.type==='discover')error=E.startDiscovery(s,n.id,C,window.V3Discovery);else if(n.type==='learn'||n.type==='check')error=E.generate(s,n.id,n.type==='learn'?'practice':'check',window.JaxonFreshReview,C);else s.view='world';return;}
+      if(name==='restore'){const bits=action.split(':');error=R.start(s,bits[1],Number(bits[2]));return;}
+      if(name==='recover-apply'){error=N.recover(s,recoveryChoice,arg);recoveryChoice=null;return;}
       switch (name) {
         case "nav":
           s.view = arg;
@@ -495,35 +543,10 @@
           before = false;
           break;
         case "continue":
-          if(s.resumeView==="journey"&&window.V5Journey.state(s)){s.view="journey";}
-          else if (s.resumeView === "adventure" && M.current(s)) {
-            s.world = M.current(s).world;
-            s.view = "adventure";
-          } else if (s.resumeView === "quest" && s.quest) s.view = "quest";
-          else if (
-            ["lesson", "practice", "check", "discovery", "adventure"].includes(
-              s.resumeView,
-            ) &&
-            s.learning
-          )
-            s.view = s.resumeView;
-          else if (s.quest) s.view = "quest";
-          else if (s.learning)
-            s.view =
-              s.learning.mode === "discovery"
-                ? "discovery"
-                : s.learning.mode === "check"
-                  ? "check"
-                  : s.learning.started
-                    ? "practice"
-                    : "lesson";
-          else if (s.world === "town")
-            M.start(s, "town", "market", M.recommendation(s, "town"));
-          else E.startQuest(s, s.world);
+          N.resume(s);
           break;
         case "quest":
-          if (arg === "town") M.start(s, "town", "market", 1);
-          else E.startQuest(s, arg);
+          error=E.startQuest(s,arg);
           break;
         case "scene-mission":
         case "mission": {
@@ -647,7 +670,7 @@
           break;
         }
         case "m-choice":
-          M.edit(s, "choice", Number(arg));
+          if(M.edit(s, "choice", Number(arg)))M.submit(s);
           break;
         case "m-post": {
           const q = M.current(s);
@@ -808,6 +831,14 @@
       $("main").focus();
     }
   }
+  function answerFocus(name){
+    if(['starting-choice','starting-submit','starting-skip'].includes(name)){document.querySelector('[data-action="starting-next"]')?.focus({preventScroll:true});return;}
+    if(name==='starting-next'){const h=document.querySelector('.baseline-question h2');if(h){h.tabIndex=-1;h.focus({preventScroll:true});}return;}
+    const scope=document.querySelector('dialog[open]')||document.getElementById('main');
+    if(['m-next','j-next','next-learning'].includes(name)){const heading=scope.querySelector('h2');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}return;}
+    const action=s.view==='journey'&&V5Journey.state(s)?.solved?'j-next':s.view==='adventure'&&M.current(s)?.solved?'m-next':['practice','check','discovery'].includes(s.view)&&s.learning?.answered?'next-learning':null;
+    if(action&&['answer','m-choice','j-choice','m-submit','j-submit','c8-m','c8-p','c8-check','d9-check','p5-submit'].includes(name))scope.querySelector('[data-action="'+action+'"]')?.focus({preventScroll:true});
+  }
   document.addEventListener("click", async (e) => {
     const ui=e.target.closest('[data-ui]');
     if(ui){
@@ -859,7 +890,8 @@
       ].includes(name) || ["j-budget-place","j-part","j-choice","j-coin","j-adjust","j-value","j-submit","j-help","j-place","j-clear","j-skip"].includes(name) || el.dataset.act;
     const evidence = () => JSON.stringify([s.quest, s.learning, M.current(s),window.V5Journey.state(s)]);
     const previous = evidence();
-    await dispatch(action, c8Scope(el) || (el.closest('.world-task-dialog')?.dataset.worldScope ? 'world|'+el.closest('.world-task-dialog').dataset.worldScope : el.closest('.immersive-journey')?.dataset.sceneKey || null));
+    await dispatch(action, (el.closest('[data-baseline-scope]')?'baseline|'+el.closest('[data-baseline-scope]').dataset.baselineScope:null) || c8Scope(el) || (el.closest('.world-task-dialog')?.dataset.worldScope ? 'world|'+el.closest('.world-task-dialog').dataset.worldScope : el.closest('.immersive-journey')?.dataset.sceneKey || null));
+    answerFocus(name);
     if (!meaningful) activity = 0;
     else if (previous !== evidence()) activity = Date.now();
   });
@@ -880,6 +912,8 @@
   });
   document.addEventListener('input',e=>{if(e.target.matches('[data-model-range]')){const out=e.target.parentElement.querySelector('output');if(out)out.textContent=e.target.value;}});
   document.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&e.target.hasAttribute('data-baseline-draft')){e.preventDefault();document.querySelector('[data-action="starting-submit"]')?.click();return;}
+    if(e.key==='Enter'&&e.target.matches('[data-c8-input]')&&e.target.type!=='range'){e.preventDefault();const prefix=e.target.dataset.c8Input;const action=prefix==='c8-m'?'m-submit':'c8-check';const scope=e.target.closest('.world-task-dialog,[data-c8-learning]');scope?.querySelector('[data-action="'+action+'"]')?.click();return;}
     if(e.key==='Enter' && e.target.dataset.numericAnswer) {
       e.preventDefault();
       const action={mission:'m-submit',journey:'j-submit',practice:'p5-submit',quest:'solve'}[e.target.dataset.numericAnswer];
@@ -919,6 +953,7 @@
       $("shop-filter")?.focus({ preventScroll: true });
       return;
     }
+    if(e.target.hasAttribute('data-character-choice')){const value=e.target.value;if(['boy','girl'].includes(value))await change(()=>{s.settings.avatarCharacter=value;});return;}
     if (e.target.dataset.avatarLook) {
       const key=e.target.dataset.avatarLook, value=Number(e.target.value);
       if(['avatarHair','avatarFace','avatarShoes'].includes(key)&&value===0)await change(()=>{s.settings[key]=value;});
@@ -938,6 +973,8 @@
     }
   });
   document.addEventListener("input", async (e) => {
+    if(e.target.hasAttribute('data-baseline-draft')){const raw=e.target.value,id=s.startingProfile?.active,q=P.question(s,id);await change(()=>{const a=s.startingProfile?.areas?.[id];if(s.view==='starting-area'&&a?.question?.prompt===q?.prompt&&!a.answered)a.draft=raw;},{renderPage:false});const submit=document.querySelector('[data-action="starting-submit"]');if(submit)submit.disabled=!raw.trim();return;}
+
     if (e.target.dataset.numericAnswer) {
       const input = e.target, context = input.dataset.numericAnswer, raw = input.value;
       const target = () => context === 'mission' ? M.current(s) : context === 'journey' ? window.V5Journey.state(s) : context === 'quest' ? s.quest : s.learning;

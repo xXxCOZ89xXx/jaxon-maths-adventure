@@ -9,6 +9,7 @@
   const X = typeof module !== "undefined" ? require("./curriculum-expansion").V8Curriculum : root.V8Curriculum;
   const XA = typeof module !== "undefined" ? require("./curriculum-activities").V8Activities : root.V8Activities;
   const curriculumRoutes = world => (X?.routes(world)||[]).filter(r=>C.skills.some(k=>k.id===r.skills[0]));
+  const R=typeof module!=="undefined"?require("./restoration").V10Restoration:root.V10Restoration;
   const copy = (x) => JSON.parse(JSON.stringify(x)),
     money = T.money,
     clock = T.clock;
@@ -101,7 +102,7 @@
       q &&
       typeof q === "object" &&
       routes(q.world).length &&
-      (q.route === "gateway" ||
+      (R.valid(q) || q.route === "gateway" ||
         routes(q.world).some((r) => r.id === q.route)) &&
       [1, 2, 3].includes(q.tier) &&
       q.key === id(q.world, q.route, q.tier) &&
@@ -177,16 +178,10 @@
     return Object.values(state(s).records).filter((r) => r.world === world);
   }
   function visualLevel(s, world, legacy = 0) {
-    const n = new Set(
-      completions(s, world)
-        .filter((r) => r.route !== "gateway")
-        .map((r) => r.route),
-    ).size;
-    return Math.max(
-      legacy,
-      world === "town" ? (n >= 8 ? 3 : n >= 4 ? 2 : n ? 1 : 0) : Math.min(3, n),
-    );
+    return Math.max(legacy, R.book(s)?.legacyVisual?.[world]||0,
+      [0,1,2].filter(i=>s.milestones.includes(world+':'+i)).length);
   }
+
   function collections(s) {
     const result = new Map();
     for (const r of Object.values(state(s).records)) {
@@ -818,7 +813,7 @@
         seed,
         i: 0,
         phase: "lesson",
-        tasks: (course ? Array.from({length:6},(_,i)=>X.task(course.skills[0],[6,7,9][tier-1],seed,i)) : expandedGateway ? expandedGatewayTasks(world,tier,seed) : expandedWorld ? expandedMissionTasks(world,route,tier,seed) : [0, 1, 2].map((i) => task(world, route, tier, seed, i))).map((t,i)=>root.V9TouchContent?root.V9TouchContent.task(t,[6,7,9][tier-1],seed,i):t),
+        tasks: (course ? Array.from({length:6},(_,i)=>X.task(course.skills[0],[6,7,9][tier-1],seed,i)) : expandedGateway ? expandedGatewayTasks(world,tier,seed) : expandedWorld ? expandedMissionTasks(world,route,tier,seed) : [0, 1, 2].map((i) => task(world, route, tier, seed, i))).map((t,i)=>{const task=root.V9TouchContent?root.V9TouchContent.task(t,[6,7,9][tier-1],seed,i):t;return world==='town'?T.taskDetails(task,{route,context:course?{venue:'home'}:context},i):task;}),
         values: {},
         assisted: false,
         unassisted: 0,
@@ -833,14 +828,14 @@
     return true;
   }
   function current(s) {
-    return state(s).active;
+    return state(s).active || null;
   }
   function begin(s) {
     const q = current(s);
     if (q?.phase === "lesson") {
       rememberTeaching(s,q);
       q.phase = "play";
-      state(s).taught[q.tasks[q.i].skill] = true;
+      if(!q.restoration)state(s).taught[q.tasks[q.i].skill] = true;
     }
   }
   function edit(s, key, value) {
@@ -944,11 +939,11 @@
     const t = q.tasks[q.i];
     if (H.invalidDraft(q.values, t)) return false;
     const evidence=q.evidence||(q.evidence=[]);
-    if(!evidence.some(e=>e.step===q.i)) evidence.push({step:q.i,skill:t.skill,mechanic:H.mechanic(t,q.world,q.route),firstValue:copy(value(q,t)),correct:correct(q,t),assisted:q.assisted,source:'guided-adventure'});
+    if(!evidence.some(e=>e.step===q.i)) evidence.push({step:q.i,skill:t.skill,mechanic:H.mechanic(t,q.world,q.route),firstValue:copy(value(q,t)),correct:correct(q,t),assisted:q.assisted,source:q.restoration?'restoration':'guided-adventure'});
     if (!correct(q, t)) {
       q.assisted = true;
       q.feedback = "Not yet. " + t.hint + " " + t.teach;
-      q.phase = "lesson";
+      // Keep the question and its first-attempt evidence visible for a safe retry.
       return false;
     }
     q.solved = true;
@@ -970,6 +965,7 @@
       rememberTeaching(s,q);
       return false;
     }
+    if(q.restoration)return R.complete(s,q,now);
     const old = a.records[q.key],
       serial =
         Object.values(a.records).reduce(

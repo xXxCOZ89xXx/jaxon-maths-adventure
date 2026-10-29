@@ -2197,3 +2197,36 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .c8-pie{width:min(100%,240px);aspect-ratio:1;border-radius:50%;border:3px solid #203b2e;margin:18px auto}
 .c8-activity table{border-collapse:collapse;width:100%;font-size:16px}.c8-activity th,.c8-activity td{padding:6px;border:1px solid #687f60;overflow-wrap:anywhere}.c8-activity td input{width:75px;max-width:100%;min-height:48px;font-size:18px}.c8-activity td button{min-width:48px;min-height:48px;padding:4px}.c8-cell-grid{display:grid;grid-template-columns:repeat(var(--columns),minmax(44px,1fr));gap:4px;max-width:360px}.c8-cell-grid button{min-width:44px;min-height:48px;padding:4px}.c8-cell-grid button[aria-pressed=true]{background:#397b50;color:white}
 .c8-activity input[type=range]{display:block;width:100%;min-height:48px;touch-action:pan-y}.c8-activity fieldset{min-width:0;max-width:100%;padding:10px}.c8-calculator input{max-width:100%;min-height:48px;font-size:18px}
+
+/* Guided progression: always-available exits and an activity-scoped confirmation. */
+.activity-safety {display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 18px}
+.activity-safety button {min-height:44px}
+#recovery-dialog {width:680px;max-width:calc(100vw - 28px);max-height:90vh;overflow:auto;border:2px solid #557459;border-radius:14px;background:#edf0e4;color:#183c34;padding:24px}
+#recovery-dialog::backdrop {background:#102e29aa}
+.restoration-path {margin:28px 0}
+.restoration-path .panel {min-width:0}
+
+/* Keep close-up controls in normal flow: a sticky footer can cover the jug
+   track after activity navigation increases the dialog content height. */
+.scene-dialog .scene-actions {position:static}
+/* The extra help entry must wrap with the main navigation on narrow screens. */
+.topbar nav {flex-wrap:wrap;min-width:0}
+.home-path .actions {display:flex;flex-wrap:wrap;gap:10px}
+.recommended-next {border-left:5px solid #486d42;padding:12px 18px;margin:16px 0;background:#eef2dc}
+.restoration-path li {margin:12px 0}
+.restoration-path button {white-space:normal;max-width:100%}
+.town-task-guide {display:flex;align-items:flex-start;gap:16px;margin:0;flex:1;min-width:0}
+.town-task-guide h3 {margin:0 0 8px}
+.town-task-guide h2 {margin:0 0 8px}
+.town-task-guide>svg {width:80px;flex:0 0 80px}
+@media(max-width:600px){.town-task-guide{padding:14px;gap:10px}.scene-task-brief{flex-wrap:wrap}.home-path .actions>button{width:100%}}
+@media(max-width:600px){.scene-task-brief .town-task-guide{flex-basis:100%;width:100%}.scene-task-brief>.badge{order:-1}}
+
+/* Starting suggestions use the existing panel language and original world artwork. */
+.starting-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}.starting-results .panel{min-width:0}.starting-results button,.saved-activities button{margin:6px 4px 6px 0;white-space:normal}.baseline-question{max-width:760px;margin:auto}.baseline-question input{display:block;max-width:100%;font:inherit;padding:12px}.baseline-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.baseline-choices button{font-size:1.2rem;min-height:56px}.starting-parent p{overflow-wrap:anywhere}
+
+@media(max-width:600px){.camp-dock{flex-direction:column}.camp-dock>.layered-explorer{margin:0 auto}.camp-dock>div{min-width:0;max-width:100%}.camp-dock .actions{flex-wrap:wrap}.camp-dock button{white-space:normal}}
+
+/* Centre the face in the circular profile aperture; do not alter full-body scene fits. */
+#headerExplorer{position:relative;display:block}#headerExplorer .layered-explorer{position:absolute;left:50%;top:-27px;margin:0;width:62px;height:93px;transform:translateX(-50%) scale(2.8);transform-origin:50% 0%}
+.starting-baseline,.starting-independent{padding-top:8px;border-top:1px solid #c5ceba}.starting-independent h4,.starting-baseline h4{margin:8px 0}.starting-results h4{font-size:1rem}

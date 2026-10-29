@@ -32,7 +32,7 @@ const test=base.extend({
         localStorage.setItem(key,JSON.stringify(state));sessionStorage.setItem('fixture-seeded','1');
       }
     },{origin:ORIGIN,key:KEY,state:profile(profileName)});
-    const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
+    const page=await context.newPage();await require("./starting-profile.cjs").browser(page);page.on('pageerror',e=>errors.push(e.message));
     await page.goto('/v3-adventure.html');
     try {await use({page,context,key:KEY,read:()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),KEY)});}
     finally {
@@ -49,7 +49,7 @@ const test=base.extend({
       const page=await context.newPage();errors.push(await mock(page,server));
       await installSession(page,server,role);
       await page.goto('/staging-fixture-dist/');
-      await expect(page.getByRole('heading',{name:role==='parent'?'Staging parent dashboard':'A little maths. A big adventure.'})).toBeVisible();
+      await expect(page.getByRole('heading',{name:role==='parent'?'Staging parent dashboard':'Base Camp',exact:true})).toBeVisible();
       return page;
     }
     try {await use({server,open,ref,uid,parentUid});}

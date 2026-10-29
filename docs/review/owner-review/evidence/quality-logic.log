@@ -1,0 +1,10 @@
+PASS gameplay quality {
+  townPlans: 27,
+  tiers: 3,
+  seeds: [ 1, 2, 7 ],
+  lunchBranches: 27,
+  orderingDisplays: 21,
+  legacyV1: true,
+  legacyV2: true,
+  liveWrites: 0
+}

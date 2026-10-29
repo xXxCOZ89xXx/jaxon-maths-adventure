@@ -1,5 +1,9 @@
 # Codex build instructions — Jaxon's Maths Adventure V3
 
+## Owner release authorisation — 29 October 2026
+
+The owner’s pasted release request supersedes the earlier preview-only holds for `codex/guided-progression-recovery`. Recovered assessment/pause work is preserved at `cdd0116` (from `bc4a601`). Complete the nine-area starting profile, parent evidence view, reliable activity-local resume, existing connected Town journey, centred profile portrait and additional girl character using the approved asset/wardrobe system. Keep the original boy and world backgrounds, approved guides, retired-item policy, save IDs, coins and independent mastery semantics. Run fictional/intercepted tests and normal required CI; publish only through a PR to `release/ipad`, never by direct release push or protection bypass, and verify the exact merge commit’s existing Git-connected Cloudflare deployment. No learner-record/service access, accounts, Supabase migrations, analytics, hosting/access settings or unrelated production configuration changes. Physical iPad Safari remains untested. Document broader family-account gaps rather than inventing child switching.
+
 ## Direct touch interactions — 24 October 2026
 
 The owner authorises direct-manipulation activities in normal post-assessment lessons and missions, an isolated playable review preview, audit/coverage and fictional tests on `codex/touch-interactions`, based on released `3334875`. Commit/push development only. No release PR, merge, deployment, production-service calls, accounts/data/coins/Supabase changes. Keep avatar/profile-picture centring for a future project. Preserve independent topic progression, historical question/task snapshots and immutable save queues. Run baseline, curriculum, touch, gameplay quality and iPad save/recovery checks. Physical iPad Safari remains untested. Current user instructions supersede earlier release permissions below.

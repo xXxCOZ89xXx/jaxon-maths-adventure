@@ -1,0 +1,34 @@
+
+Running 18 tests using 1 worker
+
+(node:199633) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:7:1 › actual shop combinations and complete 40-item renderer contact sheet (15.0s)
+  ✓   2 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:14:1 › active choices equip and reopen; retired choices retain ownership without rendering (1.1m)
+  ✓   3 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:27:1 › all retained attachments scale within canvas; companions fit actual shop and viewport (6.8s)
+  ✓   4 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:34:1 › existing unowned previews do not equip or change saved state (3.9s)
+  ✓   5 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:36:1 › legacy appearances use one unchanged original head and shoes; hats and collar crops are explicit (7.3s)
+  ✓   6 [ipad-portrait-chromium] › tests/avatar-fit.spec.cjs:51:1 › option zero, jacket, hoodie and six backgrounds remain pixel-identical to 8023a7c (4.6s)
+(node:209610) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:7:1 › actual shop combinations and complete 40-item renderer contact sheet (15.1s)
+  ✓   8 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:14:1 › active choices equip and reopen; retired choices retain ownership without rendering (1.0m)
+  ✓   9 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:27:1 › all retained attachments scale within canvas; companions fit actual shop and viewport (5.6s)
+  ✓  10 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:34:1 › existing unowned previews do not equip or change saved state (2.7s)
+  ✓  11 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:36:1 › legacy appearances use one unchanged original head and shoes; hats and collar crops are explicit (4.7s)
+  ✓  12 [ipad-landscape-chromium] › tests/avatar-fit.spec.cjs:51:1 › option zero, jacket, hoodie and six backgrounds remain pixel-identical to 8023a7c (3.7s)
+(node:217912) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  13 [small-touch] › tests/avatar-fit.spec.cjs:7:1 › actual shop combinations and complete 40-item renderer contact sheet (11.9s)
+  ✓  14 [small-touch] › tests/avatar-fit.spec.cjs:14:1 › active choices equip and reopen; retired choices retain ownership without rendering (45.1s)
+  ✓  15 [small-touch] › tests/avatar-fit.spec.cjs:27:1 › all retained attachments scale within canvas; companions fit actual shop and viewport (5.0s)
+  ✓  16 [small-touch] › tests/avatar-fit.spec.cjs:34:1 › existing unowned previews do not equip or change saved state (2.5s)
+  ✓  17 [small-touch] › tests/avatar-fit.spec.cjs:36:1 › legacy appearances use one unchanged original head and shoes; hats and collar crops are explicit (4.2s)
+  ✓  18 [small-touch] › tests/avatar-fit.spec.cjs:51:1 › option zero, jacket, hoodie and six backgrounds remain pixel-identical to 8023a7c (3.7s)
+
+  18 passed (4.5m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

@@ -1,0 +1,195 @@
+
+> test:touch-browser
+> node tests/prepare-v3.cjs && playwright test -c playwright.touch.config.cjs
+
+Built staging-fixture-dist. Separate private HTTPS hosting required; no deployment performed.
+Built preview-dist/PLAY-V3.html (standalone offline game).
+
+Running 57 tests using 1 worker
+
+(node:25157) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal place practice serves a visible direct model with equivalent keyboard answers and saved progress (6.4s)
+  ✓   2 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal negative practice serves a visible direct model with equivalent keyboard answers and saved progress (5.1s)
+  ✓   3 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal fraction_parts practice serves a visible direct model with equivalent keyboard answers and saved progress (5.2s)
+  ✓   4 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal algebra_coordinates practice serves a visible direct model with equivalent keyboard answers and saved progress (5.5s)
+  ✓   5 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal geometry_construction practice serves a visible direct model with equivalent keyboard answers and saved progress (5.2s)
+  ✓   6 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal ratio_sharing practice serves a visible direct model with equivalent keyboard answers and saved progress (4.6s)
+  ✓   7 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal stats_tables practice serves a visible direct model with equivalent keyboard answers and saved progress (4.8s)
+  ✓   8 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal prob_events practice serves a visible direct model with equivalent keyboard answers and saved progress (4.8s)
+  ✓   9 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal measure_volume practice serves a visible direct model with equivalent keyboard answers and saved progress (4.6s)
+  ✓  10 [ipad-portrait-chromium] › tests/touch.spec.cjs:8:2 › Normal town_totals practice serves a visible direct model with equivalent keyboard answers and saved progress (3.4s)
+  ✓  11 [ipad-portrait-chromium] › tests/touch.spec.cjs:10:1 › Trusted touch dragging moves a grid point, commits only on release, cancels safely and preserves tap intersections (3.7s)
+  ✓  12 [ipad-portrait-chromium] › tests/touch.spec.cjs:11:1 › Number-line marker and jug pour handle are direct touch objects, not range sliders (4.5s)
+  ✓  13 [ipad-portrait-chromium] › tests/touch.spec.cjs:12:1 › Move and align the ruler, then directly drag the read-off marker; alignment is part of checking (3.2s)
+  ✓  14 [ipad-portrait-chromium] › tests/touch.spec.cjs:13:1 › Grocery and fraction objects genuinely move between targets and return to the tray (5.7s)
+  ✓  15 [ipad-portrait-chromium] › tests/touch.spec.cjs:14:1 › Unknown/wrong direct answers open teaching and preserve first-attempt evidence through a supported retry (4.2s)
+  ✘  16 [ipad-portrait-chromium] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic (3.5s)
+(node:31861) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  17 [ipad-portrait-chromium] › tests/touch.spec.cjs:16:1 › Review preview is easy to find, isolated from game saves, playable, keyboard usable and accessible (10.4s)
+  ✓  18 [ipad-portrait-chromium] › tests/touch.spec.cjs:18:1 › A queued drag cannot edit a different question after another saved state takes over (2.4s)
+  ✓  19 [ipad-portrait-chromium] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window (3.3s)
+(node:33219) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  20 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal place practice serves a visible direct model with equivalent keyboard answers and saved progress (3.7s)
+  ✓  21 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal negative practice serves a visible direct model with equivalent keyboard answers and saved progress (3.6s)
+  ✓  22 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal fraction_parts practice serves a visible direct model with equivalent keyboard answers and saved progress (4.0s)
+  ✓  23 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal algebra_coordinates practice serves a visible direct model with equivalent keyboard answers and saved progress (3.1s)
+  ✓  24 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal geometry_construction practice serves a visible direct model with equivalent keyboard answers and saved progress (3.9s)
+  ✓  25 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal ratio_sharing practice serves a visible direct model with equivalent keyboard answers and saved progress (4.3s)
+  ✓  26 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal stats_tables practice serves a visible direct model with equivalent keyboard answers and saved progress (4.3s)
+  ✓  27 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal prob_events practice serves a visible direct model with equivalent keyboard answers and saved progress (3.3s)
+  ✓  28 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal measure_volume practice serves a visible direct model with equivalent keyboard answers and saved progress (3.9s)
+  ✓  29 [ipad-landscape-chromium] › tests/touch.spec.cjs:8:2 › Normal town_totals practice serves a visible direct model with equivalent keyboard answers and saved progress (2.9s)
+  ✓  30 [ipad-landscape-chromium] › tests/touch.spec.cjs:10:1 › Trusted touch dragging moves a grid point, commits only on release, cancels safely and preserves tap intersections (2.7s)
+  ✓  31 [ipad-landscape-chromium] › tests/touch.spec.cjs:11:1 › Number-line marker and jug pour handle are direct touch objects, not range sliders (3.9s)
+  ✓  32 [ipad-landscape-chromium] › tests/touch.spec.cjs:12:1 › Move and align the ruler, then directly drag the read-off marker; alignment is part of checking (3.3s)
+  ✓  33 [ipad-landscape-chromium] › tests/touch.spec.cjs:13:1 › Grocery and fraction objects genuinely move between targets and return to the tray (6.5s)
+  ✓  34 [ipad-landscape-chromium] › tests/touch.spec.cjs:14:1 › Unknown/wrong direct answers open teaching and preserve first-attempt evidence through a supported retry (4.0s)
+  ✘  35 [ipad-landscape-chromium] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic (3.9s)
+(node:38540) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  36 [ipad-landscape-chromium] › tests/touch.spec.cjs:16:1 › Review preview is easy to find, isolated from game saves, playable, keyboard usable and accessible (8.1s)
+  ✓  37 [ipad-landscape-chromium] › tests/touch.spec.cjs:18:1 › A queued drag cannot edit a different question after another saved state takes over (2.1s)
+  ✓  38 [ipad-landscape-chromium] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window (2.4s)
+(node:39441) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  39 [small-touch] › tests/touch.spec.cjs:8:2 › Normal place practice serves a visible direct model with equivalent keyboard answers and saved progress (3.1s)
+  ✓  40 [small-touch] › tests/touch.spec.cjs:8:2 › Normal negative practice serves a visible direct model with equivalent keyboard answers and saved progress (2.3s)
+  ✓  41 [small-touch] › tests/touch.spec.cjs:8:2 › Normal fraction_parts practice serves a visible direct model with equivalent keyboard answers and saved progress (2.0s)
+  ✓  42 [small-touch] › tests/touch.spec.cjs:8:2 › Normal algebra_coordinates practice serves a visible direct model with equivalent keyboard answers and saved progress (2.7s)
+  ✓  43 [small-touch] › tests/touch.spec.cjs:8:2 › Normal geometry_construction practice serves a visible direct model with equivalent keyboard answers and saved progress (3.3s)
+  ✓  44 [small-touch] › tests/touch.spec.cjs:8:2 › Normal ratio_sharing practice serves a visible direct model with equivalent keyboard answers and saved progress (3.3s)
+  ✓  45 [small-touch] › tests/touch.spec.cjs:8:2 › Normal stats_tables practice serves a visible direct model with equivalent keyboard answers and saved progress (3.4s)
+  ✓  46 [small-touch] › tests/touch.spec.cjs:8:2 › Normal prob_events practice serves a visible direct model with equivalent keyboard answers and saved progress (4.3s)
+  ✓  47 [small-touch] › tests/touch.spec.cjs:8:2 › Normal measure_volume practice serves a visible direct model with equivalent keyboard answers and saved progress (4.9s)
+  ✓  48 [small-touch] › tests/touch.spec.cjs:8:2 › Normal town_totals practice serves a visible direct model with equivalent keyboard answers and saved progress (3.5s)
+  ✓  49 [small-touch] › tests/touch.spec.cjs:10:1 › Trusted touch dragging moves a grid point, commits only on release, cancels safely and preserves tap intersections (3.2s)
+  ✓  50 [small-touch] › tests/touch.spec.cjs:11:1 › Number-line marker and jug pour handle are direct touch objects, not range sliders (4.2s)
+  ✓  51 [small-touch] › tests/touch.spec.cjs:12:1 › Move and align the ruler, then directly drag the read-off marker; alignment is part of checking (3.5s)
+  ✓  52 [small-touch] › tests/touch.spec.cjs:13:1 › Grocery and fraction objects genuinely move between targets and return to the tray (8.3s)
+  ✓  53 [small-touch] › tests/touch.spec.cjs:14:1 › Unknown/wrong direct answers open teaching and preserve first-attempt evidence through a supported retry (5.2s)
+  ✘  54 [small-touch] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic (5.1s)
+(node:45831) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  55 [small-touch] › tests/touch.spec.cjs:16:1 › Review preview is easy to find, isolated from game saves, playable, keyboard usable and accessible (16.7s)
+  ✓  56 [small-touch] › tests/touch.spec.cjs:18:1 › A queued drag cannot edit a different question after another saved state takes over (4.1s)
+  ✓  57 [small-touch] › tests/touch.spec.cjs:19:1 › Cancelled movement and Escape do not renew active learning; a committed answer edit uses the existing bounded window (5.7s)
+
+
+  1) [ipad-portrait-chromium] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic 
+
+    Error: locator.click: Error: strict mode violation: locator('[data-action="learn:negative"]') resolved to 4 elements:
+        1) <button class="primary" data-action="learn:negative">Learn and practise: Negative numbers</button> aka getByRole('button', { name: 'Learn and practise: Negative' }).first()
+        2) <button class="primary" data-action="learn:negative">Learn and practise: Negative numbers</button> aka getByRole('button', { name: 'Learn and practise: Negative' }).nth(1)
+        3) <button class="primary" data-action="learn:negative">Learn and practise: Negative numbers</button> aka getByRole('button', { name: 'Learn and practise: Negative' }).nth(2)
+        4) <button class="" data-action="learn:negative">Learn & practise</button> aka getByRole('button', { name: 'Learn & practise' }).nth(2)
+
+    Call log:
+      - waiting for locator('[data-action="learn:negative"]')
+
+
+      13 | test('Grocery and fraction objects genuinely move between targets and return to the tray',async({camp})=>{const{page:p,key,read}=camp;let q=await practice(p,key,'town_totals');await put(p,0,0);expect((await read()).learning.manipulation.d9.placements[0]).toBe(0);await put(p,0,-1);expect((await read()).learning.manipulation.d9.placements[0]).toBeUndefined();await put(p,0,0);await put(p,2,0);expect((await read()).learning.manipulation.d9.placements).toEqual({'0':0,'2':0});await p.locator('[data-action="d9-check"]').click();await saved(p);expect((await read()).learning.answered).toBe(true);q=await practice(p,key,'fraction_parts');await put(p,0,0);expect((await read()).learning.manipulation.d9.placements[0]).toBe(0);await p.getByRole('button',{name:'Reset activity',exact:true}).click();await saved(p);expect((await read()).learning.manipulation.d9).toEqual({});await alternative(p,q[5].direct,q[1]);await p.locator('[data-action="d9-check"]').click();await saved(p);expect((await read()).learning.answered).toBe(true);});
+      14 | test('Unknown/wrong direct answers open teaching and preserve first-attempt evidence through a supported retry',async({camp})=>{const{page:p,key,read}=camp,q=await practice(p,key,'negative');await p.locator('[data-action="d9-check"]').click();await saved(p);await expect(p.locator('.d9-board')).toBeVisible();expect((await read()).view).toBe('practice');expect((await read()).learning.needsTeaching).toBeUndefined();await expect(p.locator('.feedback').first()).toContainText(q[4]);await alternative(p,q[5].direct,q[1]);await p.locator('[data-action="d9-check"]').click();await saved(p);let s=await read();expect(s.learning.correct).toBe(0);expect(s.learning.responses[0].firstAttemptCorrect).toBe(false);await practice(p,key,'negative');await p.locator('[data-action="learning-skip"]').click();await saved(p);expect((await read()).view).toBe('practice');expect((await read()).learning.answered).toBe(true);});
+    > 15 | test('Actual assessment completion reaches direct questions without granting ability in another topic',async({camp})=>{const{page:p,key,read}=camp;await p.evaluate(key=>{const s=V3Engine.fresh();s.tourSeen=true;V3Engine.startDiscovery(s,'negative',V3Curriculum,V3Discovery);localStorage.setItem(key,JSON.stringify(s));},key);await p.reload();for(let i=0;i<4;i++){const l=(await read()).learning;if(i<2){const correct=l.qs[i][2].indexOf(l.qs[i][1]);await p.locator(`[data-action="answer:${correct}"]`).click();}else await p.locator('[data-action="learning-skip"]').click();await saved(p);await p.locator('[data-action="next-learning"]').click();await saved(p);}expect((await read()).discovery.negative.complete).toBe(true);expect((await read()).discovery.place).toBeUndefined();await p.getByRole('button',{name:'Explore this world',exact:true}).click();await saved(p);await p.locator('[data-action="learn:negative"]').click();await saved(p);await p.locator('[data-action="practice"]').click();await expect(p.locator('.d9-board')).toBeVisible();});
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+      16 | test('Review preview is easy to find, isolated from game saves, playable, keyboard usable and accessible',async({camp})=>{const{page:p,key,read}=camp,before=await read();await p.getByRole('link',{name:/Review direct touch activities/}).click();await expect(p.getByRole('heading',{name:'Direct touch review',exact:true})).toBeVisible();await p.getByRole('button',{name:'Number-line marker',exact:true}).click();await p.getByRole('button',{name:'One step right',exact:true}).focus();await p.keyboard.press('Enter');await expect(p.getByRole('button',{name:'One step right',exact:true})).toBeFocused();await p.keyboard.press('Enter');await p.reload();await expect(p.locator('.d9-board output')).toContainText('-18');expect(await read()).toEqual(before);const AxeBuilder=require('@axe-core/playwright').default;for(const name of ['Groceries into a basket','Number-line marker','Move and align a ruler','Pour and measure liquid','Build a fraction','Drag a coordinate point','Sort outcomes into groups']){await p.getByRole('button',{name,exact:true}).click();const results=await new AxeBuilder({page:p}).analyze();expect(results.violations,name).toEqual([]);}await screenshot(p,'review-preview');});
+      17 |
+      18 | test('A queued drag cannot edit a different question after another saved state takes over',async({camp})=>{const{page:p,key,read}=camp,q=await practice(p,key,'algebra_coordinates');await p.locator('.d9-canvas').evaluate(e=>e.scrollIntoView({block:'center'}));const [x,y]=JSON.parse(q[1]),to=await svgPoint(p,60+(x+5)*48,60+(5-y)*48);await drag(p,'[data-d9-handle="point"]',to,{midway:async()=>{await p.evaluate(key=>{const s=JSON.parse(localStorage.getItem(key));s.learning.i=1;delete s.learning.manipulation;localStorage.setItem(key,JSON.stringify(s));},key);}});const s=await read();expect(s.learning.i).toBe(1);expect(s.learning.manipulation).toBeUndefined();});
+        at /workspace/jaxon-maths-adventure/tests/touch.spec.cjs:15:918
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-ipad-portrait-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [ipad-landscape-chromium] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic 
+
+    Error: locator.click: Error: strict mode violation: locator('[data-action="learn:negative"]') resolved to 4 elements:
+        1) <button class="primary" data-action="learn:negative">Learn and practise: Negative numbers</button> aka getByRole('button', { name: 'Learn and practise: Negative' }).first()
+        2) <button class="primary" data-action="learn:negative">Learn and practise: Negative numbers</button> aka getByRole('button', { name: 'Learn and practise: Negative' }).nth(1)
+        3) <button class="primary" data-action="learn:negative">Learn and practise: Negative numbers</button> aka getByRole('button', { name: 'Learn and practise: Negative' }).nth(2)
+        4) <button class="" data-action="learn:negative">Learn & practise</button> aka getByRole('button', { name: 'Learn & practise' }).nth(2)
+
+    Call log:
+      - waiting for locator('[data-action="learn:negative"]')
+
+
+      13 | test('Grocery and fraction objects genuinely move between targets and return to the tray',async({camp})=>{const{page:p,key,read}=camp;let q=await practice(p,key,'town_totals');await put(p,0,0);expect((await read()).learning.manipulation.d9.placements[0]).toBe(0);await put(p,0,-1);expect((await read()).learning.manipulation.d9.placements[0]).toBeUndefined();await put(p,0,0);await put(p,2,0);expect((await read()).learning.manipulation.d9.placements).toEqual({'0':0,'2':0});await p.locator('[data-action="d9-check"]').click();await saved(p);expect((await read()).learning.answered).toBe(true);q=await practice(p,key,'fraction_parts');await put(p,0,0);expect((await read()).learning.manipulation.d9.placements[0]).toBe(0);await p.getByRole('button',{name:'Reset activity',exact:true}).click();await saved(p);expect((await read()).learning.manipulation.d9).toEqual({});await alternative(p,q[5].direct,q[1]);await p.locator('[data-action="d9-check"]').click();await saved(p);expect((await read()).learning.answered).toBe(true);});
+      14 | test('Unknown/wrong direct answers open teaching and preserve first-attempt evidence through a supported retry',async({camp})=>{const{page:p,key,read}=camp,q=await practice(p,key,'negative');await p.locator('[data-action="d9-check"]').click();await saved(p);await expect(p.locator('.d9-board')).toBeVisible();expect((await read()).view).toBe('practice');expect((await read()).learning.needsTeaching).toBeUndefined();await expect(p.locator('.feedback').first()).toContainText(q[4]);await alternative(p,q[5].direct,q[1]);await p.locator('[data-action="d9-check"]').click();await saved(p);let s=await read();expect(s.learning.correct).toBe(0);expect(s.learning.responses[0].firstAttemptCorrect).toBe(false);await practice(p,key,'negative');await p.locator('[data-action="learning-skip"]').click();await saved(p);expect((await read()).view).toBe('practice');expect((await read()).learning.answered).toBe(true);});
+    > 15 | test('Actual assessment completion reaches direct questions without granting ability in another topic',async({camp})=>{const{page:p,key,read}=camp;await p.evaluate(key=>{const s=V3Engine.fresh();s.tourSeen=true;V3Engine.startDiscovery(s,'negative',V3Curriculum,V3Discovery);localStorage.setItem(key,JSON.stringify(s));},key);await p.reload();for(let i=0;i<4;i++){const l=(await read()).learning;if(i<2){const correct=l.qs[i][2].indexOf(l.qs[i][1]);await p.locator(`[data-action="answer:${correct}"]`).click();}else await p.locator('[data-action="learning-skip"]').click();await saved(p);await p.locator('[data-action="next-learning"]').click();await saved(p);}expect((await read()).discovery.negative.complete).toBe(true);expect((await read()).discovery.place).toBeUndefined();await p.getByRole('button',{name:'Explore this world',exact:true}).click();await saved(p);await p.locator('[data-action="learn:negative"]').click();await saved(p);await p.locator('[data-action="practice"]').click();await expect(p.locator('.d9-board')).toBeVisible();});
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+      16 | test('Review preview is easy to find, isolated from game saves, playable, keyboard usable and accessible',async({camp})=>{const{page:p,key,read}=camp,before=await read();await p.getByRole('link',{name:/Review direct touch activities/}).click();await expect(p.getByRole('heading',{name:'Direct touch review',exact:true})).toBeVisible();await p.getByRole('button',{name:'Number-line marker',exact:true}).click();await p.getByRole('button',{name:'One step right',exact:true}).focus();await p.keyboard.press('Enter');await expect(p.getByRole('button',{name:'One step right',exact:true})).toBeFocused();await p.keyboard.press('Enter');await p.reload();await expect(p.locator('.d9-board output')).toContainText('-18');expect(await read()).toEqual(before);const AxeBuilder=require('@axe-core/playwright').default;for(const name of ['Groceries into a basket','Number-line marker','Move and align a ruler','Pour and measure liquid','Build a fraction','Drag a coordinate point','Sort outcomes into groups']){await p.getByRole('button',{name,exact:true}).click();const results=await new AxeBuilder({page:p}).analyze();expect(results.violations,name).toEqual([]);}await screenshot(p,'review-preview');});
+      17 |
+      18 | test('A queued drag cannot edit a different question after another saved state takes over',async({camp})=>{const{page:p,key,read}=camp,q=await practice(p,key,'algebra_coordinates');await p.locator('.d9-canvas').evaluate(e=>e.scrollIntoView({block:'center'}));const [x,y]=JSON.parse(q[1]),to=await svgPoint(p,60+(x+5)*48,60+(5-y)*48);await drag(p,'[data-d9-handle="point"]',to,{midway:async()=>{await p.evaluate(key=>{const s=JSON.parse(localStorage.getItem(key));s.learning.i=1;delete s.learning.manipulation;localStorage.setItem(key,JSON.stringify(s));},key);}});const s=await read();expect(s.learning.i).toBe(1);expect(s.learning.manipulation).toBeUndefined();});
+        at /workspace/jaxon-maths-adventure/tests/touch.spec.cjs:15:918
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-ipad-landscape-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [small-touch] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic 
+
+    Error: locator.click: Error: strict mode violation: locator('[data-action="learn:negative"]') resolved to 4 elements:
+        1) <button class="primary" data-action="learn:negative">Learn and practise: Negative numbers</button> aka getByRole('button', { name: 'Learn and practise: Negative' }).first()
+        2) <button class="primary" data-action="learn:negative">Learn and practise: Negative numbers</button> aka getByRole('button', { name: 'Learn and practise: Negative' }).nth(1)
+        3) <button class="primary" data-action="learn:negative">Learn and practise: Negative numbers</button> aka getByRole('button', { name: 'Learn and practise: Negative' }).nth(2)
+        4) <button class="" data-action="learn:negative">Learn & practise</button> aka getByRole('button', { name: 'Learn & practise' }).nth(2)
+
+    Call log:
+      - waiting for locator('[data-action="learn:negative"]')
+
+
+      13 | test('Grocery and fraction objects genuinely move between targets and return to the tray',async({camp})=>{const{page:p,key,read}=camp;let q=await practice(p,key,'town_totals');await put(p,0,0);expect((await read()).learning.manipulation.d9.placements[0]).toBe(0);await put(p,0,-1);expect((await read()).learning.manipulation.d9.placements[0]).toBeUndefined();await put(p,0,0);await put(p,2,0);expect((await read()).learning.manipulation.d9.placements).toEqual({'0':0,'2':0});await p.locator('[data-action="d9-check"]').click();await saved(p);expect((await read()).learning.answered).toBe(true);q=await practice(p,key,'fraction_parts');await put(p,0,0);expect((await read()).learning.manipulation.d9.placements[0]).toBe(0);await p.getByRole('button',{name:'Reset activity',exact:true}).click();await saved(p);expect((await read()).learning.manipulation.d9).toEqual({});await alternative(p,q[5].direct,q[1]);await p.locator('[data-action="d9-check"]').click();await saved(p);expect((await read()).learning.answered).toBe(true);});
+      14 | test('Unknown/wrong direct answers open teaching and preserve first-attempt evidence through a supported retry',async({camp})=>{const{page:p,key,read}=camp,q=await practice(p,key,'negative');await p.locator('[data-action="d9-check"]').click();await saved(p);await expect(p.locator('.d9-board')).toBeVisible();expect((await read()).view).toBe('practice');expect((await read()).learning.needsTeaching).toBeUndefined();await expect(p.locator('.feedback').first()).toContainText(q[4]);await alternative(p,q[5].direct,q[1]);await p.locator('[data-action="d9-check"]').click();await saved(p);let s=await read();expect(s.learning.correct).toBe(0);expect(s.learning.responses[0].firstAttemptCorrect).toBe(false);await practice(p,key,'negative');await p.locator('[data-action="learning-skip"]').click();await saved(p);expect((await read()).view).toBe('practice');expect((await read()).learning.answered).toBe(true);});
+    > 15 | test('Actual assessment completion reaches direct questions without granting ability in another topic',async({camp})=>{const{page:p,key,read}=camp;await p.evaluate(key=>{const s=V3Engine.fresh();s.tourSeen=true;V3Engine.startDiscovery(s,'negative',V3Curriculum,V3Discovery);localStorage.setItem(key,JSON.stringify(s));},key);await p.reload();for(let i=0;i<4;i++){const l=(await read()).learning;if(i<2){const correct=l.qs[i][2].indexOf(l.qs[i][1]);await p.locator(`[data-action="answer:${correct}"]`).click();}else await p.locator('[data-action="learning-skip"]').click();await saved(p);await p.locator('[data-action="next-learning"]').click();await saved(p);}expect((await read()).discovery.negative.complete).toBe(true);expect((await read()).discovery.place).toBeUndefined();await p.getByRole('button',{name:'Explore this world',exact:true}).click();await saved(p);await p.locator('[data-action="learn:negative"]').click();await saved(p);await p.locator('[data-action="practice"]').click();await expect(p.locator('.d9-board')).toBeVisible();});
+         |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^
+      16 | test('Review preview is easy to find, isolated from game saves, playable, keyboard usable and accessible',async({camp})=>{const{page:p,key,read}=camp,before=await read();await p.getByRole('link',{name:/Review direct touch activities/}).click();await expect(p.getByRole('heading',{name:'Direct touch review',exact:true})).toBeVisible();await p.getByRole('button',{name:'Number-line marker',exact:true}).click();await p.getByRole('button',{name:'One step right',exact:true}).focus();await p.keyboard.press('Enter');await expect(p.getByRole('button',{name:'One step right',exact:true})).toBeFocused();await p.keyboard.press('Enter');await p.reload();await expect(p.locator('.d9-board output')).toContainText('-18');expect(await read()).toEqual(before);const AxeBuilder=require('@axe-core/playwright').default;for(const name of ['Groceries into a basket','Number-line marker','Move and align a ruler','Pour and measure liquid','Build a fraction','Drag a coordinate point','Sort outcomes into groups']){await p.getByRole('button',{name,exact:true}).click();const results=await new AxeBuilder({page:p}).analyze();expect(results.violations,name).toEqual([]);}await screenshot(p,'review-preview');});
+      17 |
+      18 | test('A queued drag cannot edit a different question after another saved state takes over',async({camp})=>{const{page:p,key,read}=camp,q=await practice(p,key,'algebra_coordinates');await p.locator('.d9-canvas').evaluate(e=>e.scrollIntoView({block:'center'}));const [x,y]=JSON.parse(q[1]),to=await svgPoint(p,60+(x+5)*48,60+(5-y)*48);await drag(p,'[data-d9-handle="point"]',to,{midway:async()=>{await p.evaluate(key=>{const s=JSON.parse(localStorage.getItem(key));s.learning.i=1;delete s.learning.manipulation;localStorage.setItem(key,JSON.stringify(s));},key);}});const s=await read();expect(s.learning.i).toBe(1);expect(s.learning.manipulation).toBeUndefined();});
+        at /workspace/jaxon-maths-adventure/tests/touch.spec.cjs:15:918
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-small-touch/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-small-touch/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-small-touch/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/touch/touch-Actual-assessment-co-93671-ng-ability-in-another-topic-small-touch/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [ipad-portrait-chromium] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic 
+    [ipad-landscape-chromium] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic 
+    [small-touch] › tests/touch.spec.cjs:15:1 › Actual assessment completion reaches direct questions without granting ability in another topic 
+  54 passed (4.4m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

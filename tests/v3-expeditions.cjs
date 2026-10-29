@@ -148,7 +148,7 @@ test("Town restoration requires distinct completed venues, collections are per r
     M.start(s, "town", v.id, 1);
     finish(s);
   }
-  assert.equal(M.visualLevel(s, "town"), 3);
+  assert.equal(M.visualLevel(s, "town"), 0, "Optional Town visits do not bypass assessed restoration stages");
   assert.equal(M.collections(s).length, 8);
   assert.ok(M.campPlace(s, "shelf", "town|market"));
   assert.equal(M.campPlace(s, "unknown", "town|market"), false);

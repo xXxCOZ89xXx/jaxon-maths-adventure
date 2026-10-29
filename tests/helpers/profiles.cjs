@@ -10,7 +10,7 @@ const bank=T.install(C,sandbox.window.JaxonFreshReview);
 const names={new:'New Learner',foundation:'Foundation Learner',developing:'Developing Learner',advanced:'Advanced Learner'};
 function profile(name='new') {
   if(!names[name]) throw Error('Unknown fictional profile');
-  const s=E.fresh();
+  const s=require("./starting-profile.cjs").ready(E.fresh());
   if(name==='new') return s;
   C.skills.forEach((k,i)=>{
     const band=name==='advanced'?8:name==='developing'&&i%3?7:5;

@@ -1,0 +1,230 @@
+
+> test:gameplay-quality
+> node tests/gameplay-quality.cjs && node tests/gameplay-action-coverage.cjs && node tests/town-life.cjs && node tests/v5-hands-on.cjs && node tests/prepare-v3.cjs && playwright test --config playwright.quality.config.cjs
+
+PASS gameplay quality {
+  townPlans: 27,
+  tiers: 3,
+  seeds: [ 1, 2, 7 ],
+  lunchBranches: 27,
+  orderingDisplays: 21,
+  legacyV1: true,
+  legacyV2: true,
+  liveWrites: 0
+}
+PASS action/render coverage {
+  worlds: 9,
+  skills: 63,
+  townPlans: 27,
+  missionDefinitions: 1107,
+  townStages: 2091,
+  kinds: {
+    line: 54,
+    blocks: 36,
+    order: 153,
+    array: 9,
+    fraction: 45,
+    match: 36,
+    measure: 225,
+    balance: 63,
+    sequence: 45,
+    coordinate: 63,
+    rotate: 54,
+    grid: 54,
+    angle: 9,
+    ratio: 54,
+    chart: 18,
+    bars: 36,
+    chance: 90,
+    volume: 9,
+    basket: 273,
+    offers: 15,
+    coins: 414,
+    amount: 552,
+    bank: 18,
+    discount: 9,
+    budget: 81,
+    journey: 441,
+    clock: 144,
+    bill: 9,
+    timesheet: 9,
+    payslip: 9,
+    choice: 171
+  },
+  exceptions: [
+    'Exact numerical/notation calculation practice and independent assessment',
+    'Pre-existing journey snapshots retain original tasks until completed; no rewriting saved answers or ledgers',
+    'Recipe preparation is sequenced from reference instructions; food/heat are not physically simulated'
+  ],
+  liveWrites: 0
+}
+PASS Town Life: 27 scenarios, 2091 stages across 3 tiers × 3 replay seeds; kinds basket, journey, coins, order, measure, choice, clock, amount, budget; legacy/unknown preservation, drafts, receipts, cash and immutable completion.
+PASS V5: Every generated mechanic validates wrong/correct attempts, hints, exact save/resume and three tiers without mastery
+PASS V5: Coverage has at least three actual model types per world and exceeds 70 percent; 55 skills remain accessible
+PASS V5: Cartesian axes and intersections expose no printed coordinate labels or target answer marker
+PASS V5: Adaptive levels depend on multi-question discovery, repeated independent checks and prerequisites, never one guided answer
+PASS V5: Practice components keep supported responses separate; independent assessment does not render aids
+PASS V5: Connected journey carries inventory, list, fare, payments and cooking; interruption and duplicate completion are safe
+PASS V5: Unsupported journey versions and malformed snapshots are preserved, never silently replaced
+PASS V5: All eight buildings share validated worker/customer context metadata and retain their venue identity
+PASS V5: Missing journey context is retained and fails closed instead of crashing
+PASS V5: Completed constructed-practice evidence survives recap without becoming independent mastery
+PASS V5: Every supported practice response is constructible in the question's units across all 55 skills and bands
+PASS V5: Practice generation skips a rejected duplicate round and serves a validated fresh set
+PASS V5: Ordering and matching supply positions vary deterministically rather than repeating an answer-slot pattern
+PASS V5: V5.1 strict numeric drafts prevent stale submissions without recording learning evidence
+14 V5 suites, 1107 generated task steps; fictional fixtures only.
+Built staging-fixture-dist. Separate private HTTPS hosting required; no deployment performed.
+Built preview-dist/PLAY-V3.html (standalone offline game).
+
+Running 48 tests using 1 worker
+
+(node:6130) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › number: actual model, wrong answer, hint and saved placement (3.8s)
+  ✓   2 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › fractions: actual model, wrong answer, hint and saved placement (3.9s)
+  ✓   3 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › algebra: actual model, wrong answer, hint and saved placement (3.7s)
+  ✓   4 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › geometry: actual model, wrong answer, hint and saved placement (3.2s)
+  ✓   5 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › ratio: actual model, wrong answer, hint and saved placement (3.4s)
+  ✓   6 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › statistics: actual model, wrong answer, hint and saved placement (4.1s)
+  ✓   7 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › probability: actual model, wrong answer, hint and saved placement (3.2s)
+  ✓   8 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:34:46 › measure: actual model, wrong answer, hint and saved placement (3.1s)
+  ✓   9 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-pizza: full touch journey, context, decisions and exact reopen (20.2s)
+  ✓  10 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-curry: full touch journey, context, decisions and exact reopen (26.4s)
+  ✓  11 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-soup: full touch journey, context, decisions and exact reopen (22.4s)
+  ✓  12 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-pancakes: full touch journey, context, decisions and exact reopen (35.9s)
+  ✓  13 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › shop-budget: full touch journey, context, decisions and exact reopen (12.5s)
+  ✓  14 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › travel-library: full touch journey, context, decisions and exact reopen (9.8s)
+  ✓  15 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › job-cafe: full touch journey, context, decisions and exact reopen (17.3s)
+  ✓  16 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › errand-post: full touch journey, context, decisions and exact reopen (13.9s)
+  ✓  17 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:50:150 › original-bolognese: full touch journey, context, decisions and exact reopen (37.9s)
+  ✓  18 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:68:1 › Bolognese starts the full recipe; native iPad jug gesture and price-free cupboards (4.2s)
+  ✓  19 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:76:1 › Mocked cloud keeps immutable pending saves while new Town stock selections reconnect (3.7s)
+  ✓  20 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:82:1 › Balance bundles and old V2 snapshots retain their saved meaning (4.1s)
+  ✘  21 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:86:1 › A stale range edit cannot overwrite a replacement adventure in another tab (9.7s)
+(node:28366) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  22 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:95:1 › Place-value supplies and money envelopes use tap-to-place objects (6.2s)
+  ✓  23 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:103:1 › Parent rewards and learner shop stay separate with the new Town save (5.0s)
+  ✓  24 [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:108:1 › Released statistics chart snapshots still render and validate their original bar construction (2.5s)
+(node:30196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  25 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › number: actual model, wrong answer, hint and saved placement (3.5s)
+  ✓  26 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › fractions: actual model, wrong answer, hint and saved placement (3.9s)
+  ✓  27 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › algebra: actual model, wrong answer, hint and saved placement (3.4s)
+  ✓  28 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › geometry: actual model, wrong answer, hint and saved placement (3.4s)
+  ✓  29 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › ratio: actual model, wrong answer, hint and saved placement (3.0s)
+  ✓  30 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › statistics: actual model, wrong answer, hint and saved placement (4.0s)
+  ✓  31 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › probability: actual model, wrong answer, hint and saved placement (3.3s)
+  ✓  32 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:34:46 › measure: actual model, wrong answer, hint and saved placement (3.4s)
+  ✓  33 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-pizza: full touch journey, context, decisions and exact reopen (50.1s)
+  ✓  34 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-curry: full touch journey, context, decisions and exact reopen (1.1m)
+  ✓  35 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-soup: full touch journey, context, decisions and exact reopen (46.5s)
+  ✓  36 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › cook-pancakes: full touch journey, context, decisions and exact reopen (51.3s)
+  ✓  37 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › shop-budget: full touch journey, context, decisions and exact reopen (23.2s)
+  ✓  38 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › travel-library: full touch journey, context, decisions and exact reopen (13.1s)
+  ✓  39 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › job-cafe: full touch journey, context, decisions and exact reopen (28.9s)
+  ✓  40 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › errand-post: full touch journey, context, decisions and exact reopen (15.9s)
+  ✓  41 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:50:150 › original-bolognese: full touch journey, context, decisions and exact reopen (36.7s)
+  ✓  42 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:68:1 › Bolognese starts the full recipe; native iPad jug gesture and price-free cupboards (3.7s)
+  ✓  43 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:76:1 › Mocked cloud keeps immutable pending saves while new Town stock selections reconnect (3.7s)
+  ✓  44 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:82:1 › Balance bundles and old V2 snapshots retain their saved meaning (3.2s)
+  ✘  45 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:86:1 › A stale range edit cannot overwrite a replacement adventure in another tab (7.6s)
+(node:66774) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  46 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:95:1 › Place-value supplies and money envelopes use tap-to-place objects (4.0s)
+  ✓  47 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:103:1 › Parent rewards and learner shop stay separate with the new Town save (2.7s)
+  ✓  48 [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:108:1 › Released statistics chart snapshots still render and validate their original bar construction (2.4s)
+
+
+  1) [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:86:1 › A stale range edit cannot overwrite a replacement adventure in another tab
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Generator engineer', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Generator engineer', exact: true }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Generator engineer', exact: true })
+
+
+      89 |  await page.locator('[data-model-range]').evaluate(el=>{el.value='125';el.dispatchEvent(new Event('change',{bubbles:true}));});
+      90 |  const other=await context.newPage();await other.goto('/v3-adventure.html');await other.evaluate(k=>{const s=({...V3Engine.fresh(),startingProfile:window.FictionalStartingProfile});s.tourSeen=true;V3Adventure.start(s,'algebra','0',1);V3Adventure.begin(s);localStorage.setItem(k,JSON.stringify(s));},key);
+    > 91 |  await expect(page.getByRole('heading',{name:'Generator engineer',exact:true})).toBeVisible();await page.evaluate(()=>window.releaseRangeLock());await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+         |                                                                                 ^
+      92 |  const q=(await read()).adventure.active;expect(q.world).toBe('algebra');expect(q.values.amount).toBeUndefined();await other.close();
+      93 | });
+      94 |
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:91:81
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-A-stale-r-598a2-nt-adventure-in-another-tab-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-A-stale-r-598a2-nt-adventure-in-another-tab-ipad-portrait-chromium/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-A-stale-r-598a2-nt-adventure-in-another-tab-ipad-portrait-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-A-stale-r-598a2-nt-adventure-in-another-tab-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-A-stale-r-598a2-nt-adventure-in-another-tab-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:86:1 › A stale range edit cannot overwrite a replacement adventure in another tab
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Generator engineer', exact: true })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Generator engineer', exact: true }) with timeout 5000ms
+      - waiting for getByRole('heading', { name: 'Generator engineer', exact: true })
+
+
+      89 |  await page.locator('[data-model-range]').evaluate(el=>{el.value='125';el.dispatchEvent(new Event('change',{bubbles:true}));});
+      90 |  const other=await context.newPage();await other.goto('/v3-adventure.html');await other.evaluate(k=>{const s=({...V3Engine.fresh(),startingProfile:window.FictionalStartingProfile});s.tourSeen=true;V3Adventure.start(s,'algebra','0',1);V3Adventure.begin(s);localStorage.setItem(k,JSON.stringify(s));},key);
+    > 91 |  await expect(page.getByRole('heading',{name:'Generator engineer',exact:true})).toBeVisible();await page.evaluate(()=>window.releaseRangeLock());await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+         |                                                                                 ^
+      92 |  const q=(await read()).adventure.active;expect(q.world).toBe('algebra');expect(q.values.amount).toBeUndefined();await other.close();
+      93 | });
+      94 |
+        at /workspace/jaxon-maths-adventure/tests/gameplay-quality.spec.cjs:91:81
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-A-stale-r-598a2-nt-adventure-in-another-tab-ipad-landscape-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-A-stale-r-598a2-nt-adventure-in-another-tab-ipad-landscape-chromium/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/gameplay-quality/gameplay-quality-A-stale-r-598a2-nt-adventure-in-another-tab-ipad-landscape-chromium/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/gameplay-quality/gameplay-quality-A-stale-r-598a2-nt-adventure-in-another-tab-ipad-landscape-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/gameplay-quality/gameplay-quality-A-stale-r-598a2-nt-adventure-in-another-tab-ipad-landscape-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [ipad-portrait-chromium] › tests/gameplay-quality.spec.cjs:86:1 › A stale range edit cannot overwrite a replacement adventure in another tab
+    [ipad-landscape-chromium] › tests/gameplay-quality.spec.cjs:86:1 › A stale range edit cannot overwrite a replacement adventure in another tab
+  46 passed (10.8m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

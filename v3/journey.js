@@ -72,10 +72,10 @@
           j.basket.every((n) => Number.isInteger(n) && n >= 0 && n <= 12)))
     );
   }
-  function start(s, recipe = "bolognese", tier=1) {
+  function start(s, recipe = "bolognese", tier=1,replay=false) {
     const saved=s.adventure?.journeyV1;
     if (!recipes[recipe] || (saved && !validState(saved))) return false;
-    if(!saved||saved.done)return L.startRecipe(s,recipe,tier);
+    if(!saved||saved.done||saved.recipe!==recipe)return L.startRecipe(s,recipe,tier,replay);
     s.adventure = s.adventure || {};
     s.adventure.townActive=1;
     if (!saved)

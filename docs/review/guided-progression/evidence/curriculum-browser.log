@@ -1,0 +1,171 @@
+
+> test:curriculum-browser
+> node tests/prepare-v3.cjs && playwright test -c playwright.curriculum.config.cjs
+
+Built staging-fixture-dist. Separate private HTTPS hosting required; no deployment performed.
+Built preview-dist/PLAY-V3.html (standalone offline game).
+
+Running 81 tests using 1 worker
+
+(node:127590) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:13:2 › number: complete, resume and review a six-task curriculum mission (5.5s)
+  ✓   2 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:13:2 › fractions: complete, resume and review a six-task curriculum mission (5.7s)
+  ✓   3 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:13:2 › algebra: complete, resume and review a six-task curriculum mission (10.6s)
+  ✓   4 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:13:2 › geometry: complete, resume and review a six-task curriculum mission (12.7s)
+  ✓   5 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:13:2 › ratio: complete, resume and review a six-task curriculum mission (14.0s)
+  ✓   6 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:13:2 › statistics: complete, resume and review a six-task curriculum mission (13.3s)
+  ✓   7 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:13:2 › probability: complete, resume and review a six-task curriculum mission (19.6s)
+  ✓   8 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:13:2 › measure: complete, resume and review a six-task curriculum mission (15.0s)
+  ✓   9 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:13:2 › town: complete, resume and review a six-task curriculum mission (17.7s)
+  ✓  10 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:24:1 › Wrong answers and I do not know open teaching, keep the model and do not earn independent mastery (4.6s)
+  ✓  11 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:28:1 › Coordinate activity has real axes, no visible coordinate-pair answers, and keyboard movement alternatives (7.7s)
+  ✓  12 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:32:1 › New supported practice, discovery and the existing customer/worker Town journeys remain available (5.4s)
+  ✓  13 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:41:103 › Higher-level algebra_graphs: plot a whole graph or figure with keyboard and tap controls (6.9s)
+  ✓  14 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:41:103 › Higher-level geometry_construction: plot a whole graph or figure with keyboard and tap controls (5.7s)
+  ✓  15 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:41:103 › Higher-level geometry_similarity: plot a whole graph or figure with keyboard and tap controls (5.6s)
+  ✓  16 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:41:103 › Higher-level statistics_scatter: plot a whole graph or figure with keyboard and tap controls (5.7s)
+  ✓  17 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:47:66 › Higher-level statistics_graphs: construct a chart and retain exact cell values (3.8s)
+  ✘  18 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:47:66 › Higher-level statistics_distributions: construct a chart and retain exact cell values (6.5s)
+(node:145334) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  19 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:50:1 › Build a cube net; alternate valid nets are accepted and overlapping faces are rejected (10.8s)
+  ✓  20 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:53:1 › Construct a Venn diagram and save experimental observations between mini-tasks (25.1s)
+  ✓  21 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:58:1 › Protractor and real-number-line sliders have working keyboard alternatives and retain their values (21.1s)
+  ✓  22 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:62:1 › ASA construction, parallel markings and degree-mode calculator are usable without dragging (14.9s)
+  ✓  23 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:67:1 › Large-number and thousandth place builders are accessible and do not depend on typed answers (9.7s)
+  ✓  24 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:71:1 › Equivalent fraction shading accepts different equal parts rather than a fixed answer pattern (7.6s)
+  ✓  25 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:74:1 › Route-specific recommendation resumes the saved level even when the world suggestion differs (5.1s)
+  ✘  26 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:78:1 › Accessibility audit covers constructed graphs, charts, place columns, protractor and ASA controls (44.4s)
+(node:158750) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  27 [ipad-portrait-chromium] › tests/curriculum.spec.cjs:82:1 › Delayed curriculum edits cannot overwrite a replacement mission or learning question in another tab (16.3s)
+(node:160434) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  28 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:13:2 › number: complete, resume and review a six-task curriculum mission (22.1s)
+  ✓  29 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:13:2 › fractions: complete, resume and review a six-task curriculum mission (19.5s)
+  ✓  30 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:13:2 › algebra: complete, resume and review a six-task curriculum mission (16.0s)
+  ✓  31 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:13:2 › geometry: complete, resume and review a six-task curriculum mission (14.0s)
+  ✓  32 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:13:2 › ratio: complete, resume and review a six-task curriculum mission (15.7s)
+  ✓  33 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:13:2 › statistics: complete, resume and review a six-task curriculum mission (14.5s)
+  ✓  34 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:13:2 › probability: complete, resume and review a six-task curriculum mission (21.6s)
+  ✓  35 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:13:2 › measure: complete, resume and review a six-task curriculum mission (12.7s)
+  ✓  36 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:13:2 › town: complete, resume and review a six-task curriculum mission (14.4s)
+  ✓  37 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:24:1 › Wrong answers and I do not know open teaching, keep the model and do not earn independent mastery (4.7s)
+  ✓  38 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:28:1 › Coordinate activity has real axes, no visible coordinate-pair answers, and keyboard movement alternatives (6.2s)
+  ✓  39 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:32:1 › New supported practice, discovery and the existing customer/worker Town journeys remain available (6.7s)
+  ✓  40 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:41:103 › Higher-level algebra_graphs: plot a whole graph or figure with keyboard and tap controls (9.1s)
+  ✓  41 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:41:103 › Higher-level geometry_construction: plot a whole graph or figure with keyboard and tap controls (8.3s)
+  ✓  42 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:41:103 › Higher-level geometry_similarity: plot a whole graph or figure with keyboard and tap controls (10.7s)
+  ✓  43 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:41:103 › Higher-level statistics_scatter: plot a whole graph or figure with keyboard and tap controls (12.6s)
+  ✓  44 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:47:66 › Higher-level statistics_graphs: construct a chart and retain exact cell values (9.5s)
+  ✓  45 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:47:66 › Higher-level statistics_distributions: construct a chart and retain exact cell values (8.9s)
+  ✓  46 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:50:1 › Build a cube net; alternate valid nets are accepted and overlapping faces are rejected (9.2s)
+  ✓  47 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:53:1 › Construct a Venn diagram and save experimental observations between mini-tasks (25.7s)
+  ✓  48 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:58:1 › Protractor and real-number-line sliders have working keyboard alternatives and retain their values (26.8s)
+  ✓  49 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:62:1 › ASA construction, parallel markings and degree-mode calculator are usable without dragging (17.4s)
+  ✓  50 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:67:1 › Large-number and thousandth place builders are accessible and do not depend on typed answers (7.9s)
+  ✓  51 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:71:1 › Equivalent fraction shading accepts different equal parts rather than a fixed answer pattern (7.5s)
+  ✓  52 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:74:1 › Route-specific recommendation resumes the saved level even when the world suggestion differs (4.5s)
+  ✓  53 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:78:1 › Accessibility audit covers constructed graphs, charts, place columns, protractor and ASA controls (27.7s)
+  ✓  54 [ipad-landscape-chromium] › tests/curriculum.spec.cjs:82:1 › Delayed curriculum edits cannot overwrite a replacement mission or learning question in another tab (6.8s)
+(node:192380) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  55 [small-touch] › tests/curriculum.spec.cjs:13:2 › number: complete, resume and review a six-task curriculum mission (8.1s)
+  ✓  56 [small-touch] › tests/curriculum.spec.cjs:13:2 › fractions: complete, resume and review a six-task curriculum mission (11.0s)
+  ✓  57 [small-touch] › tests/curriculum.spec.cjs:13:2 › algebra: complete, resume and review a six-task curriculum mission (10.7s)
+  ✓  58 [small-touch] › tests/curriculum.spec.cjs:13:2 › geometry: complete, resume and review a six-task curriculum mission (10.5s)
+  ✓  59 [small-touch] › tests/curriculum.spec.cjs:13:2 › ratio: complete, resume and review a six-task curriculum mission (11.4s)
+  ✓  60 [small-touch] › tests/curriculum.spec.cjs:13:2 › statistics: complete, resume and review a six-task curriculum mission (8.4s)
+  ✓  61 [small-touch] › tests/curriculum.spec.cjs:13:2 › probability: complete, resume and review a six-task curriculum mission (14.7s)
+  ✓  62 [small-touch] › tests/curriculum.spec.cjs:13:2 › measure: complete, resume and review a six-task curriculum mission (11.8s)
+  ✓  63 [small-touch] › tests/curriculum.spec.cjs:13:2 › town: complete, resume and review a six-task curriculum mission (15.6s)
+  ✓  64 [small-touch] › tests/curriculum.spec.cjs:24:1 › Wrong answers and I do not know open teaching, keep the model and do not earn independent mastery (4.3s)
+  ✓  65 [small-touch] › tests/curriculum.spec.cjs:28:1 › Coordinate activity has real axes, no visible coordinate-pair answers, and keyboard movement alternatives (7.1s)
+  ✓  66 [small-touch] › tests/curriculum.spec.cjs:32:1 › New supported practice, discovery and the existing customer/worker Town journeys remain available (5.6s)
+  ✓  67 [small-touch] › tests/curriculum.spec.cjs:41:103 › Higher-level algebra_graphs: plot a whole graph or figure with keyboard and tap controls (7.3s)
+  ✓  68 [small-touch] › tests/curriculum.spec.cjs:41:103 › Higher-level geometry_construction: plot a whole graph or figure with keyboard and tap controls (7.0s)
+  ✓  69 [small-touch] › tests/curriculum.spec.cjs:41:103 › Higher-level geometry_similarity: plot a whole graph or figure with keyboard and tap controls (6.5s)
+  ✓  70 [small-touch] › tests/curriculum.spec.cjs:41:103 › Higher-level statistics_scatter: plot a whole graph or figure with keyboard and tap controls (6.0s)
+  ✓  71 [small-touch] › tests/curriculum.spec.cjs:47:66 › Higher-level statistics_graphs: construct a chart and retain exact cell values (3.5s)
+  ✓  72 [small-touch] › tests/curriculum.spec.cjs:47:66 › Higher-level statistics_distributions: construct a chart and retain exact cell values (4.4s)
+  ✓  73 [small-touch] › tests/curriculum.spec.cjs:50:1 › Build a cube net; alternate valid nets are accepted and overlapping faces are rejected (9.6s)
+  ✓  74 [small-touch] › tests/curriculum.spec.cjs:53:1 › Construct a Venn diagram and save experimental observations between mini-tasks (20.8s)
+  ✓  75 [small-touch] › tests/curriculum.spec.cjs:58:1 › Protractor and real-number-line sliders have working keyboard alternatives and retain their values (20.4s)
+  ✓  76 [small-touch] › tests/curriculum.spec.cjs:62:1 › ASA construction, parallel markings and degree-mode calculator are usable without dragging (13.2s)
+  ✓  77 [small-touch] › tests/curriculum.spec.cjs:67:1 › Large-number and thousandth place builders are accessible and do not depend on typed answers (5.9s)
+  ✓  78 [small-touch] › tests/curriculum.spec.cjs:71:1 › Equivalent fraction shading accepts different equal parts rather than a fixed answer pattern (5.5s)
+  ✓  79 [small-touch] › tests/curriculum.spec.cjs:74:1 › Route-specific recommendation resumes the saved level even when the world suggestion differs (2.9s)
+  ✓  80 [small-touch] › tests/curriculum.spec.cjs:78:1 › Accessibility audit covers constructed graphs, charts, place columns, protractor and ASA controls (16.9s)
+  ✓  81 [small-touch] › tests/curriculum.spec.cjs:82:1 › Delayed curriculum edits cannot overwrite a replacement mission or learning question in another tab (6.9s)
+
+
+  1) [ipad-portrait-chromium] › tests/curriculum.spec.cjs:47:66 › Higher-level statistics_distributions: construct a chart and retain exact cell values 
+
+    Error: browserContext.close: ENOENT: no such file or directory, open '/workspace/jaxon-maths-adventure/test-results/curriculum/.playwright-artifacts-0/traces/904634fca035d4892d1c-6f344088ce9eaf0d0255-recording34.network'
+
+       at helpers/identities.cjs:39
+
+      37 |     try {await use({page,context,key:KEY,read:()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),KEY)});}
+      38 |     finally {
+    > 39 |       await context.close();
+         |       ^
+      40 |       expect(blocked,'No external destinations permitted for fictional camp').toEqual([]);
+      41 |       expect(errors,'No browser runtime errors').toEqual([]);
+      42 |     }
+        at Object.camp (/workspace/jaxon-maths-adventure/tests/helpers/identities.cjs:39:7)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/curriculum/curriculum-Higher-level-st-ddaa1-nd-retain-exact-cell-values-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/curriculum/curriculum-Higher-level-st-ddaa1-nd-retain-exact-cell-values-ipad-portrait-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/curriculum/curriculum-Higher-level-st-ddaa1-nd-retain-exact-cell-values-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/curriculum/curriculum-Higher-level-st-ddaa1-nd-retain-exact-cell-values-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [ipad-portrait-chromium] › tests/curriculum.spec.cjs:78:1 › Accessibility audit covers constructed graphs, charts, place columns, protractor and ASA controls 
+
+    Error: browserContext.close: ENOENT: no such file or directory, open '/workspace/jaxon-maths-adventure/test-results/curriculum/.playwright-artifacts-1/traces/904634fca035d4892d1c-1816311eeebfbb5f3fda-recording14.network'
+
+       at helpers/identities.cjs:39
+
+      37 |     try {await use({page,context,key:KEY,read:()=>page.evaluate(key=>JSON.parse(localStorage.getItem(key)),KEY)});}
+      38 |     finally {
+    > 39 |       await context.close();
+         |       ^
+      40 |       expect(blocked,'No external destinations permitted for fictional camp').toEqual([]);
+      41 |       expect(errors,'No browser runtime errors').toEqual([]);
+      42 |     }
+        at Object.camp (/workspace/jaxon-maths-adventure/tests/helpers/identities.cjs:39:7)
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/curriculum/curriculum-Accessibility-a-05094-protractor-and-ASA-controls-ipad-portrait-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/curriculum/curriculum-Accessibility-a-05094-protractor-and-ASA-controls-ipad-portrait-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/curriculum/curriculum-Accessibility-a-05094-protractor-and-ASA-controls-ipad-portrait-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/curriculum/curriculum-Accessibility-a-05094-protractor-and-ASA-controls-ipad-portrait-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  Slow test file: [ipad-landscape-chromium] › tests/curriculum.spec.cjs (6.0m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  2 failed
+    [ipad-portrait-chromium] › tests/curriculum.spec.cjs:47:66 › Higher-level statistics_distributions: construct a chart and retain exact cell values 
+    [ipad-portrait-chromium] › tests/curriculum.spec.cjs:78:1 › Accessibility audit covers constructed graphs, charts, place columns, protractor and ASA controls 
+  79 passed (15.8m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice

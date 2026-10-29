@@ -63,11 +63,11 @@
   function ordered(labels,seed){const rotation=1+seed%(labels.length-1),indices=labels.map((_,i)=>(i+rotation)%labels.length);return {items:indices.map(i=>labels[i]),answer:labels.map((_,i)=>indices.indexOf(i))};}
   const Q=typeof module!=='undefined'?require('./town-content').V53TownContent:root.V53TownContent;
   function make(scenario,tier,seed,original){const meta=catalog.find(c=>c.id===scenario);return meta?copy(Q.make(meta,tier,seed,{meals,shopping,trips,errands,jobs},original)):null;}
-  function startRecipe(s,recipe,tier=1){
+  function startRecipe(s,recipe,tier=1,replay=false){
     if(!['bolognese','lentil'].includes(recipe)||book(s)!==undefined&&!validBook(book(s)))return false;
     s.adventure ||= {};const b=book(s)||{version:2,runs:{},counts:{},active:null};
     let j=Object.values(b.runs).filter(r=>r.originalRecipe===recipe).at(-1);
-    if(!j||j.done){const key='original-'+recipe,seed=(b.counts[key]||0)+1;j=make('cook-pasta',Math.max(1,Math.min(3,tier)),seed,recipe);j.id=key+':'+seed;b.runs[j.id]=j;b.counts[key]=seed;}
+    if(!j||j.done&&replay){const key='original-'+recipe,seed=(b.counts[key]||0)+1;j=make('cook-pasta',Math.max(1,Math.min(3,tier)),seed,recipe);j.id=key+':'+seed;b.runs[j.id]=j;b.counts[key]=seed;}
     b.active=j.id;s.adventure.townLifeV2=b;s.adventure.townActive=2;s.view=s.resumeView='journey';s.world='town';return true;
   }
   function start(s,id,tier=1,replay=false){
@@ -108,7 +108,7 @@
     if(e.receipt)j.receipts.push({id:j.id+':'+j.stage,label:e.receipt,spent:e.spend||0,earned:e.earn||0,sale:e.sale||0,saved:e.savings||0,items:copy(e.add||{}),time:j.time,choice:e.choice||null});
     if(e.choice){j.decisions ||= [];j.decisions.push({stage:j.stage,choice:e.choice});}
     if(t.branches){const branch=t.branches[j.values.choice];if(!Array.isArray(branch))return false;j.steps.splice(j.stage+1,j.steps.length-j.stage-1,...copy(branch));j.decisions ||= [];j.decisions.push({stage:j.stage,choice:t.options[j.values.choice].name});}
-    j.completed.push(j.stage);j.stage++;j.done=j.stage===j.steps.length;j.values={};j.solved=false;j.assisted=false;j.feedback='';j.hintLevel=0;if(j.done){s.resumeView=null;completeLandmark(s,j);}return true;
+    j.completed.push(j.stage);j.stage++;j.done=j.stage===j.steps.length;j.values={};j.solved=false;j.assisted=false;j.feedback='';j.hintLevel=0;if(j.done){s.resumeView='journey';s.lastResult={type:'town-plan',world:'town',name:j.name,runId:j.id};completeLandmark(s,j);}return true;
   }
   function completeLandmark(s,j){
     const M=typeof module!=='undefined'?require('./adventure').V3Adventure:root.V3Adventure;

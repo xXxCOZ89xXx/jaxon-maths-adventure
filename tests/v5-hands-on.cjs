@@ -73,9 +73,10 @@ test("Every generated mechanic validates wrong/correct attempts, hints, exact sa
               else M.edit(s, "amount", 1);
             }
             assert.equal(M.submit(s), false, t.kind);
+            assert(q.feedback.includes(t.teach));
             M.help(s);
             assert.ok(q.assisted);
-            assert.equal(q.phase,"lesson","Wrong answers route through teaching");
+            assert.equal(q.phase,"play","Wrong answers keep the question available for retry");
             M.begin(s);
             answer(s, t);
             const snapshot = JSON.stringify(q);

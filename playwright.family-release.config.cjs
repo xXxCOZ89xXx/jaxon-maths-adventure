@@ -1,0 +1,1 @@
+const base=require('./playwright.guided-progression.config.cjs');module.exports={...base,testMatch:/family-release\.spec\.cjs/,outputDir:'test-results/family-release',globalSetup:require.resolve('./tests/prepare-family-release.cjs'),reporter:[['list'],['json',{outputFile:'work/family-release/browser-results.json'}]]};
