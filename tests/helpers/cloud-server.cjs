@@ -5,7 +5,7 @@ const ref = "abcdefghijklmnopqrst",
   parentUid = "22222222-2222-4222-8222-222222222222";
 function fixture() {
   return {
-    progress: {},
+    progress: require("./starting-profile.cjs").ready({}),
     revision: 0,
     wallet: { coins: 200, bonus: 0, owned: [], active_seconds: 0, redeemed: 0 },
     tokens: new Map(),

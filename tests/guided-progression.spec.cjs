@@ -4,7 +4,7 @@ const read=async p=>{await expect(p.locator('html')).not.toHaveAttribute('data-s
 async function seed(p,s){await p.goto('/v3-adventure.html');await p.evaluate(({key,s})=>localStorage.setItem(key,JSON.stringify(s)),{key:KEY,s});await p.reload();await p.locator('#main h1').waitFor();}
 async function openWorkbench(p){if(!await p.locator('.world-task-dialog[open]').count())await p.locator('[data-world-task-open]').first().click();}
 async function capture(p,info,name,locator){const dir='docs/review/guided-progression/after/'+info.project.name;fs.mkdirSync(dir,{recursive:true});await (locator||p).screenshot({path:dir+'/'+name+'.jpg',type:'jpeg',quality:78,animations:'disabled'});}
-test.beforeEach(async({page:p})=>{p.failures=[];p.on('pageerror',e=>p.failures.push(e.message));await p.route('**/*',r=>new URL(r.request().url()).origin==='http://127.0.0.1:4173'?r.continue():r.abort());await p.emulateMedia({reducedMotion:'reduce'});});
+test.beforeEach(async({page:p})=>{await require("./helpers/starting-profile.cjs").browser(p);p.failures=[];p.on('pageerror',e=>p.failures.push(e.message));await p.route('**/*',r=>new URL(r.request().url()).origin==='http://127.0.0.1:4173'?r.continue():r.abort());await p.emulateMedia({reducedMotion:'reduce'});});
 test.afterEach(async({page:p})=>expect(p.failures).toEqual([]));
 for(const recipe of [false,true])test('completed Town '+(recipe?'recipe':'plan')+' Continue shows its recap without new supermarket or day',async({page:p},info)=>{
  const s=F.completedTown(recipe),old=F.L.state(s),runs=JSON.stringify(F.L.book(s).runs);await seed(p,s);await p.getByRole('button',{name:'Continue adventure',exact:false}).first().click();

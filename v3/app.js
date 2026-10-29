@@ -3,7 +3,7 @@
   const M = window.V3Adventure,
     U = window.V3AdventureUI,
     T = window.V3Town;
-  const R=window.V10Restoration,N=window.V10Navigation;
+  const R=window.V10Restoration,N=window.V10Navigation,P=window.V11StartingProfile;
   let recoveryChoice=null;
   const E = window.V3Engine,
     C = window.V3Curriculum,
@@ -147,6 +147,10 @@
     return `<div class="section-head"><div><div class="eyebrow">${eyebrow}</div><h1>${title}</h1></div>${back?btn("← Back", "nav:" + back):""}</div>`;
   }
   function home(){return camp();}
+  function starting(){const done=P.complete(s);return `${header('YOUR STARTING POINTS','Find my starting points','home')}<section class="panel"><p>Four little questions in each place. No timer. Pick any area, pause whenever you like, and say “I don’t know” if you need to.</p><p>${done?'All nine samples are saved. Learning adventures are now open.':'Explore the maps while we find your starting points. Lessons and adventures open when all nine areas are done.'}</p><p>${Object.keys(P.areas).filter(id=>P.valid(s.startingProfile?.areas?.[id])).length} / 9 areas complete. These short samples suggest a starting range; they do not prove mastery.</p></section><div class="starting-results">${E.worlds.map(w=>{const a=s.startingProfile?.areas?.[w.id],ready=P.valid(a);return `<article class="panel"><h2>${esc(w.name)}</h2><p>${ready?'Sample complete':a?.responses?.length?'Paused · '+a.responses.length+' / 4 saved':'Not assessed yet'}</p>${ready?'':btn(a?.question?'Resume this area':'Find this starting point','starting:'+w.id,'primary')}${done?`<details><summary>Your saved answers explained</summary>${a.responses.map(r=>`<p>${esc(r.prompt)}</p><p>You chose: ${esc(r.skipped?'I don’t know':r.value)}. ${esc(r.explanation)}</p>`).join('')}</details>`:''}</article>`;}).join('')}</div>${done?btn('Choose a learning adventure','nav:map','primary'):''}`;}
+  function startingArea(){const id=s.startingProfile?.active,a=s.startingProfile?.areas?.[id],q=a?.question;if(!q||!Array.isArray(q.choices)||typeof q.prompt!=='string')return starting();return `${header('FIND YOUR STARTING POINT',esc(E.worlds.find(w=>w.id===id).name),'starting')}<section class="panel baseline-question" data-baseline-scope="${esc(JSON.stringify([id,a.responses.length,q.prompt,a.answered]))}"><p>Question ${Math.min(a.responses.length+(a.answered?0:1),4)} / 4 · no timer</p><h2>${esc(q.prompt)}</h2>${a.answered?`<p role="status">Answer saved. We’ll explain the answers after all nine areas are done.</p>${btn('Next question','starting-next','primary')}`:`<div class="actions baseline-choices">${q.choices.map((v,i)=>btn(esc(v),'starting-choice:'+i)).join('')}</div><label>Your answer <input data-baseline-draft inputmode="decimal" value="${esc(a.draft||'')}" autocomplete="off"></label><div class="actions">${btn('Submit answer','starting-submit','primary',!a.draft?.trim())}${btn('I don’t know','starting-skip')}</div>`}<p>Use your own ideas. It’s safe not to know.</p>${a.validation?`<p role="alert">${esc(a.validation)}</p>`:""}</section>`;}
+  function savedActivities(){const entries=N.saved(s);return entries.length?`<section class="panel saved-activities"><h2>Your paused activities</h2><p>Pick one to return to the exact saved question, answer and tools.</p>${entries.map(x=>btn(esc(x.label),`resume-saved:${x.kind}:${encodeURIComponent(x.key)}`)).join('')}</section>`:'';}
+
   function map() {
     return `${header("THE ADVENTURE ATLAS", "Where will you go?", "home")}<div class="toolbar"><p class="muted">Choose a subject world. Town has its own destination from Base Camp or the Town button.</p>${A.explorer(s, true)}<span class="badge">${s.milestones.length} learning milestones</span></div>${A.atlas?A.atlas(s):""}<div class="world-grid">${E.worlds.filter(w=>w.id!=='town').map((w, i) => `<article class="world-card" data-world="${w.id}" style="--world-accent:${w.color}"><div class="world-vista">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="world-open">OPEN TO EXPLORE</span><span class="world-landmarks" role="img" aria-label="${M.visualLevel(s,w.id,E.count(s,w.id))} of 3 landmarks restored">${[0,1,2].map(i=>`<i class="${i<M.visualLevel(s,w.id,E.count(s,w.id))?'restored':''}" aria-hidden="true">◆</i>`).join('')}</span></div><div class="body"><div class="eyebrow">0${i + 1} · ${s.world === w.id ? "YOU ARE HERE" : "OPEN TO EXPLORE"}</div><h2>${w.name}</h2><p class="muted">${w.tag} · ${M.visualLevel(s, w.id, E.count(s, w.id))}/3 restored · ${M.completions(s, w.id).length} expeditions</p>${bar(M.visualLevel(s, w.id, E.count(s, w.id)), 3)}${btn("Explore " + w.name, "world:" + w.id)}</div></article>`).join("")}</div>`;
   }
@@ -277,7 +281,7 @@
   }
   function camp() {
     const progress=M.campProgress(s),n=progress.count;
-    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Base Camp", null)}<section class="home-path panel" aria-label="Choose your adventure"><h2>Where next?</h2>${!s.tourSeen?`<div class="notice"><p>New here? Your guide can show you the way.</p><div class="actions">${btn("Show me how","nav:tour")}${btn("Start exploring","skip-tour")}</div></div>`:""}<p>${esc(N.summary(s))}</p><div class="actions">${btn('Continue adventure','continue','primary')}${btn('Subject worlds','nav:map')}${btn('Town and Restore Community','world:town')}${btn('How to play','nav:tour')}</div><p>${s.world==='town'?nextButton('town'):btn('Your next learning step','next-path:'+s.world)}</p></section><section class="camp-overview ${progress.pending ? "estate-unveiling" : ""}">${progress.pending ? `<div class="estate-celebration" role="status"><strong>Your ${esc(progress.current.name)} is ready.</strong><span>Built through your adventures. No coins spent.</span>${btn("Enjoy the new home", "camp-celebrate")}</div>` : ""}<div class="camp-map hero-art">${A.camp(s)}<span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>${esc(progress.current.name)}</h2><p class="muted">Choose a place in camp to continue, explore or view your progress. Every earned upgrade stays with you.</p><p class="camp-inventory small">${campNames.filter((_,i)=>n>=campThresholds[i]).map(name=>`<span>◆ ${name}</span>`).join(" ")}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section>${campPlanner(progress)}<details class="camp-journal" id="camp-achievements"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
+    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Base Camp", null)}<section class="home-path panel" aria-label="Choose your adventure"><h2>Where next?</h2>${!P.complete(s)?`<div class="notice"><h3>Start with your starting points</h3><p>A few questions in all nine areas help us choose where to begin. Explore freely; learning opens after your profile is complete.</p>${btn("Find my starting points","nav:starting","primary")}</div>`:btn("Your starting points","nav:starting")}${!s.tourSeen?`<div class="notice"><p>New here? Your guide can show you the way.</p><div class="actions">${btn("Show me how","nav:tour")}${btn("Start exploring","skip-tour")}</div></div>`:""}<p>${esc(N.summary(s))}</p><div class="actions">${btn('Continue adventure','continue','primary')}${btn('Subject worlds','nav:map')}${btn('Town and Restore Community','world:town')}${btn('How to play','nav:tour')}</div><p>${s.world==='town'?nextButton('town'):btn('Your next learning step','next-path:'+s.world)}</p></section>${savedActivities()}<section class="camp-overview ${progress.pending ? "estate-unveiling" : ""}">${progress.pending ? `<div class="estate-celebration" role="status"><strong>Your ${esc(progress.current.name)} is ready.</strong><span>Built through your adventures. No coins spent.</span>${btn("Enjoy the new home", "camp-celebrate")}</div>` : ""}<div class="camp-map hero-art">${A.camp(s)}<span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>${esc(progress.current.name)}</h2><p class="muted">Choose a place in camp to continue, explore or view your progress. Every earned upgrade stays with you.</p><p class="camp-inventory small">${campNames.filter((_,i)=>n>=campThresholds[i]).map(name=>`<span>◆ ${name}</span>`).join(" ")}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section>${campPlanner(progress)}<details class="camp-journal" id="camp-achievements"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
       ["First steps", n >= 1, "Restore your first landmark."],
       [
         "Forest keeper",
@@ -376,21 +380,23 @@
     }</section></div>`;
   }
   function tour() {
-    return `<section class="tour">${header('YOUR ADVENTURE GUIDE','How to play','home')}<div class="panel"><h2>Follow four small steps</h2><ol><li><strong>Find your starting point.</strong> A few questions help your guide choose a level. You can say “I don’t know”.</li><li><strong>Learn and practise.</strong> Try an example, move the maths tools and ask for hints.</li><li><strong>Try an independent check.</strong> Use your own thinking. Help is still safe; it just stays separate from independent answers.</li><li><strong>Restore your world.</strong> Use the ideas in a longer plan. Each stage opens after its starting-point checks. Restoration is practice, not proof of mastery.</li></ol><h2>Explore your way</h2><p>Other missions, Town plans and Base Camp are optional adventures. You can visit another world at any time.</p><h2>Pause or get unstuck</h2><p>Home and World map pause your activity. Continue brings you back; a finished activity shows its recap. Get unstuck names exactly what a restart or exit resets before you confirm. Completed work, coins and learning evidence stay saved.</p><p>Lessons and checks restart only the current question’s draft. Earlier answers stay. A restarted Town plan or mission keeps its earlier steps in Earlier attempts.</p><div class="actions">${btn('Continue my activity','continue','primary')}${btn('Choose a world','nav:map')}${btn('Finish guide','skip-tour')}</div></div>${s.activityArchives?.length?`<details class="panel"><summary>Earlier attempts · ${s.activityArchives.length}</summary>${s.activityArchives.map(x=>`<article><h3>${esc(x.name)}</h3><p>${x.snapshot.completed?.length??x.snapshot.i??0} earlier steps kept. ${x.snapshot.receipts?.length||0} receipts kept.</p>${x.snapshot.receipts?.length?`<ul>${x.snapshot.receipts.map(r=>`<li>${esc(r.label)}</li>`).join('')}</ul>`:''}</article>`).join('')}</details>`:''}</section>`;
+    return `<section class="tour">${header('YOUR ADVENTURE GUIDE','How to play','home')}<div class="panel"><h2>Follow four small steps</h2><ol><li><strong>Find your starting point.</strong> A few questions help your guide choose a level. You can say “I don’t know”.</li><li><strong>Learn and practise.</strong> Try an example, move the maths tools and ask for hints.</li><li><strong>Try an independent check.</strong> Use your own thinking. Help is still safe; it just stays separate from independent answers.</li><li><strong>Restore your world.</strong> Use the ideas in a longer plan. Each stage opens after its starting-point checks. Restoration is practice, not proof of mastery.</li></ol><h2>Explore your way</h2><p>Other missions, Town plans and Base Camp are optional adventures. You can visit another world at any time. First, find starting points in all nine areas; then learning adventures open. The short profile is a starting suggestion, not mastery.</p><h2>Pause or get unstuck</h2><p>Pause and explore saves your question and tools. Home and World map also leave your activity saved. Base Camp lists your paused activities. Continue brings you back; a finished activity shows its recap. Get unstuck names exactly what a restart or exit resets before you confirm. Completed work, coins and learning evidence stay saved.</p><p>Lessons and checks restart only the current question’s draft. Earlier answers stay. A restarted Town plan or mission keeps its earlier steps in Earlier attempts.</p><div class="actions">${btn('Continue my activity','continue','primary')}${btn('Choose a world','nav:map')}${btn('Finish guide','skip-tour')}</div></div>${s.activityArchives?.length?`<details class="panel"><summary>Earlier attempts · ${s.activityArchives.length}</summary>${s.activityArchives.map(x=>`<article><h3>${esc(x.name)}</h3><p>${x.snapshot.completed?.length??x.snapshot.i??0} earlier steps kept. ${x.snapshot.receipts?.length||0} receipts kept.</p>${x.snapshot.receipts?.length?`<ul>${x.snapshot.receipts.map(r=>`<li>${esc(r.label)}</li>`).join('')}</ul>`:''}</article>`).join('')}</details>`:''}</section>`;
 
   }
   function closeDialogs(){document.querySelectorAll('dialog[open]').forEach(d=>d.close());}
-  function safetyButtons(){return `${btn('Home','nav:home')}${btn('World map','nav:map')}${btn('How to play','nav:tour')}${N.target(s)?btn('Get unstuck','recover-open'):''}`;}
+  function safetyButtons(){return `${btn("Pause and explore","pause-explore")}${btn('Home','nav:home')}${btn('World map','nav:map')}${btn('How to play','nav:tour')}${N.target(s)?btn('Get unstuck','recover-open'):''}`;}
   function activitySafety(){
     if(!document.getElementById('town-entry')){const b=document.createElement('button');b.id='town-entry';b.dataset.action='world:town';b.textContent='Town';document.querySelector('.topbar nav').append(b);}
     if(!document.getElementById('play-help')){const b=document.createElement('button');b.id='play-help';b.dataset.action='nav:tour';b.textContent='How to play';document.querySelector('.topbar nav').append(b);}
     if(!document.getElementById('recovery-dialog')){const d=document.createElement('dialog');d.id='recovery-dialog';d.setAttribute('aria-label','Get unstuck confirmation');d.innerHTML='<h2>Get unstuck</h2><p class="recovery-copy"></p><div class="actions"><button data-action="recover-apply:restart" data-recovery-confirm>Confirm restart</button><button data-action="recover-apply:exit" data-recovery-confirm>Exit this activity</button><button data-action="recover-cancel">Keep playing</button><button data-action="nav:home">Pause and go home</button><button data-action="nav:map">Pause and open world map</button></div>';document.body.append(d);}
-    if(['quest','adventure','journey','lesson','practice','check','discovery'].includes(s.view)){
+    if(['quest','adventure','journey','lesson','practice','check','discovery','starting-area'].includes(s.view)){
       const dock=document.createElement('nav');dock.className='activity-safety';dock.setAttribute('aria-label','Activity help and leaving');dock.innerHTML=safetyButtons();document.getElementById('main').prepend(dock);
       document.querySelectorAll('#main dialog').forEach(d=>{const n=document.createElement('nav');n.className='activity-safety';n.setAttribute('aria-label','Activity help and leaving');n.innerHTML=safetyButtons();d.prepend(n);});
     }
   }
   function render(focus = false) {
+    if(!P.complete(s)&&P.views.includes(s.view))s.view='starting';
+
     window.V7Avatar?.setState(s);
     window.V7ActivityScenes?.before();
     window.V6SceneUI?.beforeRender();
@@ -398,6 +404,8 @@
     $("headerExplorer").innerHTML = A.explorer(s, true);
     const screens = {
       home,
+      starting,
+      "starting-area":startingArea,
       map,
       world: worldPage,
       quest,
@@ -437,6 +445,10 @@
         else el.removeAttribute("aria-current");
       }
     });
+    if(!P.complete(s)){
+      document.querySelectorAll('#main [data-action]').forEach(el=>{if(!P.allowed(s,el.dataset.action)){if(el.dataset.action==='continue'){el.dataset.action='nav:starting';el.textContent='Continue starting points';}else{el.disabled=true;el.title='Find all nine starting points first';}}});
+      if(s.view==='world'){const notice=document.createElement('section');notice.className='notice';notice.innerHTML='<p>Look around freely. Find all nine starting points before learning adventures begin.</p>'+btn('Find my starting points','nav:starting','primary');$('main').prepend(notice);}
+    }
     presentationFinish();
     if (focus) {
       $("main").focus();
@@ -465,6 +477,7 @@
   }
   async function dispatch(action, sceneKey = null) {
     const [name, arg] = action.split(":");
+    if(["pause-explore","nav","world","resume-saved","starting"].includes(name))activity=0;
     if (cloud && !cloud.isUnlocked()) return;
     if (name === "buy" && window.V7Avatar && !V7Avatar.isActiveItem(C.catalog.find(i=>i.id===arg))) return;
     if (cloud && name === "buy" && !s.bought.includes(arg)) {
@@ -481,21 +494,29 @@
       const d=document.getElementById('recovery-dialog');
       d.querySelector('.recovery-copy').textContent=recoveryChoice?`Get unstuck: ${recoveryChoice.label}. ${recoveryChoice.reset}`:'No unfinished activity needs a reset. Your completed work is safe.';
       d.querySelectorAll('[data-recovery-confirm]').forEach(b=>b.hidden=!recoveryChoice);
-      d.querySelector('[data-action="recover-apply:restart"]').hidden=!recoveryChoice||recoveryChoice.kind==='learning'&&recoveryChoice.snapshot.answered;
+      d.querySelector('[data-action="recover-apply:restart"]').hidden=!recoveryChoice||['learning','baseline'].includes(recoveryChoice.kind)&&recoveryChoice.snapshot.answered;
       d.showModal();return;
     }
     if(name==='recover-cancel'){document.getElementById('recovery-dialog').close();recoveryChoice=null;return;}
-    if(['nav','world','continue','recover-apply'].includes(name))closeDialogs();
+    if(['nav','world','continue','recover-apply','pause-explore','resume-saved'].includes(name))closeDialogs();
     const oldView = s.view;
     let error = null,
       restored = false;
     await change(() => {
+      if(sceneKey?.startsWith('baseline|')){const id=s.startingProfile?.active,a=s.startingProfile?.areas?.[id];if(JSON.stringify([id,a?.responses.length,a?.question?.prompt,a?.answered])!==sceneKey.slice(9))return;}
       if(sceneKey?.startsWith('world|')&&V7ActivityScenes.key(s)!==sceneKey.slice(6))return;
       if(sceneKey?.startsWith('learning|')&&learningStamp(s.learning)!==sceneKey.slice(9))return;
       if(sceneKey && !sceneKey.startsWith('world|')&&name.startsWith('j-')) {
         const live=window.V5Journey.model(s);
         if(s.view!=='journey'||!live||JSON.stringify([live.id||live.scenario,live.seed,live.stage])!==sceneKey)return;
       }
+      if(!P.allowed(s,action)){s.view='starting';error='Find all nine starting points first. Your saved work is safe.';return;}
+      if(['nav','world'].includes(name)&&['quest','adventure','journey','lesson','practice','check','discovery','starting-area'].includes(s.view)&&!P.views.includes(arg)){error=N.pause(s);if(error)return;}
+      if(name==='pause-explore'){error=N.pause(s);return;}
+      if(name==='resume-saved'){const bits=action.split(':');error=N.openSaved(s,bits[1],decodeURIComponent(bits.slice(2).join(':')));return;}
+      if(name==='starting'){error=P.start(s,arg,C);return;}
+      if(name==='starting-choice'||name==='starting-submit'||name==='starting-skip'){const id=s.startingProfile?.active,a=s.startingProfile?.areas?.[id];P.answer(s,id,name==='starting-choice'?a?.question?.choices[Number(arg)]:a?.draft,name==='starting-skip');return;}
+      if(name==='starting-next'){P.advance(s,s.startingProfile?.active,C);return;}
       if(name==='home-activity'){window.V7Home.start(s,arg,M.state(s).difficulty.town||1);return;}
       if(name==='j-work'){const tier=Number(action.split(':')[2])||M.recommendation(s,'town');if(!window.V52TownLife.start(s,'job-'+arg,tier))error='This saved Town plan needs another look. It has been preserved.';return;}
       if(name==='j-plan'||name==='j-replay'){const tier=M.state(s).difficulty.town||M.recommendation(s,'town');if(!window.V52TownLife.start(s,arg,tier,name==='j-replay'))error='This saved Town plan needs another look. It has been preserved.';return;}
@@ -811,6 +832,8 @@
     }
   }
   function answerFocus(name){
+    if(['starting-choice','starting-submit','starting-skip'].includes(name)){document.querySelector('[data-action="starting-next"]')?.focus({preventScroll:true});return;}
+    if(name==='starting-next'){const h=document.querySelector('.baseline-question h2');if(h){h.tabIndex=-1;h.focus({preventScroll:true});}return;}
     const scope=document.querySelector('dialog[open]')||document.getElementById('main');
     if(['m-next','j-next','next-learning'].includes(name)){const heading=scope.querySelector('h2');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}return;}
     const action=s.view==='journey'&&V5Journey.state(s)?.solved?'j-next':s.view==='adventure'&&M.current(s)?.solved?'m-next':['practice','check','discovery'].includes(s.view)&&s.learning?.answered?'next-learning':null;
@@ -867,7 +890,7 @@
       ].includes(name) || ["j-budget-place","j-part","j-choice","j-coin","j-adjust","j-value","j-submit","j-help","j-place","j-clear","j-skip"].includes(name) || el.dataset.act;
     const evidence = () => JSON.stringify([s.quest, s.learning, M.current(s),window.V5Journey.state(s)]);
     const previous = evidence();
-    await dispatch(action, c8Scope(el) || (el.closest('.world-task-dialog')?.dataset.worldScope ? 'world|'+el.closest('.world-task-dialog').dataset.worldScope : el.closest('.immersive-journey')?.dataset.sceneKey || null));
+    await dispatch(action, (el.closest('[data-baseline-scope]')?'baseline|'+el.closest('[data-baseline-scope]').dataset.baselineScope:null) || c8Scope(el) || (el.closest('.world-task-dialog')?.dataset.worldScope ? 'world|'+el.closest('.world-task-dialog').dataset.worldScope : el.closest('.immersive-journey')?.dataset.sceneKey || null));
     answerFocus(name);
     if (!meaningful) activity = 0;
     else if (previous !== evidence()) activity = Date.now();
@@ -889,6 +912,7 @@
   });
   document.addEventListener('input',e=>{if(e.target.matches('[data-model-range]')){const out=e.target.parentElement.querySelector('output');if(out)out.textContent=e.target.value;}});
   document.addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&e.target.hasAttribute('data-baseline-draft')){e.preventDefault();document.querySelector('[data-action="starting-submit"]')?.click();return;}
     if(e.key==='Enter'&&e.target.matches('[data-c8-input]')&&e.target.type!=='range'){e.preventDefault();const prefix=e.target.dataset.c8Input;const action=prefix==='c8-m'?'m-submit':'c8-check';const scope=e.target.closest('.world-task-dialog,[data-c8-learning]');scope?.querySelector('[data-action="'+action+'"]')?.click();return;}
     if(e.key==='Enter' && e.target.dataset.numericAnswer) {
       e.preventDefault();
@@ -948,6 +972,8 @@
     }
   });
   document.addEventListener("input", async (e) => {
+    if(e.target.hasAttribute('data-baseline-draft')){const raw=e.target.value,id=s.startingProfile?.active,q=P.question(s,id);await change(()=>{const a=s.startingProfile?.areas?.[id];if(s.view==='starting-area'&&a?.question?.prompt===q?.prompt&&!a.answered)a.draft=raw;},{renderPage:false});const submit=document.querySelector('[data-action="starting-submit"]');if(submit)submit.disabled=!raw.trim();return;}
+
     if (e.target.dataset.numericAnswer) {
       const input = e.target, context = input.dataset.numericAnswer, raw = input.value;
       const target = () => context === 'mission' ? M.current(s) : context === 'journey' ? window.V5Journey.state(s) : context === 'quest' ? s.quest : s.learning;

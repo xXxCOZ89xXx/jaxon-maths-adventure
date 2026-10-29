@@ -41,6 +41,14 @@
       reason = rounds.length
         ? "Your short discovery round"
         : "A gentle starting point; discovery is optional";
+    // A brief area sample is an initial teaching suggestion, never skill mastery.
+    // Objective discovery and independent evidence continue to take precedence.
+    const C=typeof module!=="undefined"?require('./curriculum').V3Curriculum:root.V3Curriculum;
+    const area=s.startingProfile?.areas?.[C.skills.find(k=>k.id===id)?.world];
+    if(!rounds.length&&area?.responses?.length===4&&area.responses.some(r=>!r.skipped)&&Number.isFinite(area.completedAt)&&Number.isFinite(area.estimate?.band)){
+      band=Math.max(lower,Math.min(9,area.estimate.band));
+      reason="Provisional area starting sample; check this objective separately";
+    }
     if (checks.length >= 2) {
       const recent = checks.slice(-2);
       if (recent.every((r) => r.correct / r.total >= 0.8)) {

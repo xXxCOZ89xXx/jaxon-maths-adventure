@@ -1,0 +1,195 @@
+{
+  "branch": "codex/guided-progression-recovery",
+  "baseCommit": "bc4a6018135fabe78edcc43d5562139bf324727c",
+  "releaseHeadUnchanged": "7f51c046ee732e8000b675ed0b43d4dd1412585a",
+  "noPRMergeDeploy": true,
+  "fictionalOnly": true,
+  "checks": [
+    {
+      "area": "Starting-profile logic",
+      "result": "PASS",
+      "logs": [
+        "evidence/profile-logic.log"
+      ]
+    },
+    {
+      "area": "Baseline logic",
+      "result": "PASS",
+      "logs": [
+        "evidence/logic-final.log"
+      ]
+    },
+    {
+      "area": "Curriculum logic and audit",
+      "result": "PASS",
+      "logs": [
+        "evidence/curriculum-final.log"
+      ]
+    },
+    {
+      "area": "Touch logic",
+      "result": "PASS",
+      "logs": [
+        "evidence/touch-logic-final.log"
+      ]
+    },
+    {
+      "area": "New profile/pause browser",
+      "result": "60 cases across desktop, both iPads and small touch",
+      "logs": [
+        "evidence/browser-verified.log"
+      ]
+    },
+    {
+      "area": "Final numeric validation and Home captures",
+      "result": "4 layouts",
+      "logs": [
+        "evidence/baseline-final.log"
+      ]
+    },
+    {
+      "area": "Progression browser",
+      "result": "100 cases across all worlds and four layouts",
+      "logs": [
+        "evidence/progression-browser.log"
+      ]
+    },
+    {
+      "area": "Curriculum browser",
+      "result": "81 passed",
+      "logs": [
+        "evidence/curriculum-browser.log"
+      ]
+    },
+    {
+      "area": "Gameplay browser",
+      "result": "48 unique passed: 46 initial plus 2 rerun after explicit new-tab fixture setup",
+      "logs": [
+        "evidence/gameplay.log",
+        "evidence/quality-recheck.log"
+      ]
+    },
+    {
+      "area": "Touch browser",
+      "result": "57 passed",
+      "logs": [
+        "evidence/touch-browser.log"
+      ]
+    },
+    {
+      "area": "Save/recovery",
+      "result": "10 local PostgreSQL groups, 27 Town scenarios/2091 stages, 14 unique browser cases; 2 meal fixture cases rerun",
+      "logs": [
+        "evidence/save-recovery.log",
+        "evidence/save-recheck.log"
+      ]
+    },
+    {
+      "area": "Production browser",
+      "result": "24 unique passed: 23 initial plus parent reruns after fixture rebuild overlap",
+      "logs": [
+        "evidence/production-browser.log",
+        "evidence/production-recheck.log"
+      ]
+    },
+    {
+      "area": "Original art and portraits",
+      "result": "45 passed",
+      "logs": [
+        "evidence/portraits.log"
+      ]
+    },
+    {
+      "area": "Builds",
+      "result": "Production, staging and offline passed",
+      "logs": [
+        "evidence/production-build-final.log",
+        "evidence/staging-build.log",
+        "evidence/offline-build.log"
+      ]
+    },
+    {
+      "area": "Standalone artifact",
+      "result": "4 layout cases, all nine worlds",
+      "logs": [
+        "evidence/offline-browser.log"
+      ]
+    },
+    {
+      "area": "Portable download and gallery",
+      "result": "See package-check.log",
+      "logs": [
+        "evidence/package-check.log"
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "dev/starting-parent-preview.html": "78de5b0854656cad629facafe6363438a1fa4f3e389ecd3472be567112323f00",
+    "dev/starting-parent-preview.js": "8a8edb6b7f8d4beba6784d14597b6bca664bc87b05eb9921d2f251318a00ce1d",
+    "dev/touch-preview.html": "6c575e2b3c31156422e5c85c9162f04a8fb03375115bd96394c6951880886f97",
+    "dev/touch-preview.js": "5250d3704d3e8c3beedaaa7b9022c71e45588940719fa04b9a46f9599d8ee851",
+    "icon.svg": "93ce4a21020da194fa8186d5ffd05b99ea2b722071204cacabfba28806a2e5f5",
+    "v2-extra-tools.js": "760d05d2ef9ba2eb588bded95e7dae9040466320bdb95cbe2820b4bc37a78080",
+    "v2-guided-teaching.js": "7ca3a4a0170cc082debaa107ec7a19a3dee245db667a49f3895adb2c64a00f9f",
+    "v2-maths-tools.js": "eaf5ea829ed151f71c4f68af32f30c5e80ec9b5d102f52f2a97922860a441536",
+    "v2-review-bank.js": "296bcc09dad95e631a79bbb944c644739b9004f7b5119636a160cf921e7bafca",
+    "v3/activity-navigation.js": "e2e771a863800dd3256c480e8bec0ce547c650755b1b42e8dfe87c358bb10d55",
+    "v3/activity-scenes.js": "7ec35d9d6bc720c46f56f90fafcaf44149f0386a4ad37c9581cadf6249582ada",
+    "v3/adaptive.js": "b845637c2949890ecbed995d5c83a5230679d38bcf59bb011b6bbbac8df43d1f",
+    "v3/adventure-ui.js": "cbf88018b3fedd3700ff5f59557ff30924e5a386d3d0767a00750faa54536cd5",
+    "v3/adventure.js": "35fa2d8391b43bb85a413e072ed1be9b3f0143ee7705991330c333709e567b0d",
+    "v3/app.js": "e80fe37d55e84fa8c4cc57fa411fa1afa505096d4b75b931ba7eddb5929ad9af",
+    "v3/art.js": "33c8b8aa6be2da9463223f8124e2fcf8313cf7e94e0aa83d455de767b8d0d4e6",
+    "v3/asset-checkpoint.js": "dc07790d514357075cf573680bafcb4145174fe5a04c68d378ad548f561939ea",
+    "v3/avatar-art.js": "3849fcdd78908a6d0ec27521433ff3fdfb3207b816fdf7055f67f81b48e315ad",
+    "v3/curriculum-activities.js": "957acd2d5d385bb21ea38e92c7cb201507abccef84e00beac103862dc2a0f6d8",
+    "v3/curriculum-expansion.js": "6254d32ebc9a8c118296fc77e5c4af6880841182532cffcdbcef1acec441701b",
+    "v3/curriculum-map.js": "5a2fc81ec255a0c364b9daf6fb8b08f0875639b217d6a99db0ada81c16f98a11",
+    "v3/curriculum.js": "f984595331f0781a2e5741107713216584d7e4a9f190713dccd3bda18268d2b1",
+    "v3/discovery.js": "fac86dc55e443cdbc9a63fe7933c7faab1b7918e3b6e9cb8c54a3358a5792ce9",
+    "v3/education-depth.js": "04c0784573156a6637239de22af99b41c4448ab430f9fcc89f7e7caf3126aa74",
+    "v3/education.js": "f8f5bb6a8c4d4582fb30cd3def087ec8c94f04858836dddf1ca4546f4b1c66ed",
+    "v3/engine.js": "c653bfa7ce57a9116fada3f4aae680da57d7810ea21b6381182c3072e3fde873",
+    "v3/guide-portraits.css": "ff27624676c546f765d39b9dd0a69d7628c718f2ac22e0ccbc921983d4f30904",
+    "v3/guide-portraits.js": "d40fe89f50c0e4ce56710680b1820c330811a4f5929f579a11e47eb20d9ca8ec",
+    "v3/hands-on.js": "60f7773c0aa327fd8f2bde7f58efb5e98b264c62ce8570b4e247e5f8389a4083",
+    "v3/home-activities.js": "93f1417ca77ed6e6175e88d59d2bf967692adb42addc0232ce0d8a3f857b452c",
+    "v3/journey.js": "fcc67e928d598923a874abb6f44e691ad2b24aa02f32178f524596f4232dbdfc",
+    "v3/places-art.js": "57b5ca444424226f2d5f6b5115ec80ec1d0a40df9e77917b830d6a632556fd57",
+    "v3/presentation.js": "0919fd846419af3f38269df379d8867fb98da091e3e99b6c5c6a1c33d1aac141",
+    "v3/restoration.js": "5e1124bfbdc2a7f2fcb4b4518a08a7a80be3ba931452e77c8473433151c25483",
+    "v3/scene-interactions.js": "45eecd54f9474e57b9fc2a2ee79af0bb0db4086ec3f75ae25e24f8f7554f00a0",
+    "v3/starting-profile-ui.js": "2edae02c371c3e0cc6cd314e0a6da7ff009d82a442c46c9e3233240a8f14da7d",
+    "v3/starting-profile.js": "3db8433f86007e8c2712a99c7e60771e76fa0148a9c3b0a46030ca5c601e8918",
+    "v3/style.css": "c1ce4b233f328fd9722ef01693aeb5ca4c61883745e30a7ac61d25c0822b314c",
+    "v3/touch-activities.css": "b4c1e263bc7d5e65dbfb1c9d911abcede66bcc58b7adde57f7aeecbba085d300",
+    "v3/touch-activities.js": "5032b204dbcfe74e626c6d9b5aa8951cc8298329fb096a0bb57707ff854e21fe",
+    "v3/touch-content.js": "877ec482d86a465006e3a341fb4be154a3e3e8d950af46a474ab0f307bd04696",
+    "v3/town-content.js": "e2d1fbfabc006e46791a0ae2317e86256febc23fbeed6007a5541350b12d25d4",
+    "v3/town-life.js": "a85d812dfd6f0406288ebf5da484d4a55c18cc88dc886c36d971255451756d4b",
+    "v3/town.js": "b79a0a0bd2217b4ac33805eda834010927cbbe566fb427b085ca98339c1ab635",
+    "v3/visual-sample.js": "0f389363290398d43ec8989c1f6f1b9614eec1d6ef80d98a7ec4902f7327c3e8",
+    "v3/world-art.js": "03aae1ed85b06ba130a735b259361737fbd97462b77869ed574533aed690c6e0",
+    "v3-adventure.html": "943316863d4a565affb418b555532776761d5ca784ffe2c1b7c48661616a0445"
+  },
+  "downloads": {
+    "starting-profile-code.zip": {
+      "bytes": 324739,
+      "sha256": "830f9f4dc6fdc9a0c48a634ac3e5fc1e6a52bf33f7e2b900ec3dbe6380138edf"
+    },
+    "preview-art-1.zip": {
+      "bytes": 8001375,
+      "sha256": "78fc59f5972e8bc8198f6c84eba8bf706b744b1dd319cd77ba6ea5fec4597b3e"
+    },
+    "preview-art-2.zip": {
+      "bytes": 7993781,
+      "sha256": "600dd06f178d82431ccafd01c8ff81b5a91f724dc9c0a5b5841c84474244a384"
+    }
+  },
+  "limits": [
+    "Physical iPad Safari untested",
+    "Short samples are provisional, not school grades or mastery",
+    "Actual child suitability and duration need playtesting"
+  ],
+  "reruns": "Initial selectors/fixtures were corrected to represent post-profile learning. One production parent case overlapped a build-fixture rebuild; all parent cases passed a separate rerun. Final numeric validation is covered by a focused four-layout rerun."
+}

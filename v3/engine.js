@@ -200,6 +200,8 @@
         "parent",
         "recap",
         "tour",
+        "starting",
+        "starting-area",
       ].includes(s.view)
     )
       s.view = "home";
@@ -543,6 +545,7 @@
     };
     s.recent.unshift({ ...s.lastResult, date: new Date(now).toISOString() });
     s.recent = s.recent.slice(0, 30);
+    if(s.pausedLearning)delete s.pausedLearning[l.id+"|"+l.mode];
     s.learning = null;
     s.resumeView = null;
     s.view = "recap";
@@ -569,7 +572,9 @@
     if(N.restoreLearning(s,id,"discovery"))return null;
     if (!curriculum.discovery[id]) return "Unknown skill.";
     s.discovery[id] = s.discovery[id] || {
-      band: education.minBand(id)===3?5:7,
+      band: s.startingProfile?.areas?.[curriculum.skills.find(k=>k.id===id)?.world]?.responses?.length===4
+        ? (typeof module!=="undefined"?require('./adaptive').V5Adaptive:root.V5Adaptive).skill(s,id).band
+        : education.minBand(id)===3?5:7,
       answers: [],
       rounds: [],
       complete: false,

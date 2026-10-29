@@ -2221,3 +2221,8 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .town-task-guide>svg {width:80px;flex:0 0 80px}
 @media(max-width:600px){.town-task-guide{padding:14px;gap:10px}.scene-task-brief{flex-wrap:wrap}.home-path .actions>button{width:100%}}
 @media(max-width:600px){.scene-task-brief .town-task-guide{flex-basis:100%;width:100%}.scene-task-brief>.badge{order:-1}}
+
+/* Starting suggestions use the existing panel language and original world artwork. */
+.starting-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}.starting-results .panel{min-width:0}.starting-results button,.saved-activities button{margin:6px 4px 6px 0;white-space:normal}.baseline-question{max-width:760px;margin:auto}.baseline-question input{display:block;max-width:100%;font:inherit;padding:12px}.baseline-choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}.baseline-choices button{font-size:1.2rem;min-height:56px}.starting-parent p{overflow-wrap:anywhere}
+
+@media(max-width:600px){.camp-dock{flex-direction:column}.camp-dock>.layered-explorer{margin:0 auto}.camp-dock>div{min-width:0;max-width:100%}.camp-dock .actions{flex-wrap:wrap}.camp-dock button{white-space:normal}}

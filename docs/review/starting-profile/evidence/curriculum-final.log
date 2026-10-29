@@ -1,0 +1,34 @@
+
+> test:curriculum
+> node tests/curriculum.cjs && node scripts/audit-curriculum.cjs
+
+PASS: Objective, world, skill, prerequisite, question and mission references form a valid graph
+PASS: All 222 mission/level combinations teach, solve, persist every mini-task, complete once and safely replay
+PASS: New hints, wrong answers and unknown routing preserve first-attempt evidence and resume the exact model
+PASS: Discovery moves up/down independently per topic without awarding mastery
+PASS: Every new skill supplies fresh varied practice/checks; assisted work cannot establish mastery
+PASS: Mathematical answer keys agree with independent worked examples and equivalent numerical answers
+PASS: Fictional legacy saves, 3-task snapshots, old mastery and queued unknown fields retain their meaning
+PASS: Reasoning answer positions vary; symbolic ordering and inverse checks retain their mathematical meaning
+PASS: Cube nets, equivalent fraction shading, ASA constructions and scientific tools use valid mathematical contracts
+PASS: Higher-band banks retain fresh mathematical families and graph estimates agree with the drawn segments
+PASS: Fresh independent checks exclude questions and worked examples already encountered in guided missions
+PASS: All mission snapshots can be paused together with additional fictional history inside the existing save limit
+PASS: 12 curriculum suites; 2988 task completions with fictional fixtures.
+{
+  "release": "27ac8421e3dea2cf63788c435f3509484d45d5ea",
+  "version": 8,
+  "worldCount": 9,
+  "skillCount": 96,
+  "legacySkillCount": 63,
+  "addedSkillCount": 33,
+  "missionLevelCount": 222,
+  "objectiveCount": 121,
+  "playable": 121,
+  "partial": 0
+}
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.1
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.1
+npm notice To update run: npm install -g npm@12.2.1
+npm notice
