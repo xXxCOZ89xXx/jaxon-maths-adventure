@@ -28,7 +28,7 @@
     "scripts/single-child/build.cjs": "db1ced851469123107060c3e760e74f4266d5f3a138c0cbc01b0ecbed7ec8d98",
     "scripts/single-child/generate-bridge.cjs": "b810ae4f06ca902bc03014e1164fdb15a1c89430311cf7c4fceab5e96c2873f9",
     "scripts/single-child/local-forward.cjs": "2eef2bff2c5f5403688e8b67a4711959588e70259a59e283a8a551bb6052f2b1",
-    "scripts/single-child/local-stack.cjs": "8d1c4b67f4735a80ae90e7c9a6bb598da7a45aa3ef3f7853b0d2f761d95ddd3a",
+    "scripts/single-child/local-stack.cjs": "fd973f8f983833396c8be5860adfb185651da3478a27e0a4aefabbbd316de366",
     "server/pairing-gateway.cjs": "a2e4d6c807ed2ecb38978dbb77c3e62b78c34590ac3527d6bcaace0dab1b2b34",
     "server/single-child-server.cjs": "34cc06d1c11f7c2b7f6280d7c7c8b1a48b291fc6fdacb89b63f0bbea34e5d6a6",
     "supabase/single-child-draft/001_pairing_foundation.sql": "d05004a2cf2c623744439de37684c3ab0b19cfcd4c9e9e9610640daa8310f070",
@@ -104,5 +104,5 @@
     "preview-art-1.zip": "78fc59f5972e8bc8198f6c84eba8bf706b744b1dd319cd77ba6ea5fec4597b3e",
     "preview-art-2.zip": "600dd06f178d82431ccafd01c8ff81b5a91f724dc9c0a5b5841c84474244a384"
   },
-  "diagnostics": "Reset/revoke assertions wait for commit confirmation. Repeated runs correctly reached IP unlock cap; only isolated local counter fixtures reset between browser cases. Bridge publishes schema reload notification so client capability check fails closed until installation is complete. Visual review fixed review-only hidden game header/stale wrong-PIN feedback; screenshots await image decoding. Passwords/codes masked; no Auth traces."
+  "diagnostics": "Initial CI reached the temporary Unix-socket-only PostgreSQL init server; locally reproduced and fixed by permanent TCP readiness with explicit timeout. No fixed application delay or security assertion removed. Reset/revoke assertions wait for commit confirmation. Repeated runs correctly reached IP unlock cap; only isolated local counter fixtures reset between browser cases. Bridge publishes schema reload notification so client capability check fails closed until installation is complete. Visual review fixed review-only hidden game header/stale wrong-PIN feedback; screenshots await image decoding. Passwords/codes masked; no Auth traces."
 }

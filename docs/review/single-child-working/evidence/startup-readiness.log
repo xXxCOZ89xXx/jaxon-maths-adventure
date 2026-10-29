@@ -1,0 +1,1 @@
+{"reproduced":"Unix socket accepts requests during temporary init server while TCP is unavailable","observedTransient":true,"tcpReady":true,"fix":"Bootstrap waits for TCP and fails closed on readiness timeout; no fixed sleep or assertion removed"}
