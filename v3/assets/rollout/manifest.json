@@ -305,6 +305,16 @@
       "height": 1536,
       "bytes": 654082,
       "sha256": "3e445ab73011e39ceb783e1f3cb1cac6e0934f0eec908f4b0bdb882249f7e61c"
+    },
+    "avatar-girl": {
+      "file": "v3/assets/rollout/avatar-girl.webp",
+      "master": "/workspace/generated_images/exec-2c1a161e-d811-47cf-acdf-8f26093e7d55.png",
+      "width": 1024,
+      "height": 1536,
+      "bytes": 147050,
+      "sha256": "66734d97693ad8e6d9ebb9f068fdb5ffc70cfda99973a1087201f51072a9309f",
+      "source": "Original additional girl character edited from approved avatar-base; same pose and attachment canvas, original boy unchanged",
+      "alpha": true
     }
   }
 }

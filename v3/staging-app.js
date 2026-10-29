@@ -73,7 +73,7 @@ function authForm() {
   document.querySelector("nav").hidden = true;
   form(
     "Staging account sign-in",
-    `<p>Use a fictional account from jaxon-maths-v3-staging. Your game account and PIN are separate.</p>${field("Email", "email", 'type="email" autocomplete="username"')}${field("Account password", "password", 'type="password" autocomplete="current-password"')}${button("Forgot account password", "recover")}`,
+    `<p>Use a fictional account from jaxon-maths-v3-staging. Your game account and PIN are separate.</p><p>Parents: sign in with your own account and parent PIN for the starting profile and independent evidence. Learners: use your learner account, then begin at Base Camp. Use How to play for help; do not share a parent PIN.</p>${field("Email", "email", 'type="email" autocomplete="username"')}${field("Account password", "password", 'type="password" autocomplete="current-password"')}${button("Forgot account password", "recover")}`,
     async () => {
       const { error } = await client.auth.signInWithPassword({
         email: $("email").value,
