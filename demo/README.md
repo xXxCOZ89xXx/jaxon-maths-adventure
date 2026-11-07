@@ -33,3 +33,15 @@ Two navigation surfaces required changing for public distribution: the fictional
 Create only the new `jaxons-maths-adventure-demo` project, selecting this feature branch as that project's production branch, build command above and `demo-dist` output. Leave environment variables and resource bindings empty, analytics off, and preview deployments disabled. Never add a custom domain shared with the private game, change an Access policy, or make an Access bypass. No merge to `release/ipad` or `main` is part of this task.
 
 The existing private Git Pages project deploys `release/ipad` and explicitly allows only `preview/save-recovery-2cc3d57` for previews. This demo branch does not match either, so pushing it does not trigger a private deployment. Existing Access policies and the canonical private deployment are compared before/after, using read-only metadata. No Supabase requests, accounts, learner records or production credentials are used.
+
+## Published verification — 7 November 2026
+
+Public URL: https://jaxons-maths-adventure-demo.pages.dev/
+
+Cloudflare deployment `661aefea-3490-458f-ab5d-ec1e61774e95` successfully built commit `8e69c1e6e0f4671d7d8d40a576be4c7d1f37e11a`. [GitHub isolation check](https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/42359221526) passed. Subsequent verification-only commits do not change the game artifact.
+
+`browser-verification.json` records local gameplay, persistence, storage and network test outcomes. `hosted-verification.json` records fresh hosted browser loads at all three layouts: HTTP 200 at the demo origin without redirects, notice and rendered Base Camp present, no login or parent input controls. No authentication or cookies were supplied. The hosted scrape is a load check, not the full interaction suite; the full interaction suite runs against the identical local build with the Pages response headers. Direct outbound access to pages.dev from this workspace was denied by its network policy, so Cloudflare Browser Rendering performed hosted load checks instead.
+
+All four pre-existing Access application/policy records matched their pre-task values exactly. The private project's canonical deployment remains `4f830e7f-8155-4329-93e8-27aa6644389c`; its Git branch filters and build configuration also match the original read. No private deployment, policy edit, Supabase connection or real learner access occurred. The demo project has no environment variables, resource bindings or custom domains, and web analytics is disabled. Cloudflare may add its standard edge Network Error Logging response headers; those are infrastructure diagnostics, not game saves or a game backend integration.
+
+No owner setup step was needed: the separate public project was created and deployed successfully.

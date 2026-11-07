@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-11-07",
+  "method": "Chromium, clean browser contexts, local demo build",
+  "layouts": [
+    {
+      "layout": "desktop",
+      "gameRequests": 192,
+      "externalRequests": [],
+      "storageKeys": [
+        "jaxon_public_demo_v1"
+      ],
+      "storageOperations": 444,
+      "cookies": 0,
+      "consoleErrors": 0,
+      "passed": true
+    },
+    {
+      "layout": "ipad-portrait",
+      "gameRequests": 192,
+      "externalRequests": [],
+      "storageKeys": [
+        "jaxon_public_demo_v1"
+      ],
+      "storageOperations": 444,
+      "cookies": 0,
+      "consoleErrors": 0,
+      "passed": true
+    },
+    {
+      "layout": "ipad-landscape",
+      "gameRequests": 192,
+      "externalRequests": [],
+      "storageKeys": [
+        "jaxon_public_demo_v1"
+      ],
+      "storageOperations": 444,
+      "cookies": 0,
+      "consoleErrors": 0,
+      "passed": true
+    }
+  ],
+  "assets": 108,
+  "privateEntryPoints": "404",
+  "firstPlay": "All nine areas completed via visible UI",
+  "storageIsolation": "Fresh visitor and second origin in same browser context verified",
+  "physicalIPadTested": false,
+  "webkitTested": false
+}

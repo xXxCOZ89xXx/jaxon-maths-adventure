@@ -26,6 +26,7 @@ async function verifyLayout(p){assert(await p.evaluate(()=>document.documentElem
  assert.equal(await p.evaluate(()=>typeof window.V3CloudContext),'undefined');
  await verifyLayout(p);
  // Every published asset must be accessible without credentials. No fallbacks/missing art.
+ if(layout.name==='desktop')for(const privatePath of ['v3-adventure.html','v3-staging.html','v3-production.html','v3/backend-config.js','v3/staging-app.js','v3/production-cloud.js','dev/touch-preview.html']){const r=await ctx.request.get(new URL(privatePath,base.endsWith('/')?base:base+'/').href);assert.equal(r.status(),404,privatePath);assert((await r.text()).includes('Demo page not found'));}
  if(layout.name==='desktop')for(const f of inventory.files.filter(f=>f.path!=='_headers')){const r=await ctx.request.get(new URL(f.path,base.endsWith('/')?base:base+'/').href);assert.equal(r.status(),200,f.path);}
  await click(p,'[data-action="skip-tour"]');
  await click(p,'.home-path [data-action="nav:starting"]');
