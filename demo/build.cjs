@@ -19,12 +19,27 @@ for(const file of scripts){
   assert(!/cloud|staging|backend|production/i.test(file),file);
   let js=read(file);
   assert(!/\b(?:fetch|XMLHttpRequest|WebSocket|EventSource|sendBeacon|importScripts)\s*\(|serviceWorker|\bimport\s*\(/.test(js),'Network API in '+file);
+  if(file==='v3/starting-profile.js'){
+    // Admission is separate from assessment evidence. Never fabricate a completed profile.
+    js+='\nwindow.V11StartingProfile.canExplore = () => true;\nwindow.V11StartingProfile.allowed = () => true;\n';
+  }
+  if(file==='v3/activity-navigation.js'){
+    js=replaceOnce(js,"if(!P.complete(s)&&kind!=='baseline')","if(!P.canExplore(s)&&kind!=='baseline')");
+  }
   if(file==='v3/app.js'){
+    // All gameplay admission checks use the demo policy. The assessment page still
+    // reports real optional sample completion, without inventing answers or mastery.
+    js=js.replaceAll('P.complete(s)','P.canExplore(s)');
+    js=replaceOnce(js,'function starting(){const done=P.canExplore(s);','function starting(){const done=P.complete(s);');
+    js=replaceOnce(js,'Your starting points','Optional starting points');
+    js=replaceOnce(js,"${btn('Town and Restore Community','world:town')}","${btn('Try a cooking journey','j-plan:cook-pasta','primary')}${btn('Town journeys','world:town')}");
+    js=replaceOnce(js,'Explore the maps while we find your starting points. Lessons and adventures open when all nine areas are done.','These questions are optional in the demo. You can try lessons and journeys at any time.');
+    js=replaceOnce(js,'First, find starting points in all nine areas; then learning adventures open.','Starting-point questions are optional in this demo; journeys and lessons are open straight away.');
     js=replaceOnce(js,'const cloud = window.V3CloudContext;','const cloud = undefined; // Public demo has no cloud adapter.');
     js=replaceOnce(js,'cloud?.key || "jaxon_v3_fictional_demo_2026"',JSON.stringify(KEY));
     const start=js.indexOf('  function parent() {'),end=js.indexOf('  function tour() {',start);assert(start>0&&end>start);js=js.slice(0,start)+js.slice(end);
     js=replaceOnce(js,'      parent,\n','');
-    js=replaceOnce(js,'    if(!P.complete(s)&&P.views.includes(s.view))',"    if(s.view==='parent')s.view='home';\n    if(!P.complete(s)&&P.views.includes(s.view))");
+    js=replaceOnce(js,'    if(!P.canExplore(s)&&P.views.includes(s.view))',"    if(s.view==='parent')s.view='home';\n    if(!P.canExplore(s)&&P.views.includes(s.view))");
     js=replaceOnce(js,'    const [name, arg] = action.split(":");','    const [name, arg] = action.split(":");\n    if(name === "nav" && arg === "parent") return;');
     js=replaceOnce(js,'This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.','Your fictional explorer is saved only in this browser. No account is needed. Nothing here is connected to Jaxon’s game.');
     js=js.replace(/^  if\(!cloud&&document.getElementById\("touch-review"\)\).*$/m,'');

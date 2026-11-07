@@ -9,6 +9,7 @@ const server=http.createServer((req,res)=>{let file=path.resolve(dir,'.'+decodeU
 const report={target:process.env.DEMO_URL||'local build',layouts:[],staticAssets:inventory.files.length};
 async function settled(p){await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
 async function click(p,selector){await p.locator(selector).first().click();await settled(p);}
+async function pauseJourney(p){const dialog=p.locator('dialog[open] [data-action="pause-explore"]');await click(p,await dialog.count()?'dialog[open] [data-action="pause-explore"]':'#main > .activity-safety [data-action="pause-explore"]');}
 async function state(p){await settled(p);return p.evaluate(k=>JSON.parse(localStorage.getItem(k)),KEY);}
 async function verifyLayout(p){assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Page overflows viewport');for(const el of await p.locator('.topbar nav button').all()){const b=await el.boundingBox();assert(b.width>=40&&b.height>=40,'Navigation touch target too small');}}
 (async()=>{
@@ -29,6 +30,23 @@ async function verifyLayout(p){assert(await p.evaluate(()=>document.documentElem
  if(layout.name==='desktop')for(const privatePath of ['v3-adventure.html','v3-staging.html','v3-production.html','v3/backend-config.js','v3/staging-app.js','v3/production-cloud.js','dev/touch-preview.html']){const r=await ctx.request.get(new URL(privatePath,base.endsWith('/')?base:base+'/').href);assert.equal(r.status(),404,privatePath);assert((await r.text()).includes('Demo page not found'));}
  if(layout.name==='desktop')for(const f of inventory.files.filter(f=>f.path!=='_headers')){const r=await ctx.request.get(new URL(f.path,base.endsWith('/')?base:base+'/').href);assert.equal(r.status(),200,f.path);}
  await click(p,'[data-action="skip-tour"]');
+ // A fresh visitor must be able to start and resume a journey before answering assessments.
+ await click(p,'.home-path [data-action="world:town"]');
+ await p.locator('#town-plans summary').filter({hasText:'Cooking'}).click();
+ await click(p,'[data-action="j-plan:cook-pasta"]');
+ assert.equal((await state(p)).view,'journey');
+ assert.equal(await p.evaluate(k=>V11StartingProfile.complete(JSON.parse(localStorage.getItem(k))),KEY),false);
+ assert.deepEqual((await state(p)).skills,{});assert.equal(Object.keys((await state(p)).startingProfile?.areas||{}).length,0);
+ const opener=p.locator('[data-world-task-open]').first();if(await opener.count())await opener.click();
+ await click(p,'[data-action="j-help"]:visible');
+ const journeyBefore=await p.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),KEY);
+ assert(journeyBefore.hintLevel>0);
+ await pauseJourney(p);await p.reload();
+ await click(p,'.home-path [data-action="j-plan:cook-pasta"]');
+ assert.equal((await state(p)).view,'journey');
+ assert.deepEqual(await p.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),KEY),journeyBefore);
+ const resumeOpener=p.locator('[data-world-task-open]').first();if(await resumeOpener.count())await resumeOpener.click();
+ await pauseJourney(p);
  await click(p,'.home-path [data-action="nav:starting"]');
  await click(p,'[data-action="starting:number"]');await click(p,'[data-action="starting-choice:0"]');const before=await state(p);assert.equal(before.startingProfile.areas.number.responses.length,1);
  await p.reload();assert.deepEqual((await state(p)).startingProfile,before.startingProfile);

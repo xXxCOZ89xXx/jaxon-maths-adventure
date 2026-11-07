@@ -45,3 +45,9 @@ Cloudflare deployment `661aefea-3490-458f-ab5d-ec1e61774e95` successfully built 
 All four pre-existing Access application/policy records matched their pre-task values exactly. The private project's canonical deployment remains `4f830e7f-8155-4329-93e8-27aa6644389c`; its Git branch filters and build configuration also match the original read. No private deployment, policy edit, Supabase connection or real learner access occurred. The demo project has no environment variables, resource bindings or custom domains, and web analytics is disabled. Cloudflare may add its standard edge Network Error Logging response headers; those are infrastructure diagnostics, not game saves or a game backend integration.
 
 No owner setup step was needed: the separate public project was created and deployed successfully.
+
+## Journey access correction
+
+The first public demo inherited the private game's all-nine-area starting-profile admission gate. Public visitors could browse maps but could not start a journey until completing 36 sample questions. The demo build now separates admission (`canExplore`) from actual assessment completion (`complete`): journeys and lessons open immediately, and starting-point questions are optional. No answers, completed profiles or mastery evidence are fabricated. The original shared source and the private game's admission rules remain unchanged. Existing local demo saves and optional assessment answers are preserved.
+
+Base Camp includes **Try a cooking journey** as a direct entry point, alongside **Town journeys**. Browser regression checks now start a cooking journey, use its hint control, pause, reload, and resume through the direct entry point before answering any starting-profile questions, on desktop and both iPad layouts. The original storage/network/parent isolation tests still apply.
