@@ -1,0 +1,28 @@
+name: Public demo isolation
+on:
+  push:
+    branches: [codex/public-offline-demo]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  demo-isolation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npx playwright install --with-deps chromium
+      - run: npm test
+      - run: node demo/build.cjs && node demo/check.cjs
+      - run: node demo/test-browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: public-demo-evidence
+          path: work/public-demo/
+          retention-days: 14

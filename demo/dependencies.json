@@ -1,0 +1,495 @@
+{
+  "baselineCommit": "e3550ec202d30c407b1d5653f06c081eba014938",
+  "entry": "v3-adventure.html",
+  "source": [
+    {
+      "path": "v3/curriculum.js",
+      "sha256": "f984595331f0781a2e5741107713216584d7e4a9f190713dccd3bda18268d2b1"
+    },
+    {
+      "path": "v2-review-bank.js",
+      "sha256": "296bcc09dad95e631a79bbb944c644739b9004f7b5119636a160cf921e7bafca"
+    },
+    {
+      "path": "v2-guided-teaching.js",
+      "sha256": "7ca3a4a0170cc082debaa107ec7a19a3dee245db667a49f3895adb2c64a00f9f"
+    },
+    {
+      "path": "v2-maths-tools.js",
+      "sha256": "eaf5ea829ed151f71c4f68af32f30c5e80ec9b5d102f52f2a97922860a441536"
+    },
+    {
+      "path": "v2-extra-tools.js",
+      "sha256": "760d05d2ef9ba2eb588bded95e7dae9040466320bdb95cbe2820b4bc37a78080"
+    },
+    {
+      "path": "v3/discovery.js",
+      "sha256": "fac86dc55e443cdbc9a63fe7933c7faab1b7918e3b6e9cb8c54a3358a5792ce9"
+    },
+    {
+      "path": "v3/town.js",
+      "sha256": "b79a0a0bd2217b4ac33805eda834010927cbbe566fb427b085ca98339c1ab635"
+    },
+    {
+      "path": "v3/education.js",
+      "sha256": "f8f5bb6a8c4d4582fb30cd3def087ec8c94f04858836dddf1ca4546f4b1c66ed"
+    },
+    {
+      "path": "v3/education-depth.js",
+      "sha256": "04c0784573156a6637239de22af99b41c4448ab430f9fcc89f7e7caf3126aa74"
+    },
+    {
+      "path": "v3/curriculum-expansion.js",
+      "sha256": "6254d32ebc9a8c118296fc77e5c4af6880841182532cffcdbcef1acec441701b"
+    },
+    {
+      "path": "v3/curriculum-activities.js",
+      "sha256": "957acd2d5d385bb21ea38e92c7cb201507abccef84e00beac103862dc2a0f6d8"
+    },
+    {
+      "path": "v3/curriculum-map.js",
+      "sha256": "5a2fc81ec255a0c364b9daf6fb8b08f0875639b217d6a99db0ada81c16f98a11"
+    },
+    {
+      "path": "v3/touch-activities.js",
+      "sha256": "5032b204dbcfe74e626c6d9b5aa8951cc8298329fb096a0bb57707ff854e21fe"
+    },
+    {
+      "path": "v3/touch-content.js",
+      "sha256": "877ec482d86a465006e3a341fb4be154a3e3e8d950af46a474ab0f307bd04696"
+    },
+    {
+      "path": "v3/adaptive.js",
+      "sha256": "b845637c2949890ecbed995d5c83a5230679d38bcf59bb011b6bbbac8df43d1f"
+    },
+    {
+      "path": "v3/hands-on.js",
+      "sha256": "60f7773c0aa327fd8f2bde7f58efb5e98b264c62ce8570b4e247e5f8389a4083"
+    },
+    {
+      "path": "v3/town-content.js",
+      "sha256": "e2d1fbfabc006e46791a0ae2317e86256febc23fbeed6007a5541350b12d25d4"
+    },
+    {
+      "path": "v3/town-life.js",
+      "sha256": "a85d812dfd6f0406288ebf5da484d4a55c18cc88dc886c36d971255451756d4b"
+    },
+    {
+      "path": "v3/journey.js",
+      "sha256": "fcc67e928d598923a874abb6f44e691ad2b24aa02f32178f524596f4232dbdfc"
+    },
+    {
+      "path": "v3/restoration.js",
+      "sha256": "5e1124bfbdc2a7f2fcb4b4518a08a7a80be3ba931452e77c8473433151c25483"
+    },
+    {
+      "path": "v3/activity-navigation.js",
+      "sha256": "e2e771a863800dd3256c480e8bec0ce547c650755b1b42e8dfe87c358bb10d55"
+    },
+    {
+      "path": "v3/adventure.js",
+      "sha256": "35fa2d8391b43bb85a413e072ed1be9b3f0143ee7705991330c333709e567b0d"
+    },
+    {
+      "path": "v3/engine.js",
+      "sha256": "c653bfa7ce57a9116fada3f4aae680da57d7810ea21b6381182c3072e3fde873"
+    },
+    {
+      "path": "v3/presentation.js",
+      "sha256": "0919fd846419af3f38269df379d8867fb98da091e3e99b6c5c6a1c33d1aac141"
+    },
+    {
+      "path": "v3/art.js",
+      "sha256": "33c8b8aa6be2da9463223f8124e2fcf8313cf7e94e0aa83d455de767b8d0d4e6"
+    },
+    {
+      "path": "v3/places-art.js",
+      "sha256": "57b5ca444424226f2d5f6b5115ec80ec1d0a40df9e77917b830d6a632556fd57"
+    },
+    {
+      "path": "v3/visual-sample.js",
+      "sha256": "0f389363290398d43ec8989c1f6f1b9614eec1d6ef80d98a7ec4902f7327c3e8"
+    },
+    {
+      "path": "v3/asset-checkpoint.js",
+      "sha256": "dc07790d514357075cf573680bafcb4145174fe5a04c68d378ad548f561939ea"
+    },
+    {
+      "path": "v3/adventure-ui.js",
+      "sha256": "cbf88018b3fedd3700ff5f59557ff30924e5a386d3d0767a00750faa54536cd5"
+    },
+    {
+      "path": "v3/scene-interactions.js",
+      "sha256": "45eecd54f9474e57b9fc2a2ee79af0bb0db4086ec3f75ae25e24f8f7554f00a0"
+    },
+    {
+      "path": "v3/world-art.js",
+      "sha256": "03aae1ed85b06ba130a735b259361737fbd97462b77869ed574533aed690c6e0"
+    },
+    {
+      "path": "v3/avatar-art.js",
+      "sha256": "f0ccc637990fb57c9c52ac4c63aa6268b669490d69189ceb8007c251a0a50fad"
+    },
+    {
+      "path": "v3/home-activities.js",
+      "sha256": "93f1417ca77ed6e6175e88d59d2bf967692adb42addc0232ce0d8a3f857b452c"
+    },
+    {
+      "path": "v3/activity-scenes.js",
+      "sha256": "7ec35d9d6bc720c46f56f90fafcaf44149f0386a4ad37c9581cadf6249582ada"
+    },
+    {
+      "path": "v3/guide-portraits.js",
+      "sha256": "d40fe89f50c0e4ce56710680b1820c330811a4f5929f579a11e47eb20d9ca8ec"
+    },
+    {
+      "path": "v3/starting-profile.js",
+      "sha256": "f80dbbd3810a82a56b511576c77f6645c5177e60ed6fb0a4a74e05dee47a0bb7"
+    },
+    {
+      "path": "v3/starting-profile-ui.js",
+      "sha256": "0b2ada3b51e7d93dc1086f2474351dc210801babd45004980c4df6fd2ce16546"
+    },
+    {
+      "path": "v3/app.js",
+      "sha256": "355c4dce2a7d1ec4029b430af5a7cb5479afcaa51dd596cf2e59f0a9653dee48"
+    },
+    {
+      "path": "v3/style.css",
+      "sha256": "a80a65777e76748c3d29586b9135678668ee3a5f69bf6634913c600228d521c8"
+    },
+    {
+      "path": "v3/touch-activities.css",
+      "sha256": "b4c1e263bc7d5e65dbfb1c9d911abcede66bcc58b7adde57f7aeecbba085d300"
+    },
+    {
+      "path": "v3/guide-portraits.css",
+      "sha256": "ff27624676c546f765d39b9dd0a69d7628c718f2ac22e0ccbc921983d4f30904"
+    },
+    {
+      "path": "v3-adventure.html",
+      "sha256": "943316863d4a565affb418b555532776761d5ca784ffe2c1b7c48661616a0445"
+    },
+    {
+      "path": "icon.svg",
+      "sha256": "93ce4a21020da194fa8186d5ffd05b99ea2b722071204cacabfba28806a2e5f5"
+    }
+  ],
+  "images": [
+    {
+      "path": "v3/assets/checkpoint/camp.webp",
+      "bytes": 369964,
+      "sha256": "9039b45a2c804f2fdc79278432117f980699fa8358478270192916baac93a7c4"
+    },
+    {
+      "path": "v3/assets/checkpoint/kitchen.webp",
+      "bytes": 161130,
+      "sha256": "dbdc258f40882264e3c7263dda4e3d21251e2173635118ff5acec7a42add7899"
+    },
+    {
+      "path": "v3/assets/checkpoint/market.webp",
+      "bytes": 204694,
+      "sha256": "0592df5c3771128824a57b7083b5e845a9fb372ce3924d08c2baa720f71ef71f"
+    },
+    {
+      "path": "v3/assets/checkpoint/bus.webp",
+      "bytes": 342230,
+      "sha256": "6568727eabfe6367a77cfff7b0c5bf656b41b1f9122ff6b58301797ab30c8248"
+    },
+    {
+      "path": "v3/assets/checkpoint/rail.webp",
+      "bytes": 494494,
+      "sha256": "87b5da8082e7829de81d37b0c388825b7ba4fa51125f4616e894310372ae54b4"
+    },
+    {
+      "path": "v3/assets/checkpoint/town.webp",
+      "bytes": 650696,
+      "sha256": "0ab7e9d4f066311fbf586b9e676112a361f78a096db4fd01ebf940e90f7fcda2"
+    },
+    {
+      "path": "v3/assets/checkpoint/wagon.webp",
+      "bytes": 50852,
+      "sha256": "240add7f9c93efecca977c150725531459722f69a754c8a1217d9c0098810315"
+    },
+    {
+      "path": "v3/assets/checkpoint/engine.webp",
+      "bytes": 66980,
+      "sha256": "85154a79aa73f605f807d5a4d9f124777ca97cfb49560fa38528c8cc63c8d6a1"
+    },
+    {
+      "path": "v3/assets/checkpoint/explorer.webp",
+      "bytes": 65306,
+      "sha256": "283d997bc1f6c45bec3235ab4c5c5f13166c29ed43ee1b74c00b25bb5e51c617"
+    },
+    {
+      "path": "v3/assets/checkpoint/pantry.webp",
+      "bytes": 106048,
+      "sha256": "a247d5943023a34b0e9d70949cfa3bc3fb485cd1fc97e70d06c7965aab7ec2b7"
+    },
+    {
+      "path": "v3/assets/checkpoint/fridge.webp",
+      "bytes": 99412,
+      "sha256": "8066f7c0ef9a559dce11218d11e823ea719b3fc1e7ac9884707cb2e17d535df4"
+    },
+    {
+      "path": "v3/assets/checkpoint/pasta.webp",
+      "bytes": 73406,
+      "sha256": "635d1f964c06582362a114cfbfca5aa0b46b77149efe2ebf51fc7a67439bd47f"
+    },
+    {
+      "path": "v3/assets/checkpoint/tomato.webp",
+      "bytes": 93812,
+      "sha256": "b758292f8288d350712f0da64c0bd2ced5ca067c8fb3a6e623133bfc7d4f62ab"
+    },
+    {
+      "path": "v3/assets/checkpoint/mince.webp",
+      "bytes": 74158,
+      "sha256": "06e42e6c94e150b3e6399261061be056f5449ddf2df3f4c4f8202fd4f3d12e10"
+    },
+    {
+      "path": "v3/assets/checkpoint/teen.webp",
+      "bytes": 95506,
+      "sha256": "536898bfcd86cdd46a568062bb49c3f5893aee45426d68effcbcb84c3be676ea"
+    },
+    {
+      "path": "v3/assets/checkpoint/pantry-empty.webp",
+      "bytes": 90070,
+      "sha256": "188b23eb0ce2d24a2faa54247a47492059ecaa507e2504753b2edef831b23dc4"
+    },
+    {
+      "path": "v3/assets/checkpoint/basket-empty.webp",
+      "bytes": 179260,
+      "sha256": "6db2f0c5d8b7bea5578cc676ed577d764f1e0ca8cd256149bc5f87038d7e7591"
+    },
+    {
+      "path": "v3/assets/checkpoint/fridge-empty.webp",
+      "bytes": 104454,
+      "sha256": "1f3e34a2fca0f98184cefc1a74d99c9efb1633f9a63ddb20e6c5be87868818c4"
+    },
+    {
+      "path": "v3/assets/rollout/atlas.webp",
+      "bytes": 587430,
+      "sha256": "c1b81daac61f727a6dc590fef50466bd2e69a369c7630be285bc0be16413b508"
+    },
+    {
+      "path": "v3/assets/rollout/forest.webp",
+      "bytes": 478944,
+      "sha256": "a63b9fce80484c414613e027fa2438707723ab1b919a3c2ddc1adabad235d1ae"
+    },
+    {
+      "path": "v3/assets/rollout/desert.webp",
+      "bytes": 394998,
+      "sha256": "6e6282c9cc894ce93651c85c3f5bc2ae140fc2833e704b8c8d29fb02a5a73e90"
+    },
+    {
+      "path": "v3/assets/rollout/geometry.webp",
+      "bytes": 402558,
+      "sha256": "25f43ef46b7c279252686febadde68e45489254d70a5dad5fb58ec0fb7ecf9d1"
+    },
+    {
+      "path": "v3/assets/rollout/ratio.webp",
+      "bytes": 350354,
+      "sha256": "2e2895e8bc609ce0d232f706fe0b93217dca5e6e52e29add630189094bfa7129"
+    },
+    {
+      "path": "v3/assets/rollout/statistics.webp",
+      "bytes": 370574,
+      "sha256": "32b686abdf8b7bdc691aa704578163f4153e06966c38bf3ee1d4af0f55bee7f3"
+    },
+    {
+      "path": "v3/assets/rollout/probability.webp",
+      "bytes": 350376,
+      "sha256": "1038db42a2fab52981a9feb6d6987673ff7ecb02bbb6c7eb18b3d4da96ff2734"
+    },
+    {
+      "path": "v3/assets/rollout/measure.webp",
+      "bytes": 303232,
+      "sha256": "ffca04520d5e7fa5a203cb63b6d91dbd75549bbf1f32db32b762a9b42e0582ef"
+    },
+    {
+      "path": "v3/assets/rollout/home-exterior.webp",
+      "bytes": 324096,
+      "sha256": "9104ea3cbadad223e52a7e96d14e5921eae72bc4846c561f49f4ea9a12761f33"
+    },
+    {
+      "path": "v3/assets/rollout/camp1.webp",
+      "bytes": 477072,
+      "sha256": "041d946a032c6ab9cc0c41c07ae055c5bb7198df3b8922f765e41a6c5e7ac76f"
+    },
+    {
+      "path": "v3/assets/rollout/camp2.webp",
+      "bytes": 441368,
+      "sha256": "e820b4d41d24d20af3e041a673c55a81c134bde73ba2347e67458956588026bb"
+    },
+    {
+      "path": "v3/assets/rollout/camp3.webp",
+      "bytes": 465990,
+      "sha256": "29f9e664c42a8a3e24a3c880f877e1a3aefd8f076986e82af2f847ff0870d423"
+    },
+    {
+      "path": "v3/assets/rollout/camp4.webp",
+      "bytes": 499416,
+      "sha256": "0c7b2422b7af997db4a0b7d5261d0f0944bd52505d752401eaaf8b86e8780290"
+    },
+    {
+      "path": "v3/assets/rollout/cafe.webp",
+      "bytes": 263458,
+      "sha256": "d883991f774802a7d0673042cd3f34d66b18351fcedb93f0878be7b82e762a75"
+    },
+    {
+      "path": "v3/assets/rollout/shops.webp",
+      "bytes": 319414,
+      "sha256": "fa2734171004bba145b0dc86c9b7fb7c1f942f0cfa40fc776a3a5492ac02f0a9"
+    },
+    {
+      "path": "v3/assets/rollout/library.webp",
+      "bytes": 254994,
+      "sha256": "ae2c0566ce93c8901e7672b833c816efb880fa4ccef847d312f6997818cc1519"
+    },
+    {
+      "path": "v3/assets/rollout/bank.webp",
+      "bytes": 175404,
+      "sha256": "4132e8d636b3d5ba429a9c4daa554f04990ecb67ffb62b0a444d373097e3b040"
+    },
+    {
+      "path": "v3/assets/rollout/work.webp",
+      "bytes": 263006,
+      "sha256": "3d1d21b9ef3720c5521525e5e3e03db64861d7e771c51e3f37ad167f51c2ab9c"
+    },
+    {
+      "path": "v3/assets/rollout/leisure.webp",
+      "bytes": 204180,
+      "sha256": "ebc0a846db06d1e6ced6aa2a8f68b907503e65a3b9e8abdbb3faf4aa63c1b0b3"
+    },
+    {
+      "path": "v3/assets/rollout/train-station.webp",
+      "bytes": 283104,
+      "sha256": "f5a2c100cadb953ceadd7b64f4c6312d5832b8a434dfbbd0f828c66f24ef135a"
+    },
+    {
+      "path": "v3/assets/rollout/post.webp",
+      "bytes": 164892,
+      "sha256": "82b42a7976206219b033c6f016403e9729960d90f3c90559891c6009c33c5363"
+    },
+    {
+      "path": "v3/assets/rollout/meters.webp",
+      "bytes": 223280,
+      "sha256": "e9506c62828ae5aa25b372e1c3458d54113b07ea788697735b38beae77ddf948"
+    },
+    {
+      "path": "v3/assets/rollout/avatar-base.webp",
+      "bytes": 106692,
+      "sha256": "82d2a795bc3f8836dd387f7b61ddcc48ed0e82619b825c407a84527124f2f236"
+    },
+    {
+      "path": "v3/assets/rollout/wear-head.webp",
+      "bytes": 178646,
+      "sha256": "343864d2c3d7cc7748be8a0bc118fc0a1bfade3d598d9a96703d245a0305da78"
+    },
+    {
+      "path": "v3/assets/rollout/wear-outfits.webp",
+      "bytes": 267096,
+      "sha256": "81171593918362caed45bfcc3fc340fb9f0610f62a61973e615bdf714801059d"
+    },
+    {
+      "path": "v3/assets/rollout/wear-back.webp",
+      "bytes": 292226,
+      "sha256": "06b9812af7b2271e7539430ad037036a9c07c41d7d0ad32dccbef0aa15efaf71"
+    },
+    {
+      "path": "v3/assets/rollout/wear-accessories.webp",
+      "bytes": 176894,
+      "sha256": "d53b48342a889888f514d4850336426993f1df6ecb04a440cba77978dc17bdcb"
+    },
+    {
+      "path": "v3/assets/rollout/wear-companions.webp",
+      "bytes": 352954,
+      "sha256": "fb5e1b5742943a66fa68404b9249869462da11279b823c0f0de3b3a29c21caae"
+    },
+    {
+      "path": "v3/assets/rollout/wear-hair.webp",
+      "bytes": 287936,
+      "sha256": "2a3fe8143294300a0f1d093a315ca631c4e8f2a298fc928e255cf489d5b4e425"
+    },
+    {
+      "path": "v3/assets/rollout/repair.webp",
+      "bytes": 399882,
+      "sha256": "20b0c0a5c5a09b9a13c5b9c1208dbe843532efb55afb1476dc37e0ea780c1f6e"
+    },
+    {
+      "path": "v3/assets/rollout/wear-faces.webp",
+      "bytes": 248888,
+      "sha256": "856409e377abe882e15a1b5f55c223999ea234dc7102faa519a0b2cf8dffd643"
+    },
+    {
+      "path": "v3/assets/rollout/helpers.webp",
+      "bytes": 275894,
+      "sha256": "1b96923f7b3c3923226ce10463248f55c63ca227503623de5845d0bedef38060"
+    },
+    {
+      "path": "v3/assets/rollout/products-food.webp",
+      "bytes": 434970,
+      "sha256": "cc0c72f29787e411a1fd7c0823abb972b83e7ba6271ccd421cdd5d907e329a0b"
+    },
+    {
+      "path": "v3/assets/rollout/products-supplies.webp",
+      "bytes": 385264,
+      "sha256": "cd48528542f2066f42d82509ed0ca39071c7b8c658e4b00a15768379c42b722e"
+    },
+    {
+      "path": "v3/assets/rollout/restoration-worlds.webp",
+      "bytes": 654082,
+      "sha256": "3e445ab73011e39ceb783e1f3cb1cac6e0934f0eec908f4b0bdb882249f7e61c"
+    },
+    {
+      "path": "v3/assets/rollout/avatar-girl.webp",
+      "bytes": 147050,
+      "sha256": "66734d97693ad8e6d9ebb9f068fdb5ffc70cfda99973a1087201f51072a9309f"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/algebra-peaks-guide.webp",
+      "bytes": 106508,
+      "sha256": "3b9819ff117802b8db0e677732b1cee48adaa9fa4c4f6ae0991cabe0ce6058a3"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/fraction-desert-guide.webp",
+      "bytes": 131750,
+      "sha256": "fb9eb47ecc9ab7695d08dc35278596d71d07ee882647fdb6d63a9e8fcb05f291"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/geometry-kingdom-guide.webp",
+      "bytes": 108444,
+      "sha256": "e8a84d2df320fd887e4267e50a0502b4493913be78cdac81dcc1f1da7f4bca74"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/measurement-mines-guide.webp",
+      "bytes": 111572,
+      "sha256": "333095aaaf6494f252715b61c0b9db957f687d28c479e273da4bc797a0e82617"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/number-forest-guide.webp",
+      "bytes": 89756,
+      "sha256": "084ef98e3136bc60b6b45cad690cbad4c08992fdec69f912ebe5a93799391784"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/practical-maths-town-guide.webp",
+      "bytes": 110348,
+      "sha256": "5285ffcfdf1a1660a9ee08676760c47e87d4aa764add9db54793a5a69a902237"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/probability-portal-guide.webp",
+      "bytes": 121894,
+      "sha256": "b495fc1052435ee8dfe5faed9e56b024b06b0a77e30c4fbfb5c755a2fa32f300"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/ratio-island-guide.webp",
+      "bytes": 123946,
+      "sha256": "8dcf04affd6317df29c2379503e2caf78e67f620b3ac9567ab45e02108b58e93"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/statistics-city-guide.webp",
+      "bytes": 95632,
+      "sha256": "808bf347e2b0ff2ed3d0b4437cafe533e6b0c67b69086c8a1f83c8669e42a930"
+    }
+  ]
+}
