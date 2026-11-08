@@ -254,20 +254,30 @@
     switch (id) {
       case "town_money": {
         if (i % 3 === 0) {
-          const coins = [50, 20, 10];
-          const first = coins[n % coins.length], second = [10, 5, 2][n % 3], third = [5, 2, 1][(n + 1) % 3];
+          // Use several real coins so generated samples stay varied without creating
+          // unrealistic mixed note-and-coin totals labelled as pence.
+          const denominations = [20, 10, 5, 2, 1];
+          const coinCount = band < 5 ? 3 : band < 8 ? 4 : 5;
+          let code = Math.max(0, n - 1);
+          const coins = Array.from({ length: coinCount }, () => {
+            const coin = denominations[code % denominations.length];
+            code = Math.floor(code / denominations.length);
+            return coin;
+          });
           unit = "pence";
-          answer = first + second + third;
-          prompt = `A ${first}p coin, a ${second}p coin and a ${third}p coin total how many pence?`;
-          worked = `${first}p + ${second}p + ${third}p = ${answer}p.`;
+          answer = coins.reduce((sum, coin) => sum + coin, 0);
+          prompt = `These coins are in a purse: ${coins.map(coin => `${coin}p`).join(", ")}. How many pence altogether?`;
+          worked = `${coins.map(coin => `${coin}p`).join(" + ")} = ${answer}p.`;
         } else if (i % 3 === 1) {
-          const note = [5, 10, 20][n % 3], coin = [5, 10, 20, 50][n % 4];
+          const note = [5, 10, 20, 50][Math.floor((n - 1) / 99) % 4];
+          const coin = ((n - 1) % 99) + 1;
           unit = "pounds";
           answer = note + coin / 100;
-          prompt = `You have £${note}.00 in notes and coins and add ${coin}p. How much money altogether in pounds?`;
+          prompt = `You have a £${note} note and ${coin}p in coins. How much money altogether in pounds?`;
           worked = `£${note}.00 + ${money(coin)} = £${answer.toFixed(2)}.`;
         } else {
-          const totalPence = [735, 1050, 1275, 2050][n % 4];
+          const range = band < 5 ? 997 : band < 8 ? 4999 : 9973;
+          const totalPence = 100 + (((n - 1) * 37) % range);
           unit = "pounds";
           answer = totalPence / 100;
           prompt = `Convert ${totalPence}p to pounds.`;
