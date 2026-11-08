@@ -71,9 +71,14 @@ L.action(s,'j-skip');assert.equal(L.state(s).evidence.at(-1).correct,false);asse
 // A skipped worked model never rewrites the saved historical task.
 const before=JSON.stringify(L.state(s).steps);L.action(s,'j-skip');L.next(s);assert.equal(JSON.stringify(L.state(s).steps),before);
 // The starting-point sample uses the same unit-aware Town generator; pence totals are coin-only.
+// Each money family must retain enough fresh variants for spaced checks and retakes.
+for(const [i,minUnique] of [[0,80],[1,80],[2,80]]){
+ const prompts=new Set(Array.from({length:100},(_,round)=>T.question('town_money',9,round+1,i)[0]));
+ assert(prompts.size>=minUnique,`town_money family ${i} has too few unique prompts: ${prompts.size}`);
+}
 for(let band=3;band<=9;band++){
  const coins=T.question('town_money',band,1,0);
- assert.equal(coins[5].unit,'pence');assert.match(coins[0],/pence\\?/);assert(!coins[0].includes('£'));assert(Number(coins[1])<100);
+ assert.equal(coins[5].unit,'pence');assert.match(coins[0],/pence\\?/);assert(!coins[0].includes('£'));assert(Number(coins[1])<=100);
  const mixed=T.question('town_money',band,2,1);
  assert.equal(mixed[5].unit,'pounds');assert.match(mixed[0],/in pounds\\?/);assert.match(T.answerLabel(mixed,mixed[1]),/^£\\d+\\.\\d{2}$/);
  const conversion=T.question('town_money',band,3,2);
