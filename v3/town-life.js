@@ -84,15 +84,27 @@
   function action(s,name,arg,raw=''){
     const j=state(s),t=task(s);if(!j||!t)return false;const v=j.values,bits=raw.split(':');
     if(name==='j-next')return next(s);
-    if(name==='j-help'||name==='j-skip'){j.assisted=true;j.hintLevel=(j.hintLevel||0)+1;j.feedback=name==='j-skip'||j.hintLevel>2?t.worked:j.hintLevel===2?t.teach:t.hint;return true;}
+    if(name==='j-skip'){
+      if(j.solved)return false;
+      if(!j.evidence.some(e=>e.stage===j.stage))j.evidence.push({stage:j.stage,firstValue:copy(value(t,v)),correct:false,assisted:true,skipped:true,source:'town-life-v2'});
+      const first=j.evidence.find(e=>e.stage===j.stage);if(first&&!first.skipped)first.skippedAfterAttempt=true;
+      j.skips ||= [];if(!j.skips.includes(j.stage))j.skips.push(j.stage);
+      j.assisted=true;j.solved=true;j.feedback='Skipped with help. '+t.worked;
+      if(['basket','budget'].includes(t.kind))v.parts=copy(t.answer);
+      else if(['order','match'].includes(t.kind))v.order=copy(t.answer);
+      else if(['choice','journey'].includes(t.kind))v.choice=t.answer;
+      else if(t.kind==='coins')v.coins=T.moneyTokens(t.answer);else v.amount=t.answer;
+      delete v.amountDraft;delete v.clockDraft;return true;
+    }
+    if(name==='j-help'){j.assisted=true;j.hintLevel=(j.hintLevel||0)+1;j.feedback=name==='j-skip'||j.hintLevel>2?t.worked:j.hintLevel===2?t.teach:t.hint;return true;}
     if(name==='j-submit'){if(j.solved)return false;if(H.invalidDraft(v,t))return false;const ok=valid(t,v);if(!j.evidence.some(e=>e.stage===j.stage))j.evidence.push({stage:j.stage,firstValue:copy(value(t,v)),correct:ok,assisted:j.assisted,source:'town-life-v2'});j.solved=ok;j.assisted ||= !ok;j.feedback=ok?'That works. Continue when you are ready.':'Not yet. '+t.hint;return ok;}
     if(j.solved)return false;
     if(name==='j-pick'&&Number.isInteger(+arg)&&+arg>=0&&+arg<t.items?.length){v.picked=+arg;return true;}
     if(name==='j-clear'){v.order=[];return true;}
     if(name==='j-place'&&Number.isInteger(v.picked)&&Number.isInteger(+arg)&&+arg>=0&&+arg<t.items?.length){const a=Array(t.items.length).fill(null).map((_,i)=>v.order?.[i]??null);a.forEach((x,i)=>{if(x===v.picked)a[i]=null;});a[+arg]=v.picked;v.order=a;return true;}
-    if(name==='j-budget-pick'&&t.kind==='budget'&&[1,5,100,500,1000].includes(+arg)){v.budgetToken=+arg;return true;}
-    if(name==='j-budget-place'&&t.kind==='budget'&&Number.isInteger(+arg)&&+arg>=0&&+arg<t.labels.length&&[1,5,100,500,1000].includes(v.budgetToken)){v.parts ||= t.labels.map(()=>0);v.parts[+arg]=Math.min(t.budget,v.parts[+arg]+v.budgetToken);return true;}
-    if(name==='j-part'){const i=+bits[1],n=+bits[2],max=t.kind==='budget'?t.budget:12;if(!Number.isInteger(i)||i<0||i>=t.answer.length||!Number.isInteger(n)||![-1000,-500,-100,-25,-5,-1,1,5,25,100,500,1000].includes(n))return false;v.parts ||= Array(t.answer.length).fill(0);v.parts[i]=Math.max(0,Math.min(max,(v.parts[i]||0)+n));return true;}
+    if(name==='j-budget-pick'&&t.kind==='budget'&&[1,5,50,100,500,1000].includes(+arg)){v.budgetToken=+arg;return true;}
+    if(name==='j-budget-place'&&t.kind==='budget'&&Number.isInteger(+arg)&&+arg>=0&&+arg<t.labels.length&&[1,5,50,100,500,1000].includes(v.budgetToken)){v.parts ||= t.labels.map(()=>0);if(v.parts.reduce((a,b)=>a+b,0)+v.budgetToken>t.budget)return false;v.parts[+arg]+=v.budgetToken;return true;}
+    if(name==='j-part'){const i=+bits[1],n=+bits[2],max=t.kind==='budget'?t.budget:12;if(!Number.isInteger(i)||i<0||i>=t.answer.length||!Number.isInteger(n)||![-1000,-500,-100,-50,-25,-5,-1,1,5,25,50,100,500,1000].includes(n))return false;v.parts ||= Array(t.answer.length).fill(0);v.parts[i]=Math.max(0,Math.min(t.kind==='budget'?(v.parts[i]||0)+Math.max(0,t.budget-v.parts.reduce((a,b)=>a+b,0)):max,(v.parts[i]||0)+n));return true;}
     if(name==='j-choice'&&Number.isInteger(+arg)&&+arg>=0&&+arg<t.options?.length){v.choice=+arg;return true;}
     if(name==='j-coin'){v.coins ||= [];if(arg==='clear')v.coins=[];else if(arg==='undo')v.coins.pop();else if([1,2,5,10,20,50,100,200,500,1000,2000,5000].includes(+arg)&&v.coins.length<100)v.coins.push(+arg);else return false;return true;}
     if(name==='j-adjust'||name==='j-value'){const n=name==='j-adjust'?(v.amount||0)+Number(arg):Number(arg);if(!Number.isInteger(n)||n<0||n>t.max)return false;v.amount=n;delete v.amountDraft;delete v.clockDraft;return true;}
@@ -104,6 +116,10 @@
     for(const [name,n]of Object.entries(e.add||{}))inventory[name]=(inventory[name]||0)+n;
     for(const [name,n]of Object.entries(e.consume||{})){if((inventory[name]||0)<n)return false;inventory[name]-=n;}
     if(cash<0||time>=1440)return false;
+    j.envelopes ||= {};
+    if(t.kind==='budget')t.labels.forEach((label,i)=>{if(label!=='Savings')j.envelopes[label]=(j.envelopes[label]||0)+j.values.parts[i];});
+    let expense=e.spend||0;
+    for(const label of /Bus/.test(e.receipt||'')?['Travel','Spending']:['Spending','Travel']){const used=Math.min(expense,j.envelopes[label]||0);if(used)j.envelopes[label]-=used;expense-=used;}
     j.cash=cash;j.time=time;j.inventory=inventory;if(e.list)j.shoppingList=copy(e.list);if(e.savings)j.savings+=e.savings;
     if(e.receipt)j.receipts.push({id:j.id+':'+j.stage,label:e.receipt,spent:e.spend||0,earned:e.earn||0,sale:e.sale||0,saved:e.savings||0,items:copy(e.add||{}),time:j.time,choice:e.choice||null});
     if(e.choice){j.decisions ||= [];j.decisions.push({stage:j.stage,choice:e.choice});}
@@ -116,10 +132,10 @@
     // The same venue/tier story milestone can be earned only once across old and new play.
     // A completed plan never rewrites an earlier mission record, mastery or wallet.
     if(a.records[key])return;
-    a.records[key]={world:'town',route,tier:j.tier,unassisted:j.evidence.filter(e=>e.correct&&!e.assisted).length,evidence:copy(j.evidence),context:T.context(route,j.category==='Employment'?'direct':'journey'),completedAt:new Date().toISOString(),serial:Math.max(0,...Object.values(a.records).map(r=>r.serial||0))+1,source:'town-life-v2'};
+    a.records[key]={world:'town',route,tier:j.tier,unassisted:j.evidence.filter(e=>e.correct&&!e.assisted).length,evidence:copy(j.evidence),skips:copy(j.skips||[]),context:T.context(route,j.category==='Employment'?'direct':'journey'),completedAt:new Date().toISOString(),serial:Math.max(0,...Object.values(a.records).map(r=>r.serial||0))+1,source:'town-life-v2'};
     const milestone='mission|'+key;if(!s.milestones.includes(milestone))s.milestones.push(milestone);
   }
-  function model(s){const j=state(s);if(!j)return null;const t=task(s);return {...j,task:t,title:t?.title||'Town plan complete',venue:t?.venue||'home',recipeName:j.name,context:j.contentRevision===3?{...T.context(t?.venue||'home',j.category==='Employment'?'direct':'journey'),role:j.category==='Employment'?'worker':j.category==='Cooking'&&(t?.venue||'home')==='home'?'home cook':'customer',objective:j.category==='Cooking'?'Use your recipe card and carry the ingredients through your day.':j.category==='Shopping'?'Use your current shopping list and budget.':j.category==='Travel'?'Plan your visit and keep money and time for the return journey.':j.category==='Employment'?'Help customers at work. Keep business money separate from your wages.':'Complete the errand and keep your receipts for the trip home.'}:T.context(t?.venue||'home',j.category==='Employment'?'direct':'journey')};}
+  function model(s){const j=state(s);if(!j)return null;const original=task(s),t=original?T.taskDetails(original):null;return {...j,task:t,title:t?.title||'Town plan complete',venue:t?.venue||'home',recipeName:j.name,context:j.contentRevision===3?{...T.context(t?.venue||'home',j.category==='Employment'?'direct':'journey'),role:j.category==='Employment'?'worker':j.category==='Cooking'&&(t?.venue||'home')==='home'?'home cook':'customer',objective:j.category==='Cooking'?'Use your recipe card and carry the ingredients through your day.':j.category==='Shopping'?'Use your current shopping list and budget.':j.category==='Travel'?'Plan your visit and keep money and time for the return journey.':j.category==='Employment'?'Help customers at work. Keep business money separate from your wages.':'Complete the errand and keep your receipts for the trip home.'}:T.context(t?.venue||'home',j.category==='Employment'?'direct':'journey')};}
   root.V52TownLife={catalog,meals,jobs,make,start,startRecipe,state,task,action,next,model,valid,validRun,validBook,book};
   if(typeof module!=='undefined')module.exports={V52TownLife:root.V52TownLife};
 })(typeof window!=='undefined'?window:globalThis);

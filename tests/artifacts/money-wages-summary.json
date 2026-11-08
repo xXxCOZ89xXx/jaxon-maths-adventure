@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-08",
+  "branch": "codex/money-wages-answer-flow",
+  "base": "e3550ec202d30c407b1d5653f06c081eba014938",
+  "fixtures": "fictional offline/intercepted only; no real learner or remote database access",
+  "checks": {
+    "baseline": "passed",
+    "curriculum_static": "passed",
+    "touch_static": "passed",
+    "money_payroll_units_balances": "passed: 1344 depth + 870 base + 210 direct generated questions; official HMRC calculation method",
+    "money_browser": {
+      "passed": 18
+    },
+    "curriculum_browser": {
+      "passed": 81
+    },
+    "touch_browser": {
+      "passed": 57
+    },
+    "gameplay_quality_browser": {
+      "passed": 48
+    },
+    "ipad_save_recovery_browser": {
+      "passed": 14
+    },
+    "paused_check_followup": {
+      "passed": 4
+    },
+    "family_town_resume_followup": {
+      "passed": 1
+    }
+  },
+  "limitations": [
+    "Physical iPad Safari not tested",
+    "Initial nine-area baseline assessment flow/scoring preserved"
+  ],
+  "merged": false,
+  "deployed": false,
+  "notes": "docs/MONEY-WAGES-UPDATE.md"
+}

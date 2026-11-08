@@ -849,7 +849,7 @@
     let valid = false;
     if (key === "amount")
       valid = integer(value) && value >= (t.min || 0) && value <= t.max;
-    if (key === "budgetToken") valid=t.kind==="budget" && [1,5,100,500,1000].includes(value);
+    if (key === "budgetToken") valid=t.kind==="budget" && [1,5,50,100,500,1000].includes(value);
     if (key === "picked") valid = integer(value) && value>=0 && value<(t.labels||t.items||[]).length;
     if (key === "order") valid = array(value) && value.length<=t.items.length && value.every(n=>n===null || integer(n)&&n>=0&&n<t.items.length) && new Set(value.filter(n=>n!==null)).size===value.filter(n=>n!==null).length;
     if (key === "parts") {
@@ -889,6 +889,7 @@
         integer(value) &&
         value === (q.values.posted || 0) + 1 &&
         value <= t.transactions.length;
+    if(key==='parts'&&t.kind==='budget'&&Array.isArray(value)&&value.reduce((a,b)=>a+b,0)>t.budget)valid=false;
     if (!valid) return false;
     q.values[key] = copy(value);
     if (key === "amount") {delete q.values.amountDraft;delete q.values.clockDraft;}
@@ -981,6 +982,7 @@
       unassisted: Math.max(old?.unassisted || 0, q.unassisted),
       lastUnassisted: q.unassisted,
       evidence: copy(q.evidence || []),
+      skips: copy(q.skips || []),
       context: copy(q.context || {}),
       completedAt: new Date(now).toISOString(),
       serial,

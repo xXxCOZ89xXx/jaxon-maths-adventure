@@ -55,7 +55,7 @@ test('a real starting-point assessment opens its stage without awarding mastery'
  for(let safety=0;safety<16;safety++){
   const a=await read(p);if(a.discovery.negative?.complete)break;
   if(a.view==='recap'){await p.locator('[data-action="discover:negative"]').click();continue;}
-  const l=a.learning,q=l.qs[l.i],index=q[2].map(String).indexOf(String(q[1]));expect(index).toBeGreaterThanOrEqual(0);await p.locator('.answer-grid [data-action="answer:'+index+'"]').click();await p.locator('[data-action="next-learning"]').click();
+  const l=a.learning,q=l.qs[l.i],index=q[2].map(String).indexOf(String(q[1]));expect(index).toBeGreaterThanOrEqual(0);await p.locator('.answer-grid [data-action="answer:'+index+'"]').click();await require('./helpers/progression.cjs').advance(p);
  }
  let a=await read(p);expect(a.discovery.negative.complete).toBe(true);expect(a.skills).toEqual({});expect(a.checks).toEqual({});await p.locator('[data-action="world:number"]').first().click();await expect(p.locator('[data-action="restore:number:0"]')).toBeVisible();expect(await p.locator('[data-action="restore:number:1"]').count()).toBe(0);await p.locator('[data-action="restore:number:0"]').click();a=await read(p);expect(a.adventure.active.restoration.placement.band).toBe(9);
 });

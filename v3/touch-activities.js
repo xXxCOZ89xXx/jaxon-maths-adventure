@@ -51,7 +51,7 @@ function body(a,values={},prefix='d9-p',preview=false){
  let html='';
  if(['basket','groups','fraction'].includes(a.kind)){
   const items=a.items||Array.from({length:a.pieces},(_,i)=>({label:`Piece ${i+1}: 1/${a.denominator}`}));
-  const item=(i)=>button(items[i].label+(items[i].price!==undefined?` · ${items[i].price}p`:''),{op:'pick',item:i},`data-d9-handle="item" data-d9-item="${i}" class="d9-piece" ${items[i].value===undefined?'':'aria-label="'+esc(items[i].label)+', observation '+(i+1)+'"'} aria-pressed="${v.picked===i}"`);
+  const item=(i)=>button(items[i].label+(items[i].price!==undefined?` · £${(items[i].price/100).toFixed(2)}`:''),{op:'pick',item:i},`data-d9-handle="item" data-d9-item="${i}" class="d9-piece" ${items[i].value===undefined?'':'aria-label="'+esc(items[i].label)+', observation '+(i+1)+'"'} aria-pressed="${v.picked===i}"`);
   html=`<p>Drag an object into a target. To move it without dragging, select the object, then select a target. Return an object to the tray to undo it.</p><div class="d9-tray" data-d9-target="-1" aria-label="Object tray">${items.map((_,i)=>p[i]===undefined?item(i):'').join('')||'<span>All objects placed</span>'}</div>`;
   if(a.kind==='fraction'){
    const slot=n=>{const i=Object.keys(p).find(i=>p[i]===n),label='Part '+(n%a.denominator+1)+' of whole '+(Math.floor(n/a.denominator)+1);return `<div class="d9-slot ${i===undefined?'':'d9-filled'}" data-d9-target="${n}">${button(label,{op:'drop',target:n},'aria-label="'+label+'. Place selected piece in slot '+(n+1)+'"')}${i===undefined?'':item(Number(i))}</div>`;};

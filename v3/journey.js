@@ -218,7 +218,12 @@
   }
   function action(s, name, arg, raw) {
     if(s.adventure?.townActive===2)return L.action(s,name,arg,raw);
-    if(name==='j-skip'){const j=state(s),t=task(s);if(!validState(j)||!t)return false;j.assisted=true;j.feedback=t.worked;return true;}
+    if(name==='j-skip'){const j=state(s),t=task(s);if(!validState(j)||!t||j.solved)return false;
+      if(!j.evidence.some(e=>e.stage===j.stage))j.evidence.push({stage:j.stage,firstValue:JSON.parse(JSON.stringify(value(t,j.values))),correct:false,assisted:true,skipped:true,source:'guided-journey'});
+      const first=j.evidence.find(e=>e.stage===j.stage);if(first&&!first.skipped)first.skippedAfterAttempt=true;
+      j.skips ||= [];if(!j.skips.includes(j.stage))j.skips.push(j.stage);
+      j.assisted=true;j.solved=true;j.feedback='Skipped with help. '+t.worked;
+      if(['basket','budget'].includes(t.kind))j.values.parts=[...t.answer];else if(['choice','journey'].includes(t.kind))j.values.choice=t.answer;else if(t.kind==='coins')j.values.coins=T.moneyTokens(t.answer);else j.values.amount=t.answer;return true;}
     const j = state(s);
     if (!validState(j) || j.done) return false;
     const t = task(s),

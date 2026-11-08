@@ -351,7 +351,8 @@
     if (!q || q.intro || q.solved || !R.gate(s,q.world,q.i).ready) return false;
     const p = puzzle(q.world, q.i),
       v = ["fraction", "chance"].includes(p.kind) ? q.selected.length : q.value;
-    if (skip || v !== p.answer) {
+    if(skip){q.assisted=true;q.solved=true;q.skipped=true;q.feedback='Skipped with help. '+p.worked;return false;}
+    if (v !== p.answer) {
       q.assisted = true;
       q.feedback =
         (skip
@@ -377,6 +378,7 @@
     if (!q?.solved) return;
     // Finish this earlier saved snapshot only; subsequent stages use the new
     // assessed multi-step plan instead of creating another fixed legacy puzzle.
+    if(q.skipped){s.recent.unshift({type:'restoration-skip',world:q.world,stage:q.i,assisted:true,skipped:true,date:new Date().toISOString()});s.recent=s.recent.slice(0,30);}
     delete s.quests[q.world];s.quest=null;s.resumeView=null;
     s.lastResult={type:'restoration',world:q.world,stage:q.i,legacy:true};s.view='recap';
   }
@@ -443,11 +445,14 @@
     // Existing saved questions keep their original response contract.
     if((q[5]?.contentVersion === 8||q[5]?.direct) && l.mode === "practice" && !l.started)return;
     if(q[5]?.direct&&l.needsTeaching)return;
+    const unit=q[5]?.unit||T.moneyUnit(q[0]);
+    const moneyValue=x=>T.moneyAnswerNumber(x,unit);
     const normal = (x) => String(x).replace(/−/g, "-").trim().toLowerCase(),
       correct = !skip && (q[5]?.direct
         ? (typeof module !== "undefined" ? require('./touch-activities').V9Touch : root.V9Touch).matches(q[5].direct,q[1],l.manipulation||{})
         : q[5]?.contentVersion === 8
         ? (typeof module !== "undefined" ? require('./curriculum-activities').V8Activities : root.V8Activities).matches({answer:q[1],activity:q[5].activity},String(value)) && (q[5].activity?.kind!=='experiment'||l.manipulation?.c8?.trials===q[5].activity.outcomes.length)
+        : ['pounds','pence'].includes(unit)?Math.abs(moneyValue(value)-Number(q[1]))<1e-8
         : l.mode === "discovery" ? Math.abs(parseNumber(value)-Number(q[1])) < 1e-8 : normal(value) === normal(q[1]));
     if (correct && !l.assisted) l.correct++;
     if (l.mode === "discovery" && !l.answers.some(a=>a.q===q[0]))
@@ -466,6 +471,7 @@
         : skip
           ? "Let’s work through it. "
           : "Here is one way to work through it. ") + education.explain(q);
+    if(!correct&&!skip&&['pounds','pence'].includes(unit)&&!Number.isFinite(moneyValue(value)))l.feedback='Use '+unit+' for this question. £1 = 100p. '+education.explain(q);
     if(!correct&&!skip){l.answered=false;l.assisted=true;l.retrying=true;delete l.needsTeaching;}
     return correct;
   }
@@ -481,6 +487,8 @@
       l.answered = false;
       l.feedback = "";
       delete l.hintLevel;
+      delete l.mathTools;delete l.mathExtra;
+      delete l.teachingExample;
       return;
     }
     const passed = l.correct === l.qs.length;
@@ -589,7 +597,7 @@
         String(q[2]),
         h.choices().map(String),
         (d.band<5||education.foundations.some(f=>f[0]===id))?education.question(id,d.band,900+d.band,i)[3]:"Think about what each part of the question means.",
-        (d.band<5||education.foundations.some(f=>f[0]===id))?education.question(id,d.band,900+d.band,i)[4]:q[4] || "The answer is " + q[2] + ".",
+        (d.band<5||education.foundations.some(f=>f[0]===id))?education.question(id,d.band,900+d.band,i)[4]:q[4] || "The answer is " + T.answerLabel([q[1]],q[2]) + ".",
       ];
     });
     s.seen = [

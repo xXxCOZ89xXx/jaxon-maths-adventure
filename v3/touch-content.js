@@ -35,8 +35,8 @@ function row(id,band,seed,family=0){
  }else if(type==='basket'){
   const price=20+n*5,prices=[price,price+15,price+40,price+75];answer=String(2*price+40);
   spec={kind:'basket',items:['Apples','Milk','Bread','Rice'].map((label,i)=>({label,price:prices[i]})),targets:['Shopping basket'],requiredCount:2};
-  prompt=`You are a customer. Buy exactly two different groceries with a total of ${answer}p. Drag them into the basket. Check all four prices before choosing.`;
-  hint='Add the prices of two different items. Compare the total with your budget. Return an item to the shelf to compare another pair.';worked=`Apples ${price}p + bread ${price+40}p = ${answer}p. That is two different groceries with the requested total.`;
+  prompt=`You are a customer. Buy exactly two different groceries with a total of £${(Number(answer)/100).toFixed(2)}. Drag them into the basket. Check all four prices before choosing.`;
+  hint='Add the prices of two different items. Compare the total with your budget. Return an item to the shelf to compare another pair.';worked=`Apples £${(price/100).toFixed(2)} + bread £${((price+40)/100).toFixed(2)} = £${(Number(answer)/100).toFixed(2)}. That is two different groceries with the requested total.`;
  }else if(type==='share'){
   const ratio=2+family,scale=1+n%3,total=(ratio+1)*scale;answer=JSON.stringify([ratio*scale,scale]);
   spec={kind:'groups',items:Array.from({length:total},(_,i)=>({label:'Token '+(i+1)})),targets:['Alex','Sam'],counts:true};
