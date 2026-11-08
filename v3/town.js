@@ -246,23 +246,27 @@
   function question(id, band, round, i = 0) {
     const d = Math.max(1, Math.min(3, band - 4)),
       n = Math.max(1, Math.floor(round)) * 3 + i + 1;
-    let prompt, answer, hint, worked;
+    let prompt, answer, hint, worked, unit;
     const pounds = 4 + n + d,
-      price = 100 + 25 * (n % 8),
+      price = id==='town_totals'?100+5*(n%100):100+25*(n%8),
       count = 2 + (n % 3),
       pay = 800 + 25 * (n % 20);
     switch (id) {
       case "town_money":
-        prompt = `A £${2 + n} note-and-coin total plus ${10 * ((n % 5) + 1)}p: how many pence altogether?`;
-        answer = (2 + n) * 100 + 10 * ((n % 5) + 1);
-        hint = "Convert pounds to pence first.";
-        worked = `${2 + n} × 100 + ${10 * ((n % 5) + 1)} = ${answer}p.`;
+        const note = [5,10,20][n%3], coin = 1+n%99;
+        unit = i%3===1?'pence':'pounds';
+        prompt = i%3===2?`Convert ${note*100+coin}p to pounds.`:`A £${note} note and coins worth ${coin}p: total in ${unit}?`;
+        answer = unit==='pence'?note*100+coin:note+coin/100;
+        hint = "£1 = 100p. Read the requested unit before converting.";
+        worked = `${money(note*100)} + ${money(coin)} = ${money(note*100+coin)} = ${note*100+coin}p.`;
         break;
       case "town_totals":
-        prompt = `Pay £${pounds} for items costing ${money(price)} and ${money(price + 35)}. Change in pence?`;
-        answer = pounds * 100 - 2 * price - 35;
+        const paid = [500,1000,2000].find(n=>n>=2*price+35);
+        prompt = `Pay ${money(paid)} for items costing ${money(price)} and ${money(price + 35)}. Change in pounds?`;
+        answer = (paid - 2 * price - 35)/100;
+        unit = 'pounds';
         hint = "Add both item prices, then subtract from the amount paid.";
-        worked = `${pounds * 100} − (${price} + ${price + 35}) = ${answer}p.`;
+        worked = `${money(paid)} − (${money(price)} + ${money(price+35)}) = ${money(Math.round(answer*100))}.`;
         break;
       case "town_menu":
         prompt = `${count} sandwiches at ${money(price)} each. Total order cost in pence?`;
@@ -378,7 +382,7 @@
     const slot = (round + i + id.length) % 4;
     const options = values.filter((x) => x !== answer).map(String);
     options.splice(slot, 0, String(answer));
-    return [prompt, String(answer), options, hint, worked];
+    return [prompt, String(answer), options, hint, worked, {unit:unit||(/pence/i.test(prompt)?'pence':/pounds/i.test(prompt)?'pounds':'')}];
   }
   function install(curriculum, bank) {
     if (!curriculum.skills.some((k) => k.id === "town_money"))
@@ -410,14 +414,45 @@
       ],
     };
   }
+  // April 2026, cumulative tax month 1. See docs/MONEY-WAGES-UPDATE.md.
+  function educationalPayslip() {
+    const gross=Math.round(1271*37.5*52/12),qualifying=Math.max(0,Math.min(gross,418900)-52000);
+    const pension=Math.round(qualifying*5/100),employerPension=Math.round(qualifying*3/100);
+    // HMRC Tables A month 1: code 257 £214.92 + 2 × £416.67.
+    const freePay=104826,taxable=Math.max(0,Math.floor((gross-pension-freePay)/100));
+    const tax=taxable*20;
+    // NI exact half pennies round down, unlike ordinary pension penny rounding.
+    const niNumerator=Math.max(0,Math.min(gross,418900)-104800)*8+Math.max(0,gross-418900)*2;
+    const ni=Math.floor((niNumerator+49)/100);
+    return {gross,pension,employerPension,tax,ni,net:gross-pension-tax-ni,qualifying,freePay,taxable};
+  }
+  function moneyTokens(amount){const out=[];for(const token of [5000,2000,1000,500,200,100,50,20,10,5,2,1])while(amount>=token){out.push(token);amount-=token;}return out;}
+  function isWageTask(t={}){if(!t)return false;return ['timesheet','payslip','budget'].includes(t.kind)||['town_wages','town_payslip'].includes(t.skill)||/gross wages|fictional payslip|new wages/i.test(t.title||'');}
+  function payslipPanel() {
+    const p=educationalPayslip();
+    return `<section class="panel educational-payslip" aria-label="Educational monthly payslip"><h3>Alex Morgan · fictional adult employee, age 25</h3><p><strong>Educational example — not a real payroll calculation or payroll advice.</strong></p><p>Monthly pay: April 2026 · paid 30 April · tax month 1 · tax year 6 April 2026 to 5 April 2027.</p><dl><dt>Hours</dt><dd>37.5 each week × 52 ÷ 12 = 162.5 monthly</dd><dt>Hourly rate · age 21+ National Living Wage</dt><dd>£12.71</dd><dt>Gross pay</dt><dd>${money(p.gross)}</dd><dt>Employee pension · 5% of qualifying earnings</dt><dd>−${money(p.pension)}</dd><dt>PAYE income tax · England, 1257L</dt><dd>−${money(p.tax)}</dd><dt>Employee National Insurance · category A</dt><dd>−${money(p.ni)}</dd><dt>Net take-home pay</dt><dd><strong>${money(p.net)}</strong></dd></dl><p>Employer pension: ${money(p.employerPension)} (3% of qualifying earnings), paid separately by the employer. It is not deducted from net pay.</p><details><summary>Assumptions and calculation</summary><p>Regular monthly salary based on 52 weeks. Eligible automatic-enrolment member; net pay pension arrangement, not salary sacrifice. Qualifying earnings: gross between £520 and £4,189 per month. Pension reduces taxable pay, not NI earnings. Standard Personal Allowance £12,570 yearly; PAYE uses tax-code period tables and whole-pound taxable pay. No earlier pay or tax this tax year, student loan or other deductions. NI: 8% above £1,048 to £4,189 per month, then 2%. Other employees may owe different deductions or none.</p><p>This monthly illustration is separate from any short-shift exercise unless the task explicitly uses Alex’s net pay.</p><p><a href="https://www.gov.uk/guidance/rates-and-thresholds-for-employers-2026-to-2027">HMRC rates</a> · <a href="https://www.gov.uk/national-minimum-wage-rates">GOV.UK wage rates</a> · <a href="https://www.thepensionsregulator.gov.uk/en/employers/new-employers/im-an-employer-who-has-to-provide-a-pension/declare-your-compliance/ongoing-duties-for-employers/earnings-thresholds">Pension thresholds</a></p></details></section>`;
+  }
+  function moneyUnit(prompt){return [...String(prompt).matchAll(/\b(pounds|pence)\b/gi)].at(-1)?.[1].toLowerCase()||'';}
+  function moneyAnswerNumber(value,unit){let text=String(value).trim();if(unit==='pounds'){if(/p(?:ence)?$/i.test(text))return NaN;text=text.replace(/^£\s*/,'');}else if(unit==='pence'){if(text.startsWith('£'))return NaN;text=text.replace(/\s*p(?:ence)?$/i,'');}return /^-?\d+(?:\.\d{1,2})?$/.test(text)?Number(text):NaN;}
+  function answerLabel(q,value) {
+    const unit=q[5]?.unit||moneyUnit(q[0]);
+    return unit==='pounds'?money(Math.round(Number(value)*100)):unit==='pence'?value+'p':value;
+  }
+  function balancePanel(j,t=j.task,values=j.values||{}) {
+    if(!j||!Number.isFinite(j.cash))return '';
+    const allocating=t?.kind==='budget',parts=allocating?(values.parts||[]):[],labels=t?.labels||[];
+    const allocated=parts.reduce((a,b)=>a+b,0),reserves=j.envelopes||{};
+    const rows=Object.entries(reserves).filter(([,n])=>n>0),reserved=rows.reduce((a,[,n])=>a+n,0);
+    return `<section class="panel money-balances" aria-label="Current account balances"><h3>Current balances · fictional money</h3><p>Starting purse: ${money(j.startingCash??j.cash-j.receipts.reduce((a,r)=>a+(r.earned||0)-(r.spent||0)-(r.saved||0),0))} · starting bank savings: £0.00</p><dl><dt>Total purse cash, including cash envelopes</dt><dd>${money(j.cash-(allocating?parts[labels.indexOf('Savings')]||0:0))}</dd><dt>Purse cash, outside envelopes</dt><dd>${money(j.cash-reserved-allocated)}</dd><dt>Savings at the bank · separate from purse cash</dt><dd>${money((j.savings||0)+(allocating?parts[labels.indexOf('Savings')]||0:0))}</dd>${rows.map(([label,n])=>`<dt>${label} envelope · cash</dt><dd>${money(n)}</dd>`).join('')}${allocating?labels.filter(x=>x!=='Savings').map(label=>`<dt>${label} envelope · cash</dt><dd>${money(parts[labels.indexOf(label)]||0)}</dd>`).join(''):''}</dl>${allocating?`<p>Net wages in this exercise: ${money(t.budget)} · allocated ${money(allocated)} · still to allocate ${money(t.budget-allocated)}.</p>`:''}<p>Savings in the bank are not cash available in the purse.</p></section>`;
+  }
   function context(venue,entry='direct') {
     const v=venues.find(v=>v.id===venue),customer={market:'Follow your shopping list, stay within budget and pay for your purchases.',cafe:'Order a meal, scale quantities and settle your bill.',bank:'Check your fictional account before a planned purchase.',shops:'Compare the prices of the things you need.',station:'Choose an affordable service that arrives in time.',home:'Check your cupboards and prepare the chosen recipe.',leisure:'Plan your own tickets, booking and arrival.',work:'Plan the time and resources for your own project.'};
     if((!v&&venue!=='gateway')||!['direct','journey'].includes(entry))return null;
     return {version:1,venue,entry,role:entry==='journey'?(venue==='home'?'home cook':venue==='station'?'passenger':'customer'):'worker',objective:entry==='journey'?customer[venue]||'Continue your plan.':v?.story||'Help at the Town festival.'};
   }
   function locationFor(q={},t={}){return [t.venue,q.context?.venue,q.route].find(id=>venues.some(v=>v.id===id))||'home';}
-  function taskDetails(t,q={},index=0){return {...t,venue:locationFor(q,t),title:typeof t.title==='string'&&t.title.trim()?t.title:t.prompt||'Town task '+(index+1)};}
-  root.V3Town = { world, venues, lessons, question, money, clock, install, context, locationFor, taskDetails };
+  function taskDetails(t,q={},index=0){return {...t,...(t.unit==='p'&&t.example==='Three groups of 2 items contain 6 items.'?{example:'For a separate purchase, £5 paid for a £3.20 bill gives £1.80 change.'}:{}),venue:locationFor(q,t),title:typeof t.title==='string'&&t.title.trim()?t.title:t.prompt||'Town task '+(index+1)};}
+  root.V3Town = { moneyUnit, moneyAnswerNumber, moneyTokens, isWageTask, educationalPayslip, payslipPanel, balancePanel, answerLabel, world, venues, lessons, question, money, clock, install, context, locationFor, taskDetails };
   if (root.V3Curriculum && root.JaxonFreshReview)
     root.JaxonFreshReview = install(root.V3Curriculum, root.JaxonFreshReview);
 })(typeof module !== "undefined" ? module.exports : window);

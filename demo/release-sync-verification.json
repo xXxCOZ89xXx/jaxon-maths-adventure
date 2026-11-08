@@ -1,0 +1,101 @@
+{
+  "checkedAt": "2026-11-08",
+  "status": "prepared and tested; not merged or deployed",
+  "comparison": {
+    "liveReleaseCommit": "e3550ec202d30c407b1d5653f06c081eba014938",
+    "publishedDemoCommit": "37b91facb001fcc15e51fd9cfd3e38eb4beafe1b",
+    "confirmedMoneyCommitIncluded": "4e9de283f093ab4e89ef303e56712d3f26be72f5",
+    "finding": "The public demo already builds from the shared offline entry and modules, but its published artifact predates the money fixes. Frozen content hashes also blocked automatic inclusion of later shared edits. The builder now allowlists paths and regenerates hashes from current shared source.",
+    "sharedHome": "Existing meter, recycling and parcel modules are reused. Shared additions supply a current-date fictional collection calendar and a four-step parcel flow. Legacy three-step snapshots remain valid."
+  },
+  "hosting": {
+    "project": "jaxons-maths-adventure-demo",
+    "url": "https://jaxons-maths-adventure-demo.pages.dev/",
+    "repository": "xXxCOZ89xXx/jaxon-maths-adventure",
+    "productionBranch": "release/ipad",
+    "branchProtected": true,
+    "buildCommand": "node demo/release-build.cjs",
+    "outputDirectory": "demo-dist",
+    "rootDirectory": "/",
+    "productionGitDeploys": true,
+    "previewDeployments": "none",
+    "watchedPaths": [
+      "*"
+    ],
+    "excludedPaths": [],
+    "environmentVariableNames": {
+      "production": [],
+      "preview": []
+    },
+    "analytics": false,
+    "canonicalDeploymentUnchanged": "c468821e-1f26-4d1d-ac67-87aec72aefcd",
+    "ownerSetupNeeded": false,
+    "hostedUnauthenticatedCheck": {
+      "method": "Cloudflare Browser Rendering; no cookies or authentication supplied",
+      "artifact": "older published demo, not the new feature build",
+      "layouts": [
+        "desktop",
+        "iPad portrait",
+        "iPad landscape"
+      ],
+      "status": 200,
+      "finalUrl": "https://jaxons-maths-adventure-demo.pages.dev/",
+      "heading": "Base Camp",
+      "notice": "PUBLIC DEMO",
+      "emailOrPasswordInputs": 0
+    },
+    "automaticRebuild": "Git source configured for automatic production builds on all release/ipad path changes. Disposable-copy test proves a later shared edit changes the demo output. Actual hosted later-release rebuild remains pending an approved release commit."
+  },
+  "isolation": {
+    "storageKey": "jaxon_public_demo_v1",
+    "originSeparateFromPrivateGame": true,
+    "cloudAdapter": false,
+    "backendConfiguration": false,
+    "login": false,
+    "cookies": false,
+    "sessionStorage": false,
+    "outboundGameplayRequests": false,
+    "cspConnectSrc": "none",
+    "precacheOrOfflineFirstLoadClaim": false
+  },
+  "privateGame": {
+    "project": "jaxon-maths-private-git",
+    "deploymentUnchanged": "4f830e7f-8155-4329-93e8-27aa6644389c",
+    "sourceAndBuildConfigUnchanged": true,
+    "accessAppsAndPoliciesUnchanged": true,
+    "accessSnapshotSHA256BeforeAndAfter": "c42bff1426581855ee38b5455b6af06d96b7dab7a776be40b7d43f9964daa8b4"
+  },
+  "qa": {
+    "activityBrowserTests": 15,
+    "activityLayouts": [
+      "desktop Chromium 1440x1000",
+      "iPad portrait Chromium 820x1180",
+      "iPad landscape Chromium 1180x820"
+    ],
+    "flows": [
+      "electricity/gas/water illustration, readings and calculations",
+      "fictional recycling calendar with current London date",
+      "address order, packaging weight, suitable postage, change",
+      "money units, wrong retry, current hints and one-action answers",
+      "verified educational payslip, 50p token, visible purse/bank/envelopes, reload"
+    ],
+    "additionalChecks": [
+      "npm test",
+      "npm run test:curriculum",
+      "npm run test:touch",
+      "demo/test-sync.cjs: source parity, safe later rebuild, release-only guard, date/DST/year boundaries and legacy snapshots",
+      "demo/test-browser.cjs: three clean layouts, distinct visitors/origins, browser-only storage, no outbound requests",
+      "iPad release gate: cloud/save recovery, local receipt database checks and 14 browser regressions passed (browser portion rerun after clearing a stale local server port)"
+    ],
+    "physicalIPadSafariTested": false
+  },
+  "unsharedLiveFeatures": {
+    "requestedTownHomeActivities": [],
+    "backendDependentFeatures": "Cloud authentication, learner accounts, trusted parent approvals/rewards and cross-device sync are excluded because the fictional demo has no backend."
+  },
+  "remainingHostedAcceptance": [
+    "Review changes onto protected release/ipad; do not publish a feature branch.",
+    "Observe Cloudflare automatic demo deployment tied to the approved release commit.",
+    "Compare published build-info.json shared source hashes with that release and re-run clean unauthenticated public activity checks."
+  ]
+}

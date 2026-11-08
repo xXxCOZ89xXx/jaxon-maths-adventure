@@ -57,7 +57,7 @@ test("Earlier saved quest loops persist exact state, restore 24 landmarks and ca
       s.quest={world:w.id,i,value:0,selected:[],assisted:false,solved:false,feedback:'',intro:false};s.quests[w.id]=s.quest;s.view='quest';
       const p = E.puzzle(w.id, i);
       E.help(s);
-      E.answerQuest(s, true);
+      E.help(s);
       assert.equal(E.count(s, w.id), i);
       s.quest = JSON.parse(JSON.stringify(s.quest));
       if (["fraction", "chance"].includes(p.kind))

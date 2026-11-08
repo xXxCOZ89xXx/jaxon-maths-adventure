@@ -1,0 +1,6 @@
+'use strict';
+// Local QA server for the exact Pages output, including its response headers.
+const fs=require('node:fs'),http=require('node:http'),path=require('node:path'),dir=path.resolve(__dirname,'../demo-dist');
+const mime={'.html':'text/html','.js':'application/javascript','.css':'text/css','.svg':'image/svg+xml','.webp':'image/webp','.json':'application/json'};
+function createServer(){const headers=fs.readFileSync(path.join(dir,'_headers'),'utf8').split('\n').slice(1).filter(Boolean).map(s=>{const i=s.indexOf(':');return[s.slice(0,i).trim(),s.slice(i+1).trim()]});return http.createServer((req,res)=>{let file=path.resolve(dir,'.'+decodeURIComponent(new URL(req.url,'http://local').pathname));if(!file.startsWith(dir+path.sep)&&file!==dir){res.writeHead(403).end();return;}if(file===dir||fs.existsSync(file)&&fs.statSync(file).isDirectory())file=path.join(file,'index.html');const exists=fs.existsSync(file);for(const[k,v]of headers)res.setHeader(k,v);res.setHeader('Content-Type',mime[path.extname(file)]||'application/octet-stream');res.writeHead(exists?200:404);res.end(fs.readFileSync(exists?file:path.join(dir,'404.html')));});}
+module.exports={createServer};if(require.main===module)createServer().listen(4174,'127.0.0.1');

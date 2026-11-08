@@ -393,7 +393,7 @@
     const v=q.values.amount||0,parts=q.values.parts||[0,0,0];
     const slider=(max,step=1,unit='')=>`<label class="model-slider">Move the ${t.kind==='measure'?'scale marker':'pointer'}<input type="range" min="${t.min||0}" max="${max}" step="${step}" value="${v}" data-model-range="m-value" aria-label="Set ${esc(unit||t.unit||'value')}" /><output>${v} ${esc(unit||t.unit||'')}</output></label>`;
     if(t.kind==='blocks')return `<div class="hands-on place-value-workbench" data-mechanic="place-value"><p>Tap a supply block to put it in its matching tray. Tap a placed block to return it.</p><div class="block-supply">${[100,10,1].map((n,i)=>btn(`<span class="base-ten base-${n}">${n===100?'▦':n===10?'▥':'▪'}</span> Place ${n}`,`m-part:${i}:1`,`aria-label="Place ${n} block"`)).join('')}</div><div class="base-ten-model">${[100,10,1].map((n,i)=>`<section><strong>${['Hundreds','Tens','Ones'][i]}</strong><div class="base-ten-tray">${Array.from({length:parts[i]||0},()=>btn(`<span class="base-ten base-${n}">${n===100?'▦':n===10?'▥':'▪'}</span>`,`m-part:${i}:-1`,`aria-label="Return ${n} block"`)).join('')||'<span class="empty-tray">Empty tray</span>'}</div></section>`).join('')}</div><output>${(parts[0]||0)*100+(parts[1]||0)*10+(parts[2]||0)} units</output></div>`;
-    if(t.kind==='budget')return `<div class="hands-on budget-workbench" data-mechanic="budget"><p>Choose a money token, then tap an envelope to place it. Tap a placed token to return it.</p><div class="money-tray" role="group" aria-label="Choose envelope money">${[1,5,100,500,1000].map(n=>btn(`<span class="${n<500?'coin':'note'}">${n<100?n+'p':money(n)}</span>`,`m-budget-pick:${n}`,`aria-pressed="${q.values.budgetToken===n}" aria-label="Choose ${n} pence"`)).join('')}</div><p role="status">${q.values.budgetToken?'Selected '+money(q.values.budgetToken):'Choose a token first.'}</p><div class="envelopes">${t.labels.map((label,i)=>{let rest=parts[i]||0;const placed=[];for(const n of [1000,500,100,5,1]){const count=Math.floor(rest/n);rest%=n;if(count)placed.push(btn(`${count} × ${money(n)} ↩`,`m-part:${i}:${-n}`,`aria-label="Return ${n} pence from ${esc(label)}"`));}return `<section><button class="envelope-target" data-action="m-budget-place:${i}" ${q.values.budgetToken?'':'disabled'} aria-label="Place selected money in ${esc(label)}"><span aria-hidden="true">✉</span><strong>${esc(label)}</strong><output>${money(parts[i]||0)}</output></button><div class="placed-money">${placed.join('')||'Empty envelope'}</div></section>`;}).join('')}</div><output>Allocated ${money(parts.reduce((a,b)=>a+b,0))} of ${money(t.budget)}</output></div>`;
+    if(t.kind==='budget')return `<div class="hands-on budget-workbench" data-mechanic="budget"><p>Choose a money token, then tap an envelope to place it. Tap a placed token to return it.</p><div class="money-tray" role="group" aria-label="Choose envelope money">${[1,5,50,100,500,1000].map(n=>btn(`<span class="${n<500?'coin':'note'}">${n<100?n+'p':money(n)}</span>`,`m-budget-pick:${n}`,`aria-pressed="${q.values.budgetToken===n}" aria-label="Choose ${n} pence"`)).join('')}</div><p role="status">${q.values.budgetToken?'Selected '+money(q.values.budgetToken):'Choose a token first.'}</p><div class="envelopes">${t.labels.map((label,i)=>{let rest=parts[i]||0;const placed=[];for(const n of [1000,500,100,50,5,1]){const count=Math.floor(rest/n);rest%=n;if(count)placed.push(btn(`${count} × ${money(n)} ↩`,`m-part:${i}:${-n}`,`aria-label="Return ${n} pence from ${esc(label)}"`));}return `<section><button class="envelope-target" data-action="m-budget-place:${i}" ${q.values.budgetToken?'':'disabled'} aria-label="Place selected money in ${esc(label)}"><span aria-hidden="true">✉</span><strong>${esc(label)}</strong><output>${money(parts[i]||0)}</output></button><div class="placed-money">${placed.join('')||'Empty envelope'}</div></section>`;}).join('')}</div><section class="allocation-balances" aria-label="Allocation balances"><h3>Allocation balances</h3><p>Starting allocation fund ${money(t.budget)} · unallocated ${money(t.budget-parts.reduce((a,b)=>a+b,0))}</p><p>${t.labels.map((label,i)=>esc(label)+': '+money(parts[i]||0)).join(' · ')}</p><p>Savings are reserved separately from spending cash.</p></section><output>Allocated ${money(parts.reduce((a,b)=>a+b,0))} of ${money(t.budget)}</output></div>`;
     if(t.kind==='clock') {
       const hour=Math.floor(v/60),minute=v%60;
       return `<div class="hands-on clock-workbench" data-mechanic="clock"><p>Tap an hour, then a minute mark. This clock uses 24-hour time.</p><div class="clock-face"><svg viewBox="0 0 260 260" role="img" aria-label="Clock showing ${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}"><circle cx="130" cy="130" r="112" fill="#f4efd9" stroke="#3a6040" stroke-width="6"/>${Array.from({length:12},(_,i)=>{const r=(i+1)*Math.PI/6;return `<text x="${130+91*Math.sin(r)}" y="${137-91*Math.cos(r)}" text-anchor="middle">${i+1}</text>`;}).join('')}<path d="M130 130l${52*Math.sin((hour%12+minute/60)*Math.PI/6)} ${-52*Math.cos((hour%12+minute/60)*Math.PI/6)}" stroke="#35543c" stroke-width="7"/><path d="M130 130l${78*Math.sin(minute*Math.PI/30)} ${-78*Math.cos(minute*Math.PI/30)}" stroke="#7b5830" stroke-width="4"/></svg><strong>${String(hour).padStart(2,'0')}:${String(minute).padStart(2,'0')}</strong></div><fieldset><legend>Hour</legend><div class="clock-marks">${Array.from({length:24},(_,h)=>btn(String(h).padStart(2,'0'),`m-value:${h*60+minute}`,`aria-label="Set hour ${h}" aria-pressed="${h===hour}"`)).join('')}</div></fieldset><fieldset><legend>Minute</legend><div class="clock-marks">${Array.from({length:12},(_,i)=>i*5).map(m=>btn(String(m).padStart(2,'0'),`m-value:${hour*60+m}`,`aria-label="Set minute ${m}" aria-pressed="${m===minute}"`)).join('')}</div></fieldset><div class="actions">${btn('One minute earlier',`m-value:${Math.max(0,v-1)}`)}${btn('One minute later',`m-value:${Math.min(1439,v+1)}`)}</div></div>`;
@@ -512,8 +512,9 @@
       const unit=q[5].unit||'',n=Number(text);
       if(unit==='clock')return null;
       if(/^\d+\/\d+$/.test(text)){const den=Number(text.split('/')[1]);return den<=12&&Number(text.split('/')[0])<=den?{kind:'fraction',total:den,min:0,max:den,skill:skill.id,format:text,practice:true}:null;}
-      if(!Number.isInteger(n)||Math.abs(n)>9999)return null;
+      if(!Number.isFinite(n)||Math.abs(n)>9999)return null;
       if(['pence','pounds'].includes(unit)){const scale=unit==='pounds'?100:1;if(n*scale>100000)return null;return {kind:'amount',unit:'p',responseUnit:unit,scale,min:0,max:100000,skill:skill.id,format:text,practice:true};}
+      if(!Number.isInteger(n))return null;
       if(unit==='degrees'&&n>=0&&n<=180)return {kind:'angle',unit:'degrees',min:0,max:180,skill:skill.id,format:text,practice:true};
       if(n<0&&n>=-20)return {kind:'line',min:-20,max:20,skill:skill.id,format:text,practice:true};
       return n>=0?{kind:'blocks',unit,min:0,max:9999,skill:skill.id,format:text,practice:true}:null;
@@ -559,25 +560,31 @@
   // A draft is kept separately: an empty or invalid edit must never submit an older value.
   function numericValue(raw, t, scale = 1) {
     if (!t || !(scale === 1 || scale === 100)) return null;
+    raw=String(raw).trim();
+    if(t.unit==='p'){
+      if(scale===100){if(/p(?:ence)?$/i.test(raw))return null;raw=raw.replace(/^£\s*/, '');}
+      else {if(raw.startsWith('£'))return null;raw=raw.replace(/\s*p(?:ence)?$/i,'');}
+    }
     const pattern = scale === 100 ? /^-?\d+(?:\.\d{1,2})?$/ : /^-?\d+$/;
     if (!pattern.test(String(raw))) return null;
     const n = Math.round(Number(raw) * scale);
     return Number.isSafeInteger(n) && n >= (t.min ?? 0) && n <= t.max ? n : null;
   }
   function numericMessage(t, scale = 1) {
+    if(t.unit==='p')return scale===100?'Enter pounds, for example £4.50 or 4.50, not 450p. £1 = 100p.':'Enter whole pence, for example 50p or 50, not £0.50. £1 = 100p.';
     return scale === 100
       ? `Enter pounds from ${(t.min ?? 0)/scale} to ${t.max/scale}, using at most two decimal places.`
       : `Enter a whole number from ${t.min ?? 0} to ${t.max}.`;
   }
   function numericInput(t, value, draft, context = "mission") {
-    const scale = t.practice ? t.scale || 1 : 1;
+    const scale = t.responseUnit==='pounds'?100:t.practice ? t.scale || 1 : 1;
     const raw = draft ?? String(value/scale), invalid = numericValue(raw, t, scale) === null;
     const label = scale === 100 ? "Amount in pounds (£)" : t.unit === "p" ? "Amount in pence (100p = £1)" : "Answer" + (t.unit ? " in " + t.unit : "");
     return `<div class="numeric-answer"><label for="${context}-amount">${label}</label><input id="${context}-amount" data-numeric-answer="${context}" type="text" inputmode="${(t.min ?? 0) < 0 ? 'text' : scale === 100 ? 'decimal' : 'numeric'}" enterkeyhint="done" autocomplete="off" value="${esc(raw)}" aria-invalid="${invalid}" aria-describedby="${context}-number-help"><p id="${context}-number-help" class="small numeric-help" aria-live="polite">${invalid ? numericMessage(t,scale) : 'Type an answer or use the model.'}</p></div>`;
   }
   function invalidDraft(values, t) {
     if(values?.clockDraft !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(values.clockDraft)) return true;
-    return values?.amountDraft !== undefined && numericValue(values.amountDraft, t, t?.practice ? t.scale || 1 : 1) === null;
+    return values?.amountDraft !== undefined && numericValue(values.amountDraft, t, t?.responseUnit==='pounds'?100:t?.practice ? t.scale || 1 : 1) === null;
   }
   function sharing(t, amount) {
     const saved = String(t.prompt || "").match(/Share a £([\d.]+) café bill equally between (\d+) friends/);

@@ -110,7 +110,10 @@
       q.i >= 0 &&
       q.i < q.tasks?.length &&
       Array.isArray(q.tasks) &&
-      (q.contentVersion === 8 ? [6,12].includes(q.tasks.length) : q.tasks.length === 3) &&
+      (q.world === "town" && q.route === "home" &&
+        ["meters", "recycling", "post"].includes(q.context?.homeActivity)
+        ? q.tasks.length === (q.homeContentVersion === 2 && q.context.homeActivity === "post" ? 4 : 3)
+        : q.contentVersion === 8 ? [6, 12].includes(q.tasks.length) : q.tasks.length === 3) &&
       q.tasks.every(
         (t) => t && typeof t.kind === "string" && t.answer !== undefined,
       ) &&
@@ -849,7 +852,7 @@
     let valid = false;
     if (key === "amount")
       valid = integer(value) && value >= (t.min || 0) && value <= t.max;
-    if (key === "budgetToken") valid=t.kind==="budget" && [1,5,100,500,1000].includes(value);
+    if (key === "budgetToken") valid=t.kind==="budget" && [1,5,50,100,500,1000].includes(value);
     if (key === "picked") valid = integer(value) && value>=0 && value<(t.labels||t.items||[]).length;
     if (key === "order") valid = array(value) && value.length<=t.items.length && value.every(n=>n===null || integer(n)&&n>=0&&n<t.items.length) && new Set(value.filter(n=>n!==null)).size===value.filter(n=>n!==null).length;
     if (key === "parts") {
@@ -889,6 +892,7 @@
         integer(value) &&
         value === (q.values.posted || 0) + 1 &&
         value <= t.transactions.length;
+    if(key==='parts'&&t.kind==='budget'&&Array.isArray(value)&&value.reduce((a,b)=>a+b,0)>t.budget)valid=false;
     if (!valid) return false;
     q.values[key] = copy(value);
     if (key === "amount") {delete q.values.amountDraft;delete q.values.clockDraft;}
@@ -903,7 +907,7 @@
       return q.values.parts || [];
     if (["order","match"].includes(t.kind)) return q.values.order || [];
     if (t.kind === "coordinate") return q.values.point || [];
-    if (t.kind === "journey") return q.values.choice ?? -1;
+    if (["journey","choice"].includes(t.kind)) return q.values.choice ?? -1;
     if (t.kind === "coins")
       return (q.values.coins || []).reduce((a, b) => a + b, 0);
     return Number(q.values.amount || 0);
@@ -981,6 +985,7 @@
       unassisted: Math.max(old?.unassisted || 0, q.unassisted),
       lastUnassisted: q.unassisted,
       evidence: copy(q.evidence || []),
+      skips: copy(q.skips || []),
       context: copy(q.context || {}),
       completedAt: new Date(now).toISOString(),
       serial,

@@ -10,13 +10,13 @@ function next(s){return Object.keys(areas).find(id=>!valid(s.startingProfile?.ar
 function question(s,id){return s.startingProfile?.areas?.[id]?.question||null;}
 function makeQuestion(a,id,C){const ED=get('V6Education','education'),helper=get('V3Discovery','discovery'),i=a.responses.length,skill=areas[id][i%2],band=Math.max(ED.minBand(skill),Math.min(9,a.band));
  const bank=C.discovery[skill]?.[band],raw=bank?.[i];if(!raw)throw Error('Missing baseline discovery sample: '+skill+' / '+band);
- const h=helper(C.discovery,skill,{band,i});return{skill,band,prompt:h.prompt(raw[1]),answer:String(raw[2]),choices:h.choices().map(String),explanation:raw[4]||'The answer is '+raw[2]+'.'};}
+ const h=helper(C.discovery,skill,{band,i});return{skill,band,prompt:h.prompt(raw[1]),answer:String(raw[2]),choices:h.choices().map(String),explanation:raw[4]||'The answer is '+get('V3Town','town').answerLabel([raw[1]],raw[2])+'.'};}
 function start(s,id,C,now=Date.now()){if(!areas[id])return 'Choose an assessment area.';const b=book(s);if(!b)return 'Your starting profile needs review. Nothing has been reset.';let a=b.areas[id];if(valid(a)){s.view='starting';return null;}
  if(a===undefined)a=b.areas[id]={band:get('V6Education','education').minBand(areas[id][0])===3?5:7,responses:[],startedAt:now,draft:''};
  if(!a||typeof a!=='object'||!Array.isArray(a.responses)||a.responses.length>4||!Number.isFinite(a.band)||a.question&&(!Array.isArray(a.question.choices)||typeof a.question.prompt!=='string'))return 'Your saved assessment is preserved and needs review.';
  if(!a.question)a.question=makeQuestion(a,id,C);s.seen=[...new Set([...(s.seen||[]),a.question.prompt])];b.active=id;s.world=id;s.view=s.resumeView='starting-area';return null;}
 function answer(s,id,value,skip=false,now=Date.now()){const a=s.startingProfile?.areas?.[id],q=a?.question;if(!q||a.answered||valid(a))return false;
- const parse=get('V3Engine','engine').parseNumber;if(!skip&&!Number.isFinite(parse(value))){a.validation='Use a number, decimal or fraction, or choose I don’t know.';return false;}delete a.validation;const correct=!skip&&Number.isFinite(parse(value))&&Math.abs(parse(value)-parse(q.answer))<1e-8;
+ const T=get('V3Town','town'),unit=T.moneyUnit(q.prompt),parse=unit?x=>T.moneyAnswerNumber(x,unit):get('V3Engine','engine').parseNumber;if(!skip&&!Number.isFinite(parse(value))){a.validation=unit?'Use '+unit+' for this question. £1 = 100p.':'Use a number, decimal or fraction, or choose I don’t know.';return false;}delete a.validation;const correct=!skip&&Number.isFinite(parse(value))&&Math.abs(parse(value)-parse(q.answer))<1e-8;
  a.responses.push({...copy(q),value:skip?null:String(value),skipped:skip,correct,at:now});a.answered=true;a.draft='';return true;}
 function advance(s,id,C,now=Date.now()){const a=s.startingProfile?.areas?.[id];if(!a?.answered)return false;
  if(a.responses.length===4){const AD=get('V5Adaptive','adaptive'),anchor=areas[id][0],correct=a.responses.filter(r=>r.correct).length;

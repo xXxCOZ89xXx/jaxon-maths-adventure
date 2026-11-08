@@ -2230,3 +2230,6 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 /* Centre the face in the circular profile aperture; do not alter full-body scene fits. */
 #headerExplorer{position:relative;display:block}#headerExplorer .layered-explorer{position:absolute;left:50%;top:-27px;margin:0;width:62px;height:93px;transform:translateX(-50%) scale(2.8);transform-origin:50% 0%}
 .starting-baseline,.starting-independent{padding-top:8px;border-top:1px solid #c5ceba}.starting-independent h4,.starting-baseline h4{margin:8px 0}.starting-results h4{font-size:1rem}
+
+/* Current fictional money remains readable alongside Town answer controls. */
+.money-balances dl,.educational-payslip dl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem 1rem;margin:.75rem 0}.money-balances dd,.educational-payslip dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}.money-balances p{margin:.5rem 0;font-size:.9em}.scene-dialog .money-balances{position:sticky;top:0;z-index:2;max-height:42vh;overflow:auto;background:var(--paper,#fffdf3);border:1px solid #789264;padding:12px}.scene-dialog .money-balances h3{margin:.25rem 0}.educational-payslip dd{max-width:20ch;overflow-wrap:anywhere}@media(max-width:500px){.money-balances dl,.educational-payslip dl{gap:.3rem .5rem;font-size:.9em}}

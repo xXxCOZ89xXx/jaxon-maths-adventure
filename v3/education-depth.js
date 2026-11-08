@@ -43,6 +43,18 @@ function q(id,band,seed,f){
  hint='Keep money in pence while calculating; check units, quantities and every stated fee.';mis='Gross, net, change, total and remaining balance mean different amounts. Use the amount the question asks for.';break;}
  default:throw Error('Missing depth bank '+id);
  }
+ if(id==='town_totals'){
+ const price=(20+r(90))*5,qty=2+r(7);
+ const m=n=>'£'+(n/100).toFixed(2),paid=[500,1000,2000,5000].find(n=>n>=price*qty+a*5+50)||Math.ceil((price*qty+a*5+50)/1000)*1000;
+ rows=[row(`Buy ${qty} items at ${m(price)} each. Total in pounds?`,fmt(price*qty/100),`${qty} × ${m(price)} = ${m(price*qty)}.`),row(`Pay ${m(paid)} for a ${m(price*qty)} purchase. Change in pounds?`,fmt((paid-price*qty)/100),`${m(paid)} − ${m(price*qty)} = ${m(paid-price*qty)}.`),row(`Two prices are ${m(price)} and ${m(price+25)}. Total in pounds?`,fmt((2*price+25)/100),`${m(price)} + ${m(price+25)} = ${m(2*price+25)}.`),row(`A bill is ${m(price*qty)} for ${qty} equal-price items. Pounds each?`,fmt(price/100),`${m(price*qty)} ÷ ${qty} = ${m(price)}.`),row(`Return one ${m(price)} item from a ${m(price*qty)} basket. New total in pounds?`,fmt(price*(qty-1)/100),`${m(price*qty)} − ${m(price)} = ${m(price*(qty-1))}.`),row(`Budget ${m(paid)}; buy ${qty} at ${m(price)} and pay a ${m(a*5)} fee. Pounds left?`,fmt((paid-price*qty-a*5)/100),`${m(paid)} − ${m(price*qty)} − ${m(a*5)} = ${m(paid-price*qty-a*5)}.`)];
+ hint='Use pounds and pence. Add the costs, then subtract from the payment or budget where asked.';mis='£1 is 100p. Give this answer in pounds, with up to two decimal places.';
+ }
+ if(id==='town_money'){
+ const qty=2+r(7);
+ const m=n=>'£'+(n/100).toFixed(2),note=[500,1000,2000][r(3)],coin=[10,20,50][r(3)],pence=[5,10,20,50][r(4)];
+ rows=[row(`A ${m(note)} note and a ${coin}p coin. Total in pounds?`,fmt((note+coin)/100),`${m(note)} + ${m(coin)} = ${m(note+coin)}.`),row(`Count ${qty} coins worth ${pence}p each. Total in pence?`,qty*pence,`${qty} × ${pence}p = ${qty*pence}p.`),row(`Convert ${m(note+coin)} to pence.`,note+coin,`${m(note+coin)} × 100 = ${note+coin}p.`),row(`Convert ${note+coin}p to pounds.`,fmt((note+coin)/100),`${note+coin} ÷ 100 = ${m(note+coin)}.`),row(`A ${m(note)} note, a £1 coin and a ${coin}p coin. Total in pounds?`,fmt((note+100+coin)/100),`${m(note)} + £1.00 + ${m(coin)} = ${m(note+100+coin)}.`),row(`Two ${pence}p coins. Value in pence?`,2*pence,`2 × ${pence}p = ${2*pence}p.`)];
+ hint='Read the requested unit. £1 = 100p: multiply pounds by 100 for pence; divide pence by 100 for pounds.';mis='The same amount has different numbers in pounds and pence. Include the requested unit.';
+ }
  const chosen=rows[f%6];if(!chosen)throw Error('Missing structure '+id+':'+f);
  const [prompt,answer,worked]=chosen,choices=[answer];
  if(/^\d{2}:\d{2}$/.test(answer)){const [h,m]=answer.split(':').map(Number),time=h*60+m;for(const off of [5,-5,10,-10]){const v=clock(time+off);if(!choices.includes(v))choices.push(v);if(choices.length===4)break;}}

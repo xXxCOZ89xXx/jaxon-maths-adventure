@@ -12,14 +12,14 @@ async function target(page,act){
  const overlay=page.locator('.immersive-journey .scene-dialog[open]');if(await overlay.count())await overlay.locator('[data-scene-close]').click();
  return page.locator(selector).first();
 }
-async function click(page,act){await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').filter({visible:true}).count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').click();await control.click();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+async function click(page,act){if(['m-next','j-next','next-learning','next-quest'].includes(act))return require('./helpers/progression.cjs').advance(page);await openCurrent(page);const next=act==='m-submit'?'m-next':act==='j-submit'?'j-next':null;if(next&&await page.locator('[data-action="'+next+'"]').count())return;const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').click();await control.click();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
 async function town(page){const map=page.locator('dialog[open] [data-action="nav:map"]');if(await map.count())await map.first().click();else await page.locator('.topbar [data-nav="map"]').click();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));await click(page,'world:town');}
 async function current(page,key){return page.evaluate(key=>V52TownLife.state(JSON.parse(localStorage.getItem(key))),key);}
 async function setRange(page,n){
  await openCurrent(page);const opener=page.locator('.scene-dock [data-scene-open]').first();if(await opener.count())await openScene(page,await opener.getAttribute('data-scene-open'));
  const range=page.locator('[data-model-range]').filter({visible:true}).first();
  if(await range.count())await range.evaluate((el,n)=>{el.value=String(n);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));},n);
- else await page.locator('[data-numeric-answer]').filter({visible:true}).first().fill(String(n));
+ else {const input=page.locator('[data-numeric-answer]').filter({visible:true}).first();await input.fill(String(n/(await input.getAttribute('inputmode')==='decimal'?100:1)));}
  await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
 }
 async function answer(page,t,choice){
@@ -46,7 +46,7 @@ for(const c of L.catalog)test(`Town plan ${c.id}: touch completion, exact reload
   const initial=await read();let visits=0;
   while(!(await current(page,key)).done){
     const j=await current(page,key),t=j.steps[j.stage];
-    if(j.stage===0){await click(page,'j-skip');await expect(page.locator('.feedback').filter({visible:true}).first()).toBeVisible();}
+    if(j.stage===0){await click(page,'j-help');await expect(page.locator('.feedback').filter({visible:true}).first()).toBeVisible();}
     await answer(page,t);
     const exact=await current(page,key);
     if(j.stage===0||t.kind==='clock'||t.kind==='budget'||t.kind==='match'||t.kind==='measure'){

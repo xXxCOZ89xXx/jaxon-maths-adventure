@@ -9,14 +9,14 @@ async function target(page,act){
  const overlay=page.locator('.immersive-journey .scene-dialog[open]');if(await overlay.count())await overlay.locator('[data-scene-close]').click();
  return page.locator(selector).first();
 }
-async function click(page,act){const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').click();await control.click();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+async function click(page,act){if(['m-next','j-next','next-learning','next-quest'].includes(act))return require('./progression.cjs').advance(page);const control=await target(page,act),door=control.locator("xpath=ancestor::details[contains(@class, 'stock-door')]");if(await door.count()&&(await door.getAttribute('open'))===null)await door.locator('summary').click();await control.click();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
 async function seed(page,key,world,route,stage=0){await page.evaluate(({key,world,route,stage})=>{const s=V3Engine.fresh();s.tourSeen=true;V3Adventure.start(s,world,route,1);const q=V3Adventure.current(s);q.i=stage;q.phase='play';s.view='adventure';localStorage.setItem(key,JSON.stringify(s));},{key,world,route,stage});await page.reload();await openCurrent(page);}
 async function run(page,key){return page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))),key);}
 async function setRange(page,n){
  await openCurrent(page);const opener=page.locator('.scene-dock [data-scene-open]').first();if(await opener.count())await openScene(page,await opener.getAttribute('data-scene-open'));
  const range=page.locator('[data-model-range]').filter({visible:true}).first();
  if(await range.count())await range.evaluate((el,n)=>{el.value=String(n);el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));},n);
- else await page.locator('[data-numeric-answer]').filter({visible:true}).first().fill(String(n));
+ else {const input=page.locator('[data-numeric-answer]').filter({visible:true}).first();await input.fill(String(n/(await input.getAttribute('inputmode')==='decimal'?100:1)));}
  await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
 }
 async function answer(page,t,choice){
