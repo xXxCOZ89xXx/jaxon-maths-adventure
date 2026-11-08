@@ -1,0 +1,326 @@
+{
+  "baselineCommit": "e3550ec202d30c407b1d5653f06c081eba014938",
+  "entry": "v3-adventure.html",
+  "source": [
+    {
+      "path": "v3/curriculum.js"
+    },
+    {
+      "path": "v2-review-bank.js"
+    },
+    {
+      "path": "v2-guided-teaching.js"
+    },
+    {
+      "path": "v2-maths-tools.js"
+    },
+    {
+      "path": "v2-extra-tools.js"
+    },
+    {
+      "path": "v3/discovery.js"
+    },
+    {
+      "path": "v3/town.js"
+    },
+    {
+      "path": "v3/education.js"
+    },
+    {
+      "path": "v3/education-depth.js"
+    },
+    {
+      "path": "v3/curriculum-expansion.js"
+    },
+    {
+      "path": "v3/curriculum-activities.js"
+    },
+    {
+      "path": "v3/curriculum-map.js"
+    },
+    {
+      "path": "v3/touch-activities.js"
+    },
+    {
+      "path": "v3/touch-content.js"
+    },
+    {
+      "path": "v3/adaptive.js"
+    },
+    {
+      "path": "v3/hands-on.js"
+    },
+    {
+      "path": "v3/town-content.js"
+    },
+    {
+      "path": "v3/town-life.js"
+    },
+    {
+      "path": "v3/journey.js"
+    },
+    {
+      "path": "v3/restoration.js"
+    },
+    {
+      "path": "v3/activity-navigation.js"
+    },
+    {
+      "path": "v3/adventure.js"
+    },
+    {
+      "path": "v3/engine.js"
+    },
+    {
+      "path": "v3/presentation.js"
+    },
+    {
+      "path": "v3/art.js"
+    },
+    {
+      "path": "v3/places-art.js"
+    },
+    {
+      "path": "v3/visual-sample.js"
+    },
+    {
+      "path": "v3/asset-checkpoint.js"
+    },
+    {
+      "path": "v3/adventure-ui.js"
+    },
+    {
+      "path": "v3/scene-interactions.js"
+    },
+    {
+      "path": "v3/world-art.js"
+    },
+    {
+      "path": "v3/avatar-art.js"
+    },
+    {
+      "path": "v3/home-activities.js"
+    },
+    {
+      "path": "v3/activity-scenes.js"
+    },
+    {
+      "path": "v3/guide-portraits.js"
+    },
+    {
+      "path": "v3/starting-profile.js"
+    },
+    {
+      "path": "v3/starting-profile-ui.js"
+    },
+    {
+      "path": "v3/app.js"
+    },
+    {
+      "path": "v3/style.css"
+    },
+    {
+      "path": "v3/touch-activities.css"
+    },
+    {
+      "path": "v3/guide-portraits.css"
+    },
+    {
+      "path": "v3-adventure.html"
+    },
+    {
+      "path": "icon.svg"
+    }
+  ],
+  "images": [
+    {
+      "path": "v3/assets/checkpoint/camp.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/kitchen.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/market.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/bus.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/rail.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/town.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/wagon.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/engine.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/explorer.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/pantry.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/fridge.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/pasta.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/tomato.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/mince.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/teen.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/pantry-empty.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/basket-empty.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/fridge-empty.webp"
+    },
+    {
+      "path": "v3/assets/rollout/atlas.webp"
+    },
+    {
+      "path": "v3/assets/rollout/forest.webp"
+    },
+    {
+      "path": "v3/assets/rollout/desert.webp"
+    },
+    {
+      "path": "v3/assets/rollout/geometry.webp"
+    },
+    {
+      "path": "v3/assets/rollout/ratio.webp"
+    },
+    {
+      "path": "v3/assets/rollout/statistics.webp"
+    },
+    {
+      "path": "v3/assets/rollout/probability.webp"
+    },
+    {
+      "path": "v3/assets/rollout/measure.webp"
+    },
+    {
+      "path": "v3/assets/rollout/home-exterior.webp"
+    },
+    {
+      "path": "v3/assets/rollout/camp1.webp"
+    },
+    {
+      "path": "v3/assets/rollout/camp2.webp"
+    },
+    {
+      "path": "v3/assets/rollout/camp3.webp"
+    },
+    {
+      "path": "v3/assets/rollout/camp4.webp"
+    },
+    {
+      "path": "v3/assets/rollout/cafe.webp"
+    },
+    {
+      "path": "v3/assets/rollout/shops.webp"
+    },
+    {
+      "path": "v3/assets/rollout/library.webp"
+    },
+    {
+      "path": "v3/assets/rollout/bank.webp"
+    },
+    {
+      "path": "v3/assets/rollout/work.webp"
+    },
+    {
+      "path": "v3/assets/rollout/leisure.webp"
+    },
+    {
+      "path": "v3/assets/rollout/train-station.webp"
+    },
+    {
+      "path": "v3/assets/rollout/post.webp"
+    },
+    {
+      "path": "v3/assets/rollout/meters.webp"
+    },
+    {
+      "path": "v3/assets/rollout/avatar-base.webp"
+    },
+    {
+      "path": "v3/assets/rollout/wear-head.webp"
+    },
+    {
+      "path": "v3/assets/rollout/wear-outfits.webp"
+    },
+    {
+      "path": "v3/assets/rollout/wear-back.webp"
+    },
+    {
+      "path": "v3/assets/rollout/wear-accessories.webp"
+    },
+    {
+      "path": "v3/assets/rollout/wear-companions.webp"
+    },
+    {
+      "path": "v3/assets/rollout/wear-hair.webp"
+    },
+    {
+      "path": "v3/assets/rollout/repair.webp"
+    },
+    {
+      "path": "v3/assets/rollout/wear-faces.webp"
+    },
+    {
+      "path": "v3/assets/rollout/helpers.webp"
+    },
+    {
+      "path": "v3/assets/rollout/products-food.webp"
+    },
+    {
+      "path": "v3/assets/rollout/products-supplies.webp"
+    },
+    {
+      "path": "v3/assets/rollout/restoration-worlds.webp"
+    },
+    {
+      "path": "v3/assets/rollout/avatar-girl.webp"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/algebra-peaks-guide.webp"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/fraction-desert-guide.webp"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/geometry-kingdom-guide.webp"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/measurement-mines-guide.webp"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/number-forest-guide.webp"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/practical-maths-town-guide.webp"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/probability-portal-guide.webp"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/ratio-island-guide.webp"
+    },
+    {
+      "path": "v3/assets/world-guide-portraits-preview/statistics-city-guide.webp"
+    }
+  ]
+}

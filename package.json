@@ -50,7 +50,10 @@
     "test:guided-preview": "npm run build:guided-preview && playwright test -c playwright.guided-preview.config.cjs",
     "test:starting-profile": "node tests/starting-profile.cjs && node tests/prepare-v3.cjs && node tests/prepare-v52-production.cjs && playwright test -c playwright.starting-profile.config.cjs",
     "test:owner-review": "node tests/owner-review.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.owner-review.config.cjs",
-    "test:money-wages": "node tests/money-wages.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.money-wages.config.cjs"
+    "test:money-wages": "node tests/money-wages.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.money-wages.config.cjs",
+    "build:demo": "node demo/build.cjs && node demo/check.cjs",
+    "build:demo-release": "node demo/release-build.cjs",
+    "test:demo": "node demo/test-sync.cjs && node demo/test-browser.cjs && playwright test -c playwright.demo.config.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

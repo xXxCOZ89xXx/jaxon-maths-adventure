@@ -110,7 +110,10 @@
       q.i >= 0 &&
       q.i < q.tasks?.length &&
       Array.isArray(q.tasks) &&
-      (q.contentVersion === 8 ? [6,12].includes(q.tasks.length) : q.tasks.length === 3) &&
+      (q.world === "town" && q.route === "home" &&
+        ["meters", "recycling", "post"].includes(q.context?.homeActivity)
+        ? q.tasks.length === (q.homeContentVersion === 2 && q.context.homeActivity === "post" ? 4 : 3)
+        : q.contentVersion === 8 ? [6, 12].includes(q.tasks.length) : q.tasks.length === 3) &&
       q.tasks.every(
         (t) => t && typeof t.kind === "string" && t.answer !== undefined,
       ) &&
@@ -904,7 +907,7 @@
       return q.values.parts || [];
     if (["order","match"].includes(t.kind)) return q.values.order || [];
     if (t.kind === "coordinate") return q.values.point || [];
-    if (t.kind === "journey") return q.values.choice ?? -1;
+    if (["journey","choice"].includes(t.kind)) return q.values.choice ?? -1;
     if (t.kind === "coins")
       return (q.values.coins || []).reduce((a, b) => a + b, 0);
     return Number(q.values.amount || 0);
