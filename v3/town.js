@@ -252,14 +252,40 @@
       count = 2 + (n % 3),
       pay = 800 + 25 * (n % 20);
     switch (id) {
-      case "town_money":
-        const note = [5,10,20][n%3], coin = 1+n%99;
-        unit = i%3===1?'pence':'pounds';
-        prompt = i%3===2?`Convert ${note*100+coin}p to pounds.`:`A £${note} note and coins worth ${coin}p: total in ${unit}?`;
-        answer = unit==='pence'?note*100+coin:note+coin/100;
-        hint = "£1 = 100p. Read the requested unit before converting.";
-        worked = `${money(note*100)} + ${money(coin)} = ${money(note*100+coin)} = ${note*100+coin}p.`;
+      case "town_money": {
+        if (i % 3 === 0) {
+          // Use several real coins so generated samples stay varied without creating
+          // unrealistic mixed note-and-coin totals labelled as pence.
+          const denominations = [20, 10, 5, 2, 1];
+          const coinCount = band < 5 ? 3 : band < 8 ? 4 : 5;
+          let code = Math.max(0, n - 1);
+          const coins = Array.from({ length: coinCount }, () => {
+            const coin = denominations[code % denominations.length];
+            code = Math.floor(code / denominations.length);
+            return coin;
+          });
+          unit = "pence";
+          answer = coins.reduce((sum, coin) => sum + coin, 0);
+          prompt = `These coins are in a purse: ${coins.map(coin => `${coin}p`).join(", ")}. How many pence altogether?`;
+          worked = `${coins.map(coin => `${coin}p`).join(" + ")} = ${answer}p.`;
+        } else if (i % 3 === 1) {
+          const note = [5, 10, 20, 50][Math.floor((n - 1) / 99) % 4];
+          const coin = ((n - 1) % 99) + 1;
+          unit = "pounds";
+          answer = note + coin / 100;
+          prompt = `You have a £${note} note and ${coin}p in coins. How much money altogether in pounds?`;
+          worked = `£${note}.00 + ${money(coin)} = £${answer.toFixed(2)}.`;
+        } else {
+          const range = band < 5 ? 997 : band < 8 ? 4999 : 9973;
+          const totalPence = 100 + (((n - 1) * 37) % range);
+          unit = "pounds";
+          answer = totalPence / 100;
+          prompt = `Convert ${totalPence}p to pounds.`;
+          worked = `${totalPence}p = £${answer.toFixed(2)}.`;
+        }
+        hint = "Use pence for coins-only totals. Convert mixed amounts to pounds when asked. £1 = 100p.";
         break;
+      }
       case "town_totals":
         const paid = [500,1000,2000].find(n=>n>=2*price+35);
         prompt = `Pay ${money(paid)} for items costing ${money(price)} and ${money(price + 35)}. Change in pounds?`;

@@ -70,4 +70,25 @@ assert.equal(L.action(s,'j-submit'),false);assert.equal(L.state(s).stage,stage);
 L.action(s,'j-skip');assert.equal(L.state(s).evidence.at(-1).correct,false);assert.equal(L.state(s).evidence.at(-1).skippedAfterAttempt,true);assert(L.state(s).solved);L.next(s);assert.equal(L.state(s).stage,stage+1);
 // A skipped worked model never rewrites the saved historical task.
 const before=JSON.stringify(L.state(s).steps);L.action(s,'j-skip');L.next(s);assert.equal(JSON.stringify(L.state(s).steps),before);
+// The starting-point sample uses the same unit-aware Town generator; pence totals are coin-only.
+// Each money family must retain enough fresh variants for spaced checks and retakes.
+for(const [i,minUnique] of [[0,80],[1,80],[2,80]]){
+ const prompts=new Set(Array.from({length:100},(_,round)=>T.question('town_money',9,round+1,i)[0]));
+ assert(prompts.size>=minUnique,`town_money family ${i} has too few unique prompts: ${prompts.size}`);
+}
+for(let band=3;band<=9;band++){
+ const coins=T.question('town_money',band,1,0);
+ assert.equal(coins[5].unit,'pence');assert.match(coins[0],/pence altogether\?/);assert(!coins[0].includes('£'));assert(Number(coins[1])<=100);
+ const mixed=T.question('town_money',band,2,1);
+ assert.equal(mixed[5].unit,'pounds');assert.match(mixed[0],/in pounds\?/);assert.match(T.answerLabel(mixed,mixed[1]),/^£\d+\.\d{2}$/);
+ const conversion=T.question('town_money',band,3,2);
+ assert.equal(conversion[5].unit,'pounds');assert.match(conversion[0],/^Convert \d+p to pounds\.$/);assert.match(T.answerLabel(conversion,conversion[1]),/^£\d+\.\d{2}$/);
+}
+const townProfile=E.fresh();assert.equal(P.start(townProfile,'town',c.V3Curriculum,1),null);
+let baselineQ=P.question(townProfile,'town');assert.equal(baselineQ.moneyQuestionVersion,2);assert.equal(P.answer(townProfile,'town',baselineQ.answer),true);P.advance(townProfile,'town',c.V3Curriculum);
+baselineQ=P.question(townProfile,'town');assert.equal(baselineQ.skill,'town_timetable');assert(P.answer(townProfile,'town',baselineQ.answer));P.advance(townProfile,'town',c.V3Curriculum);
+baselineQ=P.question(townProfile,'town');assert.equal(baselineQ.skill,'town_money');assert.equal(baselineQ.moneyQuestionVersion,2);assert.match(baselineQ.prompt,/in pounds\?/);assert.match(T.answerLabel([baselineQ.prompt],baselineQ.answer),/^£/);
+// An old unanswered saved baseline item refreshes; completed responses are retained.
+const legacyProfile=E.fresh();legacyProfile.startingProfile={version:1,areas:{town:{band:5,responses:[],startedAt:1,draft:'18430',question:{skill:'town_money',band:5,prompt:'A £174 note-and-coin total plus 30p: how many pence altogether?',answer:'17430',choices:['17430','18430','16430','19430'],explanation:'Convert to pence.'}}}};
+assert.equal(P.start(legacyProfile,'town',c.V3Curriculum,2),null);assert.equal(legacyProfile.startingProfile.areas.town.question.moneyQuestionVersion,2);assert.match(legacyProfile.startingProfile.areas.town.question.prompt,/pence altogether\?/);assert(!legacyProfile.startingProfile.areas.town.question.prompt.includes('£174'));assert.equal(legacyProfile.startingProfile.areas.town.draft,'');
 console.log(`PASS money/wages: ${questions} generated questions, all bands and families; official payroll method, tokens, balances, skips and snapshots.`);
