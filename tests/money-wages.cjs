@@ -78,7 +78,7 @@ for(const [i,minUnique] of [[0,80],[1,80],[2,80]]){
 }
 for(let band=3;band<=9;band++){
  const coins=T.question('town_money',band,1,0);
- assert.equal(coins[5].unit,'pence');assert.match(coins[0],/pence\?/);assert(!coins[0].includes('£'));assert(Number(coins[1])<=100);
+ assert.equal(coins[5].unit,'pence');assert.match(coins[0],/pence altogether\?/);assert(!coins[0].includes('£'));assert(Number(coins[1])<=100);
  const mixed=T.question('town_money',band,2,1);
  assert.equal(mixed[5].unit,'pounds');assert.match(mixed[0],/in pounds\?/);assert.match(T.answerLabel(mixed,mixed[1]),/^£\d+\.\d{2}$/);
  const conversion=T.question('town_money',band,3,2);
