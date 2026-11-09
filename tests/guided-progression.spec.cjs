@@ -18,7 +18,7 @@ test('completed Town mission and final task Continue are idempotent recaps',asyn
 });
 for(const world of Object.keys(F.R.mapping))test(world+': assessment gate, adaptive restoration, real answer, pause/reload and reliable exits',async({page:p},info)=>{
  const locked=F.fresh();locked.world=world;locked.view='world';await seed(p,locked);
- const path=p.locator('.restoration-path');await expect(path).toContainText('Find your starting point');expect(await path.locator('[data-action^="restore:"]').count()).toBe(0);
+ await p.locator('.repair-stage-picker>summary').click();const path=p.locator('.restoration-path');await expect(path).toContainText('Find your starting point');expect(await path.locator('[data-action^="restore:"]').count()).toBe(0);
  expect(await p.evaluate(w=>V10Restoration.start(JSON.parse(localStorage.getItem('jaxon_v3_fictional_demo_2026')),w,0),world)).toContain('starting point');
  if(world==='number'){await path.scrollIntoViewIfNeeded();await capture(p,info,'assessment-gates');}
  const s=F.restoration(world),q=F.M.current(s),tasks=JSON.stringify(q.tasks);await seed(p,s);
@@ -51,13 +51,13 @@ for(const world of Object.keys(F.R.mapping))test(world+': reasoning controls and
  if(world==='number')await capture(p,info,'restoration-recap');await p.locator('nav [data-nav="home"]').click();await p.getByRole('button',{name:'Continue adventure',exact:false}).first().click();await expect(p.locator('.recap')).toBeVisible();expect((await read(p)).adventure.active).toBeNull();
 });
 test('a real starting-point assessment opens its stage without awarding mastery',async({page:p})=>{
- const s=F.fresh();s.world='number';s.view='world';await seed(p,s);await p.locator('.restoration-path [data-action="discover:negative"]').first().click();
+ const s=F.fresh();s.world='number';s.view='world';await seed(p,s);await p.locator('.repair-stage-picker>summary').click();await p.locator('.restoration-path [data-action="discover:negative"]').first().click();
  for(let safety=0;safety<16;safety++){
   const a=await read(p);if(a.discovery.negative?.complete)break;
   if(a.view==='recap'){await p.locator('[data-action="discover:negative"]').click();continue;}
   const l=a.learning,q=l.qs[l.i],index=q[2].map(String).indexOf(String(q[1]));expect(index).toBeGreaterThanOrEqual(0);await p.locator('.answer-grid [data-action="answer:'+index+'"]').click();await require('./helpers/progression.cjs').advance(p);
  }
- let a=await read(p);expect(a.discovery.negative.complete).toBe(true);expect(a.skills).toEqual({});expect(a.checks).toEqual({});await p.locator('[data-action="world:number"]').first().click();await expect(p.locator('[data-action="restore:number:0"]')).toBeVisible();expect(await p.locator('[data-action="restore:number:1"]').count()).toBe(0);await p.locator('[data-action="restore:number:0"]').click();a=await read(p);expect(a.adventure.active.restoration.placement.band).toBe(9);
+ let a=await read(p);expect(a.discovery.negative.complete).toBe(true);expect(a.skills).toEqual({});expect(a.checks).toEqual({});await p.locator('[data-action="world:number"]').first().click();await p.locator('.repair-stage-picker>summary').click();await expect(p.locator('[data-action="restore:number:0"]')).toBeVisible();expect(await p.locator('[data-action="restore:number:1"]').count()).toBe(0);await p.locator('[data-action="restore:number:0"]').click();a=await read(p);expect(a.adventure.active.restoration.placement.band).toBe(9);
 });
 test('independent-check recovery retains prior answers and resumes the exact paused question',async({page:p})=>{
  const s=F.fresh();s.world='number';s.view=s.resumeView='check';s.practice.place={completed:true};s.checks.place={stage:0,due:0,reteach:false};s.learning={id:'place',mode:'check',qs:[['Earlier question','3',['3','4','5','6'],'Use the place values.','Three.'],['Saved current question','4',['4','5','6','7'],'Use the place values.','Four.']],i:1,correct:0,answers:[false],responses:[{question:'Earlier question',firstIndependent:false,assisted:true}],assisted:true,answered:false,started:true,manipulation:{amount:9}};await seed(p,s);

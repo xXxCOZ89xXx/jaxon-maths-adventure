@@ -2250,3 +2250,6 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 
 /* Current fictional money remains readable alongside Town answer controls. */
 .money-balances dl,.educational-payslip dl{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.4rem 1rem;margin:.75rem 0}.money-balances dd,.educational-payslip dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}.money-balances p{margin:.5rem 0;font-size:.9em}.scene-dialog .money-balances{position:sticky;top:0;z-index:2;max-height:42vh;overflow:auto;background:var(--paper,#fffdf3);border:1px solid #789264;padding:12px}.scene-dialog .money-balances h3{margin:.25rem 0}.educational-payslip dd{max-width:20ch;overflow-wrap:anywhere}@media(max-width:500px){.money-balances dl,.educational-payslip dl{gap:.3rem .5rem;font-size:.9em}}
+
+/* One area map, with a compact keyboard-accessible repair entry beside it. */
+.repair-entry{min-width:0;align-self:start}.repair-entry h2{margin-top:0}.repair-stage-picker{margin:18px 0}.repair-stage-picker>summary{cursor:pointer;min-height:48px;padding:12px;border:2px solid #507354;border-radius:8px;font-weight:700}.repair-stage-picker>summary:focus-visible{outline:4px solid #305d36;outline-offset:3px}.repair-stage-picker .restoration-path{margin:16px 0;padding:12px}.repair-stage-picker .skill-list{grid-template-columns:minmax(0,1fr)}
