@@ -27,3 +27,4 @@ Commands: npm run test:area-maps; npm test; node tests/guided-progression.cjs; n
 
 Local result: **72/72 area cases and 8/8 unrelated-pause guard cases passed**. All 16 guided progression/recovery logic groups, 4 save/recovery groups, 4 cloud-sync suites, npm regression checks and demo isolation build checks passed.
 The existing real starting-point-to-repair gate regression also passed at all four sizes (4/4), without awarding independent mastery.
+The full existing demo browser suite passed (18/18), including the new normal-map-first order and retained Home hotspot playability. The former Home-before-map assertion is updated to the requested area layout and now also requires one Town map, a visible repair panel and all three exterior hotspots.
