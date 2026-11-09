@@ -18,6 +18,7 @@ function resume(s){const{M,J}=modules(),j=J.model(s),q=M.current(s),v=s.resumeVi
  s.view='world';s.resumeView=null;
 }
 function label(s,kind,q){const C=typeof module!=='undefined'?require('./curriculum').V3Curriculum:root.V3Curriculum;
+ if(kind==='mission'&&q.world==='town'&&q.route==='home'&&q.context?.homeActivity)return 'Home: '+({post:'Post and parcels',recycling:'Bins and recycling',meters:'Utility meters'}[q.context.homeActivity]||'saved visit');
  if(kind==='baseline')return 'Starting points: '+modules().E.worlds.find(w=>w.id===s.world)?.name;
  if(kind==='learning')return `${q.mode==='discovery'?'Starting-point assessment':q.mode==='check'?'Independent check':'Lesson / practice'}: ${C.skills.find(k=>k.id===q.id)?.name||q.id}`;
  if(kind==='town'||kind==='legacy-town')return q.name||q.recipeName||(q.recipe?modules().J.recipes[q.recipe]?.name:null)||'Town journey';
@@ -54,7 +55,7 @@ function recover(s,expected,mode){const{M,J,L,R,E}=modules(),t=target(s);if(!t||
  if(mode==='restart'){
   if(t.kind==='town'){if(q.originalRecipe)L.startRecipe(s,q.originalRecipe,q.tier);else L.start(s,q.scenario,q.tier,true);}
   else if(t.kind==='legacy-town')J.start(s,q.recipe,q.tier||1);
-  else if(t.kind==='mission'){if(q.restoration)return R.start(s,q.world,q.restoration.stage);M.start(s,q.world,q.route,q.tier,q.context);}
+  else if(t.kind==='mission'){if(q.restoration)return R.start(s,q.world,q.restoration.stage);if(q.world==='town'&&q.route==='home'&&root.V7Home?.kinds.includes(q.context?.homeActivity)){root.V7Home.start(s,q.context.homeActivity,q.tier);return null;}M.start(s,q.world,q.route,q.tier,q.context);}
   else return R.start(s,q.world,q.i);
  }
  return null;

@@ -11,6 +11,21 @@ concurrency:
   group: ipad-save-safety-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
+  home-review-materials:
+    name: Home review materials
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - run: node scripts/package-home-review.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: home-exterior-review
+          path: work/home-review-materials/
+          if-no-files-found: error
+          retention-days: 30
   save-and-recovery:
     name: ${{ github.event_name == 'pull_request' && 'save-and-recovery' || 'save-and-recovery-development' }}
     runs-on: ubuntu-latest
@@ -42,11 +57,15 @@ jobs:
           npx playwright test -c playwright.starting-profile.config.cjs
           npx playwright test -c playwright.family-release.config.cjs
           AVATAR_SHOTS=work/family-release/avatar-shots AVATAR_REPORT=work/family-release/avatar-preservation.json npx playwright test -c playwright.avatar-fit.config.cjs --grep 'option zero'
+      - name: Home exterior routing in private and isolated demo builds
+        run: npm run test:home
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ipad-save-recovery-evidence
           path: |
+            work/home-exterior/
+            test-results/home-exterior/
             work/family-release/avatar-preservation.json
             test-results/avatar-fit/
             work/family-release/browser-results.json

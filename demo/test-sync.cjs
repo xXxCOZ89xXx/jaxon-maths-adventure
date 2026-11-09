@@ -23,7 +23,7 @@ assert.equal(H.collectionCalendar(new Date('2026-11-08T12:00:00Z')).bins,'Genera
 for(const tier of [1,2,3])for(let seed=1;seed<=10;seed++){
  const ts=H.tasks('post',tier,seed);assert.equal(ts.length,4);const weight=ts[1].answer,choice=ts[2],cost=choice.options[choice.answer].price;assert(choice.options[choice.answer].limit>=weight);assert(choice.options.filter(o=>o.limit>=weight).every(o=>o.price>=cost));assert.equal(ts[3].answer,Math.ceil(cost/500)*500-cost);
  const s=E.fresh();H.start(s,'post',tier);const q=M.current(s);assert(q,JSON.stringify({tier,seed,state:s.adventure}));q.i=2;q.phase='play';const t=q.tasks[2];M.edit(s,'choice',(t.answer+1)%3);assert.equal(M.submit(s),false);M.edit(s,'choice',t.answer);assert.equal(M.submit(s),true);
- const saved=JSON.stringify(q);H.start(s,'recycling',tier);assert.equal(JSON.stringify(M.current(s)),saved,'Existing home snapshot must resume without rewrite');
+ const saved=JSON.stringify(q);H.start(s,'recycling',tier);assert.equal(M.current(s).context.homeActivity,'recycling');assert.equal(JSON.stringify(M.state(s).suspended[q.key]),saved,'Earlier Home snapshot stays saved');H.start(s,'post',tier);assert.equal(JSON.stringify(M.current(s)),saved,'Selecting the same activity resumes it exactly');
 }
 for(const kind of ['meters','recycling','post']){
  const s=E.fresh();H.start(s,kind);const q=M.current(s);
@@ -31,6 +31,7 @@ for(const kind of ['meters','recycling','post']){
  // even when generated inside the expanded contentVersion 8 curriculum.
  delete q.homeContentVersion;q.tasks=q.tasks.slice(0,3);q.contentVersion=8;
  const saved=JSON.stringify(q);assert.equal(JSON.stringify(M.current(s)),saved);
- H.start(s,'post');assert.equal(JSON.stringify(M.current(s)),saved,'Legacy '+kind+' visit must resume unchanged');
+ H.start(s,kind);assert.equal(JSON.stringify(M.current(s)),saved,'Legacy '+kind+' visit must resume unchanged');
+ H.start(s,'post');assert.equal(M.current(s).context.homeActivity,'post');if(kind!=='post')assert.equal(JSON.stringify(M.state(s).suspended[q.key]),saved,'Legacy '+kind+' stays available after choosing Post');
 }
 console.log('PASS shared Home/Town source parity; later shared edit rebuilds safely; release-only branch guard; calendar/DST/year boundaries; packaged-weight postage, change, choices and snapshots.');

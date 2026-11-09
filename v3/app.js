@@ -544,7 +544,8 @@
       if(name==='starting'){error=P.start(s,arg,C);return;}
       if(name==='starting-choice'||name==='starting-submit'||name==='starting-skip'){const id=s.startingProfile?.active,a=s.startingProfile?.areas?.[id];P.answer(s,id,name==='starting-choice'?a?.question?.choices[Number(arg)]:a?.draft,name==='starting-skip');return;}
       if(name==='starting-next'){P.advance(s,s.startingProfile?.active,C);return;}
-      if(name==='home-activity'){window.V7Home.start(s,arg,M.state(s).difficulty.town||1);return;}
+      if(name==='home-activity'){venueExterior=false;if(window.V7Home.start(s,arg,M.state(s).difficulty.town||1))window.V7ActivityScenes?.selectHome(s);return;}
+      if(name==='home-exterior'){error=N.pause(s);if(!error){s.world='town';s.view='world';}return;}
       if(name==='j-work'){const tier=Number(action.split(':')[2])||M.recommendation(s,'town');if(!window.V52TownLife.start(s,'job-'+arg,tier))error='This saved Town plan needs another look. It has been preserved.';return;}
       if(name==='j-plan'||name==='j-replay'){const tier=M.state(s).difficulty.town||M.recommendation(s,'town');if(!window.V52TownLife.start(s,arg,tier,name==='j-replay'))error='This saved Town plan needs another look. It has been preserved.';return;}
       if(name==='j-recipe-replay'){window.V52TownLife.startRecipe(s,arg,M.state(s).difficulty.town||1,true);return;}
@@ -878,6 +879,7 @@
     if(ui){
       if(ui.dataset.ui==='open-camp-journal'){e.preventDefault();const journal=document.getElementById('camp-achievements');if(journal){journal.open=true;journal.scrollIntoView({block:'start',behavior:'instant'});journal.querySelector('summary')?.focus();}}
       if(ui.dataset.ui==='choose-town-plan'){const plans=document.getElementById('town-plans');plans?.scrollIntoView({block:'start',behavior:'instant'});plans?.focus({preventScroll:true});}
+      if(ui.dataset.ui==='choose-home-activity'){const exterior=document.getElementById('home-exterior');exterior?.scrollIntoView({block:'start',behavior:'instant'});exterior?.focus({preventScroll:true});}
       if(ui.dataset.ui==='preview-item'||ui.dataset.ui==='clear-preview'){itemPreview=ui.dataset.item&&(!window.V7Avatar||V7Avatar.isActiveItem(C.catalog.find(i=>i.id===ui.dataset.item)))?ui.dataset.item:null;render();document.getElementById('wardrobe-preview')?.focus();}
       if(ui.dataset.ui==='hide-celebration'){const banner=ui.closest('.completion-ribbon');hiddenCelebrations.add(banner.dataset.completionKey);banner.remove();document.querySelector('.recap h1,.town-complete h2')?.closest('main')?.focus();}
       return;
@@ -926,6 +928,7 @@
     const previous = evidence();
     await dispatch(action, (el.closest('[data-baseline-scope]')?'baseline|'+el.closest('[data-baseline-scope]').dataset.baselineScope:null) || c8Scope(el) || (el.closest('.world-task-dialog')?.dataset.worldScope ? 'world|'+el.closest('.world-task-dialog').dataset.worldScope : el.closest('.immersive-journey')?.dataset.sceneKey || null));
     answerFocus(name);
+    if(name==='home-exterior'){const exterior=document.getElementById('home-exterior');exterior?.scrollIntoView({block:'start',behavior:'instant'});exterior?.focus({preventScroll:true});}
     if (!meaningful) activity = 0;
     else if (previous !== evidence()) activity = Date.now();
   });

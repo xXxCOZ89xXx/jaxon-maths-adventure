@@ -54,14 +54,14 @@ test('Fresh wage journey shares the verified payslip and live 50p/envelope balan
  await expect(p.locator('dialog[open] [aria-label="Current account balances"]')).toContainText('still to allocate £0.00');await click(p,'j-submit');await advance(p);const after=(await read(p)).adventure.townLifeV2;await p.reload();expect((await read(p)).adventure.townLifeV2).toEqual(after);const current=after.runs['job-market:1'];expect(current.savings).toBe(t.answer[0]);expect(current.envelopes.Travel).toBe(t.answer[1]);expect(current.envelopes.Spending).toBe(t.answer[2]);
 });
 
-test('Town page puts home activities before the map and opens illustrated meters',async({page:p})=>{
+test('Town exterior hotspots precede the map and open illustrated meters',async({page:p})=>{
  await click(p,'world:town');
  const board=p.locator('.home-activity-board');
  await expect(board).toBeVisible();
  await expect(board).toContainText('At home and around home');
- await expect(board).toContainText('Read illustrated utility meters');
- await expect(board).toContainText('Check bins and recycling day');
- await expect(board).toContainText('Prepare and post a parcel');
+ await expect(board).toContainText('Utility meters');
+ await expect(board).toContainText('Bins and recycling');
+ await expect(board).toContainText('Post and parcels');
  const boardTop=await board.evaluate(e=>e.getBoundingClientRect().top);
  const mapTop=await p.locator('.town-explore-map').evaluate(e=>e.getBoundingClientRect().top);
  expect(boardTop).toBeLessThan(mapTop);
