@@ -44,7 +44,8 @@
     "4 save/recovery groups",
     "4 cloud-sync suites",
     "demo isolation build checker",
-    "Existing starting-point-to-repair assessment browser test: 4/4"
+    "Existing starting-point-to-repair assessment browser test: 4/4",
+    "Existing repair pause/second-mission/exact-resume browser regressions: 8/8"
   ],
   "limits": [
     "Emulated Chromium/Edge viewports; physical iPad Safari untested",
