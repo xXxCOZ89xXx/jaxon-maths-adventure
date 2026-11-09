@@ -126,5 +126,38 @@
       "private connected fixture",
       "public browser-only demo"
     ]
+  },
+  "currentReleaseRecheck": {
+    "checkedOn": "2026-11-09",
+    "releaseCommit": "0a036f6c824c2aa79becefa200f6c364295726e9",
+    "method": "Fresh exact-commit archive; original tests and private fixture build; fictional intercepted services; 360x800 touch viewport.",
+    "stats": {
+      "startTime": "2026-11-09T20:56:41.995Z",
+      "duration": 45797.774,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "title": "offline edits keep the immutable request, reopen exact journey and recover on reconnect",
+        "project": "small-touch",
+        "status": "failed",
+        "error": "TimeoutError: locator.tap: Timeout 15000ms exceeded."
+      },
+      {
+        "title": "local edits save immediately while routine uploads combine; explicit save/exit flushes",
+        "project": "small-touch",
+        "status": "failed",
+        "error": "TimeoutError: locator.tap: Timeout 15000ms exceeded."
+      }
+    ]
+  },
+  "reviewPreparation": {
+    "originalHead": "c49ecb4b12b5529d4edde72508b378862b90af79",
+    "base": "0a036f6c824c2aa79becefa200f6c364295726e9",
+    "initialWorkingTree": "clean",
+    "scope": "Home exterior hotspots, Post/Bins/Utilities routing, related tests and review materials. Reward/account/database sources unchanged."
   }
 }
