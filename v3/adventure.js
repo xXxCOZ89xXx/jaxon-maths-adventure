@@ -105,7 +105,8 @@
       (R.valid(q) || q.route === "gateway" ||
         routes(q.world).some((r) => r.id === q.route)) &&
       [1, 2, 3].includes(q.tier) &&
-      q.key === id(q.world, q.route, q.tier) &&
+      (q.key === id(q.world, q.route, q.tier) ||
+        q.key === homeId(q.world, q.route, q.tier, q.context)) &&
       Number.isInteger(q.i) &&
       q.i >= 0 &&
       q.i < q.tasks?.length &&
@@ -147,6 +148,10 @@
     return a;
   }
   const id = (world, route, tier) => [world, route, tier].join("|");
+  // Home activities need separate resumable runs; historical venue keys stay valid.
+  const homeId = (world, route, tier, context) =>
+    world === 'town' && route === 'home' && ['post','recycling','meters'].includes(context?.homeActivity)
+      ? id(world, route, tier) + '|' + context.homeActivity : id(world, route, tier);
   function routes(world) {
     if (world === "town")
       return [...T.venues.map((v) => ({
@@ -796,7 +801,7 @@
         (route === "gateway" && routes(world).length);
     if (!valid) return false;
     tier = Math.max(1, Math.min(3, Math.trunc(tier) || 1));
-    const key = id(world, route, tier);
+    const key = homeId(world, route, tier, context);
     const course = curriculumRoutes(world).find(r=>r.id===route);
     const expandedWorld = curriculumRoutes(world).length > 0;
     const expandedGateway = route === "gateway" && curriculumRoutes(world).length;

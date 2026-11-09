@@ -1,0 +1,130 @@
+{
+  "baseline": "0a036f6c824c2aa79becefa200f6c364295726e9",
+  "date": "2026-11-09",
+  "logic": {
+    "npmTest": "passed",
+    "homeCases": 23
+  },
+  "demoBrowser": {
+    "startTime": "2026-11-09T18:10:46.301Z",
+    "duration": 151419.452,
+    "expected": 24,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "recovery": {
+    "passed": 22,
+    "failed": 2,
+    "desktop": {
+      "startTime": "2026-11-09T18:08:09.247Z",
+      "duration": 23474.232000000004,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "originalRun": {
+      "startTime": "2026-11-09T18:05:17.972Z",
+      "duration": 118230.541,
+      "expected": 17,
+      "skipped": 0,
+      "unexpected": 7,
+      "flaky": 0
+    },
+    "notes": [
+      "Desktop rerun with hasTouch:true because existing helpers use tap.",
+      "Two 360px cooking-control failures reproduce on unchanged baseline; no unrelated change made."
+    ],
+    "baselineReproduction": {
+      "startTime": "2026-11-09T18:08:34.577Z",
+      "duration": 41797.725,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 2,
+      "flaky": 0
+    }
+  },
+  "privacy": [
+    {
+      "layout": "desktop",
+      "passed": true,
+      "externalRequests": 0,
+      "cookies": 0
+    },
+    {
+      "layout": "ipad-portrait",
+      "passed": true,
+      "externalRequests": 0,
+      "cookies": 0
+    },
+    {
+      "layout": "ipad-landscape",
+      "passed": true,
+      "externalRequests": 0,
+      "cookies": 0
+    }
+  ],
+  "hosted": {
+    "checkedAt": "2026-11-09",
+    "demo": "https://jaxons-maths-adventure-demo.pages.dev/",
+    "private": "Cloudflare Access 302, no sign-in attempted",
+    "checks": [
+      {
+        "path": "v3/home-activities.js",
+        "matchesMetadata": true,
+        "matchesRelease": true
+      },
+      {
+        "path": "v3/adventure.js",
+        "matchesMetadata": true,
+        "matchesRelease": true
+      },
+      {
+        "path": "v3/activity-scenes.js",
+        "matchesMetadata": true,
+        "matchesRelease": true
+      }
+    ]
+  },
+  "hostedDemoReproduction": {
+    "results": [
+      {
+        "selected": "post",
+        "opened": "post"
+      },
+      {
+        "selected": "recycling",
+        "opened": "post"
+      },
+      {
+        "selected": "meters",
+        "opened": "post"
+      }
+    ],
+    "external": [],
+    "cloud": "undefined"
+  },
+  "limits": [
+    "Private hosted game redirects to Cloudflare Access; no login attempted.",
+    "Physical iPad Safari not tested.",
+    "Full iPad database gate blocked: Docker not installed."
+  ],
+  "homeBrowser": {
+    "startTime": "2026-11-09T18:10:34.388Z",
+    "duration": 416909.418,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "screenshots": {
+    "before": 32,
+    "after": 56,
+    "layouts": 4,
+    "builds": [
+      "private connected fixture",
+      "public browser-only demo"
+    ]
+  }
+}

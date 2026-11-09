@@ -42,11 +42,15 @@ jobs:
           npx playwright test -c playwright.starting-profile.config.cjs
           npx playwright test -c playwright.family-release.config.cjs
           AVATAR_SHOTS=work/family-release/avatar-shots AVATAR_REPORT=work/family-release/avatar-preservation.json npx playwright test -c playwright.avatar-fit.config.cjs --grep 'option zero'
+      - name: Home exterior routing in private and isolated demo builds
+        run: npm run test:home
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ipad-save-recovery-evidence
           path: |
+            work/home-exterior/
+            test-results/home-exterior/
             work/family-release/avatar-preservation.json
             test-results/avatar-fit/
             work/family-release/browser-results.json
