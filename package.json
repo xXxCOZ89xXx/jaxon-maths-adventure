@@ -54,7 +54,8 @@
     "build:demo": "node demo/build.cjs && node demo/check.cjs",
     "build:demo-release": "node demo/release-build.cjs",
     "test:demo": "node demo/test-sync.cjs && node demo/test-browser.cjs && playwright test -c playwright.demo.config.cjs",
-    "test:home": "node tests/home-exterior.cjs && node tests/prepare-home.cjs && playwright test -c playwright.home.config.cjs"
+    "test:home": "node tests/home-exterior.cjs && node tests/prepare-home.cjs && playwright test -c playwright.home.config.cjs",
+    "test:area-maps": "node tests/prepare-home.cjs && playwright test -c playwright.area-maps.config.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
