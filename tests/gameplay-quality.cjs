@@ -6,7 +6,7 @@ function solve(s,chosen){let t=L.task(s),j=L.state(s);if(['order','match'].inclu
 const definitions=[];
 for(const c of L.catalog)for(const tier of [1,2,3])for(const seed of [1,2,7]){
  const run=L.make(c.id,tier,seed);assert(L.validRun(run));assert.deepEqual(run,copy(run));
- if(c.category==='Cooking'){assert(run.recipeCard);definitions.push(run.recipeCard);assert(run.steps.some(t=>t.title==='Set the recipe temperature'));assert(run.steps.some(t=>t.kind==='measure'));}
+ if(c.category==='Cooking'){assert(run.recipeCard);definitions.push(run.recipeCard);assert(run.steps.some(t=>t.cookingHeat||t.title==='Set the recipe temperature'));assert(run.steps.some(t=>t.kind==='measure'));}
  if(c.id!=='shop-missing'&&c.category!=='Cooking')assert(!run.steps.some(t=>t.visualContext==='stock'),c.id+' irrelevant stock');
  for(const t of run.steps){assert(!t.prompt.includes('Reach '+c.name));assert(!t.prompt.includes('receipts, cash, then purchases'));if(t.kind==='basket'&&t.budget)assert(t.answer.reduce((s,n,i)=>s+n*t.items[i].price,0)<=t.budget,c.id+' budget');}
 }

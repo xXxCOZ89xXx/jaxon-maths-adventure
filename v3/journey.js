@@ -102,6 +102,7 @@
     s.view = "journey";
     s.resumeView = "journey";
     s.world = "town";
+    s.pausedActivity = null;
     return true;
   }
   const total = (list) => list.reduce((n, x, i) => n + x * [50, 80, 150][i], 0);
