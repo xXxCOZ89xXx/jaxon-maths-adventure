@@ -1,0 +1,67 @@
+{
+  "baseCommit": "914724a6a9fc4cb199b9c38c607af8a6dd6f2934",
+  "runtimeFiles": [
+    "v3/style.css"
+  ],
+  "baseline": {
+    "startTime": "2026-11-09T21:36:03.860Z",
+    "duration": 53561.322,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 4,
+    "flaky": 0,
+    "note": "Two original private cooking recovery cases and overlapping-row checks in both builds fail before the CSS fix."
+  },
+  "fixed": {
+    "startTime": "2026-11-09T21:38:49.885Z",
+    "duration": 127421.516,
+    "expected": 32,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "layouts": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 1000
+    },
+    {
+      "name": "iPad portrait",
+      "width": 820,
+      "height": 1180
+    },
+    {
+      "name": "iPad landscape",
+      "width": 1180,
+      "height": 820
+    },
+    {
+      "name": "small touch",
+      "width": 360,
+      "height": 800
+    }
+  ],
+  "builds": [
+    "private connected fixture",
+    "public browser-only demo"
+  ],
+  "coverage": [
+    "pantry and fridge hit targets and keyboard activation",
+    "completed unrelated recipe and existing learning/profile state preserved",
+    "offline edits and exact recipe recovery after reconnect/reload",
+    "immutable pending cloud request preserved while later edits queue",
+    "repeated ingredient taps saved immediately; explicit exit flushes",
+    "pause/reload/resume restores exact working recipe"
+  ],
+  "otherChecks": {
+    "npmTest": "passed",
+    "saveRecoveryNode": "passed",
+    "cloudSyncNode": "passed",
+    "demoBuildIsolation": "passed"
+  },
+  "limitations": [
+    "Chromium using installed Edge; no physical iPad Safari acceptance",
+    "Private services are fictional intercepted fixtures; no real learner data used"
+  ]
+}
