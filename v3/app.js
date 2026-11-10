@@ -5,6 +5,7 @@
     T = window.V3Town;
   const R=window.V10Restoration,N=window.V10Navigation,P=window.V11StartingProfile;
   let recoveryChoice=null;
+  let townVisitError='';
   const E = window.V3Engine,
     C = window.V3Curriculum,
     A = window.V3Art,
@@ -156,7 +157,7 @@
   }
   function worldPage() {
     const w = world();
-    return `${header("WORLD " + (E.worlds.indexOf(w) + 1) + " / 09", w.name)}<div class="split world-overview"><div><div class="world-route-map">${w.id==='town'?U.worldMap(s,w):art(w.id, E.count(s,w.id), false)}${w.id !== "town" ? `<nav class="world-route-pins" aria-label="Explore ${esc(w.name)} landmarks">${M.routes(w.id).map((r,i)=>`<button data-action="scene-mission:${w.id}:${r.id}:${M.state(s).difficulty[w.id] || M.recommendation(s,w.id)}" style="left:${[39,62,49][i]}%;top:${[53,64,35][i]}%" aria-label="Visit ${esc(r.name)}"><span aria-hidden="true">${i+1}</span><span class="route-label">${esc(r.name)}</span></button>`).join("")}</nav>` : ""}</div></div>${repairEntry(w)}</div><h2>Optional exploration</h2><p>Try a mission, a Town plan or Base Camp whenever you like. These are separate from your starting-point and independent checks.</p>${U.board(s, w, false)}${w.id === "town" ? '<details class="town-lessons"><summary>Maths lessons and independent checks · 16 skills</summary>' : ""}<h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills
+    return `${header("WORLD " + (E.worlds.indexOf(w) + 1) + " / 09", w.name)}<div class="split world-overview ${w.id==='town'?'town-overview':''}"><div><div class="world-route-map">${w.id==='town'?U.worldMap(s,w):art(w.id, E.count(s,w.id), false)}${w.id !== "town" ? `<nav class="world-route-pins" aria-label="Explore ${esc(w.name)} landmarks">${M.routes(w.id).map((r,i)=>`<button data-action="scene-mission:${w.id}:${r.id}:${M.state(s).difficulty[w.id] || M.recommendation(s,w.id)}" style="left:${[39,62,49][i]}%;top:${[53,64,35][i]}%" aria-label="Visit ${esc(r.name)}"><span aria-hidden="true">${i+1}</span><span class="route-label">${esc(r.name)}</span></button>`).join("")}</nav>` : ""}</div></div>${w.id==='town'?'':repairEntry(w)}</div><h2>Optional exploration</h2><p>Try a mission, a Town plan or Base Camp whenever you like. These are separate from your starting-point and independent checks.</p>${U.board(s, w, false, w.id==='town'?repairEntry(w):'')}${w.id === "town" ? '<details class="town-lessons"><summary>Maths lessons and independent checks · 16 skills</summary>' : ""}<h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills
       .filter((k) => k.world === w.id)
       .map((k) => {
         const c = s.checks[k.id],
@@ -478,6 +479,7 @@
       document.querySelectorAll('#main [data-action]').forEach(el=>{if(!P.allowed(s,el.dataset.action)){if(el.dataset.action==='continue'){el.dataset.action='nav:starting';el.textContent='Continue starting points';}else{el.disabled=true;el.title='Find all nine starting points first';}}});
       if(s.view==='world'){const notice=document.createElement('section');notice.className='notice';notice.innerHTML='<p>Look around freely. Find all nine starting points before learning adventures begin.</p>'+btn('Find my starting points','nav:starting','primary');$('main').prepend(notice);}
     }
+    const visitStatus=document.querySelector('.town-visit-status');if(visitStatus)visitStatus.textContent=townVisitError;
     presentationFinish();
     if (focus) {
       $("main").focus();
@@ -561,6 +563,7 @@
       if(name === 'c8-p'){const l=s.learning;if(l&&!l.answered&&l.qs[l.i]?.[5]?.contentVersion===8){const q=l.qs[l.i];l.manipulation||={};window.V8Activities.edit({activity:q[5]?.activity,allowCalculator:q[5]?.allowCalculator},l.manipulation,action.slice(5));if(q[5]?.activity?.kind==='choice'&&action.includes(':choice-'))E.answerLearning(s,window.V8Activities.value({activity:q[5].activity},l.manipulation));}return;}
       if(name === 'c8-check'){const l=s.learning;if(l&&!l.answered&&l.qs[l.i]?.[5]?.contentVersion===8){const q=l.qs[l.i];E.answerLearning(s,window.V8Activities.value({activity:q[5]?.activity,allowCalculator:q[5]?.allowCalculator},l.manipulation));}return;}
       if(name==='next-path'){const n=R.recommend(s,arg);s.world=arg;if(n.type==='restore')error=R.start(s,arg,n.stage);else if(n.type==='discover')error=E.startDiscovery(s,n.id,C,window.V3Discovery);else if(n.type==='learn'||n.type==='check')error=E.generate(s,n.id,n.type==='learn'?'practice':'check',window.JaxonFreshReview,C);else s.view='world';return;}
+      if(name==='town-level'){const tier=Number(arg);if([1,2,3].includes(tier))M.state(s).difficulty.town=tier;return;}
       if(name==='restore'){const bits=action.split(':');error=R.start(s,bits[1],Number(bits[2]));return;}
       if(name==='recover-apply'){error=N.recover(s,recoveryChoice,arg);recoveryChoice=null;return;}
       switch (name) {
@@ -569,6 +572,7 @@
           before = false;
           break;
         case "world":
+          townVisitError='';
           s.world = arg;
           s.view = "world";
           before = false;
@@ -583,7 +587,9 @@
         case "mission": {
           const bits = action.split(":");
           venueExterior=false;
-          M.start(s, bits[1], bits[2], Number(bits[3]));
+          if(bits[1]==='town'){const result=M.visit(s,bits[1],bits[2],Number(bits[3]));
+            townVisitError=result.available?'':result.reason;error=townVisitError;if(result.available)closeDialogs();
+          }else M.start(s,bits[1],bits[2],Number(bits[3]));
           break;
         }
         case "camp-preview":
@@ -977,6 +983,7 @@
       const id = e.target.dataset.missionTier,
         value = Number(e.target.value);
       await change(() => {
+        if(id==='town')townVisitError='';
         M.state(s).difficulty[id] = value;
       });
       return;

@@ -2,7 +2,7 @@
   "name": "jaxon-adventure-preview",
   "private": true,
   "scripts": {
-    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-estate.cjs && node tests/v5-hands-on.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs && node tests/v51-fixtures.cjs && node scripts/audit-v51-inputs.cjs && node tests/guided-progression.cjs && node tests/owner-review.cjs && node tests/starting-profile.cjs && node tests/money-wages.cjs && node tests/home-exterior.cjs",
+    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-estate.cjs && node tests/v5-hands-on.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs && node tests/v51-fixtures.cjs && node scripts/audit-v51-inputs.cjs && node tests/guided-progression.cjs && node tests/owner-review.cjs && node tests/starting-profile.cjs && node tests/money-wages.cjs && node tests/home-exterior.cjs && node tests/town-navigation.cjs",
     "test:e2e": "playwright test",
     "preview": "python3 -m http.server 4173 --bind 0.0.0.0",
     "build:staging": "node scripts/build-v3-staging.cjs",
@@ -56,7 +56,8 @@
     "test:demo": "node demo/test-sync.cjs && node demo/test-browser.cjs && playwright test -c playwright.demo.config.cjs",
     "test:home": "node tests/home-exterior.cjs && node tests/prepare-home.cjs && playwright test -c playwright.home.config.cjs",
     "test:cooking-recovery": "node tests/prepare-home.cjs && playwright test -c playwright.cooking-recovery.config.cjs",
-    "test:area-maps": "node tests/prepare-home.cjs && playwright test -c playwright.area-maps.config.cjs"
+    "test:area-maps": "node tests/prepare-home.cjs && playwright test -c playwright.area-maps.config.cjs",
+    "test:town-navigation": "node tests/town-navigation.cjs && node tests/prepare-home.cjs && node tests/prepare-v52-production.cjs && playwright test -c playwright.town-navigation.config.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

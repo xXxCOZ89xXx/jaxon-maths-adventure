@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 const root=path.resolve(__dirname,'..'),dir=path.join(root,'demo-dist');
 const inv=JSON.parse(fs.readFileSync(path.join(root,'work/public-demo/build-inventory.json')));
-const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.relative(dir,path.join(d,e.name))]);
+const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.relative(dir,path.join(d,e.name)).split(path.sep).join('/')]);
 assert.deepEqual(walk(dir).sort(),inv.files.map(f=>f.path).sort());
 const html=fs.readFileSync(path.join(dir,'index.html'),'utf8'),app=fs.readFileSync(path.join(dir,'v3/app.js'),'utf8');
 assert(html.includes('Demo only — progress is saved on this device and is not connected to Jaxon’s game'));

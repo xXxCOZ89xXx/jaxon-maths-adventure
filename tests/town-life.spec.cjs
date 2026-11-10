@@ -37,8 +37,9 @@ for(const c of L.catalog)test(`Town plan ${c.id}: touch completion, exact reload
   const {page,key,read}=camp;
   await click(page,'skip-tour');await page.locator('nav [data-nav="map"]').click();await town(page);
   if(c.category==='Employment'){
-    await page.locator(`.town-hotspots [data-action^="j-work:${c.venue}:"]`).click();
-    await expect(page.locator('.journey-progress')).toContainText('worker context');
+    await page.locator(`.building-hit-layer [data-action^="j-work:${c.venue}:"]`).click();
+    await expect(page.getByRole('heading',{name:c.name,exact:true})).toBeVisible();
+    expect(await current(page,key)).toMatchObject({scenario:c.id,category:'Employment'});
   }else{
     await page.locator('.town-plan-catalog details').filter({has:page.locator('summary',{hasText:c.category})}).locator('summary').click();
     await click(page,'j-plan:'+c.id);
@@ -52,9 +53,14 @@ for(const c of L.catalog)test(`Town plan ${c.id}: touch completion, exact reload
     if(j.stage===0||t.kind==='clock'||t.kind==='budget'||t.kind==='match'||t.kind==='measure'){
       await page.reload();expect(await current(page,key)).toEqual(exact);
     }
-    await click(page,'j-submit');expect((await current(page,key)).solved).toBe(true);
+    // Choice answers can already have submitted and advanced while saving.
+    const answered=await current(page,key);
+    if(answered.stage===j.stage&&!answered.solved&&!answered.done)await click(page,'j-submit');
+    await expect.poll(async()=>{const saved=await current(page,key);return saved.solved||saved.stage===j.stage+1||saved.done;}).toBe(true);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
-    await click(page,'j-next');expect(++visits).toBeLessThan(18);
+    await click(page,'j-next');
+    const next=await current(page,key);expect(next.done?j.stage===j.steps.length-1:next.stage===j.stage+1).toBe(true);
+    expect(++visits).toBeLessThan(18);
   }
   await expect(page.getByRole('heading',{name:'Town plan complete.'})).toBeVisible();
   const finished=await current(page,key);expect(finished.receipts.length).toBeGreaterThan(1);

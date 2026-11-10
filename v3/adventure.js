@@ -835,6 +835,25 @@
     s.resumeView = "adventure";
     return true;
   }
+  // Shared admission for explicit Visit controls. Starting a visit is atomic:
+  // unavailable/generated failures must not replace another saved activity.
+  function visitStatus(s, world, route, tier) {
+    const P=typeof module!=="undefined"?require('./starting-profile').V11StartingProfile:root.V11StartingProfile;
+    if(!routes(world).some(r=>r.id===route)&&!(route==='gateway'&&routes(world).length))
+      return {available:false,reason:'This destination is unavailable. Choose another listed destination.',missing:[]};
+    if(![1,2,3].includes(tier))return {available:false,reason:'Choose Level 1, 2 or 3 for this destination.',missing:[],alternativeTier:1};
+    const missing=P.allowed(s,`mission:${world}:${route}:${tier}`)?[]:Object.keys(P.areas).filter(id=>s.startingProfile?.version!==1||!P.valid(s.startingProfile?.areas?.[id]));
+    return {available:!missing.length,missing,reason:missing.length?'Complete the remaining starting points before visiting.':''};
+  }
+  function visit(s, world, route, tier) {
+    const admission=visitStatus(s,world,route,tier);
+    if(!admission.available)return admission;
+    const candidate=copy(s);
+    try{if(!start(candidate,world,route,tier))return {available:false,missing:[],reason:'This activity is unavailable. Choose another listed destination.'};}
+    catch(error){return {available:false,missing:[],reason:'This activity could not be opened. Your saved work is safe. Choose another listed destination.'};}
+    candidate.pausedActivity=null;
+    Object.assign(s,candidate);return {available:true,missing:[],reason:''};
+  }
   function current(s) {
     return state(s).active || null;
   }
@@ -1098,6 +1117,8 @@
     visualLevel,
     collections,
     start,
+    visitStatus,
+    visit,
     current,
     begin,
     edit,

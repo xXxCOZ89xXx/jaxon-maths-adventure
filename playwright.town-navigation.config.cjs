@@ -1,0 +1,1 @@
+const base=require('./playwright.area-maps.config.cjs');module.exports={...base,testMatch:/town-navigation\.spec\.cjs/,timeout:240000,workers:2,outputDir:'test-results/town-navigation',reporter:[['list'],['json',{outputFile:process.env.TOWN_REPORT||'work/town-navigation/results.json'}]]};
