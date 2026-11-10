@@ -1,10 +1,10 @@
 {
-  "base": "dadb2fdf895bbf21b348697a816e73dc5ff3f165",
-  "resolution": "Actual current V3Art.product HTML after art.js → asset-checkpoint.js → avatar-art.js; no art changed",
+  "base": "40682a08f14332f8365165a8145730514d309857",
+  "resolution": "Recipe-only V3Art.recipeProduct HTML after art.js → asset-checkpoint.js → avatar-art.js; 27 owner-supplied PNGs, generic unmatched products retain original visuals",
   "inventory": [
     {
       "item": "Pasta · 100 g pack",
-      "currentFile": "v3/assets/checkpoint/pasta.webp",
+      "currentFile": "v3/assets/ingredients/pasta.png",
       "atlasPosition": null,
       "flows": [
         "retained cook-pasta"
@@ -14,15 +14,16 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Tomatoes · tin",
-      "currentFile": "v3/assets/checkpoint/tomato.webp",
+      "currentFile": "v3/assets/ingredients/tinned-chopped-tomatoes.png",
       "atlasPosition": null,
       "flows": [
         "retained cook-pasta"
@@ -32,11 +33,12 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Cheese · 50 g pack",
@@ -50,16 +52,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
       "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reuseNote": "Original artwork retained because no matching supplied PNG exists."
     },
     {
       "item": "Chickpeas · tin",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "100% 33.333333333333336%",
+      "currentFile": "v3/assets/ingredients/chickpeas-tin.png",
+      "atlasPosition": null,
       "flows": [
         "retained cook-curry"
       ],
@@ -68,16 +71,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Coconut milk · 200 ml carton",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "0% 66.66666666666667%",
+      "currentFile": "v3/assets/ingredients/coconut-milk.png",
+      "atlasPosition": null,
       "flows": [
         "retained cook-curry"
       ],
@@ -86,16 +90,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Rice · 100 g pack",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "33.333333333333336% 33.333333333333336%",
+      "currentFile": "v3/assets/ingredients/basmati-rice.png",
+      "atlasPosition": null,
       "flows": [
         "retained cook-curry"
       ],
@@ -104,11 +109,12 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Pizza base",
@@ -122,16 +128,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
       "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reuseNote": "Original artwork retained because no matching supplied PNG exists."
     },
     {
       "item": "Passata · 100 ml carton",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "66.66666666666667% 100%",
+      "currentFile": "v3/assets/ingredients/passata.png",
+      "atlasPosition": null,
       "flows": [
         "retained cook-pizza"
       ],
@@ -140,16 +147,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Peppers · pair",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "33.333333333333336% 66.66666666666667%",
+      "currentFile": "v3/assets/ingredients/red-pepper.png",
+      "atlasPosition": null,
       "flows": [
         "retained cook-pizza"
       ],
@@ -158,16 +166,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Carrots · 200 g bag",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "66.66666666666667% 66.66666666666667%",
+      "currentFile": "v3/assets/ingredients/carrots.png",
+      "atlasPosition": null,
       "flows": [
         "retained cook-soup"
       ],
@@ -176,16 +185,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Lentils · 100 g pack",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "100% 66.66666666666667%",
+      "currentFile": "v3/assets/ingredients/red-lentils.png",
+      "atlasPosition": null,
       "flows": [
         "retained cook-soup",
         "retained Bolognese/lentil journey"
@@ -195,16 +205,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Stock · cube",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "33.333333333333336% 33.333333333333336%",
+      "currentFile": "v3/assets/ingredients/vegetable-stock.png",
+      "atlasPosition": null,
       "flows": [
         "retained cook-soup"
       ],
@@ -213,11 +224,12 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Flour · 100 g pack",
@@ -231,11 +243,12 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
       "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reuseNote": "Original artwork retained because no matching supplied PNG exists."
     },
     {
       "item": "Milk · 100 ml carton",
@@ -249,16 +262,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
       "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reuseNote": "Original artwork retained because no matching supplied PNG exists."
     },
     {
       "item": "Bananas",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "0% 100%",
+      "currentFile": "v3/assets/ingredients/bananas.png",
+      "atlasPosition": null,
       "flows": [
         "retained cook-pancakes"
       ],
@@ -267,15 +281,16 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Pasta · 500 g usable per pack",
-      "currentFile": "v3/assets/checkpoint/pasta.webp",
+      "currentFile": "v3/assets/ingredients/pasta.png",
       "atlasPosition": null,
       "flows": [
         "new cook-pasta"
@@ -285,15 +300,16 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Ripe tomatoes · 300 g usable per pack",
-      "currentFile": "v3/assets/checkpoint/tomato.webp",
+      "currentFile": "v3/assets/ingredients/fresh-tomatoes.png",
       "atlasPosition": null,
       "flows": [
         "new cook-pasta"
@@ -303,16 +319,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Basil · 15 g usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "66.66666666666667% 100%",
+      "currentFile": "v3/assets/ingredients/fresh-basil.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pasta"
       ],
@@ -321,16 +338,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Olive oil · 250 ml usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "66.66666666666667% 100%",
+      "currentFile": "v3/assets/ingredients/olive-oil.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pasta",
         "new cook-soup"
@@ -340,16 +358,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Chickpeas, drained · 400 g tin / 240 g drained usable",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "100% 33.333333333333336%",
+      "currentFile": "v3/assets/ingredients/chickpeas-tin.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-curry"
       ],
@@ -358,15 +377,16 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Chopped tomatoes · 400 g usable per pack",
-      "currentFile": "v3/assets/checkpoint/tomato.webp",
+      "currentFile": "v3/assets/ingredients/tinned-chopped-tomatoes.png",
       "atlasPosition": null,
       "flows": [
         "new cook-curry"
@@ -376,16 +396,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Coconut milk · 400 ml usable per pack",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "0% 66.66666666666667%",
+      "currentFile": "v3/assets/ingredients/coconut-milk.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-curry"
       ],
@@ -394,16 +415,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Dry basmati rice · 500 g usable per pack",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "33.333333333333336% 33.333333333333336%",
+      "currentFile": "v3/assets/ingredients/basmati-rice.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-curry"
       ],
@@ -412,16 +434,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Ground cumin · 20 teaspoons usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "100% 100%",
+      "currentFile": "v3/assets/ingredients/ground-cumin.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-curry"
       ],
@@ -430,16 +453,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Turmeric · 20 teaspoons usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "100% 100%",
+      "currentFile": "v3/assets/ingredients/turmeric.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-curry"
       ],
@@ -448,16 +472,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Flatbreads · 4 items usable per pack",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "100% 0%",
+      "currentFile": "v3/assets/ingredients/flatbreads.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pizza"
       ],
@@ -466,16 +491,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Passata · 500 g usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "66.66666666666667% 100%",
+      "currentFile": "v3/assets/ingredients/passata.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pizza"
       ],
@@ -484,16 +510,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Spinach, thawed and drained · 250 g usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "66.66666666666667% 100%",
+      "currentFile": "v3/assets/ingredients/spinach.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pizza"
       ],
@@ -502,16 +529,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Pepper · 160 g usable per pack",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "33.333333333333336% 66.66666666666667%",
+      "currentFile": "v3/assets/ingredients/red-pepper.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pizza"
       ],
@@ -520,16 +548,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Mozzarella · 125 g usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "66.66666666666667% 100%",
+      "currentFile": "v3/assets/ingredients/mozzarella.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pizza"
       ],
@@ -538,16 +567,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Carrots · 500 g usable per pack",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "66.66666666666667% 66.66666666666667%",
+      "currentFile": "v3/assets/ingredients/carrots.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-soup"
       ],
@@ -556,16 +586,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Red lentils · 500 g usable per pack",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "100% 66.66666666666667%",
+      "currentFile": "v3/assets/ingredients/red-lentils.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-soup"
       ],
@@ -574,16 +605,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Onion · 200 g usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "66.66666666666667% 100%",
+      "currentFile": "v3/assets/ingredients/onion.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-soup"
       ],
@@ -592,16 +624,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Garlic · 6 cloves usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "66.66666666666667% 100%",
+      "currentFile": "v3/assets/ingredients/garlic.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-soup"
       ],
@@ -610,16 +643,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Vegetable stock cubes · 6 items usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "33.333333333333336% 33.333333333333336%",
+      "currentFile": "v3/assets/ingredients/vegetable-stock.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-soup"
       ],
@@ -628,16 +662,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Rolled oats · 500 g usable per pack",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "0% 33.333333333333336%",
+      "currentFile": "v3/assets/ingredients/rolled-oats.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pancakes"
       ],
@@ -646,16 +681,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Oat milk · 1000 ml usable per pack",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "0% 0%",
+      "currentFile": "v3/assets/ingredients/oat-milk.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pancakes"
       ],
@@ -664,16 +700,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Eggs · 6 items usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "66.66666666666667% 100%",
+      "currentFile": "v3/assets/ingredients/eggs.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pancakes"
       ],
@@ -682,16 +719,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Bananas · 3 items usable per pack",
-      "currentFile": "v3/assets/rollout/products-food.webp",
-      "atlasPosition": "0% 100%",
+      "currentFile": "v3/assets/ingredients/bananas.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pancakes"
       ],
@@ -700,16 +738,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Baking powder · 20 teaspoons usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "100% 100%",
+      "currentFile": "v3/assets/ingredients/baking-powder.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pancakes"
       ],
@@ -718,16 +757,17 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Cooking oil · 250 ml usable per pack",
-      "currentFile": "v3/assets/rollout/products-supplies.webp",
-      "atlasPosition": "66.66666666666667% 100%",
+      "currentFile": "v3/assets/ingredients/cooking-oil.png",
+      "atlasPosition": null,
       "flows": [
         "new cook-pancakes"
       ],
@@ -736,15 +776,16 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Spaghetti · 100 g pack",
-      "currentFile": "v3/assets/checkpoint/pasta.webp",
+      "currentFile": "v3/assets/ingredients/spaghetti.png",
       "atlasPosition": null,
       "flows": [
         "retained Bolognese/lentil journey"
@@ -754,15 +795,16 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Chopped tomatoes · 400 g tin",
-      "currentFile": "v3/assets/checkpoint/tomato.webp",
+      "currentFile": "v3/assets/ingredients/tinned-chopped-tomatoes.png",
       "atlasPosition": null,
       "flows": [
         "retained Bolognese/lentil journey"
@@ -772,11 +814,12 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
-      "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reusedElsewhere": false,
+      "reuseNote": "Recipe-only PNG renderer; ordinary Town product renderer unchanged."
     },
     {
       "item": "Mince · 100 g pack",
@@ -790,11 +833,12 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
       "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reuseNote": "Original artwork retained because no matching supplied PNG exists."
     },
     {
       "item": "Chocolate bar",
@@ -808,11 +852,12 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
       "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reuseNote": "Original artwork retained because no matching supplied PNG exists."
     },
     {
       "item": "Fizzy drink",
@@ -826,11 +871,12 @@
         "shopping-list product",
         "supermarket shelf",
         "basket",
-        "carried inventory (text)",
-        "recipe card (text)"
+        "carried inventory",
+        "recipe card",
+        "measurement steps"
       ],
       "reusedElsewhere": true,
-      "reuseNote": "Shared V3Art.product renderer also serves other Town plans and mission products; standalone pasta/tomato/mince and atlas cells are not cooking-exclusive."
+      "reuseNote": "Original artwork retained because no matching supplied PNG exists."
     }
   ],
   "sceneAndContainerFiles": [
@@ -842,5 +888,5 @@
     "v3/assets/checkpoint/fridge-empty.webp",
     "v3/assets/checkpoint/basket-empty.webp"
   ],
-  "recipeImages": "Recipe cards currently use text, not dedicated ingredient images. Scene food baked into backgrounds is scenery and not countable stock."
+  "recipeImages": "Supplied PNGs accompany accessible text on recipe cards and measurement steps. Background food remains scenery; quantities and usable pack contents stay code-rendered."
 }

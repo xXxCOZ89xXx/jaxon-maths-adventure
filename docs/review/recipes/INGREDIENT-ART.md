@@ -1,5 +1,9 @@
 # Ingredient-art audit and proposed refresh
 
+**10 November 2026 update:** The 27 owner-supplied PNGs are now integrated on the feature branch. See the [integration report](../ingredient-art/REPORT.md) and [before/after gallery](../ingredient-art/gallery/GALLERY.md). The two machine-readable manifests linked below now describe the integrated artwork and retained fallbacks. The narrative and table below record the **pre-integration audit at `40682a0`**, rather than the current implementation.
+
+## Historical pre-integration audit
+
 Status: **owner review required for art only; no replacement images have been created or integrated.** The existing game artwork remains in use. Proposed paths below are a delivery specification, not committed image files.
 
 [Complete current-image inventory](current-ingredient-art.json) · [Machine-readable proposed manifest](ingredient-art-manifest.json)

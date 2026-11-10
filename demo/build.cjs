@@ -50,10 +50,10 @@ for(const file of scripts){
 }
 for(const file of styles){assert(!/@import|url\s*\(/i.test(read(file)),'Unreviewed CSS dependency');emit(file,read(file));}
 // All dynamic image families used by asset-checkpoint, world-art, avatar-art and guides.
-for(const dir of ['checkpoint','rollout','world-guide-portraits-preview']){
+for(const dir of ['checkpoint','rollout','world-guide-portraits-preview','ingredients']){
  const base='v3/assets/'+dir,manifest=JSON.parse(read(base+'/manifest.json'));
  const files=Array.isArray(manifest.assets)?manifest.assets.map(a=>a.file):Object.keys(manifest.assets).map(n=>n+'.webp');
- for(const name of files){assert(/^[a-z0-9-]+\.webp$/.test(name));emit(base+'/'+name,fs.readFileSync(path.join(root,base,name)));}
+ for(const name of files){assert((dir==='ingredients'?/^[a-z0-9-]+\.png$/:/^[a-z0-9-]+\.webp$/).test(name));emit(base+'/'+name,fs.readFileSync(path.join(root,base,name)));}
 }
 emit('icon.svg',read('icon.svg'));
 html=replaceOnce(html,'<title>Jaxon\'s Maths Adventure · V5 Interactive Test Camp</title>',"<title>Jaxon’s Maths Adventure · Public Demo</title>");
@@ -67,7 +67,7 @@ emit('build-info.json',JSON.stringify({entry:'v3-adventure.html',releaseBranch:'
 // Prevent Pages SPA fallback from presenting a private-looking route as a game page.
 emit('404.html','<!doctype html><html lang="en"><meta charset="utf-8"><title>Demo page not found</title><h1>Demo page not found</h1><a href="/">Return to the public demo</a></html>');
 emit('_headers',`/*\n  Content-Security-Policy: ${csp}; frame-ancestors 'none'\n  Referrer-Policy: no-referrer\n  X-Content-Type-Options: nosniff\n  X-Frame-Options: DENY\n  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()\n  Cache-Control: no-cache\n`);
-assert.deepEqual(inventory.filter(f=>f.path.endsWith('.webp')).map(f=>f.path).sort(),audited.images.map(f=>f.path).sort(),'Unexpected image dependency paths');
+assert.deepEqual(inventory.filter(f=>/\.(webp|png)$/.test(f.path)).map(f=>f.path).sort(),audited.images.map(f=>f.path).sort(),'Unexpected image dependency paths');
 fs.mkdirSync(path.join(root,'work/public-demo'),{recursive:true});
 fs.writeFileSync(path.join(root,'work/public-demo/build-inventory.json'),JSON.stringify({entry:'v3-adventure.html',storageKey:KEY,scripts,styles,files:inventory},null,2)+'\n');
 console.log(`Public demo: ${scripts.length} scripts, ${styles.length} styles, ${inventory.length} files. Output: demo-dist. No environment/config/SDK/backend files copied.`);

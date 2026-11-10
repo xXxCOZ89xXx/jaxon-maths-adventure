@@ -321,6 +321,87 @@
     },
     {
       "path": "v3/assets/world-guide-portraits-preview/statistics-city-guide.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/baking-powder.png"
+    },
+    {
+      "path": "v3/assets/ingredients/bananas.png"
+    },
+    {
+      "path": "v3/assets/ingredients/basmati-rice.png"
+    },
+    {
+      "path": "v3/assets/ingredients/carrots.png"
+    },
+    {
+      "path": "v3/assets/ingredients/chickpeas-tin.png"
+    },
+    {
+      "path": "v3/assets/ingredients/coconut-milk.png"
+    },
+    {
+      "path": "v3/assets/ingredients/cooking-oil.png"
+    },
+    {
+      "path": "v3/assets/ingredients/eggs.png"
+    },
+    {
+      "path": "v3/assets/ingredients/flatbreads.png"
+    },
+    {
+      "path": "v3/assets/ingredients/fresh-basil.png"
+    },
+    {
+      "path": "v3/assets/ingredients/fresh-tomatoes.png"
+    },
+    {
+      "path": "v3/assets/ingredients/garlic.png"
+    },
+    {
+      "path": "v3/assets/ingredients/ground-cumin.png"
+    },
+    {
+      "path": "v3/assets/ingredients/mozzarella.png"
+    },
+    {
+      "path": "v3/assets/ingredients/oat-milk.png"
+    },
+    {
+      "path": "v3/assets/ingredients/olive-oil.png"
+    },
+    {
+      "path": "v3/assets/ingredients/onion.png"
+    },
+    {
+      "path": "v3/assets/ingredients/passata.png"
+    },
+    {
+      "path": "v3/assets/ingredients/pasta.png"
+    },
+    {
+      "path": "v3/assets/ingredients/red-lentils.png"
+    },
+    {
+      "path": "v3/assets/ingredients/red-pepper.png"
+    },
+    {
+      "path": "v3/assets/ingredients/rolled-oats.png"
+    },
+    {
+      "path": "v3/assets/ingredients/spaghetti.png"
+    },
+    {
+      "path": "v3/assets/ingredients/spinach.png"
+    },
+    {
+      "path": "v3/assets/ingredients/tinned-chopped-tomatoes.png"
+    },
+    {
+      "path": "v3/assets/ingredients/turmeric.png"
+    },
+    {
+      "path": "v3/assets/ingredients/vegetable-stock.png"
     }
   ]
 }

@@ -1,872 +1,785 @@
 {
-  "status": "Awaiting owner art review; no generated or placeholder replacements",
-  "styleReferences": [
-    "v3/assets/world-guide-portraits-preview/practical-maths-town-guide.webp",
-    "v3/assets/checkpoint/kitchen.webp",
-    "v3/assets/checkpoint/market.webp"
-  ],
+  "status": "27 supplied PNGs integrated; remaining optional/legacy products retain existing visuals or text",
+  "sourceManifest": "v3/assets/ingredients/manifest.json",
   "retainContainers": true,
   "assets": [
     {
       "id": "pasta",
       "item": "Pasta",
-      "proposedFile": "v3/assets/ingredients/pasta.webp",
+      "file": "v3/assets/ingredients/pasta.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1312,
+        "height": 1199
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "2e535861e4d0b8463c50e91bc5e4cadb3143a1f8e2c4fae316ad3c4f33bd272b",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "spaghetti",
       "item": "Spaghetti",
-      "proposedFile": "v3/assets/ingredients/spaghetti.webp",
+      "file": "v3/assets/ingredients/spaghetti.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "540306e092cc90940692ed263a091df465d2df1aeb4a0080c73af991402a8978",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "fresh-tomatoes",
       "item": "Fresh tomatoes",
-      "proposedFile": "v3/assets/ingredients/fresh-tomatoes.webp",
+      "file": "v3/assets/ingredients/fresh-tomatoes.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "e737b40884e4875a733f37112fd3f51a9794994ce39fa7b83c5aca7dce2a131a",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "tinned-chopped-tomatoes",
       "item": "Tinned chopped tomatoes",
-      "proposedFile": "v3/assets/ingredients/tinned-chopped-tomatoes.webp",
+      "file": "v3/assets/ingredients/tinned-chopped-tomatoes.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "efc31d455828defc8e35fa8c2dff334c069192f06bcc9f2681b5730ae8ca3eb3",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "basil",
       "item": "Basil",
-      "proposedFile": "v3/assets/ingredients/basil.webp",
+      "file": "v3/assets/ingredients/fresh-basil.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "f0d11941613d23e761b2ac0f94daf86329b5b6eb8910ff35149c635fd401b1f7",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "olive-oil",
       "item": "Olive oil",
-      "proposedFile": "v3/assets/ingredients/olive-oil.webp",
+      "file": "v3/assets/ingredients/olive-oil.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "82d0c6b9cfcf42817a88e9778385113a2a8b78cd92c4aed833346d902011f64a",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "chickpeas-tin-400-g-240-g-drained",
       "item": "Chickpeas tin (400 g / 240 g drained)",
-      "proposedFile": "v3/assets/ingredients/chickpeas-tin-400-g-240-g-drained.webp",
+      "file": "v3/assets/ingredients/chickpeas-tin.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "dcfbb71e797493387da1818e26c6571cd458ee2d4045628587e1e5257ea977a7",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "coconut-milk",
       "item": "Coconut milk",
-      "proposedFile": "v3/assets/ingredients/coconut-milk.webp",
+      "file": "v3/assets/ingredients/coconut-milk.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "620be531b1c7b4fd00c56f751f9fe9ab9a4781f8e1c17c00a1e854fa78f4deb7",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "dry-basmati-rice",
       "item": "Dry basmati rice",
-      "proposedFile": "v3/assets/ingredients/dry-basmati-rice.webp",
+      "file": "v3/assets/ingredients/basmati-rice.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "8fd97a62a3e731d14e9325270e0ef0ea427a8f1703f62834acefeca900a59125",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "ground-cumin",
       "item": "Ground cumin",
-      "proposedFile": "v3/assets/ingredients/ground-cumin.webp",
+      "file": "v3/assets/ingredients/ground-cumin.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "e19fc2b7c8a19ef0e45432b79aa79a886d356a7e7bac430b6314b31ed8539ce5",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "turmeric",
       "item": "Turmeric",
-      "proposedFile": "v3/assets/ingredients/turmeric.webp",
+      "file": "v3/assets/ingredients/turmeric.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "83a4fac2084f33621303bc152d313e81bce54cdb6b906ca536bdcbc605629d3e",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "flatbreads",
       "item": "Flatbreads",
-      "proposedFile": "v3/assets/ingredients/flatbreads.webp",
+      "file": "v3/assets/ingredients/flatbreads.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "ce12780d0a16657a068ce266b1b3d2e65a6ad1694732674dab4998d41bf4ae1c",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "passata",
       "item": "Passata",
-      "proposedFile": "v3/assets/ingredients/passata.webp",
+      "file": "v3/assets/ingredients/passata.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "bf211ab2c8ba9baefce57fa6e3fa497bd6d41c2fac0b0be7b5b63c4cdff15be1",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "thawed-spinach",
       "item": "Thawed spinach",
-      "proposedFile": "v3/assets/ingredients/thawed-spinach.webp",
+      "file": "v3/assets/ingredients/spinach.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "717ce0381d1d459090bdc006bcf0f1845a6355bfad338647f9eaa9a95050f023",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "pepper",
       "item": "Pepper",
-      "proposedFile": "v3/assets/ingredients/pepper.webp",
+      "file": "v3/assets/ingredients/red-pepper.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "4f2b9dd615e3a87ac5ea1b51ab82d8756b5828995757139da86466850fad8c20",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "mozzarella",
       "item": "Mozzarella",
-      "proposedFile": "v3/assets/ingredients/mozzarella.webp",
+      "file": "v3/assets/ingredients/mozzarella.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "9db7fd406d1ec47fe8cdf47c4eeb92007d8fb5bcbf50e7bb4618befe8e6d95c1",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "carrots",
       "item": "Carrots",
-      "proposedFile": "v3/assets/ingredients/carrots.webp",
+      "file": "v3/assets/ingredients/carrots.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "7126e316a9670074bfc6ae1b24334948d1350066e7426806d19af3bc7cb264c7",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "red-lentils",
       "item": "Red lentils",
-      "proposedFile": "v3/assets/ingredients/red-lentils.webp",
+      "file": "v3/assets/ingredients/red-lentils.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "9adad5b87de85ce3dd8f641430ef415d1cd362ac8aa1940ec4a4598ab0824bb4",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "onion",
       "item": "Onion",
-      "proposedFile": "v3/assets/ingredients/onion.webp",
+      "file": "v3/assets/ingredients/onion.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "9c75dcdbde54def826b7df68db524a670070a419da55debaa70595ba883ddaed",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "garlic",
       "item": "Garlic",
-      "proposedFile": "v3/assets/ingredients/garlic.webp",
+      "file": "v3/assets/ingredients/garlic.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "3087c7bd7ba760359cdc2260d8601c5667c82bebcc1d1f1115b0f3f6136937bb",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "vegetable-stock-cubes",
       "item": "Vegetable stock cubes",
-      "proposedFile": "v3/assets/ingredients/vegetable-stock-cubes.webp",
+      "file": "v3/assets/ingredients/vegetable-stock.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "97f75894c98c3a844ef97798049b78e416e38bf0fe41f02ee2f0f054adcc0bb8",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "rolled-oats",
       "item": "Rolled oats",
-      "proposedFile": "v3/assets/ingredients/rolled-oats.webp",
+      "file": "v3/assets/ingredients/rolled-oats.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "4712036ba2c46924b524dec25317cc6085d1be6f2f43dd1c5c6b29b2ba6d76e4",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "oat-milk",
       "item": "Oat milk",
-      "proposedFile": "v3/assets/ingredients/oat-milk.webp",
+      "file": "v3/assets/ingredients/oat-milk.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "a3ca450698315d1e227409518aa5b2ea55a23f7a8e1ca98c10e94d359b0db07d",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "eggs",
       "item": "Eggs",
-      "proposedFile": "v3/assets/ingredients/eggs.webp",
+      "file": "v3/assets/ingredients/eggs.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "ef13cc98c37ef90ecbc6a74966b4faac1235a7a3c0e42d082f9f50c095351b6c",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "bananas",
       "item": "Bananas",
-      "proposedFile": "v3/assets/ingredients/bananas.webp",
+      "file": "v3/assets/ingredients/bananas.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "4421c66f1402918d7b881e9a376e5c24fa3f8ea0ada55557981ea97e731dca1a",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "baking-powder",
       "item": "Baking powder",
-      "proposedFile": "v3/assets/ingredients/baking-powder.webp",
+      "file": "v3/assets/ingredients/baking-powder.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "f9c457bfddf656d4e4a8fceaf29613b5e057a30f3e906563d588c1e61fe3972a",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "cooking-oil",
       "item": "Cooking oil",
-      "proposedFile": "v3/assets/ingredients/cooking-oil.webp",
+      "file": "v3/assets/ingredients/cooking-oil.png",
       "dimensions": {
-        "width": 512,
-        "height": 512
+        "width": 1254,
+        "height": 1254
       },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "sha256": "1086ca913bca9ee4551fec54491b0695f770eeb53c832283f4ffad8ced221458",
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "Owner-supplied PNG integrated without pixel changes"
     },
     {
       "id": "cheddar-or-hard-cheese",
       "item": "Cheddar or hard cheese",
-      "proposedFile": "v3/assets/ingredients/cheddar-or-hard-cheese.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Optional recipe addition; planned future imagery, not included in required purchasing/consumption",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "pitted-olives",
       "item": "Pitted olives",
-      "proposedFile": "v3/assets/ingredients/pitted-olives.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Optional recipe addition; planned future imagery, not included in required purchasing/consumption",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "optional-chilli",
       "item": "Optional chilli",
-      "proposedFile": "v3/assets/ingredients/optional-chilli.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Optional recipe addition; planned future imagery, not included in required purchasing/consumption",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "optional-curry-paste",
       "item": "Optional curry paste",
-      "proposedFile": "v3/assets/ingredients/optional-curry-paste.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Optional recipe addition; planned future imagery, not included in required purchasing/consumption",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "parsley",
       "item": "Parsley",
-      "proposedFile": "v3/assets/ingredients/parsley.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Optional recipe addition; planned future imagery, not included in required purchasing/consumption",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "vanilla-extract",
       "item": "Vanilla extract",
-      "proposedFile": "v3/assets/ingredients/vanilla-extract.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Optional recipe addition; planned future imagery, not included in required purchasing/consumption",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "yoghurt",
       "item": "Yoghurt",
-      "proposedFile": "v3/assets/ingredients/yoghurt.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Optional recipe addition; planned future imagery, not included in required purchasing/consumption",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "fruit-topping",
       "item": "Fruit topping",
-      "proposedFile": "v3/assets/ingredients/fruit-topping.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Optional recipe addition; planned future imagery, not included in required purchasing/consumption",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "legacy-wheat-flour",
       "item": "Legacy wheat flour",
-      "proposedFile": "v3/assets/ingredients/legacy-wheat-flour.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "legacy-dairy-milk",
       "item": "Legacy dairy milk",
-      "proposedFile": "v3/assets/ingredients/legacy-dairy-milk.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "legacy-mince",
       "item": "Legacy mince",
-      "proposedFile": "v3/assets/ingredients/legacy-mince.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "legacy-pizza-base",
       "item": "Legacy pizza base",
-      "proposedFile": "v3/assets/ingredients/legacy-pizza-base.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "chocolate-bar",
       "item": "Chocolate bar",
-      "proposedFile": "v3/assets/ingredients/chocolate-bar.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     },
     {
       "id": "fizzy-drink",
       "item": "Fizzy drink",
-      "proposedFile": "v3/assets/ingredients/fizzy-drink.webp",
-      "dimensions": {
-        "width": 512,
-        "height": 512
-      },
-      "sourcePreferred": "1024 × 1024 PNG with clean alpha, retained for approved export",
+      "file": null,
+      "dimensions": null,
+      "sha256": null,
       "background": "transparent",
-      "view": "consistent three-quarter product view, soft warm light from upper left; one recognisable item/pack; no baked-in count, price or measurement text",
-      "intendedUse": "Required or retained recipe ingredient / supermarket product",
       "reuseAcross": [
         "fridge or cupboard",
         "supermarket shelf",
         "shopping list",
         "basket",
-        "recipe card"
+        "recipe card",
+        "measurement steps"
       ],
-      "state": "proposal only — owner-approved coordinated image required; no replacement file supplied or generated"
+      "state": "No matching supplied PNG; original fallback or optional text retained"
     }
   ]
 }

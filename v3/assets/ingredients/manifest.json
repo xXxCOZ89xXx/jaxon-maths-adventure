@@ -1,0 +1,221 @@
+{
+  "source": "Owner-supplied town-recipe-ingredient-art-v1.zip assets/; README and preview are reference only and are not shipped.",
+  "assets": [
+    {
+      "file": "baking-powder.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1044209,
+      "sha256": "f9c457bfddf656d4e4a8fceaf29613b5e057a30f3e906563d588c1e61fe3972a",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "bananas.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 823136,
+      "sha256": "4421c66f1402918d7b881e9a376e5c24fa3f8ea0ada55557981ea97e731dca1a",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "basmati-rice.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1033171,
+      "sha256": "8fd97a62a3e731d14e9325270e0ef0ea427a8f1703f62834acefeca900a59125",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "carrots.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1108059,
+      "sha256": "7126e316a9670074bfc6ae1b24334948d1350066e7426806d19af3bc7cb264c7",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "chickpeas-tin.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1123297,
+      "sha256": "dcfbb71e797493387da1818e26c6571cd458ee2d4045628587e1e5257ea977a7",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "coconut-milk.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 896245,
+      "sha256": "620be531b1c7b4fd00c56f751f9fe9ab9a4781f8e1c17c00a1e854fa78f4deb7",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "cooking-oil.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 812490,
+      "sha256": "1086ca913bca9ee4551fec54491b0695f770eeb53c832283f4ffad8ced221458",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "eggs.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1406589,
+      "sha256": "ef13cc98c37ef90ecbc6a74966b4faac1235a7a3c0e42d082f9f50c095351b6c",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "flatbreads.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1123077,
+      "sha256": "ce12780d0a16657a068ce266b1b3d2e65a6ad1694732674dab4998d41bf4ae1c",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "fresh-basil.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 826805,
+      "sha256": "f0d11941613d23e761b2ac0f94daf86329b5b6eb8910ff35149c635fd401b1f7",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "fresh-tomatoes.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 882658,
+      "sha256": "e737b40884e4875a733f37112fd3f51a9794994ce39fa7b83c5aca7dce2a131a",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "garlic.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 991592,
+      "sha256": "3087c7bd7ba760359cdc2260d8601c5667c82bebcc1d1f1115b0f3f6136937bb",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "ground-cumin.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1051441,
+      "sha256": "e19fc2b7c8a19ef0e45432b79aa79a886d356a7e7bac430b6314b31ed8539ce5",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "mozzarella.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1194484,
+      "sha256": "9db7fd406d1ec47fe8cdf47c4eeb92007d8fb5bcbf50e7bb4618befe8e6d95c1",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "oat-milk.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 935951,
+      "sha256": "a3ca450698315d1e227409518aa5b2ea55a23f7a8e1ca98c10e94d359b0db07d",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "olive-oil.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 827845,
+      "sha256": "82d0c6b9cfcf42817a88e9778385113a2a8b78cd92c4aed833346d902011f64a",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "onion.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1134298,
+      "sha256": "9c75dcdbde54def826b7df68db524a670070a419da55debaa70595ba883ddaed",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "passata.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 846977,
+      "sha256": "bf211ab2c8ba9baefce57fa6e3fa497bd6d41c2fac0b0be7b5b63c4cdff15be1",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "pasta.png",
+      "width": 1312,
+      "height": 1199,
+      "bytes": 1493447,
+      "sha256": "2e535861e4d0b8463c50e91bc5e4cadb3143a1f8e2c4fae316ad3c4f33bd272b",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "red-lentils.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1010348,
+      "sha256": "9adad5b87de85ce3dd8f641430ef415d1cd362ac8aa1940ec4a4598ab0824bb4",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "red-pepper.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 997377,
+      "sha256": "4f2b9dd615e3a87ac5ea1b51ab82d8756b5828995757139da86466850fad8c20",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "rolled-oats.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1080193,
+      "sha256": "4712036ba2c46924b524dec25317cc6085d1be6f2f43dd1c5c6b29b2ba6d76e4",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "spaghetti.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 936589,
+      "sha256": "540306e092cc90940692ed263a091df465d2df1aeb4a0080c73af991402a8978",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "spinach.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1134025,
+      "sha256": "717ce0381d1d459090bdc006bcf0f1845a6355bfad338647f9eaa9a95050f023",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "tinned-chopped-tomatoes.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1111473,
+      "sha256": "efc31d455828defc8e35fa8c2dff334c069192f06bcc9f2681b5730ae8ca3eb3",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "turmeric.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 978900,
+      "sha256": "83a4fac2084f33621303bc152d313e81bce54cdb6b906ca536bdcbc605629d3e",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    },
+    {
+      "file": "vegetable-stock.png",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 1068373,
+      "sha256": "97f75894c98c3a844ef97798049b78e416e38bf0fe41f02ee2f0f054adcc0bb8",
+      "format": "PNG RGBA, original bytes and transparency preserved"
+    }
+  ]
+}
