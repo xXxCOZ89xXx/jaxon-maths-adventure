@@ -1,0 +1,70 @@
+{
+  "base": "914724a6a9fc4cb199b9c38c607af8a6dd6f2934",
+  "browserStats": {
+    "startTime": "2026-11-09T22:16:11.685Z",
+    "duration": 426023.592,
+    "expected": 72,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "areas": [
+    "Number Forest",
+    "Fraction Desert",
+    "Algebra Peaks",
+    "Geometry Kingdom",
+    "Ratio Island",
+    "Statistics City",
+    "Probability Portal",
+    "Measurement Mines",
+    "Practical Maths Town"
+  ],
+  "builds": [
+    "private fictional intercepted fixture",
+    "public browser-only demo"
+  ],
+  "viewports": [
+    "desktop 1440x1000",
+    "iPad portrait 820x1180",
+    "iPad landscape 1180x820",
+    "small touch 360x800"
+  ],
+  "coverage": [
+    "one main map and no repair overlay",
+    "prerequisite gates",
+    "playable repair task",
+    "exact saved task and assessed difficulty after pause/reload/resume",
+    "same-area return",
+    "completed recap and evidence preservation",
+    "blocked external traffic"
+  ],
+  "additionalChecks": [
+    "npm test",
+    "16 guided progression/recovery groups",
+    "4 save/recovery groups",
+    "4 cloud-sync suites",
+    "demo isolation build checker",
+    "Existing starting-point-to-repair assessment browser test: 4/4",
+    "Existing repair pause/second-mission/exact-resume browser regressions: 8/8"
+  ],
+  "limits": [
+    "Emulated Chromium/Edge viewports; physical iPad Safari untested",
+    "No hosted learner or account accessed"
+  ],
+  "pauseGuardStats": {
+    "startTime": "2026-11-09T22:23:46.011Z",
+    "duration": 12467.026,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "demoBrowserStats": {
+    "startTime": "2026-11-09T22:33:57.811Z",
+    "duration": 77361.68400000001,
+    "expected": 18,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

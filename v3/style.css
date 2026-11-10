@@ -2262,3 +2262,6 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
  .scene-dialog .countable-stock{min-width:0;gap:10px}
  .scene-dialog .countable-stock .stock-pick{flex:0 0 56px}
 }
+
+/* One area map, with a compact keyboard-accessible repair entry beside it. */
+.repair-entry{min-width:0;align-self:start}.repair-entry h2{margin-top:0}.repair-stage-picker{margin:18px 0}.repair-stage-picker>summary{cursor:pointer;min-height:48px;padding:12px;border:2px solid #507354;border-radius:8px;font-weight:700}.repair-stage-picker>summary:focus-visible{outline:4px solid #305d36;outline-offset:3px}.repair-stage-picker .restoration-path{margin:16px 0;padding:12px}.repair-stage-picker .skill-list{grid-template-columns:minmax(0,1fr)}

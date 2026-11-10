@@ -61,11 +61,16 @@ jobs:
         run: npm run test:home
       - name: Small-screen cooking controls and progress recovery in both builds
         run: npm run test:cooking-recovery
+
+      - name: Single area maps and saved repair stages in both builds
+        run: npm run test:area-maps
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ipad-save-recovery-evidence
           path: |
+            work/area-maps/
+            test-results/area-maps/
             work/home-exterior/
             test-results/home-exterior/
             work/cooking-recovery/

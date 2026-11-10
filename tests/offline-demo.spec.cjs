@@ -54,7 +54,7 @@ test('Fresh wage journey shares the verified payslip and live 50p/envelope balan
  await expect(p.locator('dialog[open] [aria-label="Current account balances"]')).toContainText('still to allocate £0.00');await click(p,'j-submit');await advance(p);const after=(await read(p)).adventure.townLifeV2;await p.reload();expect((await read(p)).adventure.townLifeV2).toEqual(after);const current=after.runs['job-market:1'];expect(current.savings).toBe(t.answer[0]);expect(current.envelopes.Travel).toBe(t.answer[1]);expect(current.envelopes.Spending).toBe(t.answer[2]);
 });
 
-test('Town exterior hotspots precede the map and open illustrated meters',async({page:p})=>{
+test('Town normal map precedes the retained exterior hotspots and opens illustrated meters',async({page:p})=>{
  await click(p,'world:town');
  const board=p.locator('.home-activity-board');
  await expect(board).toBeVisible();
@@ -64,7 +64,10 @@ test('Town exterior hotspots precede the map and open illustrated meters',async(
  await expect(board).toContainText('Post and parcels');
  const boardTop=await board.evaluate(e=>e.getBoundingClientRect().top);
  const mapTop=await p.locator('.town-explore-map').evaluate(e=>e.getBoundingClientRect().top);
- expect(boardTop).toBeLessThan(mapTop);
+ expect(mapTop).toBeLessThan(boardTop);
+ await expect(p.locator('.town-explore-map')).toHaveCount(1);
+ await expect(p.locator('.world-overview .repair-entry')).toBeVisible();
+ await expect(board.locator('[data-home-hotspot]')).toHaveCount(3);
  await click(p,'home-activity:meters');await open(p);await click(p,'m-begin');
  await expect(p.locator('dialog[open] .meter-art')).toBeVisible();
 });
