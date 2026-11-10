@@ -1,0 +1,266 @@
+{
+  "base": "7955861433337b61ba5bde28ae030c8f3325c935",
+  "builds": "Fictional local production with intercepted services and network-isolated public demo",
+  "runs": {
+    "townMatrix": {
+      "startTime": "2026-11-10T13:54:38.521Z",
+      "duration": 797082.26,
+      "expected": 40,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "layouts": [
+        {
+          "name": "desktop-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-portrait-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-landscape-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "small-touch",
+          "hasTouch": false
+        }
+      ]
+    },
+    "baselineMatrix": {
+      "startTime": "2026-11-10T13:48:24.286Z",
+      "duration": 127634.211,
+      "expected": 16,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "layouts": [
+        {
+          "name": "desktop-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-portrait-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-landscape-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "small-touch",
+          "hasTouch": false
+        }
+      ]
+    },
+    "demoActivities": {
+      "startTime": "2026-11-10T14:03:53.971Z",
+      "duration": 203335.657,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "layouts": [
+        {
+          "name": "desktop-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-portrait-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-landscape-chromium",
+          "hasTouch": false
+        }
+      ]
+    },
+    "related": {
+      "startTime": "2026-11-10T14:34:48.542Z",
+      "duration": 296263.992,
+      "expected": 31,
+      "skipped": 1,
+      "unexpected": 0,
+      "flaky": 0,
+      "layouts": [
+        {
+          "name": "ipad-portrait-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-landscape-chromium",
+          "hasTouch": false
+        }
+      ]
+    },
+    "repair": {
+      "startTime": "2026-11-10T14:32:03.541Z",
+      "duration": 81188.417,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "layouts": [
+        {
+          "name": "desktop-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-portrait-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-landscape-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "small-touch",
+          "hasTouch": false
+        }
+      ]
+    },
+    "production": {
+      "startTime": "2026-11-10T14:33:25.717Z",
+      "duration": 23122.11,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "layouts": [
+        {
+          "name": "desktop",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-portrait",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-landscape",
+          "hasTouch": false
+        }
+      ]
+    },
+    "baselineWorker": {
+      "startTime": "2026-11-10T14:34:05.768Z",
+      "duration": 41781.67,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "layouts": [
+        {
+          "name": "ipad-portrait-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-landscape-chromium",
+          "hasTouch": false
+        }
+      ]
+    },
+    "galleryBefore": {
+      "startTime": "2026-11-10T14:10:20.128Z",
+      "duration": 19661.037999999997,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "layouts": [
+        {
+          "name": "desktop-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-portrait-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-landscape-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "small-touch",
+          "hasTouch": false
+        }
+      ]
+    },
+    "galleryAfter": {
+      "startTime": "2026-11-10T14:09:58.019Z",
+      "duration": 20768.745,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "layouts": [
+        {
+          "name": "desktop-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-portrait-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "ipad-landscape-chromium",
+          "hasTouch": false
+        },
+        {
+          "name": "small-touch",
+          "hasTouch": false
+        }
+      ]
+    }
+  },
+  "continueProof": {
+    "before": {
+      "view": "journey",
+      "selectedMission": "market",
+      "continuedPlan": "travel-library"
+    },
+    "after": {
+      "view": "adventure",
+      "selectedMission": "market",
+      "olderSavedPlan": "travel-library"
+    }
+  },
+  "unit": [
+    "npm test including 594-task Town visit audit",
+    "npm run test:town: 27 scenarios / 2091 stages",
+    "npm run test:curriculum",
+    "gameplay-quality and gameplay-action-coverage",
+    "save-recovery and v3-cloud"
+  ],
+  "packaging": [
+    "production-build",
+    "staging-build",
+    "demo exact allowlist and source/rebuild parity"
+  ],
+  "demoIsolation": [
+    {
+      "layout": "desktop",
+      "externalRequests": [],
+      "passed": true
+    },
+    {
+      "layout": "ipad-portrait",
+      "externalRequests": [],
+      "passed": true
+    },
+    {
+      "layout": "ipad-landscape",
+      "externalRequests": [],
+      "passed": true
+    }
+  ],
+  "history": [
+    "Original café selectors failed on both base and feature: retired .town-hotspots and .journey-progress. Updated test checks current building entrance, heading and saved employment scenario.",
+    "Town completion tests could submit again after automatic advance; they now require a solved task or exact next stage, reject skipped stages and retain full resume/replay/accessibility assertions.",
+    "Before the final rerun, one unchanged-release café portrait run failed the final-cash solved assertion; a broader feature run also failed a shopping solved assertion. Final current-flow results are recorded above.",
+    "One repeated measurement-to-algebra cross-tab run timed out waiting for Generator engineer; it passed the original run and the final rerun. No change to that test or application path."
+  ],
+  "physicalIPadSafari": "Untested",
+  "remoteDataAccess": false,
+  "deployed": false
+}

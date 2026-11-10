@@ -1,0 +1,196 @@
+{
+  "base": "dadb2fdf895bbf21b348697a816e73dc5ff3f165",
+  "runs": {
+    "mainRecipeMatrix": {
+      "startTime": "2026-11-10T15:23:25.175Z",
+      "duration": 595089.8,
+      "expected": 56,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "visibleCardsAndV1": {
+      "startTime": "2026-11-10T15:39:35.367Z",
+      "duration": 56342.281,
+      "expected": 16,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "finalSmallPasta": {
+      "startTime": "2026-11-10T15:40:32.588Z",
+      "duration": 29685.857,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "townRouting": {
+      "startTime": "2026-11-10T15:33:22.363Z",
+      "duration": 130372.19900000001,
+      "expected": 32,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "cookingAndSaveRecovery": {
+      "startTime": "2026-11-10T15:35:33.807Z",
+      "duration": 72996.976,
+      "expected": 32,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "demoActivities": {
+      "startTime": "2026-11-10T15:41:37.585Z",
+      "duration": 73950.12700000001,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium"
+      ]
+    },
+    "productionRecovery": {
+      "startTime": "2026-11-10T15:42:52.503Z",
+      "duration": 15788.404,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": [
+        "desktop",
+        "ipad-portrait",
+        "ipad-landscape"
+      ]
+    },
+    "beforeCaptures": {
+      "startTime": "2026-11-10T15:38:31.143Z",
+      "duration": 63356.68199999999,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    }
+  },
+  "viewports": [
+    {
+      "name": "desktop-chromium",
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "hasTouch": false
+    },
+    {
+      "name": "ipad-portrait-chromium",
+      "viewport": {
+        "width": 820,
+        "height": 1180
+      },
+      "hasTouch": true
+    },
+    {
+      "name": "ipad-landscape-chromium",
+      "viewport": {
+        "width": 1180,
+        "height": 820
+      },
+      "hasTouch": true
+    },
+    {
+      "name": "small-touch",
+      "viewport": {
+        "width": 360,
+        "height": 800
+      },
+      "hasTouch": true
+    }
+  ],
+  "recipeEngine": {
+    "recipes": 5,
+    "servingLevels": 3,
+    "seeds": 3,
+    "completedStages": 741,
+    "exactLegacySnapshots": 5,
+    "originalRecipeGenerationComparisons": 18
+  },
+  "existingTownEngine": {
+    "scenarios": 27,
+    "completedStages": 2235
+  },
+  "units": [
+    "npm test including Home/Town navigation and recipe audits",
+    "curriculum audit",
+    "gameplay quality and action coverage",
+    "save/purchase recovery"
+  ],
+  "builds": [
+    "production packaging",
+    "isolated staging build",
+    "demo source/rebuild parity and isolation"
+  ],
+  "baselineObservation": {
+    "initialParallelCapture": {
+      "startTime": "2026-11-10T15:18:10.644Z",
+      "duration": 46965.511999999995,
+      "expected": 7,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "description": "One unchanged-base small-touch demo capture failed waiting for a saved stage transition; serial unchanged-base captures passed 8/8. No product fix is claimed for that baseline observation."
+  },
+  "finalUiVerification": "After correcting the new-card default open state, all five visible cards were checked in both builds at all four sizes, plus both complete small-touch pasta flows; V1 selection/Continue was checked at all four sizes. The 56-case main gameplay matrix and 32-case Town/recovery suites passed.",
+  "art": {
+    "currentLabelVariants": 46,
+    "proposedAssets": 41,
+    "originalAssetsChanged": 0,
+    "reviewScreenshots": 36,
+    "replacementIngredientArtCreated": false
+  },
+  "physicalIPadSafari": "Untested",
+  "hostedLearnerAccess": false,
+  "prOpened": false,
+  "merged": false,
+  "deployed": false
+}

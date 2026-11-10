@@ -31,7 +31,43 @@
       return {list,cost};
     }
     function finishDay(label){amount('home','Count your remaining cash',`Back home after ${label}. Use the starting purse (${money(initialCash)}) and your saved receipts to work out the cash still in your purse. Savings held at the bank are separate.`,cash);}
-    if(meta.category==='Cooking'){
+    if(meta.category==='Cooking'&&!original){
+      const m=clone(data.meals.find(m=>'cook-'+m.id===meta.id)),portions=2*scale;
+      const ingredients=m.ingredients.map(i=>{const packLabel=i.name==='Chickpeas, drained'?'400 g tin / 240 g drained usable':`${i.pack} ${i.unit} usable per pack`;return {...i,key:i.name+' · '+packLabel,base:i.quantity,required:i.quantity*scale,packQuantity:i.pack,packLabel};});
+      const items=ingredients.map(i=>i.key),prices=ingredients.map(i=>i.price+shift*5);
+      const have=ingredients.map((i,n)=>i.group==='pantry'||n===0||n===2&&i.storage==='fridge'?1:0);
+      const required=Object.fromEntries(ingredients.map(i=>[i.key,i.required]));
+      stock=Object.fromEntries(ingredients.map((i,n)=>[i.key,have[n]*i.packQuantity]));
+      const missing=ingredients.map((i,n)=>Math.ceil(Math.max(0,i.required-stock[i.key])/i.packQuantity));
+      const list=Object.fromEntries(items.map((key,n)=>[key,missing[n]]));
+      const purchased=Object.fromEntries(ingredients.map((i,n)=>[i.key,missing[n]*i.packQuantity]));
+      const batches=m.id==='pizza'?scale:m.id==='pancakes'?4*scale:1;
+      const minutes=m.id==='pizza'?12*batches:m.id==='pancakes'?3+3*batches:m.cook;
+      const prepMinutes=m.prepMinutes+5*(scale-1);
+      const measured=m.id==='pizza'?{name:'passata',quantity:100*scale,unit:'g'}:m.id==='pancakes'?{name:'oat milk',quantity:125*scale,unit:'ml'}:{name:m.liquid,quantity:m.water*scale,unit:'ml'};
+      recipeCard={recipeVersion:1,name:m.name,basePortions:2,portions,ingredients,optional:m.optional,prep:m.prep,prepMinutes,minutes,totalMinutes:prepMinutes+minutes,water:(m.water||0)*scale,method:m.method,heat:m.heat,temperature:m.temperature,batches,measured,allergens:m.allergens,fictionalPrices:true,safety:'Wash hands and produce. An adult must handle sharp knives, hot pans, boiling water, the oven and any blender. Timings are estimates: an adult checks the food is properly cooked.',allergenNote:'Check every ingredient and topping label with an adult, including possible cross-contact. These notes do not guarantee allergy safety.'};
+      if(tier>1)amount('home','Scale the recipe',`The card serves 2 using ${ingredients[0].base} ${ingredients[0].unit} of ${ingredients[0].name}. You are making ${portions} servings. How much is needed?`,ingredients[0].required,ingredients[0].unit);
+      const packs=(venue,title,prompt,numbers,context,effect={},extras=false)=>{const names=extras?[...items,'Chocolate bar','Fizzy drink']:items,costs=extras?[...prices,85,110]:prices;const t=basket(venue,title,prompt,names,costs,numbers,context,effect,cash);t.items.forEach((item,n)=>{if(ingredients[n])Object.assign(item,{storage:ingredients[n].storage,packQuantity:ingredients[n].packQuantity,unit:ingredients[n].unit});});return t;};
+      const inspect=packs('home','Inspect the kitchen stock','Each picture is one pack. Read its usable contents, then record the packs already at home.',have,'stock');inspect.stock=Object.fromEntries(items.map((key,n)=>[key,have[n]]));
+      packs('home','Make your shopping list','Compare the scaled recipe with stock. Buy only missing whole packs; round up when part of a pack is needed. Pantry basics are included in the stock check.',missing,'list',{list});
+      bus('the supermarket');
+      packs('market','Collect from the shelves','Collect the packs on your saved list. The printed usable quantity is what each pack adds. Prices are fictional.',[...missing,0,0],'shelves',{},true);
+      const cost=missing.reduce((total,n,i)=>total+n*prices[i],0);
+      amount('market','Check the recipe budget',`Your pretend purse holds ${money(cash)}. The recipe basket costs ${money(cost)}. How much remains before the return bus?`,cash-cost);
+      pay('market','recipe ingredients',cost,{add:purchased});bus('home',true);
+      const ready=choice('home','Check ingredients before cooking','Compare your carried ingredients with the recipe. Only begin when every required ingredient, including pantry basics, is available.',[{name:'The required ingredients are ready'},{name:'Cook without checking the stock'}],0);ready.requiresStock=clone(required);
+      if(m.id==='pizza')choice('home','Choose a baking tray','Each flatbread is 25 cm wide. Choose the smallest suitable tray. An adult bakes two flatbreads per batch, using suitable trays.',[{name:'20 cm tray'},{name:'28 cm tray'},{name:'40 cm tray'}],1);
+      if(m.id==='pancakes'||m.id==='pizza')amount('home','Plan cooking batches',m.id==='pancakes'?`Make 4 small pancakes per serving: ${4*portions} pancakes. The pan holds 2. How many batches?`:`Make ${portions} flatbreads. Bake 2 per batch. How many batches?`,batches,'batches');
+      if(m.id==='soup')add('home','Weigh the vegetables','measure',`Weigh ${250*scale} g of prepared carrots for this batch.`,250*scale,{unit:'g',max:1500,step:25});
+      order('home','Prepare '+m.name,m.prep,'Use the recipe card to place the preparation actions in order.',{minutes:prepMinutes});
+      add('home','Measure the '+measured.name,'measure',`Measure ${measured.quantity} ${measured.unit} of ${measured.name} for this batch.`,measured.quantity,{unit:measured.unit,max:Math.max(1000,measured.quantity+500),step:25,worked:`The recipe needs ${measured.quantity} ${measured.unit}.`});
+      const heat=m.method==='oven'?choice('home','Set the recipe temperature','An adult uses the conventional oven setting on the card. The fan-oven alternative is labelled separately.',[{name:'180 °C conventional'},{name:'200 °C conventional'},{name:'220 °C conventional'}],1):choice('home','Choose the cooking heat','Choose the guidance printed on the card. An adult controls the actual pan and checks the food.',[{name:m.heat},{name:'Maximum heat throughout'},{name:'Leave the equipment unattended'}],0);heat.cookingHeat=true;
+      amount('home','When will the meal be ready?',`Cooking starts at ${clock(time)}. Allow ${minutes} minutes${batches>1?' for all '+batches+' batches':''}. Set the estimated finish time; an adult still checks the food.`,time+minutes,'time',{minutes,consume:required});
+      steps.at(-1).requiresStock=clone(required);
+      order('home','Serve and tidy',['An adult turns off the equipment','Serve the cooked meal','Clean the work area and equipment'],'Finish the meal safely, with adult help.');
+      const first=ingredients[0],left=stock[first.key]+purchased[first.key]-first.required;
+      amount('home','Track leftover ingredients',`You had ${stock[first.key]} ${first.unit} of ${first.name} and bought ${purchased[first.key]} ${first.unit}. Cooking used ${first.required} ${first.unit}. How much remains?`,left,first.unit);
+    }else if(meta.category==='Cooking'){
       const m=clone(data.meals.find(m=>'cook-'+m.id===meta.id));
       if(original){Object.assign(m,{name:original==='lentil'?'Lentil Bolognese':'Spaghetti Bolognese',ingredients:['Spaghetti · 100 g pack','Chopped tomatoes · 400 g tin',original==='lentil'?'Lentils · 100 g pack':'Mince · 100 g pack'],need:[2,1,2],prices:[65,85,150],water:1000,cook:25,prep:original==='lentil'?['Measure 200 g dry lentils and rinse them','Simmer the lentils with the 400 g tomatoes and water as needed','Cook 200 g spaghetti separately, drain and add the lentil sauce']:['Measure 200 g mince and 400 g chopped tomatoes','Brown the mince with adult help, then add the tomatoes and simmer','Cook 200 g spaghetti separately, drain and add the sauce']});}
       const requirements=m.need.map(n=>n*scale),prices=m.prices.map(p=>p+shift*5),have=requirements.map((n,i)=>i===1?0:Math.min(n,1));

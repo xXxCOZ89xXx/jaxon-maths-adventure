@@ -1,0 +1,177 @@
+{
+  "date": "2026-11-10",
+  "branch": "codex/town-recipes-and-ingredient-art",
+  "integrationBase": "40682a08f14332f8365165a8145730514d309857",
+  "releaseObservedUnchanged": "7955861433337b61ba5bde28ae030c8f3325c935",
+  "scope": "Supplied recipe PNG integration only; existing recipe and Town branch work preserved",
+  "assets": {
+    "count": 27,
+    "originalPngBytes": 27873049,
+    "sourceZipBytesNotCommitted": 26002189,
+    "sourceZipSha256EntriesMatchExtracted": 27,
+    "originalRgbaTransparencyVerified": 27,
+    "allOriginalDimensionsLoadInBothBuilds": true
+  },
+  "browser": {
+    "recipeGameplay": {
+      "passed": 64,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-10T20:25:58.231Z",
+      "durationSeconds": 743,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "beforeGallery": {
+      "passed": 72,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-10T20:38:27.334Z",
+      "durationSeconds": 201,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "finalRecipeArt": {
+      "passed": 72,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-10T20:41:50.474Z",
+      "durationSeconds": 219,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "townRouting": {
+      "passed": 32,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-10T20:45:32.283Z",
+      "durationSeconds": 161,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "cookingRecovery": {
+      "passed": 32,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-10T20:48:14.474Z",
+      "durationSeconds": 125,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "demoActivities": {
+      "passed": 24,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-10T20:50:21.316Z",
+      "durationSeconds": 93,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "productionBrowser": {
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-10T20:51:55.356Z",
+      "durationSeconds": 25,
+      "projects": [
+        "desktop",
+        "ipad-portrait",
+        "ipad-landscape"
+      ]
+    }
+  },
+  "offlineChecks": [
+    [
+      "npm test",
+      "passed"
+    ],
+    [
+      "curriculum and objective audit, 222 mission/level combinations",
+      "passed"
+    ],
+    [
+      "recipes, 741 stages",
+      "passed"
+    ],
+    [
+      "Town Life, 2235 stages",
+      "passed"
+    ],
+    [
+      "save/recovery, four groups",
+      "passed"
+    ],
+    [
+      "gameplay quality",
+      "passed"
+    ],
+    [
+      "strict production build",
+      "passed"
+    ],
+    [
+      "production preparation, ten synthetic suites",
+      "passed"
+    ],
+    [
+      "demo source parity and strict asset allowlist",
+      "passed"
+    ],
+    [
+      "standalone demo browser, desktop and both iPad orientations",
+      "passed"
+    ]
+  ],
+  "additionalFailure": {
+    "command": "node tests/v52-staging-preserve.cjs",
+    "status": "fails unchanged on exact integration base",
+    "message": "Staging source changed / 1 !== 2",
+    "location": "scripts/build-v52-staging.cjs:6",
+    "unchangedReleaseSourceBlobs": {
+      "v3/staging-app.js": "61c0ef13f081eac74e714a39af08006255f06fa0",
+      "scripts/build-v52-staging.cjs": "93c7916c955d8c80efcd2ac07912f46997fb69ef"
+    },
+    "modifiedToHideOrWeakenFailure": false
+  },
+  "gallery": {
+    "pairs": 27,
+    "screenshots": 54,
+    "path": "docs/review/ingredient-art/gallery/GALLERY.md"
+  },
+  "physicalIpadSafari": "untested",
+  "hostedAcceptance": "not performed",
+  "realLearnerData": "not accessed",
+  "mergeOrDeployment": "not performed",
+  "accessAccountRewardDatabaseOrLiveDemoConfiguration": "unchanged"
+}

@@ -3,7 +3,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),http=require('n
 const {chromium,webkit}=require('playwright');
 const root=path.resolve(__dirname,'..'),dir=path.join(root,'demo-dist'),KEY='jaxon_public_demo_v1';
 const inventory=JSON.parse(fs.readFileSync(path.join(root,'work/public-demo/build-inventory.json')));
-const mime={'.html':'text/html','.js':'application/javascript','.css':'text/css','.svg':'image/svg+xml','.webp':'image/webp'};
+const mime={'.html':'text/html','.js':'application/javascript','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.webp':'image/webp'};
 const headers=fs.readFileSync(path.join(dir,'_headers'),'utf8').split('\n').slice(1).filter(Boolean).map(s=>{const i=s.indexOf(':');return [s.slice(0,i).trim(),s.slice(i+1).trim()]});
 const server=http.createServer((req,res)=>{let file=path.resolve(dir,'.'+decodeURIComponent(new URL(req.url,'http://local').pathname));if(!file.startsWith(dir+path.sep)&&file!==dir){res.writeHead(403).end();return;}if(file===dir||fs.existsSync(file)&&fs.statSync(file).isDirectory())file=path.join(file,'index.html');const exists=fs.existsSync(file);for(const [k,v]of headers)res.setHeader(k,v);res.setHeader('Content-Type',mime[path.extname(file)]||'application/octet-stream');res.writeHead(exists?200:404);res.end(fs.readFileSync(exists?file:path.join(dir,'404.html')));});
 const report={target:process.env.DEMO_URL||'local build',layouts:[],staticAssets:inventory.files.length};

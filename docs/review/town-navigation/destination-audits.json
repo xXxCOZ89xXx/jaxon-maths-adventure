@@ -1,0 +1,2978 @@
+[
+  {
+    "file": "audit-demo-desktop-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "audit-demo-ipad-landscape-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "audit-demo-ipad-portrait-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "audit-demo-small-touch.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "audit-production-desktop-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "audit-production-ipad-landscape-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "audit-production-ipad-portrait-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "audit-production-small-touch.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "baseline-demo-desktop-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "baseline-demo-ipad-landscape-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "baseline-demo-ipad-portrait-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "baseline-demo-small-touch.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "baseline-production-desktop-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "baseline-production-ipad-landscape-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "baseline-production-ipad-portrait-chromium.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  },
+  {
+    "file": "baseline-production-small-touch.json",
+    "passed": 30,
+    "routes": [
+      {
+        "route": "market",
+        "tier": 1,
+        "opened": "market",
+        "selected": 1
+      },
+      {
+        "route": "market",
+        "tier": 2,
+        "opened": "market",
+        "selected": 2
+      },
+      {
+        "route": "market",
+        "tier": 3,
+        "opened": "market",
+        "selected": 3
+      },
+      {
+        "route": "cafe",
+        "tier": 1,
+        "opened": "cafe",
+        "selected": 1
+      },
+      {
+        "route": "cafe",
+        "tier": 2,
+        "opened": "cafe",
+        "selected": 2
+      },
+      {
+        "route": "cafe",
+        "tier": 3,
+        "opened": "cafe",
+        "selected": 3
+      },
+      {
+        "route": "bank",
+        "tier": 1,
+        "opened": "bank",
+        "selected": 1
+      },
+      {
+        "route": "bank",
+        "tier": 2,
+        "opened": "bank",
+        "selected": 2
+      },
+      {
+        "route": "bank",
+        "tier": 3,
+        "opened": "bank",
+        "selected": 3
+      },
+      {
+        "route": "shops",
+        "tier": 1,
+        "opened": "shops",
+        "selected": 1
+      },
+      {
+        "route": "shops",
+        "tier": 2,
+        "opened": "shops",
+        "selected": 2
+      },
+      {
+        "route": "shops",
+        "tier": 3,
+        "opened": "shops",
+        "selected": 3
+      },
+      {
+        "route": "station",
+        "tier": 1,
+        "opened": "station",
+        "selected": 1
+      },
+      {
+        "route": "station",
+        "tier": 2,
+        "opened": "station",
+        "selected": 2
+      },
+      {
+        "route": "station",
+        "tier": 3,
+        "opened": "station",
+        "selected": 3
+      },
+      {
+        "route": "home",
+        "tier": 1,
+        "opened": "home",
+        "selected": 1
+      },
+      {
+        "route": "home",
+        "tier": 2,
+        "opened": "home",
+        "selected": 2
+      },
+      {
+        "route": "home",
+        "tier": 3,
+        "opened": "home",
+        "selected": 3
+      },
+      {
+        "route": "leisure",
+        "tier": 1,
+        "opened": "leisure",
+        "selected": 1
+      },
+      {
+        "route": "leisure",
+        "tier": 2,
+        "opened": "leisure",
+        "selected": 2
+      },
+      {
+        "route": "leisure",
+        "tier": 3,
+        "opened": "leisure",
+        "selected": 3
+      },
+      {
+        "route": "work",
+        "tier": 1,
+        "opened": "work",
+        "selected": 1
+      },
+      {
+        "route": "work",
+        "tier": 2,
+        "opened": "work",
+        "selected": 2
+      },
+      {
+        "route": "work",
+        "tier": 3,
+        "opened": "work",
+        "selected": 3
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 1,
+        "opened": "curr-town_planning",
+        "selected": 1
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 2,
+        "opened": "curr-town_planning",
+        "selected": 2
+      },
+      {
+        "route": "curr-town_planning",
+        "tier": 3,
+        "opened": "curr-town_planning",
+        "selected": 3
+      },
+      {
+        "route": "gateway",
+        "tier": 1,
+        "opened": "gateway",
+        "selected": 1
+      },
+      {
+        "route": "gateway",
+        "tier": 2,
+        "opened": "gateway",
+        "selected": 2
+      },
+      {
+        "route": "gateway",
+        "tier": 3,
+        "opened": "gateway",
+        "selected": 3
+      }
+    ]
+  }
+]

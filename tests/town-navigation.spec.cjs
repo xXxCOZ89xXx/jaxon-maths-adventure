@@ -1,0 +1,70 @@
+const {test,expect}=require('@playwright/test'),fs=require('node:fs');
+const F=require('./helpers/guided-progression.cjs'),{fixture,mock}=require('./helpers/cloud-server.cjs');
+const origin='http://127.0.0.1:4173',copy=x=>JSON.parse(JSON.stringify(x));
+const settled=p=>p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+async function click(p,a){const s=`[data-action="${a}"]:visible`,d=p.locator('dialog[open]'),b=await d.count()&&await d.locator(s).count()?d.locator(s).first():p.locator(s).first();if(p.touch)await b.tap();else await b.click();await settled(p);}
+async function launch(p,build,state){let key,server,errors=[],outside=[],mockErrors=[];p.on('pageerror',e=>errors.push(e.message));
+ if(build==='production'){server=fixture();server.progress=state;const B=require('../v3/backend-config.js').production;mockErrors=await mock(p,server,{projectRef:B.projectRef,projectName:B.projectName,identity:{contractVersion:1,ready:true}});await p.goto((process.env.TOWN_BASE_PATH||'')+'/production-test-dist/');await p.getByLabel('Email',{exact:true}).fill('learner@fictional.invalid');await p.getByLabel('Account password',{exact:true}).fill('fictional-only-password');await p.getByRole('button',{name:'Continue',exact:true}).click();await p.getByLabel('PIN',{exact:true}).fill('1234');await p.getByRole('button',{name:'Continue',exact:true}).click();await p.waitForFunction(()=>!!window.V3CloudContext);key=await p.evaluate(()=>V3CloudContext.key);
+ }else{key='jaxon_public_demo_v1';await p.route('**/*',r=>{if(new URL(r.request().url()).origin===origin)return r.continue();outside.push(r.request().url());return r.abort();});await p.addInitScript(({state,key})=>{if(!sessionStorage.getItem('town-fixture')){localStorage.setItem(key,JSON.stringify(state));sessionStorage.setItem('town-fixture','1');}},{state,key});await p.goto((process.env.TOWN_BASE_PATH||'')+'/demo-dist/');}
+ const read=async()=>{await settled(p);return p.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);};return{key,read,errors,verify:async()=>{expect(errors).toEqual([]);expect(outside).toEqual([]);expect(mockErrors).toEqual([]);if(build==='demo')expect(await p.evaluate(()=>typeof window.V3CloudContext)).toBe('undefined');}};
+}
+async function shot(p,info,build,name){const dir=`work/town-navigation/${process.env.TOWN_BEFORE?'before':'after'}/${build}/${info.project.name}`;fs.mkdirSync(dir,{recursive:true});if(name==='overview'){await p.locator('.world-overview img').evaluateAll(imgs=>Promise.all(imgs.map(i=>i.decode())));await p.locator('.world-overview').screenshot({path:dir+'/'+name+'.jpg',type:'jpeg',quality:72});}else await p.screenshot({path:dir+'/'+name+'.jpg',type:'jpeg',quality:72,fullPage:false});}
+async function layout(p){
+ const content=await p.locator('#main').evaluate(e=>{const s=getComputedStyle(e);return e.clientWidth-parseFloat(s.paddingLeft)-parseFloat(s.paddingRight);}),map=await p.locator('.town-explore-map').boundingBox();expect(map.width).toBeGreaterThan(content*.98);await expect(p.locator('.town-explore-map')).toHaveCount(1);
+ expect(await p.locator('.repair-entry').evaluate(e=>{const heading=document.querySelector('.mission-board>.section-head');return !!(heading.compareDocumentPosition(e)&Node.DOCUMENT_POSITION_FOLLOWING);})).toBe(true);await expect(p.locator('.world-overview .repair-entry')).toHaveCount(0);expect(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+}
+async function answerFirst(p,f){
+ await p.locator('.activity-entry [data-world-task-open]').click();await click(p,'m-begin');const q=(await f.read()).adventure.active,t=q.tasks[q.i],index=q.i;
+ if(t.direct)await require('./helpers/direct.cjs').alternative(p,t.direct,t.answer);
+ else if(t.kind==='curriculum'){
+  const a=t.activity;if(!a||['readgraph','angle','numberline'].includes(a.kind)){await p.locator('dialog[open] [data-c8-input]').fill(t.answer);await settled(p);}
+  else if(['order','match'].includes(a.kind))for(const i of JSON.parse(t.answer))await click(p,'c8-m:place-'+i);
+  else if(a.kind==='coordinate')await click(p,'c8-m:point-'+JSON.parse(t.answer).join(','));
+  else await click(p,'c8-m:choice-'+t.answer);
+ }else if(['basket','offers','budget'].includes(t.kind)){
+  for(let i=0;i<t.answer.length;i++){let n=t.answer[i];for(const step of t.kind==='budget'?[1000,500,100,5,1]:[1])while(n>=step){if(t.kind==='budget'){await click(p,'m-budget-pick:'+step);await click(p,'m-budget-place:'+i);}else await click(p,`m-part:${i}:1`);n-=step;}}
+ }else if(['order','match'].includes(t.kind)){for(let i=0;i<t.answer.length;i++){await click(p,'m-pick:'+t.answer[i]);await click(p,'m-place:'+i);}}
+ else if(['choice','journey'].includes(t.kind))await click(p,'m-choice:'+t.answer);
+ else if(t.kind==='coins'){let n=t.answer;for(const v of [5000,2000,1000,500,200,100,50,20,10,5,2,1])while(n>=v){await click(p,'m-coin:'+v);n-=v;}}
+ else {if(t.kind==='bank')for(let i=0;i<t.transactions.length;i++)await click(p,'m-post:'+i);const input=p.locator('dialog[open] [data-numeric-answer]').first();if(t.kind==='clock'){await p.locator('dialog[open] [data-mission-clock]').fill(String(Math.floor(t.answer/60)).padStart(2,'0')+':'+String(t.answer%60).padStart(2,'0'));}else await input.fill(String(t.responseUnit==='pounds'?t.answer/100:t.answer));await settled(p);}
+ if((await f.read()).adventure.active.i===index&&!(await f.read()).adventure.active.solved)await click(p,'m-submit');await expect.poll(async()=>(await f.read()).adventure.active.i).toBe(index+1);
+}
+for(const build of ['production','demo'])test(build+': Town destination audit',async({page:p},info)=>{
+ p.touch=!!info.project.use.hasTouch;const s=process.env.TOWN_BEFORE?F.fresh():require('./helpers/town-navigation.cjs').completed();s.view='world';s.world='town';const f=await launch(p,build,s);await expect(p.locator('#main h1')).toHaveText('Practical Maths Town');await shot(p,info,build,'overview');
+ const routes=await p.evaluate(()=>V3Adventure.routes('town').map(r=>({id:r.id,name:r.name})));const audit=[];if(!process.env.TOWN_BEFORE){await layout(p);const tier=await p.locator('[data-mission-tier="town"]').inputValue();for(const action of await p.locator('.visit-control [data-action^="mission:"]').evaluateAll(es=>es.map(e=>e.dataset.action)))expect(action.endsWith(':'+tier)).toBe(true);}
+ for(const r of [...routes,{id:'gateway',name:'Town Festival'}])for(const tier of [1,2,3]){
+  if((await f.read()).view!=='world')await click(p,'world:town');await p.locator('[data-mission-tier="town"]').selectOption(String(tier));await settled(p);
+  const b=p.locator(`[data-action="mission:town:${r.id}:${tier}"]`).first();const generation=await p.evaluate(({r,tier,key})=>{try{const s=JSON.parse(localStorage.getItem(key));return{ok:V3Adventure.start(s,'town',r.id,tier),route:s.adventure.active?.route,tasks:s.adventure.active?.tasks?.length};}catch(e){return{error:e.message,stack:e.stack};}},{r,tier,key:f.key});let blocked=null;
+  try{if(p.touch)await b.tap({timeout:2500});else await b.click({timeout:2500});await settled(p);}catch(e){blocked=e.message.slice(0,600);}
+  const a=await f.read(),q=a.adventure?.active;audit.push({route:r.id,tier,generation,blocked,view:a.view,opened:q?.route,selected:q?.tier,errors:f.errors.slice()});
+  if(!process.env.TOWN_BEFORE){expect(blocked).toBeNull();expect(a.view).toBe('adventure');expect(q.route).toBe(r.id);expect(q.tier).toBe(tier);const snapshot=copy(q);await click(p,'world:town');await click(p,`mission:town:${r.id}:${tier}`);expect((await f.read()).adventure.active).toEqual(snapshot);await answerFirst(p,f);const saved=copy((await f.read()).adventure.active);await p.reload();expect((await f.read()).adventure.active).toEqual(saved);}
+ }
+ const dir='work/town-navigation';fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(`${dir}/${process.env.TOWN_BEFORE?'baseline':'audit'}-${build}-${info.project.name}.json`,JSON.stringify(audit,null,2));if(!process.env.TOWN_BEFORE)await f.verify();
+});
+for(const build of ['production','demo'])test(build+': completed legacy visits preserve the build admission policy and explain private locks',async({page:p},info)=>{
+ p.touch=!!info.project.use.hasTouch;const s=require('./helpers/town-navigation.cjs').completed();delete s.startingProfile.areas.number;delete s.startingProfile.areas.town;const f=await launch(p,build,s),before=await f.read();
+ await p.locator('.gateway').scrollIntoViewIfNeeded();await shot(p,info,build,'locked-festival');
+ const controls=p.locator('.location-card .visit-control,.gateway .visit-control');
+ if(process.env.TOWN_BEFORE){const disabled=await p.locator('.location-card [data-action^="mission:"],.gateway [data-action^="mission:"]').evaluateAll(es=>es.map(e=>({action:e.dataset.action,disabled:e.disabled,reason:e.title})));fs.writeFileSync(`work/town-navigation/locked-before-${build}-${info.project.name}.json`,JSON.stringify(disabled,null,2));return;}
+ if(build==='demo'){await expect(controls).toHaveCount(10);for(const control of await controls.all())await expect(control.locator('[data-action^="mission:"]')).toBeEnabled();await click(p,'mission:town:gateway:1');expect((await f.read()).adventure.active.route).toBe('gateway');expect((await f.read()).startingProfile).toEqual(before.startingProfile);await f.verify();return;}
+ await expect(controls).toHaveCount(10);for(const control of await controls.all()){await expect(control.locator('[data-action^="mission:"]')).toBeDisabled();await expect(control).toContainText('Number Forest');await expect(control).toContainText('Practical Maths Town');await expect(control.locator('[data-action="starting:number"]')).toBeEnabled();}
+ await p.locator('.gateway [data-action="starting:number"]').click();await expect(p.locator('[data-baseline-scope]')).toBeVisible();expect((await f.read()).adventure.records).toEqual(before.adventure.records);expect((await f.read()).checks).toEqual(before.checks);await f.verify();
+});
+if(!process.env.TOWN_BEFORE)for(const build of ['production','demo'])for(const route of ['market','gateway'])test(`${build} ${route}: keyboard entry, full answer flow, resume, completion and replay preserve unrelated work`,async({page:p},info)=>{
+ p.touch=!!info.project.use.hasTouch;const s=require('./helpers/town-navigation.cjs').completed();F.L.start(s,'travel-library',1);const old=copy(F.L.state(s));s.pausedActivity={kind:'town',key:old.id,world:'town'};s.view='world';s.world='town';const f=await launch(p,build,s),before=await f.read();
+ await p.locator('[data-mission-tier="town"]').selectOption('2');await settled(p);const button=p.locator(`[data-action="mission:town:${route}:2"]`).first();await button.focus();await p.keyboard.press('Enter');await settled(p);expect((await f.read()).adventure.active.route).toBe(route);expect((await f.read()).coins).toBe(before.coins);expect((await f.read()).adventure.townLifeV2.runs[old.id]).toEqual(old);
+ await answerFirst(p,f);await click(p,'pause-explore');await p.reload();await click(p,'world:town');await p.locator('[data-mission-tier="town"]').selectOption('2');await settled(p);await click(p,`mission:town:${route}:2`);
+ for(let guard=0;guard<15&&(await f.read()).view==='adventure';guard++){if(!await p.locator('dialog[open]').count())await p.locator('.activity-entry [data-world-task-open]').click();const q=(await f.read()).adventure.active;if(q.phase==='lesson')await click(p,'m-begin');await click(p,'m-worked');await expect.poll(async()=>{const a=await f.read();return a.view!=='adventure'||a.adventure.active.i!==q.i;}).toBe(true);}
+ await expect(p.locator('.recap')).toBeVisible();const completed=await f.read();expect(completed.adventure.records[`town|${route}|2`].taskCount).toBe(route==='gateway'?12:6);expect(completed.checks).toEqual(before.checks);expect(completed.startingProfile).toEqual(before.startingProfile);expect(completed.adventure.records['town|shops|1']).toEqual(before.adventure.records['town|shops|1']);expect(completed.adventure.townLifeV2.runs[old.id]).toEqual(old);expect(completed.bought).toEqual(before.bought);
+ await click(p,'nav:home');await p.reload();await click(p,'continue');await expect(p.locator('.recap')).toBeVisible();await click(p,'world:town');await layout(p);await click(p,`mission:town:${route}:2`);expect((await f.read()).adventure.active.i).toBe(0);expect((await f.read()).adventure.records[`town|${route}|2`]).toEqual(completed.adventure.records[`town|${route}|2`]);await f.verify();
+});
+if(!process.env.TOWN_BEFORE)for(const build of ['production','demo'])test(build+': unavailable saved level explains the problem and offers a working Level 1 alternative',async({page:p},info)=>{
+ p.touch=!!info.project.use.hasTouch;const s=require('./helpers/town-navigation.cjs').completed();F.M.state(s).difficulty.town=4;const f=await launch(p,build,s);
+ const bank=p.locator('[data-visit-route="bank"]');await expect(bank).toContainText('Choose Level 1, 2 or 3');await expect(bank.locator('[data-action^="mission:"]')).toBeDisabled();await bank.locator('[data-action="town-level:1"]').click();await settled(p);await expect(p.locator('[data-mission-tier="town"]')).toHaveValue('1');await click(p,'mission:town:bank:1');expect((await f.read()).adventure.active.route).toBe('bank');expect((await f.read()).adventure.active.tier).toBe(1);await f.verify();
+});
+if(process.env.TOWN_GALLERY)for(const build of ['production','demo'])test(build+': review gallery',async({page:p},info)=>{
+ const s=F.fresh();s.view='world';s.world='town';const f=await launch(p,build,s);await shot(p,info,build,'overview');
+ await p.locator('.mission-board>.section-head').scrollIntoViewIfNeeded();await shot(p,info,build,'repair-panel');
+ await click(p,'mission:town:bank:1');await p.locator('.activity-entry [data-world-task-open]').click();await click(p,'m-begin');await shot(p,info,build,'bank-activity');await p.locator('[data-world-task-close]').click();await click(p,'world:town');
+ await click(p,'mission:town:gateway:1');await p.locator('.activity-entry [data-world-task-open]').click();await click(p,'m-begin');await shot(p,info,build,'festival-activity');await f.verify();
+});

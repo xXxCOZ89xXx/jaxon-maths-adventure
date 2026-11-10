@@ -66,7 +66,7 @@ test('Town normal map precedes the retained exterior hotspots and opens illustra
  const mapTop=await p.locator('.town-explore-map').evaluate(e=>e.getBoundingClientRect().top);
  expect(mapTop).toBeLessThan(boardTop);
  await expect(p.locator('.town-explore-map')).toHaveCount(1);
- await expect(p.locator('.world-overview .repair-entry')).toBeVisible();
+ await expect(p.locator('.mission-board>.repair-entry')).toBeVisible();
  await expect(board.locator('[data-home-hotspot]')).toHaveCount(3);
  await click(p,'home-activity:meters');await open(p);await click(p,'m-begin');
  await expect(p.locator('dialog[open] .meter-art')).toBeVisible();

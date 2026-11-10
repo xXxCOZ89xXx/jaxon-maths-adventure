@@ -4,12 +4,16 @@
   const T=typeof module!=='undefined'?require('./town').V3Town:root.V3Town;
   const H=typeof module!=='undefined'?require('./hands-on').V5HandsOn:root.V5HandsOn;
   const copy=x=>JSON.parse(JSON.stringify(x)), money=T.money, clock=T.clock;
+  // Quantities are usable contents, not pack counts. Old runs retain their
+  // saved recipeCard/steps/inventory; these definitions create new runs only.
+  const ingredient=(name,quantity,unit,pack,price,storage='cupboard',group='required')=>({name,quantity,unit,pack,price,storage,group});
+  const oil=()=>ingredient('Olive oil',10,'ml',250,180,'cupboard','pantry');
   const meals=[
-    {id:'pasta',name:'Tomato pasta',ingredients:['Pasta · 100 g pack','Tomatoes · tin','Cheese · 50 g pack'],need:[2,2,1],prices:[65,85,90],water:300,cook:12,prep:['Read the recipe and measure the pasta','Boil water and cook the pasta','Stir in tomatoes and cheese']},
-    {id:'curry',name:'Chickpea curry',ingredients:['Chickpeas · tin','Coconut milk · 200 ml carton','Rice · 100 g pack'],need:[2,1,2],prices:[75,120,60],water:400,cook:20,prep:['Measure rice and sauce ingredients','Start the chickpeas and coconut milk in the pan','Cook the rice while the sauce simmers','Serve rice with the finished curry']},
-    {id:'pizza',name:'Vegetable pizza',ingredients:['Pizza base','Passata · 100 ml carton','Peppers · pair'],need:[1,2,1],prices:[150,55,110],water:100,cook:15,prep:['Spread passata on the base','Add the prepared peppers','Bake the topped pizza']},
-    {id:'soup',name:'Carrot and lentil soup',ingredients:['Carrots · 200 g bag','Lentils · 100 g pack','Stock · cube'],need:[2,1,2],prices:[80,95,20],water:600,cook:25,prep:['Wash and chop the carrots','Make the stock with the measured water','Add lentils and stock to the carrots','Simmer then blend the soup']},
-    {id:'pancakes',name:'Banana pancakes',ingredients:['Flour · 100 g pack','Milk · 100 ml carton','Bananas'],need:[2,3,2],prices:[45,35,30],water:150,cook:8,prep:['Mash the bananas','Mix flour, milk and banana','Cook and turn the pancakes']}
+    {id:'pasta',name:'Tomato pasta',prepMinutes:10,cook:12,water:1000,liquid:'water',method:'hob',heat:'A steady boil for the pasta',ingredients:[ingredient('Pasta',200,'g',500,95),ingredient('Ripe tomatoes',300,'g',300,140,'fridge'),ingredient('Basil',5,'g',15,75,'fridge'),oil()],optional:['20 g grated cheese per 2 servings (milk)','20 g pitted olives per 2 servings'],allergens:'Wheat/gluten in pasta; milk if cheese is added.',prep:['Wash the tomatoes and basil; ask an adult to cut the tomatoes.','Mix the prepared tomatoes, torn basil and measured oil into a fresh sauce.','An adult cooks the measured pasta in boiling water, following its packet, then drains it.','Combine the warm pasta and tomato sauce; add an optional topping if suitable.']},
+    {id:'curry',name:'Mild chickpea coconut curry',prepMinutes:10,cook:20,water:250,liquid:'water for the rice',method:'hob',heat:'A gentle simmer for the sauce',ingredients:[ingredient('Chickpeas, drained',240,'g',240,80),ingredient('Chopped tomatoes',200,'g',400,85),ingredient('Coconut milk',200,'ml',400,125),ingredient('Dry basmati rice',125,'g',500,110),ingredient('Ground cumin',1,'teaspoons',20,95,'cupboard','pantry'),ingredient('Turmeric',0.5,'teaspoons',20,90,'cupboard','pantry')],optional:['Chilli or hotter curry paste: optional adult addition only; not included in this mild recipe or shopping list.'],allergens:'Check spice and optional paste labels for mustard, milk or gluten. Coconut is an ingredient too.',prep:['Drain and rinse the chickpeas; measure the tomatoes, coconut milk and mild spices.','An adult warms these ingredients together and lets the sauce simmer gently.','Cook the measured rice with the measured water, following its packet; start it while the sauce simmers.','Check the rice and sauce are ready together, then serve. No chilli is needed.']},
+    {id:'pizza',name:'Vegetable flatbread pizza',prepMinutes:15,cook:12,method:'oven',heat:'200 °C conventional / 180 °C fan',temperature:200,ingredients:[ingredient('Flatbreads',2,'items',4,150),ingredient('Passata',100,'g',500,90),ingredient('Spinach, thawed and drained',100,'g',250,95,'fridge'),ingredient('Pepper',80,'g',160,70,'fridge'),ingredient('Mozzarella',100,'g',125,100,'fridge')],optional:['Basil leaves to finish','A little grated hard cheese (milk)'],allergens:'Wheat/gluten in flatbreads and milk in mozzarella; check flatbread labels for other ingredients.',prep:['Ask an adult to preheat the oven and prepare the pepper; squeeze excess water from the thawed spinach.','Cover the flatbreads with the measured passata, vegetables and torn mozzarella.','An adult bakes two flatbreads per batch until hot throughout and the cheese has melted.','Let the pizzas cool slightly before an adult cuts them for serving.']},
+    {id:'soup',name:'Carrot and red lentil soup',prepMinutes:10,cook:25,water:750,liquid:'water for the stock',method:'hob',heat:'A gentle simmer',ingredients:[ingredient('Carrots',250,'g',500,65,'fridge'),ingredient('Red lentils',100,'g',500,120),ingredient('Onion',100,'g',200,45),ingredient('Garlic',1,'cloves',6,55),ingredient('Vegetable stock cubes',1,'items',6,75,'cupboard','pantry'),oil()],optional:['Chopped parsley to finish'],allergens:'Stock cubes may contain celery, gluten or milk: check the label.',prep:['Wash the carrots; an adult chops the carrots, onion and garlic. Rinse the lentils.','An adult softens the onion and garlic in the measured oil, then adds the carrots.','Add the lentils, stock cube and measured water; simmer until the vegetables and lentils are tender.','Serve as a chunky soup, or let an adult blend it safely away from splashes.']},
+    {id:'pancakes',name:'Banana oat pancakes',prepMinutes:10,cook:15,method:'frying pan',heat:'Medium heat',ingredients:[ingredient('Rolled oats',100,'g',500,100),ingredient('Oat milk',125,'ml',1000,145,'fridge'),ingredient('Eggs',2,'items',6,165,'fridge'),ingredient('Bananas',1,'items',3,70),ingredient('Baking powder',2,'teaspoons',20,80,'cupboard','pantry'),ingredient('Cooking oil',5,'ml',250,150,'cupboard','pantry')],optional:['0.5 teaspoon vanilla extract per 2 servings','Fresh fruit or yoghurt to serve (yoghurt contains milk)'],allergens:'Eggs; oats and oat milk may contain gluten. Optional yoghurt contains milk.',prep:['Measure the oats and oat milk; peel the banana and crack the eggs into a separate bowl.','An adult helps blend the oats, milk, banana, eggs and baking powder into a smooth batter.','An adult lightly oils a pan and cooks two small pancakes at a time, turning them when set.','Cook both sides until the centre is set; serve with a suitable optional topping.']}
   ];
   const shopping=[
     {id:'groceries',name:'Weekly grocery top-up',venue:'market',items:['Breakfast oats · box','Milk · carton','Apples · bag'],qty:[2,2,1],prices:[125,145,160]},
@@ -68,7 +72,7 @@
     s.adventure ||= {};const b=book(s)||{version:2,runs:{},counts:{},active:null};
     let j=Object.values(b.runs).filter(r=>r.originalRecipe===recipe).at(-1);
     if(!j||j.done&&replay){const key='original-'+recipe,seed=(b.counts[key]||0)+1;j=make('cook-pasta',Math.max(1,Math.min(3,tier)),seed,recipe);j.id=key+':'+seed;b.runs[j.id]=j;b.counts[key]=seed;}
-    b.active=j.id;s.adventure.townLifeV2=b;s.adventure.townActive=2;s.view=s.resumeView='journey';s.world='town';return true;
+    b.active=j.id;s.adventure.townLifeV2=b;s.adventure.townActive=2;s.view=s.resumeView='journey';s.world='town';s.pausedActivity=null;return true;
   }
   function start(s,id,tier=1,replay=false){
     if(!catalog.some(x=>x.id===id)||book(s)!==undefined&&!validBook(book(s)))return false;
@@ -77,13 +81,14 @@
     if(existing&&!existing.done){b.active=existing.id;}
     else if(existing&&!replay){b.active=existing.id;}
     else {const seed=(b.counts[id]||0)+1,j=make(id,Math.max(1,Math.min(3,Math.trunc(tier)||1)),seed);if(!validRun(j))return false;b.runs[j.id]=j;b.counts[id]=seed;b.active=j.id;}
-    s.adventure.townLifeV2=b;s.adventure.townActive=2;s.view=s.resumeView='journey';s.world='town';return true;
+    s.adventure.townLifeV2=b;s.adventure.townActive=2;s.view=s.resumeView='journey';s.world='town';s.pausedActivity=null;return true;
   }
   function value(t,v){if(t.kind==='order'||t.kind==='match')return v.order||[];if(['basket','budget'].includes(t.kind))return v.parts||[0,0,0];if(['journey','choice'].includes(t.kind))return v.choice??-1;if(t.kind==='coins')return (v.coins||[]).reduce((a,b)=>a+b,0);return v.amount||0;}
   function valid(t,v){if(H.invalidDraft(v,t))return false;const x=value(t,v);if(t.allowedChoices)return t.allowedChoices.includes(x);return Array.isArray(t.answer)?Array.isArray(x)&&x.length===t.answer.length&&x.every((a,i)=>a===t.answer[i]):x===t.answer;}
   function action(s,name,arg,raw=''){
     const j=state(s),t=task(s);if(!j||!t)return false;const v=j.values,bits=raw.split(':');
     if(name==='j-next')return next(s);
+    if(['j-submit','j-skip'].includes(name)&&stockShortage(j,t)){j.feedback=stockShortage(j,t);return false;}
     if(name==='j-skip'){
       if(j.solved)return false;
       if(!j.evidence.some(e=>e.stage===j.stage))j.evidence.push({stage:j.stage,firstValue:copy(value(t,v)),correct:false,assisted:true,skipped:true,source:'town-life-v2'});
@@ -112,6 +117,7 @@
   }
   function next(s){
     const j=state(s),t=task(s);if(!j||!t||!j.solved||!valid(t,j.values))return false;
+    if(stockShortage(j,t)){j.feedback=stockShortage(j,t);return false;}
     const e=t.effect,cash=j.cash+(e.earn||0)-(e.spend||0)-(e.savings||0),time=j.time+(e.minutes||0),inventory={...j.inventory};
     for(const [name,n]of Object.entries(e.add||{}))inventory[name]=(inventory[name]||0)+n;
     for(const [name,n]of Object.entries(e.consume||{})){if((inventory[name]||0)<n)return false;inventory[name]-=n;}
@@ -126,6 +132,7 @@
     if(t.branches){const branch=t.branches[j.values.choice];if(!Array.isArray(branch))return false;j.steps.splice(j.stage+1,j.steps.length-j.stage-1,...copy(branch));j.decisions ||= [];j.decisions.push({stage:j.stage,choice:t.options[j.values.choice].name});}
     j.completed.push(j.stage);j.stage++;j.done=j.stage===j.steps.length;j.values={};j.solved=false;j.assisted=false;j.feedback='';j.hintLevel=0;if(j.done){s.resumeView='journey';s.lastResult={type:'town-plan',world:'town',name:j.name,runId:j.id};completeLandmark(s,j);}return true;
   }
+  function stockShortage(j,t){const missing=Object.entries(t.requiresStock||{}).filter(([name,n])=>(j.inventory[name]||0)<n);return missing.length?'Not enough ingredients to cook. Missing '+missing.map(([key,n])=>{const i=j.recipeCard?.ingredients?.find(i=>i.key===key);return (n-(j.inventory[key]||0))+' '+(i?.unit||'')+' of '+(i?.name||key);}).join('; ')+'. Your progress is saved; review your ingredient list.':null;}
   function completeLandmark(s,j){
     const M=typeof module!=='undefined'?require('./adventure').V3Adventure:root.V3Adventure;
     const route=catalog.find(c=>c.id===j.scenario).venue,key=M.id('town',route,j.tier),a=M.state(s);
