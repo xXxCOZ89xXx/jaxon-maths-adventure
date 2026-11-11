@@ -579,8 +579,10 @@
   function startDiscovery(s, id, curriculum, helpers) {
     if(N.restoreLearning(s,id,"discovery"))return null;
     if (!curriculum.discovery[id]) return "Unknown skill.";
+    const profile=typeof module!=="undefined"?require('./starting-profile').V11StartingProfile:root.V11StartingProfile;
+    const baseline=profile?.latest(s,curriculum.skills.find(k=>k.id===id)?.world);
     s.discovery[id] = s.discovery[id] || {
-      band: s.startingProfile?.areas?.[curriculum.skills.find(k=>k.id===id)?.world]?.responses?.length===4
+      band: profile?.valid(baseline)
         ? (typeof module!=="undefined"?require('./adaptive').V5Adaptive:root.V5Adaptive).skill(s,id).band
         : education.minBand(id)===3?5:7,
       answers: [],

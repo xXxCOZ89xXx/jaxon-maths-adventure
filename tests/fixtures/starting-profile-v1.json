@@ -1,0 +1,835 @@
+{
+  "completed": {
+    "version": 1,
+    "areas": {
+      "number": {
+        "band": 8,
+        "responses": [
+          {
+            "skill": "negative",
+            "band": 7,
+            "prompt": "−8 + (−7) = ?",
+            "answer": "-15",
+            "choices": [
+              "-14",
+              "-16",
+              "-13",
+              "-15"
+            ],
+            "explanation": "The answer is -15.",
+            "value": "-15",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "operations",
+            "band": 7,
+            "prompt": "−8 − 5 = ?",
+            "answer": "-13",
+            "choices": [
+              "-12",
+              "-14",
+              "-13",
+              "-11"
+            ],
+            "explanation": "The answer is -13.",
+            "value": "-13",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "negative",
+            "band": 8,
+            "prompt": "−8.4 ÷ (−0.7) = ?",
+            "answer": "12",
+            "choices": [
+              "13",
+              "11",
+              "12",
+              "14"
+            ],
+            "explanation": "The answer is 12.",
+            "value": "12",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "operations",
+            "band": 8,
+            "prompt": "−7.2 − 4.85 = ?",
+            "answer": "-12.05",
+            "choices": [
+              "-11.55",
+              "-12.05",
+              "-12.55",
+              "-11.05"
+            ],
+            "explanation": "The answer is -12.05.",
+            "value": "-12.05",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          }
+        ],
+        "startedAt": 1793232000000,
+        "draft": "",
+        "estimate": {
+          "band": 9,
+          "tier": 3,
+          "reason": "Your short discovery round",
+          "prerequisite": null,
+          "prerequisiteGaps": []
+        },
+        "completedAt": 1793232000000
+      },
+      "fractions": {
+        "band": 6,
+        "responses": [
+          {
+            "skill": "fractions",
+            "band": 5,
+            "prompt": "What is half of 18?",
+            "answer": "9",
+            "choices": [
+              "10",
+              "8",
+              "9",
+              "11"
+            ],
+            "explanation": "The answer is 9.",
+            "value": "9",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "decimals",
+            "band": 5,
+            "prompt": "Write 1/4 as a percentage.",
+            "answer": "25",
+            "choices": [
+              "30",
+              "20",
+              "25",
+              "35"
+            ],
+            "explanation": "The answer is 25.",
+            "value": "25",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "fractions",
+            "band": 6,
+            "prompt": "What is 0.25 as a percentage?",
+            "answer": "25",
+            "choices": [
+              "30",
+              "25",
+              "20",
+              "35"
+            ],
+            "explanation": "The answer is 25.",
+            "value": "25",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "decimals",
+            "band": 6,
+            "prompt": "Write 0.375 as a percentage.",
+            "answer": "37.5",
+            "choices": [
+              "38",
+              "37.5",
+              "37",
+              "38.5"
+            ],
+            "explanation": "The answer is 37.5.",
+            "value": "37.5",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          }
+        ],
+        "startedAt": 1793232000000,
+        "draft": "",
+        "estimate": {
+          "band": 7,
+          "tier": 2,
+          "reason": "Your short discovery round",
+          "prerequisite": "fraction_parts",
+          "prerequisiteGaps": [
+            "fraction_parts",
+            "division_groups"
+          ]
+        },
+        "completedAt": 1793232000000
+      },
+      "algebra": {
+        "band": 8,
+        "responses": [
+          {
+            "skill": "algebra_missing",
+            "band": 7,
+            "prompt": "3x + 2 = 20. Find x.",
+            "answer": "6",
+            "choices": [
+              "7",
+              "5",
+              "6",
+              "8"
+            ],
+            "explanation": "The answer is 6.",
+            "value": "6",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "algebra_patterns",
+            "band": 7,
+            "prompt": "Next term: 2, 5, 8, 11",
+            "answer": "14",
+            "choices": [
+              "14",
+              "15",
+              "13",
+              "16"
+            ],
+            "explanation": "The answer is 14.",
+            "value": "14",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "algebra_missing",
+            "band": 8,
+            "prompt": "3x + 8 = 29. Find x.",
+            "answer": "7",
+            "choices": [
+              "8",
+              "7",
+              "6",
+              "9"
+            ],
+            "explanation": "The answer is 7.",
+            "value": "7",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "algebra_patterns",
+            "band": 8,
+            "prompt": "Next term: 5, 10, 20, 40",
+            "answer": "80",
+            "choices": [
+              "85",
+              "75",
+              "90",
+              "80"
+            ],
+            "explanation": "The answer is 80.",
+            "value": "80",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          }
+        ],
+        "startedAt": 1793232000000,
+        "draft": "",
+        "estimate": {
+          "band": 9,
+          "tier": 3,
+          "reason": "Your short discovery round",
+          "prerequisite": "number_bonds",
+          "prerequisiteGaps": [
+            "number_bonds"
+          ]
+        },
+        "completedAt": 1793232000000
+      },
+      "geometry": {
+        "band": 8,
+        "responses": [
+          {
+            "skill": "geometry_angles",
+            "band": 7,
+            "prompt": "Angles around a point sum to?",
+            "answer": "360",
+            "choices": [
+              "370",
+              "350",
+              "360",
+              "380"
+            ],
+            "explanation": "The answer is 360.",
+            "value": "360",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "geometry_area",
+            "band": 7,
+            "prompt": "Parallelogram base 9, height 6. Find area.",
+            "answer": "54",
+            "choices": [
+              "59",
+              "54",
+              "49",
+              "64"
+            ],
+            "explanation": "The answer is 54.",
+            "value": "54",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "geometry_angles",
+            "band": 8,
+            "prompt": "Exterior angle supplementary to 136°. Find it.",
+            "answer": "44",
+            "choices": [
+              "49",
+              "44",
+              "39",
+              "54"
+            ],
+            "explanation": "The answer is 44.",
+            "value": "44",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "geometry_area",
+            "band": 8,
+            "prompt": "Circle diameter 10. Use pi=3.14. Find circumference.",
+            "answer": "31.4",
+            "choices": [
+              "31.4",
+              "31.9",
+              "30.9",
+              "32.4"
+            ],
+            "explanation": "The answer is 31.4.",
+            "value": "31.4",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          }
+        ],
+        "startedAt": 1793232000000,
+        "draft": "",
+        "estimate": {
+          "band": 9,
+          "tier": 3,
+          "reason": "Your short discovery round",
+          "prerequisite": "geometry_shapes",
+          "prerequisiteGaps": [
+            "geometry_shapes"
+          ]
+        },
+        "completedAt": 1793232000000
+      },
+      "ratio": {
+        "band": 8,
+        "responses": [
+          {
+            "skill": "ratio_basics",
+            "band": 7,
+            "prompt": "Simplify 24:36. Give the first number.",
+            "answer": "2",
+            "choices": [
+              "3",
+              "1",
+              "4",
+              "2"
+            ],
+            "explanation": "The answer is 2.",
+            "value": "2",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "ratio_sharing",
+            "band": 7,
+            "prompt": "Share 96 in 3:5. Smaller share?",
+            "answer": "36",
+            "choices": [
+              "41",
+              "36",
+              "31",
+              "46"
+            ],
+            "explanation": "The answer is 36.",
+            "value": "36",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "ratio_basics",
+            "band": 8,
+            "prompt": "Simplify 54:81. Give the first number.",
+            "answer": "2",
+            "choices": [
+              "3",
+              "1",
+              "2",
+              "4"
+            ],
+            "explanation": "The answer is 2.",
+            "value": "2",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "ratio_sharing",
+            "band": 8,
+            "prompt": "Share 126 in 2:7. Smaller share?",
+            "answer": "28",
+            "choices": [
+              "28",
+              "33",
+              "23",
+              "38"
+            ],
+            "explanation": "The answer is 28.",
+            "value": "28",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          }
+        ],
+        "startedAt": 1793232000000,
+        "draft": "",
+        "estimate": {
+          "band": 9,
+          "tier": 3,
+          "reason": "Your short discovery round",
+          "prerequisite": "times_tables",
+          "prerequisiteGaps": [
+            "times_tables",
+            "fraction_parts"
+          ]
+        },
+        "completedAt": 1793232000000
+      },
+      "statistics": {
+        "band": 8,
+        "responses": [
+          {
+            "skill": "stats_tables",
+            "band": 7,
+            "prompt": "Bus 18, car 12, cycle 6. Total pupils?",
+            "answer": "36",
+            "choices": [
+              "41",
+              "31",
+              "46",
+              "36"
+            ],
+            "explanation": "The answer is 36.",
+            "value": "36",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "stats_averages",
+            "band": 7,
+            "prompt": "Range of -3, 2, 8?",
+            "answer": "11",
+            "choices": [
+              "12",
+              "10",
+              "11",
+              "13"
+            ],
+            "explanation": "The answer is 11.",
+            "value": "11",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "stats_tables",
+            "band": 8,
+            "prompt": "Class A 28 pupils, class B 34. Combined?",
+            "answer": "62",
+            "choices": [
+              "67",
+              "57",
+              "62",
+              "72"
+            ],
+            "explanation": "The answer is 62.",
+            "value": "62",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "stats_averages",
+            "band": 8,
+            "prompt": "Mean of 2.5, 3.5, 5, 9?",
+            "answer": "5",
+            "choices": [
+              "6",
+              "5",
+              "4",
+              "7"
+            ],
+            "explanation": "The answer is 5.",
+            "value": "5",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          }
+        ],
+        "startedAt": 1793232000000,
+        "draft": "",
+        "estimate": {
+          "band": 9,
+          "tier": 3,
+          "reason": "Your short discovery round",
+          "prerequisite": "stats_scale",
+          "prerequisiteGaps": [
+            "stats_scale"
+          ]
+        },
+        "completedAt": 1793232000000
+      },
+      "probability": {
+        "band": 8,
+        "responses": [
+          {
+            "skill": "prob_chance",
+            "band": 7,
+            "prompt": "A fair spinner has 5 equal sections, one green. Chance of green? Choose the denominator.",
+            "answer": "5",
+            "choices": [
+              "6",
+              "4",
+              "5",
+              "7"
+            ],
+            "explanation": "The answer is 5.",
+            "value": "5",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "prob_events",
+            "band": 7,
+            "prompt": "Bag with 2 green counters among 8 counters. How many favourable counters?",
+            "answer": "2",
+            "choices": [
+              "3",
+              "1",
+              "4",
+              "2"
+            ],
+            "explanation": "The answer is 2.",
+            "value": "2",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "prob_chance",
+            "band": 8,
+            "prompt": "A fair spinner has 8 equal sections, one green. Chance of green? Choose the denominator.",
+            "answer": "8",
+            "choices": [
+              "9",
+              "8",
+              "7",
+              "10"
+            ],
+            "explanation": "The answer is 8.",
+            "value": "8",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "prob_events",
+            "band": 8,
+            "prompt": "Bag with 2 green counters among 11 counters. How many favourable counters?",
+            "answer": "2",
+            "choices": [
+              "3",
+              "1",
+              "2",
+              "4"
+            ],
+            "explanation": "The answer is 2.",
+            "value": "2",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          }
+        ],
+        "startedAt": 1793232000000,
+        "draft": "",
+        "estimate": {
+          "band": 9,
+          "tier": 3,
+          "reason": "Your short discovery round",
+          "prerequisite": null,
+          "prerequisiteGaps": []
+        },
+        "completedAt": 1793232000000
+      },
+      "measure": {
+        "band": 8,
+        "responses": [
+          {
+            "skill": "measure_units",
+            "band": 7,
+            "prompt": "How many centimetres in 1.5 metres?",
+            "answer": "150",
+            "choices": [
+              "150",
+              "160",
+              "140",
+              "170"
+            ],
+            "explanation": "The answer is 150.",
+            "value": "150",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "measure_time",
+            "band": 7,
+            "prompt": "How many minutes in 4 hours?",
+            "answer": "240",
+            "choices": [
+              "240",
+              "250",
+              "230",
+              "260"
+            ],
+            "explanation": "The answer is 240.",
+            "value": "240",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "measure_units",
+            "band": 8,
+            "prompt": "How many centimetres in 2.5 metres?",
+            "answer": "250",
+            "choices": [
+              "260",
+              "240",
+              "270",
+              "250"
+            ],
+            "explanation": "The answer is 250.",
+            "value": "250",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "measure_time",
+            "band": 8,
+            "prompt": "How many minutes are 4 hours and 30 minutes?",
+            "answer": "270",
+            "choices": [
+              "280",
+              "260",
+              "290",
+              "270"
+            ],
+            "explanation": "The answer is 270.",
+            "value": "270",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          }
+        ],
+        "startedAt": 1793232000000,
+        "draft": "",
+        "estimate": {
+          "band": 9,
+          "tier": 3,
+          "reason": "Your short discovery round",
+          "prerequisite": "decimal_place",
+          "prerequisiteGaps": [
+            "decimal_place",
+            "measure_mass"
+          ]
+        },
+        "completedAt": 1793232000000
+      },
+      "town": {
+        "band": 8,
+        "responses": [
+          {
+            "skill": "town_money",
+            "band": 7,
+            "prompt": "These coins are in a purse: 2p, 20p, 20p, 20p. How many pence altogether?",
+            "answer": "62",
+            "choices": [
+              "63",
+              "61",
+              "64",
+              "62"
+            ],
+            "explanation": "2p + 20p + 20p + 20p = 62p.",
+            "moneyQuestionVersion": 2,
+            "value": "62",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "town_timetable",
+            "band": 7,
+            "prompt": "Train departs 11:53 and arrives 12:58. Journey duration in minutes?",
+            "answer": "65",
+            "choices": [
+              "70",
+              "60",
+              "65",
+              "75"
+            ],
+            "explanation": "The answer is 65.",
+            "value": "65",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "town_money",
+            "band": 8,
+            "prompt": "You have a £5 note and 8p in coins. How much money altogether in pounds?",
+            "answer": "5.08",
+            "choices": [
+              "5.33",
+              "5.08",
+              "4.83",
+              "5.58"
+            ],
+            "explanation": "£5.00 + £0.08 = £5.08.",
+            "moneyQuestionVersion": 2,
+            "value": "5.08",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "town_timetable",
+            "band": 8,
+            "prompt": "Train departs 11:58 and arrives 12:58. Journey duration in minutes?",
+            "answer": "60",
+            "choices": [
+              "65",
+              "60",
+              "55",
+              "70"
+            ],
+            "explanation": "The answer is 60.",
+            "value": "60",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          }
+        ],
+        "startedAt": 1793232000000,
+        "draft": "",
+        "estimate": {
+          "band": 9,
+          "tier": 3,
+          "reason": "Your short discovery round",
+          "prerequisite": "decimal_place",
+          "prerequisiteGaps": [
+            "decimal_place"
+          ]
+        },
+        "completedAt": 1793232000000
+      }
+    },
+    "active": "town"
+  },
+  "partial": {
+    "version": 1,
+    "areas": {
+      "number": {
+        "band": 8,
+        "responses": [
+          {
+            "skill": "negative",
+            "band": 7,
+            "prompt": "−8 + (−7) = ?",
+            "answer": "-15",
+            "choices": [
+              "-14",
+              "-16",
+              "-13",
+              "-15"
+            ],
+            "explanation": "The answer is -15.",
+            "value": "-15",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000000
+          },
+          {
+            "skill": "operations",
+            "band": 7,
+            "prompt": "−8 − 5 = ?",
+            "answer": "-13",
+            "choices": [
+              "-12",
+              "-14",
+              "-13",
+              "-11"
+            ],
+            "explanation": "The answer is -13.",
+            "value": "-13",
+            "skipped": false,
+            "correct": true,
+            "at": 1793232000001
+          }
+        ],
+        "startedAt": 1793232000000,
+        "draft": "-",
+        "question": {
+          "skill": "negative",
+          "band": 8,
+          "prompt": "−8.4 ÷ (−0.7) = ?",
+          "answer": "12",
+          "choices": [
+            "13",
+            "11",
+            "12",
+            "14"
+          ],
+          "explanation": "The answer is 12."
+        },
+        "answered": false
+      }
+    },
+    "active": "number"
+  }
+}

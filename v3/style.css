@@ -2280,6 +2280,9 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 
 .countable-stock .stock-pick .recipe-ingredient-prop{width:53px;height:70px}.basket-contents .recipe-ingredient-prop{width:100%;height:100%}.carried-products .recipe-ingredient-prop{width:100%;height:80px}.shelf-touch .recipe-ingredient-prop{width:100%;height:100%}
 
+/* Year choices and provisional starting estimates remain readable on narrow touch screens. */
+.starting-results select{display:block;width:100%;max-width:100%;min-height:48px;margin:8px 0 12px;font:inherit}.starting-results label{display:block;font-weight:700}.starting-estimate{margin-top:16px;padding-top:12px;border-top:1px solid #879b7c}.baseline-question .actions{flex-wrap:wrap}.baseline-question input{max-width:100%}
+
 /* Route positions use the artwork bounds; edge labels open toward the map. */
 .world-route-pins{position:absolute;inset:0;pointer-events:none}
 .world-route-pins button{pointer-events:auto}

@@ -48,13 +48,13 @@ async function verifyLayout(p){assert(await p.evaluate(()=>document.documentElem
  const resumeOpener=p.locator('[data-world-task-open]').first();if(await resumeOpener.count())await resumeOpener.click();
  await pauseJourney(p);
  await click(p,'.home-path [data-action="nav:starting"]');
- await click(p,'[data-action="starting:number"]');await click(p,'[data-action="starting-choice:0"]');const before=await state(p);assert.equal(before.startingProfile.areas.number.responses.length,1);
+ await p.locator('[data-starting-year="number"]').selectOption('5');await click(p,'[data-action="starting:number"]');await click(p,'[data-action="starting-choice:0"]');const before=await state(p);assert.equal(before.startingProfile.areas.number.responses.length,1);
  await p.reload();assert.deepEqual((await state(p)).startingProfile,before.startingProfile);
  await click(p,'[data-action="pause-explore"]');
  // Complete all nine real demo starting samples through the visible UI (no seeded learner).
  await click(p,'.home-path [data-action="nav:starting"]');
  for(const id of ['number','fractions','algebra','geometry','ratio','statistics','probability','measure','town']){
- await click(p,`[data-action="starting:${id}"]`);
+ if(await p.locator(`[data-starting-year="${id}"]`).count())await p.locator(`[data-starting-year="${id}"]`).selectOption('5');await click(p,`[data-action="starting:${id}"]`);
  while(!(await p.evaluate(({key,id})=>V11StartingProfile.valid(JSON.parse(localStorage.getItem(key)).startingProfile.areas[id]),{key:KEY,id}))){const s=await state(p),a=s.startingProfile.areas[id];if(a.answered)await click(p,'[data-action="starting-next"]');else await click(p,'[data-action="starting-skip"]');if((await state(p)).view==='starting')break;}
  }
  assert(await p.evaluate(k=>V11StartingProfile.complete(JSON.parse(localStorage.getItem(k))),KEY));
@@ -77,7 +77,7 @@ async function verifyLayout(p){assert(await p.evaluate(()=>document.documentElem
  await p.screenshot({path:path.join(root,'work/public-demo',layout.name+'.png'),fullPage:true});
  const keys=await p.evaluate(()=>Object.keys(localStorage));assert.deepEqual(keys,[KEY]);assert.equal(await p.evaluate(()=>sessionStorage.length),0);assert.equal((await ctx.cookies()).length,0);
  assert(firstOriginOps.every(o=>o.area==='local'&&o.key===KEY&&['getItem','setItem'].includes(o.op)),JSON.stringify(storageOps));
- assert.equal(saved.startingProfile.areas.number.responses.length,4);
+ assert.equal(saved.startingProfile.areas.number.responses.length,15);
  // All clickable links remain fragments or the demo root.
  for(const href of await p.locator('a[href]').evaluateAll(els=>els.map(a=>a.getAttribute('href'))))assert(href==='/'||href.startsWith('#'),href);
  assert.deepEqual(external,[]);assert.deepEqual(errors,[]);
