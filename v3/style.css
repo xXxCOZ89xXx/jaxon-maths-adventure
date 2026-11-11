@@ -2282,3 +2282,11 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 
 /* Year choices and provisional starting estimates remain readable on narrow touch screens. */
 .starting-results select{display:block;width:100%;max-width:100%;min-height:48px;margin:8px 0 12px;font:inherit}.starting-results label{display:block;font-weight:700}.starting-estimate{margin-top:16px;padding-top:12px;border-top:1px solid #879b7c}.baseline-question .actions{flex-wrap:wrap}.baseline-question input{max-width:100%}
+
+/* Route positions use the artwork bounds; edge labels open toward the map. */
+.world-route-pins{position:absolute;inset:0;pointer-events:none}
+.world-route-pins button{pointer-events:auto}
+.world-route-pins button:hover,.world-route-pins button:focus-visible{z-index:2}
+.world-route-pins [data-label-align="left"] .route-label{left:0;transform:none}
+.world-route-pins [data-label-align="right"] .route-label{left:auto;right:0;transform:none}
+.world-route-pins [data-label-below] .route-label{bottom:auto;top:48px}
