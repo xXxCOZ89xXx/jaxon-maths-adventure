@@ -64,11 +64,15 @@ jobs:
 
       - name: Single area maps and saved repair stages in both builds
         run: npm run test:area-maps
+      - name: Route marker bounds and all repair stages at four viewport sizes
+        run: npm run test:map-markers
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: ipad-save-recovery-evidence
           path: |
+            work/map-markers/
+            test-results/map-markers/
             work/area-maps/
             test-results/area-maps/
             work/home-exterior/

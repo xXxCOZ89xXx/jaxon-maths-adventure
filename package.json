@@ -59,7 +59,8 @@
     "test:area-maps": "node tests/prepare-home.cjs && playwright test -c playwright.area-maps.config.cjs",
     "test:town-navigation": "node tests/town-navigation.cjs && node tests/prepare-home.cjs && node tests/prepare-v52-production.cjs && playwright test -c playwright.town-navigation.config.cjs",
     "test:recipes": "node tests/recipes.cjs && node tests/prepare-home.cjs && node tests/prepare-v52-production.cjs && playwright test -c playwright.recipes.config.cjs",
-    "test:recipe-art": "node tests/recipe-art.cjs && node tests/prepare-home.cjs && node tests/prepare-v52-production.cjs && playwright test -c playwright.recipe-art.config.cjs"
+    "test:recipe-art": "node tests/recipe-art.cjs && node tests/prepare-home.cjs && node tests/prepare-v52-production.cjs && playwright test -c playwright.recipe-art.config.cjs",
+    "test:map-markers": "playwright test -c playwright.map-markers.config.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
