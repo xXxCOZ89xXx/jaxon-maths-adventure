@@ -155,9 +155,25 @@
   function map() {
     return `${header("THE ADVENTURE ATLAS", "Where will you go?", "home")}<div class="toolbar"><p class="muted">Choose a subject world. Town has its own destination from Base Camp or the Town button.</p>${A.explorer(s, true)}<span class="badge">${s.milestones.length} learning milestones</span></div>${A.atlas?A.atlas(s):""}<div class="world-grid">${E.worlds.filter(w=>w.id!=='town').map((w, i) => `<article class="world-card" data-world="${w.id}" style="--world-accent:${w.color}"><div class="world-vista">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="world-open">OPEN TO EXPLORE</span><span class="world-landmarks" role="img" aria-label="${M.visualLevel(s,w.id,E.count(s,w.id))} of 3 landmarks restored">${[0,1,2].map(i=>`<i class="${i<M.visualLevel(s,w.id,E.count(s,w.id))?'restored':''}" aria-hidden="true">◆</i>`).join('')}</span></div><div class="body"><div class="eyebrow">0${i + 1} · ${s.world === w.id ? "YOU ARE HERE" : "OPEN TO EXPLORE"}</div><h2>${w.name}</h2><p class="muted">${w.tag} · ${M.visualLevel(s, w.id, E.count(s, w.id))}/3 restored · ${M.completions(s, w.id).length} expeditions</p>${bar(M.visualLevel(s, w.id, E.count(s, w.id)), 3)}${btn("Explore " + w.name, "world:" + w.id)}</div></article>`).join("")}</div>`;
   }
+  function worldRoutePins(w) {
+    const routes = M.routes(w.id), columns = Math.min(4, routes.length),
+      rows = Math.ceil(routes.length / columns);
+    // Curriculum routes extend the original three landmarks. Position the entire
+    // current list, rather than indexing a three-entry coordinate array.
+    const original = [[39, 53], [62, 64], [49, 35]];
+    return `<nav class="world-route-pins" aria-label="Explore ${esc(w.name)} landmarks">${routes.map((r, i) => {
+      const column = i % columns, row = Math.floor(i / columns);
+      const [x, y] = routes.length === 3 ? original[i] : [
+        columns === 1 ? 50 : 15 + 70 * column / (columns - 1),
+        rows === 1 ? 53 : 28 + 50 * row / (rows - 1),
+      ];
+      const align = x < 30 ? 'left' : x > 70 ? 'right' : 'center';
+      return `<button data-action="scene-mission:${w.id}:${r.id}:${M.state(s).difficulty[w.id] || M.recommendation(s,w.id)}" style="left:${x}%;top:${y}%" data-label-align="${align}" ${y < 40 ? 'data-label-below' : ''} aria-label="Visit ${esc(r.name)}"><span aria-hidden="true">${i+1}</span><span class="route-label">${esc(r.name)}</span></button>`;
+    }).join('')}</nav>`;
+  }
   function worldPage() {
     const w = world();
-    return `${header("WORLD " + (E.worlds.indexOf(w) + 1) + " / 09", w.name)}<div class="split world-overview ${w.id==='town'?'town-overview':''}"><div><div class="world-route-map">${w.id==='town'?U.worldMap(s,w):art(w.id, E.count(s,w.id), false)}${w.id !== "town" ? `<nav class="world-route-pins" aria-label="Explore ${esc(w.name)} landmarks">${M.routes(w.id).map((r,i)=>`<button data-action="scene-mission:${w.id}:${r.id}:${M.state(s).difficulty[w.id] || M.recommendation(s,w.id)}" style="left:${[39,62,49][i]}%;top:${[53,64,35][i]}%" aria-label="Visit ${esc(r.name)}"><span aria-hidden="true">${i+1}</span><span class="route-label">${esc(r.name)}</span></button>`).join("")}</nav>` : ""}</div></div>${w.id==='town'?'':repairEntry(w)}</div><h2>Optional exploration</h2><p>Try a mission, a Town plan or Base Camp whenever you like. These are separate from your starting-point and independent checks.</p>${U.board(s, w, false, w.id==='town'?repairEntry(w):'')}${w.id === "town" ? '<details class="town-lessons"><summary>Maths lessons and independent checks · 16 skills</summary>' : ""}<h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills
+    return `${header("WORLD " + (E.worlds.indexOf(w) + 1) + " / 09", w.name)}<div class="split world-overview ${w.id==='town'?'town-overview':''}"><div><div class="world-route-map">${w.id==='town'?U.worldMap(s,w):art(w.id, E.count(s,w.id), false)}${w.id !== "town" ? worldRoutePins(w) : ""}</div></div>${w.id==='town'?'':repairEntry(w)}</div><h2>Optional exploration</h2><p>Try a mission, a Town plan or Base Camp whenever you like. These are separate from your starting-point and independent checks.</p>${U.board(s, w, false, w.id==='town'?repairEntry(w):'')}${w.id === "town" ? '<details class="town-lessons"><summary>Maths lessons and independent checks · 16 skills</summary>' : ""}<h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills
       .filter((k) => k.world === w.id)
       .map((k) => {
         const c = s.checks[k.id],

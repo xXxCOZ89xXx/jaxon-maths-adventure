@@ -2279,3 +2279,11 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .scene-shopping-list:has(.recipe-ingredient-prop) li{display:flex;align-items:center;gap:8px}.scene-shopping-list .recipe-ingredient-prop{flex:0 0 52px;width:52px;height:52px}
 
 .countable-stock .stock-pick .recipe-ingredient-prop{width:53px;height:70px}.basket-contents .recipe-ingredient-prop{width:100%;height:100%}.carried-products .recipe-ingredient-prop{width:100%;height:80px}.shelf-touch .recipe-ingredient-prop{width:100%;height:100%}
+
+/* Route positions use the artwork bounds; edge labels open toward the map. */
+.world-route-pins{position:absolute;inset:0;pointer-events:none}
+.world-route-pins button{pointer-events:auto}
+.world-route-pins button:hover,.world-route-pins button:focus-visible{z-index:2}
+.world-route-pins [data-label-align="left"] .route-label{left:0;transform:none}
+.world-route-pins [data-label-align="right"] .route-label{left:auto;right:0;transform:none}
+.world-route-pins [data-label-below] .route-label{bottom:auto;top:48px}

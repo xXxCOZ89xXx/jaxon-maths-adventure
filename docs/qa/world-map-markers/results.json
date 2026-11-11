@@ -1,0 +1,974 @@
+{
+  "releaseBaseline": "9a63750ab5687ea28e65150c5f8185b29e04974a",
+  "branch": "fix/world-map-marker-bounds",
+  "date": "2026-11-11",
+  "npmTest": "passed",
+  "reports": {
+    "baseline": {
+      "stats": {
+        "startTime": "2026-11-11T20:25:47.215Z",
+        "duration": 41726.948,
+        "expected": 36,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "name": "number: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 1554
+        },
+        {
+          "name": "fractions: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 1125
+        },
+        {
+          "name": "algebra: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 1110
+        },
+        {
+          "name": "geometry: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 1113
+        },
+        {
+          "name": "ratio: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 1051
+        },
+        {
+          "name": "statistics: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 1072
+        },
+        {
+          "name": "probability: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 993
+        },
+        {
+          "name": "measure: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 1075
+        },
+        {
+          "name": "town: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 1170
+        },
+        {
+          "name": "number: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 1378
+        },
+        {
+          "name": "fractions: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 1107
+        },
+        {
+          "name": "algebra: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 1031
+        },
+        {
+          "name": "geometry: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 1125
+        },
+        {
+          "name": "ratio: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 1050
+        },
+        {
+          "name": "statistics: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 1001
+        },
+        {
+          "name": "probability: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 1006
+        },
+        {
+          "name": "measure: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 1031
+        },
+        {
+          "name": "town: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 1107
+        },
+        {
+          "name": "number: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 1358
+        },
+        {
+          "name": "fractions: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 1070
+        },
+        {
+          "name": "algebra: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 1049
+        },
+        {
+          "name": "geometry: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 1091
+        },
+        {
+          "name": "ratio: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 1004
+        },
+        {
+          "name": "statistics: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 1043
+        },
+        {
+          "name": "probability: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 981
+        },
+        {
+          "name": "measure: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 1014
+        },
+        {
+          "name": "town: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 1106
+        },
+        {
+          "name": "number: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 1226
+        },
+        {
+          "name": "fractions: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 994
+        },
+        {
+          "name": "algebra: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 955
+        },
+        {
+          "name": "geometry: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 924
+        },
+        {
+          "name": "ratio: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 856
+        },
+        {
+          "name": "statistics: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 854
+        },
+        {
+          "name": "probability: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 892
+        },
+        {
+          "name": "measure: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 900
+        },
+        {
+          "name": "town: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 963
+        }
+      ]
+    },
+    "markers": {
+      "stats": {
+        "startTime": "2026-11-11T20:29:57.435Z",
+        "duration": 339098.518,
+        "expected": 36,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "name": "number: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 10818
+        },
+        {
+          "name": "fractions: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 7972
+        },
+        {
+          "name": "algebra: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 10560
+        },
+        {
+          "name": "geometry: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 11126
+        },
+        {
+          "name": "ratio: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 8723
+        },
+        {
+          "name": "statistics: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 7977
+        },
+        {
+          "name": "probability: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 7530
+        },
+        {
+          "name": "measure: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 7525
+        },
+        {
+          "name": "town: marker geometry, route links and all repair states",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 7052
+        },
+        {
+          "name": "number: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 10567
+        },
+        {
+          "name": "fractions: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 7956
+        },
+        {
+          "name": "algebra: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 11003
+        },
+        {
+          "name": "geometry: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 11357
+        },
+        {
+          "name": "ratio: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 9531
+        },
+        {
+          "name": "statistics: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 9018
+        },
+        {
+          "name": "probability: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 8648
+        },
+        {
+          "name": "measure: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 8690
+        },
+        {
+          "name": "town: marker geometry, route links and all repair states",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 7368
+        },
+        {
+          "name": "number: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 10639
+        },
+        {
+          "name": "fractions: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 8072
+        },
+        {
+          "name": "algebra: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 11211
+        },
+        {
+          "name": "geometry: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 11553
+        },
+        {
+          "name": "ratio: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 9397
+        },
+        {
+          "name": "statistics: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 9260
+        },
+        {
+          "name": "probability: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 8208
+        },
+        {
+          "name": "measure: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 8655
+        },
+        {
+          "name": "town: marker geometry, route links and all repair states",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 7721
+        },
+        {
+          "name": "number: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 11060
+        },
+        {
+          "name": "fractions: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 8286
+        },
+        {
+          "name": "algebra: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 12115
+        },
+        {
+          "name": "geometry: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 12878
+        },
+        {
+          "name": "ratio: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 9479
+        },
+        {
+          "name": "statistics: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 8855
+        },
+        {
+          "name": "probability: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 8273
+        },
+        {
+          "name": "measure: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 8420
+        },
+        {
+          "name": "town: marker geometry, route links and all repair states",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 7577
+        }
+      ]
+    },
+    "privateAndDemoRepairs": {
+      "stats": {
+        "startTime": "2026-11-11T20:36:01.855Z",
+        "duration": 426654.663,
+        "expected": 80,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cases": [
+        {
+          "name": "private number: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 6671
+        },
+        {
+          "name": "private fractions: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5684
+        },
+        {
+          "name": "private algebra: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 6031
+        },
+        {
+          "name": "private geometry: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5862
+        },
+        {
+          "name": "private ratio: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5711
+        },
+        {
+          "name": "private statistics: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5574
+        },
+        {
+          "name": "private probability: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5631
+        },
+        {
+          "name": "private measure: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5455
+        },
+        {
+          "name": "private town: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 6046
+        },
+        {
+          "name": "demo number: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5104
+        },
+        {
+          "name": "demo fractions: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 4918
+        },
+        {
+          "name": "demo algebra: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5145
+        },
+        {
+          "name": "demo geometry: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5550
+        },
+        {
+          "name": "demo ratio: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5138
+        },
+        {
+          "name": "demo statistics: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5028
+        },
+        {
+          "name": "demo probability: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5248
+        },
+        {
+          "name": "demo measure: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 5610
+        },
+        {
+          "name": "demo town: one map, gates, playable repair, exact resume and completed recap",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 6414
+        },
+        {
+          "name": "private: pausing a check keeps its destination and an existing repair snapshot",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 999
+        },
+        {
+          "name": "demo: pausing a check keeps its destination and an existing repair snapshot",
+          "project": "desktop-chromium",
+          "status": "passed",
+          "durationMs": 989
+        },
+        {
+          "name": "private number: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 6777
+        },
+        {
+          "name": "private fractions: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 6293
+        },
+        {
+          "name": "private algebra: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 6498
+        },
+        {
+          "name": "private geometry: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 6563
+        },
+        {
+          "name": "private ratio: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 6288
+        },
+        {
+          "name": "private statistics: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 6118
+        },
+        {
+          "name": "private probability: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 6186
+        },
+        {
+          "name": "private measure: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 6313
+        },
+        {
+          "name": "private town: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 6534
+        },
+        {
+          "name": "demo number: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 5497
+        },
+        {
+          "name": "demo fractions: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 5621
+        },
+        {
+          "name": "demo algebra: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 5674
+        },
+        {
+          "name": "demo geometry: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 5723
+        },
+        {
+          "name": "demo ratio: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 5395
+        },
+        {
+          "name": "demo statistics: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 5610
+        },
+        {
+          "name": "demo probability: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 5562
+        },
+        {
+          "name": "demo measure: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 5601
+        },
+        {
+          "name": "demo town: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 5801
+        },
+        {
+          "name": "private: pausing a check keeps its destination and an existing repair snapshot",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 1093
+        },
+        {
+          "name": "demo: pausing a check keeps its destination and an existing repair snapshot",
+          "project": "ipad-portrait-chromium",
+          "status": "passed",
+          "durationMs": 760
+        },
+        {
+          "name": "private number: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 6834
+        },
+        {
+          "name": "private fractions: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 6269
+        },
+        {
+          "name": "private algebra: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 6620
+        },
+        {
+          "name": "private geometry: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 6333
+        },
+        {
+          "name": "private ratio: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 6165
+        },
+        {
+          "name": "private statistics: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 6318
+        },
+        {
+          "name": "private probability: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 6243
+        },
+        {
+          "name": "private measure: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 6091
+        },
+        {
+          "name": "private town: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 6627
+        },
+        {
+          "name": "demo number: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 5733
+        },
+        {
+          "name": "demo fractions: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 5506
+        },
+        {
+          "name": "demo algebra: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 5600
+        },
+        {
+          "name": "demo geometry: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 5617
+        },
+        {
+          "name": "demo ratio: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 5560
+        },
+        {
+          "name": "demo statistics: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 5521
+        },
+        {
+          "name": "demo probability: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 5522
+        },
+        {
+          "name": "demo measure: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 5357
+        },
+        {
+          "name": "demo town: one map, gates, playable repair, exact resume and completed recap",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 5852
+        },
+        {
+          "name": "private: pausing a check keeps its destination and an existing repair snapshot",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 1055
+        },
+        {
+          "name": "demo: pausing a check keeps its destination and an existing repair snapshot",
+          "project": "ipad-landscape-chromium",
+          "status": "passed",
+          "durationMs": 758
+        },
+        {
+          "name": "private number: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 6164
+        },
+        {
+          "name": "private fractions: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5596
+        },
+        {
+          "name": "private algebra: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5651
+        },
+        {
+          "name": "private geometry: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5571
+        },
+        {
+          "name": "private ratio: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5731
+        },
+        {
+          "name": "private statistics: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5645
+        },
+        {
+          "name": "private probability: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5596
+        },
+        {
+          "name": "private measure: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5830
+        },
+        {
+          "name": "private town: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 6413
+        },
+        {
+          "name": "demo number: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5617
+        },
+        {
+          "name": "demo fractions: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5321
+        },
+        {
+          "name": "demo algebra: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5102
+        },
+        {
+          "name": "demo geometry: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 4971
+        },
+        {
+          "name": "demo ratio: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 4833
+        },
+        {
+          "name": "demo statistics: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5059
+        },
+        {
+          "name": "demo probability: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 4853
+        },
+        {
+          "name": "demo measure: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 4753
+        },
+        {
+          "name": "demo town: one map, gates, playable repair, exact resume and completed recap",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 5622
+        },
+        {
+          "name": "private: pausing a check keeps its destination and an existing repair snapshot",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 783
+        },
+        {
+          "name": "demo: pausing a check keeps its destination and an existing repair snapshot",
+          "project": "small-touch",
+          "status": "passed",
+          "durationMs": 621
+        }
+      ]
+    }
+  },
+  "negativeControl": {
+    "expectedFailure": true,
+    "releaseBaseline": "9a63750ab5687ea28e65150c5f8185b29e04974a",
+    "project": "small-touch",
+    "result": "Unfixed release rejected for overlapping markers; baseline suite separately confirms invalid coordinates and detached marker 8.",
+    "stats": {
+      "startTime": "2026-11-11T20:35:57.470Z",
+      "duration": 2799.6760000000004,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    }
+  },
+  "limitations": [
+    "Physical iPad Safari not tested; Chromium touch viewport emulation used.",
+    "Hosted CI not triggered: no PR opened and feature branch is not a configured workflow push trigger."
+  ]
+}
