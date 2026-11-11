@@ -84,7 +84,7 @@ for(let band=3;band<=9;band++){
  const conversion=T.question('town_money',band,3,2);
  assert.equal(conversion[5].unit,'pounds');assert.match(conversion[0],/^Convert \d+p to pounds\.$/);assert.match(T.answerLabel(conversion,conversion[1]),/^£\d+\.\d{2}$/);
 }
-const townProfile=E.fresh();assert.equal(P.start(townProfile,'town',c.V3Curriculum,1),null);
+const townProfile=E.fresh();townProfile.startingProfile={version:1,areas:{town:{band:7,responses:[],startedAt:1,draft:''}}};assert.equal(P.start(townProfile,'town',c.V3Curriculum,1),null);
 let baselineQ=P.question(townProfile,'town');assert.equal(baselineQ.moneyQuestionVersion,2);assert.equal(P.answer(townProfile,'town',baselineQ.answer),true);P.advance(townProfile,'town',c.V3Curriculum);
 baselineQ=P.question(townProfile,'town');assert.equal(baselineQ.skill,'town_timetable');assert(P.answer(townProfile,'town',baselineQ.answer));P.advance(townProfile,'town',c.V3Curriculum);
 baselineQ=P.question(townProfile,'town');assert.equal(baselineQ.skill,'town_money');assert.equal(baselineQ.moneyQuestionVersion,2);assert.match(baselineQ.prompt,/in pounds\?/);assert.match(T.answerLabel([baselineQ.prompt],baselineQ.answer),/^£/);

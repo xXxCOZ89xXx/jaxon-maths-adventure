@@ -44,8 +44,10 @@
     // A brief area sample is an initial teaching suggestion, never skill mastery.
     // Objective discovery and independent evidence continue to take precedence.
     const C=typeof module!=="undefined"?require('./curriculum').V3Curriculum:root.V3Curriculum;
-    const area=s.startingProfile?.areas?.[C.skills.find(k=>k.id===id)?.world];
-    if(!rounds.length&&area?.responses?.length===4&&area.responses.some(r=>!r.skipped)&&Number.isFinite(area.completedAt)&&Number.isFinite(area.estimate?.band)){
+    let area=s.startingProfile?.areas?.[C.skills.find(k=>k.id===id)?.world];
+    const P=typeof module!=="undefined"?require('./starting-profile').V11StartingProfile:root.V11StartingProfile;
+    area=P?.latest(s,C.skills.find(k=>k.id===id)?.world)||area;
+    if(!rounds.length&&P?.valid(area)&&area.responses.some(r=>!r.skipped)&&(area.assessmentVersion!==2||area.estimate.enoughEvidence)){
       band=Math.max(lower,Math.min(9,area.estimate.band));
       reason="Provisional area starting sample; check this objective separately";
     }

@@ -1,0 +1,246 @@
+{
+  "date": "2026-11-11",
+  "branch": "codex/adaptive-starting-points",
+  "base": "9a63750ab5687ea28e65150c5f8185b29e04974a",
+  "engine": {
+    "completeInitialRuns": 330,
+    "completedReassessments": 27,
+    "downwardOutcomeTriples": 27,
+    "sections": 9,
+    "questionsPerNewRun": 15,
+    "preservation": "Whole-state comparison excluding assessment, exposure and navigation metadata; no progress, coins or reward mutations"
+  },
+  "supportedYears": {
+    "number": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "fractions": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "algebra": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "geometry": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "ratio": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "statistics": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "probability": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "measure": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "town": [
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "browser": {
+    "focusedAdaptive": {
+      "passed": 56,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-11T16:19:00.417Z",
+      "durationSeconds": 106,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "allProfileCompatibility": {
+      "passed": 60,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-11T16:10:07.638Z",
+      "durationSeconds": 190,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "finalNineAreaFlow": {
+      "passed": 4,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-11T16:25:08.055Z",
+      "durationSeconds": 59,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "finalYearControls": {
+      "passed": 8,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-11T16:29:03.612Z",
+      "durationSeconds": 31,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "saveRecovery": {
+      "passed": 32,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-11T16:13:22.360Z",
+      "durationSeconds": 104,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "demoActivities": {
+      "passed": 24,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-11T16:15:08.824Z",
+      "durationSeconds": 101,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    },
+    "productionRecovery": {
+      "passed": 6,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-11T16:16:51.798Z",
+      "durationSeconds": 24,
+      "projects": [
+        "desktop",
+        "ipad-portrait",
+        "ipad-landscape"
+      ]
+    },
+    "finalReassessmentDisplay": {
+      "passed": 8,
+      "failed": 0,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-11-11T16:34:41.215Z",
+      "durationSeconds": 30,
+      "projects": [
+        "desktop-chromium",
+        "ipad-portrait-chromium",
+        "ipad-landscape-chromium",
+        "small-touch"
+      ]
+    }
+  },
+  "standaloneDemo": {
+    "layouts": [
+      {
+        "layout": "desktop",
+        "passed": true,
+        "externalRequests": [],
+        "consoleErrors": 0
+      },
+      {
+        "layout": "ipad-portrait",
+        "passed": true,
+        "externalRequests": [],
+        "consoleErrors": 0
+      },
+      {
+        "layout": "ipad-landscape",
+        "passed": true,
+        "externalRequests": [],
+        "consoleErrors": 0
+      }
+    ],
+    "cookies": 0,
+    "backend": "not included"
+  },
+  "offlineChecks": [
+    "npm test",
+    "curriculum and objective audit",
+    "touch audit and nine interaction suites",
+    "gameplay quality",
+    "save/purchase recovery, four groups",
+    "strict production build",
+    "demo source/rebuild parity and isolation allowlist"
+  ],
+  "legacyFixtures": {
+    "source": "Exact release 9a63750a before implementation",
+    "completeResponses": 36,
+    "partialResponses": 2,
+    "immutableAnswersPreserved": true
+  },
+  "gallery": "docs/review/adaptive-starting-points/gallery/GALLERY.md",
+  "realLearnerData": "not accessed",
+  "physicalIpadSafari": "untested",
+  "databaseBackedReleaseGate": "Not run locally: Docker unavailable. Required GitHub gate remains unchanged for a future release PR.",
+  "releaseBranch": "unchanged",
+  "mergeOrDeployment": "not performed"
+}
