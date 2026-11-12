@@ -390,7 +390,12 @@
     const activeCatalog = C.catalog.filter(i=>!window.V7Avatar||V7Avatar.isActiveItem(i));
     const slots = [...new Set(activeCatalog.map((i) => i.slot))];
     const preview=activeCatalog.find(i=>i.id===itemPreview),look=preview?{...s,bought:[...s.bought,preview.id],equipped:[...s.equipped.filter(id=>C.catalog.find(i=>i.id===id)?.slot!==preview.slot),preview.id]}:s;
-    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar?V7Avatar.controls(s):""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p>${btn("Unequip all", "unequip")}</div></div><label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${activeCatalog
+    const slotNames = {Companions:'Pet or companion',Backgrounds:'Background',Headwear:'Hat',Outfits:'Clothing'};
+    const equipment = `<section class="equipment-slots" tabindex="-1" aria-label="Equipped items"><h2>Your equipment</h2><p>Choose one item per category. Changing or removing one keeps your other items.</p><div class="equipment-slot-grid">${slots.map(slot=>{
+      const item=activeCatalog.find(i=>i.slot===slot&&s.bought.includes(i.id)&&s.equipped.includes(i.id));
+      return `<div class="equipment-slot"><strong>${esc(slotNames[slot]||slot)}</strong><span>${item?esc(item.label):'None equipped'}</span><button data-action="remove-slot:${esc(slot)}" ${item?'':'disabled'}>Remove ${esc(slotNames[slot]||slot)}</button></div>`;
+    }).join('')}</div></section>`;
+    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar?V7Avatar.controls(s):""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p></div></div>${equipment}<label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${activeCatalog
       .filter(
         (i) =>
           filter === "all" ||
@@ -870,8 +875,13 @@
           E.nextLearning(s);
           break;
         case "buy":
+          itemPreview = null;
           if (!E.purchase(s, arg, C.catalog))
             error = "More active learning coins are needed for this item.";
+          break;
+        case "remove-slot":
+          E.removeEquipment(s, arg, C.catalog);
+          itemPreview = null;
           break;
         case "unequip":
           s.equipped = [];
@@ -894,6 +904,10 @@
           }
       }
     }, {renderPage: !((name==='c8-m'||name==='c8-p')&&(action.includes(':input-')||action.includes(':calc-input-')))});
+    if (name === "remove-slot") {
+      document.querySelector(".equipment-slots")?.focus({preventScroll:true});
+      status("Removed item. Your other equipment is unchanged.");
+    }
     if (error) status(error);
     if (restored) sound();
     if (s.view !== oldView) {

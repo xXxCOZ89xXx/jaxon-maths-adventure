@@ -8,6 +8,7 @@
   const education=typeof module!=="undefined"?require("./education").V6Education:root.V6Education;
   const T =
     typeof module !== "undefined" ? require("./town").V3Town : root.V3Town;
+  const catalog = typeof module !== "undefined" ? require("./curriculum").V3Curriculum.catalog : root.V3Curriculum.catalog;
   const worlds = [
     {
       id: "number",
@@ -169,6 +170,8 @@
       "quests",
     ])
       if (!s[k] || typeof s[k] !== "object" || Array.isArray(s[k])) s[k] = {};
+    // Retain the compact array save contract; accept legacy single-item selections.
+    s.equipped = normaliseEquipment(s.equipped);
     for (const k of [
       "bought",
       "equipped",
@@ -625,6 +628,21 @@
     s.resumeView = "discovery";
     return null;
   }
+  // One ID per catalogue slot. Ownership is untouched; unknown IDs are retained.
+  // Last selection wins for older arrays containing multiple items in one slot.
+  function normaliseEquipment(value, items = catalog) {
+    const ids = Array.isArray(value) ? value : typeof value === "string" ? [value] : [];
+    return ids.filter((id, index, all) => {
+      if (typeof id !== "string" || all.lastIndexOf(id) !== index) return false;
+      const slot = items.find(i => i.id === id)?.slot;
+      return !slot || !all.slice(index + 1).some(other => items.find(i => i.id === other)?.slot === slot);
+    });
+  }
+  function removeEquipment(s, slot, items = catalog) {
+    if (!items.some(i => i.slot === slot)) return false;
+    s.equipped = normaliseEquipment(s.equipped, items).filter(id => items.find(i => i.id === id)?.slot !== slot);
+    return true;
+  }
   function purchase(s, id, catalog) {
     const item = catalog.find((x) => x.id === id);
     if (!item) return false;
@@ -633,6 +651,7 @@
       s.coins -= item.cost;
       s.bought.push(id);
     }
+    s.equipped = normaliseEquipment(s.equipped, catalog);
     if (s.equipped.includes(id))
       s.equipped = s.equipped.filter((x) => x !== id);
     else {
@@ -684,6 +703,8 @@
     answerLearning,
     nextLearning,
     purchase,
+    normaliseEquipment,
+    removeEquipment,
     weekKey,
     activeTime,
     startDiscovery,

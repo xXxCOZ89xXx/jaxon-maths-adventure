@@ -2290,3 +2290,9 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .world-route-pins [data-label-align="left"] .route-label{left:0;transform:none}
 .world-route-pins [data-label-align="right"] .route-label{left:auto;right:0;transform:none}
 .world-route-pins [data-label-below] .route-label{bottom:auto;top:48px}
+
+/* Equipment categories share the existing avatar canvas and artwork. */
+.equipment-slots { margin-block: 1rem; }
+.equipment-slot-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,220px),1fr)); gap: .75rem; }
+.equipment-slot { display: flex; flex-direction: column; gap: .5rem; padding: .75rem; border: 1px solid var(--line,#71866b); border-radius: 12px; }
+.equipment-slot button { min-height: 44px; margin-top: auto; }
