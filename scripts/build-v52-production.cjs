@@ -21,8 +21,8 @@ function entry() {
   assert.equal(guard, `if(navigator.onLine||sessionStorage.getItem(verifiedKey)!==c.projectRef||sessionStorage.getItem(receiptVerifiedKey)!=='1')throwError("Stagingidentitywasnotverified.Sign-inisdisabled.");`,
     'Staging identity/offline receipt guard changed; review before building');
   s = s.replace(identityError, 'if (check.error) {\n      throw Error("Reconnect to verify the active family release before opening saved progress.");\n    } else {');
-  s = once(s, 'const key = `jaxon_v3_staging:${c.projectRef}:${identity.user}:game`,',
-    'const key = `jaxon_v51_production:${c.projectRef}:${productionEpoch}:${identity.user}:game`,');
+  s = once(s, 'const key = `jaxon_v3_staging:${c.projectRef}:${identity.user}:game${gameEpoch?":reset-"+gameEpoch:""}`,',
+    'const key = `jaxon_v51_production:${c.projectRef}:${productionEpoch}:${identity.user}:game${gameEpoch?":reset-"+gameEpoch:""}`,');
   s = s.replaceAll('"v3-unlock:" + c.projectRef', '"v3-unlock:" + c.projectRef + ":" + productionEpoch')
     .replaceAll('`v3-last-remote:${c.projectRef}:${identity.user}`','`v3-last-remote:${c.projectRef}:${productionEpoch}:${identity.user}`')
     .replaceAll('`v3-intent:${c.projectRef}:${identity.user}`','`v52-production-intent:${c.projectRef}:${productionEpoch}:${identity.user}`');

@@ -2296,3 +2296,21 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .equipment-slot-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,220px),1fr)); gap: .75rem; }
 .equipment-slot { display: flex; flex-direction: column; gap: .5rem; padding: .75rem; border: 1px solid var(--line,#71866b); border-radius: 12px; }
 .equipment-slot button { min-height: 44px; margin-top: auto; }
+
+/* Supplied Base Camp atlas crops. Live labels/controls remain outside the artwork. */
+.display-plinth{position:relative;aspect-ratio:3/1;height:auto;border:0;background:transparent;overflow:hidden}
+.camp-surface{width:100%;height:100%;display:block;object-fit:contain}
+.display-plinth .camp-surface{position:absolute;inset:0}
+.display-plinth .keepsake-art{position:absolute;width:30%;height:70%;left:35%;bottom:24%;object-fit:contain;filter:none}
+.project-art{height:auto;aspect-ratio:4/3;background:transparent}
+.project-art .project-image{width:100%;height:100%;object-fit:contain}
+.keepsake img.keepsake-art{width:112px;height:112px;object-fit:contain}
+.collection-art-surface{max-width:270px;height:160px;margin:18px auto;overflow:hidden;border-radius:10px}
+.collection-art-surface .camp-surface{object-fit:cover;object-position:center}
+.camp-built-prop{position:absolute;bottom:4%;width:23%;height:auto;object-fit:contain;pointer-events:none;z-index:2}
+.camp-built-greenhouse{left:3%}.camp-built-lookout{left:39%}.camp-built-noticeboard{right:3%}
+@media(max-width:700px){.placement-site{display:block}.display-plinth{max-width:250px;margin:0 auto 14px;height:auto}.placement-site p{margin-top:10px}.camp-built-prop{width:27%}}
+#total-game-reset-dialog{box-sizing:border-box;width:min(620px,calc(100% - 24px));max-height:calc(100dvh - 24px);overflow:auto;border:2px solid #8fa88e;border-radius:14px;padding:22px;background:#fcf9ef;color:#243d33}
+#total-game-reset-dialog::backdrop{background:#153a2d99}
+#total-game-reset-dialog input{box-sizing:border-box;width:100%;min-height:46px;font:inherit;margin:8px 0 16px}
+#total-game-reset-dialog button{min-height:46px}

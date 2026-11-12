@@ -1,0 +1,204 @@
+{
+  "date": "2026-11-12",
+  "branch": "codex/base-camp-progression-refresh",
+  "continuedFrom": "31769e2e220ca66d1b7161171d22d83c0908680b",
+  "releaseBase": "f1b88c95326e6ba5145e8abd97306df0431b3a1a",
+  "liveLearnerDataAccess": false,
+  "remoteDatabaseConnections": 0,
+  "migrationAppliedRemotely": false,
+  "liveResetExecuted": false,
+  "deployed": false,
+  "pullRequestOpened": false,
+  "artwork": {
+    "source": "base-camp-artwork-handoff.zip",
+    "sourceSha256": "9669e0cbda0f3fb8850650e5f6fa41017bc8e3bfbcde31f755ffa5a12084f6db",
+    "files": 54,
+    "keepsakeIdentities": 41,
+    "generatedArt": false,
+    "sourceAlphaRetained": true,
+    "actualManifest": "v3/assets/base-camp/manifest.json",
+    "supplementalSources": [
+      {
+        "file": "base-camp-planned-project-card-art.zip",
+        "sha256": "6752e6d0ec91425e8071af86c2fe832303aeba25b1cf26bc93f0e3acc228fdcd"
+      },
+      {
+        "file": "base-camp-display-collection-art.zip",
+        "sha256": "4f981f10366a6d68456032ce731970a9e30d92e53d199b8c197714c752f572de"
+      }
+    ],
+    "replacedExports": 9,
+    "unchangedExports": 45,
+    "pixelVerification": "All nine exports match full supplied sources pixel-for-pixel after proportional fit, including alpha and contact shadows."
+  },
+  "checks": [
+    {
+      "command": "npm test",
+      "status": "passed"
+    },
+    {
+      "command": "npm run test:base-camp",
+      "status": "passed",
+      "logicGroups": 8,
+      "assetIntegrity": "54 output hashes; 41 stable IDs",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    {
+      "command": "node tests/parent-game-reset-db.cjs",
+      "status": "passed",
+      "passed": 9,
+      "remoteConnections": 0,
+      "network": "none"
+    },
+    {
+      "command": "node tests/parent-game-reset-db.cjs --staging",
+      "status": "passed",
+      "passed": 10,
+      "remoteConnections": 0,
+      "network": "none"
+    },
+    {
+      "command": "playwright test -c playwright.parent-reset.config.cjs",
+      "status": "passed",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    {
+      "command": "npm run test:ipad-release",
+      "status": "passed",
+      "compactReceiptDatabaseChecks": 10,
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    {
+      "command": "playwright test -c playwright.production.config.cjs",
+      "status": "passed",
+      "passed": 24,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    {
+      "command": "node tests/v52-production-build.cjs",
+      "status": "passed"
+    },
+    {
+      "command": "node tests/v3-staging-build.cjs",
+      "status": "passed"
+    },
+    {
+      "command": "node demo/build.cjs && node demo/check.cjs && node demo/test-sync.cjs",
+      "status": "passed"
+    },
+    {
+      "command": "node demo/test-browser.cjs",
+      "status": "passed",
+      "layouts": [
+        "desktop",
+        "ipad-portrait",
+        "ipad-landscape"
+      ],
+      "staticAssets": 190
+    },
+    {
+      "command": "playwright test -c playwright.demo.config.cjs",
+      "status": "passed",
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0
+    },
+    {
+      "command": "playwright test -c playwright.quality.config.cjs --grep \"cook-curry|cook-soup|cook-pancakes\"",
+      "status": "known_baseline_failures_unchanged",
+      "passed": 0,
+      "failed": 6,
+      "skipped": 0,
+      "flaky": 0,
+      "reason": "All six still expect undefined \u00b0C for hob recipes; test and recipe code unchanged."
+    }
+  ],
+  "correctedIntermediateFailures": [
+    "New artwork locator selected the parent of the desired slot and found three surfaces; corrected to the slot itself.",
+    "An overlapping local Base Camp run removed another run's trace artifacts; final Base Camp verification run without overlap."
+  ],
+  "limitations": [
+    "Physical iPad Safari not tested.",
+    "No hosted reset integration or migration application performed.",
+    "Reset remains disabled on a backend without the reviewed server upgrade.",
+    "Disconnected devices can display old local copies but cannot upload old-generation state after reset.",
+    "Retained audit/legacy records and backups are not erased by the gameplay reset.",
+    "Supplied translucent halo/matte pixels were preserved with source alpha and contact shadows.",
+    "Older higher-tier backgrounds are gated by actual project builds; an approved simpler view is used until they are eligible.",
+    "The complete 48-case gameplay-quality browser suite was not rerun; six known failures were rerun directly."
+  ],
+  "liveMigrationStateQueried": false,
+  "screenshots": {
+    "before": "before-supplements/ (31769e2)",
+    "after": "refined/",
+    "reset": "reset/",
+    "layouts": [
+      "desktop 1440x1000",
+      "iPad portrait 820x1180",
+      "iPad landscape 1180x820",
+      "small touch 360x800"
+    ]
+  },
+  "runEvidence": {
+    "reset": {
+      "startTime": "2026-11-12T11:09:47.169Z",
+      "duration": 118302.48199999999,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "saveRecovery": {
+      "startTime": "2026-11-12T11:09:48.953Z",
+      "duration": 191676.181,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "production": {
+      "startTime": "2026-11-12T11:11:21.077Z",
+      "duration": 113593.49600000001,
+      "expected": 24,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "knownRecipes": {
+      "startTime": "2026-11-12T11:10:25.213Z",
+      "duration": 139194.37300000002,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 6,
+      "flaky": 0
+    },
+    "baseCamp": {
+      "startTime": "2026-11-12T11:13:50.843Z",
+      "duration": 103857.395,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "demo": {
+      "startTime": "2026-11-12T11:13:57.129Z",
+      "duration": 116499.37100000001,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  }
+}

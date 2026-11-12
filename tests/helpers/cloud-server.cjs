@@ -105,10 +105,25 @@ async function mock(page, server, options = {}) {
           revision: server.revision,
           progress: server.progress,
           wallet: server.wallet,
+          ...(server.resetSupported?{gameResetVersion:1,gameEpoch:server.gameEpoch||0}:{}),
         };
       else if (body.p_operation === "lock") {
         server.tokens.delete(body.p_token);
         data = { ok: true };
+      } else if (body.p_operation === "reset_game" && server.resetSupported) {
+        const a=body.p_args;
+        server.resetReceipts??=new Map();
+        if(!parent){status=403;data={code:'P0001',message:'Parent account required'};}
+        else if(a.confirmation!=='RESET ALL GAME PROGRESS'){status=400;data={code:'P0001',message:'Explicit total game reset confirmation required'};}
+        else if(server.resetReceipts.has(a.requestId))data=server.resetReceipts.get(a.requestId);
+        else if(a.gameEpoch!==(server.gameEpoch||0)||a.revision!==server.revision){status=400;data={code:'P0001',message:'Game changed; refresh and confirm the reset again'};}
+        else{server.gameEpoch=(server.gameEpoch||0)+1;server.revision++;server.progress={};server.wallet={coins:0,bonus:0,active_seconds:0,redeemed:0,owned:[],opening_seconds:0,legacy_redeemed:0};
+          for(const [token,user] of server.tokens)if(user===uid)server.tokens.delete(token);
+          data={reset:true,gameEpoch:server.gameEpoch,revision:server.revision};server.resetReceipts.set(a.requestId,data);
+          if(server.loseReset){server.loseReset=false;return route.abort();}
+        }
+      } else if(server.resetSupported && (body.p_args?.gameEpoch||0)!==(server.gameEpoch||0)) {
+        status=400;data={code:'P0001',message:'GAME_RESET_REQUIRED'};
       } else if (body.p_operation === "save" && parent) {
         status=403;data={code:"P0001",message:"Learner account required"};
       } else if (body.p_operation === "save") {

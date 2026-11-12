@@ -1,0 +1,894 @@
+{
+  "status": "Integrated from three owner-supplied Base Camp packs. Original proposed dimensions are retained for comparison; source precedence, exact crop boxes, hashes and actual export dimensions are in v3/assets/base-camp/manifest.json.",
+  "style": "Original detailed 2.5D/voxel objects, painted materials and warm directional light coordinated with current worlds and approved guide portraits. All text, counters, locks and controls remain HTML.",
+  "assets": [
+    {
+      "id": "display-shelf",
+      "path": "v3/assets/base-camp/display-shelf.webp",
+      "use": "Empty shelf display surface",
+      "dimensions": [
+        1200,
+        480
+      ],
+      "background": "Opaque painted scene, clear central placement area; no baked-in keepsakes or text",
+      "reuse": [
+        "Adventure display"
+      ],
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
+    },
+    {
+      "id": "display-garden",
+      "path": "v3/assets/base-camp/display-garden.webp",
+      "use": "Empty garden display surface",
+      "dimensions": [
+        1200,
+        480
+      ],
+      "background": "Opaque painted scene, clear central placement area; no baked-in keepsakes or text",
+      "reuse": [
+        "Adventure display"
+      ],
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
+    },
+    {
+      "id": "display-gate",
+      "path": "v3/assets/base-camp/display-gate.webp",
+      "use": "Empty gate display surface",
+      "dimensions": [
+        1200,
+        480
+      ],
+      "background": "Opaque painted scene, clear central placement area; no baked-in keepsakes or text",
+      "reuse": [
+        "Adventure display"
+      ],
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
+    },
+    {
+      "id": "collection-surface",
+      "path": "v3/assets/base-camp/collection-surface.webp",
+      "use": "Optional coordinated collection header surface",
+      "dimensions": [
+        1600,
+        400
+      ],
+      "background": "Opaque warm timber/stone material, quiet space for live HTML title; no objects or lettering",
+      "reuse": [
+        "Keepsake collection header"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:number|0",
+      "name": "Copper compass",
+      "path": "v3/assets/base-camp/keepsakes/number-0.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
+    },
+    {
+      "id": "keepsake:number|1",
+      "name": "Carved leaf",
+      "path": "v3/assets/base-camp/keepsakes/number-1.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:number|2",
+      "name": "River lantern",
+      "path": "v3/assets/base-camp/keepsakes/number-2.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:number|gateway",
+      "name": "Gateway crest",
+      "path": "v3/assets/base-camp/keepsakes/number-gateway.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:fractions|0",
+      "name": "Oasis seed",
+      "path": "v3/assets/base-camp/keepsakes/fractions-0.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
+    },
+    {
+      "id": "keepsake:fractions|1",
+      "name": "Mosaic shard",
+      "path": "v3/assets/base-camp/keepsakes/fractions-1.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:fractions|2",
+      "name": "Water vessel",
+      "path": "v3/assets/base-camp/keepsakes/fractions-2.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:fractions|gateway",
+      "name": "Gateway crest",
+      "path": "v3/assets/base-camp/keepsakes/fractions-gateway.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:algebra|0",
+      "name": "Generator cog",
+      "path": "v3/assets/base-camp/keepsakes/algebra-0.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
+    },
+    {
+      "id": "keepsake:algebra|1",
+      "name": "Railway token",
+      "path": "v3/assets/base-camp/keepsakes/algebra-1.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:algebra|2",
+      "name": "Crystal lens",
+      "path": "v3/assets/base-camp/keepsakes/algebra-2.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:algebra|gateway",
+      "name": "Gateway crest",
+      "path": "v3/assets/base-camp/keepsakes/algebra-gateway.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:geometry|0",
+      "name": "Tower tile",
+      "path": "v3/assets/base-camp/keepsakes/geometry-0.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:geometry|1",
+      "name": "Courtyard rose",
+      "path": "v3/assets/base-camp/keepsakes/geometry-1.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:geometry|2",
+      "name": "Sky pennant",
+      "path": "v3/assets/base-camp/keepsakes/geometry-2.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:geometry|gateway",
+      "name": "Gateway crest",
+      "path": "v3/assets/base-camp/keepsakes/geometry-gateway.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:ratio|0",
+      "name": "Harbour shell",
+      "path": "v3/assets/base-camp/keepsakes/ratio-0.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:ratio|1",
+      "name": "Sail patch",
+      "path": "v3/assets/base-camp/keepsakes/ratio-1.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:ratio|2",
+      "name": "Recipe card",
+      "path": "v3/assets/base-camp/keepsakes/ratio-2.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:ratio|gateway",
+      "name": "Gateway crest",
+      "path": "v3/assets/base-camp/keepsakes/ratio-gateway.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:statistics|0",
+      "name": "Survey notebook",
+      "path": "v3/assets/base-camp/keepsakes/statistics-0.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:statistics|1",
+      "name": "Power crystal",
+      "path": "v3/assets/base-camp/keepsakes/statistics-1.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:statistics|2",
+      "name": "Star chart",
+      "path": "v3/assets/base-camp/keepsakes/statistics-2.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:statistics|gateway",
+      "name": "Gateway crest",
+      "path": "v3/assets/base-camp/keepsakes/statistics-gateway.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:probability|0",
+      "name": "Portal petal",
+      "path": "v3/assets/base-camp/keepsakes/probability-0.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:probability|1",
+      "name": "Chance prism",
+      "path": "v3/assets/base-camp/keepsakes/probability-1.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:probability|2",
+      "name": "Spinner pin",
+      "path": "v3/assets/base-camp/keepsakes/probability-2.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:probability|gateway",
+      "name": "Gateway crest",
+      "path": "v3/assets/base-camp/keepsakes/probability-gateway.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:measure|0",
+      "name": "Survey ruler",
+      "path": "v3/assets/base-camp/keepsakes/measure-0.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:measure|1",
+      "name": "Pump wheel",
+      "path": "v3/assets/base-camp/keepsakes/measure-1.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:measure|2",
+      "name": "Lift gear",
+      "path": "v3/assets/base-camp/keepsakes/measure-2.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:measure|gateway",
+      "name": "Gateway crest",
+      "path": "v3/assets/base-camp/keepsakes/measure-gateway.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:town|market",
+      "name": "Market basket",
+      "path": "v3/assets/base-camp/keepsakes/town-market.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:town|cafe",
+      "name": "Caf\u00e9 enamel mug",
+      "path": "v3/assets/base-camp/keepsakes/town-cafe.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:town|bank",
+      "name": "Savings acorn",
+      "path": "v3/assets/base-camp/keepsakes/town-bank.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:town|shops",
+      "name": "Smart shopper badge",
+      "path": "v3/assets/base-camp/keepsakes/town-shops.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:town|station",
+      "name": "Explorer travel pass",
+      "path": "v3/assets/base-camp/keepsakes/town-station.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:town|home",
+      "name": "House key charm",
+      "path": "v3/assets/base-camp/keepsakes/town-home.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:town|leisure",
+      "name": "Festival ticket",
+      "path": "v3/assets/base-camp/keepsakes/town-leisure.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:town|work",
+      "name": "Workshop pencil",
+      "path": "v3/assets/base-camp/keepsakes/town-work.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "keepsake:town|gateway",
+      "name": "Gateway crest",
+      "path": "v3/assets/base-camp/keepsakes/town-gateway.webp",
+      "use": "Earned keepsake, keyed by world and route rather than name matching",
+      "dimensions": [
+        512,
+        512
+      ],
+      "background": "RGBA transparent, no matte, consistent three-quarter object angle, 10% clear padding",
+      "reuse": [
+        "Adventure display slots",
+        "Keepsake collection cards",
+        "Camp interior placed keepsakes (requires raster-aware renderer)"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "project:greenhouse:planned",
+      "path": "v3/assets/base-camp/projects/greenhouse-planned.webp",
+      "use": "Community greenhouse unbuilt materials/design, visibly incomplete card",
+      "dimensions": [
+        768,
+        576
+      ],
+      "background": "RGBA transparent, common ground line, separate soft contact shadow; no text or progress values",
+      "reuse": [
+        "Build something that stays project card"
+      ],
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-planned-project-card-art.zip"
+    },
+    {
+      "id": "project:greenhouse:built",
+      "path": "v3/assets/base-camp/projects/greenhouse-built.webp",
+      "use": "Community greenhouse completed project card",
+      "dimensions": [
+        768,
+        576
+      ],
+      "background": "RGBA transparent, common ground line, separate soft contact shadow; no text or progress values",
+      "reuse": [
+        "Build something that stays project card"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "project:greenhouse:scene",
+      "path": "v3/assets/base-camp/projects/greenhouse-scene.webp",
+      "use": "Completed Community greenhouse camp interior prop",
+      "dimensions": [
+        640,
+        640
+      ],
+      "background": "RGBA transparent; match existing camp interior projection and footprint, deliver separate shadow layer if needed",
+      "reuse": [
+        "Camp interior only after saved build completion"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "project:lookout:planned",
+      "path": "v3/assets/base-camp/projects/lookout-planned.webp",
+      "use": "Explorer lookout unbuilt materials/design, visibly incomplete card",
+      "dimensions": [
+        768,
+        576
+      ],
+      "background": "RGBA transparent, common ground line, separate soft contact shadow; no text or progress values",
+      "reuse": [
+        "Build something that stays project card"
+      ],
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-planned-project-card-art.zip"
+    },
+    {
+      "id": "project:lookout:built",
+      "path": "v3/assets/base-camp/projects/lookout-built.webp",
+      "use": "Explorer lookout completed project card",
+      "dimensions": [
+        768,
+        576
+      ],
+      "background": "RGBA transparent, common ground line, separate soft contact shadow; no text or progress values",
+      "reuse": [
+        "Build something that stays project card"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "project:lookout:scene",
+      "path": "v3/assets/base-camp/projects/lookout-scene.webp",
+      "use": "Completed Explorer lookout camp interior prop",
+      "dimensions": [
+        640,
+        640
+      ],
+      "background": "RGBA transparent; match existing camp interior projection and footprint, deliver separate shadow layer if needed",
+      "reuse": [
+        "Camp interior only after saved build completion"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "project:noticeboard:planned",
+      "path": "v3/assets/base-camp/projects/noticeboard-planned.webp",
+      "use": "Town noticeboard unbuilt materials/design, visibly incomplete card",
+      "dimensions": [
+        768,
+        576
+      ],
+      "background": "RGBA transparent, common ground line, separate soft contact shadow; no text or progress values",
+      "reuse": [
+        "Build something that stays project card"
+      ],
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-planned-project-card-art.zip"
+    },
+    {
+      "id": "project:noticeboard:built",
+      "path": "v3/assets/base-camp/projects/noticeboard-built.webp",
+      "use": "Town noticeboard completed project card",
+      "dimensions": [
+        768,
+        576
+      ],
+      "background": "RGBA transparent, common ground line, separate soft contact shadow; no text or progress values",
+      "reuse": [
+        "Build something that stays project card"
+      ],
+      "status": "integrated from supplied atlas"
+    },
+    {
+      "id": "project:noticeboard:scene",
+      "path": "v3/assets/base-camp/projects/noticeboard-scene.webp",
+      "use": "Completed Town noticeboard camp interior prop",
+      "dimensions": [
+        640,
+        640
+      ],
+      "background": "RGBA transparent; match existing camp interior projection and footprint, deliver separate shadow layer if needed",
+      "reuse": [
+        "Camp interior only after saved build completion"
+      ],
+      "status": "integrated from supplied atlas"
+    }
+  ]
+}

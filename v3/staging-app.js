@@ -16,6 +16,9 @@ let client,
   saveTimer,
   intents,
   lastSaveAttempt = 0;
+let gameEpoch = null;
+let resetBlocked = false;
+let resetSupported = false;
 let busy = false,
   operationPending = null,
   releaseTab;
@@ -58,15 +61,41 @@ function form(title, body, action) {
     }
   };
 }
+function retireGame() {
+  if(resetBlocked)return;
+  resetBlocked=true;unlock=null;expires=0;clearTimeout(timeout);clearTimeout(saveTimer);
+  sessionStorage.removeItem("v3-unlock:" + c.projectRef);
+  document.querySelector("nav").hidden=true;
+  for(const d of document.querySelectorAll('dialog[open]'))d.close();
+  panel('Reconnect and unlock your game','<p>A parent may have reset this game, or this unlock has expired. This device’s earlier progress cannot be uploaded. Reconnect and unlock to load the current game.</p>'+button('Reconnect and unlock','reset-reconnect'));
+  $('reset-reconnect').onclick=()=>location.reload();
+}
+function useGameEpoch(remote){
+  if(remote.gameResetVersion===1 && (!Number.isSafeInteger(remote.gameEpoch)||remote.gameEpoch<0))throw Error('Invalid game reset generation');
+  gameEpoch=remote.gameEpoch||0;resetSupported=remote.gameResetVersion===1;
+}
+function intentKey(){return `v3-intent:${c.projectRef}:${identity.user}`+(gameEpoch?':reset-'+gameEpoch:'');}
+function prepareIntents(){
+  intents=window.V3CloudSync.createIntents({storage:localStorage,key:intentKey(),rpc,
+    allowed:identity.role==='learner'?['buy']:['award','redeem','confirm_offline']});
+}
 async function rpc(op, args = {}) {
   if (!active()) throw Error("Unlock your account to continue");
+  const sentEpoch=gameEpoch;
   const { data, error } = await client.rpc("v3_request", {
     p_token: unlock,
     p_operation: op,
-    p_args: args,
+    p_args: !['read','lock'].includes(op) && resetSupported && gameEpoch!==null ? {...args,gameEpoch:args.gameEpoch??gameEpoch} : args,
   });
-  if (error) throw error;
+  if (error) {
+    if(identity?.role==='learner' && /GAME_RESET_REQUIRED|Unlock required/.test(error.message||''))retireGame();
+    throw error;
+  }
   if (data?.error) throw Error(data.error);
+  if(op==='read' && identity?.role==='learner' && sentEpoch!==null && (data.gameEpoch||0)!==sentEpoch){
+    retireGame();throw Error('GAME_RESET_REQUIRED');
+  }
+  if(resetBlocked)throw Error('GAME_RESET_REQUIRED');
   return data;
 }
 function authForm() {
@@ -173,6 +202,7 @@ async function lock() {
   location.reload();
 }
 async function open(u) {
+  gameEpoch=null;resetBlocked=false;
   unlock = u.token;
   expires = Date.parse(u.expires);
   identity = u;
@@ -193,8 +223,8 @@ async function open(u) {
     );
   }
   wallet = remote.wallet;
-  intents=window.V3CloudSync.createIntents({storage:localStorage,key:`v3-intent:${c.projectRef}:${identity.user}`,rpc,
-    allowed:identity.role==='learner'?['buy']:['award','redeem','confirm_offline']});
+  useGameEpoch(remote);
+  prepareIntents();
   // Recover purchases independently of the item button, even when ownership already refreshed.
   if(identity.role==='learner'&&navigator.onLine){try{const recovered=await intents.recover();if(recovered){remote=recovered;wallet=remote.wallet;localStorage.setItem(cacheKey,JSON.stringify(remote));}}catch{message('A purchase is awaiting confirmation. Its retry is preserved.');}}
   if (identity.role === "parent") {
@@ -202,7 +232,7 @@ async function open(u) {
     await parent(remote);
     return;
   }
-  const key = `jaxon_v3_staging:${c.projectRef}:${identity.user}:game`,
+  const key = `jaxon_v3_staging:${c.projectRef}:${identity.user}:game${gameEpoch?":reset-"+gameEpoch:""}`,
     qkey = key + ":queue";
   // A single writing tab per account prevents shared local queues from racing. Other devices use CAS.
   if (!navigator.locks)
@@ -392,13 +422,14 @@ async function heartbeat(seconds) {
   }
 }
 async function parent(remote) {
+  useGameEpoch(remote);prepareIntents();
   const p = E.migrate(remote.progress),
     week = p.weekly[E.weekKey(Date.now())] || 0;
   let pending = null,
     invalidIntent = false;
   try {
     const raw = localStorage.getItem(
-      `v3-intent:${c.projectRef}:${identity.user}`,
+      intentKey(),
     );
     if (raw) {
       pending = JSON.parse(raw);
@@ -469,12 +500,44 @@ async function parent(remote) {
       if (e.submitter.isConnected) e.submitter.disabled = false;
     }
   };
+  const resetSection=document.createElement('section');
+  resetSection.className='panel total-game-reset';
+  resetSection.innerHTML='<h2>Reset all learner game progress</h2><p>Start this linked learner’s game again. This is separate from restarting one activity.</p>'+button('Reset all game progress','reset-game-open')+(remote.gameResetVersion===1?'':'<p>The reviewed server reset upgrade must be installed before this control can be used.</p>');
+  main.querySelector('.parent-journal').append(resetSection);
+  $('reset-game-open').disabled=remote.gameResetVersion!==1;
+  $('reset-game-open').onclick=()=>confirmGameReset(remote);
   $("refresh-parent").onclick = async () => {
     try {
       await parent(await rpc("read"));
     } catch (err) {
       message(err.message);
     }
+  };
+}
+function confirmGameReset(remote) {
+  if(identity.role!=='parent'||remote.gameResetVersion!==1)return;
+  const d=document.createElement('dialog');d.id='total-game-reset-dialog';
+  d.setAttribute('aria-labelledby','total-reset-title');
+  d.innerHTML='<h2 id="total-reset-title">Reset all learner game progress?</h2><p>This clears all learning and mastery evidence, starting-point answers, Base Camp levels, builds and keepsakes, coins, bonus coins and screen-time rewards, avatar ownership and equipment, and saved or resumable activities. Earlier offline saves cannot restore them.</p><p>Account identities, passwords, PINs, family links and parent/access configuration stay in place. This cannot be undone in the game.</p><label>Type RESET ALL GAME PROGRESS<input id="total-reset-confirm" autocomplete="off"></label><div class="actions">'+button('Cancel','total-reset-cancel')+button('Confirm total game reset','total-reset-submit')+'</div><p id="total-reset-feedback" role="status"></p>';
+  document.body.append(d);d.showModal();
+  const submit=$('total-reset-submit'),input=$('total-reset-confirm');submit.disabled=true;
+  let payload=null,submitting=false;
+  input.oninput=()=>{submit.disabled=input.value!=='RESET ALL GAME PROGRESS'||submitting;};
+  $('total-reset-cancel').onclick=()=>{if(!submitting)d.remove();};
+  d.oncancel=e=>{if(submitting)e.preventDefault();else d.remove();};
+  submit.onclick=async()=>{
+    if(submitting||input.value!=='RESET ALL GAME PROGRESS')return;
+    submitting=true;submit.disabled=true;$('total-reset-cancel').disabled=true;input.readOnly=true;
+    // Same ID/payload on a lost response retry; never persist or auto-run a reset intent.
+    payload??={requestId:crypto.randomUUID(),gameEpoch:remote.gameEpoch||0,revision:remote.revision,confirmation:input.value};
+    try{
+      const receipt=await rpc('reset_game',payload);
+      if(receipt?.reset!==true||!Number.isSafeInteger(receipt.gameEpoch)||receipt.gameEpoch<1)throw Error('Reset was not acknowledged');
+      gameEpoch=receipt.gameEpoch;
+      const next=await rpc('read');d.remove();await parent(next);
+      message('Total game reset completed. The learner must unlock again to load their fresh game.');
+    }catch(err){$('total-reset-feedback').textContent=err.message+' No automatic retry will run. Retry sends the same reset request.';}
+    finally{submitting=false;if(d.isConnected){submit.disabled=false;$('total-reset-cancel').disabled=false;}}
   };
 }
 async function boot() {

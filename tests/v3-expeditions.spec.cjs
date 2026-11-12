@@ -351,31 +351,24 @@ test("Purpose-built Town entrances open their own interiors and exterior views p
   await axe(page);
 });
 
-test("All eight camp homes render actual upgrades and reduced motion stops watermill machinery",async({page})=>{
+test("All eight earned camp homes retain four exterior appearances and saved ownership",async({page})=>{
   test.setTimeout(90000);
   for(let stage=1;stage<=8;stage++){
-    await page.evaluate(({stage,key})=>{const s=V3Engine.fresh();s.view='camp';s.tourSeen=true;s.settings.motion=true;s.bought=['cap','fox'];s.equipped=['cap','fox'];s.coins=83.5;s.milestones=V3Adventure.campMilestoneIds().slice(0,V3Adventure.campStages[stage-1].need);localStorage.setItem(key,JSON.stringify(s));},{stage,key:KEY});
-    await page.reload();const scene=page.locator('.camp-map>.camp-scene');await expect(scene).toHaveAttribute('data-camp-stage',String(stage));
+    await page.evaluate(({stage,key})=>{const s=V3Engine.fresh();s.view='camp';s.tourSeen=true;s.bought=['cap','fox'];s.equipped=['cap','fox'];s.coins=83.5;s.milestones=V3Adventure.campMilestoneIds().slice(0,V3Adventure.campStages[stage-1].need);V3Adventure.state(s);for(const p of V3Adventure.projects)if(s.milestones.length>=p.need)V3Adventure.build(s,p.id);for(let level=2;level<=stage;level++)V3Adventure.upgradeCamp(s,level);localStorage.setItem(key,JSON.stringify(s));},{stage,key:KEY});
+    await page.reload();await expect(page.locator('#estate-planner')).toContainText('BASE CAMP LEVEL '+stage+' / 8');
+    await expect(page.locator('.camp-map .camp-exterior .scene-background')).toHaveAttribute('src',new RegExp('camp'+([1,1,1,1,3,3,4,4][stage-1])+'\\.webp$'));
     await expect(page.locator('.estate-track button')).toHaveCount(8);
-    if(stage>=3)await expect(scene.locator('[data-estate-part="residence-'+stage+'"]').first()).toBeVisible();
-    if(stage>=6){await expect(scene.locator('[data-estate-part="watermill"]')).toBeVisible();await expect(scene.locator('[data-estate-part="storage-tank-and-pipework"]')).toBeVisible();}
-    if(stage>=7)await expect(scene.locator('[data-estate-part="private-power-grid"]')).toBeVisible();
-    const s=await saved(page);expect(s.bought).toEqual(['cap','fox']);expect(s.equipped).toEqual(['cap','fox']);expect(s.coins).toBe(83.5);expect(s.skills).toEqual({});
+    const s=await saved(page);expect(s.adventure.campEstate.highest).toBe(stage);expect(s.bought).toEqual(['cap','fox']);expect(s.equipped).toEqual(['cap','fox']);expect(s.coins).toBe(83.5);expect(s.skills).toEqual({});
     if(stage===1||stage===8)await axe(page);
   }
-  await page.emulateMedia({reducedMotion:'reduce'});
-  expect(await page.locator('.camp-map .mill-wheel').evaluate(el=>getComputedStyle(el).animationName)).toBe('none');
-  await page.emulateMedia({reducedMotion:'no-preference'});
-  expect(await page.locator('.camp-map .mill-wheel').evaluate(el=>getComputedStyle(el).animationName)).toBe('mill-turn');
-  await page.reload();await expect(page.locator('.camp-map>.camp-scene')).toHaveAttribute('data-camp-stage','8');
 });
 
-test("Camp upgrade celebration and previews preserve history and cannot earn a mansion, coins, mastery or time",async({page})=>{
+test("Camp upgrade claims and celebration preserve history and cannot earn coins, mastery or time",async({page})=>{
   await page.clock.install({time:new Date('2026-10-20T12:00:00Z')});
-  await page.evaluate(key=>{const s=V3Engine.fresh();s.view='camp';s.tourSeen=true;s.coins=71.25;s.milestones=V3Adventure.campMilestoneIds().slice(0,3);V3Adventure.state(s).campProjects.greenhouse=true;V3Adventure.state(s).historical={keep:17};s.milestones.push(V3Adventure.campMilestoneIds()[3]);localStorage.setItem(key,JSON.stringify(s));},KEY);
-  await page.reload();await expect(page.locator('.estate-celebration')).toBeVisible();const before=await saved(page);
-  await click(page,'camp-preview:8');await expect(page.locator('.estate-preview')).toHaveAttribute('data-camp-stage','8');
-  await expect(page.locator('.camp-map>.camp-scene')).toHaveAttribute('data-camp-stage','2');await click(page,'camp-celebrate');
+  await page.evaluate(key=>{const s=V3Engine.fresh();s.view='camp';s.tourSeen=true;s.coins=71.25;s.milestones=V3Adventure.campMilestoneIds().slice(0,4);V3Adventure.state(s).campProjects.greenhouse=true;V3Adventure.state(s).historical={keep:17};localStorage.setItem(key,JSON.stringify(s));},KEY);
+  await page.reload();await expect(page.locator('.estate-celebration')).toHaveCount(0);const before=await saved(page);
+  await expect(page.locator('[data-action="camp-preview:8"]')).toBeDisabled();await click(page,'camp-upgrade:2');await expect(page.locator('.estate-celebration')).toBeVisible();
+  await expect(page.locator('#estate-planner')).toContainText('BASE CAMP LEVEL 2 / 8');await click(page,'camp-celebrate');
   await page.clock.runFor(30000);await page.reload();const after=await saved(page);
   expect(after.adventure.campEstate.highest).toBe(2);expect(after.adventure.campEstate.celebrated).toBe(2);expect(after.adventure.historical).toEqual({keep:17});expect(after.adventure.campProjects.greenhouse).toBe(true);
   for(const key of ['coins','earned','minutes','weekly','milestones','skills','checks','bought','equipped'])expect(after[key]).toEqual(before[key]);

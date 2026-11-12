@@ -242,7 +242,7 @@
       extra+=workshop(987,502,stage===8,power)+at(961,633,block(0,0,44,25,60,"#a38d62","#b9c5a0")+roof(44,25,60));
       extra+='<g data-estate-part="water-pump">'+at(448,625,block(0,0,17,10,29,"#6d9381","#b5c6a3")+'<path d="M0-30v-32h18m-18 9h-18v-14" fill="none" stroke="#597d70" stroke-width="7"/>')+'</g>';
     }
-    if(stage>=5 || a.campProjects.greenhouse)extra+='<g data-estate-part="community-greenhouse">'+greenhouse(390,650)+'</g>';
+    if(a.campProjects.greenhouse === true)extra+='<g data-estate-part="community-greenhouse">'+greenhouse(390,650)+'</g>';
     if(a.campProjects.lookout)extra+=at(147,412,block(0,0,31,18,119,"#a18a61","#d4bb82")+roof(38,20,119))+roomText(144,451,"Lookout",13);
     if(a.campProjects.noticeboard)extra+=at(604,710,'<path d="M-31 0v-78h62V0m-62-65h62v40h-62" fill="#b69c64" stroke="#796647" stroke-width="6"/><path d="M-23-55h17v22h-17zM7-55h17v22H7z" fill="#ecdcb0"/>');
     let water="";
@@ -258,7 +258,7 @@
     if(stage===8)extra+='<g data-estate-part="landscaped-courtyard">'+block(706,575,133,58,9,"#a7b094","#dfd5b0")+block(706,562,31,17,21,"#a7b8a4","#b4d7c6")+'<path d="M706 542v-23m0 4q-13 3-13 13m13-13q13 3 13 13" stroke="#86bfc0" stroke-width="4" fill="none"/>'+flowers(600,585)+flowers(648,610)+flowers(781,586)+flowers(826,611)+'</g>';
     const placed=Object.entries(a.camp).filter(([,id])=>id).map(([slot,id],i)=>{
       const c=M.collections(s).find(c=>c.id===id);if(!c)return "";
-      return at([562,824,510][i],[570,652,669][i],`<title>${esc(c.name)} at camp ${esc(slot)}</title>`+block(0,0,18,10,24,"#99835a","#d9c18a")+at(-22,-69,A.keepsake(c).replace(/<svg[^>]*>/,"<g>").replace("</svg>","</g>"),.55));
+      return at([562,824,510][i],[570,652,669][i],`<title>${esc(c.name)} at camp ${esc(slot)}</title>`+block(0,0,18,10,24,"#99835a","#d9c18a")+at(-22,-69,A.keepsake(c,true).replace(/<svg[^>]*>/,"<g>").replace("</svg>","</g>"),.55));
     }).join("");
     const starter=stage<=2?at(576,476,block(0,0,27,17,27,"#9f8557","#d4b87d"))+at(763,498,'<path d="M-16-19h28v32h-28z" fill="#8f9871"/><path d="M-8-19v-7H5v7" stroke="#5f7959" stroke-width="4" fill="none"/>')+at(617,522,'<ellipse rx="27" ry="13" fill="#74634a"/><path d="M-15 1l29-11m-24-6L9 6" stroke="#a78a5b" stroke-width="7"/><path class="camp-fire" d="M-10-9q-4-15 6-26 0 12 8 10 10 17-1 24Z" fill="#e3b26d"/>'):"";
     return `<svg class="camp-scene estate-stage-${stage} ${previewStage?"estate-preview":""}" data-camp-stage="${stage}" viewBox="0 0 1200 800" role="img" aria-label="${previewStage?"Preview: ":""}Base Camp stage ${stage} of 8: ${esc(st.name)}${power?", hydro generator, power grid and lit estate":""}"><rect width="1200" height="800" fill="${power?"#6e9987":"#b2cdb7"}"/><path d="M0 195l180-110 203 104L600 66l218 122L1022 70l178 130v600H0Z" fill="#51816a" opacity=".3"/>${land}${water}${pine(1073,339,1.3)}${pine(129,542,1.2)}${at(700,stage===8?375:411,residence(stage))}${extra}${starter}${placed}${at(667,550,miniExplorer(),.9)}<rect x="28" y="25" width="570" height="43" rx="8" fill="#244b3d"/><text x="48" y="53" fill="#f6e8bc" font-family="system-ui" font-size="22" font-weight="750">${stage} / 8 · ${esc(st.name)}</text>${power?roomText(920,777,"Water → generator → estate lights",14):roomText(920,777,"A home built through your adventures",14)}</svg>`;
