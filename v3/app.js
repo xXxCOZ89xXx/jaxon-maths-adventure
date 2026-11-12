@@ -499,25 +499,6 @@
       cloud && s.view === "parent"
         ? "<h1>Parent account required</h1>"
         : (screens[s.view] || home)();
-    document.querySelectorAll("[data-nav]").forEach((el) => {
-      if (el.closest("nav")) {
-        const current =
-          el.dataset.nav === s.view ||
-          (el.dataset.nav === "map" &&
-            [
-              "world",
-              "quest",
-              "lesson",
-              "practice",
-              "check",
-              "discovery",
-              "adventure",
-            ].includes(s.view)) ||
-          (el.dataset.nav === "camp" && s.view === "shop");
-        if (current) el.setAttribute("aria-current", "page");
-        else el.removeAttribute("aria-current");
-      }
-    });
     if(!P.complete(s)){
       document.querySelectorAll('#main [data-action]').forEach(el=>{if(!P.allowed(s,el.dataset.action)){if(el.dataset.action==='continue'){el.dataset.action='nav:starting';el.textContent='Continue starting points';}else{el.disabled=true;el.title='Find all nine starting points first';}}});
       if(s.view==='world'){const notice=document.createElement('section');notice.className='notice';notice.innerHTML='<p>Look around freely. Find all nine starting points before learning adventures begin.</p>'+btn('Find my starting points','nav:starting','primary');$('main').prepend(notice);}
@@ -531,6 +512,15 @@
     window.V7ActivityScenes?.decorate(s);
     window.V6SceneUI?.afterRender();
     activitySafety();
+    // Town uses the existing world/action route; highlight its own section,
+    // including saved activities, rather than every world view as Worlds.
+    const worldView = ["world", "quest", "lesson", "practice", "check", "discovery", "adventure", "journey"].includes(s.view);
+    const section = worldView ? (s.world === "town" ? "town" : "map") : s.view === "shop" ? "camp" : s.view;
+    document.querySelectorAll(".topbar nav [data-nav], .topbar nav [data-action]").forEach((el) => {
+      const target = el.dataset.nav || (el.dataset.action === "world:town" ? "town" : el.dataset.action?.replace(/^nav:/, ""));
+      if (target === section) el.setAttribute("aria-current", "page");
+      else el.removeAttribute("aria-current");
+    });
     scheduleProgression();
   }
   document.addEventListener('v6-scene-ui',()=>render());
