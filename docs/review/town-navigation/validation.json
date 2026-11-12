@@ -1,0 +1,38 @@
+{
+  "date": "2026-11-12",
+  "branch": "codex/town-navigation-highlight",
+  "releaseBase": "8d597cf11e67f8911e01ade2b396c4dde615a765",
+  "initialWorkingTreeClean": true,
+  "liveDataAccess": false,
+  "remoteDatabaseConnections": 0,
+  "pullRequestOpened": false,
+  "deployed": false,
+  "navigation": {
+    "startTime": "2026-11-12T13:36:58.259Z",
+    "duration": 72551.951,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "productionBrowser": {
+    "startTime": "2026-11-12T13:38:11.973Z",
+    "duration": 42105.05,
+    "expected": 24,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "otherChecks": {
+    "baselineReproduction": "3 expected-bug cases passed",
+    "npm test": "passed",
+    "productionBuild": "passed",
+    "stagingBuild": "passed",
+    "demoBuildAllowlist": "passed",
+    "demoSourceSync": "passed"
+  },
+  "limitations": [
+    "Chromium desktop and touch-emulated iPad layouts; physical iPad Safari not tested.",
+    "Full gameplay-quality browser suite not rerun."
+  ]
+}
