@@ -3,13 +3,27 @@ const F=require('./helpers/guided-progression.cjs'),KEY='jaxon_v3_fictional_demo
 const before=process.env.BASE_CAMP_BEFORE==='1';
 async function read(p){await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));return p.evaluate(k=>JSON.parse(localStorage.getItem(k)),KEY);}
 async function seed(p,s){F.M.state(s);await p.goto('/v3-adventure.html');await p.evaluate(({s,k})=>localStorage.setItem(k,JSON.stringify(s)),{s,k:KEY});await p.reload();await p.locator('#main h1').waitFor();}
-async function shot(p,info,name,loc){const dir=`docs/review/base-camp/${before?'before':'integrated'}/${info.project.name}`;fs.mkdirSync(dir,{recursive:true});await p.evaluate(()=>Promise.all([...document.images].map(i=>i.decode().catch(()=>{}))));await (loc||p).screenshot({path:`${dir}/${name}.jpg`,type:'jpeg',quality:82,...(loc?{}:{fullPage:true})});}
+async function shot(p,info,name,loc){const dir=`docs/review/base-camp/${process.env.BASE_CAMP_SHOTS || (before?'before':'refined')}/${info.project.name}`;fs.mkdirSync(dir,{recursive:true});await p.evaluate(()=>Promise.all([...document.images].map(i=>i.decode().catch(()=>{}))));await (loc||p).screenshot({path:`${dir}/${name}.jpg`,type:'jpeg',quality:82,...(loc?{}:{fullPage:true})});}
 function collected(){const s=F.fresh();F.M.state(s);for(const world of ['number','fractions','algebra'])s.adventure.records[world+'|0|1']={world,route:'0',tier:1};s.milestones=['mission|number|0|1','mission|fractions|0|1','mission|algebra|0|1'];s.view='camp';s.adventure.camp={shelf:'number|0',garden:'fractions|0',gate:'algebra|0'};return s;}
 test.beforeEach(async({page:p})=>{p.errors=[];p.external=[];p.on('pageerror',e=>p.errors.push(e.message));await p.route('**/*',r=>{if(new URL(r.request().url()).origin==='http://127.0.0.1:4173')return r.continue();p.external.push(r.request().url());return r.abort();});await p.emulateMedia({reducedMotion:'reduce'});});
 test.afterEach(async({page:p})=>{expect(p.errors).toEqual([]);expect(p.external).toEqual([]);expect(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1)).toBe(false);});
 test('visual audit: empty and earned sections, current artwork',async({page:p},info)=>{
  const s=F.fresh();s.view='camp';await seed(p,s);await shot(p,info,'new-camp');await shot(p,info,'empty-builds',p.locator('#camp-projects'));await shot(p,info,'unbuilt-scene',p.locator('.camp-map'));
  await seed(p,collected());await shot(p,info,'adventure-display',p.locator('.camp-designer'));const journal=p.locator('.camp-workshop > details');await journal.evaluate(e=>e.open=true);await shot(p,info,'keepsake-collection',journal);await shot(p,info,'build-projects',p.locator('#camp-projects'));await shot(p,info,'upgrade-planner',p.locator('#estate-planner'));
+ if(!before){
+  const sections=p.locator('.camp-designer, .camp-workshop > details, #camp-projects');
+  await expect(sections.locator('svg,canvas')).toHaveCount(0);
+  for(const [slot,id] of [['shelf','number|0'],['garden','fractions|0'],['gate','algebra|0']]){
+   const display=p.locator('#camp-'+slot);
+   await expect(display.locator('.camp-surface')).toHaveAttribute('src',new RegExp('display-'+slot+'[.]webp$'));
+   const src=await display.locator('.keepsake-art').getAttribute('src');
+   await expect(journal.locator('[data-keepsake-id="'+id+'"]').first()).toHaveAttribute('src',src);
+  }
+  expect(await sections.locator('img').evaluateAll(images=>images.every(i=>i.complete&&i.naturalWidth>0&&getComputedStyle(i).objectFit!=='fill'))).toBe(true);
+  expect(await p.locator('.display-plinth .camp-surface').evaluateAll(images=>images.every(i=>i.naturalWidth/i.naturalHeight===3))).toBe(true);
+  for(const id of ['greenhouse','lookout','noticeboard'])await expect(p.locator('#camp-projects img[src$="'+id+'-planned.webp"]')).toHaveCount(1);
+ }
+
 });
 test('progression locks, earned upgrades and saved builds',async({page:p},info)=>{
  test.skip(before,'Functional assertions apply to changed code');

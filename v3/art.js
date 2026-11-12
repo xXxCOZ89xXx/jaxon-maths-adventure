@@ -483,14 +483,7 @@
     const valid = window.V3Adventure?.routes(world).some(r=>String(r.id)===route) || (route==='gateway' && window.V3Engine.worlds.some(w=>w.id===world));
     if(valid){const src=campAsset(`keepsakes/${world}-${route}.webp`);return svg ? `<svg viewBox="0 0 80 80" aria-hidden="true"><image href="${src}" width="80" height="80"/></svg>` : `<img class="keepsake-art" data-keepsake-id="${esc(c.id)}" src="${src}" alt="" draggable="false" decoding="async">`;}
 
-    const name=String(c.name).toLowerCase(); let body;
-    if(/leaf|seed|rose|flower/.test(name))body='<path d="M40 65V20" stroke="#527f57" stroke-width="5"/><path d="M40 43Q9 42 13 19Q41 18 40 43M40 52Q72 49 67 28Q42 28 40 52" fill="#80a66a"/>';
-    else if(/gear|cog|wheel/.test(name))body=at(40,40,gear(0,0,true));
-    else if(/chart|ticket|notebook|card|pass|pencil|token/.test(name))body='<path d="M17 10h46v61H17z" fill="#e5ce97" stroke="#95835e" stroke-width="3"/><path d="M26 25h28m-28 11h28m-28 11h17m-17 11h25" stroke="#6f8d76" stroke-width="4"/>';
-    else if(/mug|vessel|pot|cup|basket/.test(name))body='<path d="M18 21h37v39l-8 10H26l-8-10z" fill="#c99668"/><path d="M55 28h13v25H55" fill="none" stroke="#9c7954" stroke-width="6"/><path d="M22 28h29" stroke="#e6c790" stroke-width="5"/>';
-    else if(/flag|pennant|sail|badge|crest/.test(name))body='<path d="M25 72V10" stroke="#907750" stroke-width="5"/><path d="M28 13h37L52 30l13 17H28Z" fill="#739b8b"/><path d="M34 19h8v22h-8z" fill="#c6d6ac"/>';
-    else body='<path d="M40 8l22 30-22 31-22-31Z" fill="#91bab1" stroke="#5e8c84" stroke-width="3"/><path d="M40 8v61L18 38Z" fill="#cbd9b5"/><path d="M22 69h36v7H22z" fill="#b79560"/>';
-    return `<svg class="keepsake-art" viewBox="0 0 80 80" aria-hidden="true">${body}</svg>`;
+    return "";
   }
   function product(name, i=0) {
     let body;
@@ -513,11 +506,7 @@
   function project(id, built=false) {
     if(['greenhouse','lookout','noticeboard'].includes(id))return `<img class="project-image" src="${campAsset(`projects/${id}-${built?'built':'planned'}.webp`)}" alt="" draggable="false" decoding="async">`;
 
-    let body;
-    if (id === "greenhouse") body=block(100,133,60,29,53,"#7caa98","#c2dbb7")+poly("M40 80L100 22L160 80L100 110Z","#b7d6b5")+'<path d="M100 23v109M71 52v64m58-64v64M40 81l60 29 60-29" stroke="#578475" stroke-width="4"/>'+at(100,128,poly("M0-35l-21-16L-18-25 0-15 20-35 22-55 0-35Z","#5d895c"));
-    else if (id === "lookout") body=block(100,135,33,18,92,"#9c8058","#d7bd7f")+poly("M48 43L100 4L152 43L100 69Z","#527c60")+'<path d="M76 65v53m14-45v53m-16-30 16 9m-16-24 16 9" stroke="#d7bd85" stroke-width="4"/><path d="M100 5v-4h30l-10 12h-20" fill="#e8c87b"/>';
-    else body='<path d="M48 148V46h104v102" stroke="#7d6345" stroke-width="9" fill="#ba9a64"/><path d="M45 41L100 12l55 29Z" fill="#547b5c"/><path d="M61 61h29v41H61zM105 68h30v29h-30zM80 111h40v18H80z" fill="#ecdbac"/><path d="M66 72h18m-18 9h14m26-3h22" stroke="#8a9e78" stroke-width="3"/>';
-    return '<svg class="project-image" viewBox="0 0 200 160" aria-hidden="true"><ellipse cx="100" cy="144" rx="77" ry="12" fill="#30543d" opacity=".13"/><g opacity="'+(built?1:.65)+'">'+body+'</g></svg>';
+    return "";
   }
   function location(id) {
     const ids = [

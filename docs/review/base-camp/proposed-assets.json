@@ -1,5 +1,5 @@
 {
-  "status": "Integrated from owner-supplied base-camp-artwork-handoff.zip. Original proposed dimensions are retained here for comparison; exact crop boxes, source hashes and actual export dimensions are in v3/assets/base-camp/manifest.json.",
+  "status": "Integrated from three owner-supplied Base Camp packs. Original proposed dimensions are retained for comparison; source precedence, exact crop boxes, hashes and actual export dimensions are in v3/assets/base-camp/manifest.json.",
   "style": "Original detailed 2.5D/voxel objects, painted materials and warm directional light coordinated with current worlds and approved guide portraits. All text, counters, locks and controls remain HTML.",
   "assets": [
     {
@@ -14,7 +14,8 @@
       "reuse": [
         "Adventure display"
       ],
-      "status": "integrated from supplied atlas"
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
     },
     {
       "id": "display-garden",
@@ -28,7 +29,8 @@
       "reuse": [
         "Adventure display"
       ],
-      "status": "integrated from supplied atlas"
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
     },
     {
       "id": "display-gate",
@@ -42,7 +44,8 @@
       "reuse": [
         "Adventure display"
       ],
-      "status": "integrated from supplied atlas"
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
     },
     {
       "id": "collection-surface",
@@ -73,7 +76,8 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "integrated from supplied atlas"
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
     },
     {
       "id": "keepsake:number|1",
@@ -141,7 +145,8 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "integrated from supplied atlas"
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
     },
     {
       "id": "keepsake:fractions|1",
@@ -209,7 +214,8 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "integrated from supplied atlas"
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-display-collection-art.zip"
     },
     {
       "id": "keepsake:algebra|1",
@@ -767,7 +773,8 @@
       "reuse": [
         "Build something that stays project card"
       ],
-      "status": "integrated from supplied atlas"
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-planned-project-card-art.zip"
     },
     {
       "id": "project:greenhouse:built",
@@ -809,7 +816,8 @@
       "reuse": [
         "Build something that stays project card"
       ],
-      "status": "integrated from supplied atlas"
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-planned-project-card-art.zip"
     },
     {
       "id": "project:lookout:built",
@@ -851,7 +859,8 @@
       "reuse": [
         "Build something that stays project card"
       ],
-      "status": "integrated from supplied atlas"
+      "status": "integrated from supplied standalone replacement",
+      "sourcePack": "base-camp-planned-project-card-art.zip"
     },
     {
       "id": "project:noticeboard:built",

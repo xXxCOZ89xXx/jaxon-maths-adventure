@@ -1,5 +1,5 @@
 """Crop supplied atlases only; no background removal, stretching or generated art.
-Usage: python3 scripts/crop-base-camp-art.py /path/to/extracted/handoff
+Usage: python3 scripts/crop-base-camp-art.py HANDOFF [PLANNED_PROJECTS DISPLAY_COLLECTION]
 """
 from pathlib import Path
 from PIL import Image
@@ -30,5 +30,22 @@ for a in spec['assets']:
   im.thumbnail(size,Image.Resampling.LANCZOS);canvas=Image.new('RGBA',size);canvas.paste(im,((size[0]-im.width)//2,(size[1]-im.height)//2));im=canvas
  dest=root/a['path'];dest.parent.mkdir(parents=True,exist_ok=True);im.save(dest,'WEBP',lossless=True,exact=True)
  assets.append({'id':ident,'file':a['path'].split('v3/assets/base-camp/')[1],'name':a.get('name'),'source':name,'sourceSha256':hashlib.sha256((src/name).read_bytes()).hexdigest(),'crop':list(box),'dimensions':list(size),'alpha':im.mode=='RGBA','sha256':hashlib.sha256(dest.read_bytes()).hexdigest()})
-(root/'v3/assets/base-camp/manifest.json').write_text(json.dumps({'source':'Owner-supplied base-camp-artwork-handoff.zip; crops only. Source alpha and shadows retained. Actual portrait surfaces supersede proposed wide dimensions.','assets':assets},indent=2)+'\n')
-print(f'{len(assets)} assets cropped without stretching')
+# Later owner-supplied standalone replacements take precedence over atlas cells.
+# Use the original complete image, fitting objects onto transparent target canvases.
+if len(sys.argv)>2:
+ replacements=[('project:'+p+':planned',Path(sys.argv[2]),p+'-planned.png','base-camp-planned-project-card-art.zip') for p in ['greenhouse','lookout','noticeboard']]
+ if len(sys.argv)>3:
+  display=Path(sys.argv[3])
+  replacements += [(ident,display,name,'base-camp-display-collection-art.zip') for ident,name in [
+   ('display-shelf','home-shelf-background.png'),('display-garden','camp-garden-background.png'),('display-gate','welcome-gate-background.png'),
+   ('keepsake:number|0','copper-compass.png'),('keepsake:fractions|0','oasis-seed.png'),('keepsake:algebra|0','generator-cog.png')]]
+ for ident,directory,name,pack in replacements:
+  entry=next(a for a in assets if a['id']==ident);original=Image.open(directory/name);im=original.copy()
+  target=original.size if ident.startswith('display-') else tuple(entry['dimensions'])
+  if im.size!=target:
+   im.thumbnail(target,Image.Resampling.LANCZOS);canvas=Image.new('RGBA',target);canvas.paste(im,((target[0]-im.width)//2,(target[1]-im.height)//2));im=canvas
+  dest=root/'v3/assets/base-camp'/entry['file'];im.save(dest,'WEBP',lossless=True,exact=True)
+  entry.update(source=name,sourcePack=pack,sourceSha256=hashlib.sha256((directory/name).read_bytes()).hexdigest(),crop=[0,0,*original.size],dimensions=list(target),alpha=im.mode=='RGBA',sha256=hashlib.sha256(dest.read_bytes()).hexdigest())
+for entry in assets: entry.setdefault('sourcePack','base-camp-artwork-handoff.zip')
+(root/'v3/assets/base-camp/manifest.json').write_text(json.dumps({'source':'Owner-supplied Base Camp packs. Atlas crops with nine standalone replacements when the supplemental packs are provided. Full source alpha, proportions and shadows retained; exact source pack and dimensions recorded per asset.','assets':assets},indent=2)+'\n')
+print(f'{len(assets)} assets exported without stretching')

@@ -1,7 +1,7 @@
 {
   "date": "2026-11-12",
   "branch": "codex/base-camp-progression-refresh",
-  "continuedFrom": "41c8cb6b8ebe8ae400871ffeac51ebfa73ee1298",
+  "continuedFrom": "31769e2e220ca66d1b7161171d22d83c0908680b",
   "releaseBase": "f1b88c95326e6ba5145e8abd97306df0431b3a1a",
   "liveLearnerDataAccess": false,
   "remoteDatabaseConnections": 0,
@@ -16,7 +16,20 @@
     "keepsakeIdentities": 41,
     "generatedArt": false,
     "sourceAlphaRetained": true,
-    "actualManifest": "v3/assets/base-camp/manifest.json"
+    "actualManifest": "v3/assets/base-camp/manifest.json",
+    "supplementalSources": [
+      {
+        "file": "base-camp-planned-project-card-art.zip",
+        "sha256": "6752e6d0ec91425e8071af86c2fe832303aeba25b1cf26bc93f0e3acc228fdcd"
+      },
+      {
+        "file": "base-camp-display-collection-art.zip",
+        "sha256": "4f981f10366a6d68456032ce731970a9e30d92e53d199b8c197714c752f572de"
+      }
+    ],
+    "replacedExports": 9,
+    "unchangedExports": 45,
+    "pixelVerification": "All nine exports match full supplied sources pixel-for-pixel after proportional fit, including alpha and contact shadows."
   },
   "checks": [
     {
@@ -73,22 +86,6 @@
       "flaky": 0
     },
     {
-      "command": "Existing earned camp home browser checks",
-      "status": "passed",
-      "passed": 3,
-      "failed": 0,
-      "skipped": 0,
-      "flaky": 0
-    },
-    {
-      "command": "Existing rollout exterior browser checks",
-      "status": "passed",
-      "passed": 2,
-      "failed": 0,
-      "skipped": 0,
-      "flaky": 0
-    },
-    {
       "command": "node tests/v52-production-build.cjs",
       "status": "passed"
     },
@@ -125,14 +122,12 @@
       "failed": 6,
       "skipped": 0,
       "flaky": 0,
-      "reason": "All six still expect undefined °C for hob recipes; test and recipe code unchanged."
+      "reason": "All six still expect undefined \u00b0C for hob recipes; test and recipe code unchanged."
     }
   ],
   "correctedIntermediateFailures": [
-    "Browser fixtures waited for login/navigation completion before reading or reloading the game context.",
-    "Demo source-sync fixture now copies the new Base Camp manifest.",
-    "Staging read no-op inserts receive the verified generation in the wrapper.",
-    "The compact-receipt fixture uses its expected pinned project metadata inside a network-disabled local database."
+    "New artwork locator selected the parent of the desired slot and found three surfaces; corrected to the slot itself.",
+    "An overlapping local Base Camp run removed another run's trace artifacts; final Base Camp verification run without overlap."
   ],
   "limitations": [
     "Physical iPad Safari not tested.",
@@ -143,5 +138,67 @@
     "Supplied translucent halo/matte pixels were preserved with source alpha and contact shadows.",
     "Older higher-tier backgrounds are gated by actual project builds; an approved simpler view is used until they are eligible.",
     "The complete 48-case gameplay-quality browser suite was not rerun; six known failures were rerun directly."
-  ]
+  ],
+  "liveMigrationStateQueried": false,
+  "screenshots": {
+    "before": "before-supplements/ (31769e2)",
+    "after": "refined/",
+    "reset": "reset/",
+    "layouts": [
+      "desktop 1440x1000",
+      "iPad portrait 820x1180",
+      "iPad landscape 1180x820",
+      "small touch 360x800"
+    ]
+  },
+  "runEvidence": {
+    "reset": {
+      "startTime": "2026-11-12T11:09:47.169Z",
+      "duration": 118302.48199999999,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "saveRecovery": {
+      "startTime": "2026-11-12T11:09:48.953Z",
+      "duration": 191676.181,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "production": {
+      "startTime": "2026-11-12T11:11:21.077Z",
+      "duration": 113593.49600000001,
+      "expected": 24,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "knownRecipes": {
+      "startTime": "2026-11-12T11:10:25.213Z",
+      "duration": 139194.37300000002,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 6,
+      "flaky": 0
+    },
+    "baseCamp": {
+      "startTime": "2026-11-12T11:13:50.843Z",
+      "duration": 103857.395,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "demo": {
+      "startTime": "2026-11-12T11:13:57.129Z",
+      "duration": 116499.37100000001,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  }
 }
