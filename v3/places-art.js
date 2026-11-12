@@ -242,7 +242,7 @@
       extra+=workshop(987,502,stage===8,power)+at(961,633,block(0,0,44,25,60,"#a38d62","#b9c5a0")+roof(44,25,60));
       extra+='<g data-estate-part="water-pump">'+at(448,625,block(0,0,17,10,29,"#6d9381","#b5c6a3")+'<path d="M0-30v-32h18m-18 9h-18v-14" fill="none" stroke="#597d70" stroke-width="7"/>')+'</g>';
     }
-    if(stage>=5 || a.campProjects.greenhouse)extra+='<g data-estate-part="community-greenhouse">'+greenhouse(390,650)+'</g>';
+    if(a.campProjects.greenhouse === true)extra+='<g data-estate-part="community-greenhouse">'+greenhouse(390,650)+'</g>';
     if(a.campProjects.lookout)extra+=at(147,412,block(0,0,31,18,119,"#a18a61","#d4bb82")+roof(38,20,119))+roomText(144,451,"Lookout",13);
     if(a.campProjects.noticeboard)extra+=at(604,710,'<path d="M-31 0v-78h62V0m-62-65h62v40h-62" fill="#b69c64" stroke="#796647" stroke-width="6"/><path d="M-23-55h17v22h-17zM7-55h17v22H7z" fill="#ecdcb0"/>');
     let water="";

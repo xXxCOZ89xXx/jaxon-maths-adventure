@@ -137,12 +137,10 @@
       )
         delete a.records[key];
     }
-    // Additive visual progress: existing projects, camp slots and unknown history survive.
-    const earned = campMilestones(s).length;
-    const attained = campStages.filter(stage => earned >= stage.need).length;
+    // Loading or viewing camp never claims an upgrade. Keep saved homes and projects.
     const prior = a.campEstate && typeof a.campEstate === "object" && !Array.isArray(a.campEstate) ? a.campEstate : null;
     const validStage = n => Number.isInteger(n) && n >= 1 && n <= 8;
-    const highest = Math.max(attained, validStage(prior?.highest) ? prior.highest : 1);
+    const highest = validStage(prior?.highest) ? prior.highest : 1;
     a.campEstate = {...(prior || {}), version:1, highest,
       celebrated: prior ? Math.min(highest,validStage(prior.celebrated) ? prior.celebrated : 1) : highest};
     return a;
@@ -1051,7 +1049,7 @@
     {id:2, name:"Established Campsite", need:4, story:"An improved tent, canvas awning, lantern fence, storage and a growing garden."},
     {id:3, name:"Explorer’s Cabin", need:10, story:"A timber home with chimney, porch, woodpile and rainwater barrel replaces the tent."},
     {id:4, name:"Adventure Lodge", need:18, story:"An upper floor, balcony lookout, map room and landscaped garden expand your home."},
-    {id:5, name:"Workshop Homestead", need:30, story:"A bigger homestead, equipment workshop, tool shed, greenhouse and water pump."},
+    {id:5, name:"Workshop Homestead", need:30, story:"A bigger homestead, equipment workshop, tool shed and water pump, with space for your community greenhouse project."},
     {id:6, name:"Watermill Estate", need:45, story:"A substantial residence and working watermill, stream, channel, bridge, storage tank and pipework."},
     {id:7, name:"Powered Manor", need:65, story:"A manor with hydro generator, distribution equipment, visible power lines and illuminated grounds."},
     {id:8, name:"Explorer’s Mansion", need:85, story:"A grand multi-wing mansion, trophy room, courtyard and gardens, advanced workshop, watermill and complete private power grid."},
@@ -1075,6 +1073,12 @@
     const a=state(s), count=campMilestones(s).length, current=campStages[a.campEstate.highest-1], next=campStages[current.id] || null;
     return {count,current,next,remaining:next?Math.max(0,next.need-count):0,
       pending:a.campEstate.celebrated<current.id,capacity:campMilestoneIds().length};
+  }
+  function upgradeCamp(s, stage) {
+    const p = campProgress(s);
+    if (!p.next || stage !== p.next.id || p.count < p.next.need) return false;
+    state(s).campEstate.highest = stage;
+    return true;
   }
   function celebrateCamp(s) {
     const a=state(s);a.campEstate.celebrated=a.campEstate.highest;
@@ -1134,6 +1138,7 @@
     campMilestoneIds,
     campMilestones,
     campProgress,
+    upgradeCamp,
     celebrateCamp,
     build,
   };
