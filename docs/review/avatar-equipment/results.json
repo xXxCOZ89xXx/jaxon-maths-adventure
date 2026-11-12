@@ -1,0 +1,59 @@
+{
+  "base": "fb0b89441651ed87c486bc3b7cf04ed720c65df8",
+  "fictionalOnly": true,
+  "browser": {
+    "equipment-browser": {
+      "startTime": "2026-11-12T00:00:10.184Z",
+      "duration": 78682.852,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "production-browser": {
+      "startTime": "2026-11-12T00:01:30.416Z",
+      "duration": 48340.259,
+      "expected": 24,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "save-recovery-browser": {
+      "startTime": "2026-11-12T00:02:38.008Z",
+      "duration": 69949.99399999999,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "demo-browser": {
+      "startTime": "2026-11-12T00:00:28.532Z",
+      "duration": 112445.894,
+      "expected": 18,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "avatar-fit": {
+      "startTime": "2026-11-12T00:03:48.859Z",
+      "duration": 205450.704,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "logicAndBuild": {
+    "npm test": "passed",
+    "node tests/avatar-equipment.cjs": "passed",
+    "npm run test:production-build": "passed",
+    "npm run build:demo": "passed",
+    "demo/test-sync.cjs and demo/test-browser.cjs": "passed",
+    "npm run test:ipad-release": "passed"
+  },
+  "limitations": [
+    "Chromium touch/viewport emulation; physical iPad Safari untested",
+    "No live cloud acceptance or deployment"
+  ],
+  "browserTestTotal": 76
+}
