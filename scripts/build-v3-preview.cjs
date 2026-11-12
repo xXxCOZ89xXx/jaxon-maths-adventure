@@ -19,6 +19,10 @@ html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
   let js = fs
     .readFileSync(path.join(root, src), "utf8")
     .replace(/<\/script/gi, "<\\/script");
+  if(src === 'v3/art.js') {
+    const assets=JSON.parse(fs.readFileSync(path.join(root,'v3/assets/base-camp/manifest.json'))).assets;
+    js='window.V3CampAssetFiles='+JSON.stringify(Object.fromEntries(assets.map(a=>[a.file,'data:image/webp;base64,'+fs.readFileSync(path.join(root,'v3/assets/base-camp',a.file)).toString('base64')])))+';\n'+js;
+  }
   if(src === 'v3/asset-checkpoint.js') {
     const dir=path.join(root,'v3/assets/checkpoint');
     const names=Object.keys(JSON.parse(fs.readFileSync(path.join(dir,'manifest.json'),'utf8')).assets);

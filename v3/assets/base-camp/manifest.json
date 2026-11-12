@@ -1,0 +1,1031 @@
+{
+  "source": "Owner-supplied base-camp-artwork-handoff.zip; crops only. Source alpha and shadows retained. Actual portrait surfaces supersede proposed wide dimensions.",
+  "assets": [
+    {
+      "id": "display-shelf",
+      "file": "display-shelf.webp",
+      "name": null,
+      "source": "display-collection-surfaces-atlas.png",
+      "sourceSha256": "b17b073c3952e14bd47f0b724907eeda037a5beddfd24229f27c81f4035f19ff",
+      "crop": [
+        0,
+        0,
+        536,
+        724
+      ],
+      "dimensions": [
+        536,
+        724
+      ],
+      "alpha": false,
+      "sha256": "303c5e7e4e25c8047c7da5e8cd0f0a3bca887bf3942e6457138a8950272e1bb8"
+    },
+    {
+      "id": "display-garden",
+      "file": "display-garden.webp",
+      "name": null,
+      "source": "display-collection-surfaces-atlas.png",
+      "sourceSha256": "b17b073c3952e14bd47f0b724907eeda037a5beddfd24229f27c81f4035f19ff",
+      "crop": [
+        548,
+        0,
+        1080,
+        724
+      ],
+      "dimensions": [
+        532,
+        724
+      ],
+      "alpha": false,
+      "sha256": "15ac6416939eba1b0f752da36dc2f7e1fa7bb26f3bdc540a650ecb789deadcf7"
+    },
+    {
+      "id": "display-gate",
+      "file": "display-gate.webp",
+      "name": null,
+      "source": "display-collection-surfaces-atlas.png",
+      "sourceSha256": "b17b073c3952e14bd47f0b724907eeda037a5beddfd24229f27c81f4035f19ff",
+      "crop": [
+        1093,
+        0,
+        1626,
+        724
+      ],
+      "dimensions": [
+        533,
+        724
+      ],
+      "alpha": false,
+      "sha256": "9f5c25d56fbf7ad75cecf55f07d08970b0bfa4eb9620291dc2cefb57f233dada"
+    },
+    {
+      "id": "collection-surface",
+      "file": "collection-surface.webp",
+      "name": null,
+      "source": "display-collection-surfaces-atlas.png",
+      "sourceSha256": "b17b073c3952e14bd47f0b724907eeda037a5beddfd24229f27c81f4035f19ff",
+      "crop": [
+        1638,
+        0,
+        2172,
+        724
+      ],
+      "dimensions": [
+        534,
+        724
+      ],
+      "alpha": false,
+      "sha256": "d00a312e9f7594ca2ee6c80cf6f9b46796d31d598afe59f5d8bb2ed229b388da"
+    },
+    {
+      "id": "keepsake:number|0",
+      "file": "keepsakes/number-0.webp",
+      "name": "Copper compass",
+      "source": "keepsakes-number-forest-atlas.png",
+      "sourceSha256": "011f9c01ad8e7a4c35490c1a62b805361392fe3d2da0f94937b35aa2622afec4",
+      "crop": [
+        0,
+        0,
+        632,
+        623
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "244cfea2c459852e58aec5e36cab16a615e8a14b8c87a49ca4db35b45751f8a0"
+    },
+    {
+      "id": "keepsake:number|1",
+      "file": "keepsakes/number-1.webp",
+      "name": "Carved leaf",
+      "source": "keepsakes-number-forest-atlas.png",
+      "sourceSha256": "011f9c01ad8e7a4c35490c1a62b805361392fe3d2da0f94937b35aa2622afec4",
+      "crop": [
+        632,
+        0,
+        1263,
+        623
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "45218f34a0528ab61ec5a624303113ef5d6e2409a80350276722b17f424a04d3"
+    },
+    {
+      "id": "keepsake:number|2",
+      "file": "keepsakes/number-2.webp",
+      "name": "River lantern",
+      "source": "keepsakes-number-forest-atlas.png",
+      "sourceSha256": "011f9c01ad8e7a4c35490c1a62b805361392fe3d2da0f94937b35aa2622afec4",
+      "crop": [
+        0,
+        623,
+        632,
+        1246
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "1dd04720adc5ddfbb88ef7c5d53a4b955dd19ed2ceded6c2a76b4f7eb3a5c53f"
+    },
+    {
+      "id": "keepsake:number|gateway",
+      "file": "keepsakes/number-gateway.webp",
+      "name": "Gateway crest",
+      "source": "keepsakes-number-forest-atlas.png",
+      "sourceSha256": "011f9c01ad8e7a4c35490c1a62b805361392fe3d2da0f94937b35aa2622afec4",
+      "crop": [
+        632,
+        623,
+        1263,
+        1246
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "2e9d64198b650a48744dd88c91839957d0e0942d49ec20d4e58479eec454bcb7"
+    },
+    {
+      "id": "keepsake:fractions|0",
+      "file": "keepsakes/fractions-0.webp",
+      "name": "Oasis seed",
+      "source": "keepsakes-fraction-desert-atlas.png",
+      "sourceSha256": "748d705ba0713ddfb8baa0e3d99df88b98dddf30b6ffa3834cc1298357779488",
+      "crop": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "a2b6c3c40b8af47f4bf24ee4d548f8dcf530a9c4d68f33a5d89100fa2e53304e"
+    },
+    {
+      "id": "keepsake:fractions|1",
+      "file": "keepsakes/fractions-1.webp",
+      "name": "Mosaic shard",
+      "source": "keepsakes-fraction-desert-atlas.png",
+      "sourceSha256": "748d705ba0713ddfb8baa0e3d99df88b98dddf30b6ffa3834cc1298357779488",
+      "crop": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "2aadd19741e9d1f96ccd2bcf6023ff7a792738f0c044b650997497d615d43443"
+    },
+    {
+      "id": "keepsake:fractions|2",
+      "file": "keepsakes/fractions-2.webp",
+      "name": "Water vessel",
+      "source": "keepsakes-fraction-desert-atlas.png",
+      "sourceSha256": "748d705ba0713ddfb8baa0e3d99df88b98dddf30b6ffa3834cc1298357779488",
+      "crop": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "034b82815644f4a45accbb12d8b41c258b6ed8fdcfae67d8ea70f4a0d76bcca0"
+    },
+    {
+      "id": "keepsake:fractions|gateway",
+      "file": "keepsakes/fractions-gateway.webp",
+      "name": "Gateway crest",
+      "source": "keepsakes-fraction-desert-atlas.png",
+      "sourceSha256": "748d705ba0713ddfb8baa0e3d99df88b98dddf30b6ffa3834cc1298357779488",
+      "crop": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "e9c820ff765723326f8acfc7dd1b28d82cf7017fb50124537cab400b8857d76f"
+    },
+    {
+      "id": "keepsake:algebra|0",
+      "file": "keepsakes/algebra-0.webp",
+      "name": "Generator cog",
+      "source": "keepsakes-algebra-peaks-atlas.png",
+      "sourceSha256": "3464f8d3a0ec5289cf936a8d72b713e76f9555f4cc6b6a638c33282e268fe7c0",
+      "crop": [
+        0,
+        0,
+        631,
+        623
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "64d9de72c650362bb56f21e41f6b207a57bbcdd3e710a263916d371406f27383"
+    },
+    {
+      "id": "keepsake:algebra|1",
+      "file": "keepsakes/algebra-1.webp",
+      "name": "Railway token",
+      "source": "keepsakes-algebra-peaks-atlas.png",
+      "sourceSha256": "3464f8d3a0ec5289cf936a8d72b713e76f9555f4cc6b6a638c33282e268fe7c0",
+      "crop": [
+        631,
+        0,
+        1262,
+        623
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "602751870138f69aae90430990fc30a335d4576d9982c690d3f868104091005c"
+    },
+    {
+      "id": "keepsake:algebra|2",
+      "file": "keepsakes/algebra-2.webp",
+      "name": "Crystal lens",
+      "source": "keepsakes-algebra-peaks-atlas.png",
+      "sourceSha256": "3464f8d3a0ec5289cf936a8d72b713e76f9555f4cc6b6a638c33282e268fe7c0",
+      "crop": [
+        0,
+        623,
+        631,
+        1246
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "7b89bb6ed760f8bd748bf2cf79ee2272d7eb77fca04477a2dada254f556902fb"
+    },
+    {
+      "id": "keepsake:algebra|gateway",
+      "file": "keepsakes/algebra-gateway.webp",
+      "name": "Gateway crest",
+      "source": "keepsakes-algebra-peaks-atlas.png",
+      "sourceSha256": "3464f8d3a0ec5289cf936a8d72b713e76f9555f4cc6b6a638c33282e268fe7c0",
+      "crop": [
+        631,
+        623,
+        1262,
+        1246
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "d6c3f7fab6ef91e776df746a1d3567bec8bff98cf5a1f18a5f6a9717186e8b74"
+    },
+    {
+      "id": "keepsake:geometry|0",
+      "file": "keepsakes/geometry-0.webp",
+      "name": "Tower tile",
+      "source": "keepsakes-geometry-kingdom-atlas.png",
+      "sourceSha256": "774977330a62cca6e7faa4fcb606c406e28f60bdababa906d6431786514c867f",
+      "crop": [
+        0,
+        0,
+        627,
+        627
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "12ceffbd4d57714a7df7cebf0b23a01a4ef0880cd597cbe5c62709bd3101a932"
+    },
+    {
+      "id": "keepsake:geometry|1",
+      "file": "keepsakes/geometry-1.webp",
+      "name": "Courtyard rose",
+      "source": "keepsakes-geometry-kingdom-atlas.png",
+      "sourceSha256": "774977330a62cca6e7faa4fcb606c406e28f60bdababa906d6431786514c867f",
+      "crop": [
+        627,
+        0,
+        1254,
+        627
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "8a54e61c24e07cac3d721e531a37d45904fad45bf5f74018457e9c1853310aa6"
+    },
+    {
+      "id": "keepsake:geometry|2",
+      "file": "keepsakes/geometry-2.webp",
+      "name": "Sky pennant",
+      "source": "keepsakes-geometry-kingdom-atlas.png",
+      "sourceSha256": "774977330a62cca6e7faa4fcb606c406e28f60bdababa906d6431786514c867f",
+      "crop": [
+        0,
+        627,
+        627,
+        1254
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "8225e4e5355de59e968e3d970248d2d21e38d2e5a4f873303317658f9bd92e17"
+    },
+    {
+      "id": "keepsake:geometry|gateway",
+      "file": "keepsakes/geometry-gateway.webp",
+      "name": "Gateway crest",
+      "source": "keepsakes-geometry-kingdom-atlas.png",
+      "sourceSha256": "774977330a62cca6e7faa4fcb606c406e28f60bdababa906d6431786514c867f",
+      "crop": [
+        627,
+        627,
+        1254,
+        1254
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "21b7ac99d0db75687f05fa10c2dbdf3b9fc89f6e9d7a2383744911947d2b5e07"
+    },
+    {
+      "id": "keepsake:ratio|0",
+      "file": "keepsakes/ratio-0.webp",
+      "name": "Harbour shell",
+      "source": "keepsakes-ratio-island-atlas.png",
+      "sourceSha256": "c3b7254ba861882ca1e2607c8dfe280df2fd2e686411310c68159fcd3cb1729e",
+      "crop": [
+        0,
+        0,
+        768,
+        512
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "bbf0d114b061953c27d016ebb96dab0e9c31d974a577967c82fde94ee3dd9078"
+    },
+    {
+      "id": "keepsake:ratio|1",
+      "file": "keepsakes/ratio-1.webp",
+      "name": "Sail patch",
+      "source": "keepsakes-ratio-island-atlas.png",
+      "sourceSha256": "c3b7254ba861882ca1e2607c8dfe280df2fd2e686411310c68159fcd3cb1729e",
+      "crop": [
+        768,
+        0,
+        1536,
+        512
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "8554911ec55bdfa4ff5b1c11ae06b3728f0581818e6f4d4a9fa2a453ff4e2b97"
+    },
+    {
+      "id": "keepsake:ratio|2",
+      "file": "keepsakes/ratio-2.webp",
+      "name": "Recipe card",
+      "source": "keepsakes-ratio-island-atlas.png",
+      "sourceSha256": "c3b7254ba861882ca1e2607c8dfe280df2fd2e686411310c68159fcd3cb1729e",
+      "crop": [
+        0,
+        512,
+        768,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "6978e048bbfe10c992bd1dae500baf4d51d447f6cfb36776a0c9bb80c169b04f"
+    },
+    {
+      "id": "keepsake:ratio|gateway",
+      "file": "keepsakes/ratio-gateway.webp",
+      "name": "Gateway crest",
+      "source": "keepsakes-ratio-island-atlas.png",
+      "sourceSha256": "c3b7254ba861882ca1e2607c8dfe280df2fd2e686411310c68159fcd3cb1729e",
+      "crop": [
+        768,
+        512,
+        1536,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "f785a987f7690b3c3b61d5ab5b1f80dfcaebe02f71b949fe215c4ef9a0eec0cb"
+    },
+    {
+      "id": "keepsake:statistics|0",
+      "file": "keepsakes/statistics-0.webp",
+      "name": "Survey notebook",
+      "source": "keepsakes-statistics-city-atlas.png",
+      "sourceSha256": "e11fc0b994791a75feaf7ff804be2e334e0804fa18694a60da4b55f90633f2bf",
+      "crop": [
+        0,
+        0,
+        632,
+        623
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "923c7fbd12a2feef1b81c4b864244a0581690c73011071f9eef312bf2810df77"
+    },
+    {
+      "id": "keepsake:statistics|1",
+      "file": "keepsakes/statistics-1.webp",
+      "name": "Power crystal",
+      "source": "keepsakes-statistics-city-atlas.png",
+      "sourceSha256": "e11fc0b994791a75feaf7ff804be2e334e0804fa18694a60da4b55f90633f2bf",
+      "crop": [
+        632,
+        0,
+        1263,
+        623
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "a5bafc3872e32b8dedf9c8b32e268301a358e5544a925069761d1710046cdf0a"
+    },
+    {
+      "id": "keepsake:statistics|2",
+      "file": "keepsakes/statistics-2.webp",
+      "name": "Star chart",
+      "source": "keepsakes-statistics-city-atlas.png",
+      "sourceSha256": "e11fc0b994791a75feaf7ff804be2e334e0804fa18694a60da4b55f90633f2bf",
+      "crop": [
+        0,
+        623,
+        632,
+        1246
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "ae1e65512be81cfd118544f6aa9bf59f17cf0c9fbb9886687897c0088a6faa3a"
+    },
+    {
+      "id": "keepsake:statistics|gateway",
+      "file": "keepsakes/statistics-gateway.webp",
+      "name": "Gateway crest",
+      "source": "keepsakes-statistics-city-atlas.png",
+      "sourceSha256": "e11fc0b994791a75feaf7ff804be2e334e0804fa18694a60da4b55f90633f2bf",
+      "crop": [
+        632,
+        623,
+        1263,
+        1246
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "edffb710dafad9b93b38bf15b84c702abd1e46c638578486e58fa17a03989455"
+    },
+    {
+      "id": "keepsake:probability|0",
+      "file": "keepsakes/probability-0.webp",
+      "name": "Portal petal",
+      "source": "keepsakes-probability-portal-atlas.png",
+      "sourceSha256": "539e67b6b6daf183d57c1a8b316b56d383926013945ad6d038845146896f72db",
+      "crop": [
+        0,
+        0,
+        632,
+        622
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "f13031ef2cc8f1f345f0da809c5b7eaa74971782e3b902df736b117ab8bfa652"
+    },
+    {
+      "id": "keepsake:probability|1",
+      "file": "keepsakes/probability-1.webp",
+      "name": "Chance prism",
+      "source": "keepsakes-probability-portal-atlas.png",
+      "sourceSha256": "539e67b6b6daf183d57c1a8b316b56d383926013945ad6d038845146896f72db",
+      "crop": [
+        632,
+        0,
+        1263,
+        622
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "17d60a8561ce7a040e2a5ac16bc5e14474c8f3c5c02a5d2d3d55bee7cde5ef67"
+    },
+    {
+      "id": "keepsake:probability|2",
+      "file": "keepsakes/probability-2.webp",
+      "name": "Spinner pin",
+      "source": "keepsakes-probability-portal-atlas.png",
+      "sourceSha256": "539e67b6b6daf183d57c1a8b316b56d383926013945ad6d038845146896f72db",
+      "crop": [
+        0,
+        622,
+        632,
+        1245
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "7a2c27b00f29f0a82cf37f9502fc045d30ea4cf09ace54a33b7695a5659492d4"
+    },
+    {
+      "id": "keepsake:probability|gateway",
+      "file": "keepsakes/probability-gateway.webp",
+      "name": "Gateway crest",
+      "source": "keepsakes-probability-portal-atlas.png",
+      "sourceSha256": "539e67b6b6daf183d57c1a8b316b56d383926013945ad6d038845146896f72db",
+      "crop": [
+        632,
+        622,
+        1263,
+        1245
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "8257745629ca610c2d0176a376146a786f3e5d642ce9c2fc49830b4d9e87a33f"
+    },
+    {
+      "id": "keepsake:measure|0",
+      "file": "keepsakes/measure-0.webp",
+      "name": "Survey ruler",
+      "source": "keepsakes-measurement-mines-atlas.png",
+      "sourceSha256": "5ff50850c046c699cce945e41487db05f7c1921eb1d39e8f6dd5736dd39e729e",
+      "crop": [
+        0,
+        0,
+        768,
+        512
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "bd436b503feb0627db071cb44dbe248f82c0f509423553e450c2ec3dcdccf771"
+    },
+    {
+      "id": "keepsake:measure|1",
+      "file": "keepsakes/measure-1.webp",
+      "name": "Pump wheel",
+      "source": "keepsakes-measurement-mines-atlas.png",
+      "sourceSha256": "5ff50850c046c699cce945e41487db05f7c1921eb1d39e8f6dd5736dd39e729e",
+      "crop": [
+        768,
+        0,
+        1536,
+        512
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "0eaccb70d25db92527c7bd61d20001934f72791ccedbe7de5a930680ef722258"
+    },
+    {
+      "id": "keepsake:measure|2",
+      "file": "keepsakes/measure-2.webp",
+      "name": "Lift gear",
+      "source": "keepsakes-measurement-mines-atlas.png",
+      "sourceSha256": "5ff50850c046c699cce945e41487db05f7c1921eb1d39e8f6dd5736dd39e729e",
+      "crop": [
+        0,
+        512,
+        768,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "a391fd78b4b4e14b8af40fae6c02c507155b077bbd5849dabc0d34e792ae2644"
+    },
+    {
+      "id": "keepsake:measure|gateway",
+      "file": "keepsakes/measure-gateway.webp",
+      "name": "Gateway crest",
+      "source": "keepsakes-measurement-mines-atlas.png",
+      "sourceSha256": "5ff50850c046c699cce945e41487db05f7c1921eb1d39e8f6dd5736dd39e729e",
+      "crop": [
+        768,
+        512,
+        1536,
+        1024
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "42a43d2e8f39e5bfa45285df147aaec538232eeb57c76e16637c2f38b9430240"
+    },
+    {
+      "id": "keepsake:town|market",
+      "file": "keepsakes/town-market.webp",
+      "name": "Market basket",
+      "source": "keepsakes-practical-maths-town-atlas.png",
+      "sourceSha256": "80d7b8b853069083cc734f51a0fb9413b87e965fe60840483850841cf9460657",
+      "crop": [
+        450,
+        0,
+        880,
+        241
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "0043bfb628589a128770e22b56895dc02fa0ea736520ecb717583a167241adfd"
+    },
+    {
+      "id": "keepsake:town|cafe",
+      "file": "keepsakes/town-cafe.webp",
+      "name": "Caf\u00e9 enamel mug",
+      "source": "keepsakes-practical-maths-town-atlas.png",
+      "sourceSha256": "80d7b8b853069083cc734f51a0fb9413b87e965fe60840483850841cf9460657",
+      "crop": [
+        880,
+        0,
+        1310,
+        241
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "54ff25250afeb1bcb7ab7f81d304d38b4fcd34f97b2532be5a8cfc346effcc48"
+    },
+    {
+      "id": "keepsake:town|bank",
+      "file": "keepsakes/town-bank.webp",
+      "name": "Savings acorn",
+      "source": "keepsakes-practical-maths-town-atlas.png",
+      "sourceSha256": "80d7b8b853069083cc734f51a0fb9413b87e965fe60840483850841cf9460657",
+      "crop": [
+        1310,
+        0,
+        1740,
+        241
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "9cfb86b867e1ef9a303b1195474bcee91916fa3ec44cffc5473be26429105b3d"
+    },
+    {
+      "id": "keepsake:town|shops",
+      "file": "keepsakes/town-shops.webp",
+      "name": "Smart shopper badge",
+      "source": "keepsakes-practical-maths-town-atlas.png",
+      "sourceSha256": "80d7b8b853069083cc734f51a0fb9413b87e965fe60840483850841cf9460657",
+      "crop": [
+        450,
+        241,
+        880,
+        482
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "4639a5d39e1af0334829e53eeadd14e0eae8c7d2aaef00951fd5c7a654322c0a"
+    },
+    {
+      "id": "keepsake:town|station",
+      "file": "keepsakes/town-station.webp",
+      "name": "Explorer travel pass",
+      "source": "keepsakes-practical-maths-town-atlas.png",
+      "sourceSha256": "80d7b8b853069083cc734f51a0fb9413b87e965fe60840483850841cf9460657",
+      "crop": [
+        880,
+        241,
+        1310,
+        482
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "de634fc9d556592d3658e4ce8268c8a0a23fc9d1691d36829964f69ef2161a3c"
+    },
+    {
+      "id": "keepsake:town|home",
+      "file": "keepsakes/town-home.webp",
+      "name": "House key charm",
+      "source": "keepsakes-practical-maths-town-atlas.png",
+      "sourceSha256": "80d7b8b853069083cc734f51a0fb9413b87e965fe60840483850841cf9460657",
+      "crop": [
+        1310,
+        241,
+        1740,
+        482
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "4a14e7fb53f4e8bad52202edc28c239bb5f40d1072a5b65fd7bc4a929baaa0af"
+    },
+    {
+      "id": "keepsake:town|leisure",
+      "file": "keepsakes/town-leisure.webp",
+      "name": "Festival ticket",
+      "source": "keepsakes-practical-maths-town-atlas.png",
+      "sourceSha256": "80d7b8b853069083cc734f51a0fb9413b87e965fe60840483850841cf9460657",
+      "crop": [
+        450,
+        482,
+        880,
+        724
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "503cf2dfdd4da31dac77953352f88ca258f5a1b3db023c1eaed14a5e7823f777"
+    },
+    {
+      "id": "keepsake:town|work",
+      "file": "keepsakes/town-work.webp",
+      "name": "Workshop pencil",
+      "source": "keepsakes-practical-maths-town-atlas.png",
+      "sourceSha256": "80d7b8b853069083cc734f51a0fb9413b87e965fe60840483850841cf9460657",
+      "crop": [
+        880,
+        482,
+        1310,
+        724
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "3fbd8328cee1c2b70d48b009be48e22a0614e275bd0b8f844d538505a4c98ddd"
+    },
+    {
+      "id": "keepsake:town|gateway",
+      "file": "keepsakes/town-gateway.webp",
+      "name": "Gateway crest",
+      "source": "keepsakes-practical-maths-town-atlas.png",
+      "sourceSha256": "80d7b8b853069083cc734f51a0fb9413b87e965fe60840483850841cf9460657",
+      "crop": [
+        1310,
+        482,
+        1740,
+        724
+      ],
+      "dimensions": [
+        512,
+        512
+      ],
+      "alpha": true,
+      "sha256": "ff4953934985d600cd6a0eb6b0c2f29bd02dc39a9e8bc55921fb8926a26aa42d"
+    },
+    {
+      "id": "project:greenhouse:planned",
+      "file": "projects/greenhouse-planned.webp",
+      "name": null,
+      "source": "build-projects-planned-complete-atlas.png",
+      "sourceSha256": "a2ba3f8670da83d5fd832c17634a8c45d49f56673ff0f409786e22669d9a0d8e",
+      "crop": [
+        0,
+        0,
+        512,
+        512
+      ],
+      "dimensions": [
+        768,
+        576
+      ],
+      "alpha": true,
+      "sha256": "5e1bb2abffcff9d525853fe15f44f64bb344a02e63c451f59c46002f73796f96"
+    },
+    {
+      "id": "project:greenhouse:built",
+      "file": "projects/greenhouse-built.webp",
+      "name": null,
+      "source": "build-projects-planned-complete-atlas.png",
+      "sourceSha256": "a2ba3f8670da83d5fd832c17634a8c45d49f56673ff0f409786e22669d9a0d8e",
+      "crop": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "dimensions": [
+        768,
+        576
+      ],
+      "alpha": true,
+      "sha256": "4efe8228c8b091d620122de4690053080c51f68b7482af29825ace8a9d3ebf84"
+    },
+    {
+      "id": "project:greenhouse:scene",
+      "file": "projects/greenhouse-scene.webp",
+      "name": null,
+      "source": "build-projects-planned-complete-atlas.png",
+      "sourceSha256": "a2ba3f8670da83d5fd832c17634a8c45d49f56673ff0f409786e22669d9a0d8e",
+      "crop": [
+        0,
+        512,
+        512,
+        1024
+      ],
+      "dimensions": [
+        640,
+        640
+      ],
+      "alpha": true,
+      "sha256": "67b8b54b312637248ea938a5acac054dae8273cd5dd9663bc045c4358a9265dc"
+    },
+    {
+      "id": "project:lookout:planned",
+      "file": "projects/lookout-planned.webp",
+      "name": null,
+      "source": "build-projects-planned-complete-atlas.png",
+      "sourceSha256": "a2ba3f8670da83d5fd832c17634a8c45d49f56673ff0f409786e22669d9a0d8e",
+      "crop": [
+        512,
+        0,
+        1024,
+        512
+      ],
+      "dimensions": [
+        768,
+        576
+      ],
+      "alpha": true,
+      "sha256": "5f02977160e03d528c4686dd4757fb55ffe853195f47db5457650b0c61c9fb10"
+    },
+    {
+      "id": "project:lookout:built",
+      "file": "projects/lookout-built.webp",
+      "name": null,
+      "source": "build-projects-planned-complete-atlas.png",
+      "sourceSha256": "a2ba3f8670da83d5fd832c17634a8c45d49f56673ff0f409786e22669d9a0d8e",
+      "crop": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "dimensions": [
+        768,
+        576
+      ],
+      "alpha": true,
+      "sha256": "fd8588e88703673af7f5e91feecc23920c72a7999dc96190c08adb505ee5c7cd"
+    },
+    {
+      "id": "project:lookout:scene",
+      "file": "projects/lookout-scene.webp",
+      "name": null,
+      "source": "build-projects-planned-complete-atlas.png",
+      "sourceSha256": "a2ba3f8670da83d5fd832c17634a8c45d49f56673ff0f409786e22669d9a0d8e",
+      "crop": [
+        512,
+        512,
+        1024,
+        1024
+      ],
+      "dimensions": [
+        640,
+        640
+      ],
+      "alpha": true,
+      "sha256": "80f33af00221fb904fba56ccf903b345c421576357ee7f817e73d0284daf001b"
+    },
+    {
+      "id": "project:noticeboard:planned",
+      "file": "projects/noticeboard-planned.webp",
+      "name": null,
+      "source": "build-projects-planned-complete-atlas.png",
+      "sourceSha256": "a2ba3f8670da83d5fd832c17634a8c45d49f56673ff0f409786e22669d9a0d8e",
+      "crop": [
+        1024,
+        0,
+        1536,
+        512
+      ],
+      "dimensions": [
+        768,
+        576
+      ],
+      "alpha": true,
+      "sha256": "19ca079effc8924ff162ad189631db5e3e4e7db7a980d59960ed3d38fa288909"
+    },
+    {
+      "id": "project:noticeboard:built",
+      "file": "projects/noticeboard-built.webp",
+      "name": null,
+      "source": "build-projects-planned-complete-atlas.png",
+      "sourceSha256": "a2ba3f8670da83d5fd832c17634a8c45d49f56673ff0f409786e22669d9a0d8e",
+      "crop": [
+        1024,
+        512,
+        1536,
+        1024
+      ],
+      "dimensions": [
+        768,
+        576
+      ],
+      "alpha": true,
+      "sha256": "7bfb8b2a8276bd93849db903cbc4988f444bacd4e8be873212373c05da64ce3b"
+    },
+    {
+      "id": "project:noticeboard:scene",
+      "file": "projects/noticeboard-scene.webp",
+      "name": null,
+      "source": "build-projects-planned-complete-atlas.png",
+      "sourceSha256": "a2ba3f8670da83d5fd832c17634a8c45d49f56673ff0f409786e22669d9a0d8e",
+      "crop": [
+        1024,
+        512,
+        1536,
+        1024
+      ],
+      "dimensions": [
+        640,
+        640
+      ],
+      "alpha": true,
+      "sha256": "bdba4ece11bbc4e3b35e8fbeea886cd4ce95e8fbcb04eec1ffacab4308866dd2"
+    }
+  ]
+}

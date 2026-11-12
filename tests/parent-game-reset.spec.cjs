@@ -1,0 +1,26 @@
+const {test,expect}=require('@playwright/test'),fs=require('fs');
+const {fixture,mock}=require('./helpers/cloud-server.cjs'),B=require('../v3/backend-config.js'),F=require('./helpers/guided-progression.cjs');
+const options={projectRef:B.production.projectRef,projectName:B.production.projectName,identity:{contractVersion:1,ready:true}};
+async function login(p,parent=false){await p.goto('/production-test-dist/');await p.getByLabel('Email',{exact:true}).fill((parent?'parent':'learner')+'@fictional.invalid');await p.getByLabel('Account password',{exact:true}).fill('fictional-only-password');await p.getByRole('button',{name:'Continue',exact:true}).click();await pin(p,parent);await expect(p.getByRole('heading',{name:parent?'Family service parent dashboard':'Base Camp',exact:true})).toBeVisible();}
+async function pin(p,parent){await p.getByLabel('PIN',{exact:true}).fill(parent?'654321':'1234');await p.getByRole('button',{name:'Continue',exact:true}).click();}
+async function shot(p,info,name){fs.mkdirSync('docs/review/base-camp/reset/'+info.project.name,{recursive:true});await (name==='confirmation'?p.locator('#total-game-reset-dialog'):p).screenshot({path:`docs/review/base-camp/reset/${info.project.name}/${name}.jpg`,...(name==='confirmation'?{}:{fullPage:true})});}
+function server(){const s=fixture();s.resetSupported=true;s.progress=F.fresh();s.progress.milestones=F.M.campMilestoneIds().slice(0,30);F.M.state(s.progress).campProjects={greenhouse:true};s.progress.checks={place:{stage:2}};return s;}
+test('parent confirmation, cancel, lost response retry and zeroed fresh game',async({page:p},info)=>{
+ const s=server(),errors=await mock(p,s,options);await login(p,true);await expect(p.getByRole('heading',{name:'Family service parent dashboard'})).toBeVisible();
+ await p.locator('#reset-game-open').click();await expect(p.locator('#total-game-reset-dialog')).toContainText('Account identities, passwords, PINs, family links');await expect(p.locator('#total-reset-submit')).toBeDisabled();await shot(p,info,'confirmation');await p.locator('#total-reset-cancel').click();expect(s.calls.filter(c=>c.body.p_operation==='reset_game')).toHaveLength(0);
+ await p.locator('#reset-game-open').click();await p.locator('#total-reset-confirm').fill('RESET ALL GAME PROGRESS');s.loseReset=true;await p.locator('#total-reset-submit').click();await expect(p.locator('#total-reset-feedback')).toContainText('No automatic retry');expect(s.gameEpoch).toBe(1);
+ await p.locator('#total-reset-submit').click();await expect(p.locator('#total-game-reset-dialog')).toHaveCount(0);const calls=s.calls.filter(c=>c.body.p_operation==='reset_game');expect(calls).toHaveLength(2);expect(calls[1].body.p_args).toEqual(calls[0].body.p_args);expect(s.resetReceipts.size).toBe(1);expect(s.progress).toEqual({});expect(s.wallet.coins).toBe(0);expect(s.wallet.owned).toEqual([]);await shot(p,info,'parent-after');expect(errors).toEqual([]);expect(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1)).toBe(false);
+});
+test('learner has no reset control; stale queue is fenced and cannot restore a reset game',async({browser},info)=>{
+ const s=server(),a=await browser.newContext(info.project.use),b=await browser.newContext(info.project.use),p=await a.newPage(),parent=await b.newPage();const errors=[await mock(p,s,options),await mock(parent,s,options)];
+ try{
+ await login(p);await expect(p.locator('#reset-game-open')).toHaveCount(0);const oldKey=await p.evaluate(()=>V3CloudContext.key);
+
+ await login(parent,true);await parent.locator('#reset-game-open').click();await parent.locator('#total-reset-confirm').fill('RESET ALL GAME PROGRESS');await parent.locator('#total-reset-submit').click();await expect(parent.locator('#total-game-reset-dialog')).toHaveCount(0);
+ await p.evaluate(()=>V3CloudContext.onSave({...JSON.parse(localStorage.getItem(V3CloudContext.key)),oldOffline:true}));await expect(p.getByRole('heading',{name:'Reconnect and unlock your game'})).toBeVisible();await p.reload();await expect(p.getByRole('heading',{name:'Unlock your learner account'})).toBeVisible();await pin(p,false);await expect(p.getByRole('heading',{name:'Base Camp',exact:true})).toBeVisible();
+ const fresh=await p.evaluate(()=>({key:V3CloudContext.key,state:JSON.parse(localStorage.getItem(V3CloudContext.key))}));expect(fresh.key).toBe(oldKey+':reset-1');expect(fresh.state.coins).toBe(0);expect(fresh.state.milestones).toEqual([]);expect(fresh.state.checks).toEqual({});expect(fresh.state.bought).toEqual([]);expect(fresh.state.learning).toBeNull();await expect(p.locator('#estate-planner')).toContainText('BASE CAMP LEVEL 1 / 8');await expect(p.locator('#camp-projects')).toContainText('0 / 3 projects built');expect(await p.evaluate(k=>JSON.parse(localStorage.getItem(k+':queue')).pending.progress.oldOffline,oldKey)).toBe(true);expect(s.progress.oldOffline).toBeUndefined();await shot(p,info,'fresh-learner');expect(errors.flat()).toEqual([]);
+ }finally{await a.close();await b.close();}
+});
+test('old server keeps reset disabled and normal saves compatible',async({page:p})=>{
+ const s=fixture(),errors=await mock(p,s,options);await login(p,true);await expect(p.locator('#reset-game-open')).toBeDisabled();expect(s.calls.filter(c=>c.body.p_operation==='reset_game')).toHaveLength(0);expect(errors).toEqual([]);
+});

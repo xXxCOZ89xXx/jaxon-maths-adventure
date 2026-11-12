@@ -402,6 +402,168 @@
     },
     {
       "path": "v3/assets/ingredients/vegetable-stock.png"
+    },
+    {
+      "path": "v3/assets/base-camp/display-shelf.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/display-garden.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/display-gate.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/collection-surface.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/number-0.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/number-1.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/number-2.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/number-gateway.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/fractions-0.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/fractions-1.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/fractions-2.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/fractions-gateway.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/algebra-0.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/algebra-1.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/algebra-2.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/algebra-gateway.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/geometry-0.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/geometry-1.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/geometry-2.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/geometry-gateway.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/ratio-0.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/ratio-1.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/ratio-2.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/ratio-gateway.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/statistics-0.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/statistics-1.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/statistics-2.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/statistics-gateway.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/probability-0.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/probability-1.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/probability-2.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/probability-gateway.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/measure-0.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/measure-1.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/measure-2.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/measure-gateway.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/town-market.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/town-cafe.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/town-bank.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/town-shops.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/town-station.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/town-home.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/town-leisure.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/town-work.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/keepsakes/town-gateway.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/projects/greenhouse-planned.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/projects/greenhouse-built.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/projects/greenhouse-scene.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/projects/lookout-planned.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/projects/lookout-built.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/projects/lookout-scene.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/projects/noticeboard-planned.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/projects/noticeboard-built.webp"
+    },
+    {
+      "path": "v3/assets/base-camp/projects/noticeboard-scene.webp"
     }
   ]
 }

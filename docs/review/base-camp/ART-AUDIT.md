@@ -1,4 +1,6 @@
-# Base Camp imagery audit and proposed replacement set
+# Historical Base Camp imagery audit and proposed replacement set
+
+This records the pre-integration audit. See [ARTWORK-MAPPING.md](ARTWORK-MAPPING.md) for the integrated handoff and actual crop manifest.
 
 Audited against `release/ipad` at `f1b88c95326e6ba5145e8abd97306df0431b3a1a` (12 November 2026). No artwork has been replaced, generated or added. The numbered composite reference boards mentioned in the older art brief are absent from this checkout; the comparison uses current integrated world scenes and supplied approved guide portraits instead.
 

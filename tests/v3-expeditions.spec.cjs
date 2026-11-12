@@ -354,9 +354,9 @@ test("Purpose-built Town entrances open their own interiors and exterior views p
 test("All eight earned camp homes retain four exterior appearances and saved ownership",async({page})=>{
   test.setTimeout(90000);
   for(let stage=1;stage<=8;stage++){
-    await page.evaluate(({stage,key})=>{const s=V3Engine.fresh();s.view='camp';s.tourSeen=true;s.bought=['cap','fox'];s.equipped=['cap','fox'];s.coins=83.5;s.milestones=V3Adventure.campMilestoneIds().slice(0,V3Adventure.campStages[stage-1].need);V3Adventure.state(s);for(let level=2;level<=stage;level++)V3Adventure.upgradeCamp(s,level);localStorage.setItem(key,JSON.stringify(s));},{stage,key:KEY});
+    await page.evaluate(({stage,key})=>{const s=V3Engine.fresh();s.view='camp';s.tourSeen=true;s.bought=['cap','fox'];s.equipped=['cap','fox'];s.coins=83.5;s.milestones=V3Adventure.campMilestoneIds().slice(0,V3Adventure.campStages[stage-1].need);V3Adventure.state(s);for(const p of V3Adventure.projects)if(s.milestones.length>=p.need)V3Adventure.build(s,p.id);for(let level=2;level<=stage;level++)V3Adventure.upgradeCamp(s,level);localStorage.setItem(key,JSON.stringify(s));},{stage,key:KEY});
     await page.reload();await expect(page.locator('#estate-planner')).toContainText('BASE CAMP LEVEL '+stage+' / 8');
-    await expect(page.locator('.camp-map .camp-exterior .scene-background')).toHaveAttribute('src',new RegExp('camp'+Math.ceil(stage/2)+'\\.webp$'));
+    await expect(page.locator('.camp-map .camp-exterior .scene-background')).toHaveAttribute('src',new RegExp('camp'+([1,1,1,1,3,3,4,4][stage-1])+'\\.webp$'));
     await expect(page.locator('.estate-track button')).toHaveCount(8);
     const s=await saved(page);expect(s.adventure.campEstate.highest).toBe(stage);expect(s.bought).toEqual(['cap','fox']);expect(s.equipped).toEqual(['cap','fox']);expect(s.coins).toBe(83.5);expect(s.skills).toEqual({});
     if(stage===1||stage===8)await axe(page);

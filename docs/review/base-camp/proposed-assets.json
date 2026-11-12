@@ -1,5 +1,5 @@
 {
-  "status": "Proposal only. Owner supplies or approves assets before integration. No files in this manifest have been created.",
+  "status": "Integrated from owner-supplied base-camp-artwork-handoff.zip. Original proposed dimensions are retained here for comparison; exact crop boxes, source hashes and actual export dimensions are in v3/assets/base-camp/manifest.json.",
   "style": "Original detailed 2.5D/voxel objects, painted materials and warm directional light coordinated with current worlds and approved guide portraits. All text, counters, locks and controls remain HTML.",
   "assets": [
     {
@@ -14,7 +14,7 @@
       "reuse": [
         "Adventure display"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "display-garden",
@@ -28,7 +28,7 @@
       "reuse": [
         "Adventure display"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "display-gate",
@@ -42,7 +42,7 @@
       "reuse": [
         "Adventure display"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "collection-surface",
@@ -56,7 +56,7 @@
       "reuse": [
         "Keepsake collection header"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:number|0",
@@ -73,7 +73,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:number|1",
@@ -90,7 +90,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:number|2",
@@ -107,7 +107,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:number|gateway",
@@ -124,7 +124,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:fractions|0",
@@ -141,7 +141,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:fractions|1",
@@ -158,7 +158,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:fractions|2",
@@ -175,7 +175,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:fractions|gateway",
@@ -192,7 +192,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:algebra|0",
@@ -209,7 +209,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:algebra|1",
@@ -226,7 +226,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:algebra|2",
@@ -243,7 +243,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:algebra|gateway",
@@ -260,7 +260,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:geometry|0",
@@ -277,7 +277,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:geometry|1",
@@ -294,7 +294,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:geometry|2",
@@ -311,7 +311,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:geometry|gateway",
@@ -328,7 +328,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:ratio|0",
@@ -345,7 +345,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:ratio|1",
@@ -362,7 +362,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:ratio|2",
@@ -379,7 +379,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:ratio|gateway",
@@ -396,7 +396,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:statistics|0",
@@ -413,7 +413,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:statistics|1",
@@ -430,7 +430,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:statistics|2",
@@ -447,7 +447,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:statistics|gateway",
@@ -464,7 +464,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:probability|0",
@@ -481,7 +481,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:probability|1",
@@ -498,7 +498,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:probability|2",
@@ -515,7 +515,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:probability|gateway",
@@ -532,7 +532,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:measure|0",
@@ -549,7 +549,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:measure|1",
@@ -566,7 +566,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:measure|2",
@@ -583,7 +583,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:measure|gateway",
@@ -600,7 +600,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:town|market",
@@ -617,11 +617,11 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:town|cafe",
-      "name": "Café enamel mug",
+      "name": "Caf\u00e9 enamel mug",
       "path": "v3/assets/base-camp/keepsakes/town-cafe.webp",
       "use": "Earned keepsake, keyed by world and route rather than name matching",
       "dimensions": [
@@ -634,7 +634,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:town|bank",
@@ -651,7 +651,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:town|shops",
@@ -668,7 +668,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:town|station",
@@ -685,7 +685,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:town|home",
@@ -702,7 +702,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:town|leisure",
@@ -719,7 +719,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:town|work",
@@ -736,7 +736,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "keepsake:town|gateway",
@@ -753,7 +753,7 @@
         "Keepsake collection cards",
         "Camp interior placed keepsakes (requires raster-aware renderer)"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "project:greenhouse:planned",
@@ -767,7 +767,7 @@
       "reuse": [
         "Build something that stays project card"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "project:greenhouse:built",
@@ -781,7 +781,7 @@
       "reuse": [
         "Build something that stays project card"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "project:greenhouse:scene",
@@ -795,7 +795,7 @@
       "reuse": [
         "Camp interior only after saved build completion"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "project:lookout:planned",
@@ -809,7 +809,7 @@
       "reuse": [
         "Build something that stays project card"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "project:lookout:built",
@@ -823,7 +823,7 @@
       "reuse": [
         "Build something that stays project card"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "project:lookout:scene",
@@ -837,7 +837,7 @@
       "reuse": [
         "Camp interior only after saved build completion"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "project:noticeboard:planned",
@@ -851,7 +851,7 @@
       "reuse": [
         "Build something that stays project card"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "project:noticeboard:built",
@@ -865,7 +865,7 @@
       "reuse": [
         "Build something that stays project card"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     },
     {
       "id": "project:noticeboard:scene",
@@ -879,7 +879,7 @@
       "reuse": [
         "Camp interior only after saved build completion"
       ],
-      "status": "proposed, not supplied"
+      "status": "integrated from supplied atlas"
     }
   ]
 }

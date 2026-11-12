@@ -474,7 +474,15 @@
       Math.max(settled, done.length),
     );
   }
-  function keepsake(c) {
+  const campAsset = file => window.V3CampAssetFiles?.[file] || 'v3/assets/base-camp/' + file;
+  function campSurface(slot) {
+    return `<img class="camp-surface" src="${campAsset(slot==='collection'?'collection-surface.webp':'display-'+slot+'.webp')}" alt="" draggable="false" decoding="async">`;
+  }
+  function keepsake(c, svg=false) {
+    const [world,route] = String(c.id||'').split('|');
+    const valid = window.V3Adventure?.routes(world).some(r=>String(r.id)===route) || (route==='gateway' && window.V3Engine.worlds.some(w=>w.id===world));
+    if(valid){const src=campAsset(`keepsakes/${world}-${route}.webp`);return svg ? `<svg viewBox="0 0 80 80" aria-hidden="true"><image href="${src}" width="80" height="80"/></svg>` : `<img class="keepsake-art" data-keepsake-id="${esc(c.id)}" src="${src}" alt="" draggable="false" decoding="async">`;}
+
     const name=String(c.name).toLowerCase(); let body;
     if(/leaf|seed|rose|flower/.test(name))body='<path d="M40 65V20" stroke="#527f57" stroke-width="5"/><path d="M40 43Q9 42 13 19Q41 18 40 43M40 52Q72 49 67 28Q42 28 40 52" fill="#80a66a"/>';
     else if(/gear|cog|wheel/.test(name))body=at(40,40,gear(0,0,true));
@@ -503,6 +511,8 @@
     return '<svg class="product-image" viewBox="0 0 80 80" aria-hidden="true">'+body+'</svg>';
   }
   function project(id, built=false) {
+    if(['greenhouse','lookout','noticeboard'].includes(id))return `<img class="project-image" src="${campAsset(`projects/${id}-${built?'built':'planned'}.webp`)}" alt="" draggable="false" decoding="async">`;
+
     let body;
     if (id === "greenhouse") body=block(100,133,60,29,53,"#7caa98","#c2dbb7")+poly("M40 80L100 22L160 80L100 110Z","#b7d6b5")+'<path d="M100 23v109M71 52v64m58-64v64M40 81l60 29 60-29" stroke="#578475" stroke-width="4"/>'+at(100,128,poly("M0-35l-21-16L-18-25 0-15 20-35 22-55 0-35Z","#5d895c"));
     else if (id === "lookout") body=block(100,135,33,18,92,"#9c8058","#d7bd7f")+poly("M48 43L100 4L152 43L100 69Z","#527c60")+'<path d="M76 65v53m14-45v53m-16-30 16 9m-16-24 16 9" stroke="#d7bd85" stroke-width="4"/><path d="M100 5v-4h30l-10 12h-20" fill="#e8c87b"/>';
@@ -558,7 +568,7 @@
           456 - i * 13,
           `<title>${esc(window.V3Adventure.collections(s).find((c) => c.id === id)?.name || "Keepsake")} at camp ${slot}</title>` +
             block(0, 0, 15, 9, 23, "#9d8b61", "#e2c989") +
-            at(-18,-62,keepsake(window.V3Adventure.collections(s).find((c)=>c.id===id) || {name:"Keepsake"}).replace(/<svg[^>]*>/,"<g>").replace("</svg>","</g>"), .45),
+            at(-18,-62,keepsake(window.V3Adventure.collections(s).find((c)=>c.id===id) || {name:"Keepsake"},true).replace(/<svg[^>]*>/,"<g>").replace("</svg>","</g>"), .45),
         ),
       )
       .join("")}${at(460, 425, miniExplorer())}${pine(65,530,1.5,"#3d7057")}${pine(835,530,1.6,"#3d7057")}</svg>`;
@@ -576,6 +586,8 @@
     venue,
     location,
     keepsake,
+    campAsset,
+    campSurface,
     product,
     project,
   };

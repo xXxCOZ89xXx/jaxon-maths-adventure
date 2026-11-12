@@ -467,6 +467,7 @@
     },900);
   }
   function render(focus = false) {
+    if (cloud && !cloud.isUnlocked()) return;
     if(!P.complete(s)&&P.views.includes(s.view))s.view='starting';
 
     window.V7Avatar?.setState(s);

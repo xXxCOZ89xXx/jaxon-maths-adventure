@@ -1,0 +1,21 @@
+# Integrated artwork mapping
+
+Source: owner-supplied `base-camp-artwork-handoff.zip`, SHA256 `9669e0cbda0f3fb8850650e5f6fa41017bc8e3bfbcde31f755ffa5a12084f6db`. The attached README is retained as `HANDOFF-README.txt` for provenance; it supplies art layout guidance, not permission to deploy, reset live data or change progression.
+
+All **54** proposed paths are populated. [Actual manifest](../../../v3/assets/base-camp/manifest.json) records each stable ID, output path, original sheet/hash, exact crop rectangle, actual dimensions, alpha and output hash. [Original proposal](proposed-assets.json) retains the proposed dimensions for comparison. `scripts/crop-base-camp-art.py` reproduces the crops from an extracted handoff; no generation, stretching, recolouring, background removal or alpha flattening is used.
+
+| Sheet | Mapping and treatment | Runtime use |
+| --- | --- | --- |
+| `display-collection-surfaces-atlas.png` | Four panels left to right: shelf, garden, gate, collection; narrow separators removed. The supplied panels are portrait, about 532–536 × 724. They stay portrait rather than being stretched to the proposal’s approximate wide dimensions. | Three display surfaces with separate earned-keepsake layers; collection header artwork. |
+| Eight subject-world keepsake atlases | Each 2×2 cell maps in order to route `0`, `1`, `2`, `gateway` for that world. Whole cells fit into 512×512 transparent canvases without changing proportions. | 32 identity-specific keepsakes, shared by display and collection. Retained SVG scene renderer uses SVG `<image>` for compatibility. |
+| `keepsakes-practical-maths-town-atlas.png` | Actual content occupies the centre of a wide 2172×724 canvas. Columns are bounded at x=450,880,1310,1740 and rows at y=0,241,482,724. Order: market, cafe, bank, shops, station, home, leisure, work, gateway. | Nine stable Town keepsakes. Dividing the entire canvas into nine equal cells would crop the wrong regions. |
+| `build-projects-planned-complete-atlas.png` | 3×2 cells, 512×512 each. Top row: greenhouse/lookout/noticeboard planned; bottom row: their built states. Whole cells are centred without stretching in the proposed 768×576 card exports and 640×640 scene exports. | Six project cards; three scene props use matching built cells and render only for saved `campProjects[id] === true`. |
+| `style-reference.png` | Inspected as the style reference. Not cropped into gameplay objects. | Reference only. |
+
+Current keepsake lookup uses the saved world/route ID, independent of its displayed name. Copper compass therefore gets the supplied compass rather than the old name-substring document icon. Headings, object names, milestone values, built/unbuilt status, selectors, buttons and reset confirmation remain accessible HTML; no text is added to the image files. The source pictures’ blank plaques/cards remain decorative.
+
+The original alpha and contact shadows are retained. Several supplied sheets include translucent coloured or white halo/matte pixels, especially Town keepsakes and project props; these remain visible on contrasting surfaces. They were not silently removed because that would alter supplied artwork and shadows. Cleaner source transparency would be a separate art revision. `object-fit: contain` preserves object proportions; the small collection background can crop its decorative wall without stretching.
+
+The existing eight logical camp levels, thresholds, saved build flags, reward rules and stable keepsake identities remain unchanged. Older higher-tier backdrops already depict project buildings. They are now gated by the saved projects they visibly contain (tier 2: lookout/noticeboard; tier 3: greenhouse/lookout; tier 4: lookout), including previews. Until those flags are built, an existing approved simpler backdrop is reused. A live caption explains that building projects reveals the next view. Clean project-free higher-tier backgrounds would be a separate art revision; logical levels are not reduced by this visual fallback. Raster assets are packaged in both the production build and the isolated demo; the standalone offline preview embeds them as data URLs. The public demo gains no parent, account or reset entry point.
+
+[Integrated layout screenshots and reset walkthrough](index.html)

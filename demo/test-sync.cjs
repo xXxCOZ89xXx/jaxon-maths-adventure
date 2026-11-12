@@ -9,7 +9,7 @@ for(const branch of ['', 'codex/offline-demo-release-sync','main']){const r=spaw
 // Simulate a later approved source change in a disposable copy; never publish it.
 const scratch=fs.mkdtempSync(path.join(root,'work/demo-sync-'));
 try{
- const files=new Set([...audited.source.map(x=>x.path),...audited.images.map(x=>x.path),'demo/build.cjs','demo/check.cjs','demo/dependencies.json',...['checkpoint','rollout','world-guide-portraits-preview','ingredients'].map(x=>'v3/assets/'+x+'/manifest.json')]);
+ const files=new Set([...audited.source.map(x=>x.path),...audited.images.map(x=>x.path),'demo/build.cjs','demo/check.cjs','demo/dependencies.json',...['checkpoint','rollout','world-guide-portraits-preview','ingredients','base-camp'].map(x=>'v3/assets/'+x+'/manifest.json')]);
  for(const file of files){const target=path.join(scratch,file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(root,file),target);}
  fs.appendFileSync(path.join(scratch,'v3/home-activities.js'),'\n// Fictional subsequent approved source revision for rebuild verification.\n');
  execFileSync(process.execPath,['demo/build.cjs'],{cwd:scratch,stdio:'pipe'});execFileSync(process.execPath,['demo/check.cjs'],{cwd:scratch,stdio:'pipe'});
