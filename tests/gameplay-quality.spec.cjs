@@ -102,7 +102,7 @@ test('Place-value supplies and money envelopes use tap-to-place objects',async({
  await click(page,'j-budget-pick:100');await click(page,'j-budget-place:0');expect((await run(page,key)).values.parts[0]).toBe(100);await page.reload();await openCurrent(page);await expect(page.getByRole('button',{name:'Return 100 pence from Savings',exact:true})).toBeVisible();await click(page,'j-part:0:-100');expect((await run(page,key)).values.parts[0]).toBe(0);
 });
 test('Parent rewards and learner shop stay separate with the new Town save',async({family})=>{
- const parent=await family.open('parent');await expect(parent.getByRole('heading',{name:'Staging parent dashboard'})).toBeVisible();await parent.getByLabel('Action',{exact:true}).selectOption('award');await parent.getByLabel('Amount (1 to 60)',{exact:true}).fill('10');await parent.getByRole('button',{name:'Submit parent reward'}).tap();await expect.poll(()=>family.server.wallet.bonus).toBe(10);
+ const parent=await family.open('parent');await expect(parent.getByRole('heading',{name:'Family progress'})).toBeVisible();await parent.getByLabel('Action',{exact:true}).selectOption('award');await parent.getByLabel('Amount (1 to 60)',{exact:true}).fill('10');await parent.getByRole('button',{name:'Submit parent reward'}).tap();await expect.poll(()=>family.server.wallet.bonus).toBe(10);
  const page=await family.open('learner');await expect(page.getByRole('button',{name:'Submit parent reward'})).toHaveCount(0);await click(page,'skip-tour');await page.locator('nav [data-nav="camp"]').tap();await click(page,'nav:shop');await expect(page.locator('.shop-grid')).toBeVisible();expect(family.server.wallet.bonus).toBe(10);await page.reload();await openCurrent(page);expect(family.server.wallet.bonus).toBe(10);
 });
 
