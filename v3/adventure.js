@@ -998,7 +998,9 @@
           (n, r) => Math.max(n, r.serial || 0),
           0,
         ) + 1;
-    a.records[q.key] = {
+    const engine=typeof module!=='undefined'?require('./engine').V3Engine:root.V3Engine,participation=engine.participation(q,q.tasks.length);
+    if(!participation.eligible){a.finishedWithHelp||=[];a.finishedWithHelp.push(copy(q));}
+    if(participation.eligible)a.records[q.key] = {
       world: q.world,
       route: q.route,
       tier: q.tier,
@@ -1013,7 +1015,7 @@
       serial,
     };
     const milestone = "mission|" + q.key;
-    if (!s.milestones.includes(milestone)) s.milestones.push(milestone);
+    if (participation.eligible&&!s.milestones.includes(milestone)) s.milestones.push(milestone);
     s.recent.unshift({
       type: "expedition",
       world: q.world,
@@ -1028,7 +1030,8 @@
       world: q.world,
       route: q.route,
       tier: q.tier,
-      newReward: !old,
+      newReward: participation.eligible&&!old,
+      participation,
     };
     delete a.suspended[q.key];
     a.active = null;

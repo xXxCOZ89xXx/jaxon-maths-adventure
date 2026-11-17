@@ -662,6 +662,12 @@
     }
     return true;
   }
+  // Story milestones require participation, separate from independent mastery.
+  function participation(run, total) {
+    const skipped=new Set([...(run.skips||[]),...(run.evidence||[]).filter(e=>e.skipped||e.skippedAfterAttempt).map(e=>e.step??e.stage)].filter(i=>Number.isInteger(i)&&i>=0&&i<total));
+    const required=Math.ceil(total/2),answered=total-skipped.size;
+    return {total,required,answered,eligible:total>0&&answered>=required};
+  }
   function weekKey(now) {
     const parts = new Intl.DateTimeFormat("en-GB", {
         timeZone: "Europe/London",
@@ -705,6 +711,7 @@
     purchase,
     normaliseEquipment,
     removeEquipment,
+    participation,
     weekKey,
     activeTime,
     startDiscovery,
