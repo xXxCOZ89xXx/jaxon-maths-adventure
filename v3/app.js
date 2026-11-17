@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 25199)
-Total output lines: 1220
-
 (function () {
   "use strict";
   const M = window.V3Adventure,
@@ -322,7 +319,204 @@ Total output lines: 1220
   function campPlanner(progress) {
     const selected=M.campStages.find(st=>st.id===campPreview && st.id<=progress.current.id) || progress.current;
     const ready=progress.next && progress.remaining===0;
-    return `<section id="estate-planner" class="estate-planner panel" aria-label="Camp upgrade planner"><div class="section-head"><div><div class="eyebrow">A HOME BUILT THROUGH ADVENTURE</div><h2>${progress.next ? "Next upgrade: " + esc(progress.next.name) : "Your mansion estate is complete."}</h2><p>${progress.count} unique milestones · ${progress.next ? progress.remaining + " more for the next upgrade" : "Every earned upgrade stays with you"}.</p></div><span class="badge">BASE CAMP LEVEL ${progres…5199 tokens truncated…nav], .topbar nav [data-action]").forEach((el) => {
+    return `<section id="estate-planner" class="estate-planner panel" aria-label="Camp upgrade planner"><div class="section-head"><div><div class="eyebrow">A HOME BUILT THROUGH ADVENTURE</div><h2>${progress.next ? "Next upgrade: " + esc(progress.next.name) : "Your mansion estate is complete."}</h2><p>${progress.count} unique milestones · ${progress.next ? progress.remaining + " more for the next upgrade" : "Every earned upgrade stays with you"}.</p></div><span class="badge">BASE CAMP LEVEL ${progress.current.id} / 8</span></div><p class="small muted">Complete different world restoration stages or expedition difficulty levels to earn unique milestones. Hints are welcome. Repeating a completed milestone adds no progress. Coins and independent mastery are separate.</p>${progress.next ? `<p><strong>Complete Level ${progress.current.id}:</strong> earn ${progress.next.need} unique milestones in total (${Math.min(progress.count,progress.next.need)} / ${progress.next.need}), then build the ${esc(progress.next.name)} upgrade. ${esc(progress.next.story)}</p><div class="actions">${btn("Build Level " + progress.next.id + " upgrade", "camp-upgrade:" + progress.next.id, "primary", !ready)}${btn("Explore worlds to earn milestones", "nav:map")}</div>` : ""}<div class="estate-track" role="group" aria-label="Eight Base Camp levels">${M.campStages.map(st=>`<button data-action="camp-preview:${st.id}" ${st.id>progress.current.id?'disabled':''} aria-pressed="${selected.id===st.id}"><strong>Level ${st.id}. ${esc(st.name)}</strong><span>${st.need} unique milestones · ${st.id<=progress.current.id ? "earned" : "locked"}</span></button>`).join("")}</div><div class="estate-plan-preview"><div>${A.camp(s,selected.id)}</div><div><span class="badge">EARNED HOME · LEVEL ${selected.id}</span><h3>${esc(selected.name)}</h3><p>${esc(selected.story)}</p><p class="small muted">Viewing camp never builds an upgrade, spends coins or earns rewards.</p>${progress.current.id>=6?`<div class="actions">${btn("Plan fictional water supply", "mission:measure:1:1")}${progress.current.id>=7?btn("Explore fictional power planning", "mission:statistics:1:1"):""}</div><p class="small muted">Illustrated maths models, not real machinery or electrical instructions.</p>`:""}</div></div></section>`;
+  }
+  function camp() {
+    const progress=M.campProgress(s),n=progress.count;
+    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Base Camp", null)}<section class="home-path panel" aria-label="Choose your adventure"><h2>Where next?</h2>${!P.complete(s)?`<div class="notice"><h3>Start with your starting points</h3><p>About 15 questions in each of the nine areas help us choose where to begin. Explore freely; learning opens after your profile is complete.</p>${btn("Find my starting points","nav:starting","primary")}</div>`:btn("Your starting points","nav:starting")}${!s.tourSeen?`<div class="notice"><p>New here? Your guide can show you the way.</p><div class="actions">${btn("Show me how","nav:tour")}${btn("Start exploring","skip-tour")}</div></div>`:""}<p>${esc(P.complete(s)?N.summary(s):'Find starting points in all nine areas. Your paused activities will wait for you.')}</p><div class="actions">${btn('Continue adventure','continue','primary')}${btn('Subject worlds','nav:map')}${btn('Town and Restore Community','world:town')}${btn('How to play','nav:tour')}</div><p>${!P.complete(s)?'You can explore the maps between questions.':s.world==='town'?nextButton('town'):btn('Your next learning step','next-path:'+s.world)}</p></section>${savedActivities()}<section class="camp-overview ${progress.pending ? "estate-unveiling" : ""}">${progress.pending ? `<div class="estate-celebration" role="status"><strong>Your ${esc(progress.current.name)} is ready.</strong><span>Built through your adventures. No coins spent.</span>${btn("Enjoy the new home", "camp-celebrate")}</div>` : ""}<div class="camp-map hero-art">${A.camp(s)}<span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>${esc(progress.current.name)}</h2><p class="muted">Choose a place in camp to continue, explore or view your progress. Every earned upgrade stays with you.</p><p class="camp-inventory small">Base Camp Level ${progress.current.id} / 8 · ${esc(progress.current.name)}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section>${campPlanner(progress)}<details class="camp-journal" id="camp-achievements"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
+      ["First steps", n >= 1, "Restore your first landmark."],
+      [
+        "Forest keeper",
+        E.count(s, "number") === 3,
+        "Restore all of Number Forest.",
+      ],
+      [
+        "World wanderer",
+        E.worlds.every((w) => M.visualLevel(s, w.id, E.count(s, w.id)) > 0),
+        "Restore a landmark in each of the nine worlds.",
+      ],
+      [
+        "Independent thinker",
+        s.achievements.includes("independent"),
+        "Pass a fresh independent check.",
+      ],
+      [
+        "Memory maker",
+        s.achievements.includes("memory"),
+        "Pass a delayed memory check.",
+      ],
+      [
+        "Original atlas keeper",
+        E.worlds
+          .filter((w) => w.id !== "town")
+          .every((w) => E.count(s, w.id) === 3),
+        "Restore the original 24 landmarks.",
+      ],
+      [
+        "Town neighbour",
+        new Set(
+          M.completions(s, "town")
+            .filter((r) => r.route !== "gateway")
+            .map((r) => r.route),
+        ).size === 8,
+        "Help all eight town locations.",
+      ],
+      [
+        "Gateway guardian",
+        E.worlds.every(
+          (w) =>
+            M.entry(s, w.id, "gateway", 1) ||
+            M.entry(s, w.id, "gateway", 2) ||
+            M.entry(s, w.id, "gateway", 3),
+        ),
+        "Complete a gateway in each of the nine worlds.",
+      ],
+    ]
+      .map(
+        ([name, earned, desc]) =>
+          `<div class="achievement"><span aria-hidden="true">${earned ? "◆" : "◇"}</span><div><strong>${name} ${earned ? "· earned" : ""}</strong><span class="small muted">${desc}</span></div></div>`,
+      )
+      .join("")}</div></details>${U.collection(s)}`;
+  }
+  function shop() {
+    const activeCatalog = C.catalog.filter(i=>!window.V7Avatar||V7Avatar.isActiveItem(i));
+    const slots = [...new Set(activeCatalog.map((i) => i.slot))];
+    const preview=activeCatalog.find(i=>i.id===itemPreview),look=preview?{...s,bought:[...s.bought,preview.id],equipped:[...s.equipped.filter(id=>C.catalog.find(i=>i.id===id)?.slot!==preview.slot),preview.id]}:s;
+    const slotNames = {Companions:'Pet or companion',Backgrounds:'Background',Headwear:'Hat',Outfits:'Clothing'};
+    const equipment = `<section class="equipment-slots" tabindex="-1" aria-label="Equipped items"><h2>Your equipment</h2><p>Choose one item per category. Changing or removing one keeps your other items.</p><div class="equipment-slot-grid">${slots.map(slot=>{
+      const item=activeCatalog.find(i=>i.slot===slot&&s.bought.includes(i.id)&&s.equipped.includes(i.id));
+      return `<div class="equipment-slot"><strong>${esc(slotNames[slot]||slot)}</strong><span>${item?esc(item.label):'None equipped'}</span><button data-action="remove-slot:${esc(slot)}" ${item?'':'disabled'}>Remove ${esc(slotNames[slot]||slot)}</button></div>`;
+    }).join('')}</div></section>`;
+    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar?V7Avatar.controls(s):""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p></div></div>${equipment}<label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${activeCatalog
+      .filter(
+        (i) =>
+          filter === "all" ||
+          (filter === "owned" && s.bought.includes(i.id)) ||
+          (filter === "affordable" &&
+            (s.bought.includes(i.id) || s.coins >= i.cost)) ||
+          filter === i.slot,
+      )
+      .map(
+        (i) =>
+          `<article class="shop-item"><span class="ico" aria-hidden="true">${A.icon(i)}</span><h3>${i.label}</h3><p class="small muted">${i.cost} coins · ${i.slot}</p><button data-ui="preview-item" data-item="${esc(i.id)}">Preview ${esc(i.label)}</button>${btn(s.equipped.includes(i.id) ? "Unequip " + i.label : s.bought.includes(i.id) ? "Equip " + i.label : "Buy " + i.label, "buy:" + i.id, s.equipped.includes(i.id) ? "primary" : "", !s.bought.includes(i.id) && s.coins < i.cost)}</article>`,
+      )
+      .join("")}</div>`;
+  }
+  function settings() {
+    return `${header("PLAY YOUR WAY", "Settings", "home")}<div class="panel preferences"><h2>Comfort comes first</h2><label><input type="checkbox" data-setting="motion" ${s.settings.motion ? "checked" : ""}>Gentle scene animation (system reduced-motion preference takes priority)</label><label><input type="checkbox" data-setting="sound" ${s.settings.sound ? "checked" : ""}>Quiet restoration sound</label><p class="muted">Sound and animation start off. All puzzles work with tapping and a keyboard; dragging is optional.</p><div class="actions">${btn("Replay the welcome tour", "nav:tour")}</div>${cloud ? "<h3>Account and privacy</h3><p>Lock or sign out on shared devices. Parents use their own account and parent PIN to see the starting profile and independent evidence. This device keeps an offline copy and pending saves; reconnect before changing devices. Reset never clears a learner profile. This release supports one linked learner per family; it has no child-switching control.</p>" : '<h3>Fictional Test Camp</h3><p class="small muted">This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.</p>'}</div>`;
+  }
+  function parent() {
+    const minutes = s.weekly[E.weekKey(Date.now())] || 0;
+    return `${header("FICTIONAL TEST LEARNER", "Demo parent summary", "home")}<div class="notice">Offline summary only. Real parent login, bonus awards and family data stay in the existing secure game. No production data is loaded here.</div><div class="stat-grid"><div class="stat"><strong>${minutes.toFixed(1)} / 60</strong>weekly active minutes</div><div class="stat"><strong>${minutes.toFixed(1)}</strong>screen-time minutes · 1:1</div><div class="stat"><strong>${Object.values(s.skills).filter((k) => k.state === "mastered").length}</strong>independently mastered skills</div></div><div class="split"><section class="panel"><h2>Learning evidence</h2>${
+      C.skills
+        .filter((k) => s.checks[k.id] || s.practice[k.id])
+        .map(
+          (k) =>
+            `<p><strong>${k.name}</strong><br><span class="small muted">${s.checks[k.id]?.reteach ? "Needs reinforcement" : s.checks[k.id]?.stage >= 2 ? "Spaced mastery" : s.checks[k.id]?.stage === 1 ? "Independent practice passed" : "Guided practice"} · ${s.checks[k.id]?.score ?? "No independent score"}${s.checks[k.id] ? "%" : ""}</span></p>`,
+        )
+        .join("") ||
+      '<p class="muted">Learning evidence appears after lessons and checks.</p>'
+    }<p class="small muted">${s.milestones.length} story landmarks · separate from academic mastery.</p></section><section class="panel"><h2>Recent genuine activity</h2>${
+      s.recent
+        .slice(0, 8)
+        .map(
+          (r) =>
+            `<p class="small"><strong>${esc(r.type === "expedition" ? E.worlds.find((w) => w.id === r.world)?.name + " · " + (M.routes(r.world).find((v) => v.id === r.route)?.name || "Gateway") + " · level " + r.tier : r.type === "restoration" ? E.worlds.find((w) => w.id === r.world)?.name : skill(r.id)?.name || r.type)}</strong> · ${esc(r.type)}${r.assisted ? " · with support" : ""}<br><span class="muted">${esc(new Date(r.date).toLocaleString("en-GB", { timeZone: "Europe/London" }))}</span></p>`,
+        )
+        .join("") || '<p class="muted">No learning activity yet.</p>'
+    }</section></div>`;
+  }
+  function tour() {
+    return `<section class="tour">${header('YOUR ADVENTURE GUIDE','How to play','home')}<div class="panel"><h2>Follow four small steps</h2><ol><li><strong>Find your starting point.</strong> Choose your curriculum year, then answer about 15 questions in each area to help your guide choose a starting level. You can say “I don’t know”.</li><li><strong>Learn and practise.</strong> Try an example, move the maths tools and ask for hints.</li><li><strong>Try an independent check.</strong> Use your own thinking. Help is still safe; it just stays separate from independent answers.</li><li><strong>Restore your world.</strong> Use the ideas in a longer plan. Each stage opens after its starting-point checks. Restoration is practice, not proof of mastery.</li></ol><h2>Explore your way</h2><p>Other missions, Town plans and Base Camp are optional adventures. You can visit another world at any time. First, find starting points in all nine areas; then learning adventures open. The short profile is a starting suggestion, not mastery.</p><h2>Pause or reset</h2><p>Pause and explore saves your question and tools. Home and World map also leave your activity saved. Base Camp lists your paused activities. Continue brings you back; a finished activity shows its recap. Reset names exactly what a restart or exit resets before you confirm. Completed work, coins and learning evidence stay saved.</p><p>Lessons and checks restart only the current question’s draft. Earlier answers stay. A restarted Town plan or mission keeps its earlier steps in Earlier attempts.</p><div class="actions">${btn('Continue my activity','continue','primary')}${btn('Choose a world','nav:map')}${btn('Finish guide','skip-tour')}</div></div>${s.activityArchives?.length?`<details class="panel"><summary>Earlier attempts · ${s.activityArchives.length}</summary>${s.activityArchives.map(x=>`<article><h3>${esc(x.name)}</h3><p>${x.snapshot.completed?.length??x.snapshot.i??0} earlier steps kept. ${x.snapshot.receipts?.length||0} receipts kept.</p>${x.snapshot.receipts?.length?`<ul>${x.snapshot.receipts.map(r=>`<li>${esc(r.label)}</li>`).join('')}</ul>`:''}</article>`).join('')}</details>`:''}</section>`;
+
+  }
+  function closeDialogs(){document.querySelectorAll('dialog[open]').forEach(d=>d.close());}
+  function safetyButtons(){return `${btn("Pause and explore","pause-explore")}${btn('Home','nav:home')}${btn('World map','nav:map')}${btn('How to play','nav:tour')}${N.target(s)?btn('Reset','recover-open'):''}`;}
+  function activitySafety(){
+    if(!document.getElementById('town-entry')){const b=document.createElement('button');b.id='town-entry';b.dataset.action='world:town';b.textContent='Town';document.querySelector('.topbar nav').append(b);}
+    if(!document.getElementById('play-help')){const b=document.createElement('button');b.id='play-help';b.dataset.action='nav:tour';b.textContent='How to play';document.querySelector('.topbar nav').append(b);}
+    if(!document.getElementById('recovery-dialog')){const d=document.createElement('dialog');d.id='recovery-dialog';d.setAttribute('aria-label','Reset confirmation');d.innerHTML='<h2>Reset</h2><p class="recovery-copy"></p><div class="actions"><button data-action="recover-apply:restart" data-recovery-confirm>Confirm restart</button><button data-action="recover-apply:exit" data-recovery-confirm>Exit this activity</button><button data-action="recover-cancel">Keep playing</button><button data-action="nav:home">Pause and go home</button><button data-action="nav:map">Pause and open world map</button></div>';document.body.append(d);}
+    if(['quest','adventure','journey','lesson','practice','check','discovery','starting-area'].includes(s.view)){
+      const dock=document.createElement('nav');dock.className='activity-safety';dock.setAttribute('aria-label','Activity help and leaving');dock.innerHTML=safetyButtons();document.getElementById('main').prepend(dock);
+      document.querySelectorAll('#main dialog').forEach(d=>{const n=document.createElement('nav');n.className='activity-safety';n.setAttribute('aria-label','Activity help and leaving');n.innerHTML=safetyButtons();d.prepend(n);});
+    }
+  }
+  let advanceTimer=null,advanceStamp=null;
+  function progression() {
+    if(['practice','check','discovery'].includes(s.view)&&s.learning?.answered)return {action:'next-learning',stamp:JSON.stringify([s.view,s.learning.id,s.learning.round,s.learning.qs,s.learning.i])};
+    if(s.view==='journey'){const j=window.V5Journey.state(s);if(j?.solved)return {action:'j-next',stamp:JSON.stringify(['journey',j.id,j.seed,j.stage])};}
+    if(s.view==='adventure'){const q=M.current(s);if(q?.solved)return {action:'m-next',stamp:JSON.stringify(['adventure',q.key,q.seed,q.i])};}
+    if(s.view==='quest'&&s.quest?.solved)return {action:'next-quest',stamp:JSON.stringify(['quest',s.quest.world,s.quest.i])};
+    return null;
+  }
+  function scheduleProgression(){
+    const next=progression();
+    document.querySelectorAll('[data-action="next-learning"],[data-action="m-next"],[data-action="j-next"],[data-action="next-quest"]').forEach(el=>{el.hidden=true;el.style.display='none';});
+    if(!next){clearTimeout(advanceTimer);advanceTimer=null;advanceStamp=null;return;}
+    if(advanceStamp===next.stamp)return;
+    clearTimeout(advanceTimer);advanceStamp=next.stamp;
+    // Leave the live correctness announcement readable before replacing the question.
+    advanceTimer=setTimeout(async()=>{
+      await change(()=>{
+        if(progression()?.stamp!==next.stamp)return;
+        if(next.action==='next-learning')E.nextLearning(s);
+        else if(next.action==='j-next')window.V5Journey.action(s,'j-next');
+        else if(next.action==='m-next')M.next(s);
+        else E.nextQuest(s);
+      },{focus:true});
+    },900);
+  }
+  function render(focus = false) {
+    if (cloud && !cloud.isUnlocked()) return;
+    if(!P.complete(s)&&P.views.includes(s.view))s.view='starting';
+
+    window.V7Avatar?.setState(s);
+    window.V7ActivityScenes?.before();
+    window.V6SceneUI?.beforeRender();
+    document.body.classList.toggle("animate", !!s.settings.motion);
+    $("headerExplorer").innerHTML = A.explorer(s, true);
+    const screens = {
+      home,
+      starting,
+      "starting-area":startingArea,
+      map,
+      world: worldPage,
+      quest,
+      lesson: learning,
+      practice: learning,
+      check: learning,
+      camp,
+      shop,
+      settings,
+      parent,
+      recap,
+      tour,
+      discovery: learning,
+      adventure: () => U.play(s,venueExterior),
+      journey,
+    };
+    $("main").innerHTML =
+      cloud && s.view === "parent"
+        ? "<h1>Parent account required</h1>"
+        : (screens[s.view] || home)();
+    if(!P.complete(s)){
+      document.querySelectorAll('#main [data-action]').forEach(el=>{if(!P.allowed(s,el.dataset.action)){if(el.dataset.action==='continue'){el.dataset.action='nav:starting';el.textContent='Continue starting points';}else{el.disabled=true;el.title='Find all nine starting points first';}}});
+      if(s.view==='world'){const notice=document.createElement('section');notice.className='notice';notice.innerHTML='<p>Look around freely. Find all nine starting points before learning adventures begin.</p>'+btn('Find my starting points','nav:starting','primary');$('main').prepend(notice);}
+    }
+    const visitStatus=document.querySelector('.town-visit-status');if(visitStatus)visitStatus.textContent=townVisitError;
+    presentationFinish();
+    if (focus) {
+      $("main").focus();
+      window.scrollTo(0, 0);
+    }
+    window.V7ActivityScenes?.decorate(s);
+    window.V6SceneUI?.afterRender();
+    activitySafety();
+    // Town uses the existing world/action route; highlight its own section,
+    // including saved activities, rather than every world view as Worlds.
+    const worldView = ["world", "quest", "lesson", "practice", "check", "discovery", "adventure", "journey"].includes(s.view);
+    const section = worldView ? (s.world === "town" ? "town" : "map") : s.view === "shop" ? "camp" : s.view;
+    document.querySelectorAll(".topbar nav [data-nav], .topbar nav [data-action]").forEach((el) => {
       const target = el.dataset.nav || (el.dataset.action === "world:town" ? "town" : el.dataset.action?.replace(/^nav:/, ""));
       if (target === section) el.setAttribute("aria-current", "page");
       else el.removeAttribute("aria-current");

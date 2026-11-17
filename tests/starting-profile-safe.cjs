@@ -1,5 +1,7 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),{load}=require('../scripts/audit-curriculum.cjs');
+// Parse the complete application too: a truncated source file must never pass logic-only checks.
+new vm.Script(fs.readFileSync('v3/app.js','utf8'),{filename:'v3/app.js'});
 const c=load();for(const p of ['v3/touch-content.js','v3/starting-profile.js'])vm.runInContext(fs.readFileSync(p,'utf8'),c,{filename:p});
 const {V11StartingProfile:P,V3Engine:E,V3Curriculum:C}=c,unsafe=[
  ['Move the marker to the sum.','4',[],null,null,{direct:{kind:'line'}}],
