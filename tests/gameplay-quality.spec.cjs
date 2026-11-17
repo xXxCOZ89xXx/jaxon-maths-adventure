@@ -123,6 +123,7 @@ test('Place-value practice stays readable across supported iPad and desktop size
   expect(layout.columns.trim().split(/\s+/),`four place-value columns at ${width}px`).toHaveLength(4);
   for(let i=1;i<layout.cards.length;i++)expect(layout.cards[i].x).toBeGreaterThan(layout.cards[i-1].x);
   for(const b of layout.buttons){expect(b.width,`button width at ${width}px`).toBeGreaterThanOrEqual(44);expect(b.height,`button height at ${width}px`).toBeGreaterThanOrEqual(44);expect(b.x).toBeGreaterThanOrEqual(layout.model.x);expect(b.right).toBeLessThanOrEqual(layout.model.right+1);}
+  for(let i=0;i<layout.buttons.length;i++)for(let j=i+1;j<layout.buttons.length;j++){const a=layout.buttons[i],b=layout.buttons[j];expect(a.right<=b.x+0.5||b.right<=a.x+0.5||a.bottom<=b.y+0.5||b.bottom<=a.y+0.5,`buttons ${i} and ${j} must not overlap at ${width}px`).toBe(true);}
   if(width<900){expect(layout.panel.width).toBeGreaterThanOrEqual(layout.split.width-1);expect(layout.aside.y).toBeGreaterThanOrEqual(layout.panel.bottom-1);}
   await expect(page.getByRole('button',{name:'Place a 1000 block',exact:true})).toBeVisible();
   await expect(page.getByRole('button',{name:'Return a 1000 block',exact:true})).toBeVisible();
