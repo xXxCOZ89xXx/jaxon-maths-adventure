@@ -17,7 +17,7 @@ async function seed(page,state){
 
 test('a skipped answer and a solved Town step wait for the learner to continue',async({page})=>{
   const s=F.fresh();
-  s.learning={id:'town_money',mode:'check',round:1,started:true,qs:[['What is 2 + 2?','4',['3','4','5','6'],'Add two and two.','2 + 2 = 4.']],i:0,correct:0,answered:false,assisted:false};
+  s.learning={id:'town_money',mode:'check',round:1,started:true,qs:[['What is 2 + 2?','4',['3','4','5','6'],'Add two and two.','2 + 2 = 4.'],['What is 3 + 2?','5',['3','4','5','6'],'Add three and two.','3 + 2 = 5.']],i:0,correct:0,answered:false,assisted:false};
   s.view=s.resumeView='check';
   await seed(page,s);
   await page.locator('[data-action="learning-skip"]').click();
@@ -30,19 +30,20 @@ test('a skipped answer and a solved Town step wait for the learner to continue',
   await expect(nextLearning).toBeVisible();
   expect((await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),KEY)).learning.i).toBe(0);
   await nextLearning.click();
-  expect((await page.evaluate(k=>JSON.parse(localStorage.getItem(k)),KEY)).learning.i).toBe(1);
+  await expect.poll(()=>page.evaluate(k=>JSON.parse(localStorage.getItem(k)).learning?.i,KEY)).toBe(1);
 
   const town=F.fresh();
   expect(F.L.start(town,'travel-library',1)).toBe(true);
   expect(F.L.action(town,'j-skip')).toBe(true);
   const stage=F.L.state(town).stage;
   await seed(page,town);
-  const nextTown=page.locator('[data-action="j-next"]');
+  const scope=await page.locator('dialog[open]').count()?page.locator('dialog[open]').last():page;
+  const nextTown=scope.locator('[data-action="j-next"]:visible').first();
   await expect(nextTown).toBeVisible();
-  await expect(page.locator('.feedback[role="status"]')).toContainText('Skipped with help.');
+  await expect(scope.locator('.feedback[role="status"]:visible').first()).toContainText('Skipped with help.');
   await page.waitForTimeout(3100);
   await expect(nextTown).toBeVisible();
   expect((await page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))).stage,KEY))).toBe(stage);
   await nextTown.click();
-  expect((await page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))).stage,KEY))).toBe(stage+1);
+  await expect.poll(()=>page.evaluate(k=>V52TownLife.state(JSON.parse(localStorage.getItem(k))).stage,KEY)).toBe(stage+1);
 });
