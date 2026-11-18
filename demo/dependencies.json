@@ -323,87 +323,6 @@
       "path": "v3/assets/world-guide-portraits-preview/statistics-city-guide.webp"
     },
     {
-      "path": "v3/assets/ingredients/baking-powder.png"
-    },
-    {
-      "path": "v3/assets/ingredients/bananas.png"
-    },
-    {
-      "path": "v3/assets/ingredients/basmati-rice.png"
-    },
-    {
-      "path": "v3/assets/ingredients/carrots.png"
-    },
-    {
-      "path": "v3/assets/ingredients/chickpeas-tin.png"
-    },
-    {
-      "path": "v3/assets/ingredients/coconut-milk.png"
-    },
-    {
-      "path": "v3/assets/ingredients/cooking-oil.png"
-    },
-    {
-      "path": "v3/assets/ingredients/eggs.png"
-    },
-    {
-      "path": "v3/assets/ingredients/flatbreads.png"
-    },
-    {
-      "path": "v3/assets/ingredients/fresh-basil.png"
-    },
-    {
-      "path": "v3/assets/ingredients/fresh-tomatoes.png"
-    },
-    {
-      "path": "v3/assets/ingredients/garlic.png"
-    },
-    {
-      "path": "v3/assets/ingredients/ground-cumin.png"
-    },
-    {
-      "path": "v3/assets/ingredients/mozzarella.png"
-    },
-    {
-      "path": "v3/assets/ingredients/oat-milk.png"
-    },
-    {
-      "path": "v3/assets/ingredients/olive-oil.png"
-    },
-    {
-      "path": "v3/assets/ingredients/onion.png"
-    },
-    {
-      "path": "v3/assets/ingredients/passata.png"
-    },
-    {
-      "path": "v3/assets/ingredients/pasta.png"
-    },
-    {
-      "path": "v3/assets/ingredients/red-lentils.png"
-    },
-    {
-      "path": "v3/assets/ingredients/red-pepper.png"
-    },
-    {
-      "path": "v3/assets/ingredients/rolled-oats.png"
-    },
-    {
-      "path": "v3/assets/ingredients/spaghetti.png"
-    },
-    {
-      "path": "v3/assets/ingredients/spinach.png"
-    },
-    {
-      "path": "v3/assets/ingredients/tinned-chopped-tomatoes.png"
-    },
-    {
-      "path": "v3/assets/ingredients/turmeric.png"
-    },
-    {
-      "path": "v3/assets/ingredients/vegetable-stock.png"
-    },
-    {
       "path": "v3/assets/base-camp/display-shelf.webp"
     },
     {
@@ -564,6 +483,168 @@
     },
     {
       "path": "v3/assets/base-camp/projects/noticeboard-scene.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/baking-powder.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/bananas.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/basmati-rice.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/carrots.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/chickpeas-tin.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/coconut-milk.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/cooking-oil.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/eggs.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/flatbreads.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/fresh-basil.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/fresh-tomatoes.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/garlic.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/ground-cumin.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/mozzarella.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/oat-milk.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/olive-oil.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/onion.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/passata.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/pasta.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/red-lentils.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/red-pepper.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/rolled-oats.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/spaghetti.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/spinach.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/tinned-chopped-tomatoes.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/turmeric.webp"
+    },
+    {
+      "path": "v3/assets/ingredients/served/vegetable-stock.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/served/bus-1024.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/served/market-1024.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/served/town-1024.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/served/camp-1024.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/served/kitchen-1024.webp"
+    },
+    {
+      "path": "v3/assets/checkpoint/served/rail-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/atlas-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/home-exterior-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/forest-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/desert-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/geometry-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/measure-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/ratio-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/probability-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/statistics-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/camp1-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/camp2-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/camp3-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/camp4-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/shops-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/train-station-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/cafe-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/work-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/bank-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/leisure-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/library-1024.webp"
+    },
+    {
+      "path": "v3/assets/rollout/served/post-1024.webp"
     }
   ]
 }

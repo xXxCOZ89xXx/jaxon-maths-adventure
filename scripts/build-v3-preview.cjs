@@ -23,6 +23,10 @@ html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
     const assets=JSON.parse(fs.readFileSync(path.join(root,'v3/assets/base-camp/manifest.json'))).assets;
     js='window.V3CampAssetFiles='+JSON.stringify(Object.fromEntries(assets.map(a=>[a.file,'data:image/webp;base64,'+fs.readFileSync(path.join(root,'v3/assets/base-camp',a.file)).toString('base64')])))+';\n'+js;
   }
+  if(src === 'v3/avatar-art.js') {
+    const assets=JSON.parse(fs.readFileSync(path.join(root,'v3/assets/delivery-manifest.json'))).assets.filter(a=>a.source.startsWith('v3/assets/ingredients/'));
+    js='window.V3IngredientFiles='+JSON.stringify(Object.fromEntries(assets.map(a=>[path.basename(a.file,'.webp'),'data:image/webp;base64,'+fs.readFileSync(path.join(root,a.file)).toString('base64')])))+';\n'+js;
+  }
   if(src === 'v3/asset-checkpoint.js') {
     const dir=path.join(root,'v3/assets/checkpoint');
     const names=Object.keys(JSON.parse(fs.readFileSync(path.join(dir,'manifest.json'),'utf8')).assets);
