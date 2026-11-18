@@ -60,7 +60,14 @@
   };
   const obj=x=>x&&typeof x==='object'&&!Array.isArray(x);
   function validBook(b){return obj(b)&&b.version===2&&obj(b.runs)&&obj(b.counts)&&(b.active===null||typeof b.active==='string'&&Object.hasOwn(b.runs,b.active));}
-  function validRun(j){return obj(j)&&j.version===2&&typeof j.id==='string'&&catalog.some(c=>c.id===j.scenario)&&[1,2,3].includes(j.tier)&&Number.isInteger(j.stage)&&Array.isArray(j.steps)&&j.steps.length>=3&&j.stage>=0&&j.stage<=j.steps.length&&j.done===(j.stage===j.steps.length)&&j.steps.every(t=>obj(t)&&typeof t.prompt==='string'&&t.answer!==undefined&&obj(t.effect)&&typeof t.venue==='string')&&obj(j.values)&&obj(j.inventory)&&obj(j.shoppingList)&&Array.isArray(j.receipts)&&Array.isArray(j.evidence)&&Array.isArray(j.completed)&&j.completed.length===j.stage&&j.completed.every((x,i)=>x===i)&&Number.isInteger(j.cash)&&j.cash>=0&&Number.isInteger(j.time)&&j.time>=0&&j.time<1440;}
+  function validStep(t){
+    if(!obj(t)||typeof t.title!=='string'||typeof t.prompt!=='string'||!['basket','budget','journey','choice','order','match','coins','amount','measure','clock'].includes(t.kind)||t.answer===undefined||!obj(t.effect)||typeof t.venue!=='string')return false;
+    if(['choice','journey'].includes(t.kind)&&(!Array.isArray(t.options)||!t.options.length||!t.options.every(o=>obj(o)&&typeof o.name==='string')))return false;
+    if(['basket','budget','order','match'].includes(t.kind)&&!Array.isArray(t.answer))return false;
+    if(['basket','order','match'].includes(t.kind)&&!Array.isArray(t.items)||t.kind==='budget'&&!Array.isArray(t.labels))return false;
+    return t.requiresStock===undefined||obj(t.requiresStock);
+  }
+  function validRun(j){return obj(j)&&j.version===2&&typeof j.id==='string'&&catalog.some(c=>c.id===j.scenario)&&[1,2,3].includes(j.tier)&&Number.isInteger(j.stage)&&Array.isArray(j.steps)&&j.steps.length>=3&&j.stage>=0&&j.stage<=j.steps.length&&j.done===(j.stage===j.steps.length)&&j.steps.every(validStep)&&obj(j.values)&&obj(j.inventory)&&obj(j.shoppingList)&&Array.isArray(j.receipts)&&j.receipts.every(obj)&&Array.isArray(j.evidence)&&j.evidence.every(obj)&&(!j.recipeCard||obj(j.recipeCard)&&Array.isArray(j.recipeCard.ingredients)&&j.recipeCard.ingredients.every(i=>obj(i)&&typeof i.name==='string'))&&Array.isArray(j.completed)&&j.completed.length===j.stage&&j.completed.every((x,i)=>x===i)&&Number.isInteger(j.cash)&&j.cash>=0&&Number.isInteger(j.time)&&j.time>=0&&j.time<1440;}
   function book(s){return s.adventure?.townLifeV2;}
   function state(s){const b=book(s);const j=validBook(b)?b.runs[b.active]:null;return validRun(j)&&j.id===b.active?j:null;}
   function task(s){const j=state(s);return j&&!j.done?j.steps[j.stage]:null;}
@@ -124,6 +131,7 @@
     const refuse=message=>{j.feedback=message+' Your progress is saved. You can review this step or choose another Town plan.';return false;};
     const shortage=stockShortage(j,t);if(shortage)return refuse(shortage);
     if(!j.solved||!valid(t,j.values))return refuse('Complete this step before continuing. Hints and I don’t know are available.');
+    if(j.decisions!==undefined&&!Array.isArray(j.decisions))return refuse('This plan’s saved decisions need another look.');
     const e=t.effect,quantity=n=>Number.isSafeInteger(n)&&n>=0,amount=n=>typeof n==='number'&&Number.isFinite(n)&&n>=0&&n<=Number.MAX_SAFE_INTEGER,quantities=x=>obj(x)&&Object.values(x).every(amount);
     if(!obj(e)||!['earn','spend','savings','minutes','sale'].every(k=>e[k]===undefined||quantity(e[k]))||!['add','consume','list'].every(k=>e[k]===undefined||quantities(e[k])))return refuse('This saved step needs another look before we can continue.');
     if(e.receipt!==undefined&&typeof e.receipt!=='string'||e.choice!==undefined&&typeof e.choice!=='string')return refuse('The payment details for this step need another look.');

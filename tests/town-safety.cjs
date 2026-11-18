@@ -12,6 +12,8 @@ function refused(edit,pattern){
 }
 refused((j,t)=>{delete t.branches[j.values.choice];},/next step for this choice is missing/);
 refused((j,t)=>{t.branches[j.values.choice]=[null];},/next step for this choice needs another look/);
+refused((j,t)=>{t.branches[j.values.choice]=Array.from({length:2},()=>({prompt:'Incomplete saved step',answer:0,effect:{},venue:'home'}));},/next step for this choice needs another look/);
+refused((j,t)=>{j.decisions={unsupported:true};t.effect.choice='Saved choice';},/saved decisions need another look/);
 refused(j=>{j.cash=10;},/not enough pretend cash/);
 refused(j=>{j.time=1439;},/end of the saved day/);
 refused((j,t)=>{t.effect.consume={flour:3};},/not enough ingredients/);
