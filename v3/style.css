@@ -2354,3 +2354,8 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .scene-dialog .scene-money{margin-top:16px;border-top:1px solid #789264;padding-top:10px}
 .scene-dialog .scene-money .money-balances{position:static;max-height:none;overflow:visible}
 .scene-dialog>.activity-safety{margin-top:16px;border-top:1px solid #789264;padding-top:12px}
+/* Keep intrinsic product widths from expanding narrow in-scene shelf targets. */
+.shelf-touch>span{width:100%;min-width:0;max-width:100%}
+.shelf-touch .recipe-ingredient-prop{max-width:100%;min-width:0}
+.shelf-touch{grid-template-columns:minmax(0,1fr)}
+.shelf-touch strong{min-width:0;overflow-wrap:anywhere}

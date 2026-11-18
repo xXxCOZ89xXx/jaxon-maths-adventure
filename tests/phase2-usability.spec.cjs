@@ -16,3 +16,9 @@ test('Town labels stay visible and close-ups put task controls before money and 
  expect(await d.evaluate(d=>{const a=d.querySelector('.scene-closeup-controls'),b=d.querySelector('.scene-money'),n=d.querySelector('.activity-safety');return !!(a.compareDocumentPosition(b)&Node.DOCUMENT_POSITION_FOLLOWING)&&!!(a.compareDocumentPosition(n)&Node.DOCUMENT_POSITION_FOLLOWING);})).toBe(true);await expect(d.locator('.scene-money')).not.toHaveAttribute('open');await d.locator('.scene-money>summary').click();await expect(d.locator('.money-balances')).toBeVisible();await readable(p);
  await p.screenshot({path:`work/phase2-ui/${info.project.name}-task.png`});
 });
+test('ingredient pictures fit inside the supermarket shelf touch targets',async({camp})=>{
+ const s=F.fresh();F.L.start(s,'cook-pasta');while(F.L.task(s).visualContext!=='shelves')F.townStep(s);await seed(camp,s);
+ const images=camp.page.locator('.shelf-touch .recipe-ingredient-image');expect(await images.count()).toBeGreaterThan(0);
+ const sizes=await images.evaluateAll(async es=>{await Promise.all(es.map(e=>e.decode()));return es.map(e=>{const a=e.getBoundingClientRect(),b=e.closest('.shelf-touch').getBoundingClientRect();return {imageWidth:a.width,imageHeight:a.height,targetWidth:b.width,targetHeight:b.height};});});
+ for(const r of sizes){expect(r.imageWidth).toBeLessThanOrEqual(r.targetWidth+1);expect(r.imageHeight).toBeLessThanOrEqual(r.targetHeight+1);expect(r.targetWidth).toBeGreaterThanOrEqual(44);}
+});
