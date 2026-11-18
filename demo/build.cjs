@@ -49,11 +49,12 @@ for(const file of scripts){
 }
 for(const file of styles){assert(!/@import|url\s*\(/i.test(read(file)),'Unreviewed CSS dependency');emit(file,read(file));}
 // All dynamic image families used by asset-checkpoint, world-art, avatar-art and guides.
-for(const dir of ['checkpoint','rollout','world-guide-portraits-preview','ingredients']){
+for(const dir of ['checkpoint','rollout','world-guide-portraits-preview']){
  const base='v3/assets/'+dir,manifest=JSON.parse(read(base+'/manifest.json'));
  const files=Array.isArray(manifest.assets)?manifest.assets.map(a=>a.file):Object.keys(manifest.assets).map(n=>n+'.webp');
- for(const name of files){assert((dir==='ingredients'?/^[a-z0-9-]+\.png$/:/^[a-z0-9-]+\.webp$/).test(name));emit(base+'/'+name,fs.readFileSync(path.join(root,base,name)));}
+ for(const name of files){assert(/^[a-z0-9-]+\.webp$/.test(name));emit(base+'/'+name,fs.readFileSync(path.join(root,base,name)));}
 }
+for(const a of JSON.parse(read('v3/assets/delivery-manifest.json')).assets)emit(a.file,fs.readFileSync(path.join(root,a.file)));
 for(const a of JSON.parse(read('v3/assets/base-camp/manifest.json')).assets)emit('v3/assets/base-camp/'+a.file,fs.readFileSync(path.join(root,'v3/assets/base-camp',a.file)));
 emit('icon.svg',read('icon.svg'));
 html=replaceOnce(html,'<title>Jaxon\'s Maths Adventure · V5 Interactive Test Camp</title>',"<title>Jaxon’s Maths Adventure · Public Demo</title>");
