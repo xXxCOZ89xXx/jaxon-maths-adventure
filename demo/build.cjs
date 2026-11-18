@@ -41,7 +41,7 @@ for(const file of scripts){
     const start=js.indexOf('  function parent() {'),end=js.indexOf('  function tour() {',start);assert(start>0&&end>start);js=js.slice(0,start)+js.slice(end);
     js=replaceOnce(js,'      parent,\n','');
     js=replaceOnce(js,'    if(!P.canExplore(s)&&P.views.includes(s.view))',"    if(s.view==='parent')s.view='home';\n    if(!P.canExplore(s)&&P.views.includes(s.view))");
-    js=replaceOnce(js,'    const [name, arg] = action.split(":");','    const [name, arg] = action.split(":");\n    if(name === "nav" && arg === "parent") return;');
+    js=replaceOnce(js,'    let [name, arg] = action.split(":");','    let [name, arg] = action.split(":");\n    if(name === "nav" && arg === "parent") return;');
     js=replaceOnce(js,'This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.','Your fictional explorer is saved only in this browser. No account is needed. Nothing here is connected to Jaxon’s game.');
     js=js.replace(/^  if\(!cloud&&document.getElementById\("touch-review"\)\).*$/m,'');
   }

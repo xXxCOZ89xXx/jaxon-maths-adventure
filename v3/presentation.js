@@ -12,8 +12,8 @@
           }).format(new Date(value))
         : "Unknown time",
     coins: (value) =>
-      new Intl.NumberFormat("en-GB", { maximumFractionDigits: 2 }).format(
-        finite(value),
+      new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 }).format(
+        Math.floor(finite(value)),
       ),
     minutes: (value) =>
       new Intl.NumberFormat("en-GB", { maximumFractionDigits: 1 }).format(

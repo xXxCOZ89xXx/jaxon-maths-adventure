@@ -1,0 +1,1 @@
+const base=require('./playwright.config.cjs');module.exports={...base,testMatch:/small-fixes\.spec\.cjs/,outputDir:'test-results/small-fixes',reporter:[['list'],['json',{outputFile:'work/small-fixes/results.json'}]]};
