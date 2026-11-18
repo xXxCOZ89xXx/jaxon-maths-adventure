@@ -59,10 +59,10 @@
     amount:['Use the quantities in the task to build the amount. For wages, subtract unpaid break time before multiplying by the hourly rate.','Three paid hours at £8 per hour earns £24 before supplied deductions.','Separate the calculation into steps, then build the final amount in pence.']
   };
   const obj=x=>x&&typeof x==='object'&&!Array.isArray(x);
-  function validBook(b){return obj(b)&&b.version===2&&obj(b.runs)&&obj(b.counts)&&Object.values(b.counts).every(n=>Number.isInteger(n)&&n>=0)&&(b.active===null||typeof b.active==='string'&&Object.hasOwn(b.runs,b.active))&&Object.values(b.runs).every(validRun);}
+  function validBook(b){return obj(b)&&b.version===2&&obj(b.runs)&&obj(b.counts)&&(b.active===null||typeof b.active==='string'&&Object.hasOwn(b.runs,b.active));}
   function validRun(j){return obj(j)&&j.version===2&&typeof j.id==='string'&&catalog.some(c=>c.id===j.scenario)&&[1,2,3].includes(j.tier)&&Number.isInteger(j.stage)&&Array.isArray(j.steps)&&j.steps.length>=3&&j.stage>=0&&j.stage<=j.steps.length&&j.done===(j.stage===j.steps.length)&&j.steps.every(t=>obj(t)&&typeof t.prompt==='string'&&t.answer!==undefined&&obj(t.effect)&&typeof t.venue==='string')&&obj(j.values)&&obj(j.inventory)&&obj(j.shoppingList)&&Array.isArray(j.receipts)&&Array.isArray(j.evidence)&&Array.isArray(j.completed)&&j.completed.length===j.stage&&j.completed.every((x,i)=>x===i)&&Number.isInteger(j.cash)&&j.cash>=0&&Number.isInteger(j.time)&&j.time>=0&&j.time<1440;}
   function book(s){return s.adventure?.townLifeV2;}
-  function state(s){const b=book(s);return validBook(b)?b.runs[b.active]||null:null;}
+  function state(s){const b=book(s);const j=validBook(b)?b.runs[b.active]:null;return validRun(j)&&j.id===b.active?j:null;}
   function task(s){const j=state(s);return j&&!j.done?j.steps[j.stage]:null;}
   function ordered(labels,seed){const rotation=1+seed%(labels.length-1),indices=labels.map((_,i)=>(i+rotation)%labels.length);return {items:indices.map(i=>labels[i]),answer:labels.map((_,i)=>indices.indexOf(i))};}
   const Q=typeof module!=='undefined'?require('./town-content').V53TownContent:root.V53TownContent;
@@ -70,14 +70,18 @@
   function startRecipe(s,recipe,tier=1,replay=false){
     if(!['bolognese','lentil'].includes(recipe)||book(s)!==undefined&&!validBook(book(s)))return false;
     s.adventure ||= {};const b=book(s)||{version:2,runs:{},counts:{},active:null};
-    let j=Object.values(b.runs).filter(r=>r.originalRecipe===recipe).at(-1);
-    if(!j||j.done&&replay){const key='original-'+recipe,seed=(b.counts[key]||0)+1;j=make('cook-pasta',Math.max(1,Math.min(3,tier)),seed,recipe);j.id=key+':'+seed;b.runs[j.id]=j;b.counts[key]=seed;}
+    const selected=Object.entries(b.runs).filter(([key,r])=>r?.originalRecipe===recipe||key.startsWith('original-'+recipe+':')).at(-1);let j=selected?.[1];
+    if(selected&&(!validRun(j)||selected[0]!==j.id))return false;
+    if(!Number.isSafeInteger(b.counts['original-'+recipe]??0)||(b.counts['original-'+recipe]??0)<0)return false;
+    if(!j||j.done&&replay){const key='original-'+recipe,seed=(b.counts[key]||0)+1;j=make('cook-pasta',Math.max(1,Math.min(3,tier)),seed,recipe);j.id=key+':'+seed;if(!validRun(j))return false;b.runs[j.id]=j;b.counts[key]=seed;}
     b.active=j.id;s.adventure.townLifeV2=b;s.adventure.townActive=2;s.view=s.resumeView='journey';s.world='town';s.pausedActivity=null;return true;
   }
   function start(s,id,tier=1,replay=false){
     if(!catalog.some(x=>x.id===id)||book(s)!==undefined&&!validBook(book(s)))return false;
     s.adventure ||= {};const b=book(s)||{version:2,runs:{},counts:{},active:null};
-    const existing=Object.values(b.runs).filter(x=>x.scenario===id&&!x.originalRecipe).at(-1);
+    const selected=Object.entries(b.runs).filter(([key,x])=>x?.scenario===id&&!x?.originalRecipe||key.startsWith(id+':')).at(-1),existing=selected?.[1];
+    if(selected&&(!validRun(existing)||selected[0]!==existing.id))return false;
+    if(!Number.isSafeInteger(b.counts[id]??0)||(b.counts[id]??0)<0)return false;
     if(existing&&!existing.done){b.active=existing.id;}
     else if(existing&&!replay){b.active=existing.id;}
     else {const seed=(b.counts[id]||0)+1,j=make(id,Math.max(1,Math.min(3,Math.trunc(tier)||1)),seed);if(!validRun(j))return false;b.runs[j.id]=j;b.counts[id]=seed;b.active=j.id;}
@@ -116,21 +120,45 @@
     return false;
   }
   function next(s){
-    const j=state(s),t=task(s);if(!j||!t||!j.solved||!valid(t,j.values))return false;
-    if(stockShortage(j,t)){j.feedback=stockShortage(j,t);return false;}
-    const e=t.effect,cash=j.cash+(e.earn||0)-(e.spend||0)-(e.savings||0),time=j.time+(e.minutes||0),inventory={...j.inventory};
-    for(const [name,n]of Object.entries(e.add||{}))inventory[name]=(inventory[name]||0)+n;
-    for(const [name,n]of Object.entries(e.consume||{})){if((inventory[name]||0)<n)return false;inventory[name]-=n;}
-    if(cash<0||time>=1440)return false;
-    j.envelopes ||= {};
-    if(t.kind==='budget')t.labels.forEach((label,i)=>{if(label!=='Savings')j.envelopes[label]=(j.envelopes[label]||0)+j.values.parts[i];});
+    const j=state(s),t=task(s);if(!j||!t)return false;
+    const refuse=message=>{j.feedback=message+' Your progress is saved. You can review this step or choose another Town plan.';return false;};
+    const shortage=stockShortage(j,t);if(shortage)return refuse(shortage);
+    if(!j.solved||!valid(t,j.values))return refuse('Complete this step before continuing. Hints and I don’t know are available.');
+    const e=t.effect,quantity=n=>Number.isSafeInteger(n)&&n>=0,amount=n=>typeof n==='number'&&Number.isFinite(n)&&n>=0&&n<=Number.MAX_SAFE_INTEGER,quantities=x=>obj(x)&&Object.values(x).every(amount);
+    if(!obj(e)||!['earn','spend','savings','minutes','sale'].every(k=>e[k]===undefined||quantity(e[k]))||!['add','consume','list'].every(k=>e[k]===undefined||quantities(e[k])))return refuse('This step has an unsupported saved effect.');
+    if(e.receipt!==undefined&&typeof e.receipt!=='string'||e.choice!==undefined&&typeof e.choice!=='string')return refuse('This step has an unsupported saved receipt.');
+    if(!quantities(j.inventory)||j.envelopes!==undefined&&!quantities(j.envelopes)||j.savings!==undefined&&!quantity(j.savings))return refuse('This plan’s saved amounts need another look.');
+    const candidate=copy(j),cash=j.cash+(e.earn||0)-(e.spend||0)-(e.savings||0),time=j.time+(e.minutes||0),inventory={...j.inventory};
+    if(!quantity(cash))return refuse('There is not enough pretend cash for this step.');
+    if(!quantity(time)||time>=1440)return refuse('This step would finish after the end of the saved day.');
+    for(const [name,n]of Object.entries(e.add||{})){inventory[name]=(inventory[name]||0)+n;if(!amount(inventory[name]))return refuse('This step’s ingredient amount cannot be applied.');}
+    for(const [name,n]of Object.entries(e.consume||{})){if((inventory[name]||0)<n)return refuse('There are not enough ingredients for this step.');inventory[name]-=n;}
+    candidate.envelopes ||= {};
+    if(t.kind==='budget'){
+      if(!Array.isArray(t.labels)||!Array.isArray(j.values.parts)||t.labels.length!==j.values.parts.length||!j.values.parts.every(quantity))return refuse('Check the saved budget amounts before continuing.');
+      t.labels.forEach((label,i)=>{if(label!=='Savings')candidate.envelopes[label]=(candidate.envelopes[label]||0)+j.values.parts[i];});
+      if(!quantities(candidate.envelopes))return refuse('This step’s budget cannot be applied.');
+    }
     let expense=e.spend||0;
-    for(const label of /Bus/.test(e.receipt||'')?['Travel','Spending']:['Spending','Travel']){const used=Math.min(expense,j.envelopes[label]||0);if(used)j.envelopes[label]-=used;expense-=used;}
-    j.cash=cash;j.time=time;j.inventory=inventory;if(e.list)j.shoppingList=copy(e.list);if(e.savings)j.savings+=e.savings;
-    if(e.receipt)j.receipts.push({id:j.id+':'+j.stage,label:e.receipt,spent:e.spend||0,earned:e.earn||0,sale:e.sale||0,saved:e.savings||0,items:copy(e.add||{}),time:j.time,choice:e.choice||null});
-    if(e.choice){j.decisions ||= [];j.decisions.push({stage:j.stage,choice:e.choice});}
-    if(t.branches){const branch=t.branches[j.values.choice];if(!Array.isArray(branch))return false;j.steps.splice(j.stage+1,j.steps.length-j.stage-1,...copy(branch));j.decisions ||= [];j.decisions.push({stage:j.stage,choice:t.options[j.values.choice].name});}
-    j.completed.push(j.stage);j.stage++;j.done=j.stage===j.steps.length;j.values={};j.solved=false;j.assisted=false;j.feedback='';j.hintLevel=0;if(j.done){s.resumeView='journey';s.lastResult={type:'town-plan',world:'town',name:j.name,runId:j.id};completeLandmark(s,j);}return true;
+    for(const label of /Bus/.test(e.receipt||'')?['Travel','Spending']:['Spending','Travel']){const used=Math.min(expense,candidate.envelopes[label]||0);if(used)candidate.envelopes[label]-=used;expense-=used;}
+    candidate.cash=cash;candidate.time=time;candidate.inventory=inventory;if(e.list)candidate.shoppingList=copy(e.list);if(e.savings)candidate.savings=(candidate.savings||0)+e.savings;
+    if(e.receipt)candidate.receipts.push({id:j.id+':'+j.stage,label:e.receipt,spent:e.spend||0,earned:e.earn||0,sale:e.sale||0,saved:e.savings||0,items:copy(e.add||{}),time,choice:e.choice||null});
+    if(e.choice){candidate.decisions ||= [];candidate.decisions.push({stage:j.stage,choice:e.choice});}
+    if(t.branches!==undefined){
+      const branch=obj(t.branches)||Array.isArray(t.branches)?t.branches[j.values.choice]:null,option=t.options?.[j.values.choice];
+      if(!Array.isArray(branch)||!branch.length||typeof option?.name!=='string')return refuse('This saved choice has no supported next step.');
+      candidate.steps.splice(j.stage+1,candidate.steps.length-j.stage-1,...copy(branch));candidate.decisions ||= [];candidate.decisions.push({stage:j.stage,choice:option.name});
+    }
+    candidate.completed.push(j.stage);candidate.stage++;candidate.done=candidate.stage===candidate.steps.length;candidate.values={};candidate.solved=false;candidate.assisted=false;candidate.feedback='';candidate.hintLevel=0;
+    if(!validRun(candidate)||!quantity(candidate.savings||0))return refuse('This saved choice cannot continue safely.');
+    // Complete the milestone in a separate copy too: late failures cannot debit the real plan.
+    if(candidate.done){
+      const draft=copy(s);draft.adventure.townLifeV2.runs[j.id]=candidate;
+      draft.resumeView='journey';draft.lastResult={type:'town-plan',world:'town',name:j.name,runId:j.id};
+      try{completeLandmark(draft,candidate);}catch{return refuse('This plan’s completion needs another look.');}
+      Object.assign(j,candidate);draft.adventure.townLifeV2.runs[j.id]=j;Object.assign(s,draft);
+    }else Object.assign(j,candidate);
+    return true;
   }
   function stockShortage(j,t){const missing=Object.entries(t.requiresStock||{}).filter(([name,n])=>(j.inventory[name]||0)<n);return missing.length?'Not enough ingredients to cook. Missing '+missing.map(([key,n])=>{const i=j.recipeCard?.ingredients?.find(i=>i.key===key);return (n-(j.inventory[key]||0))+' '+(i?.unit||'')+' of '+(i?.name||key);}).join('; ')+'. Your progress is saved; review your ingredient list.':null;}
   function completeLandmark(s,j){
