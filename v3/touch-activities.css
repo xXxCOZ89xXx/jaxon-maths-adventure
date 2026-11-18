@@ -9,3 +9,6 @@
 .d9-line-window{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-gutter:stable}
 .d9-board .d9-line-window .d9-canvas{width:100%;min-width:600px;max-width:none}
 .d9-line-window:focus-visible{outline:3px solid #175dab;outline-offset:3px}
+/* Empty-line swipes scroll; the marker remains a direct drag target. */
+.d9-line-window,.d9-board .d9-line-window .d9-canvas{touch-action:pan-x pan-y}
+.d9-line-window .d9-handle,.d9-line-window .d9-handle *{touch-action:none}

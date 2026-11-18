@@ -6,7 +6,15 @@ test('number line uses the task width and existing button answers still save wit
  const p=camp.page;await p.evaluate(key=>{const s=V3Engine.fresh();s.startingProfile=window.FictionalStartingProfile;s.tourSeen=true;s.discovery.negative={complete:true,rounds:[{band:7,correct:2,total:4}],answers:[]};const error=V3Engine.generate(s,'negative','practice',JaxonFreshReview,V3Curriculum);if(error)throw Error(error);localStorage.setItem(key,JSON.stringify(s));},camp.key);await p.reload();await p.locator('[data-action="practice"]').click();await settled(p);
  const line=p.locator('.d9-line-window');await expect(line).toBeVisible();const boxes=await p.evaluate(()=>{const a=document.querySelector('.learning-practice-split').getBoundingClientRect(),b=document.querySelector('.learning-practice-split>.panel').getBoundingClientRect();return {all:a.width,task:b.width};});expect(boxes.task/boxes.all).toBeGreaterThan(.95);await expect(p.locator('body')).toHaveClass(/task-active/);await expect(p.locator('#headerExplorer')).toBeHidden();
  const targets=await p.locator('.topbar nav button').evaluateAll(es=>es.map(e=>e.getBoundingClientRect()).filter(r=>r.width&&r.height).map(r=>({w:r.width,h:r.height})));for(const r of targets){expect(r.w).toBeGreaterThanOrEqual(44);expect(r.h).toBeGreaterThanOrEqual(44);}
- await p.getByRole('button',{name:'One step right',exact:true}).click();await settled(p);expect((await camp.read()).learning.manipulation.d9.value).toBe(-19);await p.reload();expect((await camp.read()).learning.manipulation.d9.value).toBe(-19);await readable(p);
+ await p.getByRole('button',{name:'One step right',exact:true}).click();await settled(p);expect((await camp.read()).learning.manipulation.d9.value).toBe(-19);
+ if(p.viewportSize().width<600){
+  await line.scrollIntoViewIfNeeded();const rect=await line.boundingBox(),cdp=await p.context().newCDPSession(p),y=rect.y+45,start=rect.x+rect.width-25,end=rect.x+25;
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:start,y,id:1}]});
+  for(let i=1;i<=8;i++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:start+(end-start)*i/8,y,id:1}]});await p.waitForTimeout(20);}
+  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await cdp.detach();
+  await expect.poll(()=>line.evaluate(e=>e.scrollLeft)).toBeGreaterThan(0);expect((await camp.read()).learning.manipulation.d9.value).toBe(-19);
+ }
+ await p.reload();expect((await camp.read()).learning.manipulation.d9.value).toBe(-19);await readable(p);
  fs.mkdirSync('work/phase2-ui',{recursive:true});await p.screenshot({path:`work/phase2-ui/${info.project.name}-line.png`});
 });
 test('Town labels stay visible and close-ups put task controls before money and navigation',async({camp},info)=>{
