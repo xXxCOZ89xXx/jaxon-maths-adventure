@@ -1,7 +1,7 @@
 'use strict';
 const {test,expect}=require('./helpers/identities.cjs');
 const out=require('node:path').resolve(process.env.SCENE_SCREENSHOT_DIR||require('node:path').join(__dirname,'artifacts/scene-revision'));require('node:fs').mkdirSync(out,{recursive:true});
-async function ready(p){await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));await p.waitForFunction(()=>[...document.images].every(i=>i.complete&&i.naturalWidth>0));}
+async function ready(p){await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));await require('./helpers/visible-images.cjs')(p);}
 async function open(p,mode){const d=p.locator('.scene-dialog');if(await d.count()&&await d.getAttribute('open')!==null){await d.locator('[data-scene-close]').tap();}await p.locator(`[data-scene-open="${mode}"]`).first().tap();await expect(d).toBeVisible();}
 async function act(p,a){if(['m-next','j-next','next-learning','next-quest'].includes(a))return require('./helpers/progression.cjs').advance(p);if(a==='j-submit'&&await p.locator('dialog[open] [data-action="j-next"]').count())return;const d=p.locator('.scene-dialog[open]'),scope=await d.count()?d:p;await scope.locator(`[data-action="${a}"]`).first().tap();await ready(p);}
 async function shot(p,name,selector){await ready(p);if(selector)await p.locator(selector).first().scrollIntoViewIfNeeded();await p.evaluate(async()=>{document.activeElement?.blur();await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));});await (selector?p.locator(selector).first():p).screenshot({path:`${out}/${name}-${p.viewportSize().width}.png`,...(selector?{}:{fullPage:!(await p.locator('.scene-dialog[open]').count())})});}
