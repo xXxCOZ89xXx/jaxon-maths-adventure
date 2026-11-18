@@ -614,7 +614,7 @@
     else if (t.kind === "line")
       body = `<p>Place your answer on the number line.</p><div class="numberline">${Array.from({ length: 41 }, (_, i) => btn(String(i - 20), `p5-value:${i - 20}`, `aria-pressed="${a === i - 20}"`)).join("")}</div>`;
     else if (t.kind === "blocks")
-      body = `<p>Build your answer${t.unit?" in "+t.unit:""} from place-value blocks.</p><div class="envelopes">${[1000, 100, 10, 1].map((n) => `<section><strong>${n}s</strong><div class="practice-blocks">${Array.from({length:Math.floor(a/n)%10},()=>btn("▣",`p5-add:${-n}`,`aria-label="Return placed ${n} block"`)).join("")}</div>${btn("Place block", `p5-add:${n}`, `aria-label="Place ${n} block"`)}${btn("Return block", `p5-add:${-n}`, `aria-label="Return ${n} block"`)}</section>`).join("")}</div><output>${a}</output>`;
+      body = `<p>Build your answer${t.unit?" in "+t.unit:""} from place-value blocks.</p><div class="envelopes">${[1000, 100, 10, 1].map((n) => `<section><strong>${n}s</strong><div class="practice-blocks">${Array.from({length:Math.floor(a/n)%10},()=>btn("▣",`p5-add:${-n}`,`aria-label="Return placed ${n} block"`)).join("")}</div>${btn("+", `p5-add:${n}`, `aria-label="Place a ${n} block"`)}${btn("−", `p5-add:${-n}`, `aria-label="Return a ${n} block"`)}</section>`).join("")}</div><output>${a}</output>`;
     else if (t.kind === "angle")
       body = `<svg viewBox="0 0 400 220" role="img" aria-label="Your angle ${a} degrees"><path d="M370 200H200l${160 * Math.cos((a * Math.PI) / 180)} ${-160 * Math.sin((a * Math.PI) / 180)}" fill="none" stroke="#34563e" stroke-width="5"/><text x="200" y="80">${a}°</text></svg><div>${Array.from({length:19},(_,i)=>btn(i*10+"°",`p5-value:${i*10}`,`aria-pressed="${a===i*10}"`)).join("")}</div>`;
     else

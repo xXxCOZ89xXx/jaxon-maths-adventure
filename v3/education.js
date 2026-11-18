@@ -19,7 +19,7 @@ function minBand(id){return enhanced.has(id)?3:5;}
 const clock=n=>String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0');
 function random(seed){let value=seed>>>0;return max=>{value=(value+0x6D2B79F5)>>>0;let t=value;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return Math.floor(((t^(t>>>14))>>>0)/4294967296*max);};}
 function question(id,band,round,index){
- const rand=random(round*7919+index*1949+band*101+id.length*31),level=Math.max(1,Math.min(7,band-2)),a=2+rand(Math.min(11,3+level)),b=2+rand(Math.min(11,3+level)),n=1+rand(8),family=index%6;
+ const rand=random(round*7919+index*1949+band*101+id.length*31),level=Math.max(1,Math.min(7,band-2)),a=2+rand(24+level),b=2+rand(24+level),n=1+rand(40),family=index%6;
  let prompt,answer,hint,worked,misconception,representation;
  const set=(p,v,h,w,m)=>{prompt=p;answer=String(v);hint=h;worked=w;misconception=m;};
  switch(id){
@@ -59,7 +59,7 @@ function question(id,band,round,index){
   if(family===3)set(`${value.toFixed(2)} m of cable is how many centimetres?`,hundredths,'One metre has one hundred centimetres.',`${value.toFixed(2)} × 100 = ${hundredths} cm.`,'Read the units before choosing multiply or divide.');
   if(family===4){if(band>=5)set(`A hundred-square has ${hundredths} marked cells. What percentage is marked?`,hundredths,'Percent means out of one hundred.',`${hundredths} out of 100 = ${hundredths}%.`,'A percentage and a decimal express the same share on different scales.');else set(`A hundred-square has ${hundredths} marked cells. Each cell is one hundredth. How many hundredths are marked?`,hundredths,'Count the equal hundredths as the indicated number of cells.',`${hundredths} cells represent ${hundredths} hundredths.`,'Keep the equal part-size of one hundredth; do not count tenths instead.');}
   if(family===5)set(`Find the missing decimal: ${value.toFixed(2)} + □ = 1.`,Number((1-value).toFixed(2)),'Use 100 hundredths as one whole.',`100 − ${hundredths} = ${100-hundredths} hundredths, or ${(1-value).toFixed(2)}.`,'Align the decimal places rather than subtracting unrelated digits.');break;}
- case 'measure_mass':{const step=[10,25,50,100][rand(band<=4?2:4)],marks=2+rand(18),mass=step*marks,capacity=Math.max(1000,Math.ceil(mass/1000)*1000);
+ case 'measure_mass':{const step=[10,25,50,100][rand(band<=4?2:4)],marks=2+rand(60),mass=step*marks,capacity=Math.max(1000,Math.ceil(mass/1000)*1000);
   if(family===0)set(`A scale starts at 0 g. Each interval is ${step} g. What mass is at interval ${marks}?`,mass,'Multiply the interval count by its value.',`${marks} × ${step} g = ${mass} g.`,'Count intervals between marks, not the marks including zero.');
   if(family===1)set(`${a} kg is how many grams?`,a*1000,'A kilogram contains 1,000 grams.',`${a} × 1,000 = ${a*1000} g.`,'A kilo means a thousand, not a hundred.');
   if(family===2)set(`${mass} g plus ${step} g: total mass in grams?`,mass+step,'Both masses use the same unit.',`${mass} + ${step} = ${mass+step} g.`,'Do not mix kg and g without converting.');
@@ -73,7 +73,7 @@ function question(id,band,round,index){
   if(family===3)set(`A model uses ${n} separate cubes. Total vertices counted separately across the cubes?`,8*n,'Count the four top corners and four bottom corners.',`Each cube has 8 vertices; ${n} × 8 = ${8*n}.`,'Faces, edges and vertices describe different features.');
   if(family===4)set(`${n+1} separate ${sides}-sided polygons are drawn. Total sides across all of them?`,(n+1)*sides,'Count all sides on both shapes.',`${n+1} × ${sides} = ${(n+1)*sides} sides.`,'These shapes are separate, so none of their sides disappears.');
   if(family===5)set(`${n} squares are drawn separately. Each is also a rectangle. How many right angles altogether?`,n*4,'A square has all the rectangle properties and equal sides.',`Each square has 4 right angles; ${n} × 4 = ${n*4}.`,'A shape can belong to more than one classification.');break;}
- case 'stats_scale':{const key=band<=4?2:2+rand(4),count=2+rand(8),other=1+rand(count);
+ case 'stats_scale':{const key=band<=4?2:2+rand(20),count=2+rand(60),other=1+rand(count);
   if(family===0)set(`A pictogram shows ${count} full symbols. Each symbol means ${key} journeys. How many journeys?`,count*key,'Read the key before counting the represented total.',`${count} × ${key} = ${count*key} journeys.`,'The number of symbols is not necessarily the number of journeys.');
   if(family===1)set(`A bar reaches interval ${count}. Each interval represents ${key} votes. How many votes?`,count*key,'Multiply the height in intervals by the scale.',`${count} × ${key} = ${count*key} votes.`,'Assuming each tick means one ignores the scale.');
   if(family===2)set(`A table records ${count} walkers and ${other} cyclists. How many people altogether?`,count+other,'Combine the two separate categories.',`${count} + ${other} = ${count+other} people.`,'The total is not just the largest category.');
