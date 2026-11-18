@@ -841,7 +841,7 @@
       return {available:false,reason:'This destination is unavailable. Choose another listed destination.',missing:[]};
     if(![1,2,3].includes(tier))return {available:false,reason:'Choose Level 1, 2 or 3 for this destination.',missing:[],alternativeTier:1};
     const missing=P.allowed(s,`mission:${world}:${route}:${tier}`)?[]:Object.keys(P.areas).filter(id=>s.startingProfile?.version!==1||!P.valid(s.startingProfile?.areas?.[id]));
-    return {available:!missing.length,missing,reason:missing.length?'Complete the remaining starting points before visiting.':''};
+    return {available:!missing.length,missing,reason:missing.length?'Find one starting point before visiting. The remaining areas are optional.':''};
   }
   function visit(s, world, route, tier) {
     const admission=visitStatus(s,world,route,tier);

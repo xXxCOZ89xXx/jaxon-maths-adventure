@@ -18,7 +18,7 @@ async function login(page, parent = false) {
   await expect(
     page.getByRole("heading", {
       name: parent
-        ? "Staging parent dashboard"
+        ? "Family progress"
         : "A little maths. A big adventure.",
     }),
   ).toBeVisible();
@@ -37,7 +37,7 @@ test("staging fails closed before sign-in when configuration is absent", async (
   );
   await page.goto("/staging-fixture-dist/");
   await expect(
-    page.getByRole("heading", { name: "Staging is unavailable" }),
+    page.getByRole("heading", { name: "The family service is unavailable" }),
   ).toBeVisible();
   expect(server.calls.length).toBe(0);
   expect(errors).toEqual([]);
@@ -155,7 +155,7 @@ test("parent evidence and server reward path remain separate from learner gamepl
   expect(axe.violations).toEqual([]);
   await page.reload();
   await expect(
-    page.getByRole("heading", { name: "Staging parent dashboard" }),
+    page.getByRole("heading", { name: "Family progress" }),
   ).toBeVisible();
   expect(server.wallet.bonus).toBe(10);
   expect(errors).toEqual([]);
@@ -283,7 +283,7 @@ test("private account recovery uses PKCE, changes the password and returns to si
     .fill("fictional-recovered-password");
   await page.getByRole("button", { name: "Continue", exact: true }).click();
   await expect(
-    page.getByRole("heading", { name: "Staging account sign-in" }),
+    page.getByRole("heading", { name: "Family account sign-in" }),
   ).toBeVisible();
   expect(
     server.calls.some(
