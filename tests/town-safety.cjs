@@ -6,6 +6,13 @@ assert(L.start(s,'cook-soup'));assert.deepEqual(L.state(s),soup);assert(L.start(
 s.adventure.townLifeV2.runs['shop-offers:1']=null;const nullBefore=copy(s);assert(!L.start(s,'shop-offers'));assert.deepEqual(s,nullBefore);
 s.adventure.townLifeV2.counts['travel-library']='unsupported';assert(L.start(s,'travel-swim'));const counterBefore=copy(s);assert(!L.start(s,'travel-library'));assert.deepEqual(s,counterBefore);
 s=E.fresh();assert(L.startRecipe(s,'bolognese'));const original=copy(L.state(s));assert(L.startRecipe(s,'lentil'));s.adventure.townLifeV2.runs['original-lentil:1'].version=99;assert(L.startRecipe(s,'bolognese'));assert.deepEqual(L.state(s),original);
+// The existing renderer derives missing display titles from prompts; optional nulls are legacy no-ops.
+s=E.fresh();assert(L.start(s,'travel-swim'));let legacy=L.state(s);
+for(const t of legacy.steps){delete t.title;t.requiresStock ??= null;t.branches ??= null;for(const key of ['earn','spend','savings','minutes','sale','add','consume','list','receipt','choice'])if(t.effect[key]===undefined)t.effect[key]=null;}
+legacy.envelopes=null;legacy.decisions=null;legacy.savings=null;const legacySteps=copy(legacy.steps);
+assert(L.state(s),'Legacy titleless steps must still open');assert.equal(typeof L.model(s).task.title,'string');
+while(!L.state(s).done)require('./helpers/guided-progression.cjs').townStep(s);
+assert.deepEqual(L.state(s).steps,legacySteps,'Display fallbacks must not rewrite historical step snapshots');
 function refused(edit,pattern){
  const s=E.fresh();assert(L.start(s,'shop-budget'));const j=L.state(s),t=L.task(s);j.values.choice=t.answer;j.solved=true;t.effect={spend:50,savings:5,minutes:3,receipt:'Saved test receipt',add:{flour:2},list:{flour:2}};edit(j,t);
  const before=copy(s);assert(!L.next(s));assert.match(j.feedback,pattern);const after=copy(s);after.adventure.townLifeV2.runs[j.id].feedback=before.adventure.townLifeV2.runs[j.id].feedback;assert.deepEqual(after,before,'failure must change only explanatory feedback');

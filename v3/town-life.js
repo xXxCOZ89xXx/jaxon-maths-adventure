@@ -61,11 +61,12 @@
   const obj=x=>x&&typeof x==='object'&&!Array.isArray(x);
   function validBook(b){return obj(b)&&b.version===2&&obj(b.runs)&&obj(b.counts)&&(b.active===null||typeof b.active==='string'&&Object.hasOwn(b.runs,b.active));}
   function validStep(t){
-    if(!obj(t)||typeof t.title!=='string'||typeof t.prompt!=='string'||!['basket','budget','journey','choice','order','match','coins','amount','measure','clock'].includes(t.kind)||t.answer===undefined||!obj(t.effect)||typeof t.venue!=='string')return false;
+    if(!obj(t)||typeof t.prompt!=='string'||!['basket','budget','journey','choice','order','match','coins','amount','measure','clock'].includes(t.kind)||t.answer===undefined||!obj(t.effect)||typeof t.venue!=='string')return false;
     if(['choice','journey'].includes(t.kind)&&(!Array.isArray(t.options)||!t.options.length||!t.options.every(o=>obj(o)&&typeof o.name==='string')))return false;
     if(['basket','budget','order','match'].includes(t.kind)&&!Array.isArray(t.answer))return false;
     if(['basket','order','match'].includes(t.kind)&&!Array.isArray(t.items)||t.kind==='budget'&&!Array.isArray(t.labels))return false;
-    return t.requiresStock===undefined||obj(t.requiresStock);
+    // taskDetails supplies legacy display titles; null optional stock remains a no-op.
+    return !t.requiresStock||obj(t.requiresStock);
   }
   function validRun(j){return obj(j)&&j.version===2&&typeof j.id==='string'&&catalog.some(c=>c.id===j.scenario)&&[1,2,3].includes(j.tier)&&Number.isInteger(j.stage)&&Array.isArray(j.steps)&&j.steps.length>=3&&j.stage>=0&&j.stage<=j.steps.length&&j.done===(j.stage===j.steps.length)&&j.steps.every(validStep)&&obj(j.values)&&obj(j.inventory)&&obj(j.shoppingList)&&Array.isArray(j.receipts)&&j.receipts.every(obj)&&Array.isArray(j.evidence)&&j.evidence.every(obj)&&(!j.recipeCard||obj(j.recipeCard)&&Array.isArray(j.recipeCard.ingredients)&&j.recipeCard.ingredients.every(i=>obj(i)&&typeof i.name==='string'))&&Array.isArray(j.completed)&&j.completed.length===j.stage&&j.completed.every((x,i)=>x===i)&&Number.isInteger(j.cash)&&j.cash>=0&&Number.isInteger(j.time)&&j.time>=0&&j.time<1440;}
   function book(s){return s.adventure?.townLifeV2;}
@@ -131,11 +132,11 @@
     const refuse=message=>{j.feedback=message+' Your progress is saved. You can review this step or choose another Town plan.';return false;};
     const shortage=stockShortage(j,t);if(shortage)return refuse(shortage);
     if(!j.solved||!valid(t,j.values))return refuse('Complete this step before continuing. Hints and I don’t know are available.');
-    if(j.decisions!==undefined&&!Array.isArray(j.decisions))return refuse('This plan’s saved decisions need another look.');
+    if(j.decisions&&!Array.isArray(j.decisions))return refuse('This plan’s saved decisions need another look.');
     const e=t.effect,quantity=n=>Number.isSafeInteger(n)&&n>=0,amount=n=>typeof n==='number'&&Number.isFinite(n)&&n>=0&&n<=Number.MAX_SAFE_INTEGER,quantities=x=>obj(x)&&Object.values(x).every(amount);
-    if(!obj(e)||!['earn','spend','savings','minutes','sale'].every(k=>e[k]===undefined||quantity(e[k]))||!['add','consume','list'].every(k=>e[k]===undefined||quantities(e[k])))return refuse('This saved step needs another look before we can continue.');
-    if(e.receipt!==undefined&&typeof e.receipt!=='string'||e.choice!==undefined&&typeof e.choice!=='string')return refuse('The payment details for this step need another look.');
-    if(!quantities(j.inventory)||j.envelopes!==undefined&&!quantities(j.envelopes)||j.savings!==undefined&&!quantity(j.savings))return refuse('This plan’s saved amounts need another look.');
+    if(!obj(e)||!['earn','spend','savings','minutes','sale'].every(k=>!e[k]||quantity(e[k]))||!['add','consume','list'].every(k=>!e[k]||quantities(e[k])))return refuse('This saved step needs another look before we can continue.');
+    if(e.receipt&&typeof e.receipt!=='string'||e.choice&&typeof e.choice!=='string')return refuse('The payment details for this step need another look.');
+    if(!quantities(j.inventory)||j.envelopes&&!quantities(j.envelopes)||j.savings&&!quantity(j.savings))return refuse('This plan’s saved amounts need another look.');
     const candidate=copy(j),cash=j.cash+(e.earn||0)-(e.spend||0)-(e.savings||0),time=j.time+(e.minutes||0),inventory={...j.inventory};
     if(!quantity(cash))return refuse('There is not enough pretend cash for this step.');
     if(!quantity(time)||time>=1440)return refuse('This step would finish after the end of the saved day.');
@@ -152,7 +153,7 @@
     candidate.cash=cash;candidate.time=time;candidate.inventory=inventory;if(e.list)candidate.shoppingList=copy(e.list);if(e.savings)candidate.savings=(candidate.savings||0)+e.savings;
     if(e.receipt)candidate.receipts.push({id:j.id+':'+j.stage,label:e.receipt,spent:e.spend||0,earned:e.earn||0,sale:e.sale||0,saved:e.savings||0,items:copy(e.add||{}),time,choice:e.choice||null});
     if(e.choice){candidate.decisions ||= [];candidate.decisions.push({stage:j.stage,choice:e.choice});}
-    if(t.branches!==undefined){
+    if(t.branches){
       const branch=obj(t.branches)||Array.isArray(t.branches)?t.branches[j.values.choice]:null,option=t.options?.[j.values.choice];
       if(!Array.isArray(branch)||!branch.length||typeof option?.name!=='string')return refuse('The next step for this choice is missing.');
       candidate.steps.splice(j.stage+1,candidate.steps.length-j.stage-1,...copy(branch));candidate.decisions ||= [];candidate.decisions.push({stage:j.stage,choice:option.name});
