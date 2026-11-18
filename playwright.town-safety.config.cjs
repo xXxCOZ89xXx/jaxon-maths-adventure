@@ -1,0 +1,1 @@
+const base=require('./playwright.save-recovery.config.cjs');module.exports={...base,testMatch:/town-safety\.spec\.cjs/,grepInvert:undefined,outputDir:'test-results/town-safety',reporter:[['list'],['json',{outputFile:'work/phase2-town-safety.json'}]]};
