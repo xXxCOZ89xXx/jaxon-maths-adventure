@@ -1,0 +1,9 @@
+# Phase 2 usability — M10 part two
+
+18 November 2026. Number-line practice uses the full task column at every layout, with a horizontally scrollable labelled model on narrow screens and the same drag/button answers and save semantics. Activity headers have less padding and omit the large portrait and secondary branding; all existing navigation stays available. The single-Pause-menu redesign remains Phase 2b.
+
+Town building names are visible before a touch. Close-ups put task controls and actions ahead of the expandable Town-money/payslip panel and safety navigation. CSS text sizes have a 14px floor while preserving larger sizes and intentionally hidden zero-size text. No questions, answer keys, mastery or saved-state formats change.
+
+Validation: 18 new cases passed at 768×1024, 820×1180, 1024×768, 1180×820, 390×844 and 1440×1000. They check computed text sizes, page bounds, task width, number-line answer/reload, visible labels, close-up content order and ingredient-image bounds inside shelf targets. Nine existing focused touch-browser cases passed for number-line/rounding answers and marker/jug dragging. Screenshots were inspected locally and remain in generated work output, not source control. Full combined Phase 2 checks are recorded in the PR. Physical iPad Safari remains untested.
+
+Additional broad `npm run test:touch` is **not passing**: its integrated-mission solver rejects a plotted point outside the activity's fixed −5…5 bounds. The same failure reproduces on unchanged Phase 1 application source, with no Phase 2 files present. The earlier coverage snapshot comparison requires running the audit generator first (`npm run test:touch` does so); no stale generated report was committed to suppress that check. This pre-existing content/model-range issue needs a focused follow-up; it is not a result of the number-line layout changes. Do not claim the full touch suite passed.
