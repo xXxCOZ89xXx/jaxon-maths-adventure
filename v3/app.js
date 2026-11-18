@@ -441,31 +441,6 @@
       document.querySelectorAll('#main dialog').forEach(d=>{const n=document.createElement('nav');n.className='activity-safety';n.setAttribute('aria-label','Activity help and leaving');n.innerHTML=safetyButtons();d.prepend(n);});
     }
   }
-  let advanceTimer=null,advanceStamp=null;
-  function progression() {
-    if(['practice','check','discovery'].includes(s.view)&&s.learning?.answered)return {action:'next-learning',stamp:JSON.stringify([s.view,s.learning.id,s.learning.round,s.learning.qs,s.learning.i])};
-    if(s.view==='journey'){const j=window.V5Journey.state(s);if(j?.solved)return {action:'j-next',stamp:JSON.stringify(['journey',j.id,j.seed,j.stage])};}
-    if(s.view==='adventure'){const q=M.current(s);if(q?.solved)return {action:'m-next',stamp:JSON.stringify(['adventure',q.key,q.seed,q.i])};}
-    if(s.view==='quest'&&s.quest?.solved)return {action:'next-quest',stamp:JSON.stringify(['quest',s.quest.world,s.quest.i])};
-    return null;
-  }
-  function scheduleProgression(){
-    const next=progression();
-    document.querySelectorAll('[data-action="next-learning"],[data-action="m-next"],[data-action="j-next"],[data-action="next-quest"]').forEach(el=>{el.hidden=true;el.style.display='none';});
-    if(!next){clearTimeout(advanceTimer);advanceTimer=null;advanceStamp=null;return;}
-    if(advanceStamp===next.stamp)return;
-    clearTimeout(advanceTimer);advanceStamp=next.stamp;
-    // Leave the live correctness announcement readable before replacing the question.
-    advanceTimer=setTimeout(async()=>{
-      await change(()=>{
-        if(progression()?.stamp!==next.stamp)return;
-        if(next.action==='next-learning')E.nextLearning(s);
-        else if(next.action==='j-next')window.V5Journey.action(s,'j-next');
-        else if(next.action==='m-next')M.next(s);
-        else E.nextQuest(s);
-      },{focus:true});
-    },900);
-  }
   function render(focus = false) {
     if (cloud && !cloud.isUnlocked()) return;
     if(!P.complete(s)&&P.views.includes(s.view))s.view='starting';
@@ -521,7 +496,6 @@
       if (target === section) el.setAttribute("aria-current", "page");
       else el.removeAttribute("aria-current");
     });
-    scheduleProgression();
   }
   document.addEventListener('v6-scene-ui',()=>render());
   function sound() {
@@ -926,8 +900,14 @@
     if(name==='starting-next'){const h=document.querySelector('.baseline-question h2');if(h){h.tabIndex=-1;h.focus({preventScroll:true});}return;}
     const scope=document.querySelector('dialog[open]')||document.getElementById('main');
     if(['m-next','j-next','next-learning'].includes(name)){const heading=scope.querySelector('h2');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}return;}
-    const action=s.view==='journey'&&V5Journey.state(s)?.solved?'j-next':s.view==='adventure'&&M.current(s)?.solved?'m-next':['practice','check','discovery'].includes(s.view)&&s.learning?.answered?'next-learning':null;
-    if(action&&['answer','m-choice','j-choice','m-submit','j-submit','c8-m','c8-p','c8-check','d9-check','p5-submit'].includes(name))scope.querySelector('[data-action="'+action+'"]')?.focus({preventScroll:true});
+    const action=s.view==='journey'&&V5Journey.state(s)?.solved?'j-next':s.view==='adventure'&&M.current(s)?.solved?'m-next':s.view==='quest'&&s.quest?.solved?'next-quest':['practice','check','discovery'].includes(s.view)&&s.learning?.answered?'next-learning':null;
+    const answerActions=['answer','learning-skip','skip','solve','m-choice','m-submit','m-skip','j-choice','j-submit','j-skip','c8-m','c8-p','c8-check','d9-check','p5-submit'];
+    if(answerActions.includes(name)){
+      const next=action&&scope.querySelector('[data-action="'+action+'"]');
+      if(next){next.focus({preventScroll:true});return;}
+      const feedback=scope.querySelector('.feedback[role="status"],.feedback');
+      if(feedback){feedback.tabIndex=-1;feedback.focus({preventScroll:true});}
+    }
   }
   document.addEventListener("click", async (e) => {
     const ui=e.target.closest('[data-ui]');
