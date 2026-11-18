@@ -1,7 +1,7 @@
 'use strict';
 const {test,expect}=require('./helpers/identities.cjs');
 async function click(page,action){await page.locator(`[data-action="${action}"]`).first().tap();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
-async function images(page){await page.waitForFunction(()=>[...document.querySelectorAll('img')].every(i=>i.complete&&i.naturalWidth>0));}
+async function images(page){await require('./helpers/visible-images.cjs')(page);}
 test('Asset checkpoint: camp links and artwork at iPad size',async({camp})=>{
  const {page,read}=camp;await click(page,'skip-tour');await page.locator('nav [data-nav="camp"]').tap();await images(page);const nav=page.getByRole('navigation',{name:'Base Camp navigation'});await expect(nav.getByRole('button')).toHaveCount(5);
  const before=await read();await page.locator('.asset-camp').screenshot({path:`tests/artifacts/asset-camp-${page.viewportSize().width}.png`});

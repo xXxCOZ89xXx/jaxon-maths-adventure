@@ -63,10 +63,10 @@ for(const [world,[guide,name]] of Object.entries(worlds))test(`${world}: product
   expect((await backgroundShot()).equals(plain),'A changed background must be detected').toBe(false);
   await background.evaluate(e=>e.style.removeProperty('filter'));
   expect((await backgroundShot()).equals(plain)).toBe(true);
-  const originalSource=await background.getAttribute('src');
-  await background.evaluate(e=>{const c=document.createElement('canvas');c.width=e.naturalWidth;c.height=e.naturalHeight;const x=c.getContext('2d');x.drawImage(e,0,0);x.fillStyle='#ff00ff';x.fillRect(0,0,1,1);e.src=c.toDataURL('image/png');});
+  const originalSource=await background.evaluate(e=>({src:e.getAttribute('src'),srcset:e.getAttribute('srcset')}));
+  await background.evaluate(e=>{const c=document.createElement('canvas');c.width=e.naturalWidth;c.height=e.naturalHeight;const x=c.getContext('2d');x.drawImage(e,0,0);x.fillStyle='#ff00ff';x.fillRect(0,0,1,1);e.removeAttribute('srcset');e.src=c.toDataURL('image/png');});
   expect((await backgroundShot()).equals(plain),'A one-pixel background source edit must be detected').toBe(false);
-  await background.evaluate((e,src)=>{e.src=src;},originalSource);
+  await background.evaluate((e,original)=>{if(original.srcset===null)e.removeAttribute('srcset');else e.setAttribute('srcset',original.srcset);e.src=original.src;},originalSource);
   expect((await backgroundShot()).equals(plain)).toBe(true);
   await expect(image).toBeVisible();
  }

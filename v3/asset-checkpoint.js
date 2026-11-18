@@ -4,7 +4,7 @@
 const A=window.V3Art,H=window.V5HandsOn,esc=A.esc;
 const old={scene:A.scene,location:A.location,camp:A.camp,render:H.render,visualTool:H.visualTool,product:A.product};
 const file=name=>window.V6AssetFiles?.[name]||`v3/assets/checkpoint/${name}.webp`;
-const img=(name,cls='',alt='')=>`<img src="${file(name)}" class="${cls}" alt="${esc(alt)}" decoding="async" draggable="false">`;
+const img=(name,cls='',alt='')=>`<img src="${file(name)}"${!window.V6AssetFiles&&["bus", "market", "town", "camp", "kitchen", "rail"].includes(name)&&/(?:scene|atlas)-background/.test(cls)?` srcset="v3/assets/checkpoint/served/${name}-1024.webp 1024w, ${file(name)} 1536w" sizes="(max-width: 1100px) 100vw, 1100px"`:''} class="${cls}" alt="${esc(alt)}" decoding="async" draggable="false">`;
 function scene(name,label,cls='',layers=''){return `<div class="asset-scene world-scene direction-sample ${cls}" aria-label="${esc(label)}">${img(name,'scene-background',label)}${layers}<span class="asset-location-label">${esc(label)}</span></div>`;}
 A.product=(name,i)=>/spaghetti|pasta/i.test(name)?img('pasta','ingredient-prop'): /tomato/i.test(name)?img('tomato','ingredient-prop'):/mince/i.test(name)?img('mince','ingredient-prop'):old.product(name,i);
 const explorer=()=>img('explorer','scene-explorer','Green-hoodie explorer');

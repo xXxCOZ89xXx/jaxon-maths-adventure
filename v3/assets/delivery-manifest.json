@@ -1,0 +1,491 @@
+{
+  "generator": "scripts/prepare-ipad-art.py",
+  "assets": [
+    {
+      "source": "v3/assets/ingredients/baking-powder.png",
+      "file": "v3/assets/ingredients/served/baking-powder.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 28506,
+      "sha256": "c0ea5ce4a5af20d1d3293e65b7ed8b9305c49583b6a83c92d804529685fb683f",
+      "sourceSha256": "f9c457bfddf656d4e4a8fceaf29613b5e057a30f3e906563d588c1e61fe3972a"
+    },
+    {
+      "source": "v3/assets/ingredients/bananas.png",
+      "file": "v3/assets/ingredients/served/bananas.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 21448,
+      "sha256": "8f8667cc9b544b5c2c905be72b83f9160128271144cee39f2301f06ca901e9a2",
+      "sourceSha256": "4421c66f1402918d7b881e9a376e5c24fa3f8ea0ada55557981ea97e731dca1a"
+    },
+    {
+      "source": "v3/assets/ingredients/basmati-rice.png",
+      "file": "v3/assets/ingredients/served/basmati-rice.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 26044,
+      "sha256": "f138b7e7f5627f7b2194e15d56e3e71c01262e9a44421fed6b1cf493057fb3f8",
+      "sourceSha256": "8fd97a62a3e731d14e9325270e0ef0ea427a8f1703f62834acefeca900a59125"
+    },
+    {
+      "source": "v3/assets/ingredients/carrots.png",
+      "file": "v3/assets/ingredients/served/carrots.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 40364,
+      "sha256": "ed14f85f2ba9663aa1458ba22b62fd50c91359694526d9d4969465fe22615e1d",
+      "sourceSha256": "7126e316a9670074bfc6ae1b24334948d1350066e7426806d19af3bc7cb264c7"
+    },
+    {
+      "source": "v3/assets/ingredients/chickpeas-tin.png",
+      "file": "v3/assets/ingredients/served/chickpeas-tin.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 25702,
+      "sha256": "153eccad312374d740072239e653ca345e034c7d718dc0ef7a97bf4b60800123",
+      "sourceSha256": "dcfbb71e797493387da1818e26c6571cd458ee2d4045628587e1e5257ea977a7"
+    },
+    {
+      "source": "v3/assets/ingredients/coconut-milk.png",
+      "file": "v3/assets/ingredients/served/coconut-milk.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 20738,
+      "sha256": "5ce1dddda35ec0a3d2493ffcd841e94edd9a4dd34078425f1e771e961ca68092",
+      "sourceSha256": "620be531b1c7b4fd00c56f751f9fe9ab9a4781f8e1c17c00a1e854fa78f4deb7"
+    },
+    {
+      "source": "v3/assets/ingredients/cooking-oil.png",
+      "file": "v3/assets/ingredients/served/cooking-oil.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 23434,
+      "sha256": "1495312dfc8ce641faf80fee1f3cf1fef873d38a86da01802facc0e8d1659316",
+      "sourceSha256": "1086ca913bca9ee4551fec54491b0695f770eeb53c832283f4ffad8ced221458"
+    },
+    {
+      "source": "v3/assets/ingredients/eggs.png",
+      "file": "v3/assets/ingredients/served/eggs.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 30816,
+      "sha256": "6d6350d1788342b2c1de9be7cac420948ad4a0dd3ccb7ed84593535eab8ce66b",
+      "sourceSha256": "ef13cc98c37ef90ecbc6a74966b4faac1235a7a3c0e42d082f9f50c095351b6c"
+    },
+    {
+      "source": "v3/assets/ingredients/flatbreads.png",
+      "file": "v3/assets/ingredients/served/flatbreads.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 28400,
+      "sha256": "d0c4178489c24d49f0c22330987615ea61ba5978cef041052151381188ec3469",
+      "sourceSha256": "ce12780d0a16657a068ce266b1b3d2e65a6ad1694732674dab4998d41bf4ae1c"
+    },
+    {
+      "source": "v3/assets/ingredients/fresh-basil.png",
+      "file": "v3/assets/ingredients/served/fresh-basil.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 30186,
+      "sha256": "5ca73eb1935f387fcd61ad48968e6aeb9c8c546b4318c678f3a0c2f620f3bb15",
+      "sourceSha256": "f0d11941613d23e761b2ac0f94daf86329b5b6eb8910ff35149c635fd401b1f7"
+    },
+    {
+      "source": "v3/assets/ingredients/fresh-tomatoes.png",
+      "file": "v3/assets/ingredients/served/fresh-tomatoes.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 24928,
+      "sha256": "e85a6ddc52af8a93ba782dd63cc5688607f0be4506023d0cba02e5f259468442",
+      "sourceSha256": "e737b40884e4875a733f37112fd3f51a9794994ce39fa7b83c5aca7dce2a131a"
+    },
+    {
+      "source": "v3/assets/ingredients/garlic.png",
+      "file": "v3/assets/ingredients/served/garlic.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 28148,
+      "sha256": "757118a3c046bd52164f3ce57bda6c58db2accabc0e8348e8fd363cc492351cd",
+      "sourceSha256": "3087c7bd7ba760359cdc2260d8601c5667c82bebcc1d1f1115b0f3f6136937bb"
+    },
+    {
+      "source": "v3/assets/ingredients/ground-cumin.png",
+      "file": "v3/assets/ingredients/served/ground-cumin.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 27912,
+      "sha256": "6c46a3fd08db63fcea4764342baacfdc4b71f83754bbf0e0568e5f9e90c38a11",
+      "sourceSha256": "e19fc2b7c8a19ef0e45432b79aa79a886d356a7e7bac430b6314b31ed8539ce5"
+    },
+    {
+      "source": "v3/assets/ingredients/mozzarella.png",
+      "file": "v3/assets/ingredients/served/mozzarella.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 36200,
+      "sha256": "dcd751e6279e0df98e9e581400ad6a740de02cf78a93d5416c5c78ee606dc43e",
+      "sourceSha256": "9db7fd406d1ec47fe8cdf47c4eeb92007d8fb5bcbf50e7bb4618befe8e6d95c1"
+    },
+    {
+      "source": "v3/assets/ingredients/oat-milk.png",
+      "file": "v3/assets/ingredients/served/oat-milk.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 19618,
+      "sha256": "a2ec6a95ef5bd12066b85caf1d85042a0f97ba74e81baf1cfe710e1aaf1933d8",
+      "sourceSha256": "a3ca450698315d1e227409518aa5b2ea55a23f7a8e1ca98c10e94d359b0db07d"
+    },
+    {
+      "source": "v3/assets/ingredients/olive-oil.png",
+      "file": "v3/assets/ingredients/served/olive-oil.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 23830,
+      "sha256": "232d0f3b83e0878b22d6a0ad93fb54f46c54c544d7bd0fe3b375a54f52ccd5e8",
+      "sourceSha256": "82d0c6b9cfcf42817a88e9778385113a2a8b78cd92c4aed833346d902011f64a"
+    },
+    {
+      "source": "v3/assets/ingredients/onion.png",
+      "file": "v3/assets/ingredients/served/onion.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 41000,
+      "sha256": "a30ce65249d4d73cc219b463486e4e6690e9e5eee0ec3dbac8ca4ef9e10f008b",
+      "sourceSha256": "9c75dcdbde54def826b7df68db524a670070a419da55debaa70595ba883ddaed"
+    },
+    {
+      "source": "v3/assets/ingredients/passata.png",
+      "file": "v3/assets/ingredients/served/passata.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 21648,
+      "sha256": "14c2b26a48c0c845164d988410cb0e8cf79c712395097d68b6822667010018e2",
+      "sourceSha256": "bf211ab2c8ba9baefce57fa6e3fa497bd6d41c2fac0b0be7b5b63c4cdff15be1"
+    },
+    {
+      "source": "v3/assets/ingredients/pasta.png",
+      "file": "v3/assets/ingredients/served/pasta.webp",
+      "width": 512,
+      "height": 468,
+      "bytes": 30734,
+      "sha256": "b878594c8e45793c1aa5d262a6d03550859f356d723b343d664850c6e22b688f",
+      "sourceSha256": "2e535861e4d0b8463c50e91bc5e4cadb3143a1f8e2c4fae316ad3c4f33bd272b"
+    },
+    {
+      "source": "v3/assets/ingredients/red-lentils.png",
+      "file": "v3/assets/ingredients/served/red-lentils.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 24860,
+      "sha256": "06272a91c692093ab36d42256f3b4c0365aa2ffd89f7edfdf8b51e00250a9e67",
+      "sourceSha256": "9adad5b87de85ce3dd8f641430ef415d1cd362ac8aa1940ec4a4598ab0824bb4"
+    },
+    {
+      "source": "v3/assets/ingredients/red-pepper.png",
+      "file": "v3/assets/ingredients/served/red-pepper.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 21922,
+      "sha256": "c786c1c4cdd9c5fd31064257c1e964bb31aa81e5067c2b70c8fc986c15119272",
+      "sourceSha256": "4f2b9dd615e3a87ac5ea1b51ab82d8756b5828995757139da86466850fad8c20"
+    },
+    {
+      "source": "v3/assets/ingredients/rolled-oats.png",
+      "file": "v3/assets/ingredients/served/rolled-oats.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 27426,
+      "sha256": "acc6e4d3a7115e8a129aeed3c82ea7da3f4b5929816b874dace4f22d51792e7a",
+      "sourceSha256": "4712036ba2c46924b524dec25317cc6085d1be6f2f43dd1c5c6b29b2ba6d76e4"
+    },
+    {
+      "source": "v3/assets/ingredients/spaghetti.png",
+      "file": "v3/assets/ingredients/served/spaghetti.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 23258,
+      "sha256": "5cf2ecc465745e114adaeb2eb253ad419ed5832677587ef53f28090585770754",
+      "sourceSha256": "540306e092cc90940692ed263a091df465d2df1aeb4a0080c73af991402a8978"
+    },
+    {
+      "source": "v3/assets/ingredients/spinach.png",
+      "file": "v3/assets/ingredients/served/spinach.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 38294,
+      "sha256": "d37027fa89e686e46f5f2e733a809a9d2523b2f17c95c8231df526db52acd53c",
+      "sourceSha256": "717ce0381d1d459090bdc006bcf0f1845a6355bfad338647f9eaa9a95050f023"
+    },
+    {
+      "source": "v3/assets/ingredients/tinned-chopped-tomatoes.png",
+      "file": "v3/assets/ingredients/served/tinned-chopped-tomatoes.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 26528,
+      "sha256": "98100e8efbd6f68b006d9e0910e70013ccf1a8886b585e81576d13afb0ec221b",
+      "sourceSha256": "efc31d455828defc8e35fa8c2dff334c069192f06bcc9f2681b5730ae8ca3eb3"
+    },
+    {
+      "source": "v3/assets/ingredients/turmeric.png",
+      "file": "v3/assets/ingredients/served/turmeric.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 25372,
+      "sha256": "eada538abacf78a5787f1c49b4adc5d303fce8b11fa0835b61a8a88e45e85ac0",
+      "sourceSha256": "83a4fac2084f33621303bc152d313e81bce54cdb6b906ca536bdcbc605629d3e"
+    },
+    {
+      "source": "v3/assets/ingredients/vegetable-stock.png",
+      "file": "v3/assets/ingredients/served/vegetable-stock.webp",
+      "width": 512,
+      "height": 512,
+      "bytes": 23052,
+      "sha256": "a34c750229bcc1389ab537c7ef7535e97ffb48dee395544cd6ac41de9843b885",
+      "sourceSha256": "97f75894c98c3a844ef97798049b78e416e38bf0fe41f02ee2f0f054adcc0bb8"
+    },
+    {
+      "source": "v3/assets/checkpoint/bus.webp",
+      "file": "v3/assets/checkpoint/served/bus-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 174154,
+      "sha256": "7b9d606e77d1dc1ea55691b906f05b02287d02e8219b1b02649ee989b09f3c53",
+      "sourceSha256": "6568727eabfe6367a77cfff7b0c5bf656b41b1f9122ff6b58301797ab30c8248"
+    },
+    {
+      "source": "v3/assets/checkpoint/market.webp",
+      "file": "v3/assets/checkpoint/served/market-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 108690,
+      "sha256": "003421154f5d918679b1a5e227515ada124dbd47bd675b5edf2f2cab020add21",
+      "sourceSha256": "0592df5c3771128824a57b7083b5e845a9fb372ce3924d08c2baa720f71ef71f"
+    },
+    {
+      "source": "v3/assets/checkpoint/town.webp",
+      "file": "v3/assets/checkpoint/served/town-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 310880,
+      "sha256": "e8c382b7dc14cdeab55da7f3769600d6e1daad6cf4db5cc887050a682a143113",
+      "sourceSha256": "0ab7e9d4f066311fbf586b9e676112a361f78a096db4fd01ebf940e90f7fcda2"
+    },
+    {
+      "source": "v3/assets/checkpoint/camp.webp",
+      "file": "v3/assets/checkpoint/served/camp-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 185732,
+      "sha256": "49c806c5566ac033a91adaaee848dc055c26d06cdd57c539d0f7474d31925c7c",
+      "sourceSha256": "9039b45a2c804f2fdc79278432117f980699fa8358478270192916baac93a7c4"
+    },
+    {
+      "source": "v3/assets/checkpoint/kitchen.webp",
+      "file": "v3/assets/checkpoint/served/kitchen-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 84796,
+      "sha256": "0763cdb67fc97716c557391a1b3b4878c60c850cc63ebeb3980023e505135300",
+      "sourceSha256": "dbdc258f40882264e3c7263dda4e3d21251e2173635118ff5acec7a42add7899"
+    },
+    {
+      "source": "v3/assets/checkpoint/rail.webp",
+      "file": "v3/assets/checkpoint/served/rail-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 251816,
+      "sha256": "5554be1a6618d9f3f196b37388098f20e7c4a1cdc706a3ff74676540bf94521e",
+      "sourceSha256": "87b5da8082e7829de81d37b0c388825b7ba4fa51125f4616e894310372ae54b4"
+    },
+    {
+      "source": "v3/assets/rollout/atlas.webp",
+      "file": "v3/assets/rollout/served/atlas-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 294162,
+      "sha256": "7ff8b3a5f85de449953bf50f95bdff8d7e11af32441d97d489bd44566564b863",
+      "sourceSha256": "c1b81daac61f727a6dc590fef50466bd2e69a369c7630be285bc0be16413b508"
+    },
+    {
+      "source": "v3/assets/rollout/home-exterior.webp",
+      "file": "v3/assets/rollout/served/home-exterior-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 177856,
+      "sha256": "15c12b3b4f772ec6dddf50bf3bdbee6324c38a8c9d8fd7c18a94fb849b18cc5a",
+      "sourceSha256": "9104ea3cbadad223e52a7e96d14e5921eae72bc4846c561f49f4ea9a12761f33"
+    },
+    {
+      "source": "v3/assets/rollout/forest.webp",
+      "file": "v3/assets/rollout/served/forest-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 244858,
+      "sha256": "4c22393badc05f80857663f8a9c30e8bb10d9f0b6128ff3c03a95a79c4451a87",
+      "sourceSha256": "a63b9fce80484c414613e027fa2438707723ab1b919a3c2ddc1adabad235d1ae"
+    },
+    {
+      "source": "v3/assets/rollout/desert.webp",
+      "file": "v3/assets/rollout/served/desert-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 203162,
+      "sha256": "656aab84af6ff12a9f09e7400c0ff2193bf77b44b79548668abd8caaaa560dec",
+      "sourceSha256": "6e6282c9cc894ce93651c85c3f5bc2ae140fc2833e704b8c8d29fb02a5a73e90"
+    },
+    {
+      "source": "v3/assets/rollout/geometry.webp",
+      "file": "v3/assets/rollout/served/geometry-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 211632,
+      "sha256": "08224c257715010ce81a8e0508d4dba92b5bcea00d9662d7256f54552d3bb826",
+      "sourceSha256": "25f43ef46b7c279252686febadde68e45489254d70a5dad5fb58ec0fb7ecf9d1"
+    },
+    {
+      "source": "v3/assets/rollout/measure.webp",
+      "file": "v3/assets/rollout/served/measure-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 163606,
+      "sha256": "2dec29dbffcef8c18a085be99c36cf29848051a613fcf7c6a1655519660327e5",
+      "sourceSha256": "ffca04520d5e7fa5a203cb63b6d91dbd75549bbf1f32db32b762a9b42e0582ef"
+    },
+    {
+      "source": "v3/assets/rollout/ratio.webp",
+      "file": "v3/assets/rollout/served/ratio-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 185420,
+      "sha256": "a5bd9173aed5b288c435c3a76a4fbf69b1686dcddb89acd5f6aca3a2a0500eea",
+      "sourceSha256": "2e2895e8bc609ce0d232f706fe0b93217dca5e6e52e29add630189094bfa7129"
+    },
+    {
+      "source": "v3/assets/rollout/probability.webp",
+      "file": "v3/assets/rollout/served/probability-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 184814,
+      "sha256": "561ebb8c265880e4f207f92cd3235bed84645a026e1126c9e146afd065798b0e",
+      "sourceSha256": "1038db42a2fab52981a9feb6d6987673ff7ecb02bbb6c7eb18b3d4da96ff2734"
+    },
+    {
+      "source": "v3/assets/rollout/statistics.webp",
+      "file": "v3/assets/rollout/served/statistics-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 196742,
+      "sha256": "65386d3c31c1c887505d7bc8e1d2bd7bed420a4562d24e5eb6fac87c3842f2a5",
+      "sourceSha256": "32b686abdf8b7bdc691aa704578163f4153e06966c38bf3ee1d4af0f55bee7f3"
+    },
+    {
+      "source": "v3/assets/rollout/camp1.webp",
+      "file": "v3/assets/rollout/served/camp1-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 250672,
+      "sha256": "e5218148e936829680fe62d398582646ea9c695e3e4653ae2491497e990d4008",
+      "sourceSha256": "041d946a032c6ab9cc0c41c07ae055c5bb7198df3b8922f765e41a6c5e7ac76f"
+    },
+    {
+      "source": "v3/assets/rollout/camp2.webp",
+      "file": "v3/assets/rollout/served/camp2-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 230278,
+      "sha256": "f499c4fb35c9cd99539242a997038caf3a22da61cf0a020505bef1a091948303",
+      "sourceSha256": "e820b4d41d24d20af3e041a673c55a81c134bde73ba2347e67458956588026bb"
+    },
+    {
+      "source": "v3/assets/rollout/camp3.webp",
+      "file": "v3/assets/rollout/served/camp3-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 240954,
+      "sha256": "c31873c724ee11236fb2953188ac49864ab5a0b44902f33b13b8a2ca359c2f0b",
+      "sourceSha256": "29f9e664c42a8a3e24a3c880f877e1a3aefd8f076986e82af2f847ff0870d423"
+    },
+    {
+      "source": "v3/assets/rollout/camp4.webp",
+      "file": "v3/assets/rollout/served/camp4-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 254014,
+      "sha256": "8a874d38812d67d65ffe85088871d2186f283f3e15bcf1fb7bf355a16407b9dd",
+      "sourceSha256": "0c7b2422b7af997db4a0b7d5261d0f0944bd52505d752401eaaf8b86e8780290"
+    },
+    {
+      "source": "v3/assets/rollout/shops.webp",
+      "file": "v3/assets/rollout/served/shops-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 166502,
+      "sha256": "be948ed16bcebd9a4893557f508d5e162459dbd7585f8b1f9a602763bce403ce",
+      "sourceSha256": "fa2734171004bba145b0dc86c9b7fb7c1f942f0cfa40fc776a3a5492ac02f0a9"
+    },
+    {
+      "source": "v3/assets/rollout/train-station.webp",
+      "file": "v3/assets/rollout/served/train-station-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 150448,
+      "sha256": "3bd3328c9cc9bbe4e938c3c9909fd70bb56b1a4bde7eefdb060136dfab06d87d",
+      "sourceSha256": "f5a2c100cadb953ceadd7b64f4c6312d5832b8a434dfbbd0f828c66f24ef135a"
+    },
+    {
+      "source": "v3/assets/rollout/cafe.webp",
+      "file": "v3/assets/rollout/served/cafe-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 141998,
+      "sha256": "c3451cbb3f8b9017ea9d190499b0db1a32f7f404f0edc46cd708c5be3d38cdbe",
+      "sourceSha256": "d883991f774802a7d0673042cd3f34d66b18351fcedb93f0878be7b82e762a75"
+    },
+    {
+      "source": "v3/assets/rollout/work.webp",
+      "file": "v3/assets/rollout/served/work-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 146976,
+      "sha256": "bc2ad00f3c2710022d85131ce2f3d96c5553747dcc7ce8003ccfea72148a8d3e",
+      "sourceSha256": "3d1d21b9ef3720c5521525e5e3e03db64861d7e771c51e3f37ad167f51c2ab9c"
+    },
+    {
+      "source": "v3/assets/rollout/bank.webp",
+      "file": "v3/assets/rollout/served/bank-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 99026,
+      "sha256": "a5c164e3998e87f19d78b61464d2954c7e145b397d6d50087de98b2cc462bc5a",
+      "sourceSha256": "4132e8d636b3d5ba429a9c4daa554f04990ecb67ffb62b0a444d373097e3b040"
+    },
+    {
+      "source": "v3/assets/rollout/leisure.webp",
+      "file": "v3/assets/rollout/served/leisure-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 114514,
+      "sha256": "9b53f6007b3bd835e640ef8e0d708350ea57186dda14c97f33ba4e1553de1a6f",
+      "sourceSha256": "ebc0a846db06d1e6ced6aa2a8f68b907503e65a3b9e8abdbb3faf4aa63c1b0b3"
+    },
+    {
+      "source": "v3/assets/rollout/library.webp",
+      "file": "v3/assets/rollout/served/library-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 138508,
+      "sha256": "e3602e97a00bb4905c31bdfc92690c9e90246455a2b6dc57523d2cb5046e59e7",
+      "sourceSha256": "ae2c0566ce93c8901e7672b833c816efb880fa4ccef847d312f6997818cc1519"
+    },
+    {
+      "source": "v3/assets/rollout/post.webp",
+      "file": "v3/assets/rollout/served/post-1024.webp",
+      "width": 1024,
+      "height": 683,
+      "bytes": 94496,
+      "sha256": "a4664ef82ebf2261720a78aed2dfd708bc39f0712f20051abc50009f6b12d6ae",
+      "sourceSha256": "82b42a7976206219b033c6f016403e9729960d90f3c90559891c6009c33c5363"
+    }
+  ]
+}

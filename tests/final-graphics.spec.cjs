@@ -1,7 +1,7 @@
 'use strict';
 const {test,expect}=require('./helpers/identities.cjs'),fs=require('node:fs');
 const out='/workspace/artifacts/final-graphics';fs.mkdirSync(out,{recursive:true});
-async function ready(p){await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));await p.waitForFunction(()=>[...document.images].every(i=>i.complete&&i.naturalWidth>0));}
+async function ready(p){await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));await require('./helpers/visible-images.cjs')(p);}
 async function seed(p,key,fn){await p.evaluate(({key,code})=>{const s=V3Engine.fresh();s.tourSeen=true;(0,eval)('('+code+')')(s);localStorage.setItem(key,JSON.stringify(s));},{key,code:fn.toString()});await p.reload();await ready(p);}
 async function tap(p,a){const d=p.locator('dialog[open]');await (await d.count()?d:p).locator(`[data-action="${a}"]`).first().tap();await ready(p);}
 async function shot(p,n,selector){const e=p.locator(selector).first();await e.scrollIntoViewIfNeeded();await p.evaluate(async()=>{await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));});await e.screenshot({path:`${out}/${n}-${p.viewportSize().width}.png`});}

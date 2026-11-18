@@ -18,3 +18,4 @@ for(const unknown of [null,false,0,[],{version:2,runs:{},counts:{},active:'missi
 // Failed answers and empty clock drafts cannot apply effects; valid edits recover.
 s=E.fresh();L.start(s,'travel-swim');let j=L.state(s);L.action(s,'j-submit');assert(j.assisted);assert.equal(j.evidence[0].correct,false);assert(!L.next(s));solve(s);assert(j.evidence[0].correct===false);L.next(s);solve(s);L.next(s);j=L.state(s);while(L.task(s).kind!=='clock'){solve(s);L.next(s);}j=L.state(s);j.values.amount=L.task(s).answer;j.values.clockDraft='';assert(!L.action(s,'j-submit'));assert(!L.next(s));L.action(s,'j-adjust','0');assert(L.action(s,'j-submit'));
 console.log(`PASS Town Life: ${L.catalog.length} scenarios, ${stages} stages across 3 tiers × 3 replay seeds; kinds ${[...kinds].join(', ')}; legacy/unknown preservation, drafts, receipts, cash and immutable completion.`);
+require('./town-safety.cjs');
