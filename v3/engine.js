@@ -6,6 +6,7 @@
       ? require("./adventure").V3Adventure
       : root.V3Adventure;
   const education=typeof module!=="undefined"?require("./education").V6Education:root.V6Education;
+  const content=()=>typeof module!=="undefined"?require("./content-registry").V3Content:root.V3Content;
   const T =
     typeof module !== "undefined" ? require("./town").V3Town : root.V3Town;
   const catalog = typeof module !== "undefined" ? require("./curriculum").V3Curriculum.catalog : root.V3Curriculum.catalog;
@@ -411,7 +412,7 @@
     const band = adaptive.skill(s,id).band;
     for (let t = 0; t < 100; t++, round++) {
       let sample;
-      try { sample = bank.create(id,band,round,{exclude:used}); }
+      try { sample = content()?content().create(bank,id,band,round,{exclude:used,excludeIds:new Set(s.seenQuestionIds||[])}):bank.create(id,band,round,{exclude:used}); }
       catch (error) { if(/^Duplicate questions in review/.test(error.message))continue;throw error; }
       if (sample.every((q) => !used.has(q[0]))) {
         qs = sample;
@@ -424,7 +425,7 @@
       const candidates = new Map();
       for (let t = 0; t < 120; t++) {
         let sample;
-        try { sample = bank.create(id,band,round+100+t,{exclude:new Set()}); }
+        try { sample = content()?content().create(bank,id,band,round+100+t,{exclude:new Set()}):bank.create(id,band,round+100+t,{exclude:new Set()}); }
         catch (error) { if(/^Duplicate questions in review/.test(error.message))continue;throw error; }
         for (const question of sample || []) {
           const prompt=question?.[0];
@@ -448,7 +449,10 @@
     if (!qs) return mode === "check"
       ? "A fresh independent check is not available yet. Practice is still available."
       : "Fresh questions are unavailable. Try a different skill.";
+    let teachingExample=education.example(id,qs,band,round);
+    if(content()&&teachingExample)teachingExample=content().rows(id,[teachingExample],{band,round:round+17})[0];
     s.learningBand = band;
+    if(content())s.seenQuestionIds=[...new Set([...(s.seenQuestionIds||[]),...qs.map(q=>q[5]?.questionKey).filter(Boolean),...(teachingExample?.[5]?.questionKey?[teachingExample[5].questionKey]:[])])];
     if(!N.stashLearning(s))return 'Your saved lessons need review. Their original state has been preserved.';
     s.learning = {
       id,
@@ -456,7 +460,7 @@
       round,
       policyVersion:education.enhanced.includes(id)?2:1,
       band,
-      teachingExample:education.example(id,qs,band,round),
+      teachingExample,
       qs,
       i: 0,
       correct: 0,
@@ -495,7 +499,7 @@
       });
     const responses=l.responses||(l.responses=[]);
     const firstAttempt=!responses.some(r=>r.question===q[0]);
-    if(responses.filter(r=>r.question===q[0]).length<16)responses.push({question:q[0],answer:String(value),correct,firstAttempt,firstAttemptCorrect:firstAttempt&&correct&&!l.assisted&&!skip,firstIndependent:l.mode==='check'&&firstAttempt&&correct&&!l.assisted&&!skip,assisted:!!l.assisted,skipped:skip,source:l.mode,interaction:l.manipulation?'constructed':'conventional'});
+    if(responses.filter(r=>r.question===q[0]).length<16)responses.push({question:q[0],...(q[5]?.questionKey?{questionKey:q[5].questionKey}:{}),answer:String(value),correct,firstAttempt,firstAttemptCorrect:firstAttempt&&correct&&!l.assisted&&!skip,firstIndependent:l.mode==='check'&&firstAttempt&&correct&&!l.assisted&&!skip,assisted:!!l.assisted,skipped:skip,source:l.mode,interaction:l.manipulation?'constructed':'conventional'});
     l.answered = true;
     l.feedback =
       (correct
@@ -634,6 +638,8 @@
         (d.band<5||education.foundations.some(f=>f[0]===id))?education.question(id,d.band,900+d.band,i)[4]:q[4] || "The answer is " + T.answerLabel([q[1]],q[2]) + ".",
       ];
     });
+    const identified=content()?.rows(id,qs,{source:"discovery",band:d.band});
+    if(identified){qs.splice(0,qs.length,...identified);s.seenQuestionIds=[...new Set([...(s.seenQuestionIds||[]),...qs.map(q=>q[5].questionKey)])];}
     s.seen = [
       ...new Set([
         ...s.seen,

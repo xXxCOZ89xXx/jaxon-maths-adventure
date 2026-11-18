@@ -66,6 +66,9 @@
       "path": "v3/activity-navigation.js"
     },
     {
+      "path": "v3/content-registry.js"
+    },
+    {
       "path": "v3/adventure.js"
     },
     {
