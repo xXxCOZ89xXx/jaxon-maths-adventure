@@ -106,9 +106,9 @@ function start(s,world,stage){
  a.active={key,world,route,tier:l.tier,seed,i:0,phase:'lesson',contentVersion:8,restoration:{version:1,stage,skills:g.skills,placement:copy(l)},context:{version:1,role:'explorer'},tasks:tasks(world,stage,l.band,seed),values:{},evidence:[],unassisted:0,assisted:false,solved:false,feedback:''};}
  s.world=world;s.view=s.resumeView='adventure';return null;
 }
-function complete(s,q,now){const r=book(s);if(!r)return false;const stage=q.restoration.stage,key=q.world+':'+stage;
- if(!r.completed[key])r.completed[key]={world:q.world,stage,tier:q.tier,band:q.restoration.placement.band,skills:copy(q.restoration.skills),evidence:copy(q.evidence),tasks:copy(q.tasks),completedAt:new Date(now).toISOString(),source:'restoration',independentMastery:false};
- if(!s.milestones.includes(key))s.milestones.push(key);s.lastResult={type:'restoration',world:q.world,stage};s.resumeView=null;s.view='recap';delete s.adventure.suspended[q.key];s.adventure.active=null;return true;
+function complete(s,q,now){const r=book(s);if(!r)return false;const stage=q.restoration.stage,key=q.world+':'+stage;const E=typeof module!=='undefined'?require('./engine').V3Engine:root.V3Engine,participation=E.participation(q,q.tasks.length);if(!participation.eligible){r.finishedWithHelp||=[];r.finishedWithHelp.push(copy(q));}
+ if(participation.eligible&&!r.completed[key])r.completed[key]={world:q.world,stage,tier:q.tier,band:q.restoration.placement.band,skills:copy(q.restoration.skills),evidence:copy(q.evidence),tasks:copy(q.tasks),completedAt:new Date(now).toISOString(),source:'restoration',independentMastery:false};
+ if(participation.eligible&&!s.milestones.includes(key))s.milestones.push(key);s.lastResult={type:'restoration',world:q.world,stage,participation};s.resumeView=null;s.view='recap';delete s.adventure.suspended[q.key];s.adventure.active=null;return true;
 }
 function valid(q){return q?.restoration?.version===1&&Number.isInteger(q.restoration.stage)&&mapping[q.world]?.[q.restoration.stage]&&q.route==='restore-'+q.restoration.stage&&q.tasks?.length===12;}
 function preserveLegacy(s){const r=book(s);if(!r)return;for(const world of Object.keys(mapping)){const routes=new Set(Object.values(s.adventure?.records||{}).filter(x=>x?.world===world&&x.route!=='gateway').map(x=>x.route)).size;const visual=world==='town'?(routes>=8?3:routes>=4?2:routes?1:0):Math.min(3,routes);r.legacyVisual[world]=Math.max(r.legacyVisual[world]||0,visual);}}
