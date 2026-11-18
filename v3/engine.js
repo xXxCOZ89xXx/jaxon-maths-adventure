@@ -409,7 +409,6 @@
       round = num(p.round) + num(c.round) + 1;
     const adaptive = typeof module !== "undefined" ? require('./adaptive').V5Adaptive : root.V5Adaptive;
     const band = adaptive.skill(s,id).band;
-    s.learningBand = band;
     for (let t = 0; t < 100; t++, round++) {
       let sample;
       try { sample = bank.create(id,band,round,{exclude:used}); }
@@ -419,7 +418,37 @@
         break;
       }
     }
-    if (!qs) return "Fresh questions are unavailable. Try a different skill.";
+    if (!qs && mode === "practice") {
+      // Practice can revisit the oldest material when a bank has no wholly
+      // fresh six-question set. Checks deliberately never use this path.
+      const candidates = new Map();
+      for (let t = 0; t < 120; t++) {
+        let sample;
+        try { sample = bank.create(id,band,round+100+t,{exclude:new Set()}); }
+        catch (error) { if(/^Duplicate questions in review/.test(error.message))continue;throw error; }
+        for (const question of sample || []) {
+          const prompt=question?.[0];
+          if (typeof prompt !== "string" || candidates.has(prompt)) continue;
+          candidates.set(prompt,question);
+        }
+      }
+      const oldest = [...candidates.values()].sort((a,b) => {
+        const ai=s.seen.lastIndexOf(a[0]), bi=s.seen.lastIndexOf(b[0]);
+        return (ai<0?-1:ai)-(bi<0?-1:bi);
+      });
+      const selected=[],answers=new Set(),families=new Set();
+      for (const question of oldest) {
+        if (answers.has(question[1])) continue;
+        selected.push(question); answers.add(question[1]);
+        families.add(question[5]?.family || question[5]?.id || question[0]);
+        if (selected.length === 6) break;
+      }
+      if (selected.length === 6 && families.size >= 3) qs=selected;
+    }
+    if (!qs) return mode === "check"
+      ? "A fresh independent check is not available yet. Practice is still available."
+      : "Fresh questions are unavailable. Try a different skill.";
+    s.learningBand = band;
     if(!N.stashLearning(s))return 'Your saved lessons need review. Their original state has been preserved.';
     s.learning = {
       id,
@@ -662,6 +691,12 @@
     }
     return true;
   }
+  // Story milestones require participation, separate from independent mastery.
+  function participation(run, total) {
+    const skipped=new Set([...(run.skips||[]),...(run.evidence||[]).filter(e=>e.skipped||e.skippedAfterAttempt).map(e=>e.step??e.stage)].filter(i=>Number.isInteger(i)&&i>=0&&i<total));
+    const required=Math.ceil(total/2),answered=total-skipped.size;
+    return {total,required,answered,eligible:total>0&&answered>=required};
+  }
   function weekKey(now) {
     const parts = new Intl.DateTimeFormat("en-GB", {
         timeZone: "Europe/London",
@@ -705,6 +740,7 @@
     purchase,
     normaliseEquipment,
     removeEquipment,
+    participation,
     weekKey,
     activeTime,
     startDiscovery,

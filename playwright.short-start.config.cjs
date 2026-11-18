@@ -1,0 +1,1 @@
+const base=require('./playwright.config.cjs');module.exports={...base,testMatch:/short-start\.spec\.cjs/,outputDir:'test-results/short-start',reporter:[['list'],['json',{outputFile:'work/short-start/results.json'}]]};

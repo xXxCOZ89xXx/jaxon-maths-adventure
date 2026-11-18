@@ -53,6 +53,7 @@ jobs:
           GUIDE_BUILD=live npx playwright test -c playwright.production-portraits.config.cjs
       - name: Starting profile, family onboarding and characters (fictional only)
         run: |
+          npm run test:education-depth
           npm test
           npx playwright test -c playwright.starting-profile.config.cjs
           npx playwright test -c playwright.family-release.config.cjs

@@ -87,7 +87,7 @@ test('Fictional parent and learner sessions require no credential entry and reta
   await expect.poll(()=>family.server.wallet.bonus).toBe(10);
   expect(family.server.calls.some(c=>c.path==='/auth/v1/token'||c.path.endsWith('/v3_unlock'))).toBe(false);
   await learner.reload();await parent.reload();
-  await expect(parent.getByRole('heading',{name:'Staging parent dashboard'})).toBeVisible();
+  await expect(parent.getByRole('heading',{name:'Family progress'})).toBeVisible();
   expect(family.server.wallet.bonus).toBe(10);
 });
 
@@ -124,6 +124,6 @@ test('Preauthenticated fictional learner completes the connected journey with cl
   expect(after.coins).toBe(before.coins);expect(after.milestones).toEqual(before.milestones);expect(after.checks).toEqual(before.checks);
   const ledger=JSON.stringify(after.adventure.journeyV1);
   await page.reload();expect(JSON.stringify((await read()).adventure.journeyV1)).toBe(ledger);
-  const parent=await family.open('parent');await expect(parent.getByRole('heading',{name:'Staging parent dashboard'})).toBeVisible();
+  const parent=await family.open('parent');await expect(parent.getByRole('heading',{name:'Family progress'})).toBeVisible();
   expect(family.server.calls.filter(c=>c.body.p_operation==='save').length).toBeGreaterThan(8);
 });

@@ -47,7 +47,7 @@
     let area=s.startingProfile?.areas?.[C.skills.find(k=>k.id===id)?.world];
     const P=typeof module!=="undefined"?require('./starting-profile').V11StartingProfile:root.V11StartingProfile;
     area=P?.latest(s,C.skills.find(k=>k.id===id)?.world)||area;
-    if(!rounds.length&&P?.valid(area)&&area.responses.some(r=>!r.skipped)&&(area.assessmentVersion!==2||area.estimate.enoughEvidence)){
+    if(!rounds.length&&P?.valid(area)&&area.responses.some(r=>!r.skipped)&&(![2,3].includes(area.assessmentVersion)||area.estimate.enoughEvidence)){
       band=Math.max(lower,Math.min(9,area.estimate.band));
       reason="Provisional area starting sample; check this objective separately";
     }

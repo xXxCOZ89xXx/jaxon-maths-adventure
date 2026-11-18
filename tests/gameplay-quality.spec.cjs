@@ -101,8 +101,36 @@ test('Place-value supplies and money envelopes use tap-to-place objects',async({
  await page.evaluate(k=>{const s=({...V3Engine.fresh(),startingProfile:window.FictionalStartingProfile});s.tourSeen=true;V52TownLife.start(s,'job-cafe',1);const j=V52TownLife.state(s);j.stage=j.steps.findIndex(t=>t.kind==='budget');j.completed=Array.from({length:j.stage},(_,i)=>i);s.view='journey';localStorage.setItem(k,JSON.stringify(s));},key);await page.reload();await openCurrent(page);
  await click(page,'j-budget-pick:100');await click(page,'j-budget-place:0');expect((await run(page,key)).values.parts[0]).toBe(100);await page.reload();await openCurrent(page);await expect(page.getByRole('button',{name:'Return 100 pence from Savings',exact:true})).toBeVisible();await click(page,'j-part:0:-100');expect((await run(page,key)).values.parts[0]).toBe(0);
 });
+test('Place-value practice stays readable across supported iPad and desktop sizes',async({camp})=>{
+ const {page,key}=camp;
+ await page.evaluate(k=>{
+  const s=({...V3Engine.fresh(),startingProfile:window.FictionalStartingProfile});s.tourSeen=true;s.view='practice';
+  s.learning={id:'place',mode:'practice',qs:[['Build 4,372 using place-value blocks.','4372',['4372','4732','3472','4327'],'Build each place separately.','4 thousands, 3 hundreds, 7 tens and 2 ones.',{contentVersion:3,unit:'items'}]],i:0,answered:false,started:true,manipulation:{},responses:[]};
+  localStorage.setItem(k,JSON.stringify(s));
+ },key);
+ for(const [width,height] of [[768,1024],[820,1180],[1024,768],[1180,820]]){
+  await page.setViewportSize({width,height});await page.reload();await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
+  const panel=page.locator('.learning-practice-split > section.panel'),split=page.locator('.learning-practice-split'),aside=page.locator('.learning-practice-split > aside'),model=page.locator('.practice-manipulative');
+  await expect(model).toBeVisible();await expect(model.locator('.envelopes > section')).toHaveCount(4);
+  const layout=await page.evaluate(()=>{
+   const box=e=>{const r=e.getBoundingClientRect();return{x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height};};
+   const cards=[...document.querySelectorAll('.practice-manipulative .envelopes > section')];
+   const buttons=[...document.querySelectorAll('.practice-manipulative .envelopes section > button')];
+   return {panel:box(document.querySelector('.learning-practice-split > section.panel')),split:box(document.querySelector('.learning-practice-split')),aside:box(document.querySelector('.learning-practice-split > aside')),model:box(document.querySelector('.practice-manipulative')),cards:cards.map(box),buttons:buttons.map(box),scrollWidth:document.documentElement.scrollWidth,width:innerWidth,columns:getComputedStyle(document.querySelector('.practice-manipulative .envelopes')).gridTemplateColumns};
+  });
+  expect(layout.scrollWidth).toBeLessThanOrEqual(width+1);
+  expect(layout.cards).toHaveLength(4);
+  expect(layout.columns.trim().split(/\s+/),`four place-value columns at ${width}px`).toHaveLength(4);
+  for(let i=1;i<layout.cards.length;i++)expect(layout.cards[i].x).toBeGreaterThan(layout.cards[i-1].x);
+  for(const b of layout.buttons){expect(b.width,`button width at ${width}px`).toBeGreaterThanOrEqual(44);expect(b.height,`button height at ${width}px`).toBeGreaterThanOrEqual(44);expect(b.x).toBeGreaterThanOrEqual(layout.model.x);expect(b.right).toBeLessThanOrEqual(layout.model.right+1);}
+  for(let i=0;i<layout.buttons.length;i++)for(let j=i+1;j<layout.buttons.length;j++){const a=layout.buttons[i],b=layout.buttons[j];expect(a.right<=b.x+0.5||b.right<=a.x+0.5||a.bottom<=b.y+0.5||b.bottom<=a.y+0.5,`buttons ${i} and ${j} must not overlap at ${width}px`).toBe(true);}
+  if(width<900){expect(layout.panel.width).toBeGreaterThanOrEqual(layout.split.width-1);expect(layout.aside.y).toBeGreaterThanOrEqual(layout.panel.bottom-1);}
+  await expect(page.getByRole('button',{name:'Place a 1000 block',exact:true})).toBeVisible();
+  await expect(page.getByRole('button',{name:'Return a 1000 block',exact:true})).toBeVisible();
+ }
+});
 test('Parent rewards and learner shop stay separate with the new Town save',async({family})=>{
- const parent=await family.open('parent');await expect(parent.getByRole('heading',{name:'Staging parent dashboard'})).toBeVisible();await parent.getByLabel('Action',{exact:true}).selectOption('award');await parent.getByLabel('Amount (1 to 60)',{exact:true}).fill('10');await parent.getByRole('button',{name:'Submit parent reward'}).tap();await expect.poll(()=>family.server.wallet.bonus).toBe(10);
+ const parent=await family.open('parent');await expect(parent.getByRole('heading',{name:'Family progress'})).toBeVisible();await parent.getByLabel('Action',{exact:true}).selectOption('award');await parent.getByLabel('Amount (1 to 60)',{exact:true}).fill('10');await parent.getByRole('button',{name:'Submit parent reward'}).tap();await expect.poll(()=>family.server.wallet.bonus).toBe(10);
  const page=await family.open('learner');await expect(page.getByRole('button',{name:'Submit parent reward'})).toHaveCount(0);await click(page,'skip-tour');await page.locator('nav [data-nav="camp"]').tap();await click(page,'nav:shop');await expect(page.locator('.shop-grid')).toBeVisible();expect(family.server.wallet.bonus).toBe(10);await page.reload();await openCurrent(page);expect(family.server.wallet.bonus).toBe(10);
 });
 

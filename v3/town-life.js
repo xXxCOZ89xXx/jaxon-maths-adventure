@@ -134,6 +134,8 @@
   }
   function stockShortage(j,t){const missing=Object.entries(t.requiresStock||{}).filter(([name,n])=>(j.inventory[name]||0)<n);return missing.length?'Not enough ingredients to cook. Missing '+missing.map(([key,n])=>{const i=j.recipeCard?.ingredients?.find(i=>i.key===key);return (n-(j.inventory[key]||0))+' '+(i?.unit||'')+' of '+(i?.name||key);}).join('; ')+'. Your progress is saved; review your ingredient list.':null;}
   function completeLandmark(s,j){
+    const E=typeof module!=='undefined'?require('./engine').V3Engine:root.V3Engine;
+    j.milestoneParticipation=E.participation(j,j.steps.length);if(!j.milestoneParticipation.eligible)return;
     const M=typeof module!=='undefined'?require('./adventure').V3Adventure:root.V3Adventure;
     const route=catalog.find(c=>c.id===j.scenario).venue,key=M.id('town',route,j.tier),a=M.state(s);
     // The same venue/tier story milestone can be earned only once across old and new play.

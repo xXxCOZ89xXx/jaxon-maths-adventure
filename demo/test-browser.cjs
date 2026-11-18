@@ -77,7 +77,7 @@ async function verifyLayout(p){assert(await p.evaluate(()=>document.documentElem
  await p.screenshot({path:path.join(root,'work/public-demo',layout.name+'.png'),fullPage:true});
  const keys=await p.evaluate(()=>Object.keys(localStorage));assert.deepEqual(keys,[KEY]);assert.equal(await p.evaluate(()=>sessionStorage.length),0);assert.equal((await ctx.cookies()).length,0);
  assert(firstOriginOps.every(o=>o.area==='local'&&o.key===KEY&&['getItem','setItem'].includes(o.op)),JSON.stringify(storageOps));
- assert.equal(saved.startingProfile.areas.number.responses.length,15);
+ assert.equal(saved.startingProfile.areas.number.responses.length,8);
  // All clickable links remain fragments or the demo root.
  for(const href of await p.locator('a[href]').evaluateAll(els=>els.map(a=>a.getAttribute('href'))))assert(href==='/'||href.startsWith('#'),href);
  assert.deepEqual(external,[]);assert.deepEqual(errors,[]);

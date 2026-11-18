@@ -35,7 +35,7 @@ for(const build of (process.env.AREA_BEFORE?['demo']:['private','demo']))for(con
  await press(p,'[data-action="pause-explore"]');await overview(p,world);expect((await f.read()).adventure.active).toEqual(saved);await p.reload();await overview(p,world);
  await press(p,'.repair-entry summary');await press(p,`[data-action="restore:${world}:0"]`);expect((await f.read()).adventure.active).toEqual(saved);
  await press(p,'[data-world-task-open]');await press(p,'dialog[open] [data-action="m-begin"]');
- await p.locator('dialog[open] .c8-input').fill(saved.tasks[1].answer);await press(p,'dialog[open] [data-action="m-submit"]');await expect.poll(async()=>(await f.read()).adventure.active.i).toBe(2);
+ await p.locator('dialog[open] .c8-input').fill(saved.tasks[1].answer);await press(p,'dialog[open] [data-action="m-submit"]');await expect.poll(async()=>(await f.read()).adventure.active.solved).toBe(true);await press(p,'dialog[open] [data-action="m-next"]');await expect.poll(async()=>(await f.read()).adventure.active.i).toBe(2);
  await press(p,'[data-action="pause-explore"]');await overview(p,world);
  const completed=F.restoration(world);while(F.M.current(completed)){const q=F.M.current(completed);F.M.begin(completed);const t=q.tasks[q.i];q.values.c8=t.activity?.kind==='choice'?{choice:Number(t.answer)}:{draft:t.answer};if(!F.M.submit(completed))throw Error('Invalid completion fixture');F.M.next(completed);}
  const record=copy(completed.restoration.completed[world+':0']);completed.view='world';
