@@ -14,7 +14,7 @@ const mapping={
 };
 const copy=x=>JSON.parse(JSON.stringify(x));
 function book(s){if(s.restoration===undefined)s.restoration={version:1,completed:{},attempts:{},legacyVisual:{}};const r=s.restoration,isMap=x=>x&&typeof x==='object'&&!Array.isArray(x);return r&&r.version===1&&[r.completed,r.attempts,r.legacyVisual].every(isMap)?r:null;}
-function assessed(s,id){const d=s.discovery?.[id];return d?.complete===true&&Array.isArray(d.rounds)&&d.rounds.some(r=>Number.isInteger(r.band)&&r.band>=3&&r.band<=9&&r.total===4&&Number.isInteger(r.correct)&&r.correct>=0&&r.correct<=4);}
+function assessed(s,id,now=Date.now()){const P=typeof module!=='undefined'?require('./starting-profile').V11StartingProfile:root.V11StartingProfile;const world=Object.keys(mapping).find(w=>mapping[w].some(ids=>ids.includes(id)));if(P?.recent(s,world,now))return true;const d=s.discovery?.[id];return d?.complete===true&&Array.isArray(d.rounds)&&d.rounds.some(r=>Number.isInteger(r.band)&&r.band>=3&&r.band<=9&&r.total===4&&Number.isInteger(r.correct)&&r.correct>=0&&r.correct<=4);}
 function gate(s,world,stage){
  const skills=mapping[world]?.[stage];if(!skills)return{ready:false,missing:[],reason:'Unknown restoration stage.'};
  const missing=skills.filter(id=>!assessed(s,id)),prior=stage>0&&!s.milestones.includes(world+':'+(stage-1));

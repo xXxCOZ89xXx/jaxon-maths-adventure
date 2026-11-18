@@ -10,7 +10,8 @@ for(const r of [...M.routes('town'),{id:'gateway'}])for(const tier of [1,2,3])fo
  const record=JSON.stringify(s.adventure.records[M.id('town',r.id,tier)]);assert(M.visit(s,'town',r.id,tier).available);assert.equal(M.current(s).i,0);assert.equal(JSON.stringify(s.adventure.records[M.id('town',r.id,tier)]),record);
  M.begin(s);M.current(s).values.draftFuture='keep';const snapshot=JSON.stringify(M.current(s));assert(M.visit(s,'town',r.id,tier).available);assert.equal(JSON.stringify(M.current(s)),snapshot);
 }
-const locked=fresh();delete locked.startingProfile.areas.number;delete locked.startingProfile.areas.town;const bytes=JSON.stringify(locked);const gate=M.visit(locked,'town','bank',1);assert.deepEqual(Array.from(gate.missing),['number','town']);assert(!gate.available);assert.equal(JSON.stringify(locked),bytes);
+const unlocked=fresh();delete unlocked.startingProfile.areas.number;delete unlocked.startingProfile.areas.town;assert(M.visit(unlocked,'town','bank',1).available,'One valid area opens Town');
+const locked=fresh();locked.startingProfile.areas={};const bytes=JSON.stringify(locked);const gate=M.visit(locked,'town','bank',1);assert.equal(gate.missing.length,9);assert(!gate.available);assert.equal(JSON.stringify(locked),bytes);
 assert(!M.visit(fresh(),'town','missing',1).available);assert.equal(M.visitStatus(fresh(),'town','market',4).alternativeTier,1);
 const fail=fresh(),before=JSON.stringify(fail),task=c.V8Curriculum.task;c.V8Curriculum.task=()=>{throw Error('fictional unavailable content');};assert(!M.visit(fail,'town','market',2).available);assert.equal(JSON.stringify(fail),before);c.V8Curriculum.task=task;
 // Explicit selection changes only the transient Continue target, not saved work.
