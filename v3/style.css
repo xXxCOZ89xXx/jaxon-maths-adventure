@@ -2347,7 +2347,7 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .task-active #headerExplorer,.task-active .brand-mark,.task-active .brand-sub{display:none}
 .task-active .brand{font-size:18px;line-height:1.15}
 .task-active .topbar nav{gap:4px;flex-wrap:wrap}
-.task-active .topbar nav button{padding:6px 10px;min-height:44px}
+.task-active .topbar nav button{padding:6px 10px;min-height:44px;min-width:44px}
 .learning-practice-split:has([data-direct-kind="numberline"]){grid-template-columns:minmax(0,1fr)}
 .learning-practice-split:has([data-direct-kind="numberline"])>aside{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
 .building-navigation .building-hit .object-tag{opacity:1;font-size:14px;max-width:100%;box-sizing:border-box;white-space:normal;text-align:center;overflow-wrap:normal;padding:4px 6px;bottom:4%;line-height:1.15}
