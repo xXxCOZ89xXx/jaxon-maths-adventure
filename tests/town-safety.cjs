@@ -10,12 +10,12 @@ function refused(edit,pattern){
  const s=E.fresh();assert(L.start(s,'shop-budget'));const j=L.state(s),t=L.task(s);j.values.choice=t.answer;j.solved=true;t.effect={spend:50,savings:5,minutes:3,receipt:'Saved test receipt',add:{flour:2},list:{flour:2}};edit(j,t);
  const before=copy(s);assert(!L.next(s));assert.match(j.feedback,pattern);const after=copy(s);after.adventure.townLifeV2.runs[j.id].feedback=before.adventure.townLifeV2.runs[j.id].feedback;assert.deepEqual(after,before,'failure must change only explanatory feedback');
 }
-refused((j,t)=>{delete t.branches[j.values.choice];},/no supported next step/);
-refused((j,t)=>{t.branches[j.values.choice]=[null];},/cannot continue safely/);
+refused((j,t)=>{delete t.branches[j.values.choice];},/next step for this choice is missing/);
+refused((j,t)=>{t.branches[j.values.choice]=[null];},/next step for this choice needs another look/);
 refused(j=>{j.cash=10;},/not enough pretend cash/);
 refused(j=>{j.time=1439;},/end of the saved day/);
 refused((j,t)=>{t.effect.consume={flour:3};},/not enough ingredients/);
-refused((j,t)=>{t.effect.spend=-10;},/unsupported saved effect/);
-refused((j,t)=>{t.effect.add={flour:NaN};},/unsupported saved effect/);
-refused((j,t)=>{t.effect.minutes='3';},/unsupported saved effect/);
+refused((j,t)=>{t.effect.spend=-10;},/saved step needs another look/);
+refused((j,t)=>{t.effect.add={flour:NaN};},/saved step needs another look/);
+refused((j,t)=>{t.effect.minutes='3';},/saved step needs another look/);
 console.log('PASS Town safety: corrupt plans/counters isolated, original recipe resume preserved, missing/malformed branches and invalid cash/time/stock/effects are atomic with useful feedback.');

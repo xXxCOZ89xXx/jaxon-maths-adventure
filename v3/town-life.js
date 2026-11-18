@@ -125,8 +125,8 @@
     const shortage=stockShortage(j,t);if(shortage)return refuse(shortage);
     if(!j.solved||!valid(t,j.values))return refuse('Complete this step before continuing. Hints and I don’t know are available.');
     const e=t.effect,quantity=n=>Number.isSafeInteger(n)&&n>=0,amount=n=>typeof n==='number'&&Number.isFinite(n)&&n>=0&&n<=Number.MAX_SAFE_INTEGER,quantities=x=>obj(x)&&Object.values(x).every(amount);
-    if(!obj(e)||!['earn','spend','savings','minutes','sale'].every(k=>e[k]===undefined||quantity(e[k]))||!['add','consume','list'].every(k=>e[k]===undefined||quantities(e[k])))return refuse('This step has an unsupported saved effect.');
-    if(e.receipt!==undefined&&typeof e.receipt!=='string'||e.choice!==undefined&&typeof e.choice!=='string')return refuse('This step has an unsupported saved receipt.');
+    if(!obj(e)||!['earn','spend','savings','minutes','sale'].every(k=>e[k]===undefined||quantity(e[k]))||!['add','consume','list'].every(k=>e[k]===undefined||quantities(e[k])))return refuse('This saved step needs another look before we can continue.');
+    if(e.receipt!==undefined&&typeof e.receipt!=='string'||e.choice!==undefined&&typeof e.choice!=='string')return refuse('The payment details for this step need another look.');
     if(!quantities(j.inventory)||j.envelopes!==undefined&&!quantities(j.envelopes)||j.savings!==undefined&&!quantity(j.savings))return refuse('This plan’s saved amounts need another look.');
     const candidate=copy(j),cash=j.cash+(e.earn||0)-(e.spend||0)-(e.savings||0),time=j.time+(e.minutes||0),inventory={...j.inventory};
     if(!quantity(cash))return refuse('There is not enough pretend cash for this step.');
@@ -146,11 +146,11 @@
     if(e.choice){candidate.decisions ||= [];candidate.decisions.push({stage:j.stage,choice:e.choice});}
     if(t.branches!==undefined){
       const branch=obj(t.branches)||Array.isArray(t.branches)?t.branches[j.values.choice]:null,option=t.options?.[j.values.choice];
-      if(!Array.isArray(branch)||!branch.length||typeof option?.name!=='string')return refuse('This saved choice has no supported next step.');
+      if(!Array.isArray(branch)||!branch.length||typeof option?.name!=='string')return refuse('The next step for this choice is missing.');
       candidate.steps.splice(j.stage+1,candidate.steps.length-j.stage-1,...copy(branch));candidate.decisions ||= [];candidate.decisions.push({stage:j.stage,choice:option.name});
     }
     candidate.completed.push(j.stage);candidate.stage++;candidate.done=candidate.stage===candidate.steps.length;candidate.values={};candidate.solved=false;candidate.assisted=false;candidate.feedback='';candidate.hintLevel=0;
-    if(!validRun(candidate)||!quantity(candidate.savings||0))return refuse('This saved choice cannot continue safely.');
+    if(!validRun(candidate)||!quantity(candidate.savings||0))return refuse('The next step for this choice needs another look.');
     // Complete the milestone in a separate copy too: late failures cannot debit the real plan.
     if(candidate.done){
       const draft=copy(s);draft.adventure.townLifeV2.runs[j.id]=candidate;
