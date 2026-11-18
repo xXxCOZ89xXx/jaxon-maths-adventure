@@ -175,7 +175,7 @@
       <p id="starting-question-progress">Question ${Math.min(a.responses.length+(a.answered?0:1),total)} / ${total} · Year ${q.band} · no timer</p>
       ${[2,3].includes(a.assessmentVersion)?`<p class="small">Started at Year ${a.selectedYear}. Questions adapt within Year ${a.availableYears[0]}–Year ${a.availableYears.at(-1)}. Your answers are saved.</p>`:''}
       <h2 aria-describedby="starting-question-progress">${esc(q.prompt)}</h2>
-      ${a.answered?`<p role="status">Answer saved. Keep using your own ideas; your estimate appears at the end.</p>${btn(a.responses.length===total?'See starting estimate':'Next question','starting-next','primary')}`:`<div class="actions baseline-choices">${q.choices.map((v,i)=>btn(esc(T.answerLabel([q.prompt],v)),'starting-choice:'+i)).join('')}</div><label>Your answer <input data-baseline-draft inputmode="decimal" value="${esc(a.draft||'')}" autocomplete="off"></label><div class="actions">${btn('Submit answer','starting-submit','primary',!a.draft?.trim())}${btn('I don’t know','starting-skip')}${btn('I can’t do this','starting-skip:cannot')}</div>`}
+      ${a.answered?`<p role="status">Answer saved. Keep using your own ideas; your estimate appears at the end.</p>${btn(a.responses.length===total?'See starting estimate':'Next question','starting-next','primary')}`:q.choices.length?`<div class="actions baseline-choices">${q.choices.map((v,i)=>btn(esc(T.answerLabel([q.prompt],v)),'starting-choice:'+i)).join('')}</div><div class="actions">${btn('I don’t know','starting-skip')}${btn('I can’t do this','starting-skip:cannot')}</div>`:`<label>Your answer <input data-baseline-draft inputmode="decimal" value="${esc(a.draft||'')}" autocomplete="off"></label><div class="actions">${btn('Submit answer','starting-submit','primary',!a.draft?.trim())}${btn('I don’t know','starting-skip')}${btn('I can’t do this','starting-skip:cannot')}</div>`}
       <p>It’s safe not to know. This starting estimate earns no mastery, coins or rewards.</p>${a.validation?`<p role="alert">${esc(a.validation)}</p>`:''}
       </section>`;
   }
@@ -296,7 +296,7 @@
             mode: "question",
           }) || "").replace('<div class="math-extra-dots"','<div role="img" class="math-extra-dots"')
         : "";
-    return `${header(l.mode === "check" ? "FRESH INDEPENDENT CHECK" : l.mode === "discovery" ? "FIND YOUR STARTING POINT" : "SUPPORTED PRACTICE", esc(k.name), "world")}<div class="split"><section class="panel"><span class="badge">QUESTION ${l.i + 1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2>${payroll}${handsOn}<div class="answer-grid">${(c8||direct?[]:q[2]).map((a, i) => btn(esc(T.answerLabel(q,a)), "answer:" + i, "", l.answered)).join("")}</div><div class="actions">${btn("Hint", "learning-hint", "", l.answered)}${btn("I don’t know", "learning-skip", "", l.answered)}${btn("Save & exit", "nav:home")}</div>${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}${l.answered ? `<div class="actions">${btn(l.i === l.qs.length - 1 ? "See recap →" : "Next question →", "next-learning", "primary")}</div>` : ""}</section><aside><div class="panel"><h3>${l.mode === "check" ? "Your own thinking" : "Explore the idea"}</h3><p class="muted">${l.mode === "check" ? "Only the first answer without help counts as independent. Hints and “I don’t know” are always safe." : "Use the tools, take a hint, or work through an example. Practice never awards mastery."}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
+    return `${header(l.mode === "check" ? "FRESH INDEPENDENT CHECK" : l.mode === "discovery" ? "FIND YOUR STARTING POINT" : "SUPPORTED PRACTICE", esc(k.name), "world")}<div class="split learning-practice-split"><section class="panel"><span class="badge">QUESTION ${l.i + 1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2>${payroll}${handsOn}<div class="answer-grid">${(c8||direct?[]:q[2]).map((a, i) => btn(esc(T.answerLabel(q,a)), "answer:" + i, "", l.answered)).join("")}</div><div class="actions">${btn("Hint", "learning-hint", "", l.answered)}${btn("I don’t know", "learning-skip", "", l.answered)}${btn("Save & exit", "nav:home")}</div>${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}${l.answered ? `<div class="actions">${btn(l.i === l.qs.length - 1 ? "See recap →" : "Next question →", "next-learning", "primary")}</div>` : ""}</section><aside><div class="panel"><h3>${l.mode === "check" ? "Your own thinking" : "Explore the idea"}</h3><p class="muted">${l.mode === "check" ? "Only the first answer without help counts as independent. Hints and “I don’t know” are always safe." : "Use the tools, take a hint, or work through an example. Practice never awards mastery."}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
   }
   function townLife(j){
     const t=j.task,q={world:'town',route:j.venue,values:j.values,solved:j.solved,recipeArt:j.category==='Cooking'};
@@ -442,31 +442,6 @@
       document.querySelectorAll('#main dialog').forEach(d=>{const n=document.createElement('nav');n.className='activity-safety';n.setAttribute('aria-label','Activity help and leaving');n.innerHTML=safetyButtons();d.prepend(n);});
     }
   }
-  let advanceTimer=null,advanceStamp=null;
-  function progression() {
-    if(['practice','check','discovery'].includes(s.view)&&s.learning?.answered)return {action:'next-learning',stamp:JSON.stringify([s.view,s.learning.id,s.learning.round,s.learning.qs,s.learning.i])};
-    if(s.view==='journey'){const j=window.V5Journey.state(s);if(j?.solved)return {action:'j-next',stamp:JSON.stringify(['journey',j.id,j.seed,j.stage])};}
-    if(s.view==='adventure'){const q=M.current(s);if(q?.solved)return {action:'m-next',stamp:JSON.stringify(['adventure',q.key,q.seed,q.i])};}
-    if(s.view==='quest'&&s.quest?.solved)return {action:'next-quest',stamp:JSON.stringify(['quest',s.quest.world,s.quest.i])};
-    return null;
-  }
-  function scheduleProgression(){
-    const next=progression();
-    document.querySelectorAll('[data-action="next-learning"],[data-action="m-next"],[data-action="j-next"],[data-action="next-quest"]').forEach(el=>{el.hidden=true;el.style.display='none';});
-    if(!next){clearTimeout(advanceTimer);advanceTimer=null;advanceStamp=null;return;}
-    if(advanceStamp===next.stamp)return;
-    clearTimeout(advanceTimer);advanceStamp=next.stamp;
-    // Leave the live correctness announcement readable before replacing the question.
-    advanceTimer=setTimeout(async()=>{
-      await change(()=>{
-        if(progression()?.stamp!==next.stamp)return;
-        if(next.action==='next-learning')E.nextLearning(s);
-        else if(next.action==='j-next')window.V5Journey.action(s,'j-next');
-        else if(next.action==='m-next')M.next(s);
-        else E.nextQuest(s);
-      },{focus:true});
-    },900);
-  }
   function render(focus = false) {
     if (cloud && !cloud.isUnlocked()) return;
     if(!P.unlocked(s)&&P.views.includes(s.view))s.view='starting';
@@ -523,7 +498,6 @@
       else el.removeAttribute("aria-current");
     });
     if(s.view==='world'&&P.unlocked(s)&&!P.valid(P.latest(s,s.world))&&!s.startingProfile?.offered?.[s.world]){const n=document.createElement('section');n.className='panel';n.setAttribute('aria-label','Optional starting point');n.innerHTML='<h2>Find a starting point for this world?</h2><p>A short sample can help choose a level. You can keep playing now.</p>'+btn('Find this starting point','nav:starting')+btn('Not now','starting-later:'+s.world);$('main').prepend(n);}
-    scheduleProgression();
   }
   document.addEventListener('v6-scene-ui',()=>render());
   function sound() {
@@ -929,8 +903,14 @@
     if(name==='starting-next'){const h=document.querySelector('.baseline-question h2');if(h){h.tabIndex=-1;h.focus({preventScroll:true});}return;}
     const scope=document.querySelector('dialog[open]')||document.getElementById('main');
     if(['m-next','j-next','next-learning'].includes(name)){const heading=scope.querySelector('h2');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}return;}
-    const action=s.view==='journey'&&V5Journey.state(s)?.solved?'j-next':s.view==='adventure'&&M.current(s)?.solved?'m-next':['practice','check','discovery'].includes(s.view)&&s.learning?.answered?'next-learning':null;
-    if(action&&['answer','m-choice','j-choice','m-submit','j-submit','c8-m','c8-p','c8-check','d9-check','p5-submit'].includes(name))scope.querySelector('[data-action="'+action+'"]')?.focus({preventScroll:true});
+    const action=s.view==='journey'&&V5Journey.state(s)?.solved?'j-next':s.view==='adventure'&&M.current(s)?.solved?'m-next':s.view==='quest'&&s.quest?.solved?'next-quest':['practice','check','discovery'].includes(s.view)&&s.learning?.answered?'next-learning':null;
+    const answerActions=['answer','learning-skip','skip','solve','m-choice','m-submit','m-skip','j-choice','j-submit','j-skip','c8-m','c8-p','c8-check','d9-check','p5-submit'];
+    if(answerActions.includes(name)){
+      const next=action&&scope.querySelector('[data-action="'+action+'"]');
+      if(next){next.focus({preventScroll:true});return;}
+      const feedback=scope.querySelector('.feedback[role="status"],.feedback');
+      if(feedback){feedback.tabIndex=-1;feedback.focus({preventScroll:true});}
+    }
   }
   document.addEventListener("click", async (e) => {
     const ui=e.target.closest('[data-ui]');
