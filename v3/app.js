@@ -434,12 +434,13 @@
   function closeDialogs(){document.querySelectorAll('dialog[open]').forEach(d=>d.close());}
   function safetyButtons(){return `${btn("Pause and explore","pause-explore")}${btn('Home','nav:home')}${btn('World map','nav:map')}${btn('How to play','nav:tour')}${N.target(s)?btn('Reset','recover-open'):''}`;}
   function activitySafety(){
+    document.body.classList.toggle('task-active',['quest','adventure','journey','lesson','practice','check','discovery','starting-area'].includes(s.view));
     if(!document.getElementById('town-entry')){const b=document.createElement('button');b.id='town-entry';b.dataset.action='world:town';b.textContent='Town';document.querySelector('.topbar nav').append(b);}
     if(!document.getElementById('play-help')){const b=document.createElement('button');b.id='play-help';b.dataset.action='nav:tour';b.textContent='How to play';document.querySelector('.topbar nav').append(b);}
     if(!document.getElementById('recovery-dialog')){const d=document.createElement('dialog');d.id='recovery-dialog';d.setAttribute('aria-label','Reset confirmation');d.innerHTML='<h2>Reset</h2><p class="recovery-copy"></p><div class="actions"><button data-action="recover-apply:restart" data-recovery-confirm>Confirm restart</button><button data-action="recover-apply:exit" data-recovery-confirm>Exit this activity</button><button data-action="recover-cancel">Keep playing</button><button data-action="nav:home">Pause and go home</button><button data-action="nav:map">Pause and open world map</button></div>';document.body.append(d);}
     if(['quest','adventure','journey','lesson','practice','check','discovery','starting-area'].includes(s.view)){
       const dock=document.createElement('nav');dock.className='activity-safety';dock.setAttribute('aria-label','Activity help and leaving');dock.innerHTML=safetyButtons();document.getElementById('main').prepend(dock);
-      document.querySelectorAll('#main dialog').forEach(d=>{const n=document.createElement('nav');n.className='activity-safety';n.setAttribute('aria-label','Activity help and leaving');n.innerHTML=safetyButtons();d.prepend(n);});
+      document.querySelectorAll('#main dialog').forEach(d=>{const n=document.createElement('nav');n.className='activity-safety';n.setAttribute('aria-label','Activity help and leaving');n.innerHTML=safetyButtons();d.append(n);});
     }
   }
   function render(focus = false) {
