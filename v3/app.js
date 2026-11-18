@@ -393,12 +393,12 @@
           filter === "all" ||
           (filter === "owned" && s.bought.includes(i.id)) ||
           (filter === "affordable" &&
-            (s.bought.includes(i.id) || s.coins >= i.cost)) ||
+            (s.bought.includes(i.id) || Math.floor(s.coins) >= i.cost)) ||
           filter === i.slot,
       )
       .map(
         (i) =>
-          `<article class="shop-item"><span class="ico" aria-hidden="true">${A.icon(i)}</span><h3>${i.label}</h3><p class="small muted">${i.cost} coins · ${i.slot}</p><button data-ui="preview-item" data-item="${esc(i.id)}">Preview ${esc(i.label)}</button>${btn(s.equipped.includes(i.id) ? "Unequip " + i.label : s.bought.includes(i.id) ? "Equip " + i.label : "Buy " + i.label, "buy:" + i.id, s.equipped.includes(i.id) ? "primary" : "", !s.bought.includes(i.id) && s.coins < i.cost)}</article>`,
+          `<article class="shop-item"><span class="ico" aria-hidden="true">${A.icon(i)}</span><h3>${i.label}</h3><p class="small muted">${i.cost} coins · ${i.slot}</p><button data-ui="preview-item" data-item="${esc(i.id)}">Preview ${esc(i.label)}</button>${btn(s.equipped.includes(i.id) ? "Unequip " + i.label : s.bought.includes(i.id) ? "Equip " + i.label : "Buy " + i.label, "buy:" + i.id, s.equipped.includes(i.id) ? "primary" : "", !s.bought.includes(i.id) && Math.floor(s.coins) < i.cost)}</article>`,
       )
       .join("")}</div>`;
   }
@@ -540,11 +540,20 @@
       osc.onended = () => ctx.close();
     } catch {}
   }
+  let purchaseChoice=null;
   async function dispatch(action, sceneKey = null) {
-    const [name, arg] = action.split(":");
+    let [name, arg] = action.split(":");
     if(["pause-explore","nav","world","resume-saved","starting"].includes(name))activity=0;
     if (cloud && !cloud.isUnlocked()) return;
     if (name === "buy" && window.V7Avatar && !V7Avatar.isActiveItem(C.catalog.find(i=>i.id===arg))) return;
+    if(name==='buy-cancel'){document.getElementById('purchase-confirmation')?.close();purchaseChoice=null;return;}
+    const confirmed=name==='buy-confirm';
+    if(confirmed){if(purchaseChoice!==arg)return;purchaseChoice=null;document.getElementById('purchase-confirmation')?.close();name='buy';}
+    if(name==='buy'&&!s.bought.includes(arg)&&!confirmed){
+      const item=C.catalog.find(i=>i.id===arg);if(!item||Math.floor(s.coins)<item.cost)return;
+      let dialog=document.getElementById('purchase-confirmation');if(!dialog){dialog=document.createElement('dialog');dialog.id='purchase-confirmation';dialog.setAttribute('aria-labelledby','purchase-title');dialog.addEventListener('cancel',()=>{purchaseChoice=null;});document.body.append(dialog);}
+      purchaseChoice=arg;dialog.innerHTML=`<h2 id="purchase-title">Buy ${esc(item.label)} for ${window.V3Presentation.coins(item.cost)} coins?</h2><p>You will have ${window.V3Presentation.coins(s.coins-item.cost)} coins left.</p><div class="actions">${btn('Buy','buy-confirm:'+item.id,'primary')}${btn('Cancel','buy-cancel')}</div>`;dialog.showModal();dialog.querySelector('[data-action="buy-cancel"]').focus();return;
+    }
     if (cloud && name === "buy" && !s.bought.includes(arg)) {
       try {
         await cloud.purchase(arg);

@@ -1,5 +1,5 @@
 const {test,expect}=require('./helpers/identities.cjs');
-async function tap(p,a){const d=p.locator('dialog[open]');await (await d.count()?d:p).locator(`[data-action="${a}"]`).first().tap();await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
+async function tap(p,a){const d=p.locator('dialog[open]');await (await d.count()?d:p).locator(`[data-action="${a}"]`).first().tap();if(a.startsWith('buy:')&&await p.locator('#purchase-confirmation[open]').count())await p.locator('#purchase-confirmation [data-action^="buy-confirm:"]').tap();await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
 const waitSave=p=>p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
 for(const failure of ['loseBuy','failReadAfterBuy'])test(`purchase ${failure}: resume acknowledged intent after refresh and buy another item`,async({family})=>{
  const p=await family.open('learner');await tap(p,'skip-tour');await p.locator('nav [data-nav="camp"]').tap();await tap(p,'nav:shop');family.server[failure]=true;const before=family.server.wallet.coins;
@@ -19,7 +19,7 @@ test('local edits save immediately while routine uploads combine; explicit save/
  await tap(p,'nav:home');await expect.poll(()=>family.server.progress.adventure?.townLifeV2?.runs[family.server.progress.adventure?.townLifeV2?.active]?.values?.parts?.[0]).toBe(3);await p.reload();await expect(p.getByRole('heading',{name:'Base Camp',exact:true})).toBeVisible();
 });
 test('parent role, reward retry and learner purchase permissions remain separate',async({family})=>{
- const parent=await family.open('parent');family.server.loseAward=true;await parent.getByLabel('Action',{exact:true}).selectOption('award');await parent.getByLabel('Amount (1 to 60)',{exact:true}).fill('10');await parent.getByRole('button',{name:'Submit parent reward'}).tap();expect(family.server.wallet.bonus).toBe(10);await parent.reload();await parent.getByRole('button',{name:'Retry saved parent transaction'}).tap();expect(family.server.wallet.bonus).toBe(10);
+ const parent=await family.open('parent');family.server.loseAward=true;await parent.getByLabel('Action',{exact:true}).selectOption('award');await parent.getByLabel('Amount (1 to 60)',{exact:true}).fill('10');await parent.getByRole('button',{name:'Submit parent reward'}).tap();await expect.poll(()=>family.server.wallet.bonus).toBe(10);await parent.reload();await parent.getByRole('button',{name:'Retry saved parent transaction'}).tap();await expect.poll(()=>family.server.wallet.bonus).toBe(10);
  const learner=await family.open('learner');await expect(learner.getByRole('button',{name:'Submit parent reward'})).toHaveCount(0);await expect(learner.locator('.topbar nav')).toBeVisible();
 });
 test('new app refuses an old database before game writes and preserves existing queue bytes',async({browser},testInfo)=>{

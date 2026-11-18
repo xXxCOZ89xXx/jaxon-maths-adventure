@@ -41,6 +41,7 @@ function active() {
   return !!unlock && Date.now() < expires;
 }
 function form(title, body, action) {
+  document.querySelector("nav").hidden = true;
   panel(
     title,
     `<form id="cloud-form" class="preferences">${body}<button class="primary">Continue</button></form>`,
@@ -52,6 +53,7 @@ function form(title, body, action) {
     const b = e.submitter;
     b.disabled = true;
     try {
+      message("");
       await action();
     } catch (err) {
       message(err.message);
@@ -130,6 +132,7 @@ function authForm() {
   };
 }
 async function pinScreen() {
+  document.querySelector("nav").hidden = true;
   const { data, error } = await client.rpc("v3_role");
   if (error) throw error;
   identity = data;
@@ -202,6 +205,7 @@ async function lock() {
   location.reload();
 }
 async function open(u) {
+  message("");
   gameEpoch=null;resetBlocked=false;
   unlock = u.token;
   expires = Date.parse(u.expires);
@@ -422,6 +426,7 @@ async function heartbeat(seconds) {
   }
 }
 async function parent(remote) {
+  message("");
   useGameEpoch(remote);prepareIntents();
   const p = E.migrate(remote.progress),
     week = p.weekly[E.weekKey(Date.now())] || 0;

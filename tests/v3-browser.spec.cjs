@@ -240,6 +240,7 @@ test("Shop, avatar across screens, preferences and mock parent summary", async (
   await action(page, "nav:shop").click();
   await expect(page.locator(".shop-item")).toHaveCount(40);
   await action(page, "buy:cap").click();
+  await page.locator('[data-action="buy-confirm:cap"]').click();
   await saveWait(page, 's.equipped.includes("cap")');
   expect((await read(page)).coins).toBe(155);
   await expect(page.locator("#headerExplorer svg")).toHaveAttribute(
@@ -283,6 +284,7 @@ test("Two tabs serialize purchases and milestones without duplicate rewards", as
     action(page, "buy:cap").click(),
     action(other, "buy:cap").click(),
   ]);
+  await Promise.all([page,other].map(p=>p.locator('[data-action="buy-confirm:cap"]').click()));
   await saveWait(page, 's.bought.includes("cap")');
   expect((await read(page)).coins).toBe(55);
   expect((await read(page)).bought).toEqual(["cap"]);

@@ -1,7 +1,7 @@
 const assert = require("node:assert/strict");
 const P = require("../v3/presentation").V3Presentation;
 const value = 13.154587166666667;
-assert.equal(P.coins(value), "13.15");
+assert.equal(P.coins(value), "13");
 assert.equal(value, 13.154587166666667);
 assert.equal(P.coins(1200), "1,200");
 assert.equal(P.coins(0), "0");
@@ -17,3 +17,5 @@ assert.ok(
 console.log(
   "PASS display-only coin/time formatting and non-sensitive recovery/invalid-date handling",
 );
+
+for(const [value,expected] of [[63.79,'63'],[99.99,'99'],[100,'100']])assert.equal(P.coins(value),expected);
