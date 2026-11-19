@@ -582,6 +582,130 @@ alter default privileges for role postgres in schema public grant execute on fun
   pass(
     "target-bound hosted-test history package preserves all application rows, rolls back on failure and leaves history disabled",
   );
+  const activateModule = require("../scripts/prepare-synthetic-history-activation.cjs");
+  const activation = activateModule.prepare();
+  assert.equal(
+    fs.readFileSync(
+      path.join(
+        root,
+        "supabase/synthetic/history-activation/ACTIVATE-TEST-HISTORY.sql",
+      ),
+      "utf8",
+    ),
+    activation.sql,
+  );
+  assert.deepEqual(
+    JSON.parse(
+      fs.readFileSync(
+        path.join(root, "supabase/synthetic/history-activation/MANIFEST.json"),
+        "utf8",
+      ),
+    ),
+    activation.manifest,
+  );
+  reject(
+    () => activateModule.prepare("f".repeat(40)),
+    /actual deployed test client/,
+  );
+  reject(
+    () =>
+      activateModule.prepare(
+        activateModule.deployedClient,
+        (f) =>
+          fs.readFileSync(path.join(root, f), "utf8") +
+          (f === activateModule.sourceFile ? "\n" : ""),
+      ),
+    /activation source changed/,
+  );
+  sql("update public.v3_environment set project_ref='sfogrvedypgtxfvecmbx'");
+  reject(() => sql(activation.sql), /Exact synthetic test identity/);
+  sql(`update public.v3_environment set project_ref='${reviewedRef}'`);
+  reject(
+    () =>
+      sql(
+        activation.sql.replace(
+          /COMMIT;\nSELECT jsonb_build_object/,
+          "DO $$BEGIN RAISE EXCEPTION 'fictional late activation failure';END$$;COMMIT;\nSELECT jsonb_build_object",
+        ),
+      ),
+    /fictional late activation failure/,
+  );
+  assert.equal(
+    sql("select enabled or write_enabled from public.v3_history_settings"),
+    "f",
+  );
+  reject(
+    () =>
+      sql(
+        activation.sql.replace(
+          "DO $preserve$",
+          `UPDATE public.v3_wallet SET bonus=bonus+1 WHERE child_user_id='${ids.other}';DO $preserve$`,
+        ),
+      ),
+    /Application rows changed/,
+  );
+  assert.equal(
+    sql("select enabled or write_enabled from public.v3_history_settings"),
+    "f",
+  );
+  assert.equal(req("other", "read").wallet.bonus, 10);
+  const enabled = JSON.parse(sql(activation.sql));
+  assert.equal(enabled.historyEnabled, true);
+  assert.equal(enabled.historyWritesEnabled, true);
+  assert.equal(enabled.progressStorageVersion, 2);
+  assert.equal(enabled.clientRelease, activateModule.deployedClient);
+  assert.equal(enabled.originalRowsPreservedDuringActivation, true);
+  assert.equal(
+    JSON.parse(sql("set role anon;select public.v3_identity()")).syntheticOnly,
+    true,
+  );
+  assert.deepEqual(req("other", "save", retainedArgs), retainedAck);
+  assert.deepEqual(
+    req("otherParent", "award", retainedAward),
+    retainedAwardAck,
+  );
+  assert.deepEqual(req("other", "read_v2").progress, retainedFixture);
+  const historyValues = [{ fixture: "original fictional history" }],
+    nodeBody = JSON.stringify({ kind: "value", value: historyValues });
+  const node = { id: hash(nodeBody), body: nodeBody };
+  req("other", "history_put", { gameEpoch: 0, node });
+  const nextBounded = {
+    ...retainedFixture,
+    evidence: [],
+    _historyV2: {
+      version: 2,
+      sourceHash: hash(
+        JSON.stringify({ ...retainedFixture, evidence: historyValues }),
+      ),
+      refs: [{ path: ["evidence"], root: node.id, mode: "array" }],
+    },
+  };
+  const v2Args = {
+    requestId: crypto.randomUUID(),
+    revision: retainedAck.revision,
+    gameEpoch: 0,
+    progress: nextBounded,
+  };
+  const v2Saved = req("other", "save_v2", v2Args);
+  assert.deepEqual(req("other", "save_v2", v2Args), v2Saved);
+  assert.deepEqual(req("other", "read").progress, {
+    ...retainedFixture,
+    evidence: historyValues,
+  });
+  assert.deepEqual(req("other", "save", retainedArgs), retainedAck);
+  reject(
+    () =>
+      req("other", "save", {
+        ...retainedArgs,
+        requestId: crypto.randomUUID(),
+        revision: v2Saved.revision,
+      }),
+    /UPDATE_REQUIRED/,
+  );
+  reject(() => sql(activation.sql), /Fresh disabled history/);
+  pass(
+    "exact-client test activation preserves old acknowledgements, fences failed changes and supports V2 roundtrip without truncating progress",
+  );
   fs.mkdirSync(path.join(root, "tests/artifacts"), { recursive: true });
   fs.writeFileSync(
     path.join(root, "tests/artifacts/synthetic-baseline-verification.json"),

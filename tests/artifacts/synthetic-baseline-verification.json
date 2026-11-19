@@ -1,6 +1,6 @@
 {
   "scope": "network-disabled local PostgreSQL only",
-  "groups": 10,
+  "groups": 11,
   "manifest": {
     "target": "vyxvemtevkxlwqzelghj",
     "packageVersion": 1,
