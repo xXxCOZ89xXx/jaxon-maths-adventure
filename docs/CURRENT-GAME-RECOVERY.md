@@ -28,6 +28,16 @@ Expected successful console result: **PARTIAL: application recovery checks PASS*
 
 The script creates a local database and reads the owner's private dump. It is never run by CI against genuine data or used as a development/learner QA fixture. Keep the machine's existing PostgreSQL access/firewall controls; the script revokes PUBLIC database access but does not configure the server's listener/firewall. It does not prevent access by the local administrator.
 
+## If validation fails after restoration
+
+Do not repeat the export, overwrite the archive or clear the recovery database. The original short failure stage does not identify which validation failed and is not proof of corruption. Keep its private JSON report.
+
+The verifier now accepts optional `-ValidationReportPath` pointing to that **original completed-restore report**, beside the same dump. It validates the archive digest, earlier unchanged-archive flag, completed-restore checkpoint and strict loopback/port/random-database target pattern. It inspects that existing recovery database with PostgreSQL transactions forced read-only; it skips database creation, restore and permission-changing commands. It writes a separate summary and preserves the original report and database. A subsequent diagnostic-only report is not a substitute for the original completed-restore report.
+
+Specific validation stages identify row counts, COPY content (by ordinal, without table/record output), constraints, indexes, sequences or identity checks. Console diagnostic codes come from fixed verifier messages or fixed PowerShell error categories. Arbitrary native/SQL/record errors remain private. A mismatch still fails; the diagnostic does not waive checks or repair/rewrite any records.
+
+Twelve fictional checks cover this mode, including matching-report/unchanged-archive guards, missing dependencies, empty/null/binary/multiline values, CRLF tool output, unchanged database lists/data and server rejection of an injected diagnostic write. The owner's current archive still requires its own successful check. No managed-service recovery is certified.
+
 ## Scope relative to retained-history installation
 
 | Change | Recovery implication |
@@ -57,4 +67,4 @@ Safe local synthetic implementation and review can continue independently of thi
 
 ## Prepared verification evidence
 
-[The fictional rehearsal record](../tests/artifacts/current-game-recovery-verification.json) records eight owner-script recovery cases, the read-only contract checks, the retained-history database rehearsal, passing game regressions/lint/format/status checks and 56 Chromium save/recovery cases. This is preparation evidence, not execution of the owner's Windows restore or full managed-service recovery. The script remains a reviewable owner-run tool; no merge or deployment was performed by this preparation.
+[The fictional rehearsal record](../tests/artifacts/current-game-recovery-verification.json) records twelve owner-script recovery cases, the read-only contract checks, the retained-history database rehearsal, passing game regressions/lint/format/status checks and 56 Chromium save/recovery cases. This is preparation evidence, not execution of the owner's Windows restore or full managed-service recovery. The script remains a reviewable owner-run tool; no merge or deployment was performed by this preparation.

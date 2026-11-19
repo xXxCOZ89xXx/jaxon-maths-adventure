@@ -5,6 +5,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory=$true)][string]$ArchivePath,
+    [string]$ValidationReportPath,
     [string]$PgBin = 'C:\Program Files\PostgreSQL\17\bin')
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
@@ -27,7 +28,7 @@ $report = [ordered]@{
         'Hosted Auth login/password verification, JWT/AMR, API/RPC behaviour, email, external settings, Storage bytes and Vault recovery are NOT verified.',
         'Counts are checked against this archive, not against live production. Source maintenance/snapshot coverage and encryption copies are owner-reported, not certified here.'
     )
-    reason = $null; completedUtc = $null
+    reason = $null; failureCode = $null; validationPosition = 0; readOnlyValidation = [bool]$ValidationReportPath; completedUtc = $null
 }
 $work = $null; $exitCode = 1
 function Quote-NativeArgument([string]$Value) {
@@ -52,6 +53,7 @@ function Invoke-Pg([string]$Tool, [string[]]$Arguments) {
     $psi.EnvironmentVariables['PGPASSWORD'] = $script:LocalPassword
     $psi.EnvironmentVariables['PGCLIENTENCODING'] = 'UTF8'
     $psi.EnvironmentVariables['PGOPTIONS'] = '-c statement_timeout=120000 -c lock_timeout=5000 -c timezone=UTC -c datestyle=ISO,YMD -c intervalstyle=postgres -c extra_float_digits=3 -c bytea_output=hex'
+    if ($ValidationReportPath) { $psi.EnvironmentVariables['PGOPTIONS'] += ' -c default_transaction_read_only=on' }
     $p = New-Object System.Diagnostics.Process
     $p.StartInfo = $psi
     try {
@@ -111,6 +113,20 @@ try {
     $report.archiveBytes = (Get-Item -LiteralPath $archive).Length
     if ($report.archiveBytes -lt 1) { throw 'Archive empty' }
     $report.archiveSha256 = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+    if ($ValidationReportPath) {
+        $script:Stage = 'Verify private earlier report and matching unchanged archive'
+        $earlier = Get-Content -LiteralPath $ValidationReportPath -Raw | ConvertFrom-Json
+        if ((Get-Item -LiteralPath $ValidationReportPath).DirectoryName -cne (Get-Item -LiteralPath $archive).DirectoryName -or
+            $earlier.target -cnotmatch '^localhost:5433/(esa_restore_[a-f0-9]{32})$' -or
+            $earlier.archiveSha256 -cne $report.archiveSha256 -or $earlier.archiveUnchanged -ne $true -or
+            @($earlier.checks | Where-Object { $_ -ceq 'PASS: selected original definitions/data restored in one error-stopping transaction; local copy restricted to its owner' }).Count -ne 1) {
+            throw 'Earlier report does not identify this archive and completed local restore'
+        }
+        # Re-read the regex after other property checks; never accept a supplied endpoint.
+        [void]($earlier.target -cmatch '^localhost:5433/(esa_restore_[a-f0-9]{32})$')
+        $script:TargetDatabase = $Matches[1]
+        $report.target = $earlier.target
+    }
     $work = Join-Path (Split-Path $archive) ('restore-check-' + [guid]::NewGuid().ToString('N'))
     [void](New-Item -ItemType Directory -Path $work)
     $script:Stage = 'Verify local PostgreSQL and create a new private recovery database'
@@ -118,6 +134,7 @@ try {
     $ptr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secret)
     try { $script:LocalPassword = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($ptr) }
     finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr); $secret.Dispose() }
+    if (-not $ValidationReportPath) {
     Assert-LocalTarget 'postgres'
     if ($script:TargetDatabase -cnotmatch '^esa_restore_[a-f0-9]{32}$') { throw 'Invalid generated recovery database' }
     [void](Query ('create database ' + $script:TargetDatabase + ' template template0;'))
@@ -143,6 +160,12 @@ select not exists (
     if ($empty -ne 't') { throw 'Destination not empty; nothing will be dropped or overwritten' }
     [void](Query ('revoke connect,temporary on database ' + $script:TargetDatabase + ' from public; select 1;'))
     $report.checks += 'PASS: loopback connection/server address, PostgreSQL 17, exact authorised empty database; PUBLIC connection access revoked locally'
+    } else {
+        $script:Connection = $script:Connection.Replace('dbname=postgres ', ('dbname=' + $script:TargetDatabase + ' '))
+        Assert-LocalTarget
+        if ((Query "select current_setting('transaction_read_only');") -cne 'on') { throw 'Read-only validation required' }
+        $report.checks += 'PASS: existing restore target and archive matched; all database commands forced read-only'
+    }
     $script:Stage = 'Inspect archive and select only supported recovery objects'
     $toc = Invoke-Pg 'pg_restore' @('--list', $archive)
     $entries = @()
@@ -242,6 +265,7 @@ select not exists (
     if ($null -ne $copyTable -or $sourceCounts.Count -ne $script:Tables.Count) { throw 'Incomplete archive COPY inventory' }
     if ($sourceCounts['public.maths_families'] -lt 1 -or $sourceCounts['auth.users'] -lt 2) { throw 'Existing family/account records absent from archive' }
     foreach ($table in $script:Tables) { $sourceRows[$table] = Rows-Hash $sourceRows[$table].ToArray() }
+    if (-not $ValidationReportPath) {
     $script:Stage = 'Restore selected objects atomically (missing dependencies abort; no raw errors logged)'
     Assert-LocalTarget
     [void](Invoke-Pg 'pg_restore' @('--exit-on-error','--single-transaction','--no-owner','--no-privileges',
@@ -252,11 +276,15 @@ select not exists (
         [void](Query 'revoke all on schema v52_staging_private from public; revoke all on all tables in schema v52_staging_private from public; select 1;')
     }
     $report.checks += 'PASS: selected original definitions/data restored in one error-stopping transaction; local copy restricted to its owner'
+    }
     $script:Stage = 'Validate recovered counts, constraints, indexes, sequences and family relationships'
     Assert-LocalTarget
     foreach ($table in $script:Tables) {
+        $report.validationPosition++
+        $script:Stage = 'Validate table row count (position ' + $report.validationPosition + ')'
         $actual=[long](Query ('select count(*) from '+$table+';'))
         if ($actual -ne $sourceCounts[$table]) { throw 'Archive/restored count mismatch' }
+        $script:Stage = 'Validate table COPY content (position ' + $report.validationPosition + ')'
         $restoredCopy = Invoke-Pg 'psql' @('-X','-w','-q','-v','ON_ERROR_STOP=1','--dbname',$script:Connection,
             '--command', ('COPY ' + $table + ' (' + $copyColumns[$table] + ') TO STDOUT;'))
         $rows = if ($restoredCopy.Length -eq 0) { @() } else { @($restoredCopy.Substring(0,$restoredCopy.Length-1) -split "`n" | ForEach-Object { $_.TrimEnd([char]13) }) }
@@ -264,17 +292,21 @@ select not exists (
         $restoredCopy=$null; $rows=$null
         $report.tableCounts[$table]=$actual
     }
+    $script:Stage = 'Validate restored constraint states'
     $tableLiterals=($script:Tables | ForEach-Object { "'"+$_+"'::regclass" }) -join ','
     if ((Query "select count(*) from pg_constraint where conrelid in ($tableLiterals) and not convalidated;") -ne '0') { throw 'Unvalidated constraint' }
+    $script:Stage = 'Validate archived constraint names and definitions'
     foreach ($e in @($selected | Where-Object { $_.Kind -in @('CONSTRAINT','FK CONSTRAINT') })) {
         $tokens=$e.Tail -split '\s+'; $constraint=$tokens[2]
         if (-not (Safe-Name $constraint)) { throw 'Unsupported quoted constraint identifier' }
         if ((Query "select count(*) from pg_constraint where conrelid='$($e.Schema).$($e.Name)'::regclass and conname='$constraint' and convalidated;") -ne '1') { throw 'Constraint missing after restore' }
     }
+    $script:Stage = 'Validate restored indexes'
     foreach ($e in @($selected | Where-Object { $_.Kind -eq 'INDEX' })) {
         if (-not (Safe-Name $e.Name)) { throw 'Unsupported index identifier' }
         if ((Query "select count(*) from pg_index where indexrelid='$($e.Schema).$($e.Name)'::regclass and indisvalid and indisready;") -ne '1') { throw 'Invalid/missing index' }
     }
+    $script:Stage = 'Validate restored sequence states'
     foreach ($e in @($selected | Where-Object { $_.Kind -eq 'SEQUENCE' })) {
         $key=$e.Schema+'.'+$e.Name
         if (-not (Safe-Name $e.Name)) { throw 'Unsupported sequence identifier' }
@@ -282,9 +314,11 @@ select not exists (
         if (-not $sequenceStates.ContainsKey($key) -or
             (Query ("select last_value::text||'|'||is_called::text from "+$key+';')) -cne $sequenceStates[$key]) { throw 'Sequence state mismatch' }
     }
+    $script:Stage = 'Validate recovered current-game project identity'
     if ((Query "select count(*) from public.v3_environment where project_ref='sfogrvedypgtxfvecmbx' and name='jaxon-maths-v3-staging';") -ne '1' -or
         (Query 'select count(*) from public.v3_environment;') -ne '1') { throw 'Current family game project identity mismatch' }
     if ((Query "select count(*) from information_schema.columns where table_schema='public' and table_name='v3_progress' and column_name='game_epoch';") -ne '1') { throw 'Reset-generation column absent' }
+    $script:Stage = 'Validate family and Auth identity links'
     $orphans=Query @'
 select count(*) from public.maths_families f left join auth.users p on p.id=f.parent_user_id
  left join auth.users c on c.id=f.child_user_id
@@ -300,7 +334,34 @@ select count(*) from public.maths_families f left join auth.users p on p.id=f.pa
     }
     $report.status='PARTIAL'; $report.applicationChecks='PASS'; $exitCode=0
 } catch {
-    # Deliberately never print $_, stderr, SQL, COPY rows or native exception messages.
+    # Map only fixed verifier-owned messages, never expose arbitrary native/COPY errors.
+    $codes = @{
+        'Archive/restored count mismatch' = 'ROW_COUNT_MISMATCH'
+        'Archive/restored content digest mismatch; stop for private operator review' = 'COPY_CONTENT_MISMATCH'
+        'Unvalidated constraint' = 'CONSTRAINT_NOT_VALIDATED'
+        'Unsupported quoted constraint identifier' = 'CONSTRAINT_IDENTIFIER_UNSUPPORTED'
+        'Constraint missing after restore' = 'CONSTRAINT_MISSING'
+        'Unsupported index identifier' = 'INDEX_IDENTIFIER_UNSUPPORTED'
+        'Invalid/missing index' = 'INDEX_INVALID_OR_MISSING'
+        'Unsupported sequence identifier' = 'SEQUENCE_IDENTIFIER_UNSUPPORTED'
+        'Missing sequence' = 'SEQUENCE_MISSING'
+        'Sequence state mismatch' = 'SEQUENCE_STATE_MISMATCH'
+        'Current family game project identity mismatch' = 'PROJECT_IDENTITY_MISMATCH'
+        'Reset-generation column absent' = 'RESET_COLUMN_MISSING'
+        'Broken Auth/family relationship' = 'FAMILY_LINK_MISMATCH'
+        'Broken archived identity link' = 'AUTH_IDENTITY_LINK_MISMATCH'
+        'Earlier report does not identify this archive and completed local restore' = 'EARLIER_REPORT_MISMATCH'
+        'Read-only validation required' = 'READ_ONLY_GUARD_FAILED'
+        'Native command failed; sensitive diagnostics suppressed' = 'NATIVE_TOOL_FAILED'
+        'Native command produced diagnostics; sensitive text suppressed' = 'NATIVE_TOOL_DIAGNOSTICS'
+        'Native command timeout' = 'NATIVE_TOOL_TIMEOUT'
+    }
+    $message = [string]$_.Exception.Message
+    $report.failureCode = if ($codes.ContainsKey($message)) { $codes[$message] }
+        elseif ($_.FullyQualifiedErrorId -match 'PropertyNotFound') { 'POWERSHELL_PROPERTY_ERROR' }
+        elseif ($_.FullyQualifiedErrorId -match 'MethodNotFound|InvokeMethodOnNull|MethodInvocation') { 'POWERSHELL_METHOD_ERROR' }
+        elseif ($_.FullyQualifiedErrorId -match 'ParameterBinding|ArgumentTransformation') { 'POWERSHELL_ARGUMENT_ERROR' }
+        else { 'VERIFIER_ERROR_DETAILS_PRIVATE' }
     $report.reason=$script:Stage
     $report.status='FAIL'; $report.applicationChecks='FAIL'; $exitCode=1
 } finally {
@@ -319,6 +380,8 @@ select count(*) from public.maths_families f left join auth.users p on p.id=f.pa
     Write-Host ($report.status+': application recovery checks '+$report.applicationChecks)
     Write-Host ('Target: localhost:5433/' + $script:TargetDatabase + '. Original archive unchanged: ' + $report.archiveUnchanged)
     if ($report.reason) { Write-Host ('Stopped at: '+$report.reason) }
+    if ($report.failureCode) { Write-Host ('Diagnostic code: '+$report.failureCode) }
+    if ($ValidationReportPath) { Write-Host 'Existing local restore inspected read-only; no new database or restore was created.' }
     Write-Host 'This does NOT verify complete Supabase/Auth-service recovery. See the private JSON summary for exclusions.'
     if ($reportPath) { Write-Host ('Private summary: '+$reportPath) }
     if ($exitCode -ne 0) { Write-Host 'No automatic cleanup/reset is performed. Do not paste raw database errors or records; share only this summary.' }

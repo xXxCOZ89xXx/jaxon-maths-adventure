@@ -6,11 +6,11 @@
   "ownerWindowsExecutionVerified": false,
   "hostedSQLExecuted": false,
   "mergeOrDeploymentPerformed": false,
-  "scriptSha256": "75e8accee1efb91a55a1280e95b6bbc5628b5e09f76f9a12e28b4c8fc430e3e7",
+  "scriptSha256": "476b8761033159464044c24cd1476c94c108058dc9d6d3534edd6cd764a4d02a",
   "rehearsal": {
     "powershell": "7.4.6 on Linux; Windows PowerShell 5.1 compatibility intended, not owner-executed",
     "database": "PostgreSQL 17.12 Alpine; disposable network-disabled containers",
-    "result": "8 suites passed",
+    "result": "12 suites passed",
     "cases": [
       "Current V3 + legacy/public/private + actual archived Auth record restoration and COPY digests",
       "Unique rerun preserves old recovery databases",
@@ -19,7 +19,11 @@
       "Invalid target name rejected",
       "Equal row count but changed wallet rejected",
       "Missing dependency rolls back selected restore without stubs",
-      "Missing reset/request table refused before restore"
+      "Missing reset/request table refused before restore",
+      "Read-only revalidation of existing restore with CRLF tool output, empty/null/binary/multiline values; no new database or data changes",
+      "Failed content validation returns safe code and leaves differing records unchanged",
+      "PostgreSQL read-only transactions reject attempted diagnostic writes",
+      "Archive/report digest mismatch refused before target connection"
     ]
   },
   "additionalChecks": {
@@ -27,11 +31,12 @@
     "historyStorageDatabase": "PASS: additive disabled installation, rollback, history integrity/retries, roles, write pause/reset fencing",
     "npmTest": "PASS, including 121440 prompt freshness checks",
     "combinedIpadRelease": "PASS: 56 Chromium cases; physical Safari untested",
-    "lintFormatStatus": "PASS"
+    "lintFormatStatus": "PASS after diagnostic update"
   },
   "remaining": [
     "Owner executes scoped current-game restore on trusted workstation",
     "Managed-service/Auth/Vault/configuration/Storage recovery remains unverified",
     "Specific installed-contract and SQL installation/activation review required"
-  ]
+  ],
+  "diagnosticMode": "Optional original-report-bound read-only revalidation; no restore, database creation or data repair"
 }

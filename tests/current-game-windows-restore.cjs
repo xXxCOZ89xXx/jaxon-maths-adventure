@@ -116,6 +116,9 @@ try {
   sql(`create schema v52_staging_private;create table v52_staging_private.control(state text,previous jsonb);
  insert into v52_staging_private.control values('open','{"private":"PRIVATE_FICTIONAL_JSON"}');
  create table public.future_evidence(id int primary key,detail text);
+ create table public.empty_evidence(id int primary key,detail text);
+ create table public.copy_edge_cases(id int primary key,detail text,bytes bytea);
+ insert into public.copy_edge_cases values (1,'',null),(2,null,decode('00ff0a0d','hex')),(3,E'line\nline\ttab',null);
  insert into public.future_evidence values(1,E'PRIVATE_FICTIONAL_JSON\\nline\\ttab\\\\slash');`);
   sql(
     "create table old_restore_marker(id int);insert into old_restore_marker values(1);",
@@ -188,21 +191,26 @@ try {
   fs.mkdirSync(bin);
   for (const tool of ["psql", "pg_restore"]) {
     // Test transport only: real PostgreSQL tools inside a network-disabled container.
-    const body = `#!/bin/sh\nexec docker --host=unix:///var/run/docker.sock exec -e PGPASSWORD -e PGOPTIONS -e PGCLIENTENCODING -e PGHOST -e PGHOSTADDR -e PGPORT -e PGDATABASE -e PGSERVICE -e PGSERVICEFILE -e PGPASSFILE ${name} ${tool} "$@"\n`;
+    const body = `#!/usr/bin/env node
+const cp=require('node:child_process');
+const r=cp.spawnSync('docker',['--host=unix:///var/run/docker.sock','exec',...['PGPASSWORD','PGOPTIONS','PGCLIENTENCODING','PGHOST','PGHOSTADDR','PGPORT','PGDATABASE','PGSERVICE','PGSERVICEFILE','PGPASSFILE'].flatMap(k=>['-e',k]),'${name}','${tool}',...process.argv.slice(2)],{encoding:'utf8',stdio:['inherit','pipe','pipe'],maxBuffer:32*1024*1024});
+process.stdout.write(process.env.ESA_TEST_CRLF==='1' ? r.stdout.replace(/\\r?\\n/g,'\\r\\n') : r.stdout);
+process.stderr.write(r.stderr);process.exit(r.status??1);
+`;
     fs.writeFileSync(path.join(bin, tool + ".exe"), body, { mode: 0o700 });
   }
   const launch = path.join(work, "launch.ps1");
-  function run(scriptPath = script, poison = false) {
+  function run(scriptPath = script, poison = false, options = {}) {
     const quote = (s) => "'" + s.replaceAll("'", "''") + "'";
     const oldReports = new Set(
       fs.readdirSync(privateDir).filter((x) => x.endsWith(".json")),
     );
     fs.writeFileSync(
       launch,
-      `New-PSDrive -Name C -PSProvider FileSystem -Root ${quote(work)} | Out-Null\nfunction Read-Host { ConvertTo-SecureString 'fictional-local-password' -AsPlainText -Force }\n${poison ? "$env:PGHOST='remote.invalid';$env:PGDATABASE='production';$env:PGPORT='9999';$env:PGSERVICE='wrong';$env:PGOPTIONS='-c search_path=unsafe'\n" : ""}& ${quote(scriptPath)} -PgBin ${quote(bin)} -ArchivePath 'C:\\Users\\c_mil\\Jaxon-Private-Backup\\current-game.dump'\nexit $LASTEXITCODE\n`,
+      `New-PSDrive -Name C -PSProvider FileSystem -Root ${quote(work)} | Out-Null\nfunction Read-Host { ConvertTo-SecureString 'fictional-local-password' -AsPlainText -Force }\n${poison ? "$env:PGHOST='remote.invalid';$env:PGDATABASE='production';$env:PGPORT='9999';$env:PGSERVICE='wrong';$env:PGOPTIONS='-c search_path=unsafe'\n" : ""}& ${quote(scriptPath)} -PgBin ${quote(bin)} -ArchivePath 'C:\\Users\\c_mil\\Jaxon-Private-Backup\\current-game.dump'${options.reportPath ? " -ValidationReportPath " + quote(options.reportPath) : ""}\nexit $LASTEXITCODE\n`,
     );
     const r = cp.spawnSync(pwsh, ["-NoProfile", "-File", launch], {
-      env,
+      env: { ...env, ESA_TEST_CRLF: options.crlf ? "1" : "0" },
       encoding: "utf8",
     });
     const reports = fs
@@ -227,7 +235,7 @@ try {
         "no sensitive values displayed/reported",
       );
     assert.deepEqual(fs.readFileSync(dump), original, "archive immutable");
-    return { ...r, report };
+    return { ...r, report, reportPath: path.join(privateDir, reports[0]) };
   }
   let r = run(script, true);
   const target = r.report.target.split("/")[1];
@@ -251,6 +259,8 @@ try {
     assert.equal(r.report.tableCounts["public." + table], 1, table);
   assert.equal(r.report.tableCounts["v52_staging_private.control"], 1);
   assert.equal(r.report.tableCounts["auth.users"], 2);
+  assert.equal(r.report.tableCounts["public.empty_evidence"], 0);
+  assert.equal(r.report.tableCounts["public.copy_edge_cases"], 3);
   assert.ok(
     r.report.managedDependencies.some(
       (x) => x.name === "supabase_vault" && !x.locallyAvailable && !x.restored,
@@ -287,6 +297,36 @@ try {
   );
   pass(
     "current game + old tables + future public table + private control + actual Auth: original data/content digests, reset, PIN, wallet/receipt preservation; unavailable Vault explicitly excluded; no sensitive output",
+  );
+  const firstReport = r.reportPath;
+  const originalData = sql(
+    "select jsonb_agg(to_jsonb(w)) from public.v3_wallet w",
+    target,
+  );
+  const originalDatabases = sql(
+    "select string_agg(datname,',' order by datname) from pg_database",
+    "postgres",
+  );
+  r = run(script, false, { reportPath: firstReport, crlf: true });
+  if (r.status !== 0) {
+    console.error(r.stdout, r.stderr, JSON.stringify(r.report));
+    throw Error("Read-only CRLF validation failed");
+  }
+  assert.equal(r.report.readOnlyValidation, true);
+  assert.equal(r.report.target, "localhost:5433/" + target);
+  assert.equal(
+    sql("select jsonb_agg(to_jsonb(w)) from public.v3_wallet w", target),
+    originalData,
+  );
+  assert.equal(
+    sql(
+      "select string_agg(datname,',' order by datname) from pg_database",
+      "postgres",
+    ),
+    originalDatabases,
+  );
+  pass(
+    "existing restore revalidated with CRLF tool output, read-only transactions, no new database or data changes",
   );
   r = run();
   assert.equal(r.status, 0);
@@ -330,7 +370,55 @@ try {
   );
   assert.notEqual(r.status, 0);
   assert.equal(r.report.applicationChecks, "FAIL");
-  pass("same row count but altered wallet is rejected by content digest");
+  assert.equal(r.report.failureCode, "COPY_CONTENT_MISMATCH");
+  pass(
+    "same row count but altered wallet is rejected with safe content-mismatch diagnostic",
+  );
+  const tamperedTarget = r.report.target.split("/")[1];
+  const tamperedData = sql(
+    "select jsonb_agg(to_jsonb(w)) from public.v3_wallet w",
+    tamperedTarget,
+  );
+  r = run(script, false, { reportPath: r.reportPath });
+  assert.notEqual(r.status, 0);
+  assert.equal(r.report.failureCode, "COPY_CONTENT_MISMATCH");
+  assert.equal(
+    sql(
+      "select jsonb_agg(to_jsonb(w)) from public.v3_wallet w",
+      tamperedTarget,
+    ),
+    tamperedData,
+  );
+  pass(
+    "read-only diagnostic of failed restore preserves the differing records and still fails",
+  );
+  r = run(
+    mutation(
+      "        $restoredCopy = Invoke-Pg",
+      "        [void](Query 'update public.v3_wallet set coins=coins+1;')\n        $restoredCopy = Invoke-Pg",
+    ),
+    false,
+    { reportPath: firstReport },
+  );
+  assert.notEqual(r.status, 0);
+  assert.equal(r.report.failureCode, "NATIVE_TOOL_FAILED");
+  assert.equal(
+    sql("select jsonb_agg(to_jsonb(w)) from public.v3_wallet w", target),
+    originalData,
+  );
+  pass("server read-only mode rejects an accidental diagnostic write");
+  const badReportPath = path.join(privateDir, "wrong-source.json");
+  const badReport = JSON.parse(
+    fs.readFileSync(firstReport, "utf8").replace(/^\uFEFF/, ""),
+  );
+  badReport.archiveSha256 = "0".repeat(64);
+  fs.writeFileSync(badReportPath, JSON.stringify(badReport));
+  r = run(script, false, { reportPath: badReportPath });
+  assert.notEqual(r.status, 0);
+  assert.equal(r.report.failureCode, "EARLIER_REPORT_MISMATCH");
+  pass(
+    "mismatched archive/report refused before connecting to the recovery target",
+  );
   sql(
     "alter table auth.users add column missing_dependency managed_only.not_supported;",
   );
