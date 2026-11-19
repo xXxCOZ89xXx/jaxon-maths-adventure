@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-19",
+  "base": "21237873a04ce1306b8596d1097b234098300f01",
+  "scope": "Current application-data recovery preparation; fictional records only",
+  "ownerArchiveAccessed": false,
+  "ownerWindowsExecutionVerified": false,
+  "hostedSQLExecuted": false,
+  "mergeOrDeploymentPerformed": false,
+  "scriptSha256": "75e8accee1efb91a55a1280e95b6bbc5628b5e09f76f9a12e28b4c8fc430e3e7",
+  "rehearsal": {
+    "powershell": "7.4.6 on Linux; Windows PowerShell 5.1 compatibility intended, not owner-executed",
+    "database": "Cached PostgreSQL 17 Alpine; disposable network-disabled containers",
+    "result": "8 suites passed",
+    "cases": [
+      "Current V3 + legacy/public/private + actual archived Auth record restoration and COPY digests",
+      "Unique rerun preserves old recovery databases",
+      "Wrong port rejected",
+      "Non-loopback identity rejected",
+      "Invalid target name rejected",
+      "Equal row count but changed wallet rejected",
+      "Missing dependency rolls back selected restore without stubs",
+      "Missing reset/request table refused before restore"
+    ]
+  },
+  "additionalChecks": {
+    "installedContractPreflight": "PASS: project guard, routine hashes and security properties, RLS/grants and leaked-grant detection; no learner rows/output or data changes",
+    "historyStorageDatabase": "PASS: additive disabled installation, rollback, history integrity/retries, roles, write pause/reset fencing",
+    "npmTest": "PASS, including 121440 prompt freshness checks",
+    "combinedIpadRelease": "PASS: 56 Chromium cases; physical Safari untested",
+    "lintFormatStatus": "PASS"
+  },
+  "remaining": [
+    "Owner executes scoped current-game restore on trusted workstation",
+    "Managed-service/Auth/Vault/configuration/Storage recovery remains unverified",
+    "Specific installed-contract and SQL installation/activation review required"
+  ]
+}

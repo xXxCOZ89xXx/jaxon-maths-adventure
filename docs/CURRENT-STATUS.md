@@ -2,10 +2,10 @@
 
 Generated from the code registry by `npm run status`. Historical review reports remain dated evidence; this page is the current implementation summary.
 
-- Current scope: Everyday Skills Adventures branding preparation.
+- Current scope: UK launch Phase 1 recovery preparation.
 - Registry: **96 skills across 9 worlds**, with 146 prerequisite links.
-- Released baseline: `e33d3ef064ef6b6df036771ebab466b9465ff30e`.
-- Release: Phase 3 application is live. The Everyday Skills Adventures branding change is prepared for PR review and is not deployed. The owner-selected future live address is everydayskillsadventures.co.uk/game; sales-site routing and Auth configuration have not changed.
+- Released baseline: `21237873a04ce1306b8596d1097b234098300f01`.
+- Release: Branding PR #38 is released on both existing game/demo hosts. The UK family launch roadmap is recorded in the shared Notion project home. /game, /account and /demo are selected future paths; their routing is not deployed by this package.
 
 ## Implementation
 
@@ -20,9 +20,9 @@ Generated from the code registry by `npm run status`. Historical review reports 
 
 ## Verification and cutover
 
-Local npm test, the 56-case combined iPad Chromium save/recovery gate, 2,988 curriculum task completions, retained-history PostgreSQL rehearsals, private/demo build checks, lint and formatting pass. Extended bank coverage verifies 121,440 fresh prompts. GitHub CI is reported on PR #37; physical iPad Safari acceptance is deferred. See PHASE3-VERIFICATION.md for scope and limits.
+Local npm test, the 56-case combined iPad Chromium save/recovery gate, 2,988 curriculum task completions, retained-history PostgreSQL rehearsals, private/demo build checks, lint and formatting pass. Extended bank coverage verifies 121,440 fresh prompts. GitHub CI is reported on PR #37; physical iPad Safari acceptance is deferred. See PHASE3-VERIFICATION.md for scope and limits. Current recovery preparation has separate fictional PowerShell/PostgreSQL rehearsals; see CURRENT-GAME-RECOVERY.md for scope. Earlier test results remain dated evidence, not new device/service certification.
 
-Owner confirmed on 19 November that the new encrypted backup is not yet ready. No hosted SQL, account or project changes have been made. Compatible client release can precede installation; database installation and cutover wait for a verified encrypted backup and concrete review.
+The owner reports a current main-game export and two tested encrypted copies. Current application-data restoration remains unverified. A new local verifier covers current V3 and existing public/private application tables without Docker/WSL; see CURRENT-GAME-RECOVERY.md. No hosted SQL, Auth, accounts, hosting or project changes were made. Concrete storage review and managed-service recovery limitations remain open.
 
 One combined manual iPad Safari session after the planned updates and any approved cutover are complete.
 

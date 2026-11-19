@@ -1,0 +1,28 @@
+name: Current game recovery rehearsal
+on:
+  pull_request:
+    branches: [release/ipad]
+    paths:
+      - scripts/windows/Verify-CurrentGameBackup.ps1
+      - tests/current-game-windows-restore.cjs
+      - supabase/**
+      - tests/fixtures/v52-legacy-schema.sql
+      - .github/workflows/current-game-recovery.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic-recovery:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Prepare fictional recovery tools
+        run: |
+          command -v pwsh
+          docker pull postgres:17-alpine
+      - name: Rehearse owner script with fictional records only
+        run: node tests/current-game-windows-restore.cjs
