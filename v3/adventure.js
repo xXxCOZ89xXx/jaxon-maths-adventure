@@ -790,6 +790,7 @@
   function rememberTeaching(s,q){
     if(![8,9].includes(q?.contentVersion))return;
     const t=q.tasks[q.i];s.seen||=[];
+    const registry=typeof module!=='undefined'?require('./content-registry').V3Content:root.V3Content;if(t.markingVersion===1&&registry)s.seenQuestionIds=[...new Set([...(s.seenQuestionIds||[]),registry.identity(t),t.exampleQuestionKey].filter(Boolean))];
     for(const prompt of [t.prompt,t.examplePrompt])if(prompt&&!s.seen.includes(prompt))s.seen.push(prompt);
   }
   function start(s, world, route, tier, context = null) {
@@ -947,6 +948,7 @@
         ? [...v].sort((a, b) => a - b).every((n, i) => n === t.answer[i])
         : v.every((n, i) => n === t.answer[i]);
     }
+    if(t.markingVersion===1&&typeof t.answer==='number'){const marker=typeof module!=='undefined'?require('./answer-marking').V3AnswerMarking:root.V3AnswerMarking;return marker.matches(t.answer,v,t.answerContract);}
     return v === t.answer;
   }
   function help(s, worked = false) {
@@ -1134,7 +1136,6 @@
     next,
     value,
     correct,
-    task,
     campPlace,
     projects,
     campStages,

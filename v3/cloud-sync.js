@@ -46,6 +46,7 @@
     rpc,
     id = () => crypto.randomUUID(),
     notify = () => {},
+    storageVersion = 1,
   }) {
     let doc;
     const raw = storage.getItem(key);
@@ -69,17 +70,18 @@
     // Local revision is a device write counter, not new learning content.
     const signature = value => { const p=copy(value); delete p.revision; return JSON.stringify(p); };
     function write() {
-      storage.setItem(key, JSON.stringify(doc));
+      const saved=storage.setItem(key, JSON.stringify(doc));
+      if(saved?.then)return saved.then(()=>notify(copy(doc)));
       notify(copy(doc));
     }
+    function stored(value){const saved=write();return saved?.then?saved.then(()=>value):value;}
     function enqueue(progress) {
       // Keep the in-flight immutable request for idempotent retry; later edits wait behind it.
       const next=signature(progress);
       if(doc.latest && signature(doc.latest)===next)return false;
-      if(!doc.pending && next===acknowledged){if(doc.latest){doc.latest=null;write();}return false;}
+      if(!doc.pending && next===acknowledged){if(doc.latest){doc.latest=null;return stored(false);}return false;}
       doc.latest = copy(progress);
-      write();
-      return true;
+      return stored(true);
     }
     async function flush({ oneRequest = false } = {}) {
       if (running) return running;
@@ -89,17 +91,24 @@
           if (!doc.pending) {
             doc.pending = {
               requestId: id(),
+              ...(storageVersion===2?{storageVersion:2}:{}),
               revision: doc.revision,
               progress: doc.latest,
             };
             doc.latest = null;
-            write();
+            await write();
           }
-          const sent = copy(doc.pending),
-            result = await rpc("save", sent);
+          const sent = copy(doc.pending);
+          let result;
+          try{result=await rpc("save",sent);}catch(error){
+            if(storageVersion!==2||sent.storageVersion===2||!String(error.message).includes("UPDATE_REQUIRED"))throw error;
+            const remote=await rpc("read");
+            if(!Number.isInteger(remote.revision)||!remote.progress)throw Error("Original save retained; remote recovery is unavailable");
+            result={...remote,conflict:true};
+          }
           if (result.conflict) {
             doc.conflict = result;
-            write();
+            await write();
             return copy(doc);
           }
           if (
@@ -111,7 +120,7 @@
           acknowledged = signature(sent.progress);
           doc.pending = null;
           if(doc.latest && signature(doc.latest)===acknowledged)doc.latest=null;
-          write();
+          await write();
           if(oneRequest)break;
         }
         return copy(doc);
@@ -124,8 +133,7 @@
       if (doc.pending || doc.latest || doc.conflict) return false;
       doc.revision = remote.revision;
       acknowledged = remote.progress ? signature(remote.progress) : null;
-      write();
-      return true;
+      return stored(true);
     }
     function resolve(choice) {
       if (!doc.conflict || !["remote", "local"].includes(choice))
@@ -135,6 +143,7 @@
       // Preserve both alternatives; no field-wise merger can safely combine unfinished assessments.
       doc.archives.push({
         at: new Date().toISOString(),
+        ...(doc.pending?{pending:copy(doc.pending)}:{}),
         local: copy(local),
         remote: copy(remote),
       });
@@ -142,8 +151,7 @@
       doc.pending = null;
       doc.latest = choice === "local" ? copy(local) : null;
       doc.conflict = null;
-      write();
-      return copy(choice === "local" ? local : remote.progress);
+      return stored(copy(choice === "local" ? local : remote.progress));
     }
     return { enqueue, flush, seed, resolve, snapshot: () => copy(doc) };
   }

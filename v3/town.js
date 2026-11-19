@@ -408,7 +408,7 @@
     const slot = (round + i + id.length) % 4;
     const options = values.filter((x) => x !== answer).map(String);
     options.splice(slot, 0, String(answer));
-    return [prompt, String(answer), options, hint, worked, {unit:unit||(/pence/i.test(prompt)?'pence':/pounds/i.test(prompt)?'pounds':'')}];
+    return [prompt, String(answer), options, hint, worked, {generatorKey:`town:${id}:v1:b${band}:r${round}:i${i}`,unit:unit||(/pence/i.test(prompt)?'pence':/pounds/i.test(prompt)?'pounds':'')}];
   }
   function install(curriculum, bank) {
     if (!curriculum.skills.some((k) => k.id === "town_money"))
@@ -461,6 +461,7 @@
   function moneyUnit(prompt){return [...String(prompt).matchAll(/\b(pounds|pence)\b/gi)].at(-1)?.[1].toLowerCase()||'';}
   function moneyAnswerNumber(value,unit){let text=String(value).trim();if(unit==='pounds'){if(/p(?:ence)?$/i.test(text))return NaN;text=text.replace(/^£\s*/,'');}else if(unit==='pence'){if(text.startsWith('£'))return NaN;text=text.replace(/\s*p(?:ence)?$/i,'');}return /^-?\d+(?:\.\d{1,2})?$/.test(text)?Number(text):NaN;}
   function answerLabel(q,value) {
+    if(q[5]?.choiceLabels&&Object.hasOwn(q[5].choiceLabels,String(value)))return q[5].choiceLabels[String(value)];
     const unit=q[5]?.unit||moneyUnit(q[0]);
     return unit==='pounds'?money(Math.round(Number(value)*100)):unit==='pence'?value+'p':value;
   }

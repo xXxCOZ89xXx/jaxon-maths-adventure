@@ -12,6 +12,7 @@
     $ = (id) => document.getElementById(id),
     esc = A.esc;
   const cloud = window.V3CloudContext;
+  const localGameStorage=cloud?.storage||localStorage;
   const KEY = cloud?.key || "jaxon_v3_fictional_demo_2026",
     LOCK = KEY + ":transaction";
   let itemPreview=null, lastSceneKey=null;
@@ -21,7 +22,7 @@
     pendingSaves = 0;
   function read() {
     try {
-      return E.migrate(JSON.parse(localStorage.getItem(KEY)) || {});
+      return E.migrate(JSON.parse(localGameStorage.getItem(KEY)) || {});
     } catch (error) {
       storageError = error instanceof SyntaxError ? "corrupt" : "unavailable";
       return E.fresh();
@@ -65,7 +66,7 @@
   function status(message) {
     $("status").textContent = message;
   }
-  function persist() {
+  async function persist() {
     if (storageError === "corrupt") {
       status(
         "Saved Test Camp data could not be read. This session is temporary; the saved copy has been preserved.",
@@ -75,8 +76,8 @@
     if (cloud) cloud.applyWallet(s);
     s.revision++;
     try {
-      cloud?.onSave(s);
-      localStorage.setItem(KEY, JSON.stringify(s));
+      await cloud?.onSave(s);
+      await localGameStorage.setItem(KEY, JSON.stringify(s));
       storageError = false;
       coinFeedback();
       status(
@@ -95,7 +96,7 @@
     if (cloud && !cloud.isUnlocked()) return;
     pendingSaves++;
     document.documentElement.setAttribute("data-saving", "");
-    const transact = () => {
+    const transact = async () => {
       if (!storageError) s = read();
       const priorView = s.view,
         focused = document.activeElement,
@@ -104,7 +105,7 @@
         ),
         token = kind ? focused.dataset[kind] : null;
       fn();
-      persist();
+      await persist();
       if (renderPage) {
         render(focus);
         if (!focus && priorView === s.view && kind && token) {
@@ -125,7 +126,7 @@
     try {
       if (navigator.locks) await navigator.locks.request(LOCK, transact);
       else {
-        transact();
+        await transact();
         status(
           "Please use one Test Camp tab: this browser cannot coordinate saves across tabs.",
         );
@@ -207,7 +208,7 @@
       .map((k) => {
         const c = s.checks[k.id],
           old = s.skills[k.id];
-        return `<article class="panel"><h3>${esc(k.name)}</h3><p class="small muted">${esc(k.description)}</p><span class="badge">${c?.stage >= 2 ? "SPACED MASTERY" : c?.stage === 1 ? "INDEPENDENTLY PRACTISED" : old?.state === "mastered" ? "EXISTING MASTERY" : "READY TO EXPLORE"}</span><div class="actions">${btn("Learn & practise", "learn:" + k.id)}${!s.discovery[k.id]?.complete ? btn("Find my starting point", "discover:" + k.id) : ""}${btn("Independent check", "check:" + k.id, "", !s.practice[k.id]?.completed || c?.reteach || c?.due > Date.now())}</div>${c?.due > Date.now() ? '<p class="small muted">Memory check due ' + esc(new Date(c.due).toLocaleDateString("en-GB", { timeZone: "Europe/London" })) + "</p>" : ""}${c?.reteach ? '<p class="small muted">Revisit the lesson before another check.</p>' : ""}</article>`;
+        return `<article class="panel"><h3>${esc(k.name)}</h3><p class="small muted">${esc(k.description)}</p><span class="badge">${c?.reteach ? "REVISIT LESSON" : c?.stage >= 2 ? "SPACED MASTERY" : c?.stage === 1 ? "INDEPENDENTLY PRACTISED" : old?.state === "mastered" ? "EXISTING MASTERY" : "READY TO EXPLORE"}</span><div class="actions">${btn("Learn & practise", "learn:" + k.id)}${!s.discovery[k.id]?.complete ? btn("Find my starting point", "discover:" + k.id) : ""}${btn("Independent check", "check:" + k.id, "", !s.practice[k.id]?.completed || c?.reteach || c?.due > Date.now())}</div>${c?.due > Date.now() ? '<p class="small muted">Memory check due ' + esc(new Date(c.due).toLocaleDateString("en-GB", { timeZone: "Europe/London" })) + "</p>" : ""}${c?.reteach ? '<p class="small muted">Revisit the lesson before another check.</p>' : ""}</article>`;
       })
       .join("")}</section>${w.id === "town" ? "</details>" : ""}`;
   }
@@ -314,7 +315,7 @@
     const r = s.lastResult;
     if (!r) return home();
     const w = r.world || skill(r.id)?.world || s.world;
-    return `<section class="recap"><span class="badge">A CHAPTER IN YOUR JOURNEY</span><h1 style="margin-top:22px">${r.type === "expedition" ? "A visit worth remembering." : r.type === "restoration" ? "Your restoration stage is complete." : r.type === "quest" ? "Look what you restored." : r.type === "discovery" ? "Your starting point" : r.type === "check" ? "Your independent check" : "Another idea explored."}</h1><p class="muted">${r.type === "expedition" ? (r.newReward ? "A new milestone and keepsake are saved. Your maths has helped this place grow." : "A fresh visit complete. Your earlier rewards are safe; replaying does not duplicate them.") : r.type === "restoration" ? (r.legacy ? "Your earlier saved puzzle is complete. Later stages use your assessed maths in a longer plan. Restoration stays separate from independent mastery." : "You applied your assessed maths in a longer plan. Your work is saved as restoration practice, not independent mastery.") : r.type === "quest" ? "Three landmarks, brought back to life through your maths. Your progress is saved." : r.type === "discovery" ? "A starting point helps us choose suitable fresh practice. Discovery does not award mastery." : r.type === "check" ? r.correct + " / " + r.total + " first answers without help. " + (s.checks[r.id]?.stage >= 2 ? "Spaced mastery demonstrated." : s.checks[r.id]?.stage === 1 ? "Independently practised. Come back for a memory check in two days." : "Revisit the lesson before your next fresh check.") : "Guided practice complete. Your next step can be a separate fresh independent check."}</p>${r.participation&&!r.participation.eligible?`<p role="status">Finished with help. Your work is saved. Replay and answer at least ${r.participation.required} of ${r.participation.total} steps without choosing I don’t know to earn the milestone. Hints and retries are welcome.</p>`:""}${art(w)}<div class="actions">${btn("Explore this world", "world:" + w, "primary")}${r.type === "practice" ? btn("Try a fresh independent check", "check:" + r.id) : r.type === "discovery" && !s.discovery[r.id]?.complete ? btn("Continue discovery", "discover:" + r.id) : ""}${r.type === "expedition" ? btn("Learn the maths behind this visit", "learn:" + (M.routes(w).find((v) => v.id === r.route)?.skills[0] || E.worlds.find((v) => v.id === w).skill)) : ""}${btn("Visit Base Camp", "nav:camp")}${btn("Save & exit", "nav:home")}</div></section>`;
+    return `<section class="recap"><span class="badge">A CHAPTER IN YOUR JOURNEY</span><h1 style="margin-top:22px">${r.type === "expedition" ? "A visit worth remembering." : r.type === "restoration" ? "Your restoration stage is complete." : r.type === "quest" ? "Look what you restored." : r.type === "discovery" ? "Your starting point" : r.type === "check" ? "Your independent check" : "Another idea explored."}</h1><p class="muted">${r.type === "expedition" ? (r.newReward ? "A new milestone and keepsake are saved. Your maths has helped this place grow." : "A fresh visit complete. Your earlier rewards are safe; replaying does not duplicate them.") : r.type === "restoration" ? (r.legacy ? "Your earlier saved puzzle is complete. Later stages use your assessed maths in a longer plan. Restoration stays separate from independent mastery." : "You applied your assessed maths in a longer plan. Your work is saved as restoration practice, not independent mastery.") : r.type === "quest" ? "Three landmarks, brought back to life through your maths. Your progress is saved." : r.type === "discovery" ? "A starting point helps us choose suitable fresh practice. Discovery does not award mastery." : r.type === "check" ? r.correct + " / " + r.total + " first answers without help. " + (s.checks[r.id]?.reteach ? "Revisit the lesson before your next fresh check. Your earlier evidence stays saved." : s.checks[r.id]?.stage >= 2 ? "Spaced mastery demonstrated." : s.checks[r.id]?.stage === 1 ? "Independently practised. Come back for a memory check in two days." : "Revisit the lesson before your next fresh check.") : "Guided practice complete. Your next step can be a separate fresh independent check."}</p>${r.participation&&!r.participation.eligible?`<p role="status">Finished with help. Your work is saved. Replay and answer at least ${r.participation.required} of ${r.participation.total} steps without choosing I don’t know to earn the milestone. Hints and retries are welcome.</p>`:""}${art(w)}<div class="actions">${btn("Explore this world", "world:" + w, "primary")}${r.type === "practice" ? btn("Try a fresh independent check", "check:" + r.id) : r.type === "discovery" && !s.discovery[r.id]?.complete ? btn("Continue discovery", "discover:" + r.id) : ""}${r.type === "expedition" ? btn("Learn the maths behind this visit", "learn:" + (M.routes(w).find((v) => v.id === r.route)?.skills[0] || E.worlds.find((v) => v.id === w).skill)) : ""}${btn("Visit Base Camp", "nav:camp")}${btn("Save & exit", "nav:home")}</div></section>`;
   }
   function campPlanner(progress) {
     const selected=M.campStages.find(st=>st.id===campPreview && st.id<=progress.current.id) || progress.current;
@@ -380,7 +381,7 @@
       .join("")}</div></details>${U.collection(s)}`;
   }
   function shop() {
-    const activeCatalog = C.catalog.filter(i=>!window.V7Avatar||V7Avatar.isActiveItem(i));
+    const activeCatalog = C.catalog.filter(i=>!window.V7Avatar||window.V7Avatar.isActiveItem(i));
     const slots = [...new Set(activeCatalog.map((i) => i.slot))];
     const preview=activeCatalog.find(i=>i.id===itemPreview),look=preview?{...s,bought:[...s.bought,preview.id],equipped:[...s.equipped.filter(id=>C.catalog.find(i=>i.id===id)?.slot!==preview.slot),preview.id]}:s;
     const slotNames = {Companions:'Pet or companion',Backgrounds:'Background',Headwear:'Hat',Outfits:'Clothing'};
@@ -388,7 +389,7 @@
       const item=activeCatalog.find(i=>i.slot===slot&&s.bought.includes(i.id)&&s.equipped.includes(i.id));
       return `<div class="equipment-slot"><strong>${esc(slotNames[slot]||slot)}</strong><span>${item?esc(item.label):'None equipped'}</span><button data-action="remove-slot:${esc(slot)}" ${item?'':'disabled'}>Remove ${esc(slotNames[slot]||slot)}</button></div>`;
     }).join('')}</div></section>`;
-    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar?V7Avatar.controls(s):""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p></div></div>${equipment}<label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${activeCatalog
+    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar?window.V7Avatar.controls(s):""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p></div></div>${equipment}<label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${activeCatalog
       .filter(
         (i) =>
           filter === "all" ||
@@ -522,7 +523,7 @@
     let [name, arg] = action.split(":");
     if(["pause-explore","nav","world","resume-saved","starting"].includes(name))activity=0;
     if (cloud && !cloud.isUnlocked()) return;
-    if (name === "buy" && window.V7Avatar && !V7Avatar.isActiveItem(C.catalog.find(i=>i.id===arg))) return;
+    if (name === "buy" && window.V7Avatar && !window.V7Avatar.isActiveItem(C.catalog.find(i=>i.id===arg))) return;
     if(name==='buy-cancel'){document.getElementById('purchase-confirmation')?.close();purchaseChoice=null;return;}
     const confirmed=name==='buy-confirm';
     if(confirmed){if(purchaseChoice!==arg)return;purchaseChoice=null;document.getElementById('purchase-confirmation')?.close();name='buy';}
@@ -555,7 +556,7 @@
       restored = false;
     await change(() => {
       if(sceneKey?.startsWith('baseline|')){const id=s.startingProfile?.active,a=s.startingProfile?.areas?.[id];if(JSON.stringify([id,a?.responses.length,a?.question?.prompt,a?.answered])!==sceneKey.slice(9))return;}
-      if(sceneKey?.startsWith('world|')&&V7ActivityScenes.key(s)!==sceneKey.slice(6))return;
+      if(sceneKey?.startsWith('world|')&&window.V7ActivityScenes.key(s)!==sceneKey.slice(6))return;
       if(sceneKey?.startsWith('learning|')&&learningStamp(s.learning)!==sceneKey.slice(9))return;
       if(sceneKey && !sceneKey.startsWith('world|')&&name.startsWith('j-')) {
         const live=window.V5Journey.model(s);
@@ -913,7 +914,7 @@
     if(name==='starting-next'){const h=document.querySelector('.baseline-question h2');if(h){h.tabIndex=-1;h.focus({preventScroll:true});}return;}
     const scope=document.querySelector('dialog[open]')||document.getElementById('main');
     if(['m-next','j-next','next-learning'].includes(name)){const heading=scope.querySelector('h2');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}return;}
-    const action=s.view==='journey'&&V5Journey.state(s)?.solved?'j-next':s.view==='adventure'&&M.current(s)?.solved?'m-next':s.view==='quest'&&s.quest?.solved?'next-quest':['practice','check','discovery'].includes(s.view)&&s.learning?.answered?'next-learning':null;
+    const action=s.view==='journey'&&window.V5Journey.state(s)?.solved?'j-next':s.view==='adventure'&&M.current(s)?.solved?'m-next':s.view==='quest'&&s.quest?.solved?'next-quest':['practice','check','discovery'].includes(s.view)&&s.learning?.answered?'next-learning':null;
     const answerActions=['answer','learning-skip','skip','solve','m-choice','m-submit','m-skip','j-choice','j-submit','j-skip','c8-m','c8-p','c8-check','d9-check','p5-submit'];
     if(answerActions.includes(name)){
       const next=action&&scope.querySelector('[data-action="'+action+'"]');
@@ -928,7 +929,7 @@
       if(ui.dataset.ui==='open-camp-journal'){e.preventDefault();const journal=document.getElementById('camp-achievements');if(journal){journal.open=true;journal.scrollIntoView({block:'start',behavior:'instant'});journal.querySelector('summary')?.focus();}}
       if(ui.dataset.ui==='choose-town-plan'){const plans=document.getElementById('town-plans');plans?.scrollIntoView({block:'start',behavior:'instant'});plans?.focus({preventScroll:true});}
       if(ui.dataset.ui==='choose-home-activity'){const exterior=document.getElementById('home-exterior');exterior?.scrollIntoView({block:'start',behavior:'instant'});exterior?.focus({preventScroll:true});}
-      if(ui.dataset.ui==='preview-item'||ui.dataset.ui==='clear-preview'){itemPreview=ui.dataset.item&&(!window.V7Avatar||V7Avatar.isActiveItem(C.catalog.find(i=>i.id===ui.dataset.item)))?ui.dataset.item:null;render();document.getElementById('wardrobe-preview')?.focus();}
+      if(ui.dataset.ui==='preview-item'||ui.dataset.ui==='clear-preview'){itemPreview=ui.dataset.item&&(!window.V7Avatar||window.V7Avatar.isActiveItem(C.catalog.find(i=>i.id===ui.dataset.item)))?ui.dataset.item:null;render();document.getElementById('wardrobe-preview')?.focus();}
       if(ui.dataset.ui==='hide-celebration'){const banner=ui.closest('.completion-ribbon');hiddenCelebrations.add(banner.dataset.completionKey);banner.remove();document.querySelector('.recap h1,.town-complete h2')?.closest('main')?.focus();}
       return;
     }

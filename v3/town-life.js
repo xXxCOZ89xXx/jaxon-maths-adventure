@@ -74,7 +74,9 @@
   function task(s){const j=state(s);return j&&!j.done?j.steps[j.stage]:null;}
   function ordered(labels,seed){const rotation=1+seed%(labels.length-1),indices=labels.map((_,i)=>(i+rotation)%labels.length);return {items:indices.map(i=>labels[i]),answer:labels.map((_,i)=>indices.indexOf(i))};}
   const Q=typeof module!=='undefined'?require('./town-content').V53TownContent:root.V53TownContent;
-  function make(scenario,tier,seed,original){const meta=catalog.find(c=>c.id===scenario);return meta?copy(Q.make(meta,tier,seed,{meals,shopping,trips,errands,jobs},original)):null;}
+  function make(scenario,tier,seed,original){const meta=catalog.find(c=>c.id===scenario);if(!meta)return null;const j=copy(Q.make(meta,tier,seed,{meals,shopping,trips,errands,jobs},original)),registry=typeof module!=='undefined'?require('./content-registry').V3Content:root.V3Content;
+   function identify(t,path){const next=registry?registry.task(t,{world:'town',route:scenario+':'+(original||''),tier,seed,stage:path}):t;if(t.branches)next.branches=Object.fromEntries(Object.entries(t.branches).map(([choice,steps])=>[choice,steps.map((step,i)=>identify(step,path+':'+choice+':'+i))]));return next;}
+   j.steps=j.steps.map((t,i)=>identify(t,String(i)));return j;}
   function startRecipe(s,recipe,tier=1,replay=false){
     if(!['bolognese','lentil'].includes(recipe)||book(s)!==undefined&&!validBook(book(s)))return false;
     s.adventure ||= {};const b=book(s)||{version:2,runs:{},counts:{},active:null};
@@ -96,7 +98,7 @@
     s.adventure.townLifeV2=b;s.adventure.townActive=2;s.view=s.resumeView='journey';s.world='town';s.pausedActivity=null;return true;
   }
   function value(t,v){if(t.kind==='order'||t.kind==='match')return v.order||[];if(['basket','budget'].includes(t.kind))return v.parts||[0,0,0];if(['journey','choice'].includes(t.kind))return v.choice??-1;if(t.kind==='coins')return (v.coins||[]).reduce((a,b)=>a+b,0);return v.amount||0;}
-  function valid(t,v){if(H.invalidDraft(v,t))return false;const x=value(t,v);if(t.allowedChoices)return t.allowedChoices.includes(x);return Array.isArray(t.answer)?Array.isArray(x)&&x.length===t.answer.length&&x.every((a,i)=>a===t.answer[i]):x===t.answer;}
+  function valid(t,v){if(H.invalidDraft(v,t))return false;const x=value(t,v);if(t.allowedChoices)return t.allowedChoices.includes(x);if(t.markingVersion===1&&typeof t.answer==='number'){const marker=typeof module!=='undefined'?require('./answer-marking').V3AnswerMarking:root.V3AnswerMarking;return marker.matches(t.answer,x,t.answerContract);}return Array.isArray(t.answer)?Array.isArray(x)&&x.length===t.answer.length&&x.every((a,i)=>a===t.answer[i]):x===t.answer;}
   function action(s,name,arg,raw=''){
     const j=state(s),t=task(s);if(!j||!t)return false;const v=j.values,bits=raw.split(':');
     if(name==='j-next')return next(s);

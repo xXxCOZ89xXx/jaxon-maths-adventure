@@ -16,6 +16,7 @@ let client,
   saveTimer,
   intents,
   lastSaveAttempt = 0;
+let gameStorage=localStorage,remoteStorage=localStorage,historyBackend=null,historyRpc=null,historyVersion=1;
 let gameEpoch = null;
 let resetBlocked = false;
 let resetSupported = false;
@@ -81,7 +82,8 @@ function prepareIntents(){
   intents=window.V3CloudSync.createIntents({storage:localStorage,key:intentKey(),rpc,
     allowed:identity.role==='learner'?['buy']:['award','redeem','confirm_offline']});
 }
-async function rpc(op, args = {}) {
+async function rpc(op,args={}){return historyRpc?historyRpc(op,args):rawRpc(op,args);}
+async function rawRpc(op, args = {}) {
   if (!active()) throw Error("Unlock your account to continue");
   const sentEpoch=gameEpoch;
   const { data, error } = await client.rpc("v3_request", {
@@ -94,7 +96,7 @@ async function rpc(op, args = {}) {
     throw error;
   }
   if (data?.error) throw Error(data.error);
-  if(op==='read' && identity?.role==='learner' && sentEpoch!==null && (data.gameEpoch||0)!==sentEpoch){
+  if(['read','read_v2'].includes(op) && identity?.role==='learner' && sentEpoch!==null && (data.gameEpoch||0)!==sentEpoch){
     retireGame();throw Error('GAME_RESET_REQUIRED');
   }
   if(resetBlocked)throw Error('GAME_RESET_REQUIRED');
@@ -215,11 +217,12 @@ async function open(u) {
   timeout = setTimeout(lock, Math.max(1, expires - Date.now()));
   let remote;
   const cacheKey = `v3-last-remote:${c.projectRef}:${identity.user}`;
+  if(historyVersion===2){historyBackend=window.V3HistoryStorage.indexedDBBackend(`v3-history:${c.projectRef}:${identity.user}`);remoteStorage=await window.V3HistoryStorage.localStore({backend:historyBackend,legacy:localStorage,keys:[cacheKey]});}
   try {
     remote = await rpc("read");
-    localStorage.setItem(cacheKey, JSON.stringify(remote));
+    await remoteStorage.setItem(cacheKey, JSON.stringify(remote));
   } catch (err) {
-    const cached = localStorage.getItem(cacheKey);
+    const cached = remoteStorage.getItem(cacheKey);
     if (identity.role !== "learner" || !cached || navigator.onLine) throw err;
     remote = JSON.parse(cached);
     message(
@@ -230,7 +233,7 @@ async function open(u) {
   useGameEpoch(remote);
   prepareIntents();
   // Recover purchases independently of the item button, even when ownership already refreshed.
-  if(identity.role==='learner'&&navigator.onLine){try{const recovered=await intents.recover();if(recovered){remote=recovered;wallet=remote.wallet;localStorage.setItem(cacheKey,JSON.stringify(remote));}}catch{message('A purchase is awaiting confirmation. Its retry is preserved.');}}
+  if(identity.role==='learner'&&navigator.onLine){try{const recovered=await intents.recover();if(recovered){remote=recovered;wallet=remote.wallet;await remoteStorage.setItem(cacheKey,JSON.stringify(remote));}}catch{message('A purchase is awaiting confirmation. Its retry is preserved.');}}
   if (identity.role === "parent") {
     document.querySelector("nav").hidden = true;
     await parent(remote);
@@ -257,8 +260,10 @@ async function open(u) {
     throw Error(
       "This staging account is already open in another tab. Close that tab first.",
     );
+  if(historyVersion===2)gameStorage=await window.V3HistoryStorage.localStore({backend:historyBackend,legacy:localStorage,keys:[key,qkey],preserveLegacyPending:true});
   sync = window.V3CloudSync.create({
-    storage: localStorage,
+    storage: gameStorage,
+    storageVersion:historyVersion,
     key: qkey,
     rpc,
     notify: (doc) => {
@@ -267,9 +272,9 @@ async function open(u) {
   });
   const local = sync.snapshot(),
     initial = local.latest || local.pending?.progress || remote.progress;
-  if (!local.pending && !local.latest && !local.conflict) sync.seed(remote);
+  if (!local.pending && !local.latest && !local.conflict) await sync.seed(remote);
   // Never overwrite a corrupt game cache silently.
-  const previous = localStorage.getItem(key);
+  const previous = gameStorage.getItem(key);
   if (previous)
     try {
       JSON.parse(previous);
@@ -278,15 +283,16 @@ async function open(u) {
     }
   const s = E.migrate(initial);
   applyWallet(s);
-  localStorage.setItem(key, JSON.stringify(s));
+  await gameStorage.setItem(key, JSON.stringify(s));
   window.V3CloudContext = {
     key,
+    storage:gameStorage,
     isUnlocked: active,
     screenTime: () =>
       Math.max(0, Number(wallet.active_seconds) / 60 - Number(wallet.redeemed)),
     applyWallet,
-    onSave(state) {
-      if(!sync.enqueue(state))return;
+    async onSave(state) {
+      if(!await sync.enqueue(state))return;
       if(state.view==='home'){queueMicrotask(()=>flush(true));return;}
       if(!saveTimer)saveTimer=setTimeout(()=>{saveTimer=null;flush();},30000);
     },
@@ -295,9 +301,9 @@ async function open(u) {
     },
     purchase: async (item) => {
       await transaction("buy", { item });
-      const x = E.migrate(JSON.parse(localStorage.getItem(key)));
+      const x = E.migrate(JSON.parse(gameStorage.getItem(key)));
       applyWallet(x);
-      localStorage.setItem(key, JSON.stringify(x));
+      await gameStorage.setItem(key, JSON.stringify(x));
     },
   };
   document.querySelector("nav").hidden = false;
@@ -331,7 +337,7 @@ async function open(u) {
       const walletChanged =
         JSON.stringify(wallet) !== JSON.stringify(latest.wallet);
       wallet = latest.wallet;
-      localStorage.setItem(cacheKey, JSON.stringify(latest));
+      await remoteStorage.setItem(cacheKey, JSON.stringify(latest));
       if (
         !document.documentElement.hasAttribute("data-saving") &&
         !sync.snapshot().pending &&
@@ -339,19 +345,19 @@ async function open(u) {
         !sync.snapshot().conflict &&
         latest.revision > sync.snapshot().revision
       ) {
-        sync.seed(latest);
+        await sync.seed(latest);
         const next = E.migrate(latest.progress);
         applyWallet(next);
-        localStorage.setItem(key, JSON.stringify(next));
+        await gameStorage.setItem(key, JSON.stringify(next));
         window.dispatchEvent(new StorageEvent("storage", { key }));
         message("Updated from your other staging device.");
       } else if (
         walletChanged &&
         !document.documentElement.hasAttribute("data-saving")
       ) {
-        const current = E.migrate(JSON.parse(localStorage.getItem(key)) || {});
+        const current = E.migrate(JSON.parse(gameStorage.getItem(key)) || {});
         applyWallet(current);
-        localStorage.setItem(key, JSON.stringify(current));
+        await gameStorage.setItem(key, JSON.stringify(current));
         window.dispatchEvent(new StorageEvent("storage", { key }));
       }
     } catch {
@@ -378,9 +384,9 @@ async function flush(force=false) {
 }
 async function recoverPurchase(){
   if(!active()||identity.role!=='learner'||!navigator.onLine)return;
-  try{if(!intents.pending())return;const remote=await intents.recover();if(remote){wallet=remote.wallet;localStorage.setItem(`v3-last-remote:${c.projectRef}:${identity.user}`,JSON.stringify(remote));
+  try{if(!intents.pending())return;const remote=await intents.recover();if(remote){wallet=remote.wallet;await remoteStorage.setItem(`v3-last-remote:${c.projectRef}:${identity.user}`,JSON.stringify(remote));
       const key=window.V3CloudContext?.key;
-      if(key&&!document.documentElement.hasAttribute('data-saving')){const state=JSON.parse(localStorage.getItem(key));applyWallet(state);localStorage.setItem(key,JSON.stringify(state));window.dispatchEvent(new StorageEvent('storage',{key}));}}}
+      if(key&&!document.documentElement.hasAttribute('data-saving')){const state=JSON.parse(gameStorage.getItem(key));applyWallet(state);await gameStorage.setItem(key,JSON.stringify(state));window.dispatchEvent(new StorageEvent('storage',{key}));}}}
   catch{message('A purchase is awaiting confirmation. Its retry is preserved.');}
 }
 
@@ -397,9 +403,9 @@ function conflictUI() {
   dialog.oncancel = (e) => e.preventDefault();
   for (const choice of ["local", "remote"])
     $("keep-" + choice).onclick = async () => {
-      const state = sync.resolve(choice);
+      const state = E.migrate(await sync.resolve(choice));
       applyWallet(state);
-      localStorage.setItem(window.V3CloudContext.key, JSON.stringify(state));
+      await gameStorage.setItem(window.V3CloudContext.key, JSON.stringify(state));
       dialog.remove();
       window.dispatchEvent(
         new StorageEvent("storage", { key: window.V3CloudContext.key }),
@@ -410,7 +416,7 @@ function conflictUI() {
 async function transaction(op,payload) {
   const latest=await intents.run(op,payload);
   wallet=latest.wallet;
-  localStorage.setItem(`v3-last-remote:${c.projectRef}:${identity.user}`,JSON.stringify(latest));
+  await remoteStorage.setItem(`v3-last-remote:${c.projectRef}:${identity.user}`,JSON.stringify(latest));
   return latest;
 }
 
@@ -558,7 +564,7 @@ async function boot() {
       },
     });
     const check = await client.rpc("v3_identity");
-    const verifiedKey = "v3-verified:" + c.projectRef, receiptVerifiedKey="v3-verified-receipts:"+c.projectRef;
+    const verifiedKey = "v3-verified:" + c.projectRef, receiptVerifiedKey="v3-verified-receipts:"+c.projectRef,historyVerifiedKey="v3-verified-history:"+c.projectRef;
     if (check.error) {
       if (
         navigator.onLine ||
@@ -574,7 +580,11 @@ async function boot() {
       if(check.data?.saveReceiptVersion!==1)throw Error('The saving upgrade has not been verified on this server. Existing saved data is preserved.');
       sessionStorage.setItem(verifiedKey, c.projectRef);
       sessionStorage.setItem(receiptVerifiedKey,'1');
+      if(check.data.progressStorageVersion!==undefined&&![1,2].includes(check.data.progressStorageVersion))throw Error("Unsupported history storage version; saved data preserved");
+      sessionStorage.setItem(historyVerifiedKey,String(check.data.progressStorageVersion||1));
     }
+    historyVersion=Number(sessionStorage.getItem(historyVerifiedKey))===2?2:1;
+    if(historyVersion===2)historyRpc=window.V3HistoryStorage.transport(rawRpc,{epoch:()=>gameEpoch||0});
     $("cloud-lock").onclick = lock;
     $("cloud-signout").onclick = async () => {
       try {

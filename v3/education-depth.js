@@ -68,7 +68,7 @@ function q(id,band,seed,f){
  if(id==='stats_pie')unit=f===0?'percent':f===3?'people':'degrees';
  if(id==='town_bills'&&[0,3,4].includes(f)){unit=f===3?'m³':'kWh';hint=f===4?'Subtract the gas readings, then apply the supplied energy conversion.':'Subtract the previous reading from the current reading. Keep the displayed unit.';mis='A meter total is not the amount used. Subtract readings before calculating cost or conversion.';}
  if(id==='town_household'&&f>=2){hint='Read the quantities and units in this household task. Use only the stated information.';mis='Keep quantities in matching units and count intervals rather than counting the starting day twice.';}
- return [prompt,answer,choices,hint,worked,{contentVersion:3,family:id+':depth:'+f%6,band,misconception:mis,unit}];
+ return [prompt,answer,choices,hint,worked,{contentVersion:3,generatorKey:`depth:${id}:v1:b${band}:s${seed}:f${f}`,family:id+':depth:'+f%6,band,misconception:mis,unit}];
 }
 function create(id,band,round,options={}){if(!ids.includes(id))return base.create(id,band,round,options);const excluded=options.exclude||new Set(),pool=[],prompts=new Set();for(let n=0;n<90;n++)for(let f=0;f<6;f++){const row=q(id,band,round+n*97,f);if(!excluded.has(row[0])&&!prompts.has(row[0])){pool.push(row);prompts.add(row[0]);}}
  const rand=random(round*71+band);for(let i=pool.length-1;i>0;i--){const j=rand(i+1);[pool[i],pool[j]]=[pool[j],pool[i]];}

@@ -449,8 +449,13 @@
     if (!qs) return mode === "check"
       ? "A fresh independent check is not available yet. Practice is still available."
       : "Fresh questions are unavailable. Try a different skill.";
-    let teachingExample=education.example(id,qs,band,round);
-    if(content()&&teachingExample)teachingExample=content().rows(id,[teachingExample],{band,round:round+17})[0];
+    let teachingExample=null;
+    for(let attempt=0;attempt<32;attempt++){
+      let candidate=education.example(id,qs,band,round+attempt*101);if(!candidate)break;
+      if(content())candidate=content().rows(id,[candidate],{band,round:round+17+attempt*101})[0];
+      const marker=typeof module!=="undefined"?require('./answer-marking').V3AnswerMarking:root.V3AnswerMarking;
+      if(!qs.some(q=>q[0]===candidate[0]||q[1]===candidate[1]||marker?.matches(q[1],candidate[1],q[5]?.answerContract))){teachingExample=candidate;break;}
+    }
     s.learningBand = band;
     if(content())s.seenQuestionIds=[...new Set([...(s.seenQuestionIds||[]),...qs.map(q=>q[5]?.questionKey).filter(Boolean),...(teachingExample?.[5]?.questionKey?[teachingExample[5].questionKey]:[])])];
     if(!N.stashLearning(s))return 'Your saved lessons need review. Their original state has been preserved.';
@@ -458,7 +463,7 @@
       id,
       mode,
       round,
-      policyVersion:education.enhanced.includes(id)?2:1,
+      policyVersion:3,
       band,
       teachingExample,
       qs,
@@ -487,7 +492,8 @@
       correct = !skip && (q[5]?.direct
         ? (typeof module !== "undefined" ? require('./touch-activities').V9Touch : root.V9Touch).matches(q[5].direct,q[1],l.manipulation||{})
         : q[5]?.contentVersion === 8
-        ? (typeof module !== "undefined" ? require('./curriculum-activities').V8Activities : root.V8Activities).matches({answer:q[1],activity:q[5].activity},String(value)) && (q[5].activity?.kind!=='experiment'||l.manipulation?.c8?.trials===q[5].activity.outcomes.length)
+        ? (typeof module !== "undefined" ? require('./curriculum-activities').V8Activities : root.V8Activities).matches({answer:q[1],activity:q[5].activity,markingVersion:q[5].markingVersion,answerContract:q[5].answerContract,prompt:q[0],unit},String(value)) && (q[5].activity?.kind!=='experiment'||l.manipulation?.c8?.trials===q[5].activity.outcomes.length)
+        : q[5]?.markingVersion===1?(typeof module!=="undefined"?require("./answer-marking").V3AnswerMarking:root.V3AnswerMarking).matches(q[1],value,q[5].answerContract)
         : ['pounds','pence'].includes(unit)?Math.abs(moneyValue(value)-Number(q[1]))<1e-8
         : l.mode === "discovery" ? Math.abs(parseNumber(value)-Number(q[1])) < 1e-8 : normal(value) === normal(q[1]));
     if (correct && !l.assisted) l.correct++;
@@ -507,6 +513,7 @@
         : skip
           ? "Let’s work through it. "
           : "Here is one way to work through it. ") + education.explain(q);
+    if(!correct&&!skip&&q[5]?.choiceReasons?.[String(value)])l.feedback=q[5].choiceReasons[String(value)]+' '+q[4];
     if(!correct&&!skip&&['pounds','pence'].includes(unit)&&!Number.isFinite(moneyValue(value)))l.feedback='Use '+unit+' for this question. £1 = 100p. '+education.explain(q);
     if(!correct&&!skip){l.answered=false;l.assisted=true;l.retrying=true;delete l.needsTeaching;}
     return correct;
@@ -527,7 +534,7 @@
       delete l.teachingExample;
       return;
     }
-    const passed = l.correct === l.qs.length;
+    const passed = l.policyVersion===3?l.qs.length===6&&l.correct>=5:l.correct===l.qs.length;
     const old = s.skills[l.id] || {};
     if (l.mode === "discovery") {
       const d = s.discovery[l.id],
@@ -555,10 +562,10 @@
     } else {
       const previous = s.checks[l.id] || {},
         families=[...new Set(l.qs.map(q=>q[5]?.family).filter(Boolean))],
-        varied=l.policyVersion!==2 || (l.qs.length>=3&&(families.length>=3||l.qs.every(q=>!q[5]))),
-        prior=(old.independentEvidence||[]).filter(r=>r.correct===r.total&&r.total>=3&&r.policyVersion===2&&new Set(r.families||[]).size>=3&&r.at<=now-2*86400000),
-        spaced = passed && varied && previous.stage >= 1 && previous.due <= now && (l.policyVersion!==2 || prior.length>0);
-      const stage = passed ? (spaced || previous.stage===2 ? 2 : 1) : 0;
+        varied=![2,3].includes(l.policyVersion) || (l.qs.length>=3&&(families.length>=3||l.qs.every(q=>!q[5]))),
+        prior=(old.independentEvidence||[]).filter(r=>(r.policyVersion===3?r.total===6&&r.correct>=5:r.correct===r.total&&r.total>=3&&r.policyVersion===2)&&new Set(r.families||[]).size>=3&&r.at<=now-2*86400000),
+        spaced = passed && varied && previous.stage >= 1 && previous.due <= now && (![2,3].includes(l.policyVersion) || prior.length>0);
+      const stage = passed ? (spaced || previous.stage===2 ? 2 : 1) : l.policyVersion===3?Math.max(0,(previous.stage||0)-1):0;
       if (passed && !s.achievements.includes("independent"))
         s.achievements.push("independent");
       if (spaced && !s.achievements.includes("memory"))

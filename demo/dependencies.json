@@ -66,6 +66,15 @@
       "path": "v3/activity-navigation.js"
     },
     {
+      "path": "v3/history-storage.js"
+    },
+    {
+      "path": "v3/answer-marking.js"
+    },
+    {
+      "path": "v3/question-teaching.js"
+    },
+    {
       "path": "v3/content-registry.js"
     },
     {

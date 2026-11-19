@@ -67,7 +67,7 @@ async function mock(page, server, options = {}) {
     else if (u.pathname === "/auth/v1/recover") data = {};
     else if (u.pathname === "/auth/v1/logout") data = {};
     else if (u.pathname === "/rest/v1/rpc/v3_identity")
-      data = { name: options.projectName || "jaxon-maths-v3-staging", projectRef: targetRef,saveReceiptVersion:server.receiptVersion??1,
+      data = { name: options.projectName || "jaxon-maths-v3-staging", projectRef: targetRef,saveReceiptVersion:server.receiptVersion??1,...(server.historyVersion?{progressStorageVersion:server.historyVersion}:{}),
         ...(options.identity || {}) };
     else if (u.pathname === "/rest/v1/rpc/v3_role")
       data = {
@@ -98,6 +98,19 @@ async function mock(page, server, options = {}) {
       if (server.tokens.get(body.p_token) !== user.id) {
         status = 403;
         data = { code: "P0001", message: "Unlock required" };
+      } else if(server.historyVersion===2&&['read_v2','history_has','history_get','history_put','save_v2'].includes(body.p_operation)){
+        server.historyNodes??=new Map();const op=body.p_operation,a=body.p_args||{};
+        if(op==='read_v2')data={revision:server.revision,progress:server.progress,wallet:server.wallet,gameResetVersion:1,gameEpoch:server.gameEpoch||0,progressStorageVersion:2};
+        else if((a.gameEpoch||0)!==(server.gameEpoch||0)){status=400;data={code:'P0001',message:'GAME_RESET_REQUIRED'};}
+        else if(op==='history_has')data={ids:a.ids.filter(id=>server.historyNodes.has(id))};
+        else if(op==='history_get')data={nodes:a.ids.filter(id=>server.historyNodes.has(id)).map(id=>({id,body:server.historyNodes.get(id)}))};
+        else if(op==='history_put'){server.historyNodes.set(a.node.id,a.node.body);data={stored:a.node.id};}
+        else if(parent){status=403;data={code:'P0001',message:'Learner account required'};}
+        else if(server.transactions.has(a.requestId))data=server.transactions.get(a.requestId);
+        else if(a.revision!==server.revision)data={conflict:true,revision:server.revision,progress:server.progress};
+        else{server.progress=a.progress;server.revision++;data={revision:server.revision};server.transactions.set(a.requestId,data);if(server.loseHistorySave){server.loseHistorySave=false;return route.abort();}}
+      } else if(server.historyVersion===2&&body.p_operation==='save'&&server.progress?._historyV2&&!server.transactions.has(body.p_args?.requestId)){
+        status=400;data={code:'P0001',message:'UPDATE_REQUIRED: original request preserved'};
       } else if (body.p_operation === "read" && server.failNextRead) {
         server.failNextRead=false;return route.abort();
       } else if (body.p_operation === "read")
