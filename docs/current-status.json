@@ -11,7 +11,7 @@
     "Multi-learner architecture documented; account selection is not enabled"
   ],
   "validation": "Local npm test, the 56-case combined iPad Chromium save/recovery gate, 2,988 curriculum task completions, retained-history PostgreSQL rehearsals, private/demo build checks, lint and formatting pass. Extended bank coverage verifies 121,440 fresh prompts. GitHub CI is reported on PR #37; physical iPad Safari acceptance is deferred. See PHASE3-VERIFICATION.md for scope and limits.",
-  "hostedDatabase": "No hosted SQL, account or project changes. Installation and cutover remain a separate review after a verified encrypted backup.",
-  "release": "Implemented on PR #37 for review. Not merged or deployed.",
+  "hostedDatabase": "Owner confirmed on 19 November that the new encrypted backup is not yet ready. No hosted SQL, account or project changes have been made. Compatible client release can precede installation; database installation and cutover wait for a verified encrypted backup and concrete review.",
+  "release": "Phase 3 application release authorised. PR #37 records the current checks, merge and deployment. Retained-history database installation and cutover remain pending; the client uses the existing save system until capability 2 is enabled.",
   "acceptance": "One combined manual iPad Safari session after the planned updates and any approved cutover are complete."
 }

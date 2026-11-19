@@ -14,6 +14,8 @@ The local IndexedDB backend atomically stores immutable nodes and document refer
 
 ## Review and execution order
 
+The compatible client may be released before this database package is installed. An absent capability or capability 1 keeps the existing save transport and local storage. Installation of 001 may occur before or after that client release; enabling 002 requires both the verified deployed client and reviewed installation. The owner confirmed on 19 November 2026 that the new backup is not yet ready, so hosted SQL remains deferred.
+
 1. The owner takes a consistent **encrypted backup**, including schema, Auth/family/PIN mappings, wallet, receipt/reset tables and progress, and verifies how to restore it. Preserve/export any unresolved device queues as well. No hosted inspection or backup is claimed by this task.
 2. Compare the installed secure request/reset definitions and grants with the reviewed baseline. Confirm the actual project reference independently. In the intended SQL session, set `app.history_expected_project_ref` to that reference and `app.history_storage_reviewed` to `yes`, then execute **001**. It must leave all pre-existing rows unchanged and `progressStorageVersion` at 1.
 3. Deploy the compatible application through normal passing PR checks and the existing Git-connected hosting. It continues using V1 while the capability is disabled.
