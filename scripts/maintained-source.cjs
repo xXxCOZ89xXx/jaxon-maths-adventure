@@ -1,5 +1,12 @@
 module.exports = [
-  "tests/current-game-windows-restore.cjs",
+  "v3/synthetic-environment.js",
+  "scripts/build-synthetic-environment.cjs",
+  "tests/synthetic-environment.cjs",
+  "tests/synthetic-environment-db.cjs",
+  "tests/synthetic-environment.spec.cjs",
+  "tests/helpers/synthetic-project.cjs",
+  "tests/prepare-synthetic.cjs",
+  "playwright.synthetic.config.cjs",
   "demo/build.cjs",
   "v3/branding.css",
   "demo/dependencies.json",
@@ -43,4 +50,5 @@ module.exports = [
   "scripts/maintained-source.cjs",
   "scripts/source-checks.cjs",
   "eslint.config.cjs",
+  "tests/current-game-windows-restore.cjs",
 ];

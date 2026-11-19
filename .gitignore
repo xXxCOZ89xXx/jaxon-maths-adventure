@@ -25,3 +25,9 @@ docs/review/**/*.png
 docs/review/**/*.jpg
 docs/review/**/*.jpeg
 docs/review/**/*.webp
+
+synthetic-test-dist/
+synthetic-fixture-dist/
+
+# Full synthetic browser run details are retained as CI artifacts.
+tests/artifacts/synthetic-environment-browser.json

@@ -1,0 +1,8 @@
+{
+  "base": "21237873a04ce1306b8596d1097b234098300f01",
+  "result": "PASS: candidate family deployment output matches baseline byte for byte",
+  "filesCompared": 241,
+  "fixtureInputsOnly": true,
+  "networkUsed": false,
+  "existingDeployableOutputsTouched": false
+}
