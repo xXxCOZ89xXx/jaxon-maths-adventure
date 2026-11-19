@@ -69,7 +69,7 @@ for (const file of [
 let html = fs.readFileSync(path.join(repo, "v3-adventure.html"), "utf8");
 for (const [before, after] of [
   ["connect-src 'none'", `connect-src 'self' ${c.url}`],
-  ["V5 Interactive Test Camp", "Jaxon's Maths Adventure"],
+  ["V5 Interactive Test Camp", "Family Game"],
   ["V3 TEST CAMP", "FAMILY MATHS ADVENTURE"],
   ["Offline demo · fictional explorer · saved only on this device", "Family account required · secure cloud saves"],
   ['href="v3-adventure.html"', 'href="index.html"'],

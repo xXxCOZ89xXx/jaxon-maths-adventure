@@ -110,7 +110,7 @@ for (const file of scripts) {
     js = replaceOnce(
       js,
       "This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.",
-      "Your fictional explorer is saved only in this browser. No account is needed. Nothing here is connected to Jaxon’s game.",
+      "Your fictional explorer is saved only in this browser. No account is needed. Nothing here is connected to the family game.",
     );
     const review = js.match(
       /^  if\s*\(!cloud\s*&&\s*document.getElementById\("touch-review"\)\)\s*\{[\s\S]*?^  \}\n/m,
@@ -143,15 +143,28 @@ for (const a of JSON.parse(read("v3/assets/base-camp/manifest.json")).assets)
     "v3/assets/base-camp/" + a.file,
     fs.readFileSync(path.join(root, "v3/assets/base-camp", a.file)),
   );
+// Publish only the exact supplied raster delivery files, never source fonts or oversized masters.
+for (const asset of JSON.parse(read("v3/assets/branding/manifest.json"))
+  .assets) {
+  assert(/^esa-(?:logo|symbol-(?:64|128|256))\.(?:png|webp)$/.test(asset.file));
+  const file = "v3/assets/branding/" + asset.file;
+  const bytes = fs.readFileSync(path.join(root, file));
+  assert.equal(
+    hash(bytes),
+    asset.sha256,
+    "Supplied brand asset changed: " + file,
+  );
+  emit(file, bytes);
+}
 emit("icon.svg", read("icon.svg"));
 html = replaceOnce(
   html,
-  "<title>Jaxon's Maths Adventure · V5 Interactive Test Camp</title>",
-  "<title>Jaxon’s Maths Adventure · Public Demo</title>",
+  "<title>Everyday Skills Adventures · V5 Interactive Test Camp</title>",
+  "<title>Everyday Skills Adventures · Public Demo</title>",
 );
 html = html.replace(
   /<div class="demo-strip">[\s\S]*?<\/div>/,
-  '<div class="demo-strip" role="note">PUBLIC DEMO<span>Demo only — progress is saved on this device and is not connected to Jaxon’s game</span></div>',
+  '<div class="demo-strip" role="note">PUBLIC DEMO<span>Demo only — progress is saved on this device and is not connected to the family game</span></div>',
 );
 html = replaceOnce(html, 'href="v3-adventure.html"', 'href="/"');
 html = html.replace(

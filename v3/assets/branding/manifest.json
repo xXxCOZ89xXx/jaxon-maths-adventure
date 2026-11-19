@@ -1,0 +1,33 @@
+{
+  "brand": "Everyday Skills Adventures",
+  "suppliedArchiveSha256": "5a50868cb4091b2c7b7ff60a249b10650b479db012d40dd20f262c71b5f9c0a8",
+  "source": "Owner-uploaded everyday-skills-game-logo-pack.zip, 19 November 2026",
+  "unchangedSuppliedBytes": true,
+  "assets": [
+    {
+      "file": "esa-logo.webp",
+      "bytes": 57972,
+      "sha256": "81192f5b368facc91db470ea2eaeefcad1891c01848c8e3f652c2577a2a31caf"
+    },
+    {
+      "file": "esa-logo.png",
+      "bytes": 88029,
+      "sha256": "cb6bf6a6d5008f44e08ed15a01f7076acc4eede1039661a55262e764c51f1a88"
+    },
+    {
+      "file": "esa-symbol-128.png",
+      "bytes": 14179,
+      "sha256": "19ecaebadcb66c77d643400b89336704374bc7b11defe63b591a4cef902abaeb"
+    },
+    {
+      "file": "esa-symbol-256.png",
+      "bytes": 43023,
+      "sha256": "5ef62ed8c12fe9eb471d7714106ba40136dd5536901d1aa0c497a5d32b5d1ac7"
+    },
+    {
+      "file": "esa-symbol-64.png",
+      "bytes": 4935,
+      "sha256": "a0fee88125580ba4e6402e5816a485452c057acc7847136afa1e151ea329a471"
+    }
+  ]
+}

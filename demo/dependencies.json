@@ -138,6 +138,9 @@
       "path": "v3/guide-portraits.css"
     },
     {
+      "path": "v3/branding.css"
+    },
+    {
       "path": "v3-adventure.html"
     },
     {
@@ -657,6 +660,21 @@
     },
     {
       "path": "v3/assets/rollout/served/post-1024.webp"
+    },
+    {
+      "path": "v3/assets/branding/esa-logo.webp"
+    },
+    {
+      "path": "v3/assets/branding/esa-logo.png"
+    },
+    {
+      "path": "v3/assets/branding/esa-symbol-128.png"
+    },
+    {
+      "path": "v3/assets/branding/esa-symbol-256.png"
+    },
+    {
+      "path": "v3/assets/branding/esa-symbol-64.png"
     }
   ]
 }

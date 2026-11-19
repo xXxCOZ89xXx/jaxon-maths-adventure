@@ -5,7 +5,7 @@ const inv=JSON.parse(fs.readFileSync(path.join(root,'work/public-demo/build-inve
 const walk=d=>fs.readdirSync(d,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path.join(d,e.name)):[path.relative(dir,path.join(d,e.name)).split(path.sep).join('/')]);
 assert.deepEqual(walk(dir).sort(),inv.files.map(f=>f.path).sort());
 const html=fs.readFileSync(path.join(dir,'index.html'),'utf8'),app=fs.readFileSync(path.join(dir,'v3/app.js'),'utf8');
-assert(html.includes('Demo only — progress is saved on this device and is not connected to Jaxon’s game'));
+assert(html.includes('Demo only — progress is saved on this device and is not connected to the family game'));
 assert(!/data-nav="parent"|touch-review|dev\//.test(html));
 assert(!/function parent\(|Demo parent summary|href="dev\//.test(app));
 assert(!app.includes('window.V3CloudContext'));assert(app.includes('"jaxon_public_demo_v1"'));

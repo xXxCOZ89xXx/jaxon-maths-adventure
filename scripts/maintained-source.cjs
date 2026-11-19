@@ -1,5 +1,7 @@
 module.exports = [
   "demo/build.cjs",
+  "v3/branding.css",
+  "demo/dependencies.json",
   "scripts/build-v52-production.cjs",
   "scripts/package-home-review.cjs",
   "tests/v3-engine.cjs",
