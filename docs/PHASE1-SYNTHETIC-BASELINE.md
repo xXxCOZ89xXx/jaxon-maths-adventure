@@ -1,6 +1,6 @@
 # Phase 1 — fresh synthetic database baseline
 
-19 November 2026. **Prepared package; no hosted SQL executed.** The owner supplied the separate test-project URL `https://vyxvemtevkxlwqzelghj.supabase.co`. Existing game/demo release PRs #39/#40 are complete. This package is the next foundation step, not a commercial account rollout.
+19 November 2026. **Owner-confirmed test baseline installed; provider/API acceptance remains open.** The owner supplied the separate test-project URL `https://vyxvemtevkxlwqzelghj.supabase.co`. Existing game/demo release PRs #39/#40 are complete. This package is the next foundation step, not a commercial account rollout.
 
 ## Owner-run installation handoff
 
@@ -8,7 +8,13 @@ The owner authorised this test baseline and clarified that further setup/fixes/t
 
 Use the complete `supabase/synthetic/fresh-baseline/RUN-IN-TEST-PROJECT.sql` in one new query after selecting the test project in the dashboard. It includes both session settings followed by the exact unchanged reviewed installer. Copy the whole file, clear any partial editor selection and run once. No manually combined fragments or separate settings query are needed. The manifest hashes both the original reviewed SQL and this complete operator file. The tests execute that complete file for the successful installation case.
 
-An owner run returned no rows, then `v3_identity()` was absent. Installation is not verified; only part of the query may have run. No cleanup or guard bypass is authorised as a shortcut. If the complete file finds existing objects, inspect the error before continuing. The expected final result is one `synthetic_identity` row.
+An earlier owner run returned no rows, then `v3_identity()` was absent; partial query execution was possible. This was resolved when the owner ran the complete file and returned the expected synthetic identity, reference and versions. No cleanup or guard bypass is authorised as a shortcut. If the complete file finds existing objects, inspect the error before continuing. The expected final result is one `synthetic_identity` row.
+
+## Linking the operator-created test accounts
+
+The owner subsequently returned the expected installed synthetic identity and confirmed the test Auth settings and creation of four fictional accounts. Record these as owner-reported facts, not independent API verification. Provider signup/anonymous access are off, Email is on, minimum password length is 12 and email confirmation is on. Admin-confirmed fixture accounts do not test email delivery/recovery.
+
+`supabase/synthetic/fresh-baseline/LINK-TEST-FAMILIES.sql` links the four reserved admin-managed `parent-a`, `learner-a`, `parent-b` and `learner-b` accounts at `esa-test.invalid` into two unrelated legacy test families. It requires the exact installed synthetic marker/reference, postgres caller and four uniquely matched confirmed accounts. It locks the relevant tables, refuses unexpected existing family links, and inserts only missing exact links. A retry preserves existing progress, wallets, PINs and receipts. It creates no Auth accounts and handles no passwords or PINs. It returns aggregate counts only. This remains the current one-child-per-family baseline, not the Phase 2 commercial household implementation. Recovery requires a separately controlled deliverable inbox later.
 
 ## Exact target and scope
 
@@ -32,9 +38,9 @@ npm run prepare:synthetic-baseline -- --out /a/new/review-directory
 
 The destination must not already exist. The command writes `INSTALL-REVIEW.sql` and `MANIFEST.json`, including the target, all input hashes and output SQL hash. No database command is issued. The exact generated review SQL and manifest are also committed under `supabase/synthetic/fresh-baseline/` so owner review needs no Node installation; the test suite checks both against the generator byte for byte. Retain the reviewed output; do not overwrite it or edit its target/hashes by hand. Changed source dependencies require a new review. The generated SQL is deliberately not included in either game/demo deployable build.
 
-## Installation review — not an instruction to run now
+## Initial installation review record
 
-Before specific hosted installation approval:
+These initial review steps are retained as provenance. The baseline is now owner-confirmed installed, and test work is authorised without repeated prompts. Do not reinstall it:
 
 1. Confirm the owner-created project's dashboard reference is exactly `vyxvemtevkxlwqzelghj`, its selected plan has no unapproved cost and it is still unused. Never select Main, a NYN project or a live-data clone.
 2. The committed `supabase/synthetic/fresh-baseline/PRECHECK.sql` provides a read-only aggregate inventory after dashboard selection; it returns no records or secrets and does not identify the physical project independently. Review the PR, source-hash manifest and exact generated SQL; verify its SHA-256. Preserve the existing current-game backup checkpoint; this empty-project operation does not require repeating that restore.
@@ -43,7 +49,7 @@ Before specific hosted installation approval:
 5. Separately review provider password minimum 12, closed signup/invite restrictions, exact Auth/recovery callbacks, fictional operator-controlled test accounts and restricted HTTPS test hosting. Noindex alone is not access control. No real learner data or public fixture password belongs there.
 6. Verify actual Auth/PostgREST, PIN/roles, unrelated-family isolation, retry/reset behaviour and browser configuration before moving on to household/session implementation. Preserve existing family/demo hosting, IONOS mail and future /game routing boundaries.
 
-No setup flags, accounts, family links, uploads or API calls have been applied to the hosted project by this work. The baseline retains the current one-linked-child RPC model; the planned three-child household architecture belongs to Phase 2.
+The owner has now run the setup and created the four fictional accounts. Test-family linking and actual Auth/API/recovery acceptance are the current next steps; no live project operation is included. The baseline retains the current one-linked-child RPC model; the planned three-child household architecture belongs to Phase 2.
 
 ## Verification evidence
 

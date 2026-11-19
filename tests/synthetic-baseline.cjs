@@ -148,7 +148,7 @@ try {
     }
   }
   sql(`create role anon;create role authenticated;create role service_role bypassrls;
-create schema auth;create table auth.users(id uuid primary key);create table auth.identities(id uuid primary key,user_id uuid references auth.users(id));
+create schema auth;create table auth.users(id uuid primary key,email text,email_confirmed_at timestamptz);create table auth.identities(id uuid primary key,user_id uuid references auth.users(id));
 create function auth.jwt() returns jsonb language sql stable as $$select coalesce(nullif(current_setting('request.jwt.claims',true),''),'{}')::jsonb$$;
 create function auth.uid() returns uuid language sql stable as $$select (auth.jwt()->>'sub')::uuid$$;
 grant usage on schema auth to anon,authenticated;grant execute on function auth.jwt(),auth.uid() to anon,authenticated;
@@ -186,7 +186,9 @@ alter default privileges for role postgres in schema public grant execute on fun
   pass(
     "missing review, wrong target and non-owner roles refuse installation before application changes",
   );
-  sql("insert into auth.users values('11111111-1111-4111-8111-111111111111')");
+  sql(
+    "insert into auth.users(id) values('11111111-1111-4111-8111-111111111111')",
+  );
   reject(() => sql(flags + bundle.sql), /existing Auth records preserved/);
   noObjects();
   assert.equal(sql("select count(*) from auth.users"), "1");
@@ -334,12 +336,62 @@ alter default privileges for role postgres in schema public grant execute on fun
       "v3_request",
       `${lit(tokens[who])},${lit(op)},${lit(JSON.stringify(args))}`,
     );
+  const links = fs.readFileSync(
+    path.join(root, "supabase/synthetic/fresh-baseline/LINK-TEST-FAMILIES.sql"),
+    "utf8",
+  );
+  reject(() => sql(links), /Exactly four reserved/);
+  assert.equal(sql("select count(*) from public.maths_families"), "0");
+  const emails = {
+    learner: "learner-a@esa-test.invalid",
+    parent: "parent-a@esa-test.invalid",
+    other: "learner-b@esa-test.invalid",
+    otherParent: "parent-b@esa-test.invalid",
+  };
   sql(
-    `insert into auth.users values ${Object.values(ids)
-      .map((x) => `(${lit(x)})`)
-      .join(
-        ",",
-      )};insert into public.maths_families values('${ids.learner}','${ids.parent}'),('${ids.other}','${ids.otherParent}')`,
+    `insert into auth.users(id,email,email_confirmed_at) values ${Object.keys(
+      ids,
+    )
+      .map((who) => `(${lit(ids[who])},${lit(emails[who])},now())`)
+      .join(",")}`,
+  );
+  sql(
+    `update auth.users set email_confirmed_at=null where id='${ids.learner}'`,
+  );
+  reject(() => sql(links), /admin-confirmed/);
+  sql(
+    `update auth.users set email_confirmed_at=now() where id='${ids.learner}'`,
+  );
+  sql("update public.v3_environment set project_ref='sfogrvedypgtxfvecmbx'");
+  reject(() => sql(links), /Exact installed synthetic/);
+  sql(`update public.v3_environment set project_ref='${reviewedRef}'`);
+  reject(
+    () => sql("set role authenticated;" + links),
+    /postgres SQL-editor role/,
+  );
+  sql(
+    `insert into public.maths_families values('${ids.learner}','${ids.otherParent}')`,
+  );
+  reject(() => sql(links), /Existing family links differ/);
+  assert.equal(
+    sql(
+      `select parent_user_id from public.maths_families where child_user_id='${ids.learner}'`,
+    ),
+    ids.otherParent,
+  );
+  sql("delete from public.maths_families");
+  const linked = JSON.parse(sql(links));
+  assert.deepEqual(linked, {
+    projectRef: reviewedRef,
+    syntheticOnly: true,
+    familiesLinked: 2,
+    testAccounts: 4,
+  });
+  assert.deepEqual(JSON.parse(sql(links)), linked);
+  assert.equal(sql("select count(*) from public.v3_progress"), "0");
+  assert.equal(sql("select count(*) from public.v3_wallet"), "0");
+  pass(
+    "test-family linking refuses missing/unconfirmed/wrong-target/conflicting identities and safely retries exact links",
   );
   for (const who of Object.keys(ids)) {
     const pin = who.toLowerCase().includes("parent") ? "654321" : "1234";
@@ -355,6 +407,16 @@ alter default privileges for role postgres in schema public grant execute on fun
   };
   const saved = req("learner", "save", save);
   assert.deepEqual(req("learner", "save", save), saved);
+  const beforeLinkRetry = sql(
+    "select jsonb_agg(to_jsonb(t) order by child_user_id) from public.v3_progress t",
+  );
+  sql(links);
+  assert.equal(
+    sql(
+      "select jsonb_agg(to_jsonb(t) order by child_user_id) from public.v3_progress t",
+    ),
+    beforeLinkRetry,
+  );
   assert.deepEqual(req("learner", "read").progress, save.progress);
   assert.deepEqual(req("other", "read").progress, {});
   reject(
