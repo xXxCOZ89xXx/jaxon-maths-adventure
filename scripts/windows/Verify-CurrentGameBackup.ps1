@@ -94,8 +94,12 @@ select json_build_object('db',current_database(),'port',inet_server_port(),
 function Selected-Table([string]$Schema, [string]$Name) { return $script:Tables -contains ($Schema + '.' + $Name) }
 function Rows-Hash([string[]]$Rows) {
     $ordered = [string[]]@($Rows)
-    [Array]::Sort($ordered, [StringComparer]::Ordinal)
-    $bytes = [Text.Encoding]::UTF8.GetBytes(($ordered -join "`n"))
+    # Windows PowerShell 5.1 can bind empty/single-null arrays to a null Array
+    # overload. Such arrays need no sorting; counts separately distinguish empty rows.
+    if ($null -ne $ordered -and $ordered.Length -gt 1) {
+        [Array]::Sort($ordered, [StringComparer]::Ordinal)
+    }
+    $bytes = [Text.Encoding]::UTF8.GetBytes([string]($ordered -join "`n"))
     $sha = [Security.Cryptography.SHA256]::Create()
     try { return ([BitConverter]::ToString($sha.ComputeHash($bytes))).Replace('-','').ToLowerInvariant() }
     finally { $sha.Dispose() }
