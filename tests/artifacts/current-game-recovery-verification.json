@@ -1,0 +1,68 @@
+{
+  "date": "2026-11-19",
+  "base": "21237873a04ce1306b8596d1097b234098300f01",
+  "scope": "Current application-data recovery preparation; fictional records only",
+  "ownerArchiveAccessed": false,
+  "hostedSQLExecuted": false,
+  "mergeOrDeploymentPerformed": false,
+  "scriptSha256": "3bf6819b7d6a6d5806fa029a6449570e9715d2ce151dde990d0253bcf8ab9684",
+  "rehearsal": {
+    "powershell": "7.4.6 on Linux; Windows PowerShell 5.1 compatibility intended, not owner-executed",
+    "database": "PostgreSQL 17.12 Alpine; disposable network-disabled containers",
+    "result": "12 suites passed",
+    "cases": [
+      "Current V3 + legacy/public/private + actual archived Auth record restoration and COPY digests",
+      "Unique rerun preserves old recovery databases",
+      "Wrong port rejected",
+      "Non-loopback identity rejected",
+      "Invalid target name rejected",
+      "Equal row count but changed wallet rejected",
+      "Missing dependency rolls back selected restore without stubs",
+      "Missing reset/request table refused before restore",
+      "Read-only revalidation of existing restore with CRLF tool output, empty/null/binary/multiline values; no new database or data changes",
+      "Failed content validation returns safe code and leaves differing records unchanged",
+      "PostgreSQL read-only transactions reject attempted diagnostic writes",
+      "Archive/report digest mismatch refused before target connection"
+    ]
+  },
+  "additionalChecks": {
+    "installedContractPreflight": "PASS: project guard, routine hashes and security properties, RLS/grants and leaked-grant detection; no learner rows/output or data changes",
+    "historyStorageDatabase": "PASS: additive disabled installation, rollback, history integrity/retries, roles, write pause/reset fencing",
+    "npmTest": "PASS, including 121440 prompt freshness checks",
+    "combinedIpadRelease": "PASS: 56 Chromium cases; physical Safari untested",
+    "lintFormatStatus": "PASS after diagnostic update"
+  },
+  "remaining": [
+    "Review actual installed contracts and any managed-service residual gap relevant to storage release",
+    "Obtain specific reviewed installation/activation approval; no hosted SQL performed",
+    "Complete broader managed-service/Auth/Vault/configuration/Storage recovery planning before external users"
+  ],
+  "diagnosticMode": "Optional original-report-bound read-only revalidation; no restore, database creation or data repair",
+  "windowsPowerShellHelperRegression": {
+    "version": "5.1.26100.33822",
+    "sourceCommit": "5b7db3a993af25ef3b00189ff91e60b34baa2e93",
+    "cases": 6,
+    "result": "PASS",
+    "before": "Empty/null array sorting reproduced ArgumentNullException in Windows PowerShell 5.1",
+    "fix": "Skip sorting empty/single-element arrays and explicitly encode a string; row-count/content checks retained",
+    "checks": [
+      "empty table",
+      "one empty field",
+      "scalar row LF",
+      "scalar row CRLF",
+      "multiple rows CRLF",
+      "Unicode normalization"
+    ],
+    "jobUrl": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/44566471494/job/135709466833",
+    "boundary": "Helper tests on Windows; not execution of owner archive or full Windows database restore"
+  },
+  "ownerArchiveExecutedByCodex": false,
+  "ownerReportedApplicationRecovery": {
+    "date": "2026-11-19",
+    "status": "PARTIAL: application recovery checks PASS",
+    "originalArchiveUnchanged": true,
+    "mode": "Read-only revalidation of earlier current-game restoration",
+    "source": "Owner-provided console summary; private archive/report not accessed by Codex",
+    "managedServiceRecoveryCertified": false
+  }
+}

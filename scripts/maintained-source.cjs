@@ -1,4 +1,5 @@
 module.exports = [
+  "tests/current-game-windows-restore.cjs",
   "demo/build.cjs",
   "v3/branding.css",
   "demo/dependencies.json",

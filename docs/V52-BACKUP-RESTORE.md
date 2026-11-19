@@ -1,5 +1,7 @@
 # V5.2 private backup and restoration guide
 
+**Historical project/scope:** this guide concerns the older production/five-table exercise. It is not the current family-game backup procedure. The later current-game checkpoint is [CURRENT-GAME-RECOVERY.md](CURRENT-GAME-RECOVERY.md). Preserve the earlier completed exercise and its private report.
+
 ## Current owner update — application recovery completed
 
 The owner completed the PostgreSQL 17.11 full export (390,821 bytes), Auth/all-five-game-table inventory, tested AES-256 7-Zip protection, second protected copy and successful Windows local application restoration verification. The displayed result is **PARTIAL: application recovery checks PASS**, target localhost:5433/jaxon_restore_test, original archive unchanged. Accept this work as completed; do not request the archive, private report or repeat the local recovery test. Codex has not accessed either genuine data copy.
