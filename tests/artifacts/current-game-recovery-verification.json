@@ -3,7 +3,6 @@
   "base": "21237873a04ce1306b8596d1097b234098300f01",
   "scope": "Current application-data recovery preparation; fictional records only",
   "ownerArchiveAccessed": false,
-  "ownerWindowsExecutionVerified": false,
   "hostedSQLExecuted": false,
   "mergeOrDeploymentPerformed": false,
   "scriptSha256": "3bf6819b7d6a6d5806fa029a6449570e9715d2ce151dde990d0253bcf8ab9684",
@@ -34,9 +33,9 @@
     "lintFormatStatus": "PASS after diagnostic update"
   },
   "remaining": [
-    "Owner executes scoped current-game restore on trusted workstation",
-    "Managed-service/Auth/Vault/configuration/Storage recovery remains unverified",
-    "Specific installed-contract and SQL installation/activation review required"
+    "Review actual installed contracts and any managed-service residual gap relevant to storage release",
+    "Obtain specific reviewed installation/activation approval; no hosted SQL performed",
+    "Complete broader managed-service/Auth/Vault/configuration/Storage recovery planning before external users"
   ],
   "diagnosticMode": "Optional original-report-bound read-only revalidation; no restore, database creation or data repair",
   "windowsPowerShellHelperRegression": {
@@ -56,5 +55,14 @@
     ],
     "jobUrl": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/runs/44566471494/job/135709466833",
     "boundary": "Helper tests on Windows; not execution of owner archive or full Windows database restore"
+  },
+  "ownerArchiveExecutedByCodex": false,
+  "ownerReportedApplicationRecovery": {
+    "date": "2026-11-19",
+    "status": "PARTIAL: application recovery checks PASS",
+    "originalArchiveUnchanged": true,
+    "mode": "Read-only revalidation of earlier current-game restoration",
+    "source": "Owner-provided console summary; private archive/report not accessed by Codex",
+    "managedServiceRecoveryCertified": false
   }
 }

@@ -2,11 +2,19 @@
 
 19 November 2026. This is the recovery route for the existing family game and the retained-history review, not the older V5.2 fresh-start cutover. No hosted SQL, new service provisioning, dependency installation or release is authorised by this document.
 
+## Owner checkpoint — application recovery passed
+
+On 19 November 2026 the owner reported **PARTIAL: application recovery checks PASS** using the corrected verifier, with the original archive unchanged. This was read-only verification of the already-restored current-game copy. Accept that current application-data check as completed; do not request another export, Docker/WSL installation or repeat restore merely to finish this checkpoint. Keep the earlier reports/databases and both encrypted archive copies.
+
+The final private report remains on the owner's workstation and has not been opened by Codex. Keep it with the protected recovery records; encrypt it before any off-device/cloud copy. This is owner-reported current application recovery, separate from the synthetic CI evidence below. Full managed Auth/service, policies/grants, Vault and Storage recovery are not certified by this result.
+
+Next is the concrete installed-contract/recovery-limit review in [the retained-history release review](../supabase/history/RELEASE-REVIEW.md). Neither this PASS nor the review document executes or authorises hosted SQL. Local synthetic implementation can continue independently under the agreed roadmap.
+
 ## What changed, and what did not
 
 The earlier owner-run application restore remains accepted evidence for its original archive and scope. Do not overwrite its archive, database or PARTIAL report. `Verify-JaxonBackup.ps1` was written for five older application tables and selected Auth records. It does not cover today's V3 wallet, receipts, PINs, reset generations or progress tables. Its older project instructions are not current-game instructions.
 
-A fresh export is needed to protect later changes and play. The owner confirmed that the export connection's project reference matches the deployed family game's public configuration; the archive is readable and two password-protected encrypted copies passed 7-Zip tests. Codex has not opened the real dump or private reports. These facts establish an exported/protected archive, not successful recovery.
+A fresh export is needed to protect later changes and play. The owner confirmed that the export connection's project reference matches the deployed family game's public configuration; the archive is readable and two password-protected encrypted copies passed 7-Zip tests. Codex has not opened the real dump or private reports. Those initial facts established an exported/protected archive; the later owner checkpoint above records the completed scoped application recovery.
 
 The local Windows PostgreSQL 17.11 server on loopback port 5433 is available. It lacks `supabase_vault`. That blocks an unmodified full Supabase restore to that server; it does **not** prevent an explicitly scoped application-data restore. Docker/WSL are not prerequisites for the scoped check below. The previous attempt to set them up pursued a broader service-recovery rehearsal; that route is paused.
 
@@ -38,7 +46,7 @@ Specific validation stages identify row counts, COPY content (by ordinal, withou
 
 Windows PowerShell 5.1 reproduced an empty-table verifier defect: its array overload binding could throw ArgumentNullException during row sorting. The helper now skips unnecessary sorting for empty/single-element arrays and explicitly encodes a string. Six synthetic helper cases pass on actual Windows PowerShell 5.1; the twelve database rehearsals still pass on Linux. These are verifier tests, not verification of the owner's recovered data.
 
-Twelve fictional checks cover this mode, including matching-report/unchanged-archive guards, missing dependencies, empty/null/binary/multiline values, CRLF tool output, unchanged database lists/data and server rejection of an injected diagnostic write. The owner's current archive still requires its own successful check. No managed-service recovery is certified.
+Twelve fictional checks cover this mode, including matching-report/unchanged-archive guards, missing dependencies, empty/null/binary/multiline values, CRLF tool output, unchanged database lists/data and server rejection of an injected diagnostic write. The owner subsequently reported the scoped PASS recorded above. No managed-service recovery is certified.
 
 ## Scope relative to retained-history installation
 
@@ -69,4 +77,4 @@ Safe local synthetic implementation and review can continue independently of thi
 
 ## Prepared verification evidence
 
-[The fictional rehearsal record](../tests/artifacts/current-game-recovery-verification.json) records twelve owner-script recovery cases, the read-only contract checks, the retained-history database rehearsal, passing game regressions/lint/format/status checks and 56 Chromium save/recovery cases. This is preparation evidence, not execution of the owner's Windows restore or full managed-service recovery. The script remains a reviewable owner-run tool; no merge or deployment was performed by this preparation.
+[The fictional rehearsal record](../tests/artifacts/current-game-recovery-verification.json) records twelve owner-script recovery cases, the read-only contract checks, the retained-history database rehearsal, passing game regressions/lint/format/status checks and 56 Chromium save/recovery cases. This is preparation evidence, separate from the owner-reported Windows application recovery above; it does not certify full managed-service recovery. The script remains a reviewable owner-run tool; no merge or deployment was performed by this preparation.

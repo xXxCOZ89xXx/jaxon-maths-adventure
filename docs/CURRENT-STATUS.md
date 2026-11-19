@@ -22,7 +22,7 @@ Generated from the code registry by `npm run status`. Historical review reports 
 
 Local npm test, the 56-case combined iPad Chromium save/recovery gate, 2,988 curriculum task completions, retained-history PostgreSQL rehearsals, private/demo build checks, lint and formatting pass. Extended bank coverage verifies 121,440 fresh prompts. GitHub CI is reported on PR #37; physical iPad Safari acceptance is deferred. See PHASE3-VERIFICATION.md for scope and limits. Current recovery preparation has separate fictional PowerShell/PostgreSQL rehearsals; see CURRENT-GAME-RECOVERY.md for scope. Earlier test results remain dated evidence, not new device/service certification.
 
-The owner reports a current main-game export and two tested encrypted copies. Current application-data restoration remains unverified. A new local verifier covers current V3 and existing public/private application tables without Docker/WSL; see CURRENT-GAME-RECOVERY.md. No hosted SQL, Auth, accounts, hosting or project changes were made. Concrete storage review and managed-service recovery limitations remain open.
+Owner reported current-game PARTIAL application recovery checks PASS on 19 November, original archive unchanged, after confirming two tested encrypted copies. The application-data recovery checkpoint is complete; preserve its private report. Managed-service recovery limits, actual installed-contract review and specific history SQL approval remain open. No hosted SQL, Auth, account, hosting or project changes were made. See CURRENT-GAME-RECOVERY.md and supabase/history/RELEASE-REVIEW.md.
 
 One combined manual iPad Safari session after the planned updates and any approved cutover are complete.
 
