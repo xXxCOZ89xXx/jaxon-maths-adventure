@@ -10,6 +10,7 @@
     "supabase/synthetic/001_environment_marker.sql": "746c646cd176604c220fd418f78384d39676abdb8ad796e7c4e7cc7e5f7f0f6c"
   },
   "sqlSha256": "f4673d2b75ce69d57314267a2599aaa7d3154e1443c9398199a8d3e938b39ed9",
+  "runSqlSha256": "c29a933d82097452c47660c21c331f61e17bb753b9612067c246681207673230",
   "createsUsers": false,
   "executesSql": false,
   "requiresOwnerDashboardVerification": true

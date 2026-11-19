@@ -2,6 +2,14 @@
 
 19 November 2026. **Prepared package; no hosted SQL executed.** The owner supplied the separate test-project URL `https://vyxvemtevkxlwqzelghj.supabase.co`. Existing game/demo release PRs #39/#40 are complete. This package is the next foundation step, not a commercial account rollout.
 
+## Owner-run installation handoff
+
+The owner authorised this test baseline and clarified that further setup/fixes/testing in the new test project need no repeated approval; live game/demo updates still need approval. That supersedes the earlier test-project approval wording below.
+
+Use the complete `supabase/synthetic/fresh-baseline/RUN-IN-TEST-PROJECT.sql` in one new query after selecting the test project in the dashboard. It includes both session settings followed by the exact unchanged reviewed installer. Copy the whole file, clear any partial editor selection and run once. No manually combined fragments or separate settings query are needed. The manifest hashes both the original reviewed SQL and this complete operator file. The tests execute that complete file for the successful installation case.
+
+An owner run returned no rows, then `v3_identity()` was absent. Installation is not verified; only part of the query may have run. No cleanup or guard bypass is authorised as a shortcut. If the complete file finds existing objects, inspect the error before continuing. The expected final result is one `synthetic_identity` row.
+
 ## Exact target and scope
 
 Only `vyxvemtevkxlwqzelghj` is accepted by `scripts/prepare-synthetic-baseline.cjs`. Both known live references and all other references are rejected. This is an offline SQL/package generator: it opens no connections, reads no keys/passwords, creates no accounts and executes no SQL. The actual project name/plan/region/emptiness still require dashboard verification. The supplied URL confirms the owner's chosen reference, not those other settings.

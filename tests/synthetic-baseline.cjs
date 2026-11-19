@@ -71,6 +71,16 @@ try {
   assert.equal(bundle.sql, prepare().sql);
   assert.equal(
     fs.readFileSync(
+      path.join(
+        root,
+        "supabase/synthetic/fresh-baseline/RUN-IN-TEST-PROJECT.sql",
+      ),
+      "utf8",
+    ),
+    bundle.runSql,
+  );
+  assert.equal(
+    fs.readFileSync(
       path.join(root, "supabase/synthetic/fresh-baseline/INSTALL-REVIEW.sql"),
       "utf8",
     ),
@@ -108,6 +118,10 @@ try {
     manifest.sqlSha256,
   );
   reject(() => writePackage(output), /never overwrite/);
+  assert.equal(
+    hash(fs.readFileSync(path.join(output, "RUN-IN-TEST-PROJECT.sql"))),
+    manifest.runSqlSha256,
+  );
   assert.deepEqual(manifest.sourceSha256, sources);
   pass(
     "deterministic source-hash-bound package, exact confirmed target only and no overwrite",
@@ -228,7 +242,7 @@ alter default privileges for role postgres in schema public grant execute on fun
   pass(
     "late failure rolls back all application objects, extension creation and schema privilege changes",
   );
-  sql(flags + bundle.sql);
+  sql(bundle.runSql);
   const identity = JSON.parse(sql("set role anon;select public.v3_identity()"));
   assert.equal(identity.projectRef, reviewedRef);
   assert.equal(identity.syntheticOnly, true);

@@ -131,14 +131,22 @@ COMMIT;
 -- Aggregate public metadata only. Provider Auth/API acceptance is a separate step.
 SELECT public.v3_identity() AS synthetic_identity;
 `;
+  const runSql = `-- Owner-authorised TEST PROJECT ONLY: ${projectRef}.
+-- Copy this ENTIRE file into one new SQL-editor query and run the whole query.
+-- The two settings below and the installer must run together in the same session.
+SET app.synthetic_fresh_install_reviewed = 'yes';
+SET app.synthetic_dashboard_ref = '${projectRef}';
+${sql}`;
   return {
     sql,
+    runSql,
     manifest: {
       target: projectRef,
       packageVersion: 1,
       purpose: "empty synthetic project only",
       sourceSha256: sources,
       sqlSha256: hash(sql),
+      runSqlSha256: hash(runSql),
       createsUsers: false,
       executesSql: false,
       requiresOwnerDashboardVerification: true,
@@ -156,6 +164,13 @@ function writePackage(out, projectRef = reviewedRef) {
   fs.writeFileSync(path.join(destination, "INSTALL-REVIEW.sql"), result.sql, {
     flag: "wx",
   });
+  fs.writeFileSync(
+    path.join(destination, "RUN-IN-TEST-PROJECT.sql"),
+    result.runSql,
+    {
+      flag: "wx",
+    },
+  );
   fs.writeFileSync(
     path.join(destination, "MANIFEST.json"),
     JSON.stringify(result.manifest, null, 2) + "\n",
