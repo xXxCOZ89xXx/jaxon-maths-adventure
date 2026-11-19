@@ -1,4 +1,6 @@
 module.exports = [
+  "scripts/prepare-synthetic-baseline.cjs",
+  "tests/synthetic-baseline.cjs",
   "v3/synthetic-environment.js",
   "scripts/build-synthetic-environment.cjs",
   "tests/synthetic-environment.cjs",

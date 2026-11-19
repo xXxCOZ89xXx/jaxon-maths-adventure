@@ -1,0 +1,22 @@
+{
+  "scope": "network-disabled local PostgreSQL only",
+  "groups": 8,
+  "manifest": {
+    "target": "vyxvemtevkxlwqzelghj",
+    "packageVersion": 1,
+    "purpose": "empty synthetic project only",
+    "sourceSha256": {
+      "supabase/v3-staging/001_secure_core.sql": "80ff825e0888d7e4a7aa44aaf0c96f09922eb88cba622184d64ce5f7c456f054",
+      "supabase/v3-staging/002_catalog.sql": "26c1fe9447f67e1f775ac2bf726f6dee617fd66ec9bb856a276662fa3895116a",
+      "supabase/v3-staging/004_compact_save_receipts.sql": "085f3d619bf4194e6c05fdf01dbd31e56a6b1a33cfde7110413a6933e901d905",
+      "supabase/base-camp/001_parent_game_reset.sql": "97619e3fbc141de1f9a68b0ac3ee9e069f13676f6160a231923c066761ecb131",
+      "supabase/synthetic/001_environment_marker.sql": "746c646cd176604c220fd418f78384d39676abdb8ad796e7c4e7cc7e5f7f0f6c"
+    },
+    "sqlSha256": "f4673d2b75ce69d57314267a2599aaa7d3154e1443c9398199a8d3e938b39ed9",
+    "createsUsers": false,
+    "executesSql": false,
+    "requiresOwnerDashboardVerification": true
+  },
+  "providerAuthApiVerified": false,
+  "hostedSqlExecuted": false
+}

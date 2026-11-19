@@ -76,7 +76,9 @@
     "test:phase3-browser": "node tests/prepare-v3.cjs && playwright test -c playwright.save-recovery.config.cjs tests/history-storage.spec.cjs tests/phase3-learning.spec.cjs",
     "build:synthetic": "node scripts/build-synthetic-environment.cjs",
     "test:synthetic": "node tests/synthetic-environment.cjs && node tests/synthetic-environment-db.cjs",
-    "test:synthetic-browser": "node tests/prepare-synthetic.cjs && playwright test -c playwright.synthetic.config.cjs"
+    "test:synthetic-browser": "node tests/prepare-synthetic.cjs && playwright test -c playwright.synthetic.config.cjs",
+    "prepare:synthetic-baseline": "node scripts/prepare-synthetic-baseline.cjs",
+    "test:synthetic-baseline": "node tests/synthetic-baseline.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
