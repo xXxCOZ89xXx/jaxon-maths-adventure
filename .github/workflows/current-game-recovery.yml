@@ -5,6 +5,7 @@ on:
     paths:
       - scripts/windows/Verify-CurrentGameBackup.ps1
       - tests/current-game-windows-restore.cjs
+      - tests/current-game-recovery-unit.ps1
       - supabase/**
       - tests/fixtures/v52-legacy-schema.sql
       - .github/workflows/current-game-recovery.yml
@@ -26,3 +27,11 @@ jobs:
           docker pull postgres:17-alpine
       - name: Rehearse owner script with fictional records only
         run: node tests/current-game-windows-restore.cjs
+  windows-runtime:
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test real helpers in Windows PowerShell 5.1
+        shell: powershell
+        run: ./tests/current-game-recovery-unit.ps1
