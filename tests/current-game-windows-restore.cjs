@@ -130,7 +130,7 @@ try {
  insert into public.maths_learning(child_user_id,progress) values('${child}','{"coins":999}');
  insert into public.maths_rewards(child_user_id,bonus_coins,redeemed_minutes) values('${child}',80,7);
  insert into public.maths_reward_events(child_user_id,parent_user_id,kind,amount,request_id) values('${child}','${parent}','bonus_coins',20,'${child}');
- 
+
  set app.game_request_epoch='2';
  insert into public.v3_progress(child_user_id,revision,game_epoch,progress) values('${child}',17,2,'{"unknown":{"private":"PRIVATE_FICTIONAL_JSON"},"paused":{"answer":"untouched"}}');
  insert into public.v3_wallet(child_user_id,coins,bonus,active_seconds,redeemed,owned) values('${child}',103,7,600,2,'["old-item"]');

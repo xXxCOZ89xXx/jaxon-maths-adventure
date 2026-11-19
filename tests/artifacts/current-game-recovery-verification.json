@@ -9,7 +9,7 @@
   "scriptSha256": "75e8accee1efb91a55a1280e95b6bbc5628b5e09f76f9a12e28b4c8fc430e3e7",
   "rehearsal": {
     "powershell": "7.4.6 on Linux; Windows PowerShell 5.1 compatibility intended, not owner-executed",
-    "database": "Cached PostgreSQL 17 Alpine; disposable network-disabled containers",
+    "database": "PostgreSQL 17.12 Alpine; disposable network-disabled containers",
     "result": "8 suites passed",
     "cases": [
       "Current V3 + legacy/public/private + actual archived Auth record restoration and COPY digests",
