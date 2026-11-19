@@ -6,10 +6,14 @@ const E = require("../v3/engine").V3Engine,
   C = require("../v3/curriculum").V3Curriculum;
 const ctx = { window: {} };
 vm.runInNewContext(fs.readFileSync("v2-review-bank.js", "utf8"), ctx);
-const bank = require("../v3/education").V6Education.install(C, require("../v3/town").V3Town.install(
+let bank = require("../v3/education").V6Education.install(C, require("../v3/town").V3Town.install(
   C,
   ctx.window.JaxonFreshReview,
 ));
+// Exercise the released depth bank used by six-question checks.
+Object.assign(ctx.window, { V3Curriculum: C, V6Education: require("../v3/education").V6Education, JaxonFreshReview: bank });
+vm.runInNewContext(fs.readFileSync("v3/education-depth.js", "utf8"), ctx);
+bank = ctx.window.JaxonFreshReview;
 let checks = 0;
 function test(name, fn) {
   fn();
@@ -88,9 +92,10 @@ test("All runtime foundation skills: guided practice cannot award mastery, check
     for(const pre of require("../v3/education").V6Education.prerequisites[k.id]||[])s.checks[pre]={stage:1};
     assert.match(E.generate(s, k.id, "check", bank, C, now), /practice/);
     assert.equal(E.generate(s, k.id, "practice", bank, C, now), null);
+    assert.equal(s.learning.qs.length, 6);
     const practice = s.learning.qs.map((q) => q[0]);
     while (s.learning) {
-      E.answerLearning(s, s.learning.qs[s.learning.i][1], false, now);
+      assert(E.answerLearning(s, s.learning.qs[s.learning.i][1], false, now), k.id);
       E.nextLearning(s, now);
     }
     assert.notEqual(s.skills[k.id].state, "mastered");
@@ -101,7 +106,7 @@ test("All runtime foundation skills: guided practice cannot award mastery, check
       ),
     );
     while (s.learning) {
-      E.answerLearning(s, s.learning.qs[s.learning.i][1], false, now);
+      assert(E.answerLearning(s, s.learning.qs[s.learning.i][1], false, now), k.id);
       E.nextLearning(s, now);
     }
     assert.equal(s.checks[k.id].stage, 1);
@@ -109,7 +114,7 @@ test("All runtime foundation skills: guided practice cannot award mastery, check
     const due = s.checks[k.id].due;
     assert.equal(E.generate(s, k.id, "check", bank, C, due), null);
     while (s.learning) {
-      E.answerLearning(s, s.learning.qs[s.learning.i][1], false, due);
+      assert(E.answerLearning(s, s.learning.qs[s.learning.i][1], false, due), k.id);
       E.nextLearning(s, due);
     }
     assert.equal(s.skills[k.id].state, "mastered");

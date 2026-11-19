@@ -15,6 +15,13 @@ CREATE TABLE public.v3_history_nodes(
  id text NOT NULL CHECK(id~'^[0-9a-f]{64}$'),body text NOT NULL CHECK(octet_length(body)<=200000),
  PRIMARY KEY(child_user_id,game_epoch,id),
  CHECK(encode(extensions.digest(convert_to(body,'UTF8'),'sha256'),'hex')=id));
+CREATE TABLE public.v3_history_roots(
+ child_user_id uuid NOT NULL,game_epoch bigint NOT NULL,path text[] NOT NULL,root text NOT NULL,
+ mode text NOT NULL,revision bigint NOT NULL,request_id uuid NOT NULL,
+ PRIMARY KEY(child_user_id,game_epoch,path,root),
+ FOREIGN KEY(child_user_id,game_epoch,root) REFERENCES public.v3_history_nodes(child_user_id,game_epoch,id));
+ALTER TABLE public.v3_history_roots ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON public.v3_history_roots FROM PUBLIC,anon,authenticated,service_role;
 ALTER TABLE public.v3_history_settings ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.v3_history_nodes ENABLE ROW LEVEL SECURITY;
 REVOKE ALL ON public.v3_history_settings,public.v3_history_nodes FROM PUBLIC,anon,authenticated,service_role;
@@ -69,9 +76,9 @@ REVOKE ALL ON FUNCTION public.v3_history_children(jsonb),public.v3_history_value
 ALTER FUNCTION public.v3_request(text,text,jsonb) RENAME TO v3_request_before_history;
 REVOKE ALL ON FUNCTION public.v3_request_before_history(text,text,jsonb) FROM PUBLIC,anon,authenticated,service_role;
 CREATE FUNCTION public.v3_request(p_token text,p_operation text,p_args jsonb DEFAULT '{}') RETURNS jsonb LANGUAGE plpgsql SECURITY DEFINER SET search_path='' AS $$
-DECLARE remote jsonb; role_data jsonb; child uuid; epoch bigint; settings public.v3_history_settings; n jsonb; ident text; body_text text; children text[]; ref jsonb; path text[]; result jsonb;
+DECLARE remote jsonb; role_data jsonb; child uuid; epoch bigint; settings public.v3_history_settings; n jsonb; ident text; body_text text; children text[]; ref jsonb; path text[]; result jsonb; cursor_path text[]; page_limit integer;
 BEGIN
- IF p_operation NOT IN ('read','save','read_v2','save_v2','history_has','history_put','history_get') THEN RETURN public.v3_request_before_history(p_token,p_operation,p_args); END IF;
+ IF p_operation NOT IN ('read','save','read_v2','save_v2','history_has','history_put','history_get','history_roots') THEN RETURN public.v3_request_before_history(p_token,p_operation,p_args); END IF;
  remote:=public.v3_request_before_history(p_token,'read','{}');role_data:=public.v3_role();child:=(role_data->>'child')::uuid;epoch:=(remote->>'gameEpoch')::bigint;
  SELECT * INTO settings FROM public.v3_history_settings WHERE singleton;
  IF p_operation='read' THEN
@@ -84,12 +91,22 @@ BEGIN
  IF NOT settings.enabled THEN RAISE EXCEPTION 'History capability is not enabled'; END IF;
  IF p_operation='read_v2' THEN RETURN remote||jsonb_build_object('progressStorageVersion',2); END IF;
  IF coalesce((p_args->>'gameEpoch')::bigint,0)<>epoch THEN RAISE EXCEPTION 'GAME_RESET_REQUIRED'; END IF;
+ IF p_operation='history_roots' THEN
+  page_limit:=least(32,greatest(1,coalesce((p_args->>'limit')::integer,32)));
+  SELECT coalesce(array_agg(v#>>'{}' ORDER BY ord),'{}'::text[]) INTO cursor_path FROM jsonb_array_elements(coalesce(p_args#>'{cursor,path}','[]'::jsonb)) WITH ORDINALITY e(v,ord);
+  SELECT coalesce(jsonb_agg(to_jsonb(x)),'[]'::jsonb) INTO n FROM (
+   SELECT h.path,h.root,h.mode,h.revision FROM public.v3_history_roots h WHERE h.child_user_id=child AND h.game_epoch=epoch
+    AND (h.revision,h.path,h.root)>(coalesce((p_args#>>'{cursor,revision}')::bigint,-1),cursor_path,coalesce(p_args#>>'{cursor,root}',''))
+   ORDER BY h.revision,h.path,h.root LIMIT page_limit) x;
+  RETURN jsonb_build_object('roots',n,'nextCursor',CASE WHEN jsonb_array_length(n)=page_limit THEN n->(jsonb_array_length(n)-1) ELSE NULL END);
+ END IF;
  IF p_operation IN ('history_has','history_get') THEN
   IF jsonb_typeof(p_args->'ids') IS DISTINCT FROM 'array' OR jsonb_array_length(p_args->'ids')>64 THEN RAISE EXCEPTION 'Bounded history page required'; END IF;
   IF p_operation='history_has' THEN SELECT jsonb_build_object('ids',coalesce(jsonb_agg(id),'[]')) INTO result FROM public.v3_history_nodes WHERE child_user_id=child AND game_epoch=epoch AND id IN (SELECT jsonb_array_elements_text(p_args->'ids'));
   ELSE SELECT jsonb_build_object('nodes',coalesce(jsonb_agg(jsonb_build_object('id',id,'body',body)),'[]')) INTO result FROM public.v3_history_nodes WHERE child_user_id=child AND game_epoch=epoch AND id IN (SELECT jsonb_array_elements_text(p_args->'ids')); END IF;RETURN result;
  END IF;
  IF role_data->>'role'<>'learner' THEN RAISE EXCEPTION 'Learner account required'; END IF;
+ IF p_operation='save_v2' AND EXISTS(SELECT 1 FROM public.v3_transactions WHERE child_user_id=child AND request_id=(p_args->>'requestId')::uuid) THEN RETURN public.v3_request_before_history(p_token,'save',p_args); END IF;
  IF NOT settings.write_enabled THEN RAISE EXCEPTION 'History writes are paused; original request retained'; END IF;
  IF p_operation='history_put' THEN
   ident:=p_args#>>'{node,id}';body_text:=p_args#>>'{node,body}';
@@ -109,6 +126,12 @@ BEGIN
    IF EXISTS(SELECT 1 FROM unnest(path) k WHERE k IS NULL OR k=ANY(ARRAY['__proto__','constructor','prototype','_historyV2'])) OR (p_args->'progress')#>path IS NULL OR NOT EXISTS(SELECT 1 FROM public.v3_history_nodes WHERE child_user_id=child AND game_epoch=epoch AND id=ref->>'root') THEN RAISE EXCEPTION 'History reference missing or invalid'; END IF;
   END LOOP;
   result:=public.v3_request_before_history(p_token,'save',p_args);
+  IF NOT coalesce((result->>'conflict')::boolean,false) THEN
+   FOR ref IN SELECT * FROM jsonb_array_elements(n->'refs') LOOP
+    SELECT array_agg(v#>>'{}' ORDER BY ord) INTO path FROM jsonb_array_elements(ref->'path') WITH ORDINALITY e(v,ord);
+    INSERT INTO public.v3_history_roots VALUES(child,epoch,path,ref->>'root',ref->>'mode',(result->>'revision')::bigint,(p_args->>'requestId')::uuid) ON CONFLICT DO NOTHING;
+   END LOOP;
+  END IF;
   RETURN result;
  END IF;
  RAISE EXCEPTION 'Unknown history operation';
