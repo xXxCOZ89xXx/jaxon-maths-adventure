@@ -1,4 +1,4 @@
-# Jaxon's Maths Adventure
+# Everyday Skills Adventures
 
 [Current implementation, release and acceptance status](docs/CURRENT-STATUS.md) · [Development rules](AGENTS.md) · [Phase 3 sequence](docs/PHASE3-IMPLEMENTATION.md)
 

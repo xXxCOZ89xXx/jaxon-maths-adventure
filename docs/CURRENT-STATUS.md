@@ -2,10 +2,10 @@
 
 Generated from the code registry by `npm run status`. Historical review reports remain dated evidence; this page is the current implementation summary.
 
-- Current scope: Claude Phase 3 and save-growth development.
+- Current scope: Everyday Skills Adventures branding preparation.
 - Registry: **96 skills across 9 worlds**, with 146 prerequisite links.
-- Released baseline: `e462b1a7f38c54565b869a56b04e23b9cd02eeec`.
-- Release: Phase 3 application release authorised. PR #37 records the current checks, merge and deployment. Retained-history database installation and cutover remain pending; the client uses the existing save system until capability 2 is enabled.
+- Released baseline: `e33d3ef064ef6b6df036771ebab466b9465ff30e`.
+- Release: Phase 3 application is live. The Everyday Skills Adventures branding change is prepared for PR review and is not deployed. The owner-selected future live address is everydayskillsadventures.co.uk/game; sales-site routing and Auth configuration have not changed.
 
 ## Implementation
 
@@ -16,6 +16,7 @@ Generated from the code registry by `npm run status`. Historical review reports 
 - Question-specific worked explanations and misconception choices
 - Lint/format tooling, archived review screenshots and current instructions
 - Multi-learner architecture documented; account selection is not enabled
+- Everyday Skills Adventures name, exact owner-supplied logo, compact activity symbol and browser icons
 
 ## Verification and cutover
 

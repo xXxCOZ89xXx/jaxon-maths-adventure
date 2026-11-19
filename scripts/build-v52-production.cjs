@@ -148,7 +148,7 @@ function build(config, out) {
   let html = fs.readFileSync(path.join(root, "v3-adventure.html"), "utf8");
   html = once(html, "connect-src 'none'", `connect-src 'self' ${c.url}`);
   html = html
-    .replaceAll("V5 Interactive Test Camp", "V5.2 Maths Adventure")
+    .replaceAll("V5 Interactive Test Camp", "Family Game")
     .replaceAll("V3 TEST CAMP", "V5.2 FAMILY ADVENTURE")
     .replaceAll(
       "Offline demo · fictional explorer · saved only on this device",
@@ -171,7 +171,7 @@ function build(config, out) {
   fs.writeFileSync(path.join(out, "index.html"), html);
   // Future deployment retires stale writers/bookmarks; original repository pages stay intact.
   const redirect =
-    '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; base-uri \'none\'; form-action \'none\'"><meta http-equiv="refresh" content="0;url=./"><title>Jaxon’s Maths Adventure has moved</title><p><a href="./">Open Jaxon’s Maths Adventure</a></p></html>\n';
+    '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src \'none\'; base-uri \'none\'; form-action \'none\'"><meta http-equiv="refresh" content="0;url=./"><title>Everyday Skills Adventures has moved</title><p><a href="./">Open Everyday Skills Adventures</a></p></html>\n';
   for (const old of [
     "v2-game-test.html",
     "v2-secure-preview.html",

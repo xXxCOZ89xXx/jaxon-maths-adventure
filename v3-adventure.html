@@ -8,11 +8,13 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; connect-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
     />
-    <title>Jaxon's Maths Adventure · V5 Interactive Test Camp</title>
-    <link rel="icon" href="icon.svg" />
+    <title>Everyday Skills Adventures · V5 Interactive Test Camp</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="v3/assets/branding/esa-symbol-64.png" />
+    <link rel="apple-touch-icon" href="v3/assets/branding/esa-symbol-256.png" />
     <link rel="stylesheet" href="v3/style.css" />
     <link rel="stylesheet" href="v3/touch-activities.css" />
     <link rel="stylesheet" href="v3/guide-portraits.css" />
+    <link rel="stylesheet" href="v3/branding.css" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to adventure</a>
@@ -21,10 +23,13 @@
       <span>Offline demo · fictional explorer · saved only on this device</span>
     </div>
     <header class="topbar">
-      <a class="brand" href="v3-adventure.html"
-        ><span class="brand-mark" aria-hidden="true">◈</span
-        ><span>JAXON’S<span class="brand-sub">MATHS ADVENTURE</span></span></a
-      >
+      <a class="brand brand--esa" href="v3-adventure.html" aria-label="Everyday Skills Adventures home">
+        <picture class="brand-full">
+          <source srcset="v3/assets/branding/esa-logo.webp" type="image/webp" />
+          <img src="v3/assets/branding/esa-logo.png" alt="Everyday Skills Adventures" width="1100" height="320" fetchpriority="high" />
+        </picture>
+        <img class="brand-compact" src="v3/assets/branding/esa-symbol-128.png" alt="" width="128" height="128" />
+      </a>
       <div id="headerExplorer" role="group" aria-label="Your equipped explorer"></div>
       <nav aria-label="Main navigation">
         <button data-nav="home">Home</button

@@ -22,7 +22,7 @@ async function verifyLayout(p){assert(await p.evaluate(()=>document.documentElem
  await ctx.exposeBinding('recordStorage',(_,op)=>storageOps.push(op));
  await ctx.addInitScript(()=>{for(const name of ['getItem','setItem','removeItem','clear']){const orig=Storage.prototype[name];Storage.prototype[name]=function(...args){window.recordStorage({area:this===localStorage?'local':'session',op:name,key:args[0]||null});return orig.apply(this,args)}}});
  let response=await p.goto(base);assert.equal(response.status(),200);assert.equal(new URL(p.url()).origin,origin);assert((await response.allHeaders())['content-security-policy'].includes("connect-src 'none'"));
- assert(await p.getByText('Demo only — progress is saved on this device and is not connected to Jaxon’s game',{exact:true}).isVisible());
+ assert(await p.getByText('Demo only — progress is saved on this device and is not connected to the family game',{exact:true}).isVisible());
  assert.equal(await p.locator('input[type=password],input[type=email],[data-nav=parent],[data-action="nav:parent"]').count(),0);
  assert.equal(await p.evaluate(()=>typeof window.V3CloudContext),'undefined');
  await verifyLayout(p);
