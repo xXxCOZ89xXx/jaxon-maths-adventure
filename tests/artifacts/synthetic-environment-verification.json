@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-19",
+  "base": "21237873a04ce1306b8596d1097b234098300f01",
+  "scope": "Phase1 synthetic test target preparation; no hosted provisioning/SQL/Auth or deployment",
+  "sourceSha256": {
+    "v3/synthetic-environment.js": "8658c16b8e719c3040f44ceadae0143ed8b7bf497178a38120d2300736d7f99d",
+    "scripts/build-synthetic-environment.cjs": "0a0a538e75a3641385e4a377d7f2dd45f5c9c2917c21d451dd7332fa167d2e6e",
+    "scripts/build-v3-staging.cjs": "63964770e326e68a15b2ae4aa730cf895e2e1aaf380441f6388f698e7afa362f",
+    "supabase/synthetic/001_environment_marker.sql": "746c646cd176604c220fd418f78384d39676abdb8ad796e7c4e7cc7e5f7f0f6c"
+  },
+  "configurationBuild": "PASS: explicit non-live project/key/capability; no secret serialization; outputs and namespaces separated; existing family target pinned",
+  "database": {
+    "result": "PASS",
+    "groups": 7,
+    "network": "disabled Docker PostgreSQL17",
+    "identities": "fictional only",
+    "coverage": [
+      "wrong/live/unknown project and baseline fingerprints",
+      "existing Auth/public data and grants refused",
+      "transaction rollback",
+      "private helpers and unchanged original metadata/catalog",
+      "parent/learner PIN and reset initialization",
+      "two-family roles/isolation and exact save/purchase/award retries",
+      "rerun refusal and disabled history wrapper compatibility"
+    ]
+  },
+  "browser": {
+    "result": "PASS",
+    "cases": 16,
+    "layouts": [
+      "iPad portrait Chromium",
+      "iPad landscape Chromium"
+    ],
+    "network": "external requests blocked; fake API intercepted",
+    "physicalSafari": false
+  },
+  "existingFamilyBuild": {
+    "result": "PASS: byte-identical to released baseline",
+    "files": 241,
+    "existingArtifactsOverwritten": false
+  },
+  "regressions": {
+    "npmTest": "PASS, including 121440 fresh prompts",
+    "combinedIpadRelease": "PASS: 56 Chromium cases",
+    "familyBuildIsolation": "PASS",
+    "lintFormatStatus": "PASS"
+  },
+  "hostedProjectCreated": false,
+  "hostedSQLExecuted": false,
+  "actualProviderAuthApiTested": false,
+  "realLearnerDataUsed": false,
+  "merged": false,
+  "deployed": false,
+  "remaining": [
+    "reviewed separate provider project/baseline/HTTPS host provisioning",
+    "actual hosted Auth/API/role acceptance with fictional accounts",
+    "specific live retained-history review/cutover",
+    "operator MFA/IP decisions and transferable sales-site source"
+  ]
+}

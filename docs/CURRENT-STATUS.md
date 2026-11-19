@@ -2,10 +2,10 @@
 
 Generated from the code registry by `npm run status`. Historical review reports remain dated evidence; this page is the current implementation summary.
 
-- Current scope: Everyday Skills Adventures branding preparation.
+- Current scope: UK launch Phase 1 synthetic environment implementation.
 - Registry: **96 skills across 9 worlds**, with 146 prerequisite links.
-- Released baseline: `e33d3ef064ef6b6df036771ebab466b9465ff30e`.
-- Release: Phase 3 application is live. The Everyday Skills Adventures branding change is prepared for PR review and is not deployed. The owner-selected future live address is everydayskillsadventures.co.uk/game; sales-site routing and Auth configuration have not changed.
+- Released baseline: `21237873a04ce1306b8596d1097b234098300f01`.
+- Release: Everyday Skills Adventures branding PR #38 is deployed on the existing game/demo hosts. Phase 1 synthetic-environment work is prepared for review, not deployed. Selected /game, /account and /demo routes remain planned.
 
 ## Implementation
 
@@ -17,12 +17,13 @@ Generated from the code registry by `npm run status`. Historical review reports 
 - Lint/format tooling, archived review screenshots and current instructions
 - Multi-learner architecture documented; account selection is not enabled
 - Everyday Skills Adventures name, exact owner-supplied logo, compact activity symbol and browser icons
+- Separate synthetic-project build and guarded empty-server identity marker, isolated storage and live-target refusal
 
 ## Verification and cutover
 
 Local npm test, the 56-case combined iPad Chromium save/recovery gate, 2,988 curriculum task completions, retained-history PostgreSQL rehearsals, private/demo build checks, lint and formatting pass. Extended bank coverage verifies 121,440 fresh prompts. GitHub CI is reported on PR #37; physical iPad Safari acceptance is deferred. See PHASE3-VERIFICATION.md for scope and limits.
 
-Owner confirmed on 19 November that the new encrypted backup is not yet ready. No hosted SQL, account or project changes have been made. Compatible client release can precede installation; database installation and cutover wait for a verified encrypted backup and concrete review.
+Owner-confirmed current application-data recovery PASS and two protected copies are complete. Live history installation/activation still need their specific installed-contract/recovery-limit review. The synthetic test build/marker is implemented locally; hosted project/baseline/host provisioning and real Auth/API acceptance remain separate approval steps. No hosted SQL, account/project, hosting or Auth setting change was made.
 
 One combined manual iPad Safari session after the planned updates and any approved cutover are complete.
 

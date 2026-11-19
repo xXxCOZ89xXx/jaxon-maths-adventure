@@ -11,6 +11,10 @@ const c = config({
   url: env.V3_STAGING_URL,
   anonKey: env.V3_STAGING_ANON_KEY,
 });
+// This is the existing family deployment despite its historical internal name.
+// A separate synthetic project must use the synthetic builder, never this output.
+if (env.V3_STAGING_BUILD_FIXTURE !== "1" && c.projectRef !== "sfogrvedypgtxfvecmbx")
+  throw Error("Family deployment is pinned to the current family project; use the separate synthetic builder");
 const repo = path.resolve(__dirname, "..");
 function once(source, before, after) {
   if (source.split(before).length !== 2)
@@ -65,7 +69,7 @@ for (const file of [
   "v2-extra-tools.js",
 ])
   fs.cpSync(path.join(repo, file), path.join(out, file), { recursive: true,
-    filter: source => !(path.dirname(source)===path.join(repo,'v3/assets/ingredients') && source.endsWith('.png')) && !['painted-forest-preview','fraction-desert-preview','painted-forest-preview.js','painted-forest-preview.css','painted-desert-preview.js','painted-desert-preview.css','guide-portraits-preview.js','guide-portraits-preview.css'].includes(path.basename(source)) });
+    filter: source => !(path.dirname(source)===path.join(repo,'v3/assets/ingredients') && source.endsWith('.png')) && !['synthetic-environment.js','painted-forest-preview','fraction-desert-preview','painted-forest-preview.js','painted-forest-preview.css','painted-desert-preview.js','painted-desert-preview.css','guide-portraits-preview.js','guide-portraits-preview.css'].includes(path.basename(source)) });
 let html = fs.readFileSync(path.join(repo, "v3-adventure.html"), "utf8");
 for (const [before, after] of [
   ["connect-src 'none'", `connect-src 'self' ${c.url}`],
