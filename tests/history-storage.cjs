@@ -1,22 +1,157 @@
-'use strict';
-const assert=require('node:assert/strict'),{createHash}=require('node:crypto'),{V3HistoryStorage:H}=require('../v3/history-storage.js');
-const copy=x=>JSON.parse(JSON.stringify(x));
-(async()=>{
- assert.equal(await H.hash('fixture'),createHash('sha256').update('fixture').digest('hex'));
- const evidence=Array.from({length:1800},(_,i)=>({at:i,questionKey:'q/'+i,original:'original '+i,unknown:'x'.repeat(1500)}));
- const s={seen:evidence.map(e=>e.original),skills:{algebra:{independentEvidence:evidence,reviewSeen:evidence.map(e=>e.original)}},startingProfile:{history:{number:[{responses:[{original:'retained'}]}]}},adventure:{townLifeV2:{runs:Object.fromEntries(Array.from({length:40},(_,i)=>['plan-'+i,{done:i>0,stage:i,steps:[{prompt:'original task '+i}]}]))}},future:{retained:true}};
- assert(Buffer.byteLength(JSON.stringify(s))>2000000);
- const first=await H.pack(s),nodes=new Map(first.nodes.map(n=>[n.id,n.body]));assert(Buffer.byteLength(JSON.stringify(first.progress))<5000);assert(first.progress.adventure.townLifeV2.runs['plan-0']);assert.equal(Object.keys(first.progress.adventure.townLifeV2.runs).length,1);
- assert.deepEqual(await H.restore(first.progress,id=>nodes.get(id)),s);
- await assert.rejects(H.restore(first.progress,()=>undefined),/missing/);await assert.rejects(H.restore(first.progress,()=>'{"corrupt":true}'),/verification/);
- const next=copy(s);next.skills.algebra.independentEvidence.push({at:1801,questionKey:'q/new',original:'new'});const second=await H.pack(next),delta=second.nodes.filter(n=>!nodes.has(n.id));assert(delta.length<10,'Appending one response should reuse the original immutable history');assert(Buffer.byteLength(JSON.stringify(delta))<10000);assert.equal(s.skills.algebra.independentEvidence.length,1800);
- const large={raw:'retained exact original bytes '+JSON.stringify(s)};const raw=await H.pack(large),rawNodes=new Map(raw.nodes.map(n=>[n.id,n.body]));assert.deepEqual(await H.restore(raw.progress,id=>rawNodes.get(id)),large);
- const docs=new Map(),dbNodes=new Map();let fail=false;
- const backend={get:async k=>docs.get(k),node:async id=>dbNodes.get(id),put:async(k,p)=>{if(fail)throw Error('fictional quota');for(const n of p.nodes)dbNodes.set(n.id,n.body);docs.set(k,copy(p.progress));}};
- const strings=new Map([['game',JSON.stringify(s)],['queue',JSON.stringify({version:1,pending:{requestId:'original-v1',progress:s}})]]),legacy={getItem:k=>strings.get(k)??null,setItem:(k,v)=>strings.set(k,v)};
- await assert.rejects(H.localStore({backend,legacy,keys:['game','queue']}),/original pending/);assert.equal(docs.size,0);assert.equal(strings.get('game'),JSON.stringify(s));
- strings.set('queue',JSON.stringify({version:1,pending:null,archives:[]}));const local=await H.localStore({backend,legacy,keys:['game','queue']});assert.equal(local.getItem('game'),JSON.stringify(s));assert(strings.get('game').startsWith('HISTORY-V2:'));assert.equal((await H.restore(docs.get('game:original-legacy'),id=>dbNodes.get(id))).raw,JSON.stringify(s));
- fail=true;await assert.rejects(local.setItem('game',JSON.stringify(next)),/quota/);assert.deepEqual(JSON.parse(local.getItem('game')),s);fail=false;await local.setItem('game',JSON.stringify(next));const reopened=await H.localStore({backend,legacy,keys:['game','queue']});assert.deepEqual(JSON.parse(reopened.getItem('game')),next);
- let sent;const remote=H.transport(async(op,args)=>{sent={op,args};return {revision:1};});const pending={requestId:'legacy request',revision:0,progress:{unchanged:true}};await remote('save',pending);assert.deepEqual(sent,{op:'save',args:pending});
- console.log('PASS retained history: >2MB exact restoration, bounded current save, reuse on append, original active tasks, immutable unknown fields, missing-page refusal, quota recovery, original legacy bytes and V1 request preservation.');
-})().catch(e=>{console.error(e);process.exitCode=1});
+"use strict";
+const assert = require("node:assert/strict"),
+  { createHash } = require("node:crypto"),
+  { V3HistoryStorage: H } = require("../v3/history-storage.js");
+const copy = (x) => JSON.parse(JSON.stringify(x));
+(async () => {
+  assert.equal(
+    await H.hash("fixture"),
+    createHash("sha256").update("fixture").digest("hex"),
+  );
+  const evidence = Array.from({ length: 1800 }, (_, i) => ({
+    at: i,
+    questionKey: "q/" + i,
+    original: "original " + i,
+    unknown: "x".repeat(1500),
+  }));
+  const s = {
+    seen: evidence.map((e) => e.original),
+    skills: {
+      algebra: {
+        independentEvidence: evidence,
+        reviewSeen: evidence.map((e) => e.original),
+      },
+    },
+    startingProfile: {
+      history: { number: [{ responses: [{ original: "retained" }] }] },
+    },
+    adventure: {
+      townLifeV2: {
+        runs: Object.fromEntries(
+          Array.from({ length: 40 }, (_, i) => [
+            "plan-" + i,
+            {
+              done: i > 0,
+              stage: i,
+              steps: [{ prompt: "original task " + i }],
+            },
+          ]),
+        ),
+      },
+    },
+    future: { retained: true },
+  };
+  assert(Buffer.byteLength(JSON.stringify(s)) > 2000000);
+  const first = await H.pack(s),
+    nodes = new Map(first.nodes.map((n) => [n.id, n.body]));
+  assert(Buffer.byteLength(JSON.stringify(first.progress)) < 5000);
+  assert(first.progress.adventure.townLifeV2.runs["plan-0"]);
+  assert.equal(Object.keys(first.progress.adventure.townLifeV2.runs).length, 1);
+  assert.deepEqual(await H.restore(first.progress, (id) => nodes.get(id)), s);
+  await assert.rejects(
+    H.restore(first.progress, () => undefined),
+    /missing/,
+  );
+  await assert.rejects(
+    H.restore(first.progress, () => '{"corrupt":true}'),
+    /verification/,
+  );
+  const next = copy(s);
+  next.skills.algebra.independentEvidence.push({
+    at: 1801,
+    questionKey: "q/new",
+    original: "new",
+  });
+  const second = await H.pack(next),
+    delta = second.nodes.filter((n) => !nodes.has(n.id));
+  assert(
+    delta.length < 10,
+    "Appending one response should reuse the original immutable history",
+  );
+  assert(Buffer.byteLength(JSON.stringify(delta)) < 10000);
+  assert.equal(s.skills.algebra.independentEvidence.length, 1800);
+  const large = { raw: "retained exact original bytes " + JSON.stringify(s) };
+  const raw = await H.pack(large),
+    rawNodes = new Map(raw.nodes.map((n) => [n.id, n.body]));
+  assert.deepEqual(
+    await H.restore(raw.progress, (id) => rawNodes.get(id)),
+    large,
+  );
+  const docs = new Map(),
+    dbNodes = new Map();
+  let fail = false;
+  const backend = {
+    get: async (k) => docs.get(k),
+    node: async (id) => dbNodes.get(id),
+    put: async (k, p) => {
+      if (fail) throw Error("fictional quota");
+      for (const n of p.nodes) dbNodes.set(n.id, n.body);
+      docs.set(k, copy(p.progress));
+    },
+  };
+  const strings = new Map([
+      ["game", JSON.stringify(s)],
+      [
+        "queue",
+        JSON.stringify({
+          version: 1,
+          pending: { requestId: "original-v1", progress: s },
+        }),
+      ],
+    ]),
+    legacy = {
+      getItem: (k) => strings.get(k) ?? null,
+      setItem: (k, v) => strings.set(k, v),
+    };
+  await assert.rejects(
+    H.localStore({ backend, legacy, keys: ["game", "queue"] }),
+    /original pending/,
+  );
+  assert.equal(docs.size, 0);
+  assert.equal(strings.get("game"), JSON.stringify(s));
+  strings.set(
+    "queue",
+    JSON.stringify({ version: 1, pending: null, archives: [] }),
+  );
+  const local = await H.localStore({
+    backend,
+    legacy,
+    keys: ["game", "queue"],
+  });
+  assert.equal(local.getItem("game"), JSON.stringify(s));
+  assert(strings.get("game").startsWith("HISTORY-V2:"));
+  assert.equal(
+    (await H.restore(docs.get("game:original-legacy"), (id) => dbNodes.get(id)))
+      .raw,
+    JSON.stringify(s),
+  );
+  fail = true;
+  await assert.rejects(local.setItem("game", JSON.stringify(next)), /quota/);
+  assert.deepEqual(JSON.parse(local.getItem("game")), s);
+  fail = false;
+  await local.setItem("game", JSON.stringify(next));
+  const reopened = await H.localStore({
+    backend,
+    legacy,
+    keys: ["game", "queue"],
+  });
+  assert.deepEqual(JSON.parse(reopened.getItem("game")), next);
+  let sent;
+  const remote = H.transport(async (op, args) => {
+    sent = { op, args };
+    return { revision: 1 };
+  });
+  const pending = {
+    requestId: "legacy request",
+    revision: 0,
+    progress: { unchanged: true },
+  };
+  await remote("save", pending);
+  assert.deepEqual(sent, { op: "save", args: pending });
+  console.log(
+    "PASS retained history: >2MB exact restoration, bounded current save, reuse on append, original active tasks, immutable unknown fields, missing-page refusal, quota recovery, original legacy bytes and V1 request preservation.",
+  );
+})().catch((e) => {
+  console.error(e);
+  process.exitCode = 1;
+});

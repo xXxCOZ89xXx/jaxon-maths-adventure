@@ -5,11 +5,20 @@
     typeof module !== "undefined"
       ? require("./adventure").V3Adventure
       : root.V3Adventure;
-  const education=typeof module!=="undefined"?require("./education").V6Education:root.V6Education;
-  const content=()=>typeof module!=="undefined"?require("./content-registry").V3Content:root.V3Content;
+  const education =
+    typeof module !== "undefined"
+      ? require("./education").V6Education
+      : root.V6Education;
+  const content = () =>
+    typeof module !== "undefined"
+      ? require("./content-registry").V3Content
+      : root.V3Content;
   const T =
     typeof module !== "undefined" ? require("./town").V3Town : root.V3Town;
-  const catalog = typeof module !== "undefined" ? require("./curriculum").V3Curriculum.catalog : root.V3Curriculum.catalog;
+  const catalog =
+    typeof module !== "undefined"
+      ? require("./curriculum").V3Curriculum.catalog
+      : root.V3Curriculum.catalog;
   const worlds = [
     {
       id: "number",
@@ -121,8 +130,14 @@
     },
     T.world,
   ];
-  const R=typeof module!=="undefined"?require("./restoration").V10Restoration:root.V10Restoration;
-  const N=typeof module!=="undefined"?require("./activity-navigation").V10Navigation:root.V10Navigation;
+  const R =
+    typeof module !== "undefined"
+      ? require("./restoration").V10Restoration
+      : root.V10Restoration;
+  const N =
+    typeof module !== "undefined"
+      ? require("./activity-navigation").V10Navigation
+      : root.V10Navigation;
   const clone = (x) => JSON.parse(JSON.stringify(x));
   const num = (x, d = 0) =>
     Number.isFinite(Number(x)) ? Math.max(0, Number(x)) : d;
@@ -238,7 +253,10 @@
       ],
     ])
       if (earned && !s.achievements.includes(badge)) s.achievements.push(badge);
-    if(!old.guidedProgressionVersion){R.preserveLegacy(s);s.guidedProgressionVersion=1;}
+    if (!old.guidedProgressionVersion) {
+      R.preserveLegacy(s);
+      s.guidedProgressionVersion = 1;
+    }
     M.state(s);
     if (s.view === "adventure" && !s.adventure.active) s.view = "home";
     if (s.quest) s.quests[s.quest.world] = s.quest;
@@ -341,8 +359,8 @@
     }
   }
   function startQuest(s, id) {
-    const stage=[0,1,2].find(i=>!s.milestones.includes(id+':'+i));
-    return R.start(s,id,stage===undefined?2:stage);
+    const stage = [0, 1, 2].find((i) => !s.milestones.includes(id + ":" + i));
+    return R.start(s, id, stage === undefined ? 2 : stage);
   }
 
   function help(s) {
@@ -352,10 +370,17 @@
   }
   function answerQuest(s, skip = false) {
     const q = s.quest;
-    if (!q || q.intro || q.solved || !R.gate(s,q.world,q.i).ready) return false;
+    if (!q || q.intro || q.solved || !R.gate(s, q.world, q.i).ready)
+      return false;
     const p = puzzle(q.world, q.i),
       v = ["fraction", "chance"].includes(p.kind) ? q.selected.length : q.value;
-    if(skip){q.assisted=true;q.solved=true;q.skipped=true;q.feedback='Skipped with help. '+p.worked;return false;}
+    if (skip) {
+      q.assisted = true;
+      q.solved = true;
+      q.skipped = true;
+      q.feedback = "Skipped with help. " + p.worked;
+      return false;
+    }
     if (v !== p.answer) {
       q.assisted = true;
       q.feedback =
@@ -382,21 +407,48 @@
     if (!q?.solved) return;
     // Finish this earlier saved snapshot only; subsequent stages use the new
     // assessed multi-step plan instead of creating another fixed legacy puzzle.
-    if(q.skipped){s.recent.unshift({type:'restoration-skip',world:q.world,stage:q.i,assisted:true,skipped:true,date:new Date().toISOString()});s.recent=s.recent.slice(0,30);}
-    delete s.quests[q.world];s.quest=null;s.resumeView=null;
-    s.lastResult={type:'restoration',world:q.world,stage:q.i,legacy:true};s.view='recap';
+    if (q.skipped) {
+      s.recent.unshift({
+        type: "restoration-skip",
+        world: q.world,
+        stage: q.i,
+        assisted: true,
+        skipped: true,
+        date: new Date().toISOString(),
+      });
+      s.recent = s.recent.slice(0, 30);
+    }
+    delete s.quests[q.world];
+    s.quest = null;
+    s.resumeView = null;
+    s.lastResult = {
+      type: "restoration",
+      world: q.world,
+      stage: q.i,
+      legacy: true,
+    };
+    s.view = "recap";
   }
 
   function generate(s, id, mode, bank, curriculum, now = Date.now()) {
-    if(N.restoreLearning(s,id,mode))return null;
+    if (N.restoreLearning(s, id, mode)) return null;
     const skill = curriculum.skills.find((k) => k.id === id);
     if (!skill) return "Unknown skill.";
     const p = s.practice[id] || {},
       c = s.checks[id] || {};
     if (mode === "check" && (!p.completed || c.reteach))
       return "Complete a practice lesson before this independent check.";
-    if (mode === "check" && education.gaps(s,id).length)
-      return "Check the starting point for "+education.gaps(s,id).map(pre=>curriculum.skills.find(k=>k.id===pre)?.name||pre).join(", ")+" before this dependent independent check. Your earlier evidence is kept.";
+    if (mode === "check" && education.gaps(s, id).length)
+      return (
+        "Check the starting point for " +
+        education
+          .gaps(s, id)
+          .map(
+            (pre) => curriculum.skills.find((k) => k.id === pre)?.name || pre,
+          )
+          .join(", ") +
+        " before this dependent independent check. Your earlier evidence is kept."
+      );
     if (mode === "check" && c.due > now)
       return "Your memory check is not due yet. Explore another skill in the meantime.";
     const used = new Set([
@@ -408,12 +460,24 @@
     ]);
     let qs,
       round = num(p.round) + num(c.round) + 1;
-    const adaptive = typeof module !== "undefined" ? require('./adaptive').V5Adaptive : root.V5Adaptive;
-    const band = adaptive.skill(s,id).band;
+    const adaptive =
+      typeof module !== "undefined"
+        ? require("./adaptive").V5Adaptive
+        : root.V5Adaptive;
+    const band = adaptive.skill(s, id).band;
     for (let t = 0; t < 100; t++, round++) {
       let sample;
-      try { sample = content()?content().create(bank,id,band,round,{exclude:used,excludeIds:new Set(s.seenQuestionIds||[])}):bank.create(id,band,round,{exclude:used}); }
-      catch (error) { if(/^Duplicate questions in review/.test(error.message))continue;throw error; }
+      try {
+        sample = content()
+          ? content().create(bank, id, band, round, {
+              exclude: used,
+              excludeIds: new Set(s.seenQuestionIds || []),
+            })
+          : bank.create(id, band, round, { exclude: used });
+      } catch (error) {
+        if (/^Duplicate questions in review/.test(error.message)) continue;
+        throw error;
+      }
       if (sample.every((q) => !used.has(q[0]))) {
         qs = sample;
         break;
@@ -425,45 +489,86 @@
       const candidates = new Map();
       for (let t = 0; t < 120; t++) {
         let sample;
-        try { sample = content()?content().create(bank,id,band,round+100+t,{exclude:new Set()}):bank.create(id,band,round+100+t,{exclude:new Set()}); }
-        catch (error) { if(/^Duplicate questions in review/.test(error.message))continue;throw error; }
+        try {
+          sample = content()
+            ? content().create(bank, id, band, round + 100 + t, {
+                exclude: new Set(),
+              })
+            : bank.create(id, band, round + 100 + t, { exclude: new Set() });
+        } catch (error) {
+          if (/^Duplicate questions in review/.test(error.message)) continue;
+          throw error;
+        }
         for (const question of sample || []) {
-          const prompt=question?.[0];
+          const prompt = question?.[0];
           if (typeof prompt !== "string" || candidates.has(prompt)) continue;
-          candidates.set(prompt,question);
+          candidates.set(prompt, question);
         }
       }
-      const oldest = [...candidates.values()].sort((a,b) => {
-        const ai=s.seen.lastIndexOf(a[0]), bi=s.seen.lastIndexOf(b[0]);
-        return (ai<0?-1:ai)-(bi<0?-1:bi);
+      const oldest = [...candidates.values()].sort((a, b) => {
+        const ai = s.seen.lastIndexOf(a[0]),
+          bi = s.seen.lastIndexOf(b[0]);
+        return (ai < 0 ? -1 : ai) - (bi < 0 ? -1 : bi);
       });
-      const selected=[],answers=new Set(),families=new Set();
+      const selected = [],
+        answers = new Set(),
+        families = new Set();
       for (const question of oldest) {
         if (answers.has(question[1])) continue;
-        selected.push(question); answers.add(question[1]);
+        selected.push(question);
+        answers.add(question[1]);
         families.add(question[5]?.family || question[5]?.id || question[0]);
         if (selected.length === 6) break;
       }
-      if (selected.length === 6 && families.size >= 3) qs=selected;
+      if (selected.length === 6 && families.size >= 3) qs = selected;
     }
-    if (!qs) return mode === "check"
-      ? "A fresh independent check is not available yet. Practice is still available."
-      : "Fresh questions are unavailable. Try a different skill.";
-    let teachingExample=null;
-    for(let attempt=0;attempt<32;attempt++){
-      let candidate=education.example(id,qs,band,round+attempt*101);if(!candidate)break;
-      if(content())candidate=content().rows(id,[candidate],{band,round:round+17+attempt*101})[0];
-      const marker=typeof module!=="undefined"?require('./answer-marking').V3AnswerMarking:root.V3AnswerMarking;
-      if(!qs.some(q=>q[0]===candidate[0]||q[1]===candidate[1]||marker?.matches(q[1],candidate[1],q[5]?.answerContract))){teachingExample=candidate;break;}
+    if (!qs)
+      return mode === "check"
+        ? "A fresh independent check is not available yet. Practice is still available."
+        : "Fresh questions are unavailable. Try a different skill.";
+    let teachingExample = null;
+    for (let attempt = 0; attempt < 32; attempt++) {
+      let candidate = education.example(id, qs, band, round + attempt * 101);
+      if (!candidate) break;
+      if (content())
+        candidate = content().rows(id, [candidate], {
+          band,
+          round: round + 17 + attempt * 101,
+        })[0];
+      const marker =
+        typeof module !== "undefined"
+          ? require("./answer-marking").V3AnswerMarking
+          : root.V3AnswerMarking;
+      if (
+        !qs.some(
+          (q) =>
+            q[0] === candidate[0] ||
+            q[1] === candidate[1] ||
+            marker?.matches(q[1], candidate[1], q[5]?.answerContract),
+        )
+      ) {
+        teachingExample = candidate;
+        break;
+      }
     }
     s.learningBand = band;
-    if(content())s.seenQuestionIds=[...new Set([...(s.seenQuestionIds||[]),...qs.map(q=>q[5]?.questionKey).filter(Boolean),...(teachingExample?.[5]?.questionKey?[teachingExample[5].questionKey]:[])])];
-    if(!N.stashLearning(s))return 'Your saved lessons need review. Their original state has been preserved.';
+    if (content())
+      s.seenQuestionIds = [
+        ...new Set([
+          ...(s.seenQuestionIds || []),
+          ...qs.map((q) => q[5]?.questionKey).filter(Boolean),
+          ...(teachingExample?.[5]?.questionKey
+            ? [teachingExample[5].questionKey]
+            : []),
+        ]),
+      ];
+    if (!N.stashLearning(s))
+      return "Your saved lessons need review. Their original state has been preserved.";
     s.learning = {
       id,
       mode,
       round,
-      policyVersion:3,
+      policyVersion: 3,
       band,
       teachingExample,
       qs,
@@ -473,7 +578,14 @@
       feedback: "",
       answered: false,
     };
-    s.seen = [...s.seen, ...qs.map((q) => q[0]), ...(mode === "practice" && [8,9].includes(s.learning.teachingExample?.[5]?.contentVersion) ? [s.learning.teachingExample[0]] : [])];
+    s.seen = [
+      ...s.seen,
+      ...qs.map((q) => q[0]),
+      ...(mode === "practice" &&
+      [8, 9].includes(s.learning.teachingExample?.[5]?.contentVersion)
+        ? [s.learning.teachingExample[0]]
+        : []),
+    ];
     s.view = mode === "check" ? "check" : "lesson";
     s.resumeView = s.view;
     return null;
@@ -484,28 +596,74 @@
     const q = l.qs[l.i];
     // Newly authored supported practice must pass through its teaching screen.
     // Existing saved questions keep their original response contract.
-    if((q[5]?.contentVersion === 8||q[5]?.direct) && l.mode === "practice" && !l.started)return;
-    if(q[5]?.direct&&l.needsTeaching)return;
-    const unit=q[5]?.unit||T.moneyUnit(q[0]);
-    const moneyValue=x=>T.moneyAnswerNumber(x,unit);
+    if (
+      (q[5]?.contentVersion === 8 || q[5]?.direct) &&
+      l.mode === "practice" &&
+      !l.started
+    )
+      return;
+    if (q[5]?.direct && l.needsTeaching) return;
+    const unit = q[5]?.unit || T.moneyUnit(q[0]);
+    const moneyValue = (x) => T.moneyAnswerNumber(x, unit);
     const normal = (x) => String(x).replace(/−/g, "-").trim().toLowerCase(),
-      correct = !skip && (q[5]?.direct
-        ? (typeof module !== "undefined" ? require('./touch-activities').V9Touch : root.V9Touch).matches(q[5].direct,q[1],l.manipulation||{})
-        : q[5]?.contentVersion === 8
-        ? (typeof module !== "undefined" ? require('./curriculum-activities').V8Activities : root.V8Activities).matches({answer:q[1],activity:q[5].activity,markingVersion:q[5].markingVersion,answerContract:q[5].answerContract,prompt:q[0],unit},String(value)) && (q[5].activity?.kind!=='experiment'||l.manipulation?.c8?.trials===q[5].activity.outcomes.length)
-        : q[5]?.markingVersion===1?(typeof module!=="undefined"?require("./answer-marking").V3AnswerMarking:root.V3AnswerMarking).matches(q[1],value,q[5].answerContract)
-        : ['pounds','pence'].includes(unit)?Math.abs(moneyValue(value)-Number(q[1]))<1e-8
-        : l.mode === "discovery" ? Math.abs(parseNumber(value)-Number(q[1])) < 1e-8 : normal(value) === normal(q[1]));
+      correct =
+        !skip &&
+        (q[5]?.direct
+          ? (typeof module !== "undefined"
+              ? require("./touch-activities").V9Touch
+              : root.V9Touch
+            ).matches(q[5].direct, q[1], l.manipulation || {})
+          : q[5]?.contentVersion === 8
+            ? (typeof module !== "undefined"
+                ? require("./curriculum-activities").V8Activities
+                : root.V8Activities
+              ).matches(
+                {
+                  answer: q[1],
+                  activity: q[5].activity,
+                  markingVersion: q[5].markingVersion,
+                  answerContract: q[5].answerContract,
+                  prompt: q[0],
+                  unit,
+                },
+                String(value),
+              ) &&
+              (q[5].activity?.kind !== "experiment" ||
+                l.manipulation?.c8?.trials === q[5].activity.outcomes.length)
+            : q[5]?.markingVersion === 1
+              ? (typeof module !== "undefined"
+                  ? require("./answer-marking").V3AnswerMarking
+                  : root.V3AnswerMarking
+                ).matches(q[1], value, q[5].answerContract)
+              : ["pounds", "pence"].includes(unit)
+                ? Math.abs(moneyValue(value) - Number(q[1])) < 1e-8
+                : l.mode === "discovery"
+                  ? Math.abs(parseNumber(value) - Number(q[1])) < 1e-8
+                  : normal(value) === normal(q[1]));
     if (correct && !l.assisted) l.correct++;
-    if (l.mode === "discovery" && !l.answers.some(a=>a.q===q[0]))
+    if (l.mode === "discovery" && !l.answers.some((a) => a.q === q[0]))
       l.answers.push({
         q: q[0],
         correct: correct && !l.assisted,
         skipped: skip,
       });
-    const responses=l.responses||(l.responses=[]);
-    const firstAttempt=!responses.some(r=>r.question===q[0]);
-    if(responses.filter(r=>r.question===q[0]).length<16)responses.push({question:q[0],...(q[5]?.questionKey?{questionKey:q[5].questionKey}:{}),answer:String(value),correct,firstAttempt,firstAttemptCorrect:firstAttempt&&correct&&!l.assisted&&!skip,firstIndependent:l.mode==='check'&&firstAttempt&&correct&&!l.assisted&&!skip,assisted:!!l.assisted,skipped:skip,source:l.mode,interaction:l.manipulation?'constructed':'conventional'});
+    const responses = l.responses || (l.responses = []);
+    const firstAttempt = !responses.some((r) => r.question === q[0]);
+    if (responses.filter((r) => r.question === q[0]).length < 16)
+      responses.push({
+        question: q[0],
+        ...(q[5]?.questionKey ? { questionKey: q[5].questionKey } : {}),
+        answer: String(value),
+        correct,
+        firstAttempt,
+        firstAttemptCorrect: firstAttempt && correct && !l.assisted && !skip,
+        firstIndependent:
+          l.mode === "check" && firstAttempt && correct && !l.assisted && !skip,
+        assisted: !!l.assisted,
+        skipped: skip,
+        source: l.mode,
+        interaction: l.manipulation ? "constructed" : "conventional",
+      });
     l.answered = true;
     l.feedback =
       (correct
@@ -513,9 +671,25 @@
         : skip
           ? "Let’s work through it. "
           : "Here is one way to work through it. ") + education.explain(q);
-    if(!correct&&!skip&&q[5]?.choiceReasons?.[String(value)])l.feedback=q[5].choiceReasons[String(value)]+' '+q[4];
-    if(!correct&&!skip&&['pounds','pence'].includes(unit)&&!Number.isFinite(moneyValue(value)))l.feedback='Use '+unit+' for this question. £1 = 100p. '+education.explain(q);
-    if(!correct&&!skip){l.answered=false;l.assisted=true;l.retrying=true;delete l.needsTeaching;}
+    if (!correct && !skip && q[5]?.choiceReasons?.[String(value)])
+      l.feedback = q[5].choiceReasons[String(value)] + " " + q[4];
+    if (
+      !correct &&
+      !skip &&
+      ["pounds", "pence"].includes(unit) &&
+      !Number.isFinite(moneyValue(value))
+    )
+      l.feedback =
+        "Use " +
+        unit +
+        " for this question. £1 = 100p. " +
+        education.explain(q);
+    if (!correct && !skip) {
+      l.answered = false;
+      l.assisted = true;
+      l.retrying = true;
+      delete l.needsTeaching;
+    }
     return correct;
   }
   function nextLearning(s, now = Date.now()) {
@@ -530,11 +704,15 @@
       l.answered = false;
       l.feedback = "";
       delete l.hintLevel;
-      delete l.mathTools;delete l.mathExtra;
+      delete l.mathTools;
+      delete l.mathExtra;
       delete l.teachingExample;
       return;
     }
-    const passed = l.policyVersion===3?l.qs.length===6&&l.correct>=5:l.correct===l.qs.length;
+    const passed =
+      l.policyVersion === 3
+        ? l.qs.length === 6 && l.correct >= 5
+        : l.correct === l.qs.length;
     const old = s.skills[l.id] || {};
     if (l.mode === "discovery") {
       const d = s.discovery[l.id],
@@ -553,7 +731,15 @@
       if (s.checks[l.id]) s.checks[l.id].reteach = false;
       s.skills[l.id] = {
         ...old,
-        practiceEvidence:[...(old.practiceEvidence||[]),{at:now,round:l.round,source:"supported-practice",responses:l.responses||[]}],
+        practiceEvidence: [
+          ...(old.practiceEvidence || []),
+          {
+            at: now,
+            round: l.round,
+            source: "supported-practice",
+            responses: l.responses || [],
+          },
+        ],
         lastPractised: new Date(now).toISOString(),
         practiceSessions: num(old.practiceSessions) + 1,
         practiceSeen: [...(old.practiceSeen || []), ...l.qs.map((q) => q[0])],
@@ -561,11 +747,34 @@
       };
     } else {
       const previous = s.checks[l.id] || {},
-        families=[...new Set(l.qs.map(q=>q[5]?.family).filter(Boolean))],
-        varied=![2,3].includes(l.policyVersion) || (l.qs.length>=3&&(families.length>=3||l.qs.every(q=>!q[5]))),
-        prior=(old.independentEvidence||[]).filter(r=>(r.policyVersion===3?r.total===6&&r.correct>=5:r.correct===r.total&&r.total>=3&&r.policyVersion===2)&&new Set(r.families||[]).size>=3&&r.at<=now-2*86400000),
-        spaced = passed && varied && previous.stage >= 1 && previous.due <= now && (![2,3].includes(l.policyVersion) || prior.length>0);
-      const stage = passed ? (spaced || previous.stage===2 ? 2 : 1) : l.policyVersion===3?Math.max(0,(previous.stage||0)-1):0;
+        families = [...new Set(l.qs.map((q) => q[5]?.family).filter(Boolean))],
+        varied =
+          ![2, 3].includes(l.policyVersion) ||
+          (l.qs.length >= 3 &&
+            (families.length >= 3 || l.qs.every((q) => !q[5]))),
+        prior = (old.independentEvidence || []).filter(
+          (r) =>
+            (r.policyVersion === 3
+              ? r.total === 6 && r.correct >= 5
+              : r.correct === r.total &&
+                r.total >= 3 &&
+                r.policyVersion === 2) &&
+            new Set(r.families || []).size >= 3 &&
+            r.at <= now - 2 * 86400000,
+        ),
+        spaced =
+          passed &&
+          varied &&
+          previous.stage >= 1 &&
+          previous.due <= now &&
+          (![2, 3].includes(l.policyVersion) || prior.length > 0);
+      const stage = passed
+        ? spaced || previous.stage === 2
+          ? 2
+          : 1
+        : l.policyVersion === 3
+          ? Math.max(0, (previous.stage || 0) - 1)
+          : 0;
       if (passed && !s.achievements.includes("independent"))
         s.achievements.push("independent");
       if (spaced && !s.achievements.includes("memory"))
@@ -579,10 +788,23 @@
       };
       s.skills[l.id] = {
         ...old,
-        independentEvidence:[...(old.independentEvidence||[]),{correct:l.correct,total:l.qs.length,at:now,band:l.band??s.learningBand,policyVersion:l.policyVersion||1,families:l.qs.map(q=>q[5]?.family||"legacy-generator"),responses:l.responses||[]}],
+        independentEvidence: [
+          ...(old.independentEvidence || []),
+          {
+            correct: l.correct,
+            total: l.qs.length,
+            at: now,
+            band: l.band ?? s.learningBand,
+            policyVersion: l.policyVersion || 1,
+            families: l.qs.map((q) => q[5]?.family || "legacy-generator"),
+            responses: l.responses || [],
+          },
+        ],
         state: stage === 2 ? "mastered" : stage === 1 ? "review" : "learning",
         reviewStage: stage,
-        masteryPolicyVersion:spaced?(l.policyVersion||1):(old.masteryPolicyVersion||(previous.stage>=2?1:null)),
+        masteryPolicyVersion: spaced
+          ? l.policyVersion || 1
+          : old.masteryPolicyVersion || (previous.stage >= 2 ? 1 : null),
         lastIndependentScore: s.checks[l.id].score,
         reviewDueAt: passed ? new Date(s.checks[l.id].due).toISOString() : null,
         reviewSeen: [...(old.reviewSeen || []), ...l.qs.map((q) => q[0])],
@@ -596,7 +818,7 @@
     };
     s.recent.unshift({ ...s.lastResult, date: new Date(now).toISOString() });
     s.recent = s.recent.slice(0, 30);
-    if(s.pausedLearning)delete s.pausedLearning[l.id+"|"+l.mode];
+    if (s.pausedLearning) delete s.pausedLearning[l.id + "|" + l.mode];
     s.learning = null;
     s.resumeView = null;
     s.view = "recap";
@@ -620,14 +842,25 @@
     return b ? a / b : NaN;
   }
   function startDiscovery(s, id, curriculum, helpers) {
-    if(N.restoreLearning(s,id,"discovery"))return null;
+    if (N.restoreLearning(s, id, "discovery")) return null;
     if (!curriculum.discovery[id]) return "Unknown skill.";
-    const profile=typeof module!=="undefined"?require('./starting-profile').V11StartingProfile:root.V11StartingProfile;
-    const baseline=profile?.latest(s,curriculum.skills.find(k=>k.id===id)?.world);
+    const profile =
+      typeof module !== "undefined"
+        ? require("./starting-profile").V11StartingProfile
+        : root.V11StartingProfile;
+    const baseline = profile?.latest(
+      s,
+      curriculum.skills.find((k) => k.id === id)?.world,
+    );
     s.discovery[id] = s.discovery[id] || {
       band: profile?.valid(baseline)
-        ? (typeof module!=="undefined"?require('./adaptive').V5Adaptive:root.V5Adaptive).skill(s,id).band
-        : education.minBand(id)===3?5:7,
+        ? (typeof module !== "undefined"
+            ? require("./adaptive").V5Adaptive
+            : root.V5Adaptive
+          ).skill(s, id).band
+        : education.minBand(id) === 3
+          ? 5
+          : 7,
       answers: [],
       rounds: [],
       complete: false,
@@ -641,12 +874,27 @@
         h.prompt(q[1]),
         String(q[2]),
         h.choices().map(String),
-        (d.band<5||education.foundations.some(f=>f[0]===id))?education.question(id,d.band,900+d.band,i)[3]:"Think about what each part of the question means.",
-        (d.band<5||education.foundations.some(f=>f[0]===id))?education.question(id,d.band,900+d.band,i)[4]:q[4] || "The answer is " + T.answerLabel([q[1]],q[2]) + ".",
+        d.band < 5 || education.foundations.some((f) => f[0] === id)
+          ? education.question(id, d.band, 900 + d.band, i)[3]
+          : "Think about what each part of the question means.",
+        d.band < 5 || education.foundations.some((f) => f[0] === id)
+          ? education.question(id, d.band, 900 + d.band, i)[4]
+          : q[4] || "The answer is " + T.answerLabel([q[1]], q[2]) + ".",
       ];
     });
-    const identified=content()?.rows(id,qs,{source:"discovery",band:d.band});
-    if(identified){qs.splice(0,qs.length,...identified);s.seenQuestionIds=[...new Set([...(s.seenQuestionIds||[]),...qs.map(q=>q[5].questionKey)])];}
+    const identified = content()?.rows(id, qs, {
+      source: "discovery",
+      band: d.band,
+    });
+    if (identified) {
+      qs.splice(0, qs.length, ...identified);
+      s.seenQuestionIds = [
+        ...new Set([
+          ...(s.seenQuestionIds || []),
+          ...qs.map((q) => q[5].questionKey),
+        ]),
+      ];
+    }
     s.seen = [
       ...new Set([
         ...s.seen,
@@ -654,7 +902,8 @@
         ...qs.map((q) => q[0]),
       ]),
     ];
-    if(!N.stashLearning(s))return 'Your saved lessons need review. Their original state has been preserved.';
+    if (!N.stashLearning(s))
+      return "Your saved lessons need review. Their original state has been preserved.";
     s.learning = {
       id,
       mode: "discovery",
@@ -673,16 +922,27 @@
   // One ID per catalogue slot. Ownership is untouched; unknown IDs are retained.
   // Last selection wins for older arrays containing multiple items in one slot.
   function normaliseEquipment(value, items = catalog) {
-    const ids = Array.isArray(value) ? value : typeof value === "string" ? [value] : [];
+    const ids = Array.isArray(value)
+      ? value
+      : typeof value === "string"
+        ? [value]
+        : [];
     return ids.filter((id, index, all) => {
       if (typeof id !== "string" || all.lastIndexOf(id) !== index) return false;
-      const slot = items.find(i => i.id === id)?.slot;
-      return !slot || !all.slice(index + 1).some(other => items.find(i => i.id === other)?.slot === slot);
+      const slot = items.find((i) => i.id === id)?.slot;
+      return (
+        !slot ||
+        !all
+          .slice(index + 1)
+          .some((other) => items.find((i) => i.id === other)?.slot === slot)
+      );
     });
   }
   function removeEquipment(s, slot, items = catalog) {
-    if (!items.some(i => i.slot === slot)) return false;
-    s.equipped = normaliseEquipment(s.equipped, items).filter(id => items.find(i => i.id === id)?.slot !== slot);
+    if (!items.some((i) => i.slot === slot)) return false;
+    s.equipped = normaliseEquipment(s.equipped, items).filter(
+      (id) => items.find((i) => i.id === id)?.slot !== slot,
+    );
     return true;
   }
   function purchase(s, id, catalog) {
@@ -706,9 +966,22 @@
   }
   // Story milestones require participation, separate from independent mastery.
   function participation(run, total) {
-    const skipped=new Set([...(run.skips||[]),...(run.evidence||[]).filter(e=>e.skipped||e.skippedAfterAttempt).map(e=>e.step??e.stage)].filter(i=>Number.isInteger(i)&&i>=0&&i<total));
-    const required=Math.ceil(total/2),answered=total-skipped.size;
-    return {total,required,answered,eligible:total>0&&answered>=required};
+    const skipped = new Set(
+      [
+        ...(run.skips || []),
+        ...(run.evidence || [])
+          .filter((e) => e.skipped || e.skippedAfterAttempt)
+          .map((e) => e.step ?? e.stage),
+      ].filter((i) => Number.isInteger(i) && i >= 0 && i < total),
+    );
+    const required = Math.ceil(total / 2),
+      answered = total - skipped.size;
+    return {
+      total,
+      required,
+      answered,
+      eligible: total > 0 && answered >= required,
+    };
   }
   function weekKey(now) {
     const parts = new Intl.DateTimeFormat("en-GB", {

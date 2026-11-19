@@ -1,0 +1,17 @@
+{
+  "baseline": "e462b1a7f38c54565b869a56b04e23b9cd02eeec",
+  "phase": "Claude Phase 3 and save-growth development",
+  "features": [
+    "Additive stable question identities, shared registry and prerequisite graph",
+    "Capability-gated retained-history storage, paged transport and local recovery",
+    "Versioned shared marking for decimals, mixed numbers, currency and compatible units",
+    "New mastery policy: five independent first answers out of six; one-stage demotion",
+    "Question-specific worked explanations and misconception choices",
+    "Lint/format tooling, archived review screenshots and current instructions",
+    "Multi-learner architecture documented; account selection is not enabled"
+  ],
+  "validation": "Combined automated verification in progress; physical iPad Safari acceptance is deferred.",
+  "hostedDatabase": "No hosted SQL, account or project changes. Installation and cutover remain a separate review after a verified encrypted backup.",
+  "release": "Development only. Not merged or deployed.",
+  "acceptance": "One combined manual iPad Safari session after the planned updates and any approved cutover are complete."
+}

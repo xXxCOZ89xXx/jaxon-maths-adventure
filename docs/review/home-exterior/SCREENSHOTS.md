@@ -6,38 +6,38 @@ Baseline: 0a036f6. Fictional fixtures at 820 × 1180. The after activity images 
 
 Before
 
-![Before Home exterior](before/exterior.png)
+[Before Home exterior](/docs/review/ARCHIVE.md)
 
 After
 
-![After Home exterior](after/exterior.png)
+[After Home exterior](/docs/review/ARCHIVE.md)
 
 ## Post and parcels
 
 Before
 
-![Before Post and parcels](before/post.png)
+[Before Post and parcels](/docs/review/ARCHIVE.md)
 
 After
 
-![After Post and parcels](after/post.png)
+[After Post and parcels](/docs/review/ARCHIVE.md)
 
 ## Bins and recycling
 
 Before
 
-![Before Bins and recycling](before/recycling.png)
+[Before Bins and recycling](/docs/review/ARCHIVE.md)
 
 After
 
-![After Bins and recycling](after/recycling.png)
+[After Bins and recycling](/docs/review/ARCHIVE.md)
 
 ## Utility meters
 
 Before
 
-![Before Utility meters](before/meters.png)
+[Before Utility meters](/docs/review/ARCHIVE.md)
 
 After
 
-![After Utility meters](after/meters.png)
+[After Utility meters](/docs/review/ARCHIVE.md)

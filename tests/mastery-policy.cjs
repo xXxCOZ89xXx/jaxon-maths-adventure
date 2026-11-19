@@ -1,11 +1,79 @@
-const assert=require('node:assert/strict'),{load}=require('../scripts/audit-curriculum.cjs');
-const c=load(),E=c.V3Engine,C=c.V3Curriculum,plain=x=>JSON.parse(JSON.stringify(x)),day=86400000,now=Date.UTC(2026,10,18);
-function start(s,time,legacy=false){assert.equal(E.generate(s,'number_bonds','check',c.JaxonFreshReview,C,time),null);if(legacy)s.learning.policyVersion=2;assert.equal(s.learning.qs.length,6);}
-function finish(s,score,time){for(let i=0;i<6;i++){const q=s.learning.qs[s.learning.i];E.answerLearning(s,i<score?q[1]:'',i>=score,time);E.nextLearning(s,time);}assert.equal(s.learning,null);}
-const s=E.fresh();s.practice.number_bonds={completed:true};start(s,now);assert.equal(s.learning.policyVersion,3);finish(s,5,now);assert.equal(s.checks.number_bonds.stage,1);assert.equal(s.checks.number_bonds.reteach,false);assert.equal(s.skills.number_bonds.independentEvidence[0].correct,5);assert.equal(s.skills.number_bonds.independentEvidence[0].responses.filter(r=>r.firstIndependent).length,5);
-start(s,now+3*day);finish(s,5,now+3*day);assert.equal(s.checks.number_bonds.stage,2);assert.equal(s.skills.number_bonds.masteryPolicyVersion,3);const history=plain(s.skills.number_bonds.independentEvidence);
-start(s,now+11*day);finish(s,4,now+11*day);assert.equal(s.checks.number_bonds.stage,1);assert.equal(s.checks.number_bonds.reteach,true);assert.deepEqual(plain(s.skills.number_bonds.independentEvidence.slice(0,2)),history);
-assert.match(E.generate(s,'number_bonds','check',c.JaxonFreshReview,C,now+12*day),/practice/);
-const legacy=E.fresh();legacy.practice.number_bonds={completed:true};legacy.checks.number_bonds={stage:2,due:0};start(legacy,now,true);const pending=plain(legacy.learning);const resumed=E.migrate(plain(legacy));assert.deepEqual(plain(resumed.learning),pending);finish(resumed,5,now);assert.equal(resumed.checks.number_bonds.stage,0,'An already-saved V2 assessment retains its original all-correct/reset rule');
-const retry=E.fresh();retry.practice.number_bonds={completed:true};start(retry,now);const q=retry.learning.qs[0];assert(!E.answerLearning(retry,'wrong',false,now));assert(E.answerLearning(retry,q[1],false,now));assert.equal(retry.learning.correct,0);assert.equal(retry.learning.responses[0].firstIndependent,false);
-console.log('PASS mastery policy V3: five independent first answers, spaced evidence, one-stage demotion, reteaching, preserved historical records and exact legacy assessment rules.');
+const assert = require("node:assert/strict"),
+  { load } = require("../scripts/audit-curriculum.cjs");
+const c = load(),
+  E = c.V3Engine,
+  C = c.V3Curriculum,
+  plain = (x) => JSON.parse(JSON.stringify(x)),
+  day = 86400000,
+  now = Date.UTC(2026, 10, 18);
+function start(s, time, legacy = false) {
+  assert.equal(
+    E.generate(s, "number_bonds", "check", c.JaxonFreshReview, C, time),
+    null,
+  );
+  if (legacy) s.learning.policyVersion = 2;
+  assert.equal(s.learning.qs.length, 6);
+}
+function finish(s, score, time) {
+  for (let i = 0; i < 6; i++) {
+    const q = s.learning.qs[s.learning.i];
+    E.answerLearning(s, i < score ? q[1] : "", i >= score, time);
+    E.nextLearning(s, time);
+  }
+  assert.equal(s.learning, null);
+}
+const s = E.fresh();
+s.practice.number_bonds = { completed: true };
+start(s, now);
+assert.equal(s.learning.policyVersion, 3);
+finish(s, 5, now);
+assert.equal(s.checks.number_bonds.stage, 1);
+assert.equal(s.checks.number_bonds.reteach, false);
+assert.equal(s.skills.number_bonds.independentEvidence[0].correct, 5);
+assert.equal(
+  s.skills.number_bonds.independentEvidence[0].responses.filter(
+    (r) => r.firstIndependent,
+  ).length,
+  5,
+);
+start(s, now + 3 * day);
+finish(s, 5, now + 3 * day);
+assert.equal(s.checks.number_bonds.stage, 2);
+assert.equal(s.skills.number_bonds.masteryPolicyVersion, 3);
+const history = plain(s.skills.number_bonds.independentEvidence);
+start(s, now + 11 * day);
+finish(s, 4, now + 11 * day);
+assert.equal(s.checks.number_bonds.stage, 1);
+assert.equal(s.checks.number_bonds.reteach, true);
+assert.deepEqual(
+  plain(s.skills.number_bonds.independentEvidence.slice(0, 2)),
+  history,
+);
+assert.match(
+  E.generate(s, "number_bonds", "check", c.JaxonFreshReview, C, now + 12 * day),
+  /practice/,
+);
+const legacy = E.fresh();
+legacy.practice.number_bonds = { completed: true };
+legacy.checks.number_bonds = { stage: 2, due: 0 };
+start(legacy, now, true);
+const pending = plain(legacy.learning);
+const resumed = E.migrate(plain(legacy));
+assert.deepEqual(plain(resumed.learning), pending);
+finish(resumed, 5, now);
+assert.equal(
+  resumed.checks.number_bonds.stage,
+  0,
+  "An already-saved V2 assessment retains its original all-correct/reset rule",
+);
+const retry = E.fresh();
+retry.practice.number_bonds = { completed: true };
+start(retry, now);
+const q = retry.learning.qs[0];
+assert(!E.answerLearning(retry, "wrong", false, now));
+assert(E.answerLearning(retry, q[1], false, now));
+assert.equal(retry.learning.correct, 0);
+assert.equal(retry.learning.responses[0].firstIndependent, false);
+console.log(
+  "PASS mastery policy V3: five independent first answers, spaced evidence, one-stage demotion, reteaching, preserved historical records and exact legacy assessment rules.",
+);

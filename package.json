@@ -2,7 +2,7 @@
   "name": "jaxon-adventure-preview",
   "private": true,
   "scripts": {
-    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-estate.cjs && node tests/v5-hands-on.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs && node tests/v51-fixtures.cjs && node scripts/audit-v51-inputs.cjs && node tests/guided-progression.cjs && node tests/algebra-graph-range.cjs && node tests/content-registry.cjs && node tests/owner-review.cjs && node tests/starting-profile.cjs && node tests/money-wages.cjs && node tests/home-exterior.cjs && node tests/town-navigation.cjs && node tests/recipes.cjs && node tests/recipe-art.cjs && node tests/starting-profile-adaptive.cjs && node tests/skipped-milestones.cjs && node tests/starting-profile-short.cjs && node tests/starting-profile-safe.cjs && node tests/education-depth.cjs",
+    "test": "node tests/v2-learning-regression.cjs && node tests/v2-discovery-regression.cjs && node tests/v2-bonus-shop-regression.cjs && node tests/v3-engine.cjs && node tests/v3-expeditions.cjs && node tests/v3-estate.cjs && node tests/v5-hands-on.cjs && node tests/v3-cloud.cjs && node tests/v3-presentation.cjs && node tests/v3-release-rehearsal.cjs && node tests/v51-fixtures.cjs && node scripts/audit-v51-inputs.cjs && node tests/guided-progression.cjs && node tests/algebra-graph-range.cjs && node tests/content-registry.cjs && node tests/answer-marking.cjs && node tests/mastery-policy.cjs && node tests/question-teaching.cjs && node tests/history-storage.cjs && node tests/owner-review.cjs && node tests/starting-profile.cjs && node tests/money-wages.cjs && node tests/home-exterior.cjs && node tests/town-navigation.cjs && node tests/recipes.cjs && node tests/recipe-art.cjs && node tests/starting-profile-adaptive.cjs && node tests/skipped-milestones.cjs && node tests/starting-profile-short.cjs && node tests/starting-profile-safe.cjs && node tests/education-depth.cjs",
     "test:parent-reset": "node tests/parent-game-reset-db.cjs && node tests/parent-game-reset-db.cjs --staging && playwright test -c playwright.parent-reset.config.cjs",
     "test:navigation": "playwright test -c playwright.navigation.config.cjs",
     "test:base-camp": "node tests/v3-estate.cjs && node tests/base-camp-art.cjs && playwright test -c playwright.base-camp.config.cjs",
@@ -41,7 +41,7 @@
     "test:town-browser": "node tests/prepare-v3.cjs && playwright test --config=playwright.town-life.config.cjs",
     "test:gameplay-quality": "node tests/gameplay-quality.cjs && node tests/gameplay-action-coverage.cjs && node tests/town-life.cjs && node tests/v5-hands-on.cjs && node tests/prepare-v3.cjs && playwright test --config playwright.quality.config.cjs",
     "test:major-upgrade": "node tests/major-upgrade.cjs && node tests/town-life.cjs && node tests/gameplay-quality.cjs && node tests/gameplay-action-coverage.cjs && node tests/v5-hands-on.cjs && node tests/prepare-v3.cjs && playwright test --config playwright.major-upgrade.config.cjs",
-    "test:ipad-release": "node tests/v3-cloud.cjs && node tests/save-recovery.cjs && node tests/ipad-release-gate.cjs && node tests/compact-receipts-db.cjs && node tests/town-life.cjs && node tests/v5-hands-on.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.save-recovery.config.cjs",
+    "test:ipad-release": "node tests/v3-cloud.cjs && node tests/save-recovery.cjs && node tests/ipad-release-gate.cjs && node tests/compact-receipts-db.cjs && node tests/history-storage-db.cjs && node tests/town-life.cjs && node tests/v5-hands-on.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.save-recovery.config.cjs",
     "test:curriculum": "node tests/curriculum.cjs && node scripts/audit-curriculum.cjs",
     "test:curriculum-browser": "node tests/prepare-v3.cjs && playwright test -c playwright.curriculum.config.cjs",
     "audit:touch": "node scripts/audit-touch-flow.cjs",
@@ -67,12 +67,21 @@
     "test:map-markers": "playwright test -c playwright.map-markers.config.cjs",
     "test:avatar-equipment": "node tests/avatar-equipment.cjs && node tests/prepare-v3.cjs && playwright test -c playwright.avatar-equipment.config.cjs",
     "test:starting-profile-safe": "node tests/starting-profile-safe.cjs",
-    "test:education-depth": "node tests/education-depth.cjs"
+    "test:education-depth": "node tests/education-depth.cjs",
+    "lint": "node scripts/source-checks.cjs lint",
+    "format": "node scripts/source-checks.cjs format",
+    "format:check": "node scripts/source-checks.cjs check",
+    "status": "node scripts/project-status.cjs",
+    "status:check": "node scripts/project-status.cjs --check",
+    "test:phase3-browser": "node tests/prepare-v3.cjs && playwright test -c playwright.save-recovery.config.cjs tests/history-storage.spec.cjs tests/phase3-learning.spec.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
     "@playwright/test": "^1.56.1",
     "@supabase/supabase-js": "^2.118.0",
-    "esbuild": "^0.28.2"
+    "esbuild": "^0.28.2",
+    "eslint": "^10.15.0",
+    "globals": "^16.5.0",
+    "prettier": "^3.10.1"
   }
 }

@@ -3,13 +3,34 @@
   "use strict";
   const T =
     typeof module !== "undefined" ? require("./town").V3Town : root.V3Town;
-  const H = typeof module !== "undefined" ? require("./hands-on").V5HandsOn : root.V5HandsOn;
-  const AD = typeof module !== "undefined" ? require("./adaptive").V5Adaptive : root.V5Adaptive;
-  const C = typeof module !== "undefined" ? require("./curriculum").V3Curriculum : root.V3Curriculum;
-  const X = typeof module !== "undefined" ? require("./curriculum-expansion").V8Curriculum : root.V8Curriculum;
-  const XA = typeof module !== "undefined" ? require("./curriculum-activities").V8Activities : root.V8Activities;
-  const curriculumRoutes = world => (X?.routes(world)||[]).filter(r=>C.skills.some(k=>k.id===r.skills[0]));
-  const R=typeof module!=="undefined"?require("./restoration").V10Restoration:root.V10Restoration;
+  const H =
+    typeof module !== "undefined"
+      ? require("./hands-on").V5HandsOn
+      : root.V5HandsOn;
+  const AD =
+    typeof module !== "undefined"
+      ? require("./adaptive").V5Adaptive
+      : root.V5Adaptive;
+  const C =
+    typeof module !== "undefined"
+      ? require("./curriculum").V3Curriculum
+      : root.V3Curriculum;
+  const X =
+    typeof module !== "undefined"
+      ? require("./curriculum-expansion").V8Curriculum
+      : root.V8Curriculum;
+  const XA =
+    typeof module !== "undefined"
+      ? require("./curriculum-activities").V8Activities
+      : root.V8Activities;
+  const curriculumRoutes = (world) =>
+    (X?.routes(world) || []).filter((r) =>
+      C.skills.some((k) => k.id === r.skills[0]),
+    );
+  const R =
+    typeof module !== "undefined"
+      ? require("./restoration").V10Restoration
+      : root.V10Restoration;
   const copy = (x) => JSON.parse(JSON.stringify(x)),
     money = T.money,
     clock = T.clock;
@@ -102,7 +123,8 @@
       q &&
       typeof q === "object" &&
       routes(q.world).length &&
-      (R.valid(q) || q.route === "gateway" ||
+      (R.valid(q) ||
+        q.route === "gateway" ||
         routes(q.world).some((r) => r.id === q.route)) &&
       [1, 2, 3].includes(q.tier) &&
       (q.key === id(q.world, q.route, q.tier) ||
@@ -111,10 +133,16 @@
       q.i >= 0 &&
       q.i < q.tasks?.length &&
       Array.isArray(q.tasks) &&
-      (q.world === "town" && q.route === "home" &&
-        ["meters", "recycling", "post"].includes(q.context?.homeActivity)
-        ? q.tasks.length === (q.homeContentVersion === 2 && q.context.homeActivity === "post" ? 4 : 3)
-        : q.contentVersion === 8 ? [6, 12].includes(q.tasks.length) : q.tasks.length === 3) &&
+      (q.world === "town" &&
+      q.route === "home" &&
+      ["meters", "recycling", "post"].includes(q.context?.homeActivity)
+        ? q.tasks.length ===
+          (q.homeContentVersion === 2 && q.context.homeActivity === "post"
+            ? 4
+            : 3)
+        : q.contentVersion === 8
+          ? [6, 12].includes(q.tasks.length)
+          : q.tasks.length === 3) &&
       q.tasks.every(
         (t) => t && typeof t.kind === "string" && t.answer !== undefined,
       ) &&
@@ -138,54 +166,93 @@
         delete a.records[key];
     }
     // Loading or viewing camp never claims an upgrade. Keep saved homes and projects.
-    const prior = a.campEstate && typeof a.campEstate === "object" && !Array.isArray(a.campEstate) ? a.campEstate : null;
-    const validStage = n => Number.isInteger(n) && n >= 1 && n <= 8;
+    const prior =
+      a.campEstate &&
+      typeof a.campEstate === "object" &&
+      !Array.isArray(a.campEstate)
+        ? a.campEstate
+        : null;
+    const validStage = (n) => Number.isInteger(n) && n >= 1 && n <= 8;
     const highest = validStage(prior?.highest) ? prior.highest : 1;
-    a.campEstate = {...(prior || {}), version:1, highest,
-      celebrated: prior ? Math.min(highest,validStage(prior.celebrated) ? prior.celebrated : 1) : highest};
+    a.campEstate = {
+      ...(prior || {}),
+      version: 1,
+      highest,
+      celebrated: prior
+        ? Math.min(highest, validStage(prior.celebrated) ? prior.celebrated : 1)
+        : highest,
+    };
     return a;
   }
   const id = (world, route, tier) => [world, route, tier].join("|");
   // Home activities need separate resumable runs; historical venue keys stay valid.
   const homeId = (world, route, tier, context) =>
-    world === 'town' && route === 'home' && ['post','recycling','meters'].includes(context?.homeActivity)
-      ? id(world, route, tier) + '|' + context.homeActivity : id(world, route, tier);
+    world === "town" &&
+    route === "home" &&
+    ["post", "recycling", "meters"].includes(context?.homeActivity)
+      ? id(world, route, tier) + "|" + context.homeActivity
+      : id(world, route, tier);
   function routes(world) {
     if (world === "town")
-      return [...T.venues.map((v) => ({
-        id: v.id,
-        name: v.name,
-        guide: v.guide,
-        story: v.story,
-        artefact: v.reward,
-        skills: v.skills,
-      })), ...(curriculumRoutes(world))];
+      return [
+        ...T.venues.map((v) => ({
+          id: v.id,
+          name: v.name,
+          guide: v.guide,
+          story: v.story,
+          artefact: v.reward,
+          skills: v.skills,
+        })),
+        ...curriculumRoutes(world),
+      ];
     const w = stories[world];
     return w
-      ? [...w.routes.map((name, i) => ({
-          id: String(i),
-          name,
-          guide: w.guide,
-          story: w.intro,
-          artefact: w.artefacts[i],
-          skills: [],
-        })), ...(curriculumRoutes(world))]
+      ? [
+          ...w.routes.map((name, i) => ({
+            id: String(i),
+            name,
+            guide: w.guide,
+            story: w.intro,
+            artefact: w.artefacts[i],
+            skills: [],
+          })),
+          ...curriculumRoutes(world),
+        ]
       : [];
   }
-  function recommendation(s, world, route=null) {
-    const course=curriculumRoutes(world).find(r=>r.id===route);
-    if(course)return AD.skill(s,course.skills[0]).tier;
-    const ids=route?[...new Set((curriculumRoutes(world).length?expandedMissionTasks(world,route,1,1):[0,1,2].map(i=>task(world,route,1,1,i))).map(t=>t.skill))]:null;
-    const curriculum=world==="town"?{skills:T.venues.flatMap(v=>v.skills.map(id=>({id,world:"town"})))}:C;
-    return AD.world(s,world,curriculum,ids);
+  function recommendation(s, world, route = null) {
+    const course = curriculumRoutes(world).find((r) => r.id === route);
+    if (course) return AD.skill(s, course.skills[0]).tier;
+    const ids = route
+      ? [
+          ...new Set(
+            (curriculumRoutes(world).length
+              ? expandedMissionTasks(world, route, 1, 1)
+              : [0, 1, 2].map((i) => task(world, route, 1, 1, i))
+            ).map((t) => t.skill),
+          ),
+        ]
+      : null;
+    const curriculum =
+      world === "town"
+        ? {
+            skills: T.venues.flatMap((v) =>
+              v.skills.map((id) => ({ id, world: "town" })),
+            ),
+          }
+        : C;
+    return AD.world(s, world, curriculum, ids);
   }
 
   function completions(s, world) {
     return Object.values(state(s).records).filter((r) => r.world === world);
   }
   function visualLevel(s, world, legacy = 0) {
-    return Math.max(legacy, R.book(s)?.legacyVisual?.[world]||0,
-      [0,1,2].filter(i=>s.milestones.includes(world+':'+i)).length);
+    return Math.max(
+      legacy,
+      R.book(s)?.legacyVisual?.[world] || 0,
+      [0, 1, 2].filter((i) => s.milestones.includes(world + ":" + i)).length,
+    );
   }
 
   function collections(s) {
@@ -536,7 +603,8 @@
       Object.assign(t, {
         prompt: `Share a ${money(each * people)} café bill equally between ${people} friends. Set each person’s payment.`,
         answer: each,
-        people, shareTotal: each * people,
+        people,
+        shareTotal: each * people,
         worked: `${money(each * people)} ÷ ${people} = ${money(each)} each.`,
       });
     } else if (venue === "bank") {
@@ -749,8 +817,9 @@
     return t;
   }
   function task(world, route, tier, seed, stage) {
-    const course=curriculumRoutes(world).find(r=>r.id===route);
-    if(course)return X.task(course.skills[0],[6,7,9][tier-1],seed,stage);
+    const course = curriculumRoutes(world).find((r) => r.id === route);
+    if (course)
+      return X.task(course.skills[0], [6, 7, 9][tier - 1], seed, stage);
     if (route === "gateway") {
       if (world === "town")
         return townTask(
@@ -759,39 +828,117 @@
           seed,
           stage === 0 ? 0 : stage === 1 ? 0 : 0,
         );
-      return H.enrich(commonTask(world, String(stage), tier, seed, stage),world,String(stage),tier,seed,stage);
+      return H.enrich(
+        commonTask(world, String(stage), tier, seed, stage),
+        world,
+        String(stage),
+        tier,
+        seed,
+        stage,
+      );
     }
-    return H.enrich(world === "town" ? townTask(route,tier,seed,stage) : commonTask(world,route,tier,seed,stage),world,route,tier,seed,stage);
+    return H.enrich(
+      world === "town"
+        ? townTask(route, tier, seed, stage)
+        : commonTask(world, route, tier, seed, stage),
+      world,
+      route,
+      tier,
+      seed,
+      stage,
+    );
   }
-  function expandedMissionTasks(world,route,tier,seed){
-    const courses=curriculumRoutes(world),band=[6,7,9][tier-1],offset=Number(route)||0,tasks=[];
-    for(let i=0;i<6;i++){
-      let t=i<3?task(world,route,tier,seed,i):X.task(courses[((i-3)+offset)%courses.length].skills[0],band,seed,i);
+  function expandedMissionTasks(world, route, tier, seed) {
+    const courses = curriculumRoutes(world),
+      band = [6, 7, 9][tier - 1],
+      offset = Number(route) || 0,
+      tasks = [];
+    for (let i = 0; i < 6; i++) {
+      let t =
+        i < 3
+          ? task(world, route, tier, seed, i)
+          : X.task(
+              courses[(i - 3 + offset) % courses.length].skills[0],
+              band,
+              seed,
+              i,
+            );
       // Reuse the original interactions, replacing a duplicated instruction with a
       // different authored reasoning family rather than another number substitution.
-      if(tasks.some(other=>other.prompt===t.prompt))t=X.task(courses[(i+offset)%courses.length].skills[0],band,seed,i);
+      if (tasks.some((other) => other.prompt === t.prompt))
+        t = X.task(
+          courses[(i + offset) % courses.length].skills[0],
+          band,
+          seed,
+          i,
+        );
       tasks.push(t);
     }
     return tasks;
   }
-  function expandedGatewayTasks(world,tier,seed){
-    const courses=curriculumRoutes(world),band=[6,7,9][tier-1];
+  function expandedGatewayTasks(world, tier, seed) {
+    const courses = curriculumRoutes(world),
+      band = [6, 7, 9][tier - 1];
     // Avoid repeating the same pool, mean-bar or sequence in the longer challenge.
-    const slots=world==='statistics'?[[0,0],[1,1],[2,1],[0,1],[2,0]]:
-      world==='probability'?[[0,0],[1,1]]:
-      world==='town'?[['market',0],['bank',1],['station',2],['cafe',0],['shops',1],['home',2]]:
-      Array.from({length:6},(_,i)=>[String(i%3),(Math.floor(i/3)+i%3)%3]);
-    return Array.from({length:12},(_,i)=>{
-      if(i<slots.length)return task(world,String(slots[i][0]),tier,seed,slots[i][1]);
-      const n=i-slots.length;
-      return X.task(courses[n%courses.length].skills[0],band,seed,Math.floor(n/courses.length));
+    const slots =
+      world === "statistics"
+        ? [
+            [0, 0],
+            [1, 1],
+            [2, 1],
+            [0, 1],
+            [2, 0],
+          ]
+        : world === "probability"
+          ? [
+              [0, 0],
+              [1, 1],
+            ]
+          : world === "town"
+            ? [
+                ["market", 0],
+                ["bank", 1],
+                ["station", 2],
+                ["cafe", 0],
+                ["shops", 1],
+                ["home", 2],
+              ]
+            : Array.from({ length: 6 }, (_, i) => [
+                String(i % 3),
+                (Math.floor(i / 3) + (i % 3)) % 3,
+              ]);
+    return Array.from({ length: 12 }, (_, i) => {
+      if (i < slots.length)
+        return task(world, String(slots[i][0]), tier, seed, slots[i][1]);
+      const n = i - slots.length;
+      return X.task(
+        courses[n % courses.length].skills[0],
+        band,
+        seed,
+        Math.floor(n / courses.length),
+      );
     });
   }
-  function rememberTeaching(s,q){
-    if(![8,9].includes(q?.contentVersion))return;
-    const t=q.tasks[q.i];s.seen||=[];
-    const registry=typeof module!=='undefined'?require('./content-registry').V3Content:root.V3Content;if(t.markingVersion===1&&registry)s.seenQuestionIds=[...new Set([...(s.seenQuestionIds||[]),registry.identity(t),t.exampleQuestionKey].filter(Boolean))];
-    for(const prompt of [t.prompt,t.examplePrompt])if(prompt&&!s.seen.includes(prompt))s.seen.push(prompt);
+  function rememberTeaching(s, q) {
+    if (![8, 9].includes(q?.contentVersion)) return;
+    const t = q.tasks[q.i];
+    s.seen ||= [];
+    const registry =
+      typeof module !== "undefined"
+        ? require("./content-registry").V3Content
+        : root.V3Content;
+    if (t.markingVersion === 1 && registry)
+      s.seenQuestionIds = [
+        ...new Set(
+          [
+            ...(s.seenQuestionIds || []),
+            registry.identity(t),
+            t.exampleQuestionKey,
+          ].filter(Boolean),
+        ),
+      ];
+    for (const prompt of [t.prompt, t.examplePrompt])
+      if (prompt && !s.seen.includes(prompt)) s.seen.push(prompt);
   }
   function start(s, world, route, tier, context = null) {
     const a = state(s),
@@ -801,9 +948,10 @@
     if (!valid) return false;
     tier = Math.max(1, Math.min(3, Math.trunc(tier) || 1));
     const key = homeId(world, route, tier, context);
-    const course = curriculumRoutes(world).find(r=>r.id===route);
+    const course = curriculumRoutes(world).find((r) => r.id === route);
     const expandedWorld = curriculumRoutes(world).length > 0;
-    const expandedGateway = route === "gateway" && curriculumRoutes(world).length;
+    const expandedGateway =
+      route === "gateway" && curriculumRoutes(world).length;
     if (a.active) a.suspended[a.active.key] = a.active;
     if (a.suspended[key]) a.active = a.suspended[key];
     else {
@@ -811,8 +959,20 @@
       a.attempts[key] = seed;
       a.active = {
         key,
-        ...(expandedWorld ? {contentVersion:8} : {}),
-        context: world==="town" ? {...T.context(course?"home":route,course?"journey":context?.entry||"direct"),...(course?{role:"customer",course:course.skills[0]}:{}),...(context||{})} : {version:1,role:"explorer"},
+        ...(expandedWorld ? { contentVersion: 8 } : {}),
+        context:
+          world === "town"
+            ? {
+                ...T.context(
+                  course ? "home" : route,
+                  course ? "journey" : context?.entry || "direct",
+                ),
+                ...(course
+                  ? { role: "customer", course: course.skills[0] }
+                  : {}),
+                ...(context || {}),
+              }
+            : { version: 1, role: "explorer" },
         evidence: [],
         world,
         route,
@@ -820,7 +980,34 @@
         seed,
         i: 0,
         phase: "lesson",
-        tasks: (course ? Array.from({length:6},(_,i)=>X.task(course.skills[0],[6,7,9][tier-1],seed,i)) : expandedGateway ? expandedGatewayTasks(world,tier,seed) : expandedWorld ? expandedMissionTasks(world,route,tier,seed) : [0, 1, 2].map((i) => task(world, route, tier, seed, i))).map((t,i)=>{const base=root.V9TouchContent?root.V9TouchContent.task(t,[6,7,9][tier-1],seed,i):t,registry=typeof module!=='undefined'?require('./content-registry').V3Content:root.V3Content,task=registry?registry.task(base,{world,route,tier,seed,stage:i}):base;return world==='town'?T.taskDetails(task,{route,context:course?{venue:'home'}:context},i):task;}),
+        tasks: (course
+          ? Array.from({ length: 6 }, (_, i) =>
+              X.task(course.skills[0], [6, 7, 9][tier - 1], seed, i),
+            )
+          : expandedGateway
+            ? expandedGatewayTasks(world, tier, seed)
+            : expandedWorld
+              ? expandedMissionTasks(world, route, tier, seed)
+              : [0, 1, 2].map((i) => task(world, route, tier, seed, i))
+        ).map((t, i) => {
+          const base = root.V9TouchContent
+              ? root.V9TouchContent.task(t, [6, 7, 9][tier - 1], seed, i)
+              : t,
+            registry =
+              typeof module !== "undefined"
+                ? require("./content-registry").V3Content
+                : root.V3Content,
+            task = registry
+              ? registry.task(base, { world, route, tier, seed, stage: i })
+              : base;
+          return world === "town"
+            ? T.taskDetails(
+                task,
+                { route, context: course ? { venue: "home" } : context },
+                i,
+              )
+            : task;
+        }),
         values: {},
         assisted: false,
         unassisted: 0,
@@ -828,7 +1015,7 @@
         solved: false,
       };
     }
-    rememberTeaching(s,a.active);
+    rememberTeaching(s, a.active);
     s.world = world;
     s.view = "adventure";
     s.resumeView = "adventure";
@@ -837,21 +1024,65 @@
   // Shared admission for explicit Visit controls. Starting a visit is atomic:
   // unavailable/generated failures must not replace another saved activity.
   function visitStatus(s, world, route, tier) {
-    const P=typeof module!=="undefined"?require('./starting-profile').V11StartingProfile:root.V11StartingProfile;
-    if(!routes(world).some(r=>r.id===route)&&!(route==='gateway'&&routes(world).length))
-      return {available:false,reason:'This destination is unavailable. Choose another listed destination.',missing:[]};
-    if(![1,2,3].includes(tier))return {available:false,reason:'Choose Level 1, 2 or 3 for this destination.',missing:[],alternativeTier:1};
-    const missing=P.allowed(s,`mission:${world}:${route}:${tier}`)?[]:Object.keys(P.areas).filter(id=>s.startingProfile?.version!==1||!P.valid(s.startingProfile?.areas?.[id]));
-    return {available:!missing.length,missing,reason:missing.length?'Find one starting point before visiting. The remaining areas are optional.':''};
+    const P =
+      typeof module !== "undefined"
+        ? require("./starting-profile").V11StartingProfile
+        : root.V11StartingProfile;
+    if (
+      !routes(world).some((r) => r.id === route) &&
+      !(route === "gateway" && routes(world).length)
+    )
+      return {
+        available: false,
+        reason:
+          "This destination is unavailable. Choose another listed destination.",
+        missing: [],
+      };
+    if (![1, 2, 3].includes(tier))
+      return {
+        available: false,
+        reason: "Choose Level 1, 2 or 3 for this destination.",
+        missing: [],
+        alternativeTier: 1,
+      };
+    const missing = P.allowed(s, `mission:${world}:${route}:${tier}`)
+      ? []
+      : Object.keys(P.areas).filter(
+          (id) =>
+            s.startingProfile?.version !== 1 ||
+            !P.valid(s.startingProfile?.areas?.[id]),
+        );
+    return {
+      available: !missing.length,
+      missing,
+      reason: missing.length
+        ? "Find one starting point before visiting. The remaining areas are optional."
+        : "",
+    };
   }
   function visit(s, world, route, tier) {
-    const admission=visitStatus(s,world,route,tier);
-    if(!admission.available)return admission;
-    const candidate=copy(s);
-    try{if(!start(candidate,world,route,tier))return {available:false,missing:[],reason:'This activity is unavailable. Choose another listed destination.'};}
-    catch(error){return {available:false,missing:[],reason:'This activity could not be opened. Your saved work is safe. Choose another listed destination.'};}
-    candidate.pausedActivity=null;
-    Object.assign(s,candidate);return {available:true,missing:[],reason:''};
+    const admission = visitStatus(s, world, route, tier);
+    if (!admission.available) return admission;
+    const candidate = copy(s);
+    try {
+      if (!start(candidate, world, route, tier))
+        return {
+          available: false,
+          missing: [],
+          reason:
+            "This activity is unavailable. Choose another listed destination.",
+        };
+    } catch (error) {
+      return {
+        available: false,
+        missing: [],
+        reason:
+          "This activity could not be opened. Your saved work is safe. Choose another listed destination.",
+      };
+    }
+    candidate.pausedActivity = null;
+    Object.assign(s, candidate);
+    return { available: true, missing: [], reason: "" };
   }
   function current(s) {
     return state(s).active || null;
@@ -859,28 +1090,47 @@
   function begin(s) {
     const q = current(s);
     if (q?.phase === "lesson") {
-      rememberTeaching(s,q);
+      rememberTeaching(s, q);
       q.phase = "play";
-      if(!q.restoration)state(s).taught[q.tasks[q.i].skill] = true;
+      if (!q.restoration) state(s).taught[q.tasks[q.i].skill] = true;
     }
   }
   function edit(s, key, value) {
     const q = current(s);
     if (!q || q.phase !== "play" || q.solved) return false;
     const t = q.tasks[q.i];
-    if(t.direct&&key==="direct")return root.V9Touch.edit(t.direct,q.values,value);
-    if(t.kind === "curriculum" && key === "c8action")return XA.edit(t,q.values,value);
+    if (t.direct && key === "direct")
+      return root.V9Touch.edit(t.direct, q.values, value);
+    if (t.kind === "curriculum" && key === "c8action")
+      return XA.edit(t, q.values, value);
     const integer = (n) => Number.isInteger(n),
       array = Array.isArray;
     let valid = false;
     if (key === "amount")
       valid = integer(value) && value >= (t.min || 0) && value <= t.max;
-    if (key === "budgetToken") valid=t.kind==="budget" && [1,5,50,100,500,1000].includes(value);
-    if (key === "picked") valid = integer(value) && value>=0 && value<(t.labels||t.items||[]).length;
-    if (key === "order") valid = array(value) && value.length<=t.items.length && value.every(n=>n===null || integer(n)&&n>=0&&n<t.items.length) && new Set(value.filter(n=>n!==null)).size===value.filter(n=>n!==null).length;
+    if (key === "budgetToken")
+      valid = t.kind === "budget" && [1, 5, 50, 100, 500, 1000].includes(value);
+    if (key === "picked")
+      valid =
+        integer(value) &&
+        value >= 0 &&
+        value < (t.labels || t.items || []).length;
+    if (key === "order")
+      valid =
+        array(value) &&
+        value.length <= t.items.length &&
+        value.every(
+          (n) => n === null || (integer(n) && n >= 0 && n < t.items.length),
+        ) &&
+        new Set(value.filter((n) => n !== null)).size ===
+          value.filter((n) => n !== null).length;
     if (key === "parts") {
       const length = t.items?.length || 3,
-        max = ["blocks","array","volume"].includes(t.kind) ? 9 : t.kind === "budget" ? t.budget : 12;
+        max = ["blocks", "array", "volume"].includes(t.kind)
+          ? 9
+          : t.kind === "budget"
+            ? t.budget
+            : 12;
       valid =
         array(value) &&
         value.length === length &&
@@ -915,29 +1165,48 @@
         integer(value) &&
         value === (q.values.posted || 0) + 1 &&
         value <= t.transactions.length;
-    if(key==='parts'&&t.kind==='budget'&&Array.isArray(value)&&value.reduce((a,b)=>a+b,0)>t.budget)valid=false;
+    if (
+      key === "parts" &&
+      t.kind === "budget" &&
+      Array.isArray(value) &&
+      value.reduce((a, b) => a + b, 0) > t.budget
+    )
+      valid = false;
     if (!valid) return false;
     q.values[key] = copy(value);
-    if (key === "amount") {delete q.values.amountDraft;delete q.values.clockDraft;}
+    if (key === "amount") {
+      delete q.values.amountDraft;
+      delete q.values.clockDraft;
+    }
     return true;
   }
   function value(q, t) {
-    if(t.direct)return root.V9Touch.value(t.direct,q.values);
-    if(t.kind === "curriculum")return XA.value(t,q.values);
+    if (t.direct) return root.V9Touch.value(t.direct, q.values);
+    if (t.kind === "curriculum") return XA.value(t, q.values);
     if (["fraction", "chance", "grid"].includes(t.kind))
       return q.values.selected || [];
-    if (["basket", "offers", "budget", "blocks", "array", "chart", "volume"].includes(t.kind))
+    if (
+      [
+        "basket",
+        "offers",
+        "budget",
+        "blocks",
+        "array",
+        "chart",
+        "volume",
+      ].includes(t.kind)
+    )
       return q.values.parts || [];
-    if (["order","match"].includes(t.kind)) return q.values.order || [];
+    if (["order", "match"].includes(t.kind)) return q.values.order || [];
     if (t.kind === "coordinate") return q.values.point || [];
-    if (["journey","choice"].includes(t.kind)) return q.values.choice ?? -1;
+    if (["journey", "choice"].includes(t.kind)) return q.values.choice ?? -1;
     if (t.kind === "coins")
       return (q.values.coins || []).reduce((a, b) => a + b, 0);
     return Number(q.values.amount || 0);
   }
   function correct(q, t) {
-    if(t.direct)return root.V9Touch.matches(t.direct,t.answer,q.values);
-    if(t.kind === "curriculum")return XA.correct(t,q.values);
+    if (t.direct) return root.V9Touch.matches(t.direct, t.answer, q.values);
+    if (t.kind === "curriculum") return XA.correct(t, q.values);
     const v = value(q, t);
     if (["fraction", "chance"].includes(t.kind)) return v.length === t.answer;
     if (t.kind === "bank" && (q.values.posted || 0) !== t.transactions.length)
@@ -948,7 +1217,13 @@
         ? [...v].sort((a, b) => a - b).every((n, i) => n === t.answer[i])
         : v.every((n, i) => n === t.answer[i]);
     }
-    if(t.markingVersion===1&&typeof t.answer==='number'){const marker=typeof module!=='undefined'?require('./answer-marking').V3AnswerMarking:root.V3AnswerMarking;return marker.matches(t.answer,v,t.answerContract);}
+    if (t.markingVersion === 1 && typeof t.answer === "number") {
+      const marker =
+        typeof module !== "undefined"
+          ? require("./answer-marking").V3AnswerMarking
+          : root.V3AnswerMarking;
+      return marker.matches(t.answer, v, t.answerContract);
+    }
     return v === t.answer;
   }
   function help(s, worked = false) {
@@ -956,18 +1231,31 @@
     if (!q || q.solved) return;
     q.assisted = true;
     q.hintLevel ||= 0;
-    if(worked)q.phase="lesson";
+    if (worked) q.phase = "lesson";
     q.feedback = worked
       ? "Let’s work through it. " + q.tasks[q.i].worked
-      : (++q.hintLevel>2?q.tasks[q.i].worked:q.hintLevel===2?q.tasks[q.i].teach:q.tasks[q.i].hint);
+      : ++q.hintLevel > 2
+        ? q.tasks[q.i].worked
+        : q.hintLevel === 2
+          ? q.tasks[q.i].teach
+          : q.tasks[q.i].hint;
   }
   function submit(s) {
     const q = current(s);
     if (!q || q.phase !== "play" || q.solved) return false;
     const t = q.tasks[q.i];
     if (H.invalidDraft(q.values, t)) return false;
-    const evidence=q.evidence||(q.evidence=[]);
-    if(!evidence.some(e=>e.step===q.i)) evidence.push({step:q.i,skill:t.skill,mechanic:H.mechanic(t,q.world,q.route),firstValue:copy(value(q,t)),correct:correct(q,t),assisted:q.assisted,source:q.restoration?'restoration':'guided-adventure'});
+    const evidence = q.evidence || (q.evidence = []);
+    if (!evidence.some((e) => e.step === q.i))
+      evidence.push({
+        step: q.i,
+        skill: t.skill,
+        mechanic: H.mechanic(t, q.world, q.route),
+        firstValue: copy(value(q, t)),
+        correct: correct(q, t),
+        assisted: q.assisted,
+        source: q.restoration ? "restoration" : "guided-adventure",
+      });
     if (!correct(q, t)) {
       q.assisted = true;
       q.feedback = "Not yet. " + t.hint + " " + t.teach;
@@ -989,35 +1277,45 @@
       q.values = {};
       q.assisted = false;
       q.solved = false;
-      q.feedback = "";q.hintLevel=0;
-      rememberTeaching(s,q);
+      q.feedback = "";
+      q.hintLevel = 0;
+      rememberTeaching(s, q);
       return false;
     }
-    if(q.restoration)return R.complete(s,q,now);
+    if (q.restoration) return R.complete(s, q, now);
     const old = a.records[q.key],
       serial =
         Object.values(a.records).reduce(
           (n, r) => Math.max(n, r.serial || 0),
           0,
         ) + 1;
-    const engine=typeof module!=='undefined'?require('./engine').V3Engine:root.V3Engine,participation=engine.participation(q,q.tasks.length);
-    if(!participation.eligible){a.finishedWithHelp||=[];a.finishedWithHelp.push(copy(q));}
-    if(participation.eligible)a.records[q.key] = {
-      world: q.world,
-      route: q.route,
-      tier: q.tier,
-      taskCount: q.tasks.length,
-      contentVersion:q.contentVersion||1,
-      unassisted: Math.max(old?.unassisted || 0, q.unassisted),
-      lastUnassisted: q.unassisted,
-      evidence: copy(q.evidence || []),
-      skips: copy(q.skips || []),
-      context: copy(q.context || {}),
-      completedAt: new Date(now).toISOString(),
-      serial,
-    };
+    const engine =
+        typeof module !== "undefined"
+          ? require("./engine").V3Engine
+          : root.V3Engine,
+      participation = engine.participation(q, q.tasks.length);
+    if (!participation.eligible) {
+      a.finishedWithHelp ||= [];
+      a.finishedWithHelp.push(copy(q));
+    }
+    if (participation.eligible)
+      a.records[q.key] = {
+        world: q.world,
+        route: q.route,
+        tier: q.tier,
+        taskCount: q.tasks.length,
+        contentVersion: q.contentVersion || 1,
+        unassisted: Math.max(old?.unassisted || 0, q.unassisted),
+        lastUnassisted: q.unassisted,
+        evidence: copy(q.evidence || []),
+        skips: copy(q.skips || []),
+        context: copy(q.context || {}),
+        completedAt: new Date(now).toISOString(),
+        serial,
+      };
     const milestone = "mission|" + q.key;
-    if (participation.eligible&&!s.milestones.includes(milestone)) s.milestones.push(milestone);
+    if (participation.eligible && !s.milestones.includes(milestone))
+      s.milestones.push(milestone);
     s.recent.unshift({
       type: "expedition",
       world: q.world,
@@ -1032,7 +1330,7 @@
       world: q.world,
       route: q.route,
       tier: q.tier,
-      newReward: participation.eligible&&!old,
+      newReward: participation.eligible && !old,
       participation,
     };
     delete a.suspended[q.key];
@@ -1050,34 +1348,98 @@
     return true;
   }
   const campStages = [
-    {id:1, name:"Wilderness Camp", need:0, story:"A tent, a warm campfire and a place for your first discoveries."},
-    {id:2, name:"Established Campsite", need:4, story:"An improved tent, canvas awning, lantern fence, storage and a growing garden."},
-    {id:3, name:"Explorer’s Cabin", need:10, story:"A timber home with chimney, porch, woodpile and rainwater barrel replaces the tent."},
-    {id:4, name:"Adventure Lodge", need:18, story:"An upper floor, balcony lookout, map room and landscaped garden expand your home."},
-    {id:5, name:"Workshop Homestead", need:30, story:"A bigger homestead, equipment workshop, tool shed and water pump, with space for your community greenhouse project."},
-    {id:6, name:"Watermill Estate", need:45, story:"A substantial residence and working watermill, stream, channel, bridge, storage tank and pipework."},
-    {id:7, name:"Powered Manor", need:65, story:"A manor with hydro generator, distribution equipment, visible power lines and illuminated grounds."},
-    {id:8, name:"Explorer’s Mansion", need:85, story:"A grand multi-wing mansion, trophy room, courtyard and gardens, advanced workshop, watermill and complete private power grid."},
+    {
+      id: 1,
+      name: "Wilderness Camp",
+      need: 0,
+      story: "A tent, a warm campfire and a place for your first discoveries.",
+    },
+    {
+      id: 2,
+      name: "Established Campsite",
+      need: 4,
+      story:
+        "An improved tent, canvas awning, lantern fence, storage and a growing garden.",
+    },
+    {
+      id: 3,
+      name: "Explorer’s Cabin",
+      need: 10,
+      story:
+        "A timber home with chimney, porch, woodpile and rainwater barrel replaces the tent.",
+    },
+    {
+      id: 4,
+      name: "Adventure Lodge",
+      need: 18,
+      story:
+        "An upper floor, balcony lookout, map room and landscaped garden expand your home.",
+    },
+    {
+      id: 5,
+      name: "Workshop Homestead",
+      need: 30,
+      story:
+        "A bigger homestead, equipment workshop, tool shed and water pump, with space for your community greenhouse project.",
+    },
+    {
+      id: 6,
+      name: "Watermill Estate",
+      need: 45,
+      story:
+        "A substantial residence and working watermill, stream, channel, bridge, storage tank and pipework.",
+    },
+    {
+      id: 7,
+      name: "Powered Manor",
+      need: 65,
+      story:
+        "A manor with hydro generator, distribution equipment, visible power lines and illuminated grounds.",
+    },
+    {
+      id: 8,
+      name: "Explorer’s Mansion",
+      need: 85,
+      story:
+        "A grand multi-wing mansion, trophy room, courtyard and gardens, advanced workshop, watermill and complete private power grid.",
+    },
   ];
   function campMilestoneIds() {
-    const worlds=[...Object.keys(stories),"town"], ids=[];
-    for(const w of worlds) {
-      if(w!=="town") for(let i=0;i<3;i++) ids.push(w+":"+i);
-      for(const r of [...routes(w).map(r=>r.id),"gateway"])
-        for(let tier=1;tier<=3;tier++) ids.push("mission|"+id(w,r,tier));
+    const worlds = [...Object.keys(stories), "town"],
+      ids = [];
+    for (const w of worlds) {
+      if (w !== "town") for (let i = 0; i < 3; i++) ids.push(w + ":" + i);
+      for (const r of [...routes(w).map((r) => r.id), "gateway"])
+        for (let tier = 1; tier <= 3; tier++)
+          ids.push("mission|" + id(w, r, tier));
     }
     return ids;
   }
   function campMilestones(s) {
-    const valid=new Set(campMilestoneIds());
+    const valid = new Set(campMilestoneIds());
     // Historical Town restoration identifiers also remain legitimate saved progress.
-    for(let i=0;i<3;i++) valid.add("town:"+i);
-    return [...new Set((s.milestones || []).filter(x=>typeof x==="string" && valid.has(x)))];
+    for (let i = 0; i < 3; i++) valid.add("town:" + i);
+    return [
+      ...new Set(
+        (s.milestones || []).filter(
+          (x) => typeof x === "string" && valid.has(x),
+        ),
+      ),
+    ];
   }
   function campProgress(s) {
-    const a=state(s), count=campMilestones(s).length, current=campStages[a.campEstate.highest-1], next=campStages[current.id] || null;
-    return {count,current,next,remaining:next?Math.max(0,next.need-count):0,
-      pending:a.campEstate.celebrated<current.id,capacity:campMilestoneIds().length};
+    const a = state(s),
+      count = campMilestones(s).length,
+      current = campStages[a.campEstate.highest - 1],
+      next = campStages[current.id] || null;
+    return {
+      count,
+      current,
+      next,
+      remaining: next ? Math.max(0, next.need - count) : 0,
+      pending: a.campEstate.celebrated < current.id,
+      capacity: campMilestoneIds().length,
+    };
   }
   function upgradeCamp(s, stage) {
     const p = campProgress(s);
@@ -1086,7 +1448,8 @@
     return true;
   }
   function celebrateCamp(s) {
-    const a=state(s);a.campEstate.celebrated=a.campEstate.highest;
+    const a = state(s);
+    a.campEstate.celebrated = a.campEstate.highest;
   }
   const projects = [
     {

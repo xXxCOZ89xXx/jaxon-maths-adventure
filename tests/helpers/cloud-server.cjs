@@ -67,8 +67,15 @@ async function mock(page, server, options = {}) {
     else if (u.pathname === "/auth/v1/recover") data = {};
     else if (u.pathname === "/auth/v1/logout") data = {};
     else if (u.pathname === "/rest/v1/rpc/v3_identity")
-      data = { name: options.projectName || "jaxon-maths-v3-staging", projectRef: targetRef,saveReceiptVersion:server.receiptVersion??1,...(server.historyVersion?{progressStorageVersion:server.historyVersion}:{}),
-        ...(options.identity || {}) };
+      data = {
+        name: options.projectName || "jaxon-maths-v3-staging",
+        projectRef: targetRef,
+        saveReceiptVersion: server.receiptVersion ?? 1,
+        ...(server.historyVersion
+          ? { progressStorageVersion: server.historyVersion }
+          : {}),
+        ...(options.identity || {}),
+      };
     else if (u.pathname === "/rest/v1/rpc/v3_role")
       data = {
         role: parent ? "parent" : "learner",
@@ -77,9 +84,9 @@ async function mock(page, server, options = {}) {
         pinSet: server.pinSet !== false,
       };
     else if (u.pathname === "/rest/v1/rpc/v3_set_pin") {
-      server.pinSet = true; data = { ok: true };
-    }
-    else if (u.pathname === "/rest/v1/rpc/v3_unlock") {
+      server.pinSet = true;
+      data = { ok: true };
+    } else if (u.pathname === "/rest/v1/rpc/v3_unlock") {
       if (body.p_pin !== (parent ? "654321" : "1234")) {
         server.pinAttempts++;
         data = { error: "PIN was not recognised. Try again." };
@@ -98,47 +105,147 @@ async function mock(page, server, options = {}) {
       if (server.tokens.get(body.p_token) !== user.id) {
         status = 403;
         data = { code: "P0001", message: "Unlock required" };
-      } else if(server.historyVersion===2&&['read_v2','history_has','history_get','history_put','save_v2'].includes(body.p_operation)){
-        server.historyNodes??=new Map();const op=body.p_operation,a=body.p_args||{};
-        if(op==='read_v2')data={revision:server.revision,progress:server.progress,wallet:server.wallet,gameResetVersion:1,gameEpoch:server.gameEpoch||0,progressStorageVersion:2};
-        else if((a.gameEpoch||0)!==(server.gameEpoch||0)){status=400;data={code:'P0001',message:'GAME_RESET_REQUIRED'};}
-        else if(op==='history_has')data={ids:a.ids.filter(id=>server.historyNodes.has(id))};
-        else if(op==='history_get')data={nodes:a.ids.filter(id=>server.historyNodes.has(id)).map(id=>({id,body:server.historyNodes.get(id)}))};
-        else if(op==='history_put'){server.historyNodes.set(a.node.id,a.node.body);data={stored:a.node.id};}
-        else if(parent){status=403;data={code:'P0001',message:'Learner account required'};}
-        else if(server.transactions.has(a.requestId))data=server.transactions.get(a.requestId);
-        else if(a.revision!==server.revision)data={conflict:true,revision:server.revision,progress:server.progress};
-        else{server.progress=a.progress;server.revision++;data={revision:server.revision};server.transactions.set(a.requestId,data);if(server.loseHistorySave){server.loseHistorySave=false;return route.abort();}}
-      } else if(server.historyVersion===2&&body.p_operation==='save'&&server.progress?._historyV2&&!server.transactions.has(body.p_args?.requestId)){
-        status=400;data={code:'P0001',message:'UPDATE_REQUIRED: original request preserved'};
+      } else if (
+        server.historyVersion === 2 &&
+        [
+          "read_v2",
+          "history_has",
+          "history_get",
+          "history_put",
+          "save_v2",
+        ].includes(body.p_operation)
+      ) {
+        server.historyNodes ??= new Map();
+        const op = body.p_operation,
+          a = body.p_args || {};
+        if (op === "read_v2")
+          data = {
+            revision: server.revision,
+            progress: server.progress,
+            wallet: server.wallet,
+            gameResetVersion: 1,
+            gameEpoch: server.gameEpoch || 0,
+            progressStorageVersion: 2,
+          };
+        else if ((a.gameEpoch || 0) !== (server.gameEpoch || 0)) {
+          status = 400;
+          data = { code: "P0001", message: "GAME_RESET_REQUIRED" };
+        } else if (op === "history_has")
+          data = { ids: a.ids.filter((id) => server.historyNodes.has(id)) };
+        else if (op === "history_get")
+          data = {
+            nodes: a.ids
+              .filter((id) => server.historyNodes.has(id))
+              .map((id) => ({ id, body: server.historyNodes.get(id) })),
+          };
+        else if (op === "history_put") {
+          server.historyNodes.set(a.node.id, a.node.body);
+          data = { stored: a.node.id };
+        } else if (parent) {
+          status = 403;
+          data = { code: "P0001", message: "Learner account required" };
+        } else if (server.transactions.has(a.requestId))
+          data = server.transactions.get(a.requestId);
+        else if (a.revision !== server.revision)
+          data = {
+            conflict: true,
+            revision: server.revision,
+            progress: server.progress,
+          };
+        else {
+          server.progress = a.progress;
+          server.revision++;
+          data = { revision: server.revision };
+          server.transactions.set(a.requestId, data);
+          if (server.loseHistorySave) {
+            server.loseHistorySave = false;
+            return route.abort();
+          }
+        }
+      } else if (
+        server.historyVersion === 2 &&
+        body.p_operation === "save" &&
+        server.progress?._historyV2 &&
+        !server.transactions.has(body.p_args?.requestId)
+      ) {
+        status = 400;
+        data = {
+          code: "P0001",
+          message: "UPDATE_REQUIRED: original request preserved",
+        };
       } else if (body.p_operation === "read" && server.failNextRead) {
-        server.failNextRead=false;return route.abort();
+        server.failNextRead = false;
+        return route.abort();
       } else if (body.p_operation === "read")
         data = {
           revision: server.revision,
           progress: server.progress,
           wallet: server.wallet,
-          ...(server.resetSupported?{gameResetVersion:1,gameEpoch:server.gameEpoch||0}:{}),
+          ...(server.resetSupported
+            ? { gameResetVersion: 1, gameEpoch: server.gameEpoch || 0 }
+            : {}),
         };
       else if (body.p_operation === "lock") {
         server.tokens.delete(body.p_token);
         data = { ok: true };
       } else if (body.p_operation === "reset_game" && server.resetSupported) {
-        const a=body.p_args;
-        server.resetReceipts??=new Map();
-        if(!parent){status=403;data={code:'P0001',message:'Parent account required'};}
-        else if(a.confirmation!=='RESET ALL GAME PROGRESS'){status=400;data={code:'P0001',message:'Explicit total game reset confirmation required'};}
-        else if(server.resetReceipts.has(a.requestId))data=server.resetReceipts.get(a.requestId);
-        else if(a.gameEpoch!==(server.gameEpoch||0)||a.revision!==server.revision){status=400;data={code:'P0001',message:'Game changed; refresh and confirm the reset again'};}
-        else{server.gameEpoch=(server.gameEpoch||0)+1;server.revision++;server.progress={};server.wallet={coins:0,bonus:0,active_seconds:0,redeemed:0,owned:[],opening_seconds:0,legacy_redeemed:0};
-          for(const [token,user] of server.tokens)if(user===uid)server.tokens.delete(token);
-          data={reset:true,gameEpoch:server.gameEpoch,revision:server.revision};server.resetReceipts.set(a.requestId,data);
-          if(server.loseReset){server.loseReset=false;return route.abort();}
+        const a = body.p_args;
+        server.resetReceipts ??= new Map();
+        if (!parent) {
+          status = 403;
+          data = { code: "P0001", message: "Parent account required" };
+        } else if (a.confirmation !== "RESET ALL GAME PROGRESS") {
+          status = 400;
+          data = {
+            code: "P0001",
+            message: "Explicit total game reset confirmation required",
+          };
+        } else if (server.resetReceipts.has(a.requestId))
+          data = server.resetReceipts.get(a.requestId);
+        else if (
+          a.gameEpoch !== (server.gameEpoch || 0) ||
+          a.revision !== server.revision
+        ) {
+          status = 400;
+          data = {
+            code: "P0001",
+            message: "Game changed; refresh and confirm the reset again",
+          };
+        } else {
+          server.gameEpoch = (server.gameEpoch || 0) + 1;
+          server.revision++;
+          server.progress = {};
+          server.wallet = {
+            coins: 0,
+            bonus: 0,
+            active_seconds: 0,
+            redeemed: 0,
+            owned: [],
+            opening_seconds: 0,
+            legacy_redeemed: 0,
+          };
+          for (const [token, user] of server.tokens)
+            if (user === uid) server.tokens.delete(token);
+          data = {
+            reset: true,
+            gameEpoch: server.gameEpoch,
+            revision: server.revision,
+          };
+          server.resetReceipts.set(a.requestId, data);
+          if (server.loseReset) {
+            server.loseReset = false;
+            return route.abort();
+          }
         }
-      } else if(server.resetSupported && (body.p_args?.gameEpoch||0)!==(server.gameEpoch||0)) {
-        status=400;data={code:'P0001',message:'GAME_RESET_REQUIRED'};
+      } else if (
+        server.resetSupported &&
+        (body.p_args?.gameEpoch || 0) !== (server.gameEpoch || 0)
+      ) {
+        status = 400;
+        data = { code: "P0001", message: "GAME_RESET_REQUIRED" };
       } else if (body.p_operation === "save" && parent) {
-        status=403;data={code:"P0001",message:"Learner account required"};
+        status = 403;
+        data = { code: "P0001", message: "Learner account required" };
       } else if (body.p_operation === "save") {
         const a = body.p_args;
         if (server.transactions.has(a.requestId))
@@ -189,8 +296,14 @@ async function mock(page, server, options = {}) {
           server.transactions.set(a.requestId, { wallet: server.wallet });
         }
         data = { wallet: server.wallet };
-        if(server.failReadAfterBuy){server.failReadAfterBuy=false;server.failNextRead=true;}
-        if(server.loseBuy){server.loseBuy=false;return route.abort();}
+        if (server.failReadAfterBuy) {
+          server.failReadAfterBuy = false;
+          server.failNextRead = true;
+        }
+        if (server.loseBuy) {
+          server.loseBuy = false;
+          return route.abort();
+        }
       } else data = { wallet: server.wallet };
     } else {
       errors.push("Unmocked backend route " + u.pathname);
@@ -206,4 +319,4 @@ async function mock(page, server, options = {}) {
   return errors;
 }
 
-module.exports = {fixture,mock,ref,url,uid,parentUid};
+module.exports = { fixture, mock, ref, url, uid, parentUid };

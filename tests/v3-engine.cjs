@@ -6,12 +6,16 @@ const E = require("../v3/engine").V3Engine,
   C = require("../v3/curriculum").V3Curriculum;
 const ctx = { window: {} };
 vm.runInNewContext(fs.readFileSync("v2-review-bank.js", "utf8"), ctx);
-let bank = require("../v3/education").V6Education.install(C, require("../v3/town").V3Town.install(
+let bank = require("../v3/education").V6Education.install(
   C,
-  ctx.window.JaxonFreshReview,
-));
+  require("../v3/town").V3Town.install(C, ctx.window.JaxonFreshReview),
+);
 // Exercise the released depth bank used by six-question checks.
-Object.assign(ctx.window, { V3Curriculum: C, V6Education: require("../v3/education").V6Education, JaxonFreshReview: bank });
+Object.assign(ctx.window, {
+  V3Curriculum: C,
+  V6Education: require("../v3/education").V6Education,
+  JaxonFreshReview: bank,
+});
 vm.runInNewContext(fs.readFileSync("v3/education-depth.js", "utf8"), ctx);
 bank = ctx.window.JaxonFreshReview;
 let checks = 0;
@@ -50,15 +54,41 @@ test("Earlier saved quest loops persist exact state, restore 24 landmarks and ca
   let s = E.fresh();
   for (const w of E.worlds.filter((w) => w.id !== "town")) {
     assert.ok(C.skills.some((k) => k.id === w.skill));
-    const R=require('../v3/restoration').V10Restoration;
-    for(const id of R.mapping[w.id].flat())s.discovery[id]={complete:true,rounds:[{band:5,correct:2,total:4}]};
+    const R = require("../v3/restoration").V10Restoration;
+    for (const id of R.mapping[w.id].flat())
+      s.discovery[id] = {
+        complete: true,
+        rounds: [{ band: 5, correct: 2, total: 4 }],
+      };
     // Released three-task snapshots remain resumable; new starts use assessed plans.
-    s.quest={world:w.id,i:0,value:0,selected:[],assisted:false,solved:false,feedback:'',intro:true};
-    s.quests[w.id]=s.quest;s.view='quest';s.resumeView='quest';
+    s.quest = {
+      world: w.id,
+      i: 0,
+      value: 0,
+      selected: [],
+      assisted: false,
+      solved: false,
+      feedback: "",
+      intro: true,
+    };
+    s.quests[w.id] = s.quest;
+    s.view = "quest";
+    s.resumeView = "quest";
     assert.equal(s.quest.intro, true);
     s.quest.intro = false;
     for (let i = 0; i < 3; i++) {
-      s.quest={world:w.id,i,value:0,selected:[],assisted:false,solved:false,feedback:'',intro:false};s.quests[w.id]=s.quest;s.view='quest';
+      s.quest = {
+        world: w.id,
+        i,
+        value: 0,
+        selected: [],
+        assisted: false,
+        solved: false,
+        feedback: "",
+        intro: false,
+      };
+      s.quests[w.id] = s.quest;
+      s.view = "quest";
       const p = E.puzzle(w.id, i);
       E.help(s);
       E.help(s);
@@ -79,8 +109,8 @@ test("Earlier saved quest loops persist exact state, restore 24 landmarks and ca
   assert.equal(E.xp(s), 2400);
   assert.equal(s.coins, 0);
   E.startQuest(s, "number");
-  assert.equal(s.quest,null);
-  assert.equal(s.view,'recap');
+  assert.equal(s.quest, null);
+  assert.equal(s.view, "recap");
   assert.equal(E.xp(s), 2400);
   assert.deepEqual(s.skills, {});
 });
@@ -89,13 +119,19 @@ test("All runtime foundation skills: guided practice cannot award mastery, check
     const s = E.fresh(),
       now = Date.UTC(2026, 9, 20);
     // This suite isolates practice/check policy; prerequisite discovery is tested separately.
-    for(const pre of require("../v3/education").V6Education.prerequisites[k.id]||[])s.checks[pre]={stage:1};
+    for (const pre of require("../v3/education").V6Education.prerequisites[
+      k.id
+    ] || [])
+      s.checks[pre] = { stage: 1 };
     assert.match(E.generate(s, k.id, "check", bank, C, now), /practice/);
     assert.equal(E.generate(s, k.id, "practice", bank, C, now), null);
     assert.equal(s.learning.qs.length, 6);
     const practice = s.learning.qs.map((q) => q[0]);
     while (s.learning) {
-      assert(E.answerLearning(s, s.learning.qs[s.learning.i][1], false, now), k.id);
+      assert(
+        E.answerLearning(s, s.learning.qs[s.learning.i][1], false, now),
+        k.id,
+      );
       E.nextLearning(s, now);
     }
     assert.notEqual(s.skills[k.id].state, "mastered");
@@ -106,7 +142,10 @@ test("All runtime foundation skills: guided practice cannot award mastery, check
       ),
     );
     while (s.learning) {
-      assert(E.answerLearning(s, s.learning.qs[s.learning.i][1], false, now), k.id);
+      assert(
+        E.answerLearning(s, s.learning.qs[s.learning.i][1], false, now),
+        k.id,
+      );
       E.nextLearning(s, now);
     }
     assert.equal(s.checks[k.id].stage, 1);
@@ -114,7 +153,10 @@ test("All runtime foundation skills: guided practice cannot award mastery, check
     const due = s.checks[k.id].due;
     assert.equal(E.generate(s, k.id, "check", bank, C, due), null);
     while (s.learning) {
-      assert(E.answerLearning(s, s.learning.qs[s.learning.i][1], false, due), k.id);
+      assert(
+        E.answerLearning(s, s.learning.qs[s.learning.i][1], false, due),
+        k.id,
+      );
       E.nextLearning(s, due);
     }
     assert.equal(s.skills[k.id].state, "mastered");
@@ -124,7 +166,7 @@ test("All runtime foundation skills: guided practice cannot award mastery, check
 test("Hinted, wrong and skipped check answers never inflate mastery; failed check requires reteaching", () => {
   const s = E.fresh();
   s.practice.place = { completed: true };
-  s.checks.number_bonds = {stage:1};
+  s.checks.number_bonds = { stage: 1 };
   E.generate(s, "place", "check", bank, C);
   s.learning.assisted = true;
   E.answerLearning(s, s.learning.qs[0][1]);
@@ -132,7 +174,10 @@ test("Hinted, wrong and skipped check answers never inflate mastery; failed chec
   E.nextLearning(s);
   E.answerLearning(s, "wrong");
   E.nextLearning(s);
-  while(s.learning){E.answerLearning(s, "", true);E.nextLearning(s);}
+  while (s.learning) {
+    E.answerLearning(s, "", true);
+    E.nextLearning(s);
+  }
   assert.equal(s.checks.place.score, 0);
   assert.equal(s.checks.place.reteach, true);
   assert.match(E.generate(s, "place", "check", bank, C), /practice/);
@@ -209,17 +254,40 @@ test("All 1100 discovery choices remain valid; adaptive rounds choose a band wit
       assert.ok(prompts.every((q) => s.seen.includes(q)));
     }
     assert.equal(s.discovery[k.id].complete, true);
-    assert.equal(s.discovery[k.id].rounds.at(-1).band, require("../v3/education").V6Education.minBand(k.id)===3 ? 7 : 9);
+    assert.equal(
+      s.discovery[k.id].rounds.at(-1).band,
+      require("../v3/education").V6Education.minBand(k.id) === 3 ? 7 : 9,
+    );
     assert.deepEqual(s.skills, {});
     assert.equal(s.coins, 0);
   }
 });
 test("Changing worlds preserves assessed restoration snapshots without rewarding navigation", () => {
- const R=require('../v3/restoration').V10Restoration,M=require('../v3/adventure').V3Adventure,s=E.fresh();
- for(const world of ['number','fractions'])for(const id of R.mapping[world][0])s.discovery[id]={complete:true,rounds:[{band:5,correct:2,total:4}]};
- E.startQuest(s,'number');M.begin(s);M.current(s).values={c8:{draft:'1'}};M.help(s);const number=JSON.parse(JSON.stringify(M.current(s)));
- E.startQuest(s,'fractions');M.begin(s);M.current(s).values={c8:{draft:'1/2'}};const fraction=JSON.parse(JSON.stringify(M.current(s)));
- const reloaded=E.migrate(s);E.startQuest(reloaded,'number');assert.deepEqual(M.current(reloaded),number);E.startQuest(reloaded,'fractions');assert.deepEqual(M.current(reloaded),fraction);assert.equal(reloaded.coins,0);assert.equal(E.xp(reloaded),0);
+  const R = require("../v3/restoration").V10Restoration,
+    M = require("../v3/adventure").V3Adventure,
+    s = E.fresh();
+  for (const world of ["number", "fractions"])
+    for (const id of R.mapping[world][0])
+      s.discovery[id] = {
+        complete: true,
+        rounds: [{ band: 5, correct: 2, total: 4 }],
+      };
+  E.startQuest(s, "number");
+  M.begin(s);
+  M.current(s).values = { c8: { draft: "1" } };
+  M.help(s);
+  const number = JSON.parse(JSON.stringify(M.current(s)));
+  E.startQuest(s, "fractions");
+  M.begin(s);
+  M.current(s).values = { c8: { draft: "1/2" } };
+  const fraction = JSON.parse(JSON.stringify(M.current(s)));
+  const reloaded = E.migrate(s);
+  E.startQuest(reloaded, "number");
+  assert.deepEqual(M.current(reloaded), number);
+  E.startQuest(reloaded, "fractions");
+  assert.deepEqual(M.current(reloaded), fraction);
+  assert.equal(reloaded.coins, 0);
+  assert.equal(E.xp(reloaded), 0);
 });
 
 console.log(

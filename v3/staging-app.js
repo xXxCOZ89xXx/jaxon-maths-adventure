@@ -16,7 +16,11 @@ let client,
   saveTimer,
   intents,
   lastSaveAttempt = 0;
-let gameStorage=localStorage,remoteStorage=localStorage,historyBackend=null,historyRpc=null,historyVersion=1;
+let gameStorage = localStorage,
+  remoteStorage = localStorage,
+  historyBackend = null,
+  historyRpc = null,
+  historyVersion = 1;
 let gameEpoch = null;
 let resetBlocked = false;
 let resetSupported = false;
@@ -65,41 +69,81 @@ function form(title, body, action) {
   };
 }
 function retireGame() {
-  if(resetBlocked)return;
-  resetBlocked=true;unlock=null;expires=0;clearTimeout(timeout);clearTimeout(saveTimer);
+  if (resetBlocked) return;
+  resetBlocked = true;
+  unlock = null;
+  expires = 0;
+  clearTimeout(timeout);
+  clearTimeout(saveTimer);
   sessionStorage.removeItem("v3-unlock:" + c.projectRef);
-  document.querySelector("nav").hidden=true;
-  for(const d of document.querySelectorAll('dialog[open]'))d.close();
-  panel('Reconnect and unlock your game','<p>A parent may have reset this game, or this unlock has expired. This device’s earlier progress cannot be uploaded. Reconnect and unlock to load the current game.</p>'+button('Reconnect and unlock','reset-reconnect'));
-  $('reset-reconnect').onclick=()=>location.reload();
+  document.querySelector("nav").hidden = true;
+  for (const d of document.querySelectorAll("dialog[open]")) d.close();
+  panel(
+    "Reconnect and unlock your game",
+    "<p>A parent may have reset this game, or this unlock has expired. This device’s earlier progress cannot be uploaded. Reconnect and unlock to load the current game.</p>" +
+      button("Reconnect and unlock", "reset-reconnect"),
+  );
+  $("reset-reconnect").onclick = () => location.reload();
 }
-function useGameEpoch(remote){
-  if(remote.gameResetVersion===1 && (!Number.isSafeInteger(remote.gameEpoch)||remote.gameEpoch<0))throw Error('Invalid game reset generation');
-  gameEpoch=remote.gameEpoch||0;resetSupported=remote.gameResetVersion===1;
+function useGameEpoch(remote) {
+  if (
+    remote.gameResetVersion === 1 &&
+    (!Number.isSafeInteger(remote.gameEpoch) || remote.gameEpoch < 0)
+  )
+    throw Error("Invalid game reset generation");
+  gameEpoch = remote.gameEpoch || 0;
+  resetSupported = remote.gameResetVersion === 1;
 }
-function intentKey(){return `v3-intent:${c.projectRef}:${identity.user}`+(gameEpoch?':reset-'+gameEpoch:'');}
-function prepareIntents(){
-  intents=window.V3CloudSync.createIntents({storage:localStorage,key:intentKey(),rpc,
-    allowed:identity.role==='learner'?['buy']:['award','redeem','confirm_offline']});
+function intentKey() {
+  return (
+    `v3-intent:${c.projectRef}:${identity.user}` +
+    (gameEpoch ? ":reset-" + gameEpoch : "")
+  );
 }
-async function rpc(op,args={}){return historyRpc?historyRpc(op,args):rawRpc(op,args);}
+function prepareIntents() {
+  intents = window.V3CloudSync.createIntents({
+    storage: localStorage,
+    key: intentKey(),
+    rpc,
+    allowed:
+      identity.role === "learner"
+        ? ["buy"]
+        : ["award", "redeem", "confirm_offline"],
+  });
+}
+async function rpc(op, args = {}) {
+  return historyRpc ? historyRpc(op, args) : rawRpc(op, args);
+}
 async function rawRpc(op, args = {}) {
   if (!active()) throw Error("Unlock your account to continue");
-  const sentEpoch=gameEpoch;
+  const sentEpoch = gameEpoch;
   const { data, error } = await client.rpc("v3_request", {
     p_token: unlock,
     p_operation: op,
-    p_args: !['read','lock'].includes(op) && resetSupported && gameEpoch!==null ? {...args,gameEpoch:args.gameEpoch??gameEpoch} : args,
+    p_args:
+      !["read", "lock"].includes(op) && resetSupported && gameEpoch !== null
+        ? { ...args, gameEpoch: args.gameEpoch ?? gameEpoch }
+        : args,
   });
   if (error) {
-    if(identity?.role==='learner' && /GAME_RESET_REQUIRED|Unlock required/.test(error.message||''))retireGame();
+    if (
+      identity?.role === "learner" &&
+      /GAME_RESET_REQUIRED|Unlock required/.test(error.message || "")
+    )
+      retireGame();
     throw error;
   }
   if (data?.error) throw Error(data.error);
-  if(['read','read_v2'].includes(op) && identity?.role==='learner' && sentEpoch!==null && (data.gameEpoch||0)!==sentEpoch){
-    retireGame();throw Error('GAME_RESET_REQUIRED');
+  if (
+    ["read", "read_v2"].includes(op) &&
+    identity?.role === "learner" &&
+    sentEpoch !== null &&
+    (data.gameEpoch || 0) !== sentEpoch
+  ) {
+    retireGame();
+    throw Error("GAME_RESET_REQUIRED");
   }
-  if(resetBlocked)throw Error('GAME_RESET_REQUIRED');
+  if (resetBlocked) throw Error("GAME_RESET_REQUIRED");
   return data;
 }
 function authForm() {
@@ -182,7 +226,10 @@ async function pinScreen() {
   }
 }
 async function lock() {
-  await Promise.race([flush(true),new Promise(resolve=>setTimeout(resolve,1500))]);
+  await Promise.race([
+    flush(true),
+    new Promise((resolve) => setTimeout(resolve, 1500)),
+  ]);
   const old = unlock;
   unlock = null;
   expires = 0;
@@ -208,7 +255,8 @@ async function lock() {
 }
 async function open(u) {
   message("");
-  gameEpoch=null;resetBlocked=false;
+  gameEpoch = null;
+  resetBlocked = false;
   unlock = u.token;
   expires = Date.parse(u.expires);
   identity = u;
@@ -217,7 +265,16 @@ async function open(u) {
   timeout = setTimeout(lock, Math.max(1, expires - Date.now()));
   let remote;
   const cacheKey = `v3-last-remote:${c.projectRef}:${identity.user}`;
-  if(historyVersion===2){historyBackend=window.V3HistoryStorage.indexedDBBackend(`v3-history:${c.projectRef}:${identity.user}`);remoteStorage=await window.V3HistoryStorage.localStore({backend:historyBackend,legacy:localStorage,keys:[cacheKey]});}
+  if (historyVersion === 2) {
+    historyBackend = window.V3HistoryStorage.indexedDBBackend(
+      `v3-history:${c.projectRef}:${identity.user}`,
+    );
+    remoteStorage = await window.V3HistoryStorage.localStore({
+      backend: historyBackend,
+      legacy: localStorage,
+      keys: [cacheKey],
+    });
+  }
   try {
     remote = await rpc("read");
     await remoteStorage.setItem(cacheKey, JSON.stringify(remote));
@@ -233,13 +290,24 @@ async function open(u) {
   useGameEpoch(remote);
   prepareIntents();
   // Recover purchases independently of the item button, even when ownership already refreshed.
-  if(identity.role==='learner'&&navigator.onLine){try{const recovered=await intents.recover();if(recovered){remote=recovered;wallet=remote.wallet;await remoteStorage.setItem(cacheKey,JSON.stringify(remote));}}catch{message('A purchase is awaiting confirmation. Its retry is preserved.');}}
+  if (identity.role === "learner" && navigator.onLine) {
+    try {
+      const recovered = await intents.recover();
+      if (recovered) {
+        remote = recovered;
+        wallet = remote.wallet;
+        await remoteStorage.setItem(cacheKey, JSON.stringify(remote));
+      }
+    } catch {
+      message("A purchase is awaiting confirmation. Its retry is preserved.");
+    }
+  }
   if (identity.role === "parent") {
     document.querySelector("nav").hidden = true;
     await parent(remote);
     return;
   }
-  const key = `jaxon_v3_staging:${c.projectRef}:${identity.user}:game${gameEpoch?":reset-"+gameEpoch:""}`,
+  const key = `jaxon_v3_staging:${c.projectRef}:${identity.user}:game${gameEpoch ? ":reset-" + gameEpoch : ""}`,
     qkey = key + ":queue";
   // A single writing tab per account prevents shared local queues from racing. Other devices use CAS.
   if (!navigator.locks)
@@ -260,10 +328,16 @@ async function open(u) {
     throw Error(
       "This staging account is already open in another tab. Close that tab first.",
     );
-  if(historyVersion===2)gameStorage=await window.V3HistoryStorage.localStore({backend:historyBackend,legacy:localStorage,keys:[key,qkey],preserveLegacyPending:true});
+  if (historyVersion === 2)
+    gameStorage = await window.V3HistoryStorage.localStore({
+      backend: historyBackend,
+      legacy: localStorage,
+      keys: [key, qkey],
+      preserveLegacyPending: true,
+    });
   sync = window.V3CloudSync.create({
     storage: gameStorage,
-    storageVersion:historyVersion,
+    storageVersion: historyVersion,
     key: qkey,
     rpc,
     notify: (doc) => {
@@ -272,7 +346,8 @@ async function open(u) {
   });
   const local = sync.snapshot(),
     initial = local.latest || local.pending?.progress || remote.progress;
-  if (!local.pending && !local.latest && !local.conflict) await sync.seed(remote);
+  if (!local.pending && !local.latest && !local.conflict)
+    await sync.seed(remote);
   // Never overwrite a corrupt game cache silently.
   const previous = gameStorage.getItem(key);
   if (previous)
@@ -286,15 +361,22 @@ async function open(u) {
   await gameStorage.setItem(key, JSON.stringify(s));
   window.V3CloudContext = {
     key,
-    storage:gameStorage,
+    storage: gameStorage,
     isUnlocked: active,
     screenTime: () =>
       Math.max(0, Number(wallet.active_seconds) / 60 - Number(wallet.redeemed)),
     applyWallet,
     async onSave(state) {
-      if(!await sync.enqueue(state))return;
-      if(state.view==='home'){queueMicrotask(()=>flush(true));return;}
-      if(!saveTimer)saveTimer=setTimeout(()=>{saveTimer=null;flush();},30000);
+      if (!(await sync.enqueue(state))) return;
+      if (state.view === "home") {
+        queueMicrotask(() => flush(true));
+        return;
+      }
+      if (!saveTimer)
+        saveTimer = setTimeout(() => {
+          saveTimer = null;
+          flush();
+        }, 30000);
     },
     onActive(ms) {
       heartbeat(ms / 1000);
@@ -315,11 +397,15 @@ async function open(u) {
   }
   if (local.conflict) conflictUI();
   else await flush(true);
-  window.addEventListener("online", () => {flush(true);recoverPurchase();});
-  window.addEventListener('pagehide',()=>flush(true));
+  window.addEventListener("online", () => {
+    flush(true);
+    recoverPurchase();
+  });
+  window.addEventListener("pagehide", () => flush(true));
   document.addEventListener("visibilitychange", () => {
-    if (!active()) {if(!document.hidden)lock();}
-    else flush(true);
+    if (!active()) {
+      if (!document.hidden) lock();
+    } else flush(true);
   });
   // Polling uses HTTPS and works when a WebSocket or background tab is unavailable.
   setInterval(async () => {
@@ -370,24 +456,49 @@ function applyWallet(s) {
   s.bought = [...wallet.owned];
   s.equipped = s.equipped.filter((id) => s.bought.includes(id));
 }
-async function flush(force=false) {
-  if(!sync||!active())return;
-  const dirty=sync.snapshot();
-  if(!dirty.pending&&!dirty.latest)return;
-  if(!force&&Date.now()-lastSaveAttempt<30000)return;
-  lastSaveAttempt=Date.now();
-  try{
-    await sync.flush({oneRequest:!force});
-    const next=sync.snapshot();
-    if(!next.conflict)message(next.pending||next.latest?'Saved on this device · waiting for staging sync':'Saved to staging · 60-minute weekly goal · screen time 1:1');
-  }catch{message('Not synced. Your changes remain on this device; reconnect and unlock to retry.');}
+async function flush(force = false) {
+  if (!sync || !active()) return;
+  const dirty = sync.snapshot();
+  if (!dirty.pending && !dirty.latest) return;
+  if (!force && Date.now() - lastSaveAttempt < 30000) return;
+  lastSaveAttempt = Date.now();
+  try {
+    await sync.flush({ oneRequest: !force });
+    const next = sync.snapshot();
+    if (!next.conflict)
+      message(
+        next.pending || next.latest
+          ? "Saved on this device · waiting for staging sync"
+          : "Saved to staging · 60-minute weekly goal · screen time 1:1",
+      );
+  } catch {
+    message(
+      "Not synced. Your changes remain on this device; reconnect and unlock to retry.",
+    );
+  }
 }
-async function recoverPurchase(){
-  if(!active()||identity.role!=='learner'||!navigator.onLine)return;
-  try{if(!intents.pending())return;const remote=await intents.recover();if(remote){wallet=remote.wallet;await remoteStorage.setItem(`v3-last-remote:${c.projectRef}:${identity.user}`,JSON.stringify(remote));
-      const key=window.V3CloudContext?.key;
-      if(key&&!document.documentElement.hasAttribute('data-saving')){const state=JSON.parse(gameStorage.getItem(key));applyWallet(state);await gameStorage.setItem(key,JSON.stringify(state));window.dispatchEvent(new StorageEvent('storage',{key}));}}}
-  catch{message('A purchase is awaiting confirmation. Its retry is preserved.');}
+async function recoverPurchase() {
+  if (!active() || identity.role !== "learner" || !navigator.onLine) return;
+  try {
+    if (!intents.pending()) return;
+    const remote = await intents.recover();
+    if (remote) {
+      wallet = remote.wallet;
+      await remoteStorage.setItem(
+        `v3-last-remote:${c.projectRef}:${identity.user}`,
+        JSON.stringify(remote),
+      );
+      const key = window.V3CloudContext?.key;
+      if (key && !document.documentElement.hasAttribute("data-saving")) {
+        const state = JSON.parse(gameStorage.getItem(key));
+        applyWallet(state);
+        await gameStorage.setItem(key, JSON.stringify(state));
+        window.dispatchEvent(new StorageEvent("storage", { key }));
+      }
+    }
+  } catch {
+    message("A purchase is awaiting confirmation. Its retry is preserved.");
+  }
 }
 
 function conflictUI() {
@@ -405,7 +516,10 @@ function conflictUI() {
     $("keep-" + choice).onclick = async () => {
       const state = E.migrate(await sync.resolve(choice));
       applyWallet(state);
-      await gameStorage.setItem(window.V3CloudContext.key, JSON.stringify(state));
+      await gameStorage.setItem(
+        window.V3CloudContext.key,
+        JSON.stringify(state),
+      );
       dialog.remove();
       window.dispatchEvent(
         new StorageEvent("storage", { key: window.V3CloudContext.key }),
@@ -413,10 +527,13 @@ function conflictUI() {
       await flush();
     };
 }
-async function transaction(op,payload) {
-  const latest=await intents.run(op,payload);
-  wallet=latest.wallet;
-  await remoteStorage.setItem(`v3-last-remote:${c.projectRef}:${identity.user}`,JSON.stringify(latest));
+async function transaction(op, payload) {
+  const latest = await intents.run(op, payload);
+  wallet = latest.wallet;
+  await remoteStorage.setItem(
+    `v3-last-remote:${c.projectRef}:${identity.user}`,
+    JSON.stringify(latest),
+  );
   return latest;
 }
 
@@ -433,15 +550,14 @@ async function heartbeat(seconds) {
 }
 async function parent(remote) {
   message("");
-  useGameEpoch(remote);prepareIntents();
+  useGameEpoch(remote);
+  prepareIntents();
   const p = E.migrate(remote.progress),
     week = p.weekly[E.weekKey(Date.now())] || 0;
   let pending = null,
     invalidIntent = false;
   try {
-    const raw = localStorage.getItem(
-      intentKey(),
-    );
+    const raw = localStorage.getItem(intentKey());
     if (raw) {
       pending = JSON.parse(raw);
       if (
@@ -511,12 +627,17 @@ async function parent(remote) {
       if (e.submitter.isConnected) e.submitter.disabled = false;
     }
   };
-  const resetSection=document.createElement('section');
-  resetSection.className='panel total-game-reset';
-  resetSection.innerHTML='<h2>Reset all learner game progress</h2><p>Start this linked learner’s game again. This is separate from restarting one activity.</p>'+button('Reset all game progress','reset-game-open')+(remote.gameResetVersion===1?'':'<p>The reviewed server reset upgrade must be installed before this control can be used.</p>');
-  main.querySelector('.parent-journal').append(resetSection);
-  $('reset-game-open').disabled=remote.gameResetVersion!==1;
-  $('reset-game-open').onclick=()=>confirmGameReset(remote);
+  const resetSection = document.createElement("section");
+  resetSection.className = "panel total-game-reset";
+  resetSection.innerHTML =
+    "<h2>Reset all learner game progress</h2><p>Start this linked learner’s game again. This is separate from restarting one activity.</p>" +
+    button("Reset all game progress", "reset-game-open") +
+    (remote.gameResetVersion === 1
+      ? ""
+      : "<p>The reviewed server reset upgrade must be installed before this control can be used.</p>");
+  main.querySelector(".parent-journal").append(resetSection);
+  $("reset-game-open").disabled = remote.gameResetVersion !== 1;
+  $("reset-game-open").onclick = () => confirmGameReset(remote);
   $("refresh-parent").onclick = async () => {
     try {
       await parent(await rpc("read"));
@@ -526,29 +647,71 @@ async function parent(remote) {
   };
 }
 function confirmGameReset(remote) {
-  if(identity.role!=='parent'||remote.gameResetVersion!==1)return;
-  const d=document.createElement('dialog');d.id='total-game-reset-dialog';
-  d.setAttribute('aria-labelledby','total-reset-title');
-  d.innerHTML='<h2 id="total-reset-title">Reset all learner game progress?</h2><p>This clears all learning and mastery evidence, starting-point answers, Base Camp levels, builds and keepsakes, coins, bonus coins and screen-time rewards, avatar ownership and equipment, and saved or resumable activities. Earlier offline saves cannot restore them.</p><p>Account identities, passwords, PINs, family links and parent/access configuration stay in place. This cannot be undone in the game.</p><label>Type RESET ALL GAME PROGRESS<input id="total-reset-confirm" autocomplete="off"></label><div class="actions">'+button('Cancel','total-reset-cancel')+button('Confirm total game reset','total-reset-submit')+'</div><p id="total-reset-feedback" role="status"></p>';
-  document.body.append(d);d.showModal();
-  const submit=$('total-reset-submit'),input=$('total-reset-confirm');submit.disabled=true;
-  let payload=null,submitting=false;
-  input.oninput=()=>{submit.disabled=input.value!=='RESET ALL GAME PROGRESS'||submitting;};
-  $('total-reset-cancel').onclick=()=>{if(!submitting)d.remove();};
-  d.oncancel=e=>{if(submitting)e.preventDefault();else d.remove();};
-  submit.onclick=async()=>{
-    if(submitting||input.value!=='RESET ALL GAME PROGRESS')return;
-    submitting=true;submit.disabled=true;$('total-reset-cancel').disabled=true;input.readOnly=true;
+  if (identity.role !== "parent" || remote.gameResetVersion !== 1) return;
+  const d = document.createElement("dialog");
+  d.id = "total-game-reset-dialog";
+  d.setAttribute("aria-labelledby", "total-reset-title");
+  d.innerHTML =
+    '<h2 id="total-reset-title">Reset all learner game progress?</h2><p>This clears all learning and mastery evidence, starting-point answers, Base Camp levels, builds and keepsakes, coins, bonus coins and screen-time rewards, avatar ownership and equipment, and saved or resumable activities. Earlier offline saves cannot restore them.</p><p>Account identities, passwords, PINs, family links and parent/access configuration stay in place. This cannot be undone in the game.</p><label>Type RESET ALL GAME PROGRESS<input id="total-reset-confirm" autocomplete="off"></label><div class="actions">' +
+    button("Cancel", "total-reset-cancel") +
+    button("Confirm total game reset", "total-reset-submit") +
+    '</div><p id="total-reset-feedback" role="status"></p>';
+  document.body.append(d);
+  d.showModal();
+  const submit = $("total-reset-submit"),
+    input = $("total-reset-confirm");
+  submit.disabled = true;
+  let payload = null,
+    submitting = false;
+  input.oninput = () => {
+    submit.disabled = input.value !== "RESET ALL GAME PROGRESS" || submitting;
+  };
+  $("total-reset-cancel").onclick = () => {
+    if (!submitting) d.remove();
+  };
+  d.oncancel = (e) => {
+    if (submitting) e.preventDefault();
+    else d.remove();
+  };
+  submit.onclick = async () => {
+    if (submitting || input.value !== "RESET ALL GAME PROGRESS") return;
+    submitting = true;
+    submit.disabled = true;
+    $("total-reset-cancel").disabled = true;
+    input.readOnly = true;
     // Same ID/payload on a lost response retry; never persist or auto-run a reset intent.
-    payload??={requestId:crypto.randomUUID(),gameEpoch:remote.gameEpoch||0,revision:remote.revision,confirmation:input.value};
-    try{
-      const receipt=await rpc('reset_game',payload);
-      if(receipt?.reset!==true||!Number.isSafeInteger(receipt.gameEpoch)||receipt.gameEpoch<1)throw Error('Reset was not acknowledged');
-      gameEpoch=receipt.gameEpoch;
-      const next=await rpc('read');d.remove();await parent(next);
-      message('Total game reset completed. The learner must unlock again to load their fresh game.');
-    }catch(err){$('total-reset-feedback').textContent=err.message+' No automatic retry will run. Retry sends the same reset request.';}
-    finally{submitting=false;if(d.isConnected){submit.disabled=false;$('total-reset-cancel').disabled=false;}}
+    payload ??= {
+      requestId: crypto.randomUUID(),
+      gameEpoch: remote.gameEpoch || 0,
+      revision: remote.revision,
+      confirmation: input.value,
+    };
+    try {
+      const receipt = await rpc("reset_game", payload);
+      if (
+        receipt?.reset !== true ||
+        !Number.isSafeInteger(receipt.gameEpoch) ||
+        receipt.gameEpoch < 1
+      )
+        throw Error("Reset was not acknowledged");
+      gameEpoch = receipt.gameEpoch;
+      const next = await rpc("read");
+      d.remove();
+      await parent(next);
+      message(
+        "Total game reset completed. The learner must unlock again to load their fresh game.",
+      );
+    } catch (err) {
+      $("total-reset-feedback").textContent =
+        err.message +
+        " No automatic retry will run. Retry sends the same reset request.";
+    } finally {
+      submitting = false;
+      if (d.isConnected) {
+        submit.disabled = false;
+        $("total-reset-cancel").disabled = false;
+      }
+    }
   };
 }
 async function boot() {
@@ -564,11 +727,14 @@ async function boot() {
       },
     });
     const check = await client.rpc("v3_identity");
-    const verifiedKey = "v3-verified:" + c.projectRef, receiptVerifiedKey="v3-verified-receipts:"+c.projectRef,historyVerifiedKey="v3-verified-history:"+c.projectRef;
+    const verifiedKey = "v3-verified:" + c.projectRef,
+      receiptVerifiedKey = "v3-verified-receipts:" + c.projectRef,
+      historyVerifiedKey = "v3-verified-history:" + c.projectRef;
     if (check.error) {
       if (
         navigator.onLine ||
-        sessionStorage.getItem(verifiedKey) !== c.projectRef || sessionStorage.getItem(receiptVerifiedKey)!=='1'
+        sessionStorage.getItem(verifiedKey) !== c.projectRef ||
+        sessionStorage.getItem(receiptVerifiedKey) !== "1"
       )
         throw Error("Staging identity was not verified. Sign-in is disabled.");
     } else {
@@ -577,18 +743,37 @@ async function boot() {
         check.data?.projectRef !== c.projectRef
       )
         throw Error("Staging identity mismatch. Sign-in disabled.");
-      if(check.data?.saveReceiptVersion!==1)throw Error('The saving upgrade has not been verified on this server. Existing saved data is preserved.');
+      if (check.data?.saveReceiptVersion !== 1)
+        throw Error(
+          "The saving upgrade has not been verified on this server. Existing saved data is preserved.",
+        );
       sessionStorage.setItem(verifiedKey, c.projectRef);
-      sessionStorage.setItem(receiptVerifiedKey,'1');
-      if(check.data.progressStorageVersion!==undefined&&![1,2].includes(check.data.progressStorageVersion))throw Error("Unsupported history storage version; saved data preserved");
-      sessionStorage.setItem(historyVerifiedKey,String(check.data.progressStorageVersion||1));
+      sessionStorage.setItem(receiptVerifiedKey, "1");
+      if (
+        check.data.progressStorageVersion !== undefined &&
+        ![1, 2].includes(check.data.progressStorageVersion)
+      )
+        throw Error(
+          "Unsupported history storage version; saved data preserved",
+        );
+      sessionStorage.setItem(
+        historyVerifiedKey,
+        String(check.data.progressStorageVersion || 1),
+      );
     }
-    historyVersion=Number(sessionStorage.getItem(historyVerifiedKey))===2?2:1;
-    if(historyVersion===2)historyRpc=window.V3HistoryStorage.transport(rawRpc,{epoch:()=>gameEpoch||0});
+    historyVersion =
+      Number(sessionStorage.getItem(historyVerifiedKey)) === 2 ? 2 : 1;
+    if (historyVersion === 2)
+      historyRpc = window.V3HistoryStorage.transport(rawRpc, {
+        epoch: () => gameEpoch || 0,
+      });
     $("cloud-lock").onclick = lock;
     $("cloud-signout").onclick = async () => {
       try {
-        await Promise.race([flush(true),new Promise(resolve=>setTimeout(resolve,1500))]);
+        await Promise.race([
+          flush(true),
+          new Promise((resolve) => setTimeout(resolve, 1500)),
+        ]);
         if (active()) await rpc("lock");
       } finally {
         unlock = null;
