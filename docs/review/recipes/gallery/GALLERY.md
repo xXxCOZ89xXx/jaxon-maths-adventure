@@ -10,170 +10,170 @@ The full test matrix covers every recipe in both builds at all four sizes; this 
 
 Before — pack-count recipe.
 
-![production, desktop-chromium: original pasta recipe](before-production-desktop-chromium-pasta-recipe.jpg)
+[production, desktop-chromium: original pasta recipe](/docs/review/ARCHIVE.md)
 
 After — explicit usable quantities, scaled batch and practical recipe.
 
-![production, desktop-chromium: refreshed pasta recipe, serving count and pack quantities](after-production-desktop-chromium-pasta-recipe.jpg)
+[production, desktop-chromium: refreshed pasta recipe, serving count and pack quantities](/docs/review/ARCHIVE.md)
 
 ## Tomato pasta: production, ipad-portrait-chromium
 
 Before — pack-count recipe.
 
-![production, ipad-portrait-chromium: original pasta recipe](before-production-ipad-portrait-chromium-pasta-recipe.jpg)
+[production, ipad-portrait-chromium: original pasta recipe](/docs/review/ARCHIVE.md)
 
 After — explicit usable quantities, scaled batch and practical recipe.
 
-![production, ipad-portrait-chromium: refreshed pasta recipe, serving count and pack quantities](after-production-ipad-portrait-chromium-pasta-recipe.jpg)
+[production, ipad-portrait-chromium: refreshed pasta recipe, serving count and pack quantities](/docs/review/ARCHIVE.md)
 
 ## Tomato pasta: production, ipad-landscape-chromium
 
 Before — pack-count recipe.
 
-![production, ipad-landscape-chromium: original pasta recipe](before-production-ipad-landscape-chromium-pasta-recipe.jpg)
+[production, ipad-landscape-chromium: original pasta recipe](/docs/review/ARCHIVE.md)
 
 After — explicit usable quantities, scaled batch and practical recipe.
 
-![production, ipad-landscape-chromium: refreshed pasta recipe, serving count and pack quantities](after-production-ipad-landscape-chromium-pasta-recipe.jpg)
+[production, ipad-landscape-chromium: refreshed pasta recipe, serving count and pack quantities](/docs/review/ARCHIVE.md)
 
 ## Tomato pasta: production, small-touch
 
 Before — pack-count recipe.
 
-![production, small-touch: original pasta recipe](before-production-small-touch-pasta-recipe.jpg)
+[production, small-touch: original pasta recipe](/docs/review/ARCHIVE.md)
 
 After — explicit usable quantities, scaled batch and practical recipe.
 
-![production, small-touch: refreshed pasta recipe, serving count and pack quantities](after-production-small-touch-pasta-recipe.jpg)
+[production, small-touch: refreshed pasta recipe, serving count and pack quantities](/docs/review/ARCHIVE.md)
 
 ## Tomato pasta: demo, desktop-chromium
 
 Before — pack-count recipe.
 
-![demo, desktop-chromium: original pasta recipe](before-demo-desktop-chromium-pasta-recipe.jpg)
+[demo, desktop-chromium: original pasta recipe](/docs/review/ARCHIVE.md)
 
 After — explicit usable quantities, scaled batch and practical recipe.
 
-![demo, desktop-chromium: refreshed pasta recipe, serving count and pack quantities](after-demo-desktop-chromium-pasta-recipe.jpg)
+[demo, desktop-chromium: refreshed pasta recipe, serving count and pack quantities](/docs/review/ARCHIVE.md)
 
 ## Tomato pasta: demo, ipad-portrait-chromium
 
 Before — pack-count recipe.
 
-![demo, ipad-portrait-chromium: original pasta recipe](before-demo-ipad-portrait-chromium-pasta-recipe.jpg)
+[demo, ipad-portrait-chromium: original pasta recipe](/docs/review/ARCHIVE.md)
 
 After — explicit usable quantities, scaled batch and practical recipe.
 
-![demo, ipad-portrait-chromium: refreshed pasta recipe, serving count and pack quantities](after-demo-ipad-portrait-chromium-pasta-recipe.jpg)
+[demo, ipad-portrait-chromium: refreshed pasta recipe, serving count and pack quantities](/docs/review/ARCHIVE.md)
 
 ## Tomato pasta: demo, ipad-landscape-chromium
 
 Before — pack-count recipe.
 
-![demo, ipad-landscape-chromium: original pasta recipe](before-demo-ipad-landscape-chromium-pasta-recipe.jpg)
+[demo, ipad-landscape-chromium: original pasta recipe](/docs/review/ARCHIVE.md)
 
 After — explicit usable quantities, scaled batch and practical recipe.
 
-![demo, ipad-landscape-chromium: refreshed pasta recipe, serving count and pack quantities](after-demo-ipad-landscape-chromium-pasta-recipe.jpg)
+[demo, ipad-landscape-chromium: refreshed pasta recipe, serving count and pack quantities](/docs/review/ARCHIVE.md)
 
 ## Tomato pasta: demo, small-touch
 
 Before — pack-count recipe.
 
-![demo, small-touch: original pasta recipe](before-demo-small-touch-pasta-recipe.jpg)
+[demo, small-touch: original pasta recipe](/docs/review/ARCHIVE.md)
 
 After — explicit usable quantities, scaled batch and practical recipe.
 
-![demo, small-touch: refreshed pasta recipe, serving count and pack quantities](after-demo-small-touch-pasta-recipe.jpg)
+[demo, small-touch: refreshed pasta recipe, serving count and pack quantities](/docs/review/ARCHIVE.md)
 
 ## pantry: production, small-touch
 
 Before
 
-![Before: production pasta pantry](before-production-small-touch-pasta-pantry.jpg)
+[Before: production pasta pantry](/docs/review/ARCHIVE.md)
 
 After — matching ingredient labels and quantities; original pictures retained.
 
-![After: production pasta pantry, matching usable pack quantities](after-production-small-touch-pasta-pantry.jpg)
+[After: production pasta pantry, matching usable pack quantities](/docs/review/ARCHIVE.md)
 
 ## fridge: production, desktop-chromium
 
 Before
 
-![Before: production pasta fridge](before-production-desktop-chromium-pasta-fridge.jpg)
+[Before: production pasta fridge](/docs/review/ARCHIVE.md)
 
 After — matching ingredient labels and quantities; original pictures retained.
 
-![After: production pasta fridge, matching usable pack quantities](after-production-desktop-chromium-pasta-fridge.jpg)
+[After: production pasta fridge, matching usable pack quantities](/docs/review/ARCHIVE.md)
 
 ## basket: production, small-touch
 
 Before
 
-![Before: production pasta basket](before-production-small-touch-pasta-basket.jpg)
+[Before: production pasta basket](/docs/review/ARCHIVE.md)
 
 After — matching ingredient labels and quantities; original pictures retained.
 
-![After: production pasta basket, matching usable pack quantities](after-production-small-touch-pasta-basket.jpg)
+[After: production pasta basket, matching usable pack quantities](/docs/review/ARCHIVE.md)
 
 ## pantry: demo, small-touch
 
 Before
 
-![Before: demo pasta pantry](before-demo-small-touch-pasta-pantry.jpg)
+[Before: demo pasta pantry](/docs/review/ARCHIVE.md)
 
 After — matching ingredient labels and quantities; original pictures retained.
 
-![After: demo pasta pantry, matching usable pack quantities](after-demo-small-touch-pasta-pantry.jpg)
+[After: demo pasta pantry, matching usable pack quantities](/docs/review/ARCHIVE.md)
 
 ## fridge: demo, desktop-chromium
 
 Before
 
-![Before: demo pasta fridge](before-demo-desktop-chromium-pasta-fridge.jpg)
+[Before: demo pasta fridge](/docs/review/ARCHIVE.md)
 
 After — matching ingredient labels and quantities; original pictures retained.
 
-![After: demo pasta fridge, matching usable pack quantities](after-demo-desktop-chromium-pasta-fridge.jpg)
+[After: demo pasta fridge, matching usable pack quantities](/docs/review/ARCHIVE.md)
 
 ## basket: demo, small-touch
 
 Before
 
-![Before: demo pasta basket](before-demo-small-touch-pasta-basket.jpg)
+[Before: demo pasta basket](/docs/review/ARCHIVE.md)
 
 After — matching ingredient labels and quantities; original pictures retained.
 
-![After: demo pasta basket, matching usable pack quantities](after-demo-small-touch-pasta-basket.jpg)
+[After: demo pasta basket, matching usable pack quantities](/docs/review/ARCHIVE.md)
 
 ## curry: production, desktop-chromium
 
-![production, desktop-chromium: refreshed curry recipe](after-production-desktop-chromium-curry-recipe.jpg)
+[production, desktop-chromium: refreshed curry recipe](/docs/review/ARCHIVE.md)
 
 ## pizza: production, desktop-chromium
 
-![production, desktop-chromium: refreshed pizza recipe](after-production-desktop-chromium-pizza-recipe.jpg)
+[production, desktop-chromium: refreshed pizza recipe](/docs/review/ARCHIVE.md)
 
 ## soup: production, desktop-chromium
 
-![production, desktop-chromium: refreshed soup recipe](after-production-desktop-chromium-soup-recipe.jpg)
+[production, desktop-chromium: refreshed soup recipe](/docs/review/ARCHIVE.md)
 
 ## pancakes: production, desktop-chromium
 
-![production, desktop-chromium: refreshed pancakes recipe](after-production-desktop-chromium-pancakes-recipe.jpg)
+[production, desktop-chromium: refreshed pancakes recipe](/docs/review/ARCHIVE.md)
 
 ## curry: demo, small-touch
 
-![demo, small-touch: refreshed curry recipe](after-demo-small-touch-curry-recipe.jpg)
+[demo, small-touch: refreshed curry recipe](/docs/review/ARCHIVE.md)
 
 ## pizza: demo, small-touch
 
-![demo, small-touch: refreshed pizza recipe](after-demo-small-touch-pizza-recipe.jpg)
+[demo, small-touch: refreshed pizza recipe](/docs/review/ARCHIVE.md)
 
 ## soup: demo, small-touch
 
-![demo, small-touch: refreshed soup recipe](after-demo-small-touch-soup-recipe.jpg)
+[demo, small-touch: refreshed soup recipe](/docs/review/ARCHIVE.md)
 
 ## pancakes: demo, small-touch
 
-![demo, small-touch: refreshed pancakes recipe](after-demo-small-touch-pancakes-recipe.jpg)
+[demo, small-touch: refreshed pancakes recipe](/docs/review/ARCHIVE.md)

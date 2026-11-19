@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -29,7 +31,7 @@ jobs:
   save-and-recovery:
     name: ${{ github.event_name == 'pull_request' && 'save-and-recovery' || 'save-and-recovery-development' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
@@ -40,6 +42,11 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Lint, formatting and current registry status
+        run: |
+          npm run lint
+          npm run format:check
+          npm run status:check
       - run: npx playwright install --with-deps chromium
       - run: docker pull postgres:17-alpine
       - name: Migration, requests, offline recovery, purchases, roles and gameplay

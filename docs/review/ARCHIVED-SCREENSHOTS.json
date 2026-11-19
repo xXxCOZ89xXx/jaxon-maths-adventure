@@ -1,0 +1,4417 @@
+{
+  "sourceRelease": "e462b1a7f38c54565b869a56b04e23b9cd02eeec",
+  "archive": "phase3-review-archive.zip",
+  "archiveSha256": "fcd792e23b7c477fbf46969d784d4d8f895f766bfa036effe8186cbda8625ed6",
+  "files": [
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/demo-ipad-portrait-chromium-adapted-question.jpg",
+      "bytes": 67538,
+      "sha256": "edca2a4afbfb78fb49bc0283d0f1b557316278c5bfc84b32bc8837a1028fd935"
+    },
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/demo-ipad-portrait-chromium-estimate.jpg",
+      "bytes": 110866,
+      "sha256": "6bddb7f557be6dcb5967ff4f8e91721b483cbe04247396c733b1a39554ea6d08"
+    },
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/demo-ipad-portrait-chromium-year-choice.jpg",
+      "bytes": 104146,
+      "sha256": "c24b78adf5383af718c7d1a6893040f53f0eb5702cd39e8bcd43169896b58c3b"
+    },
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/demo-small-touch-adapted-question.jpg",
+      "bytes": 31258,
+      "sha256": "7232d185f2ca30d995f6a1287b8d7b6ba3fdeafa2dee7d12a172038221a415dc"
+    },
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/demo-small-touch-estimate.jpg",
+      "bytes": 41638,
+      "sha256": "381cc6da2e0a7514b018f40519dee0aff0f586672e7e3f1ca8519caca6afd1c9"
+    },
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/demo-small-touch-year-choice.jpg",
+      "bytes": 36737,
+      "sha256": "67210c21b67a439f0318951c71e09f04cc359e3e632517eb4affee1e81dda7fc"
+    },
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/production-desktop-chromium-adapted-question.jpg",
+      "bytes": 80180,
+      "sha256": "b113a5374f814a7db9467db57815c4d3bcf46e9cf872cdfd35ce8e7ff4a2db04"
+    },
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/production-desktop-chromium-estimate.jpg",
+      "bytes": 138025,
+      "sha256": "6646e3529c305b4207516dee8f2704e4ca3a773b9b3a0cd5f1777c151c132836"
+    },
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/production-desktop-chromium-year-choice.jpg",
+      "bytes": 138899,
+      "sha256": "af98769f2ace8c7ca49d1dea9b14facb0a0ee4d3a070cf47d105a42be2720571"
+    },
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/production-ipad-landscape-chromium-adapted-question.jpg",
+      "bytes": 61553,
+      "sha256": "6bbece1e05b12e67ed3e32dfe4980d66f319203243e6a42662bfb1e0b115fa1b"
+    },
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/production-ipad-landscape-chromium-estimate.jpg",
+      "bytes": 109767,
+      "sha256": "4fe82f0b80a68c1809de48f21fcfee70532c6e6fede1ba8518422fe8ebea1ab5"
+    },
+    {
+      "path": "docs/review/adaptive-starting-points/gallery/production-ipad-landscape-chromium-year-choice.jpg",
+      "bytes": 98512,
+      "sha256": "68512c1a333262be3107ee752b97947e781504a5933ae53b3ce3f4714d953ef7"
+    },
+    {
+      "path": "docs/review/area-maps/algebra-after.jpg",
+      "bytes": 197491,
+      "sha256": "86a591c1fca22c89ee413abcd6483ac5eb462a3b9862155eef03f2d2b7e53776"
+    },
+    {
+      "path": "docs/review/area-maps/algebra-before.jpg",
+      "bytes": 181978,
+      "sha256": "baae47ee3d1cb01482b7cc60dc044fc2b0dc71104cee4263d6a31ee69e46f520"
+    },
+    {
+      "path": "docs/review/area-maps/fractions-after.jpg",
+      "bytes": 168894,
+      "sha256": "4151a7419da1da70e2312449f7de51245b6b0e1441f20f4d7ebd561345980096"
+    },
+    {
+      "path": "docs/review/area-maps/fractions-before.jpg",
+      "bytes": 159736,
+      "sha256": "0f781e38b2ef3b85aa69229e5c9de636b7058d41db7f72210e9175fa3f708ddb"
+    },
+    {
+      "path": "docs/review/area-maps/geometry-after.jpg",
+      "bytes": 170927,
+      "sha256": "e04ebc54732667399f096e3ed4c384447625c573ddd338a40882c17f87ecb449"
+    },
+    {
+      "path": "docs/review/area-maps/geometry-before.jpg",
+      "bytes": 162390,
+      "sha256": "4acb354037392645e65801ac039d39da1ab2f99ba2ae1462067e5cc8e091692c"
+    },
+    {
+      "path": "docs/review/area-maps/measure-after.jpg",
+      "bytes": 158650,
+      "sha256": "07ef297150935b005585f128bbb17424b2ecc15699c73d5d168e015b164ee31e"
+    },
+    {
+      "path": "docs/review/area-maps/measure-before.jpg",
+      "bytes": 150318,
+      "sha256": "db531464e63b1f582166a243884769bd08633a330b192aeccc31ad92de89db02"
+    },
+    {
+      "path": "docs/review/area-maps/number-after.jpg",
+      "bytes": 181517,
+      "sha256": "dffdb748cf1b8abf206030725bdb95bfbe08ef06fddef1064b7c930304b84e12"
+    },
+    {
+      "path": "docs/review/area-maps/number-before.jpg",
+      "bytes": 169200,
+      "sha256": "6f2d087486df6eb8ba31bb89495b385599cd9a3033127a802d923fdbcd9dddc2"
+    },
+    {
+      "path": "docs/review/area-maps/probability-after.jpg",
+      "bytes": 163588,
+      "sha256": "346e1158e7e35504149e8c55a0f86f31c5f9f2b46b503211e37ec99867fbb827"
+    },
+    {
+      "path": "docs/review/area-maps/probability-before.jpg",
+      "bytes": 155273,
+      "sha256": "07b2d09b8aea4d826d8770116b9d5be37bf6678e76eeb8ba0c08cc6e43392d00"
+    },
+    {
+      "path": "docs/review/area-maps/ratio-after.jpg",
+      "bytes": 165153,
+      "sha256": "3e41a7532f19e161e9a933523405724c59a43df04e32c6b2b25928787f276c56"
+    },
+    {
+      "path": "docs/review/area-maps/ratio-before.jpg",
+      "bytes": 157983,
+      "sha256": "be1c49befa442b92177f8ddda28443c231306f5e02b3d355f120adaaa79c0e36"
+    },
+    {
+      "path": "docs/review/area-maps/statistics-after.jpg",
+      "bytes": 169612,
+      "sha256": "5d7bb4e6109217edc4d7d18b7b04769d6afad6614eea50d7f02bc1e91302f50f"
+    },
+    {
+      "path": "docs/review/area-maps/statistics-before.jpg",
+      "bytes": 160533,
+      "sha256": "6c9340b7a0aaf6c5e7dd8f1db5c2b8f2744fc658aad262db000d9b01d20cdfb4"
+    },
+    {
+      "path": "docs/review/area-maps/town-after.jpg",
+      "bytes": 195349,
+      "sha256": "23bb1f6605559954f865f5742238f40de870cd14a4155120846b4f979463838d"
+    },
+    {
+      "path": "docs/review/area-maps/town-before.jpg",
+      "bytes": 200280,
+      "sha256": "c93751ed30e401354087bbbc494ee227e4bd0d42d0eb6f8cd70f2f0d05791455"
+    },
+    {
+      "path": "docs/review/avatar-equipment/after/desktop-chromium.png",
+      "bytes": 1139792,
+      "sha256": "79bcd2a8cfe7111391271b606df2939ce130155237fc4f04a47da373e6e8d608"
+    },
+    {
+      "path": "docs/review/avatar-equipment/after/ipad-landscape-chromium.png",
+      "bytes": 1088045,
+      "sha256": "cea4ab2625c47e9ea9bd0ffbe5987fcd91345b21dc91fb08f12318bfb81e3d7b"
+    },
+    {
+      "path": "docs/review/avatar-equipment/after/ipad-portrait-chromium.png",
+      "bytes": 1056525,
+      "sha256": "e6021d29b75336c7f95beb42649e0ecb088d68768ec83b04f966530aa8a68357"
+    },
+    {
+      "path": "docs/review/avatar-equipment/after/small-touch.png",
+      "bytes": 1053445,
+      "sha256": "b093d36cbbac26c068b7b0fa73c6bac09cd1928b0dfc02564a9f5f920f27c28d"
+    },
+    {
+      "path": "docs/review/avatar-equipment/before/desktop-chromium.png",
+      "bytes": 1074244,
+      "sha256": "3e92b5c687b7179bf8011731d4425bb320f298f29eaa7b644cc65b4898a2bc09"
+    },
+    {
+      "path": "docs/review/avatar-equipment/before/ipad-landscape-chromium.png",
+      "bytes": 1027466,
+      "sha256": "e5ad2938f92d350f9c4c0ba5311db9d9af3c5257a5f26b44e9bbd05b10783d0a"
+    },
+    {
+      "path": "docs/review/avatar-equipment/before/ipad-portrait-chromium.png",
+      "bytes": 994894,
+      "sha256": "64721ca0ce984d7c42ad2c53a3ddf345a9a299e52bdb60d8c8376982a061fbc1"
+    },
+    {
+      "path": "docs/review/avatar-equipment/before/small-touch.png",
+      "bytes": 996181,
+      "sha256": "821936a48381e963e5b1cb8b597b181790d4e2288d0b476a3be4d9cf67653128"
+    },
+    {
+      "path": "docs/review/base-camp/after/desktop-chromium/adventure-display.jpg",
+      "bytes": 48396,
+      "sha256": "3597c10f8215d4e8611be135853b885b66f6ccc103b9da86198498b5f217003b"
+    },
+    {
+      "path": "docs/review/base-camp/after/desktop-chromium/build-projects.jpg",
+      "bytes": 75772,
+      "sha256": "b6961b0295ed63a7af0bddee96507eb0dc3e80d66599d5a4d9fea58af810b693"
+    },
+    {
+      "path": "docs/review/base-camp/after/desktop-chromium/completed-builds.jpg",
+      "bytes": 77391,
+      "sha256": "b8fd8fa951715a7fcc44a5bc0e23678b13b7dcbd084396917589b1a8c9892564"
+    },
+    {
+      "path": "docs/review/base-camp/after/desktop-chromium/earned-before-claim.jpg",
+      "bytes": 189711,
+      "sha256": "27a645f0f2e77ed26ad67a221417fb8e7827d6a1f14e5a3cf6ea723d7b1ff010"
+    },
+    {
+      "path": "docs/review/base-camp/after/desktop-chromium/earned-level-5.jpg",
+      "bytes": 197755,
+      "sha256": "ed14e97a83e8bcfdc48ab251b1e6578643af1cb20b867fab9bf85833136f7700"
+    },
+    {
+      "path": "docs/review/base-camp/after/desktop-chromium/empty-builds.jpg",
+      "bytes": 75480,
+      "sha256": "26d1509032a66d6f85b47038812ecf2ba2410a92f323f34c432f4784640bd78c"
+    },
+    {
+      "path": "docs/review/base-camp/after/desktop-chromium/keepsake-collection.jpg",
+      "bytes": 27590,
+      "sha256": "7f860f0e662345a15056a95462ecef60990afa19766504f370ea9b7bfb9441b2"
+    },
+    {
+      "path": "docs/review/base-camp/after/desktop-chromium/milestone-ready-builds.jpg",
+      "bytes": 79798,
+      "sha256": "821c49a8941ad5aa30d5f5382dfaf76cc36120b1b9ca0e643116fa65481ea471"
+    },
+    {
+      "path": "docs/review/base-camp/after/desktop-chromium/milestone-ready-planner.jpg",
+      "bytes": 189711,
+      "sha256": "27a645f0f2e77ed26ad67a221417fb8e7827d6a1f14e5a3cf6ea723d7b1ff010"
+    },
+    {
+      "path": "docs/review/base-camp/after/desktop-chromium/new-camp.jpg",
+      "bytes": 1038127,
+      "sha256": "fd196fdc16f62439a833b264fbffe06aae0c5e91f552e8deb37e952f4aacac9e"
+    },
+    {
+      "path": "docs/review/base-camp/after/desktop-chromium/upgrade-planner.jpg",
+      "bytes": 188954,
+      "sha256": "f5d4c00c596e37f9d34efa21431a947be65051a05591761f004d0f06b7609c30"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-landscape-chromium/adventure-display.jpg",
+      "bytes": 47762,
+      "sha256": "ce8ee0884e68e2633499c6c07426e7388de578c6f83620087d1f33d6bd5af6c4"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-landscape-chromium/build-projects.jpg",
+      "bytes": 75205,
+      "sha256": "7a4149f2ed9a6fcd88dc36d8a6ff38d96ff543baa11d664ad011774aa7dcd952"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-landscape-chromium/completed-builds.jpg",
+      "bytes": 75211,
+      "sha256": "20eeed2d4b4cca29133724d5964ddad03f0f85ea9f0cf2f63ecca994973d75e8"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-landscape-chromium/earned-before-claim.jpg",
+      "bytes": 179662,
+      "sha256": "8366b3f9315ceeed5fe6e57a177acfeffcd6d9b16945e173f19b4ad998006523"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-landscape-chromium/earned-level-5.jpg",
+      "bytes": 186577,
+      "sha256": "e6b324cc2c08bede31851005f1002ebc75dfdc3c181f99f1094eb2917cb15ff8"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-landscape-chromium/empty-builds.jpg",
+      "bytes": 74848,
+      "sha256": "123a966256ec106c20cbf81a114af280342293b99e283d7878b883a460dc2e3e"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-landscape-chromium/keepsake-collection.jpg",
+      "bytes": 27370,
+      "sha256": "bd4cac569486a17157999efa153cf3c0f8488061c2499b8e101b03586d4a0dff"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-landscape-chromium/milestone-ready-builds.jpg",
+      "bytes": 79278,
+      "sha256": "61bc2bdcdd93906d5353258c96d398755775e9f6c5ab09f2e58367f0c3c42cad"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-landscape-chromium/milestone-ready-planner.jpg",
+      "bytes": 179662,
+      "sha256": "8366b3f9315ceeed5fe6e57a177acfeffcd6d9b16945e173f19b4ad998006523"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-landscape-chromium/new-camp.jpg",
+      "bytes": 947828,
+      "sha256": "3e0fde6279619385b34e625029de271fbf07bb29d3c52da13b6f39e6c466b8c6"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-landscape-chromium/upgrade-planner.jpg",
+      "bytes": 178874,
+      "sha256": "223a58e81d1059b01254acdf732c11be81a252f70f4630299d5f4cc63fbc30eb"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-portrait-chromium/adventure-display.jpg",
+      "bytes": 43388,
+      "sha256": "9917a8bf008de3e6fc0d59682803b39610b9ebdbf485678f4886b3763e3ae4cf"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-portrait-chromium/build-projects.jpg",
+      "bytes": 76632,
+      "sha256": "eb23f71699f9756309e8369b6de476d5ec5caf1a7a51f6bb8eb074753e021c78"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-portrait-chromium/completed-builds.jpg",
+      "bytes": 78897,
+      "sha256": "532a26e0589d2657b832542eada2396bde1fd63306429a765c35a0d26539a20b"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-portrait-chromium/earned-before-claim.jpg",
+      "bytes": 197954,
+      "sha256": "2da7970c79fc1fd7bdde508a1456032dec42687d0d2203d45fa4e0618dfb32c5"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-portrait-chromium/earned-level-5.jpg",
+      "bytes": 204739,
+      "sha256": "3e888315cbcb8180a21204b67d878eab49b8b77431dddbfbf43afd7f2c0c4eec"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-portrait-chromium/empty-builds.jpg",
+      "bytes": 76930,
+      "sha256": "943a205b62b5aebbb82045e05b415340a4184eb0c95ab71d51869c582e725fd8"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-portrait-chromium/keepsake-collection.jpg",
+      "bytes": 25302,
+      "sha256": "fadfe9beefceb6f01165a02702ee00ae2ad33fe549849b765563c1e22c61df9f"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-portrait-chromium/milestone-ready-builds.jpg",
+      "bytes": 81017,
+      "sha256": "d076f9d13c0e3764e33f439c3459da2c1e0df4a60e25cc78a1ff9512278bfa89"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-portrait-chromium/milestone-ready-planner.jpg",
+      "bytes": 197954,
+      "sha256": "2da7970c79fc1fd7bdde508a1456032dec42687d0d2203d45fa4e0618dfb32c5"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-portrait-chromium/new-camp.jpg",
+      "bytes": 685494,
+      "sha256": "e07bcbe86c3c2c0b0b07c5952526f6c816868f8e055de56530ac5b17b4e0f5b9"
+    },
+    {
+      "path": "docs/review/base-camp/after/ipad-portrait-chromium/upgrade-planner.jpg",
+      "bytes": 197427,
+      "sha256": "f0678f80af90b877f6de5706bf1c2f2675e677b0a08f60acf789995d72a0efd2"
+    },
+    {
+      "path": "docs/review/base-camp/after/small-touch/adventure-display.jpg",
+      "bytes": 39386,
+      "sha256": "31fecf9779c4543b52409be7479a5ee789ecd78f616bd06d262555ad3268c974"
+    },
+    {
+      "path": "docs/review/base-camp/after/small-touch/build-projects.jpg",
+      "bytes": 69297,
+      "sha256": "1d0384a06efd7856363e65ab964325eb4a1420a13270189b260ed033c49fcfe1"
+    },
+    {
+      "path": "docs/review/base-camp/after/small-touch/completed-builds.jpg",
+      "bytes": 73416,
+      "sha256": "878f353e759175248bd231a4314de54a30ca1fa3cf0e0848163824cffc52c912"
+    },
+    {
+      "path": "docs/review/base-camp/after/small-touch/earned-before-claim.jpg",
+      "bytes": 109422,
+      "sha256": "4ccca4d5b5077e6c7fc345b8d09050444e792fb6a00378e98fc8277bb52a9c38"
+    },
+    {
+      "path": "docs/review/base-camp/after/small-touch/earned-level-5.jpg",
+      "bytes": 116750,
+      "sha256": "a77d16258bfe8f29b134473ba9f656d16a641dd98d84ea9d23634d6b619c1cdc"
+    },
+    {
+      "path": "docs/review/base-camp/after/small-touch/empty-builds.jpg",
+      "bytes": 70317,
+      "sha256": "1b5dc1235b1c0b12fcd4060128c1e5cebabaf63afed280b6176d0f61fa550abd"
+    },
+    {
+      "path": "docs/review/base-camp/after/small-touch/keepsake-collection.jpg",
+      "bytes": 23754,
+      "sha256": "45ff86d74c979352e400e68f46162cf5f201c62c80c8b57dde23c3a972acf55d"
+    },
+    {
+      "path": "docs/review/base-camp/after/small-touch/milestone-ready-builds.jpg",
+      "bytes": 72378,
+      "sha256": "e51c51eebffdb1b5acffd7640962509a41ba7d298cf9bafdd047dc9a41d57318"
+    },
+    {
+      "path": "docs/review/base-camp/after/small-touch/milestone-ready-planner.jpg",
+      "bytes": 109422,
+      "sha256": "4ccca4d5b5077e6c7fc345b8d09050444e792fb6a00378e98fc8277bb52a9c38"
+    },
+    {
+      "path": "docs/review/base-camp/after/small-touch/new-camp.jpg",
+      "bytes": 377823,
+      "sha256": "ef9f9aa786662b3d0e9e6e500c7694c9ef9319f80629d22b084d8b11112e2739"
+    },
+    {
+      "path": "docs/review/base-camp/after/small-touch/upgrade-planner.jpg",
+      "bytes": 108616,
+      "sha256": "f0c2627b35112c77da1f8e3d2ea5229c2b2c59656cd1ca8e175acbc8c52de3c8"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/desktop-chromium/adventure-display.jpg",
+      "bytes": 204072,
+      "sha256": "632eec8021aced2dbbc043f9b8239693619b3ddb567caa1c9e6b5800bac82b04"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/desktop-chromium/build-projects.jpg",
+      "bytes": 99408,
+      "sha256": "2bca645ba0263867d4da4d9714329afaa2d716677f782823ae9ddd5161ae2df1"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/desktop-chromium/empty-builds.jpg",
+      "bytes": 97361,
+      "sha256": "ae620d2da975b86a6ed0c8c1401129fb2325d369288b6e98ce1d5722ad3ce85f"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/desktop-chromium/keepsake-collection.jpg",
+      "bytes": 50459,
+      "sha256": "1ba9db038dd5c3d35eb276edcd37c2cc1f55e7005a0c3275ed4a435a8047b1aa"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/desktop-chromium/new-camp.jpg",
+      "bytes": 1214015,
+      "sha256": "cef20469b166c62a71e487e5ca9f9e30ed820cf891aaf7d47b68481b415a7e90"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/desktop-chromium/unbuilt-scene.jpg",
+      "bytes": 538812,
+      "sha256": "edddddc90a8c2bd605769dfeeb479dc394f9d6b1d4c88bf3f2534fa5b24f6501"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/desktop-chromium/upgrade-planner.jpg",
+      "bytes": 188954,
+      "sha256": "f5d4c00c596e37f9d34efa21431a947be65051a05591761f004d0f06b7609c30"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-landscape-chromium/adventure-display.jpg",
+      "bytes": 188900,
+      "sha256": "8eef1865847adb04bc32a18c45b4b1a881ad73f1488f6a5cb61423e7c8f85f93"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-landscape-chromium/build-projects.jpg",
+      "bytes": 96368,
+      "sha256": "2a8f54407e85ed8ca90f10ce344fb55d630e6ba50779606449a5c3b546f1b426"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-landscape-chromium/empty-builds.jpg",
+      "bytes": 94913,
+      "sha256": "8dc149e9cc5d11c8a904c00aa5785324a6aa2a2feb6e7da1543216f00626a5eb"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-landscape-chromium/keepsake-collection.jpg",
+      "bytes": 49476,
+      "sha256": "95a5f163d23d60085507cddf40c2456e83e0310716b30f9c12887993b14325ea"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-landscape-chromium/new-camp.jpg",
+      "bytes": 1097411,
+      "sha256": "d28376d4a91081b38329919b28ed83cec88c62bc43e1fde4498c22146580de11"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-landscape-chromium/unbuilt-scene.jpg",
+      "bytes": 494815,
+      "sha256": "cb061eab9a2755e2acf613ccfab9908d9ac20181c839670e9a01809689dc9601"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-landscape-chromium/upgrade-planner.jpg",
+      "bytes": 178874,
+      "sha256": "223a58e81d1059b01254acdf732c11be81a252f70f4630299d5f4cc63fbc30eb"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-portrait-chromium/adventure-display.jpg",
+      "bytes": 98896,
+      "sha256": "b3fccee4f85df5b5a1d8633a50c1de1a6773ef81d57f773f4e18bad8411129e6"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-portrait-chromium/build-projects.jpg",
+      "bytes": 98560,
+      "sha256": "04dcc844c4e2fd1c5fecd1d6a7c4ac705cb60045ded59c613ee67c1c897994dd"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-portrait-chromium/empty-builds.jpg",
+      "bytes": 98140,
+      "sha256": "f691083b05c82f69c3582f86b5d3b0cbe64f6f0f68009b02847275fd2c076ac5"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-portrait-chromium/keepsake-collection.jpg",
+      "bytes": 46395,
+      "sha256": "3a4c0261ca2257210e8e573314f6011a19b11c5897a51b728db819849738a371"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-portrait-chromium/new-camp.jpg",
+      "bytes": 762061,
+      "sha256": "3132cc4df199d191cb5b88c08be3cd0b42bdf286d2f3570b0a8e771d38fe673d"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-portrait-chromium/unbuilt-scene.jpg",
+      "bytes": 233792,
+      "sha256": "e518997e74eabfb5e56994d442e204f0bf908fa6b50a439610be1e67d49d72f7"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/ipad-portrait-chromium/upgrade-planner.jpg",
+      "bytes": 197427,
+      "sha256": "f0678f80af90b877f6de5706bf1c2f2675e677b0a08f60acf789995d72a0efd2"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/small-touch/adventure-display.jpg",
+      "bytes": 129943,
+      "sha256": "f4108c3fdf46ac426027618143a6e8d657a92a7d0c7ca937d41a79e833f039bc"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/small-touch/build-projects.jpg",
+      "bytes": 88479,
+      "sha256": "894412a3d1e4fa052d1cb794000f54be2812c25c7be7a0be8754f2909f051568"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/small-touch/empty-builds.jpg",
+      "bytes": 88614,
+      "sha256": "8a2fbe3ed368aa7e5660f89a7890af5c355c878177254d14217981662a8aeddc"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/small-touch/keepsake-collection.jpg",
+      "bytes": 41788,
+      "sha256": "516a831490ddee6da84b2cd17d180b59d1209417a6999dbb1fa42a59156e03d1"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/small-touch/new-camp.jpg",
+      "bytes": 485652,
+      "sha256": "08ac421070fac9cb5e620c7fb1e2c5708e73ebc1099565e3ced1dc6268a06ab0"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/small-touch/unbuilt-scene.jpg",
+      "bytes": 53928,
+      "sha256": "b1b37ebbfa12d01e08b376ddbeac357785762791f0a4016a2ca1849670f99049"
+    },
+    {
+      "path": "docs/review/base-camp/before-supplements/small-touch/upgrade-planner.jpg",
+      "bytes": 108616,
+      "sha256": "f0c2627b35112c77da1f8e3d2ea5229c2b2c59656cd1ca8e175acbc8c52de3c8"
+    },
+    {
+      "path": "docs/review/base-camp/before/desktop-chromium/adventure-display.jpg",
+      "bytes": 48398,
+      "sha256": "50ef54731c931977a7c90351c77bb1d8e9919cdc2190cc64b755a7bdc42ddeda"
+    },
+    {
+      "path": "docs/review/base-camp/before/desktop-chromium/build-projects.jpg",
+      "bytes": 55424,
+      "sha256": "4a16a7717e8a2bc9c0d0a21f4efc89dfe328737eeec5d8be954306bd0dc9f5f0"
+    },
+    {
+      "path": "docs/review/base-camp/before/desktop-chromium/empty-builds.jpg",
+      "bytes": 54737,
+      "sha256": "1236daa602499d00e464fa7c2e9bc7a310dafa38c8b933674ab8037d55cb0f8d"
+    },
+    {
+      "path": "docs/review/base-camp/before/desktop-chromium/keepsake-collection.jpg",
+      "bytes": 27888,
+      "sha256": "71d3439129ca272ba9c456aa23be93305fe05e88ab8427aa1f2fea04cd5f640c"
+    },
+    {
+      "path": "docs/review/base-camp/before/desktop-chromium/milestone-ready-builds.jpg",
+      "bytes": 57091,
+      "sha256": "10a93df70d808dfa8fa6522d86d2739bbf627208ea93243cb1b24f3e9f227b39"
+    },
+    {
+      "path": "docs/review/base-camp/before/desktop-chromium/milestone-ready-planner.jpg",
+      "bytes": 167162,
+      "sha256": "f98585e348c72d20f724d53178862c4edd1476b029977727a3f7f1a128763808"
+    },
+    {
+      "path": "docs/review/base-camp/before/desktop-chromium/new-camp.jpg",
+      "bytes": 990755,
+      "sha256": "27d3bb228ac19dee5fcc3a6ba6d610116ddc6db834501076dbb9b19395debe22"
+    },
+    {
+      "path": "docs/review/base-camp/before/desktop-chromium/upgrade-planner.jpg",
+      "bytes": 169222,
+      "sha256": "47e6736e5e8b8ba0693bcc9b098b973a047a2725572c06ed740f4e8ec5ca01e8"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-landscape-chromium/adventure-display.jpg",
+      "bytes": 47777,
+      "sha256": "fcb964a01f3c5135f46f867c516814d80b438f0e141a3034f66b9d7cdde4259c"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-landscape-chromium/build-projects.jpg",
+      "bytes": 54978,
+      "sha256": "3a0313e50f7bef6425cec89d328050ae4fe7889900803e8192ef9d572b9f4334"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-landscape-chromium/empty-builds.jpg",
+      "bytes": 54183,
+      "sha256": "3e0e1579a2b29d2e7fa70e69213d507602d9027a6971ae97cf50348a8bbb7e7f"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-landscape-chromium/keepsake-collection.jpg",
+      "bytes": 27361,
+      "sha256": "bbc4f34663db59870de76ec8e8127abae0f516997d90433175b57f5b57493214"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-landscape-chromium/milestone-ready-builds.jpg",
+      "bytes": 56319,
+      "sha256": "8bac7dba664b2b643d1432db4c2e9d74cc8c4f0525ffde8a39d35cb59c6e9872"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-landscape-chromium/milestone-ready-planner.jpg",
+      "bytes": 157418,
+      "sha256": "ba34b6889cc369fcfc1b8dffadaba5349eaae47875de98196f44d52e0d85c559"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-landscape-chromium/new-camp.jpg",
+      "bytes": 901057,
+      "sha256": "1744b6f5615be9f631e92b220a624492bc196b7eb03479e1be739e0854896625"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-landscape-chromium/upgrade-planner.jpg",
+      "bytes": 155833,
+      "sha256": "8870bc3f46e470713b6bad71a299fffd4c90954a59289d92526b9d9aa4c39ba9"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-portrait-chromium/adventure-display.jpg",
+      "bytes": 44292,
+      "sha256": "e6dc32fc741107d2502b161d23e5327abdb722994b25feb9c278a4ba082a4f43"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-portrait-chromium/build-projects.jpg",
+      "bytes": 58621,
+      "sha256": "d129ee7b36489d1324d0f985181cff3802a4bfdd8c887457711bbb1230324b7c"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-portrait-chromium/empty-builds.jpg",
+      "bytes": 58299,
+      "sha256": "eac8c5c9f21df7513e07a5653c6619fc7d30cb109c0582bfceaee00511a94af6"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-portrait-chromium/keepsake-collection.jpg",
+      "bytes": 25298,
+      "sha256": "0b4beb39d49c608d4691fb0b74e3e6cafa2e2b486c7e62fe1de951f0441a9199"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-portrait-chromium/milestone-ready-builds.jpg",
+      "bytes": 60301,
+      "sha256": "66b0bf95e8cb033a26c955a58870da8f604d6fbc73cd8e685cc73d7d316548a2"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-portrait-chromium/milestone-ready-planner.jpg",
+      "bytes": 173127,
+      "sha256": "5cc04fa03d553f48ac370ebb5805d6455bbd512a19985da73609b5b2fe249acf"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-portrait-chromium/new-camp.jpg",
+      "bytes": 638740,
+      "sha256": "8157e700284aab9510d5eca4cd3177118bdc4af76303aedbec8296e67f407b6b"
+    },
+    {
+      "path": "docs/review/base-camp/before/ipad-portrait-chromium/upgrade-planner.jpg",
+      "bytes": 175836,
+      "sha256": "75b7c9d6e59367fc41bc40a2877638f8afbda9615eba7cb4861071dbc773f210"
+    },
+    {
+      "path": "docs/review/base-camp/before/small-touch/adventure-display.jpg",
+      "bytes": 39278,
+      "sha256": "c935e579dadd8deda835c3492bf6dcdf0bda8b24ffd607b92f318c291b3255e3"
+    },
+    {
+      "path": "docs/review/base-camp/before/small-touch/build-projects.jpg",
+      "bytes": 52419,
+      "sha256": "ccba74eb5524b9d67ba13e9628de1a29d9d318942947bdb8bd7940e10d4efc53"
+    },
+    {
+      "path": "docs/review/base-camp/before/small-touch/empty-builds.jpg",
+      "bytes": 51516,
+      "sha256": "1afdc10682d3559a00a2b5243904a05841a0d3a15a9592e371c7123da322b23e"
+    },
+    {
+      "path": "docs/review/base-camp/before/small-touch/keepsake-collection.jpg",
+      "bytes": 23743,
+      "sha256": "6fac3bda70a1e5d12b26372cb94c4222461aa868a9b8a67699653f05b8964c4c"
+    },
+    {
+      "path": "docs/review/base-camp/before/small-touch/milestone-ready-builds.jpg",
+      "bytes": 55720,
+      "sha256": "6fc668d384f52080924a0ca416edad24c1b50cfeee43a2062a115fa4bd1c5fd6"
+    },
+    {
+      "path": "docs/review/base-camp/before/small-touch/milestone-ready-planner.jpg",
+      "bytes": 85889,
+      "sha256": "dee0a8719a0b8ef65d17e55ad9f56768653314d58427c64f0e2c333f221a81b8"
+    },
+    {
+      "path": "docs/review/base-camp/before/small-touch/new-camp.jpg",
+      "bytes": 333826,
+      "sha256": "343f53d19465b1a2bc998f97c098d9713d1e7e2f1b81a9d094e7d918c3895a22"
+    },
+    {
+      "path": "docs/review/base-camp/before/small-touch/upgrade-planner.jpg",
+      "bytes": 84749,
+      "sha256": "ab7ad65fadf4af241472c85ec9b5ca8d639d53d7b12dc8b0ef8f264b9f0a5b4b"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/adventure-display.jpg",
+      "bytes": 204072,
+      "sha256": "632eec8021aced2dbbc043f9b8239693619b3ddb567caa1c9e6b5800bac82b04"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/build-projects.jpg",
+      "bytes": 99408,
+      "sha256": "2bca645ba0263867d4da4d9714329afaa2d716677f782823ae9ddd5161ae2df1"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/built-scene.jpg",
+      "bytes": 533262,
+      "sha256": "953665b5f28c10306fd8757d8042a7df45e0f6a8a721fec2c1385caf72c8f502"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/completed-builds.jpg",
+      "bytes": 102229,
+      "sha256": "ca2f6a18bfad94e9323ac03ce41ca81a6918f31e5b82ca98294f61d651171c9d"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/earned-before-claim.jpg",
+      "bytes": 189711,
+      "sha256": "27a645f0f2e77ed26ad67a221417fb8e7827d6a1f14e5a3cf6ea723d7b1ff010"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/earned-level-5.jpg",
+      "bytes": 197755,
+      "sha256": "ed14e97a83e8bcfdc48ab251b1e6578643af1cb20b867fab9bf85833136f7700"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/earned-unbuilt-scene.jpg",
+      "bytes": 538978,
+      "sha256": "a3354b914b695f1b57eb8a5588926a3032626cb9d49e0957f3551cb14dab548e"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/empty-builds.jpg",
+      "bytes": 97361,
+      "sha256": "ae620d2da975b86a6ed0c8c1401129fb2325d369288b6e98ce1d5722ad3ce85f"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/keepsake-collection.jpg",
+      "bytes": 50459,
+      "sha256": "1ba9db038dd5c3d35eb276edcd37c2cc1f55e7005a0c3275ed4a435a8047b1aa"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/milestone-ready-builds.jpg",
+      "bytes": 103489,
+      "sha256": "2d025512b2e303b66abac0107a1c84d12330ba81bf7df8cb575f3d08650110bf"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/milestone-ready-planner.jpg",
+      "bytes": 189711,
+      "sha256": "27a645f0f2e77ed26ad67a221417fb8e7827d6a1f14e5a3cf6ea723d7b1ff010"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/new-camp.jpg",
+      "bytes": 1214015,
+      "sha256": "cef20469b166c62a71e487e5ca9f9e30ed820cf891aaf7d47b68481b415a7e90"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/unbuilt-scene.jpg",
+      "bytes": 538812,
+      "sha256": "edddddc90a8c2bd605769dfeeb479dc394f9d6b1d4c88bf3f2534fa5b24f6501"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/desktop-chromium/upgrade-planner.jpg",
+      "bytes": 188954,
+      "sha256": "f5d4c00c596e37f9d34efa21431a947be65051a05591761f004d0f06b7609c30"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/adventure-display.jpg",
+      "bytes": 188900,
+      "sha256": "8eef1865847adb04bc32a18c45b4b1a881ad73f1488f6a5cb61423e7c8f85f93"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/build-projects.jpg",
+      "bytes": 96368,
+      "sha256": "2a8f54407e85ed8ca90f10ce344fb55d630e6ba50779606449a5c3b546f1b426"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/built-scene.jpg",
+      "bytes": 489081,
+      "sha256": "ec37025e1769390f5b4aee978f4421d46733643ace6444140833090425d7459b"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/completed-builds.jpg",
+      "bytes": 100080,
+      "sha256": "53ee46ada9b4b71da5a5e25127bffc9e43f3619cfbf10348b9c6947181f21b67"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/earned-before-claim.jpg",
+      "bytes": 179662,
+      "sha256": "8366b3f9315ceeed5fe6e57a177acfeffcd6d9b16945e173f19b4ad998006523"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/earned-level-5.jpg",
+      "bytes": 186577,
+      "sha256": "e6b324cc2c08bede31851005f1002ebc75dfdc3c181f99f1094eb2917cb15ff8"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/earned-unbuilt-scene.jpg",
+      "bytes": 494645,
+      "sha256": "9353137ce8908f81c3ff121565d17623c538a9e461b5607875b9e9a9392ba80f"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/empty-builds.jpg",
+      "bytes": 94913,
+      "sha256": "8dc149e9cc5d11c8a904c00aa5785324a6aa2a2feb6e7da1543216f00626a5eb"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/keepsake-collection.jpg",
+      "bytes": 49476,
+      "sha256": "95a5f163d23d60085507cddf40c2456e83e0310716b30f9c12887993b14325ea"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/milestone-ready-builds.jpg",
+      "bytes": 100304,
+      "sha256": "a10b09f754274d93d06c2ba481710b7ba5e06fa0a3e07b8daa7c9926eb9a1712"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/milestone-ready-planner.jpg",
+      "bytes": 179662,
+      "sha256": "8366b3f9315ceeed5fe6e57a177acfeffcd6d9b16945e173f19b4ad998006523"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/new-camp.jpg",
+      "bytes": 1097411,
+      "sha256": "d28376d4a91081b38329919b28ed83cec88c62bc43e1fde4498c22146580de11"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/unbuilt-scene.jpg",
+      "bytes": 494815,
+      "sha256": "cb061eab9a2755e2acf613ccfab9908d9ac20181c839670e9a01809689dc9601"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-landscape-chromium/upgrade-planner.jpg",
+      "bytes": 178874,
+      "sha256": "223a58e81d1059b01254acdf732c11be81a252f70f4630299d5f4cc63fbc30eb"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/adventure-display.jpg",
+      "bytes": 98896,
+      "sha256": "b3fccee4f85df5b5a1d8633a50c1de1a6773ef81d57f773f4e18bad8411129e6"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/build-projects.jpg",
+      "bytes": 98560,
+      "sha256": "04dcc844c4e2fd1c5fecd1d6a7c4ac705cb60045ded59c613ee67c1c897994dd"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/built-scene.jpg",
+      "bytes": 231466,
+      "sha256": "8077bbb0c82cc433c984c5a6b4ce3371955043da7450a3680e3c8b8d2c9fe03a"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/completed-builds.jpg",
+      "bytes": 105374,
+      "sha256": "6d9bf2de27ff1f0b36896d30265069439d07c2fc8e0d90f04793cfd788f5d48e"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/earned-before-claim.jpg",
+      "bytes": 197954,
+      "sha256": "2da7970c79fc1fd7bdde508a1456032dec42687d0d2203d45fa4e0618dfb32c5"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/earned-level-5.jpg",
+      "bytes": 204739,
+      "sha256": "3e888315cbcb8180a21204b67d878eab49b8b77431dddbfbf43afd7f2c0c4eec"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/earned-unbuilt-scene.jpg",
+      "bytes": 230249,
+      "sha256": "c2d86e57110f90f2c08e838e35e254c3c1eea39b9d50b894e0e2ee8c7ee6b292"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/empty-builds.jpg",
+      "bytes": 98140,
+      "sha256": "f691083b05c82f69c3582f86b5d3b0cbe64f6f0f68009b02847275fd2c076ac5"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/keepsake-collection.jpg",
+      "bytes": 46395,
+      "sha256": "3a4c0261ca2257210e8e573314f6011a19b11c5897a51b728db819849738a371"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/milestone-ready-builds.jpg",
+      "bytes": 102009,
+      "sha256": "63932599672998279b557b0683d9152af5092e3d620a7864a0127a8ef31ab5ca"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/milestone-ready-planner.jpg",
+      "bytes": 197954,
+      "sha256": "2da7970c79fc1fd7bdde508a1456032dec42687d0d2203d45fa4e0618dfb32c5"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/new-camp.jpg",
+      "bytes": 762061,
+      "sha256": "3132cc4df199d191cb5b88c08be3cd0b42bdf286d2f3570b0a8e771d38fe673d"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/unbuilt-scene.jpg",
+      "bytes": 233792,
+      "sha256": "e518997e74eabfb5e56994d442e204f0bf908fa6b50a439610be1e67d49d72f7"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/ipad-portrait-chromium/upgrade-planner.jpg",
+      "bytes": 197427,
+      "sha256": "f0678f80af90b877f6de5706bf1c2f2675e677b0a08f60acf789995d72a0efd2"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/adventure-display.jpg",
+      "bytes": 129943,
+      "sha256": "f4108c3fdf46ac426027618143a6e8d657a92a7d0c7ca937d41a79e833f039bc"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/build-projects.jpg",
+      "bytes": 88479,
+      "sha256": "894412a3d1e4fa052d1cb794000f54be2812c25c7be7a0be8754f2909f051568"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/built-scene.jpg",
+      "bytes": 55578,
+      "sha256": "5863c46011b39a4132b430cae7a46fb1c5440dc3e68e96ca98720d149ed8e040"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/completed-builds.jpg",
+      "bytes": 94803,
+      "sha256": "b6568399bf6c80db2ae238e4049f00627bb5eab02d7fdb4e5273ca5be9d620ef"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/earned-before-claim.jpg",
+      "bytes": 109422,
+      "sha256": "4ccca4d5b5077e6c7fc345b8d09050444e792fb6a00378e98fc8277bb52a9c38"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/earned-level-5.jpg",
+      "bytes": 116691,
+      "sha256": "1819d2a76dfdc3f05d03e427059c35b47327144f83770ab318e640f887cf34fa"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/earned-unbuilt-scene.jpg",
+      "bytes": 54507,
+      "sha256": "6fe5fe8480e62635284e2668fa6a75875a67ca98e239793bc3e59d362259d286"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/empty-builds.jpg",
+      "bytes": 88614,
+      "sha256": "8a2fbe3ed368aa7e5660f89a7890af5c355c878177254d14217981662a8aeddc"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/keepsake-collection.jpg",
+      "bytes": 41788,
+      "sha256": "516a831490ddee6da84b2cd17d180b59d1209417a6999dbb1fa42a59156e03d1"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/milestone-ready-builds.jpg",
+      "bytes": 90577,
+      "sha256": "fe8d4af7b4fad7d74a4acc99c5a5599734f8337d7a549c4d91ca4af54f7fa458"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/milestone-ready-planner.jpg",
+      "bytes": 109422,
+      "sha256": "4ccca4d5b5077e6c7fc345b8d09050444e792fb6a00378e98fc8277bb52a9c38"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/new-camp.jpg",
+      "bytes": 485652,
+      "sha256": "08ac421070fac9cb5e620c7fb1e2c5708e73ebc1099565e3ced1dc6268a06ab0"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/unbuilt-scene.jpg",
+      "bytes": 53928,
+      "sha256": "b1b37ebbfa12d01e08b376ddbeac357785762791f0a4016a2ca1849670f99049"
+    },
+    {
+      "path": "docs/review/base-camp/integrated/small-touch/upgrade-planner.jpg",
+      "bytes": 108616,
+      "sha256": "f0c2627b35112c77da1f8e3d2ea5229c2b2c59656cd1ca8e175acbc8c52de3c8"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/adventure-display.jpg",
+      "bytes": 86893,
+      "sha256": "765cd6e5d39c2a19387946108ff32cfad622742b479efb0fd2211d4d36e7e77d"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/build-projects.jpg",
+      "bytes": 119973,
+      "sha256": "997eada3b92cde78c29a35640fa5c5e3111fa54568e1e0c8a2f7734192989480"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/built-scene.jpg",
+      "bytes": 533262,
+      "sha256": "953665b5f28c10306fd8757d8042a7df45e0f6a8a721fec2c1385caf72c8f502"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/completed-builds.jpg",
+      "bytes": 110410,
+      "sha256": "24b5ecb45031ea9054230611636623c6c86b9904de71895ad246f159574e821e"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/earned-before-claim.jpg",
+      "bytes": 189711,
+      "sha256": "27a645f0f2e77ed26ad67a221417fb8e7827d6a1f14e5a3cf6ea723d7b1ff010"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/earned-level-5.jpg",
+      "bytes": 197755,
+      "sha256": "ed14e97a83e8bcfdc48ab251b1e6578643af1cb20b867fab9bf85833136f7700"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/earned-unbuilt-scene.jpg",
+      "bytes": 538978,
+      "sha256": "a3354b914b695f1b57eb8a5588926a3032626cb9d49e0957f3551cb14dab548e"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/empty-builds.jpg",
+      "bytes": 119873,
+      "sha256": "cf7fa66f0dd09fc245d16e21ea5a010e6599191e74e80cd3f4edbebcdac30373"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/keepsake-collection.jpg",
+      "bytes": 49144,
+      "sha256": "1c8720b5e7f6fbcb6d66661a411bb2398f4688df608bfffcc0a14b561f2fd649"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/milestone-ready-builds.jpg",
+      "bytes": 125330,
+      "sha256": "e05fd8a6de041bb31e42b1d4b71839ed90cb819656d6803c53100d0fd67d4a81"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/milestone-ready-planner.jpg",
+      "bytes": 189711,
+      "sha256": "27a645f0f2e77ed26ad67a221417fb8e7827d6a1f14e5a3cf6ea723d7b1ff010"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/new-camp.jpg",
+      "bytes": 1120723,
+      "sha256": "5790a066dba20ba56978c87629377852de6e31d8e2a6451c3f91372aa27fb6f8"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/unbuilt-scene.jpg",
+      "bytes": 538812,
+      "sha256": "edddddc90a8c2bd605769dfeeb479dc394f9d6b1d4c88bf3f2534fa5b24f6501"
+    },
+    {
+      "path": "docs/review/base-camp/refined/desktop-chromium/upgrade-planner.jpg",
+      "bytes": 188954,
+      "sha256": "f5d4c00c596e37f9d34efa21431a947be65051a05591761f004d0f06b7609c30"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/adventure-display.jpg",
+      "bytes": 81122,
+      "sha256": "621ced18ce740cf5945dbaa4f256d44a9f3e32ed73cac087e2c7cd541fef6823"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/build-projects.jpg",
+      "bytes": 116922,
+      "sha256": "8a0672aedaf628d046910929375a24d2f2ea5e75b39fcdeb36819c9cda7e5433"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/built-scene.jpg",
+      "bytes": 489081,
+      "sha256": "ec37025e1769390f5b4aee978f4421d46733643ace6444140833090425d7459b"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/completed-builds.jpg",
+      "bytes": 106862,
+      "sha256": "9a245aa499b3f424f994c17d22fddb59fe05c65f2546f10b8cedf00834599df2"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/earned-before-claim.jpg",
+      "bytes": 179662,
+      "sha256": "8366b3f9315ceeed5fe6e57a177acfeffcd6d9b16945e173f19b4ad998006523"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/earned-level-5.jpg",
+      "bytes": 186577,
+      "sha256": "e6b324cc2c08bede31851005f1002ebc75dfdc3c181f99f1094eb2917cb15ff8"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/earned-unbuilt-scene.jpg",
+      "bytes": 494645,
+      "sha256": "9353137ce8908f81c3ff121565d17623c538a9e461b5607875b9e9a9392ba80f"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/empty-builds.jpg",
+      "bytes": 114871,
+      "sha256": "20287ab7c6f3fb5b0c0c3c1059f828de7e6ca9276b998499fdf4166894eca4c3"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/keepsake-collection.jpg",
+      "bytes": 48193,
+      "sha256": "3cc92cee970aa8e8c908f5d69a7f06633ed55c7bb8b75b1f1cae16d1ab28a98b"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/milestone-ready-builds.jpg",
+      "bytes": 120886,
+      "sha256": "f2c37ba61ddf8cc5f3174d1295fcaec9407c252b2b9991a0df7f5a02a6e94d94"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/milestone-ready-planner.jpg",
+      "bytes": 179662,
+      "sha256": "8366b3f9315ceeed5fe6e57a177acfeffcd6d9b16945e173f19b4ad998006523"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/new-camp.jpg",
+      "bytes": 1016869,
+      "sha256": "5d9b01bc141766f6ff7684fc2b94b6261e76d28f920c00c4a961d1cea94d8a77"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/unbuilt-scene.jpg",
+      "bytes": 494815,
+      "sha256": "cb061eab9a2755e2acf613ccfab9908d9ac20181c839670e9a01809689dc9601"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-landscape-chromium/upgrade-planner.jpg",
+      "bytes": 178874,
+      "sha256": "223a58e81d1059b01254acdf732c11be81a252f70f4630299d5f4cc63fbc30eb"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/adventure-display.jpg",
+      "bytes": 53103,
+      "sha256": "fc856c30115650fde383b2fbc57d529a412efc60e639bb7acbcf04f01baaa208"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/build-projects.jpg",
+      "bytes": 120386,
+      "sha256": "912087343d4630ecc0b3a8e85d10ef71f4754d1ef999ce59bf8b4c0b40b1528b"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/built-scene.jpg",
+      "bytes": 231466,
+      "sha256": "8077bbb0c82cc433c984c5a6b4ce3371955043da7450a3680e3c8b8d2c9fe03a"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/completed-builds.jpg",
+      "bytes": 112202,
+      "sha256": "13a0c1d03368b269a0e7b25dbb56d90fad24f2cb9c0c3861d3653898d240daf1"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/earned-before-claim.jpg",
+      "bytes": 197954,
+      "sha256": "2da7970c79fc1fd7bdde508a1456032dec42687d0d2203d45fa4e0618dfb32c5"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/earned-level-5.jpg",
+      "bytes": 204739,
+      "sha256": "3e888315cbcb8180a21204b67d878eab49b8b77431dddbfbf43afd7f2c0c4eec"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/earned-unbuilt-scene.jpg",
+      "bytes": 230249,
+      "sha256": "c2d86e57110f90f2c08e838e35e254c3c1eea39b9d50b894e0e2ee8c7ee6b292"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/empty-builds.jpg",
+      "bytes": 119944,
+      "sha256": "5bcd22af577589d951d3fb8b57ee495dabb4d50672b650101afc908ca9e78181"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/keepsake-collection.jpg",
+      "bytes": 45202,
+      "sha256": "4556d53a45adf59f7f99ce109f4694d5e805c9248b72babf8cf505536dc79651"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/milestone-ready-builds.jpg",
+      "bytes": 123736,
+      "sha256": "702d3ac4640ca22aad621d68624d75375f4bb32f6ae9e4ac8aabadf5bfa793b2"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/milestone-ready-planner.jpg",
+      "bytes": 197954,
+      "sha256": "2da7970c79fc1fd7bdde508a1456032dec42687d0d2203d45fa4e0618dfb32c5"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/new-camp.jpg",
+      "bytes": 740275,
+      "sha256": "553bb3bb52bfa1ab6b20cbe8809a2331737f807ad750b0049b2e037cf4426134"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/unbuilt-scene.jpg",
+      "bytes": 233792,
+      "sha256": "e518997e74eabfb5e56994d442e204f0bf908fa6b50a439610be1e67d49d72f7"
+    },
+    {
+      "path": "docs/review/base-camp/refined/ipad-portrait-chromium/upgrade-planner.jpg",
+      "bytes": 197427,
+      "sha256": "f0678f80af90b877f6de5706bf1c2f2675e677b0a08f60acf789995d72a0efd2"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/adventure-display.jpg",
+      "bytes": 64388,
+      "sha256": "3e1177f7003eb62d7c0410a18430febb0bef87e482cea3a8aab13a7960f27245"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/build-projects.jpg",
+      "bytes": 106326,
+      "sha256": "2f42b98e5f072badb6ba7983a020bec25e9e3811a9f30ed84dcff3b8b9438064"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/built-scene.jpg",
+      "bytes": 55578,
+      "sha256": "5863c46011b39a4132b430cae7a46fb1c5440dc3e68e96ca98720d149ed8e040"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/completed-builds.jpg",
+      "bytes": 101205,
+      "sha256": "1af770204e4e128bccf6283a72444c0988e66040545fe55098a27a79727ecb7d"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/earned-before-claim.jpg",
+      "bytes": 109422,
+      "sha256": "4ccca4d5b5077e6c7fc345b8d09050444e792fb6a00378e98fc8277bb52a9c38"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/earned-level-5.jpg",
+      "bytes": 116691,
+      "sha256": "1819d2a76dfdc3f05d03e427059c35b47327144f83770ab318e640f887cf34fa"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/earned-unbuilt-scene.jpg",
+      "bytes": 54507,
+      "sha256": "6fe5fe8480e62635284e2668fa6a75875a67ca98e239793bc3e59d362259d286"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/empty-builds.jpg",
+      "bytes": 106723,
+      "sha256": "60fd7bc3329a60710789dfee95ab980b06ea58b82c438ce592ee5b54a34218c7"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/keepsake-collection.jpg",
+      "bytes": 40526,
+      "sha256": "f50647daa7707b604d8ea616b09301ce0b1bd0b30de64f3893ebed0ff6e76d83"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/milestone-ready-builds.jpg",
+      "bytes": 108720,
+      "sha256": "86475a2817f82383c3485eecd7788c7ccffefe169a4bd20622acee0520da4438"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/milestone-ready-planner.jpg",
+      "bytes": 109422,
+      "sha256": "4ccca4d5b5077e6c7fc345b8d09050444e792fb6a00378e98fc8277bb52a9c38"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/new-camp.jpg",
+      "bytes": 438695,
+      "sha256": "f4d943fa42d6930e9ab0f05609dfb1e51a683d99adf78dd21d479f37162a69a6"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/unbuilt-scene.jpg",
+      "bytes": 53928,
+      "sha256": "b1b37ebbfa12d01e08b376ddbeac357785762791f0a4016a2ca1849670f99049"
+    },
+    {
+      "path": "docs/review/base-camp/refined/small-touch/upgrade-planner.jpg",
+      "bytes": 108616,
+      "sha256": "f0c2627b35112c77da1f8e3d2ea5229c2b2c59656cd1ca8e175acbc8c52de3c8"
+    },
+    {
+      "path": "docs/review/base-camp/reset/desktop-chromium/confirmation.jpg",
+      "bytes": 48461,
+      "sha256": "7733590a4c36506cc816f4981f02196163834cacedad58b2f56e19e96b1ff120"
+    },
+    {
+      "path": "docs/review/base-camp/reset/desktop-chromium/fresh-learner.jpg",
+      "bytes": 1008912,
+      "sha256": "30ae36950b9812491efb16e19f49fcb69480c6393921ba46ee36ef1e0174fcdc"
+    },
+    {
+      "path": "docs/review/base-camp/reset/desktop-chromium/parent-after.jpg",
+      "bytes": 510364,
+      "sha256": "19fd8cadf2b2a60ca08b2e123b0b77f481eeca8df6b7c6dfe3b8901cdea448e6"
+    },
+    {
+      "path": "docs/review/base-camp/reset/ipad-landscape-chromium/confirmation.jpg",
+      "bytes": 48462,
+      "sha256": "2f86d65a1a15a202c1236202a9d7beac3e0299ae7ffd33a7e56c9486d9657489"
+    },
+    {
+      "path": "docs/review/base-camp/reset/ipad-landscape-chromium/fresh-learner.jpg",
+      "bytes": 742233,
+      "sha256": "5497418c2d4e18e9949e979b353aa5c7adff6edd662610204706f07f8f6db0c9"
+    },
+    {
+      "path": "docs/review/base-camp/reset/ipad-landscape-chromium/parent-after.jpg",
+      "bytes": 484751,
+      "sha256": "a04215fc95c895d7576ba4ca9d0239327bb28a111fdb489871c929b978737446"
+    },
+    {
+      "path": "docs/review/base-camp/reset/ipad-portrait-chromium/confirmation.jpg",
+      "bytes": 48477,
+      "sha256": "551c0e2dc88dfac243980a45855fc57c799ea7361563939cbc09d6d53c18ea6a"
+    },
+    {
+      "path": "docs/review/base-camp/reset/ipad-portrait-chromium/fresh-learner.jpg",
+      "bytes": 588068,
+      "sha256": "3c2282836b5aec3b9e510795fbc0e444a7cd984a574a00d94622c223227df9a9"
+    },
+    {
+      "path": "docs/review/base-camp/reset/ipad-portrait-chromium/parent-after.jpg",
+      "bytes": 486336,
+      "sha256": "fe2c00322fea99a039fb7f52b3da6024ef844751c691ef44b3ec26cd1d7b1931"
+    },
+    {
+      "path": "docs/review/base-camp/reset/small-touch/confirmation.jpg",
+      "bytes": 46002,
+      "sha256": "71bd36bdf389f20db5bf0ff5b200ca26bbabf35487ef080df972417e381452f6"
+    },
+    {
+      "path": "docs/review/base-camp/reset/small-touch/fresh-learner.jpg",
+      "bytes": 338601,
+      "sha256": "f370282b992d6a6035cefa3ae1985c075bc60ec0335bf6f447887d0dc3df56e3"
+    },
+    {
+      "path": "docs/review/base-camp/reset/small-touch/parent-after.jpg",
+      "bytes": 469201,
+      "sha256": "3740f341f2c4e6209dbbaf3a220115cfe251258319555fd15d2236240168496c"
+    },
+    {
+      "path": "docs/review/cooking-recovery/demo-after-fridge.png",
+      "bytes": 19933,
+      "sha256": "45e1372efcd39692e4cc336bf57af6ad2d9f86aa809c569105427590f14f11c6"
+    },
+    {
+      "path": "docs/review/cooking-recovery/demo-after-pantry.png",
+      "bytes": 43626,
+      "sha256": "6fbb6a5b288b3e679cdebe530740993ecd83bc80314d837dc37638ba472acb53"
+    },
+    {
+      "path": "docs/review/cooking-recovery/demo-before-pantry.png",
+      "bytes": 53743,
+      "sha256": "c412bbb9c6184165ff00f5e1706dc8ca8fc963f94c9b7b869ccaf22bbd0be836"
+    },
+    {
+      "path": "docs/review/cooking-recovery/private-after-fridge.png",
+      "bytes": 19933,
+      "sha256": "45e1372efcd39692e4cc336bf57af6ad2d9f86aa809c569105427590f14f11c6"
+    },
+    {
+      "path": "docs/review/cooking-recovery/private-after-pantry.png",
+      "bytes": 43626,
+      "sha256": "6fbb6a5b288b3e679cdebe530740993ecd83bc80314d837dc37638ba472acb53"
+    },
+    {
+      "path": "docs/review/cooking-recovery/private-before-pantry.png",
+      "bytes": 53743,
+      "sha256": "c412bbb9c6184165ff00f5e1706dc8ca8fc963f94c9b7b869ccaf22bbd0be836"
+    },
+    {
+      "path": "docs/review/family-release/assessment/desktop-chromium/direct-touch-resumed.jpg",
+      "bytes": 92802,
+      "sha256": "85edfca873a1865c57dfbc89183b5a5994a47c081590a34d4f497cac7215bd68"
+    },
+    {
+      "path": "docs/review/family-release/assessment/desktop-chromium/first-home.jpg",
+      "bytes": 52953,
+      "sha256": "e95d8db19e1c925e3c49127246633f177f793d7b0ccb74cdadb00c4fd4a45e8a"
+    },
+    {
+      "path": "docs/review/family-release/assessment/desktop-chromium/neutral-assessment.jpg",
+      "bytes": 45383,
+      "sha256": "24f50276e1684393b338e6bd36e5e8ad1a72e0ebc7897008b9b380b9264db02b"
+    },
+    {
+      "path": "docs/review/family-release/assessment/desktop-chromium/nine-areas.jpg",
+      "bytes": 125013,
+      "sha256": "39901a09ca2983d0e9fea5c4f720f7546b0a54f57098bc0ff13f4c1b2b842a85"
+    },
+    {
+      "path": "docs/review/family-release/assessment/desktop-chromium/profile-complete.jpg",
+      "bytes": 131376,
+      "sha256": "8c2a06faeb9aa22e9823783c28bd6679c9ad28e81dc261f817c4f2f8290f3343"
+    },
+    {
+      "path": "docs/review/family-release/assessment/ipad-landscape-chromium/direct-touch-resumed.jpg",
+      "bytes": 81348,
+      "sha256": "bf042491998d40350ecf830477897e9e377adf1abdd6688c8c813ac05375c85f"
+    },
+    {
+      "path": "docs/review/family-release/assessment/ipad-landscape-chromium/first-home.jpg",
+      "bytes": 52432,
+      "sha256": "8c3c78ce30138eeb60bb167054be2b845861fab1d8c6406e7a2e270f743b409f"
+    },
+    {
+      "path": "docs/review/family-release/assessment/ipad-landscape-chromium/neutral-assessment.jpg",
+      "bytes": 39115,
+      "sha256": "28d5eb27ee67431ae3cf52a75aaa60b79a71350ef0efa42f2c82ac089158c7fd"
+    },
+    {
+      "path": "docs/review/family-release/assessment/ipad-landscape-chromium/nine-areas.jpg",
+      "bytes": 119452,
+      "sha256": "9a962070125e1dd6e56520880ee80fede71052a59fead29cbd38b0610127bac7"
+    },
+    {
+      "path": "docs/review/family-release/assessment/ipad-landscape-chromium/profile-complete.jpg",
+      "bytes": 126681,
+      "sha256": "39e0e795f433f9a5e6a45f9158c2664ff7a17e377d50c6b84a993e1bf7239316"
+    },
+    {
+      "path": "docs/review/family-release/assessment/ipad-portrait-chromium/direct-touch-resumed.jpg",
+      "bytes": 99459,
+      "sha256": "fc3d9571988ebaa6d9add4303ce040daa6757d56d8d972658fd81ed6a61964af"
+    },
+    {
+      "path": "docs/review/family-release/assessment/ipad-portrait-chromium/first-home.jpg",
+      "bytes": 48859,
+      "sha256": "c8284ae53d3a84b1a8ff0a127774d056ed348167ca0a182545e3040e0b52d5db"
+    },
+    {
+      "path": "docs/review/family-release/assessment/ipad-portrait-chromium/neutral-assessment.jpg",
+      "bytes": 40781,
+      "sha256": "5d16533f5dae2cc02c7a665e4bb9721f18b09bc619e1b4931942284acc1924b2"
+    },
+    {
+      "path": "docs/review/family-release/assessment/ipad-portrait-chromium/nine-areas.jpg",
+      "bytes": 121357,
+      "sha256": "d1411f74b2962127b444bcf7e537e641c291851796ef2530e1b2fbbe617ce13b"
+    },
+    {
+      "path": "docs/review/family-release/assessment/ipad-portrait-chromium/profile-complete.jpg",
+      "bytes": 123659,
+      "sha256": "2408c1d5a8c158cff34920f67e05693f9976c3ce3599479327591d0517e22f51"
+    },
+    {
+      "path": "docs/review/family-release/assessment/small-touch/direct-touch-resumed.jpg",
+      "bytes": 46664,
+      "sha256": "7bf33235d34e1ca48ff562caa192ebbbd53728e3505ea0d175a792ceb71aeff9"
+    },
+    {
+      "path": "docs/review/family-release/assessment/small-touch/first-home.jpg",
+      "bytes": 48227,
+      "sha256": "1d951e1b10a491a1532d9a19ce97e7d9b46bdd76160d4c8e2eb749df7278e18d"
+    },
+    {
+      "path": "docs/review/family-release/assessment/small-touch/neutral-assessment.jpg",
+      "bytes": 30238,
+      "sha256": "b0294ffe25771f5b6a79ee647e88107744245165f426fdf375d8a4e65ef14b74"
+    },
+    {
+      "path": "docs/review/family-release/assessment/small-touch/nine-areas.jpg",
+      "bytes": 108289,
+      "sha256": "ad94606812634f52eadb981f19c2afabd74caef6cb6f175c579dabfa1f885281"
+    },
+    {
+      "path": "docs/review/family-release/assessment/small-touch/profile-complete.jpg",
+      "bytes": 113213,
+      "sha256": "ca60c46c1711efa8f49d07dfaeb9a98e08ea183cbba83e8ff0856f1757580bc6"
+    },
+    {
+      "path": "docs/review/family-release/desktop-chromium/boy-profile.jpg",
+      "bytes": 2384,
+      "sha256": "a0d497824b645c1cdd06fd81903e1097213193b963a7de6e0b95f6184ce70887"
+    },
+    {
+      "path": "docs/review/family-release/desktop-chromium/boy-wardrobe.jpg",
+      "bytes": 29732,
+      "sha256": "9b77f069324f5d767d61cac9fd3f997d43cd1ff211086ad0a9781c64128c991d"
+    },
+    {
+      "path": "docs/review/family-release/desktop-chromium/girl-base-camp.jpg",
+      "bytes": 560053,
+      "sha256": "dbd29d50c053fab62e9664036c173e8238d422633aaaf39c9e9431d5220ad43a"
+    },
+    {
+      "path": "docs/review/family-release/desktop-chromium/girl-choice.jpg",
+      "bytes": 12865,
+      "sha256": "5ed5b33131dd6ad7637c2896ad715c23af6fdccb07bcf809d7526d27b9db1e15"
+    },
+    {
+      "path": "docs/review/family-release/desktop-chromium/girl-profile.jpg",
+      "bytes": 2379,
+      "sha256": "e92065a45e13f7b2f234403e791bfc000176691887d830219a1740f2ac3b3204"
+    },
+    {
+      "path": "docs/review/family-release/desktop-chromium/girl-town-complete.jpg",
+      "bytes": 264689,
+      "sha256": "e1b7e3d5ed41005cc70a9b558ae49df305bb72a60914fa3b820d9b07969941b2"
+    },
+    {
+      "path": "docs/review/family-release/desktop-chromium/girl-wardrobe.jpg",
+      "bytes": 29776,
+      "sha256": "07b453e2068a01ca034da0b9aca66ae2af448a628f6473c51b5ddadafae15fbb"
+    },
+    {
+      "path": "docs/review/family-release/desktop-chromium/parent-evidence.jpg",
+      "bytes": 312741,
+      "sha256": "94bec52befc2d46b30420699f4e97a8e03fb7ad47cccacde507bd847272b5885"
+    },
+    {
+      "path": "docs/review/family-release/desktop-chromium/paused-town.jpg",
+      "bytes": 15286,
+      "sha256": "38d6b92e670cc751186c8ad6acd3b074427acf65fe7c2cd6d205b96e9fcffcc3"
+    },
+    {
+      "path": "docs/review/family-release/ipad-landscape-chromium/boy-profile.jpg",
+      "bytes": 2384,
+      "sha256": "fc1e826eda78dfe4c202ccb81b276da4ceda89d3d3bccc32ec78507b1d414ff5"
+    },
+    {
+      "path": "docs/review/family-release/ipad-landscape-chromium/boy-wardrobe.jpg",
+      "bytes": 32124,
+      "sha256": "f6da6e4b57855691e2a06743136d2dd72576b9e393795a0077e1531ccb4da8a0"
+    },
+    {
+      "path": "docs/review/family-release/ipad-landscape-chromium/girl-base-camp.jpg",
+      "bytes": 516163,
+      "sha256": "3ca06a82af104a203c3a53a96827e295d220806e21f0d36d8b3113f5ade242d8"
+    },
+    {
+      "path": "docs/review/family-release/ipad-landscape-chromium/girl-choice.jpg",
+      "bytes": 12722,
+      "sha256": "a234904bb9dc9298d0105a3ca8707d494694858d614aecb773fad3ec558e95bb"
+    },
+    {
+      "path": "docs/review/family-release/ipad-landscape-chromium/girl-profile.jpg",
+      "bytes": 2373,
+      "sha256": "43e857383a6a9ad5db29e341feddb4795e2e18a7f5d8285897825d41c34ee16c"
+    },
+    {
+      "path": "docs/review/family-release/ipad-landscape-chromium/girl-town-complete.jpg",
+      "bytes": 249541,
+      "sha256": "a540e9589f25feef9669fad13c1bac0ca63188a7ef62d839707acc5bcbf87598"
+    },
+    {
+      "path": "docs/review/family-release/ipad-landscape-chromium/girl-wardrobe.jpg",
+      "bytes": 32125,
+      "sha256": "3c86e892a9af08c5a9b5e3a8f1394dfa8c7edb1a62bdeb771af31c9ac62e9dd6"
+    },
+    {
+      "path": "docs/review/family-release/ipad-landscape-chromium/parent-evidence.jpg",
+      "bytes": 314772,
+      "sha256": "b0319af560f3ea824bfd5cf5d3e51a4c18b6ebb185f6d711daa01bab002cbb4c"
+    },
+    {
+      "path": "docs/review/family-release/ipad-landscape-chromium/paused-town.jpg",
+      "bytes": 17090,
+      "sha256": "855c97ea38391c5b791a883073c8cf90d65ba0b5e1ff90bc3935d3b848bf1b4d"
+    },
+    {
+      "path": "docs/review/family-release/ipad-portrait-chromium/boy-profile.jpg",
+      "bytes": 2384,
+      "sha256": "81821a9ac03dae596674d86e8a631a10201a42012cc07d195ffc9fa4982f24d1"
+    },
+    {
+      "path": "docs/review/family-release/ipad-portrait-chromium/boy-wardrobe.jpg",
+      "bytes": 27172,
+      "sha256": "ec86f6a2a012ae39896cfd15b6f65fbad44537f631b0fa6b40c3f2df6860d4e3"
+    },
+    {
+      "path": "docs/review/family-release/ipad-portrait-chromium/girl-base-camp.jpg",
+      "bytes": 261847,
+      "sha256": "fb31d1af72f67a3c9ab1f847eac546ec4d07054b496815299156fd5ea33d0fd2"
+    },
+    {
+      "path": "docs/review/family-release/ipad-portrait-chromium/girl-choice.jpg",
+      "bytes": 11853,
+      "sha256": "3f7ad3ee234293f093c2b35c2701761d8cba9d893e13cdd75d62ee9a317e1c09"
+    },
+    {
+      "path": "docs/review/family-release/ipad-portrait-chromium/girl-profile.jpg",
+      "bytes": 2363,
+      "sha256": "73a19d859c07a5af575387eebea3d29ff300b9a2219356251b14e0808e0b3ab6"
+    },
+    {
+      "path": "docs/review/family-release/ipad-portrait-chromium/girl-town-complete.jpg",
+      "bytes": 171692,
+      "sha256": "effc436408b7de8b95b7ccc2c200507ec5a1a1dffeb83fdfde00d2f96cb8adc1"
+    },
+    {
+      "path": "docs/review/family-release/ipad-portrait-chromium/girl-wardrobe.jpg",
+      "bytes": 27213,
+      "sha256": "7a44c1b7611ebd49bd922c5f63ac24e0bceba112ee8ff5e7b50b518c008da9c4"
+    },
+    {
+      "path": "docs/review/family-release/ipad-portrait-chromium/parent-evidence.jpg",
+      "bytes": 315667,
+      "sha256": "489dc2386e2fe924e433ece8e7c970d1ee12f046f847de4f1037dce808bc584a"
+    },
+    {
+      "path": "docs/review/family-release/ipad-portrait-chromium/paused-town.jpg",
+      "bytes": 14028,
+      "sha256": "d1b8144371ff494a4e2a087fb4a2f969d1f680179d15ff891ef662cff7bc7d19"
+    },
+    {
+      "path": "docs/review/family-release/small-touch/boy-profile.jpg",
+      "bytes": 2366,
+      "sha256": "4dfcfc2959d4f5bad255b98c605ff0264dd5088c6805ed731608958bf3c2f9e9"
+    },
+    {
+      "path": "docs/review/family-release/small-touch/boy-wardrobe.jpg",
+      "bytes": 27898,
+      "sha256": "4ea5e4919889e6b6228031682d5fa0beb63ee3b3cacc676147fbb4d111389ec3"
+    },
+    {
+      "path": "docs/review/family-release/small-touch/girl-base-camp.jpg",
+      "bytes": 87997,
+      "sha256": "8528368cb010c0e86560184f7b49c3c6d89e41b2a337e9731192fc17dc27d2ac"
+    },
+    {
+      "path": "docs/review/family-release/small-touch/girl-choice.jpg",
+      "bytes": 10840,
+      "sha256": "560e22d3caa56cf232b330b6a88afb57be23ab1da8971e6a8f6c518cba4c0511"
+    },
+    {
+      "path": "docs/review/family-release/small-touch/girl-profile.jpg",
+      "bytes": 2352,
+      "sha256": "b46ba46d6354dbfce7c75d043deb0e7c9ad1b5e3bb21be206b6a5c37b309997e"
+    },
+    {
+      "path": "docs/review/family-release/small-touch/girl-town-complete.jpg",
+      "bytes": 107073,
+      "sha256": "4f5cf258a50b8a4adc1e4bc1841d23ff90a7687f19e2cc9288320c35f74ae8be"
+    },
+    {
+      "path": "docs/review/family-release/small-touch/girl-wardrobe.jpg",
+      "bytes": 27907,
+      "sha256": "4f3b4755d8b9283c2871a98b7bfa3358f2402586e0992db7804dfa9c42d83da8"
+    },
+    {
+      "path": "docs/review/family-release/small-touch/parent-evidence.jpg",
+      "bytes": 317047,
+      "sha256": "5c06381caf962ba99e80aba8e8208f23fb6c937528599e2534973c5cbcba6e83"
+    },
+    {
+      "path": "docs/review/family-release/small-touch/paused-town.jpg",
+      "bytes": 12475,
+      "sha256": "003e086d8e3a39587fe86d880a05c5625eb4df270f278b0121c9c844aa0bdc24"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/desktop-chromium/after-guide-panel.png",
+      "bytes": 27609,
+      "sha256": "8b83f11202c0bb731c8bd66baf23630da36e8393df55887167f0605c69d804bd"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/desktop-chromium/after-guide.png",
+      "bytes": 1179925,
+      "sha256": "47c6dc69051c7acd869bfadbbd9375e69143fcd1d878db047d304f332a4d841b"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/desktop-chromium/after-restored.png",
+      "bytes": 768620,
+      "sha256": "a226d69e40738bd20de2386e26e065a96936aa6e413bc3a4643e82016abb7ada"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/desktop-chromium/after-world.png",
+      "bytes": 772950,
+      "sha256": "b7e4d6d50166a134679554c3fa06205f4dc8ef88e53c0982b103b352a6e2d446"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/desktop-chromium/before-guide-panel.png",
+      "bytes": 22736,
+      "sha256": "25128fee80caf69c3f27fbd3d90dfd9b6a5e682c416e33f6e3fb1335d8dbb5a0"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/desktop-chromium/before-guide.png",
+      "bytes": 1184064,
+      "sha256": "1f78504d01a61737a5dfd8ab19d9e8e7f03d7cbf09f68406b022e04073bbfa2c"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/desktop-chromium/before-world.png",
+      "bytes": 763309,
+      "sha256": "9ef4744ec05d9d16ed332900a13ae197565816d2dc42db240f5a641196ffc0d7"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-landscape-chromium/after-guide-panel.png",
+      "bytes": 27625,
+      "sha256": "6d75f2e3b817d65a55148fb328d8921e5e1834d2e27a4fb6ccf99c25d67dc4ff"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-landscape-chromium/after-guide.png",
+      "bytes": 701625,
+      "sha256": "e21f3fd17777b9ce808049f992699e5f60a9ff3c07a3e34638ab4c0470e974ea"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-landscape-chromium/after-restored.png",
+      "bytes": 680157,
+      "sha256": "11822d01c9c2baaa6d645001c70ff5968214a03814b438667f0bc10d0ea5c134"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-landscape-chromium/after-world.png",
+      "bytes": 682458,
+      "sha256": "7a3961edd4f418209d528a4941afaea48bf2d87b1cf75aa3b332c0cc86d98bf1"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-landscape-chromium/before-guide-panel.png",
+      "bytes": 22701,
+      "sha256": "13203dd4164a51e698f2b0b4a6537ec70de03f8ebe8358e2851992572f997275"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-landscape-chromium/before-guide.png",
+      "bytes": 696702,
+      "sha256": "f0d6d904d917b576afb90229e638c581e47d3db3f42c5aa8a7ac8ccd382f095c"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-landscape-chromium/before-world.png",
+      "bytes": 674088,
+      "sha256": "2c25c6186da555a28beadc77853044e295f4e9c5f12ad1f3c01a63fdda86213b"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-portrait-chromium/after-guide-panel.png",
+      "bytes": 22006,
+      "sha256": "4406642468613d504976d1b70326350bc2d9d27f4b2a812fa2160efffcdb0023"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-portrait-chromium/after-guide.png",
+      "bytes": 810328,
+      "sha256": "33a43dc24320003b9b5d402275eefca5f0ab7c14f81d225c1515e51e14530a11"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-portrait-chromium/after-restored.png",
+      "bytes": 795828,
+      "sha256": "b164f66dea8697c133e0627289f15942dc241b9f655eb7e93b31c8d3de44a5c0"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-portrait-chromium/after-world.png",
+      "bytes": 796704,
+      "sha256": "2f3a0454511f381ae9b8bce591b263e424e9eda7c06367835905e74233378b17"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-portrait-chromium/before-guide-panel.png",
+      "bytes": 17256,
+      "sha256": "d8a8f86beb35997803fe0d887e3ec46a3dc628ed1ffd5ca6b42b6adc8ca85c10"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-portrait-chromium/before-guide.png",
+      "bytes": 796063,
+      "sha256": "555e8cf08a04d2e56c922b2d4b1e29aff86ee0d5266f97b28b35f71eab5d6acd"
+    },
+    {
+      "path": "docs/review/fraction-desert-preview/ipad-portrait-chromium/before-world.png",
+      "bytes": 786710,
+      "sha256": "f782c42e128b7975a4bc72a7b5b516b6f9a10d00acb84c2d1abecc58abb30c8b"
+    },
+    {
+      "path": "docs/review/guided-progression/after/desktop-chromium/assessment-gates.jpg",
+      "bytes": 201672,
+      "sha256": "f77428e2011d0f937f5194b024c03a122839642ade07c69a5aeec57a64165ee2"
+    },
+    {
+      "path": "docs/review/guided-progression/after/desktop-chromium/completed-town-recap.jpg",
+      "bytes": 122664,
+      "sha256": "b2c5de9572896a36696a0bc83e882d746f0fd438d72340b61005086555be0499"
+    },
+    {
+      "path": "docs/review/guided-progression/after/desktop-chromium/how-to-play.jpg",
+      "bytes": 130093,
+      "sha256": "c55c59c12507a13bca98ece9f58d609f6246a0810cebc5fa6f06cde2b33caa33"
+    },
+    {
+      "path": "docs/review/guided-progression/after/desktop-chromium/offline-how-to-play.jpg",
+      "bytes": 145369,
+      "sha256": "800dbbd9dcbede4f815f270e00d079e9131375c4bac25bd35a5733d1ddb0db74"
+    },
+    {
+      "path": "docs/review/guided-progression/after/desktop-chromium/reasoning.jpg",
+      "bytes": 74906,
+      "sha256": "a0871038d78f98607dcb7b7d1d1c6623d9ccfc4f5b291ac3aeed6c5cecdd2c6c"
+    },
+    {
+      "path": "docs/review/guided-progression/after/desktop-chromium/recovery-confirmation.jpg",
+      "bytes": 33778,
+      "sha256": "6857b9cb34ec43700acad72d14e1e679401b0e6efdd2848b3ebb19635379e79a"
+    },
+    {
+      "path": "docs/review/guided-progression/after/desktop-chromium/restoration-plan.jpg",
+      "bytes": 140567,
+      "sha256": "7f3176b24813b5f80ac574bd757f3ea4c0b1e4262c20294bc8d60ac0a04ec6d6"
+    },
+    {
+      "path": "docs/review/guided-progression/after/desktop-chromium/restoration-recap.jpg",
+      "bytes": 239769,
+      "sha256": "6bd0ba1e514e70569bdbc5cb4b0aeb35ae1bee2a7fd06e7a7f4f85b64664b863"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-landscape-chromium/assessment-gates.jpg",
+      "bytes": 102576,
+      "sha256": "891453550342f26a5f0291b4ce400775f45c3d0d3fad161d74b9f6cbcf2a82e9"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-landscape-chromium/completed-town-recap.jpg",
+      "bytes": 82182,
+      "sha256": "1cf1a1ec6df888727a71f2fd4e66fe084ebc44e94dd8fe50c987894435227aba"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-landscape-chromium/how-to-play.jpg",
+      "bytes": 102725,
+      "sha256": "0b94fd0146affdc7d8366a2adc0413433699aa20888e51f4b88bdb68bde77882"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-landscape-chromium/offline-how-to-play.jpg",
+      "bytes": 136535,
+      "sha256": "035e16aaf9198f15e6f52c30a9992925e5517641ae415270937cb2a71dd6a12b"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-landscape-chromium/reasoning.jpg",
+      "bytes": 74553,
+      "sha256": "5fb96ac32d4bb17c03726b15cc7ecb5a9c53e721f15ecbd45f33da63a88b4ab8"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-landscape-chromium/recovery-confirmation.jpg",
+      "bytes": 33533,
+      "sha256": "4b83b583bd1c5e1f8c2123851d0ffed4497e5f95048013a07cd33bdafa5ebd74"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-landscape-chromium/restoration-plan.jpg",
+      "bytes": 103783,
+      "sha256": "f35530c8e6fdd94740af3856efc89491cb1b7f188a97629938ae4855e7d15826"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-landscape-chromium/restoration-recap.jpg",
+      "bytes": 170302,
+      "sha256": "d0d72cf2f766f1c8a3a250f60962abefa6e09e1a3bd85c07325c45e78bff99a3"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-portrait-chromium/assessment-gates.jpg",
+      "bytes": 90224,
+      "sha256": "56de58fb5aad511bd283f604bdbd32e7de135cfdd2c48da3803b82d5f5673b34"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-portrait-chromium/completed-town-recap.jpg",
+      "bytes": 111069,
+      "sha256": "32561ea090f7edbcd1cd4c5fe0c3e3bd9380c17cf15b38bbcc037b6a8e10be07"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-portrait-chromium/how-to-play.jpg",
+      "bytes": 123716,
+      "sha256": "adbbe56988120d4640194ae4a50481c2f4c591e729b26123f0ad076c091a3939"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-portrait-chromium/offline-how-to-play.jpg",
+      "bytes": 129515,
+      "sha256": "66b1f05692ab7a940de8c86b40bef6b3dc0201c0cb63841d7b0d08e546c00687"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-portrait-chromium/reasoning.jpg",
+      "bytes": 72616,
+      "sha256": "9f986f3e6a3a47cc45fc967fea8340ceeb3231d8687e7b3797224fe8f8a0b197"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-portrait-chromium/recovery-confirmation.jpg",
+      "bytes": 33815,
+      "sha256": "b7cc69630d4757e34af268a937b0096d21c4deb5b5a264631353a379ed846622"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-portrait-chromium/restoration-plan.jpg",
+      "bytes": 78925,
+      "sha256": "44c90027dd34f14851b97028705bf3a3ceb86e79f061ff907b6b9b4aeab0a113"
+    },
+    {
+      "path": "docs/review/guided-progression/after/ipad-portrait-chromium/restoration-recap.jpg",
+      "bytes": 174578,
+      "sha256": "2da13dfb90bfc75bbc9d89af4d65f5f3309f4d5204a95929d07fd0a341af786f"
+    },
+    {
+      "path": "docs/review/guided-progression/after/small-touch/assessment-gates.jpg",
+      "bytes": 39051,
+      "sha256": "6327094e1810ee6a271e046d1559fdaa6b5cac33b299916db01a00f0b9fc31d4"
+    },
+    {
+      "path": "docs/review/guided-progression/after/small-touch/completed-town-recap.jpg",
+      "bytes": 37186,
+      "sha256": "d41e3d8eeaffb8446d2c28305da229da985782e68c65aea37b47a80b7f23da4d"
+    },
+    {
+      "path": "docs/review/guided-progression/after/small-touch/how-to-play.jpg",
+      "bytes": 45729,
+      "sha256": "c3fd08fe3473b9a795d29e3fb2bc26f51e1ceff7b67a4a206cb8adc45cbe1e4c"
+    },
+    {
+      "path": "docs/review/guided-progression/after/small-touch/offline-how-to-play.jpg",
+      "bytes": 121340,
+      "sha256": "b39587d710643928d3e1d59b1ae25ef93040a521465d090c8eaaca88854ce467"
+    },
+    {
+      "path": "docs/review/guided-progression/after/small-touch/reasoning.jpg",
+      "bytes": 39232,
+      "sha256": "b2abf381e53864b7a1204744ee710545d47069db730ed0c7c2e2349023abe56b"
+    },
+    {
+      "path": "docs/review/guided-progression/after/small-touch/recovery-confirmation.jpg",
+      "bytes": 33799,
+      "sha256": "7915d212c55d10e85731c0c95c04127f64be22e630464399425790a01a53b1b9"
+    },
+    {
+      "path": "docs/review/guided-progression/after/small-touch/restoration-plan.jpg",
+      "bytes": 42409,
+      "sha256": "4977f04aa20771030ea1178a8b1c1e44cddea48264f5c5c61ac3f2056f665439"
+    },
+    {
+      "path": "docs/review/guided-progression/after/small-touch/restoration-recap.jpg",
+      "bytes": 39104,
+      "sha256": "98cc96f0ee6bbfebcb08b30dd359961c29cf91726fe11da9b701534edb38338c"
+    },
+    {
+      "path": "docs/review/guided-progression/before/desktop-chromium/completed-town-loop.png",
+      "bytes": 1244623,
+      "sha256": "55e1e98c1cf96e61afd6d3df2ca467f43cbbe6122f8b75e741516731d3aa27eb"
+    },
+    {
+      "path": "docs/review/guided-progression/before/ipad-landscape-chromium/completed-town-loop.png",
+      "bytes": 1120180,
+      "sha256": "a50f9c903759989662c561e66f5eac9e463a25803355acc58cf0d96625fa31c4"
+    },
+    {
+      "path": "docs/review/guided-progression/before/ipad-portrait-chromium/completed-town-loop.png",
+      "bytes": 151471,
+      "sha256": "bc4a753202dfbc93e94ff516544c3689592b69c459faa9bf4ece9fa206ca2fa6"
+    },
+    {
+      "path": "docs/review/guided-progression/before/small-touch/completed-town-loop.png",
+      "bytes": 115551,
+      "sha256": "749bca5c6595a802448e9a8e82357b8490b69c83a2d2ec20ad614968b6de4965"
+    },
+    {
+      "path": "docs/review/home-exterior/after/exterior.png",
+      "bytes": 645310,
+      "sha256": "931667cb5f218f0f7424bd50dc8fba0648e0f6f345ed0a0542c77b8906f09227"
+    },
+    {
+      "path": "docs/review/home-exterior/after/meters.png",
+      "bytes": 537961,
+      "sha256": "15efaf6f4555851c0be3c5d22b175bbf6cdf19d57e9e61831f9f4d2d76d25d1e"
+    },
+    {
+      "path": "docs/review/home-exterior/after/post.png",
+      "bytes": 54625,
+      "sha256": "d5915e63e1276f6c6d5fcaa4978c19cdaf6b8df1932d9c285ad21d0e91ada74c"
+    },
+    {
+      "path": "docs/review/home-exterior/after/recycling.png",
+      "bytes": 88502,
+      "sha256": "1b9c4184f2f95ea7cece1f6c534e86980b5c11fb95212e2feaf0fcff2070b1fa"
+    },
+    {
+      "path": "docs/review/home-exterior/before/exterior.png",
+      "bytes": 19841,
+      "sha256": "414a6128295bf5eb9856d9c84dc1f0473418d85feb026b883e38dbd3f455e976"
+    },
+    {
+      "path": "docs/review/home-exterior/before/meters.png",
+      "bytes": 729008,
+      "sha256": "e226b767a6951d5eb13a1c80b8e93269c726d299fae495f10645a1ba6a73f162"
+    },
+    {
+      "path": "docs/review/home-exterior/before/post.png",
+      "bytes": 729008,
+      "sha256": "e226b767a6951d5eb13a1c80b8e93269c726d299fae495f10645a1ba6a73f162"
+    },
+    {
+      "path": "docs/review/home-exterior/before/recycling.png",
+      "bytes": 729008,
+      "sha256": "e226b767a6951d5eb13a1c80b8e93269c726d299fae495f10645a1ba6a73f162"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/demo-ipad-landscape-chromium-pancakes-recipe.jpg",
+      "bytes": 56910,
+      "sha256": "cf75fc25e66af6a869b9beebcbb2d1d2b2786daa2c445d37a27b5cb36d3bbcc4"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/demo-ipad-landscape-chromium-pasta-shop.jpg",
+      "bytes": 90265,
+      "sha256": "45d701ab4f0a667f9597e39e7feec37a8a710983553f0a71bf4bf81e4f05b7b1"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/demo-ipad-portrait-chromium-curry-recipe.jpg",
+      "bytes": 69531,
+      "sha256": "43ba5c4d77341e7d8cf6fc2ea7ea7b17fe54848a91b19e9bfaa11d7bbcf6f149"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/demo-ipad-portrait-chromium-pasta-pantry.jpg",
+      "bytes": 84350,
+      "sha256": "d8a859e5bce29bbc7ac754cc9b04b747716eb6dce72edb0539da8a8a2a45278b"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-curry-recipe.jpg",
+      "bytes": 88941,
+      "sha256": "fe3b6eadfdef720de35de93dfa096c8c6feab1ea3ef3d42f3eba7c22b19a99a1"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-pancakes-recipe.jpg",
+      "bytes": 86574,
+      "sha256": "ddea81f4949be2221c2ce471ecdce24be21172ab6045ed9f1520f998a5515e0d"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-pasta-basket.jpg",
+      "bytes": 110274,
+      "sha256": "02105190e34b98512b4dafeea1089c66b3145968ac5e889b39184bc546e6e60f"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-pasta-carried-inventory.jpg",
+      "bytes": 81299,
+      "sha256": "c7ed2116fcc84b742037c79247ddcee63b8804fef76ada37007940270efdaa19"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-pasta-fridge.jpg",
+      "bytes": 98977,
+      "sha256": "31763f4a334008706e68842121e0b753f0e339d1d34c3fee6bc1731db404b787"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-pasta-pantry.jpg",
+      "bytes": 99201,
+      "sha256": "86cbb91fe09e5ad4078ac6c1e63b5cccbaa9e666cdf9832978f3a20cb734b0be"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-pasta-recipe.jpg",
+      "bytes": 88501,
+      "sha256": "969079a7490a0de5341e741fdb7010de2759557cf342bc5c7ee54e4877dcbe2d"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-pasta-shop.jpg",
+      "bytes": 118915,
+      "sha256": "3c97bf4d3c4855b68801b5d0a6ddf4a2acd317da23312ac4ee05ba482392a3c7"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-pasta-shopping-list.jpg",
+      "bytes": 121463,
+      "sha256": "f56f08c16e65543adb030c381b27fa3d01d13b1fb7fdc28cb5109225ad6e8b34"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-pizza-measure.jpg",
+      "bytes": 79439,
+      "sha256": "abd3f726b373159867acebadd9e43c38726935fe7fb690ed5d16c85156a0a40f"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-pizza-recipe.jpg",
+      "bytes": 77074,
+      "sha256": "3635d1e09c84dcc80422a202aebfdcbcd3bcfb199c0c6e4f7d5b3cf4ab83b439"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-desktop-chromium-soup-recipe.jpg",
+      "bytes": 86361,
+      "sha256": "52b0da7c83e0cb2902daf8f1e50a1761581f61c0ab7e4a81e50e9648fdd60b96"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-ipad-landscape-chromium-pasta-recipe.jpg",
+      "bytes": 64028,
+      "sha256": "21f510203ba97f4377b7861e7f8d9a17448faebc4052ab8098717755256111e4"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-ipad-portrait-chromium-pancakes-measure.jpg",
+      "bytes": 60287,
+      "sha256": "b44ac5bbec28d09af52a529f8a7b1e16f89887fe025560d3faa9db77fa3266fa"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-ipad-portrait-chromium-pasta-recipe.jpg",
+      "bytes": 67958,
+      "sha256": "c18705cedec4c53edb6e9d28a03a3a073a2e1bde064ade951be31b077534c704"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-small-touch-pasta-basket.jpg",
+      "bytes": 44707,
+      "sha256": "c37d9ee51ce5ef6807b6f5a704e40f25c5a0a8d43d46e122f47de1b6e005835e"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-small-touch-pasta-carried-inventory.jpg",
+      "bytes": 27667,
+      "sha256": "4f66e07c4d194c491ff1a9e6df27c0f8d366c24df01faa06155cf136435e539a"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-small-touch-pasta-fridge.jpg",
+      "bytes": 38143,
+      "sha256": "4d079cb37805879e0908fdf48d11ccbdbf617c90fd25b26b454fb1b24484688a"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-small-touch-pasta-pantry.jpg",
+      "bytes": 38061,
+      "sha256": "e5ca5016a3413eb65c7d909a834ee45e8dd68e1913c298c3c83bfaa5157f357f"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-small-touch-pasta-recipe.jpg",
+      "bytes": 37689,
+      "sha256": "e16fa5dfb49ab0de84e11f55947d20fdb3a76aaf48cf224f979f9b60781c5d2b"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-small-touch-pasta-shop.jpg",
+      "bytes": 41035,
+      "sha256": "825794a08f1a589a1b66b5ef922a7d3efb2dd5d51a0445166b7752782a753d77"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-small-touch-pasta-shopping-list.jpg",
+      "bytes": 44239,
+      "sha256": "1fc35699558c2af36231e286c7c16b3bc0e3468c1c4592b184760954de2ff846"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/after/production-small-touch-soup-measure.jpg",
+      "bytes": 33982,
+      "sha256": "0119f3219d076d92910edbc62c354568222ab3285d3b0685fd66f3a313158cbc"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/demo-ipad-landscape-chromium-pancakes-recipe.jpg",
+      "bytes": 71769,
+      "sha256": "ecf4eaa8d7775ed97a762a33b73461366e393c248a74d9c6f9515d22b57584bb"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/demo-ipad-landscape-chromium-pasta-shop.jpg",
+      "bytes": 90643,
+      "sha256": "3c5784e531b1a73748db1f6484686eb72d1fcf506bec1aa19be65ebb869b10b7"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/demo-ipad-portrait-chromium-curry-recipe.jpg",
+      "bytes": 84192,
+      "sha256": "410bc1cb7def69542783618e08c65df858977f3007ae0d87ed7889b7379cf57b"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/demo-ipad-portrait-chromium-pasta-pantry.jpg",
+      "bytes": 84641,
+      "sha256": "01942118b2aebf385076d79903d12c6a82d8a16469f6b7e548a539fe9c0aaca7"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-curry-recipe.jpg",
+      "bytes": 98496,
+      "sha256": "089fde61f94af0db8a15610745c4d33f5a9b7c5920b6c639a340609ad7e1a57a"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-pancakes-recipe.jpg",
+      "bytes": 96324,
+      "sha256": "654ad3e97ca6e31d7fdf75ca05cffd27170b6d089fdd18623c9c3ff73b893404"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-pasta-basket.jpg",
+      "bytes": 112865,
+      "sha256": "f3b908c27e7f98d455f7922a9eecbcd9a6f4403ea1272572181126f23ad4f129"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-pasta-carried-inventory.jpg",
+      "bytes": 92820,
+      "sha256": "40486a48503d2e818704dd8255d7d96a63f869488a7b666830e08b0b50498893"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-pasta-fridge.jpg",
+      "bytes": 99328,
+      "sha256": "685f9a2e230268f6ad0fb513397d10ae059792d3588b402465faba0671f3a7f3"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-pasta-pantry.jpg",
+      "bytes": 99497,
+      "sha256": "a9e70d92ecf350cd42bfaf47b3d8eaafeddda0aa1ac1a00b5d90a11550d6b499"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-pasta-recipe.jpg",
+      "bytes": 100202,
+      "sha256": "3bf06498399528de777828b3185ae35a2591c39c6d78e5814da23b6a240f91ab"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-pasta-shop.jpg",
+      "bytes": 108450,
+      "sha256": "9b0a9ec8171db41f188614d85d56c44361c12b4b3425a0bc53e6515f569cc9cf"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-pasta-shopping-list.jpg",
+      "bytes": 122211,
+      "sha256": "45fbc1cff2e37ae2217705bc9af1fea1c90acf27bc57ca3c6d051a9d891ab5d0"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-pizza-measure.jpg",
+      "bytes": 80740,
+      "sha256": "c1a985e100fe72f19610eb00e86b501f0e8dab7eb5d8d5dd4112f603fe9ba7b0"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-pizza-recipe.jpg",
+      "bytes": 98824,
+      "sha256": "943304c540b34635517312fbde95bdba9c8e843ba1e6ae420ae3b781b1eb5ae6"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-desktop-chromium-soup-recipe.jpg",
+      "bytes": 96247,
+      "sha256": "1958600dfe5da45295fd64dfb1d70b87803722980f6f069dc93816856422e9a1"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-ipad-landscape-chromium-pasta-recipe.jpg",
+      "bytes": 73083,
+      "sha256": "68dd116f5900c796025d44976f59220a54b61b8504c7ebf24c05bf818db7e5b5"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-ipad-portrait-chromium-pancakes-measure.jpg",
+      "bytes": 64761,
+      "sha256": "788ae59983b85d405477d7a962c2d1aa153fec70e480e429fac2623f49c763ec"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-ipad-portrait-chromium-pasta-recipe.jpg",
+      "bytes": 83697,
+      "sha256": "1bc32a520bcab1098e6d46f4e26c470ac73646cc9caea5258b1e302d6517f49d"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-small-touch-pasta-basket.jpg",
+      "bytes": 45188,
+      "sha256": "1f9ef50edaa828335994abf9bfa7b41251f7c823ea82977e46be36e823ba35c6"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-small-touch-pasta-carried-inventory.jpg",
+      "bytes": 32737,
+      "sha256": "36d5d109d78dfac3912ff37bf638949303f46d6549b564c3ad43a0ee4cda9c37"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-small-touch-pasta-fridge.jpg",
+      "bytes": 38432,
+      "sha256": "32094a22a21c03c7643a06122d845110c2bb4e625dce992a87f309100fed6bc2"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-small-touch-pasta-pantry.jpg",
+      "bytes": 38329,
+      "sha256": "e992d6da1bdd6d7e6333cf796fbd7036ad30e3f4f5ff47b22a1bc0e237e8fd59"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-small-touch-pasta-recipe.jpg",
+      "bytes": 39310,
+      "sha256": "7fd9f54ac6ce10dc12cb3364d4f0432fa48a55438a9175b7cda4bd649ef45cdc"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-small-touch-pasta-shop.jpg",
+      "bytes": 41423,
+      "sha256": "94d06b21a7eb8cd05577b220af35dc012f96cd5f66adf39a9715ca619a9ee73e"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-small-touch-pasta-shopping-list.jpg",
+      "bytes": 44951,
+      "sha256": "9c8249f4583390cefa9e6a279b77aa47a9024d47c95265239d16fb6e13bb27ab"
+    },
+    {
+      "path": "docs/review/ingredient-art/gallery/before/production-small-touch-soup-measure.jpg",
+      "bytes": 34146,
+      "sha256": "c83e59a85c6e0d68cfa5e00b07558ddab03aaade03993a83822b875e316b29df"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/algebra-after.png",
+      "bytes": 25725,
+      "sha256": "a316c123922d9100965f3e95ec1ef5cb68f733f140b4c75c0994c1120e5a6d23"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/algebra-before.png",
+      "bytes": 23233,
+      "sha256": "58f1abdcea7f7de87bf4aaa59c3ceb88d5248650aa9b11c99fbf86b50a9e0c8d"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/algebra-context.png",
+      "bytes": 1722455,
+      "sha256": "f595e21328d3a44c1dd3052a6ba709d6023432290848d250dce61f31fa75098f"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/fractions-after.png",
+      "bytes": 27643,
+      "sha256": "14cec096184c64440a0db53a9e8e7a083bf63628b73ebe0c60591c296be2bd16"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/fractions-before.png",
+      "bytes": 22734,
+      "sha256": "add9589721d03edf35c2520486b023e86b40a4a5b1af623543fa044b52f18595"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/fractions-context.png",
+      "bytes": 1615462,
+      "sha256": "f2b2f0aecd2ace8836c46ba88f5804bf306c72cba6c01e8bb74cf0a2aabe04ab"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/geometry-after.png",
+      "bytes": 25786,
+      "sha256": "953b635926ae663a45ffbe5f26aa69c032085c20393956a090a51962a15589e9"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/geometry-before.png",
+      "bytes": 23162,
+      "sha256": "4d64e571f1610ca600ee8e9882d39d3ce458fe3c21629d42b8076cc5532c2bf2"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/geometry-context.png",
+      "bytes": 1599639,
+      "sha256": "06ed6a0ea282073bd58c8397813abf2fa6b94a9442cd22555a7489e48a8e34f5"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/measure-after.png",
+      "bytes": 24967,
+      "sha256": "c8a5a25c1e0978c813294d36afc7359d54ef8e4e4715de4473810800adda6338"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/measure-before.png",
+      "bytes": 23401,
+      "sha256": "5c53fd8c27395c7761c59dd5381f1447e8d6f1b33ddc01cba2526dab23116e37"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/measure-context.png",
+      "bytes": 1463550,
+      "sha256": "a97411d27fa498f89f4c51bb159f437f9c19337c6fbe2bfcedad26c0b60e0364"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/number-after.png",
+      "bytes": 27257,
+      "sha256": "24954403bafa540748dcb093a05e3439c557a43903dd6c70c426218582b47974"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/number-before.png",
+      "bytes": 23913,
+      "sha256": "6d5bde203dfeb42a5f4b0c3eba8904adca029c9c82f80e30a69de937c0ec215a"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/number-context.png",
+      "bytes": 1723753,
+      "sha256": "127a7200da06e94fcf2a3bf446f71e67f074c9a491b30669b31764540ba9d538"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/probability-after.png",
+      "bytes": 26735,
+      "sha256": "561e1e249a6ec835b60ca368bfe76bd6c4a6b1f430fe2e287b63577f12445d18"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/probability-before.png",
+      "bytes": 23762,
+      "sha256": "8146b81c2358b65a0079488cebe79bb1486b0875df712bf0030bfaf7c2817695"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/probability-context.png",
+      "bytes": 1577244,
+      "sha256": "c8cbde8e07ff71b4875782a4849ace3abe31b2c6baf7a5ccc2c082a2ce197c70"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/ratio-after.png",
+      "bytes": 26867,
+      "sha256": "ce77b0346c6af11f29718d53bf8fe303cd8db82c0669f792a58efb65a89eb77c"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/ratio-before.png",
+      "bytes": 22688,
+      "sha256": "e4d62c2c3964a5569eced3372571c3bde39eb0b49d89bdd609f76d46e6eb7db0"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/ratio-context.png",
+      "bytes": 1559972,
+      "sha256": "dbd5df9ce4139676e3e8b3e685d24302ded83fa294fef70eb9d2a2e0754e7068"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/statistics-after.png",
+      "bytes": 24455,
+      "sha256": "55a342c98650eea32a13cec17dc73aa0f16c49a038cdb1ec3e2e5ab3db8589e4"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/statistics-before.png",
+      "bytes": 20279,
+      "sha256": "46833d8a208f6ae4cf87ac95a1a3c2d209dc82b79c47221ac63816dbf8dd52d6"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/statistics-context.png",
+      "bytes": 1505185,
+      "sha256": "ee49765876c599f4a3a81d99bba61a63354cb4cb71b41de2bfe713abe595e50c"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/town-after.png",
+      "bytes": 24841,
+      "sha256": "3a6bbf811b7c6f7a9166c5382c71088454befaee9c2ba4895865b0e3fb732621"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/town-before.png",
+      "bytes": 19656,
+      "sha256": "1909e36f7316eb9ed63f0a8d0b6389e13bbff3b4b8214d92a3e47e9f7fe7404b"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/desktop-chromium/town-context.png",
+      "bytes": 1897247,
+      "sha256": "1f3e445fa551f47ca8fe1df65968bd22fe84252914154c319cd7974b12fdc7be"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/algebra-after.png",
+      "bytes": 25758,
+      "sha256": "94a3b3006c95601492fd0e73e90b497a5c749f9fe1edcfea8483e39e436deb41"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/algebra-before.png",
+      "bytes": 23229,
+      "sha256": "d262a604f00d434920cd49ab0207508e910a83fe6aa5194895afa526075d47c0"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/algebra-context.png",
+      "bytes": 763212,
+      "sha256": "486b24b5d473cf56d3a2a992412fb592757e8509d7b7ba8449f3020dee93f8d1"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/fractions-after.png",
+      "bytes": 27633,
+      "sha256": "e3eb2b5e3f6bb0ff011ca6c396cb3606b8a4c451d13b9f0a0fa7969253c5ccd9"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/fractions-before.png",
+      "bytes": 22789,
+      "sha256": "c754a739f568f2b73fd833abd339c2f4bbaf81d88e12053f46846e4ffda2e2eb"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/fractions-context.png",
+      "bytes": 698696,
+      "sha256": "3a1b9967998d5b0545011d6b436b8765449858c363349a96564beb15e8e0ebc2"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/geometry-after.png",
+      "bytes": 25778,
+      "sha256": "c0aeaf9da181a7c8b7670fafdf0b724f3e38c2a65a48419e09c0f37726d98ced"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/geometry-before.png",
+      "bytes": 23157,
+      "sha256": "84efc585bb00ca939a0d93ea73445499c5c2f48983a80e495332d6e6ad974f2d"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/geometry-context.png",
+      "bytes": 701714,
+      "sha256": "fb978c9e84eac95e29b97807a20d606c8648a90825272452fab2be9dac1cf726"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/measure-after.png",
+      "bytes": 24952,
+      "sha256": "b8e5f2f83b14c95c9d93f3169e4b5fa781ee87232454f4c5093c8fc9b302979a"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/measure-before.png",
+      "bytes": 23380,
+      "sha256": "5922be14e5b8fd25d6a19b4c37ad163cce5b54d74d90ab728a524b38e65be965"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/measure-context.png",
+      "bytes": 626869,
+      "sha256": "7dc6d052f80304f491861b8d7295a0363f669e796e17696f839eaf02de4449d8"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/number-after.png",
+      "bytes": 27272,
+      "sha256": "cdbf97d224d70b2bfa8cf8f911966089f4a0678a0fec616f5d7bfff46d2b3130"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/number-before.png",
+      "bytes": 23863,
+      "sha256": "4b3ffa5f178697d6ad2aab75d9af6b226acc217758c84239a6722e4bb9ed9ef7"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/number-context.png",
+      "bytes": 748274,
+      "sha256": "9ec06b95c316501ee74cd1f95ecaf385e5153d9d4156986d65075c78af6eee3b"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/probability-after.png",
+      "bytes": 26756,
+      "sha256": "698d1d4af5d3e08e04a96484ac9acb75abe1ee0343abf83bd2f07930210d6a9d"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/probability-before.png",
+      "bytes": 23749,
+      "sha256": "38efa78f31a573247485d63db0ae4e3623f4f7bc9b423bd0b2d9dd44f2e30b60"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/probability-context.png",
+      "bytes": 692243,
+      "sha256": "42917a14610c66e0cecac5c58622ae2806ed58603d8df75e5ef450fbee57a354"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/ratio-after.png",
+      "bytes": 26871,
+      "sha256": "c68118f71b00ba1ff73e61091ad118a47b62ac033c2abf245da95bf64277ff3d"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/ratio-before.png",
+      "bytes": 22669,
+      "sha256": "8b6bf0c13ab6f4862e5ecbfa83d3384ad561b9783f19d076dc5ee19e10be627c"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/ratio-context.png",
+      "bytes": 691121,
+      "sha256": "0e886b0789a40616292374c43a80ad9f4095cdf6a6f431ae4b6da2c42edd95a9"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/statistics-after.png",
+      "bytes": 24462,
+      "sha256": "63c5caf530ebc3a0aae09200bb7336857b344e04fa6b8fa6f10fa11c96b8c368"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/statistics-before.png",
+      "bytes": 20284,
+      "sha256": "1c6df3ac937dcd307221c2ab121d261428a44e02f8e8ccbb7566527dc26ffd4e"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/statistics-context.png",
+      "bytes": 638575,
+      "sha256": "5e8b92f84af0b120ebd0617f38ced0bf05c8b56b8621e3d54148068eb224fdc1"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/town-after.png",
+      "bytes": 24871,
+      "sha256": "90b64ea7afd328fe4db473c1f6915e799ebc81b63d82360613919653ec2dc4be"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/town-before.png",
+      "bytes": 19648,
+      "sha256": "463cf717d08cd0281eba647ddc9ab5fd1c27138571d2d1ec3b72092248633269"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-landscape-chromium/town-context.png",
+      "bytes": 709630,
+      "sha256": "d7d09892a4ce928a39df651d06d4ddb15c1c939b288344d5275fe8a3ad1b15b2"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/algebra-after.png",
+      "bytes": 20181,
+      "sha256": "1a6a04e25b9be5bde01dcaae2270d63af6bf52bb418b5109112723556680c258"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/algebra-before.png",
+      "bytes": 17670,
+      "sha256": "fe9c3786d8c78aa9180f8acd340510aebf5906bb1a84556b3c40188e568a1e8d"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/algebra-context.png",
+      "bytes": 843656,
+      "sha256": "70d7e5a24fb284307ab39df7dd8dec84fa3df81a597cf785fbd897070244f9b1"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/fractions-after.png",
+      "bytes": 21998,
+      "sha256": "ba04467e349eaffb0206550d8fdbf03f275c7aead2d3f02ca224947f1e2e7280"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/fractions-before.png",
+      "bytes": 17252,
+      "sha256": "b080a87cdf99306b7e336a0d61f57dbcfc874c0bdf29b208d0c8885b47505f25"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/fractions-context.png",
+      "bytes": 794750,
+      "sha256": "9fd41b9cc551f3985aed6fc4d397f158832cccbb9efd9c4b352fb724ae3962da"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/geometry-after.png",
+      "bytes": 20227,
+      "sha256": "2a685877b3325cbd59c168f8e9fcf1bfabd980df26fda88fe0cccc5e7eae37fc"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/geometry-before.png",
+      "bytes": 17594,
+      "sha256": "ca0852834c73049c4b5753e83f25c9c6adb02075aa3322ce87eb064765c964cc"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/geometry-context.png",
+      "bytes": 796446,
+      "sha256": "6f69912da812bec5a6fc5723122230b3099964bab0771aabec86b6a1c95b9baa"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/measure-after.png",
+      "bytes": 19367,
+      "sha256": "c58598d801c96e339e882c986c397fb93079654d2951e03f2df0e3ce98cca6ca"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/measure-before.png",
+      "bytes": 17791,
+      "sha256": "8465319c48d9d275c172b98487736c0b12dc09f8c7180ff4cdd7a0d1107f3541"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/measure-context.png",
+      "bytes": 759121,
+      "sha256": "7fcd816a97d12b708653194f8b0eec9459ea743287dc73e36dc3b7457ac11445"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/number-after.png",
+      "bytes": 21849,
+      "sha256": "2d0ce2906adaa6dd565456035b6b143f78beeef81f20d2fa7bb65c3f5c4ead76"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/number-before.png",
+      "bytes": 18360,
+      "sha256": "acbee0a128bb84732a814f588cff254a18210b075d98388bf39be5c4d298a113"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/number-context.png",
+      "bytes": 861556,
+      "sha256": "b599ac47e00b7b19e1e6dd721aa8adf7ef767d3f61a2f7765946d06bcb54da0d"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/probability-after.png",
+      "bytes": 21200,
+      "sha256": "d1855c370aac4a07a7e96f95d7bf1609c58d65bc1cbdfdc3a5b53c8c74df408f"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/probability-before.png",
+      "bytes": 18175,
+      "sha256": "64fa9e516b8d4966a2a6e7e4ce7cb68d3735787d87cf7f06bdc329138924cfec"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/probability-context.png",
+      "bytes": 786862,
+      "sha256": "197e2370284f630269d5eb08e40898709b65341624a519d274d0689badedf55e"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/ratio-after.png",
+      "bytes": 21609,
+      "sha256": "c0e9810cdd46ef17fcd341b3baf056cbf4237d0b8aba9309e3d64039c7ce8edd"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/ratio-before.png",
+      "bytes": 17471,
+      "sha256": "6811d06871e3ea4fd2f3b51e93980acfcd1e4cffcd685809b8a06930fe68a132"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/ratio-context.png",
+      "bytes": 769790,
+      "sha256": "63c57e52f21b9d416def6a5c9fe6b1f72273b663f7faf832780b90014f18d7c1"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/statistics-after.png",
+      "bytes": 18943,
+      "sha256": "0acf99720e714b36374b25234d07ce5db00b32ef845483404e01f30b905a1a30"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/statistics-before.png",
+      "bytes": 14818,
+      "sha256": "fce3dce67c1d65f44346cf1fde1adbb9852d08076ceff73a62726ac076cb215c"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/statistics-context.png",
+      "bytes": 755629,
+      "sha256": "093a4c5f313a5e5a2069d275ab78cdaaab21124f7d714584244d40bb8ddf8be9"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/town-after.png",
+      "bytes": 24345,
+      "sha256": "8ecf56259031fd7e197e1d1919a9ffcf2adfe3c61a0b8ffe59006f739701df73"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/town-before.png",
+      "bytes": 19018,
+      "sha256": "7111b9b77233ef580d2f5e865c832db98bf89b4a33f732d8817680642c74491c"
+    },
+    {
+      "path": "docs/review/live-guide-portraits/ipad-portrait-chromium/town-context.png",
+      "bytes": 909378,
+      "sha256": "d56b78c1abe79d019acbe3d35efdf867af759ab07ca9826d1c027d1508092e98"
+    },
+    {
+      "path": "docs/review/owner-review/after/desktop-chromium/base-camp.jpg",
+      "bytes": 219044,
+      "sha256": "515c68dce5d27a4fdbb7d65b51ea07192e52c0aeda768fbbf5a60328e54c237d"
+    },
+    {
+      "path": "docs/review/owner-review/after/desktop-chromium/community-complete.jpg",
+      "bytes": 76047,
+      "sha256": "b3a4d6b9b43c203149d6cb5849e38f9c917af525f2ac66f9f441442fb94ca47a"
+    },
+    {
+      "path": "docs/review/owner-review/after/desktop-chromium/community-reasoning.jpg",
+      "bytes": 70963,
+      "sha256": "262c2639a145b35b457dfb1d78fa5a549860247432df9e07f3e60ec4f515c1c5"
+    },
+    {
+      "path": "docs/review/owner-review/after/desktop-chromium/one-action-answer.jpg",
+      "bytes": 75981,
+      "sha256": "fc835feb93a62aeac1c81910ee905db4fe2b44881c570907d92ee0819ed4a087"
+    },
+    {
+      "path": "docs/review/owner-review/after/desktop-chromium/scoped-recovery.jpg",
+      "bytes": 34888,
+      "sha256": "610a1002df0c1f634600a32630274be3ef89569e456e154592e7bc1db2256423"
+    },
+    {
+      "path": "docs/review/owner-review/after/desktop-chromium/town-complete.jpg",
+      "bytes": 126480,
+      "sha256": "a571009b42d94866d4a36e1c4e2449fc989edd91cef6332ed718e151fff6b9e4"
+    },
+    {
+      "path": "docs/review/owner-review/after/desktop-chromium/town-guide.jpg",
+      "bytes": 23422,
+      "sha256": "cec5915c4b78149fc6c788b2f493f403c826be01dd4133c074d8f2e54a5a98bf"
+    },
+    {
+      "path": "docs/review/owner-review/after/desktop-chromium/town-path.jpg",
+      "bytes": 138706,
+      "sha256": "a64a599a78c7d4093021811431fb610c19f0320ad86ad1457e982b5a6b638d93"
+    },
+    {
+      "path": "docs/review/owner-review/after/desktop-chromium/valid-location.jpg",
+      "bytes": 46675,
+      "sha256": "f1e26fc99f5acd0eb024074a688e6a4e97630959c81ca573fd73191c095c6841"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-landscape-chromium/base-camp.jpg",
+      "bytes": 146378,
+      "sha256": "9343659d15de701f229281bfe178752c560a9d170808dd148bfe872d8f0c3065"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-landscape-chromium/community-complete.jpg",
+      "bytes": 76769,
+      "sha256": "53d03bc51313473ffd9edff9956e63f06c89ec1507e810ce106a388885be242b"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-landscape-chromium/community-reasoning.jpg",
+      "bytes": 70997,
+      "sha256": "c594b7f8c1b321486bd161a99be00f9c0bbe54f922d9bcdd34bcec15f789cb81"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-landscape-chromium/one-action-answer.jpg",
+      "bytes": 67095,
+      "sha256": "4f86ab77edbb4a4083b46b89be894e2ad244319d450c2152bdf698ce08220182"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-landscape-chromium/scoped-recovery.jpg",
+      "bytes": 34602,
+      "sha256": "d295f85e084a23a3018b3ea847218860c4fea8a1d13c280739c3b2a4c2ab119f"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-landscape-chromium/town-complete.jpg",
+      "bytes": 82843,
+      "sha256": "bfbb3ad48baf52b96b3b00f45a562587be1f862c372af9317dc3c3f107a9e1d1"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-landscape-chromium/town-guide.jpg",
+      "bytes": 23100,
+      "sha256": "6d69b4d22b42c77edba26f45e565b82aac3d4041cc7a3f6c4fded0430437b708"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-landscape-chromium/town-path.jpg",
+      "bytes": 137459,
+      "sha256": "1be2aff3b3f76dad47707e7d82ce579110865486fd542c8b8594a493957412a8"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-landscape-chromium/valid-location.jpg",
+      "bytes": 46188,
+      "sha256": "3ac1115b7f7baa1006195481f3d9cdf5d20f68ea88cecea5eabb0fd0a6c14436"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-portrait-chromium/base-camp.jpg",
+      "bytes": 170787,
+      "sha256": "b68da268f164c945f3d80e108166932d50b139823b265aea30988482045bba45"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-portrait-chromium/community-complete.jpg",
+      "bytes": 77585,
+      "sha256": "144f49884b9e0d294a67919eec1685d656bfc96cba11212cd7ea8c57cb40486d"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-portrait-chromium/community-reasoning.jpg",
+      "bytes": 69699,
+      "sha256": "89a2bbf57272217438fc776f677e060f4cb7cb4f799da5d25274ff632f60b97d"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-portrait-chromium/one-action-answer.jpg",
+      "bytes": 73717,
+      "sha256": "57abd03b885827dd543f49372c52a2dd1a158deea65c3667adef192731b081c2"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-portrait-chromium/scoped-recovery.jpg",
+      "bytes": 34788,
+      "sha256": "fe0823c207217241c413590700c62321b1a5e7578c47ba7c123ebe1bdacc3eb7"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-portrait-chromium/town-complete.jpg",
+      "bytes": 111867,
+      "sha256": "9b74d013921836171cbf7d7e452495dea9e046653c0a5bc87c091ff5c938de5d"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-portrait-chromium/town-guide.jpg",
+      "bytes": 23210,
+      "sha256": "aeeec5a45d14c91a20863a7e38086f9b7f4e67ed7b862756096d5abf76d4bc3b"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-portrait-chromium/town-path.jpg",
+      "bytes": 144205,
+      "sha256": "b4c19715d9cf104cbe05144a252fa1ca92e92e89085bed2fce6c2ac62ded2116"
+    },
+    {
+      "path": "docs/review/owner-review/after/ipad-portrait-chromium/valid-location.jpg",
+      "bytes": 57479,
+      "sha256": "1caac7de925f09d7e4596f2b932ccda2f9b9805e6cd052312d95b1339927a1f0"
+    },
+    {
+      "path": "docs/review/owner-review/after/small-touch/base-camp.jpg",
+      "bytes": 39800,
+      "sha256": "7da167bf6913f26c4c9172c9deb1db9ba9cb61100227e8f0f758d1485525efbb"
+    },
+    {
+      "path": "docs/review/owner-review/after/small-touch/community-complete.jpg",
+      "bytes": 74040,
+      "sha256": "ec25c189757f11100ef998da0e3f0f6adcdbb5f7b0626a7ff544cb777ba06aac"
+    },
+    {
+      "path": "docs/review/owner-review/after/small-touch/community-reasoning.jpg",
+      "bytes": 43180,
+      "sha256": "0886f80543358049b4b1ea6653895e325d96bf12b1643dae657717b508353856"
+    },
+    {
+      "path": "docs/review/owner-review/after/small-touch/one-action-answer.jpg",
+      "bytes": 39846,
+      "sha256": "a5e03b92513cd0cc031666f7b5ce241003970cdcc30b811c6e67374a4656e148"
+    },
+    {
+      "path": "docs/review/owner-review/after/small-touch/scoped-recovery.jpg",
+      "bytes": 35040,
+      "sha256": "e3bbd7a93ee0e3fb761dc1cfcab1ec5d8f0af97c5d07ebe920048dcfa9d0be37"
+    },
+    {
+      "path": "docs/review/owner-review/after/small-touch/town-complete.jpg",
+      "bytes": 40998,
+      "sha256": "757ad0416da35a439133717d1df879da34f80c12a23fe0bf131077b6b224b340"
+    },
+    {
+      "path": "docs/review/owner-review/after/small-touch/town-guide.jpg",
+      "bytes": 17600,
+      "sha256": "6093ac9f88dcdf529982a24e00fc3a4e262f1cf50de9892d7caa232499a49784"
+    },
+    {
+      "path": "docs/review/owner-review/after/small-touch/town-path.jpg",
+      "bytes": 137760,
+      "sha256": "8e3973d83d909bf8c08400c82bcb6a1ea531be6c26b04b4fc4830bcd8ccefd82"
+    },
+    {
+      "path": "docs/review/owner-review/after/small-touch/valid-location.jpg",
+      "bytes": 33431,
+      "sha256": "6cb94d4bc3405cc73662d22cd0869b9f583f56b2585424dbbe63c4976ed06d3a"
+    },
+    {
+      "path": "docs/review/owner-review/before/desktop-chromium/question-closed.jpg",
+      "bytes": 179430,
+      "sha256": "6fe2a4f35e74a25ed7ebfa6c22f7597977ca335707b838f090d5dbdffbfb03c8"
+    },
+    {
+      "path": "docs/review/owner-review/before/desktop-chromium/undefined-location.jpg",
+      "bytes": 50119,
+      "sha256": "a9c1f5bbc362b64f922875f088d6e961621d8b0f456fda9100b927b5389c258c"
+    },
+    {
+      "path": "docs/review/owner-review/before/ipad-landscape-chromium/question-closed.jpg",
+      "bytes": 143334,
+      "sha256": "8e54733b360591668b18c797d1b477c405bea5abea33772845fb3b6886d5c6c1"
+    },
+    {
+      "path": "docs/review/owner-review/before/ipad-landscape-chromium/undefined-location.jpg",
+      "bytes": 46699,
+      "sha256": "41f3d8fc5aa21d34ad466afd0b5ae42573aaddfb4948d1fc946af36f30540c2c"
+    },
+    {
+      "path": "docs/review/owner-review/before/ipad-portrait-chromium/question-closed.jpg",
+      "bytes": 136089,
+      "sha256": "8a9f5d519e6654bd48d520fa541f2813ae6e5362d726b385952414596455c4fb"
+    },
+    {
+      "path": "docs/review/owner-review/before/ipad-portrait-chromium/undefined-location.jpg",
+      "bytes": 63141,
+      "sha256": "8102aca8ff64fc6f686b25f2e543e526a7316d6a663e1c058aaf0a4c539eaf0e"
+    },
+    {
+      "path": "docs/review/owner-review/before/small-touch/question-closed.jpg",
+      "bytes": 50325,
+      "sha256": "0666932fc653af576d826d163d0b5bc2cef8d808ee441e4015d82f03f02fc72a"
+    },
+    {
+      "path": "docs/review/owner-review/before/small-touch/undefined-location.jpg",
+      "bytes": 34654,
+      "sha256": "5fe53b34c173d9bb70d4a9d0eb387b67700e3b340af5b759602212c1ad7aa35e"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/desktop-chromium/after-restored.png",
+      "bytes": 806197,
+      "sha256": "60af1d34802bee21fe4fd8aacac54b46664619a04f9ad1ee5f775fa123fcc46b"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/desktop-chromium/after-rowan-panel.png",
+      "bytes": 27225,
+      "sha256": "94df855c48b66ae307af03f3c698e1de4d9e4d6ea9036f1bbc9b707efc5cb5a7"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/desktop-chromium/after-rowan.png",
+      "bytes": 1243748,
+      "sha256": "25dfe2a51bffa85bed28babbc62277f10762d3bd5de64ac97519115be91af130"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/desktop-chromium/after-world.png",
+      "bytes": 812347,
+      "sha256": "1669b129ca3aa7c55072524a4131e67f7e4b935dedc88f762180e044e7da0f00"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/desktop-chromium/before-rowan.png",
+      "bytes": 1248358,
+      "sha256": "1fc732835a886d1fbfa03a4669579b96a8e4d59e4cfa33b6133e8798510eeb9e"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/desktop-chromium/before-world.png",
+      "bytes": 834063,
+      "sha256": "317ccff1544b0ccde2df72bd011205721156ce67e666f72a3c8da7ab29e146b7"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-landscape-chromium/after-restored.png",
+      "bytes": 714899,
+      "sha256": "c28c459379a9dbe25f7958dcf7fc4a244321a1efbac1cae4a674b8b3d572d48e"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-landscape-chromium/after-rowan-panel.png",
+      "bytes": 27202,
+      "sha256": "8376b591018b2202bf9f66eb2aa494f294c0fbc7f35e7610d1b47ff4b89bc365"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-landscape-chromium/after-rowan.png",
+      "bytes": 750723,
+      "sha256": "e30b34fffa0c3f1c3b4ecf7c074d6a51c67e394bf87079532f1872ddb26687e5"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-landscape-chromium/after-world.png",
+      "bytes": 716376,
+      "sha256": "27426b12a857791aa063d7e4b00386841aa406bad0532d202ae21d08b61cdc07"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-landscape-chromium/before-rowan.png",
+      "bytes": 747085,
+      "sha256": "e95e576544a623ca17dcc5ececb152a2153a24073aa5c80279e858e53d9a54c6"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-landscape-chromium/before-world.png",
+      "bytes": 734460,
+      "sha256": "54b8e40d0d96202cf059c9a3f46f3b2d2c001aadc153c4530d8b1f9d087fb2f3"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-portrait-chromium/after-restored.png",
+      "bytes": 832264,
+      "sha256": "aa4addaffe14edf249936df6d4bbd95cfe8f3479ba4861a9b61cbe92b0ac42ad"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-portrait-chromium/after-rowan-panel.png",
+      "bytes": 21580,
+      "sha256": "324ba9bd308357605a163962d45d537627a75c6e2691dc9e2a1001ce033887ff"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-portrait-chromium/after-rowan.png",
+      "bytes": 844317,
+      "sha256": "b1c7d41b34a126f88fef1ea02070f71ab37be1d7017b92653699543da985d39f"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-portrait-chromium/after-world.png",
+      "bytes": 833766,
+      "sha256": "e1295a371472da7161924b5ff24f5a38ca1673240fbd102d7525fcf2dc96ec58"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-portrait-chromium/before-rowan.png",
+      "bytes": 863684,
+      "sha256": "88b6fa2fd2a90e9b74d4a16a08ddf9a161b8e2675b65348e998a2f13afc0ca72"
+    },
+    {
+      "path": "docs/review/painted-forest-preview/ipad-portrait-chromium/before-world.png",
+      "bytes": 855092,
+      "sha256": "a7d03787a303926034c6483817f48c688cd1efea24a14305b44f4006b11f6d61"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/algebra-after.png",
+      "bytes": 25725,
+      "sha256": "a316c123922d9100965f3e95ec1ef5cb68f733f140b4c75c0994c1120e5a6d23"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/algebra-before.png",
+      "bytes": 23233,
+      "sha256": "58f1abdcea7f7de87bf4aaa59c3ceb88d5248650aa9b11c99fbf86b50a9e0c8d"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/algebra-context.png",
+      "bytes": 1722454,
+      "sha256": "4bdab1d35232945adfe26c9579aa65baf2043c4ae1c1093adaa7921de3d066e3"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/fractions-after.png",
+      "bytes": 27643,
+      "sha256": "14cec096184c64440a0db53a9e8e7a083bf63628b73ebe0c60591c296be2bd16"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/fractions-before.png",
+      "bytes": 22734,
+      "sha256": "add9589721d03edf35c2520486b023e86b40a4a5b1af623543fa044b52f18595"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/fractions-context.png",
+      "bytes": 1615461,
+      "sha256": "ab5ade77cedd81be103e0d52036ef201c0be837d7a1c3292ef63cd68490025bc"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/geometry-after.png",
+      "bytes": 25786,
+      "sha256": "953b635926ae663a45ffbe5f26aa69c032085c20393956a090a51962a15589e9"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/geometry-before.png",
+      "bytes": 23162,
+      "sha256": "4d64e571f1610ca600ee8e9882d39d3ce458fe3c21629d42b8076cc5532c2bf2"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/geometry-context.png",
+      "bytes": 1599639,
+      "sha256": "06ed6a0ea282073bd58c8397813abf2fa6b94a9442cd22555a7489e48a8e34f5"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/measure-after.png",
+      "bytes": 24967,
+      "sha256": "c8a5a25c1e0978c813294d36afc7359d54ef8e4e4715de4473810800adda6338"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/measure-before.png",
+      "bytes": 23401,
+      "sha256": "5c53fd8c27395c7761c59dd5381f1447e8d6f1b33ddc01cba2526dab23116e37"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/measure-context.png",
+      "bytes": 1463554,
+      "sha256": "6408370348a23c715aa8a812508829ffc8d6b93f19b507cb729016a1e43071e7"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/number-after.png",
+      "bytes": 27257,
+      "sha256": "24954403bafa540748dcb093a05e3439c557a43903dd6c70c426218582b47974"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/number-before.png",
+      "bytes": 23913,
+      "sha256": "6d5bde203dfeb42a5f4b0c3eba8904adca029c9c82f80e30a69de937c0ec215a"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/number-context.png",
+      "bytes": 1723753,
+      "sha256": "127a7200da06e94fcf2a3bf446f71e67f074c9a491b30669b31764540ba9d538"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/probability-after.png",
+      "bytes": 26735,
+      "sha256": "561e1e249a6ec835b60ca368bfe76bd6c4a6b1f430fe2e287b63577f12445d18"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/probability-before.png",
+      "bytes": 23762,
+      "sha256": "8146b81c2358b65a0079488cebe79bb1486b0875df712bf0030bfaf7c2817695"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/probability-context.png",
+      "bytes": 1577244,
+      "sha256": "c8cbde8e07ff71b4875782a4849ace3abe31b2c6baf7a5ccc2c082a2ce197c70"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/ratio-after.png",
+      "bytes": 26867,
+      "sha256": "ce77b0346c6af11f29718d53bf8fe303cd8db82c0669f792a58efb65a89eb77c"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/ratio-before.png",
+      "bytes": 22688,
+      "sha256": "e4d62c2c3964a5569eced3372571c3bde39eb0b49d89bdd609f76d46e6eb7db0"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/ratio-context.png",
+      "bytes": 1559972,
+      "sha256": "dbd5df9ce4139676e3e8b3e685d24302ded83fa294fef70eb9d2a2e0754e7068"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/statistics-after.png",
+      "bytes": 24455,
+      "sha256": "55a342c98650eea32a13cec17dc73aa0f16c49a038cdb1ec3e2e5ab3db8589e4"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/statistics-before.png",
+      "bytes": 20279,
+      "sha256": "46833d8a208f6ae4cf87ac95a1a3c2d209dc82b79c47221ac63816dbf8dd52d6"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/statistics-context.png",
+      "bytes": 1505186,
+      "sha256": "cd275a40d8a762aa7875db9dd3ec0d3aa8441122cb1e46850fa57bc18925e351"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/town-after.png",
+      "bytes": 24841,
+      "sha256": "3a6bbf811b7c6f7a9166c5382c71088454befaee9c2ba4895865b0e3fb732621"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/town-before.png",
+      "bytes": 19656,
+      "sha256": "1909e36f7316eb9ed63f0a8d0b6389e13bbff3b4b8214d92a3e47e9f7fe7404b"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/desktop-chromium/town-context.png",
+      "bytes": 1897246,
+      "sha256": "cd3e6c354a495b6ad51dac21f8f9ef00a6dafffbf56501e46bbb7fa5e510910f"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/algebra-after.png",
+      "bytes": 25758,
+      "sha256": "94a3b3006c95601492fd0e73e90b497a5c749f9fe1edcfea8483e39e436deb41"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/algebra-before.png",
+      "bytes": 23229,
+      "sha256": "d262a604f00d434920cd49ab0207508e910a83fe6aa5194895afa526075d47c0"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/algebra-context.png",
+      "bytes": 761812,
+      "sha256": "47789c3702ba10bfd0434b5e7df2509e92d6ec8f17e8c46501c7647a590b97ee"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/fractions-after.png",
+      "bytes": 27633,
+      "sha256": "e3eb2b5e3f6bb0ff011ca6c396cb3606b8a4c451d13b9f0a0fa7969253c5ccd9"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/fractions-before.png",
+      "bytes": 22789,
+      "sha256": "c754a739f568f2b73fd833abd339c2f4bbaf81d88e12053f46846e4ffda2e2eb"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/fractions-context.png",
+      "bytes": 697306,
+      "sha256": "eebb65dc743bf9805ca3f4b086882470214d1db5dcab8c0bbe5d6217b85aa942"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/geometry-after.png",
+      "bytes": 25778,
+      "sha256": "c0aeaf9da181a7c8b7670fafdf0b724f3e38c2a65a48419e09c0f37726d98ced"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/geometry-before.png",
+      "bytes": 23157,
+      "sha256": "84efc585bb00ca939a0d93ea73445499c5c2f48983a80e495332d6e6ad974f2d"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/geometry-context.png",
+      "bytes": 700304,
+      "sha256": "52a64e40547933d966ca7dadbea9337f2ec090af24f83719350125de17554dc7"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/measure-after.png",
+      "bytes": 24953,
+      "sha256": "51cdc826ff5ca305ec5237d6a0a1d4cde69087ddd184b8a107a27f12febae8be"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/measure-before.png",
+      "bytes": 23404,
+      "sha256": "fa0a5be4472ecf610d8e609d9499605e34ce041d22e77d14e24891a0851b24f4"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/measure-context.png",
+      "bytes": 625435,
+      "sha256": "1a3081c4b8146c6291129105612a4852add1b687b6fab5c10c5b82ddc54806cc"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/number-after.png",
+      "bytes": 27272,
+      "sha256": "cdbf97d224d70b2bfa8cf8f911966089f4a0678a0fec616f5d7bfff46d2b3130"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/number-before.png",
+      "bytes": 23863,
+      "sha256": "4b3ffa5f178697d6ad2aab75d9af6b226acc217758c84239a6722e4bb9ed9ef7"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/number-context.png",
+      "bytes": 746815,
+      "sha256": "7bb473b91a8e04b54303c2ba0610471005ec07045b546f9424296d2ab26bd17b"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/probability-after.png",
+      "bytes": 26756,
+      "sha256": "698d1d4af5d3e08e04a96484ac9acb75abe1ee0343abf83bd2f07930210d6a9d"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/probability-before.png",
+      "bytes": 23749,
+      "sha256": "38efa78f31a573247485d63db0ae4e3623f4f7bc9b423bd0b2d9dd44f2e30b60"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/probability-context.png",
+      "bytes": 690864,
+      "sha256": "4d200cd25d7899008511a294cf8c770c2c84f35273fc09f2388414977745a5b8"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/ratio-after.png",
+      "bytes": 26864,
+      "sha256": "95cd38cc77eb4e56fd99c5e5114b134c73bfd83174cfd63350b986898457e5c9"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/ratio-before.png",
+      "bytes": 22679,
+      "sha256": "091546545ca6c7694a373fbf6a2f8b73e331521e3b1ac16b796ee71ebb0948dd"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/ratio-context.png",
+      "bytes": 689726,
+      "sha256": "4e692ca7428de868f81146ef64787e0adf233e9457ef61959437bb65d22790e6"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/statistics-after.png",
+      "bytes": 24462,
+      "sha256": "63c5caf530ebc3a0aae09200bb7336857b344e04fa6b8fa6f10fa11c96b8c368"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/statistics-before.png",
+      "bytes": 20284,
+      "sha256": "1c6df3ac937dcd307221c2ab121d261428a44e02f8e8ccbb7566527dc26ffd4e"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/statistics-context.png",
+      "bytes": 637163,
+      "sha256": "856a6268c205e5fb2a974be5e66bec3bd3802eaba9d1ec7537b99e0df8e86dc3"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/town-after.png",
+      "bytes": 24871,
+      "sha256": "90b64ea7afd328fe4db473c1f6915e799ebc81b63d82360613919653ec2dc4be"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/town-before.png",
+      "bytes": 19648,
+      "sha256": "463cf717d08cd0281eba647ddc9ab5fd1c27138571d2d1ec3b72092248633269"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-landscape-chromium/town-context.png",
+      "bytes": 708207,
+      "sha256": "34b755d24c34b8f808fa3ec60f5b26a2fffa0852398f2dd055331cf3501cfcc9"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/algebra-after.png",
+      "bytes": 20181,
+      "sha256": "1a6a04e25b9be5bde01dcaae2270d63af6bf52bb418b5109112723556680c258"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/algebra-before.png",
+      "bytes": 17670,
+      "sha256": "fe9c3786d8c78aa9180f8acd340510aebf5906bb1a84556b3c40188e568a1e8d"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/algebra-context.png",
+      "bytes": 843781,
+      "sha256": "977ded17ad3f4e58e1e3423d849b09fec0c2480fa14883be7e60e32a38e0bd11"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/fractions-after.png",
+      "bytes": 21998,
+      "sha256": "ba04467e349eaffb0206550d8fdbf03f275c7aead2d3f02ca224947f1e2e7280"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/fractions-before.png",
+      "bytes": 17252,
+      "sha256": "b080a87cdf99306b7e336a0d61f57dbcfc874c0bdf29b208d0c8885b47505f25"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/fractions-context.png",
+      "bytes": 794937,
+      "sha256": "b8be4c2a2d7798ad4d6df575c95ff64011f30b70552229bbb88215d7a5cac19e"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/geometry-after.png",
+      "bytes": 20227,
+      "sha256": "2a685877b3325cbd59c168f8e9fcf1bfabd980df26fda88fe0cccc5e7eae37fc"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/geometry-before.png",
+      "bytes": 17594,
+      "sha256": "ca0852834c73049c4b5753e83f25c9c6adb02075aa3322ce87eb064765c964cc"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/geometry-context.png",
+      "bytes": 796612,
+      "sha256": "a84336dab56102bf52818366cfeda1c2e42775e9dc1e6fb29cdf6b81c59ac1df"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/measure-after.png",
+      "bytes": 19367,
+      "sha256": "c58598d801c96e339e882c986c397fb93079654d2951e03f2df0e3ce98cca6ca"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/measure-before.png",
+      "bytes": 17791,
+      "sha256": "8465319c48d9d275c172b98487736c0b12dc09f8c7180ff4cdd7a0d1107f3541"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/measure-context.png",
+      "bytes": 759281,
+      "sha256": "a348f8b2e551b4152c5cb7edc85d50a8ab66bf0003f14ca1970cc67ec7855f68"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/number-after.png",
+      "bytes": 21849,
+      "sha256": "2d0ce2906adaa6dd565456035b6b143f78beeef81f20d2fa7bb65c3f5c4ead76"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/number-before.png",
+      "bytes": 18360,
+      "sha256": "acbee0a128bb84732a814f588cff254a18210b075d98388bf39be5c4d298a113"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/number-context.png",
+      "bytes": 861717,
+      "sha256": "ef754a08abed3ecb045d89d8b45213503fe8ba54d95f563e189a0628845f479e"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/probability-after.png",
+      "bytes": 21200,
+      "sha256": "d1855c370aac4a07a7e96f95d7bf1609c58d65bc1cbdfdc3a5b53c8c74df408f"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/probability-before.png",
+      "bytes": 18175,
+      "sha256": "64fa9e516b8d4966a2a6e7e4ce7cb68d3735787d87cf7f06bdc329138924cfec"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/probability-context.png",
+      "bytes": 787053,
+      "sha256": "d0a9846dd60f2503e86c1987a0e73ca82084792567e3d27c3fcafea253e7eae9"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/ratio-after.png",
+      "bytes": 21609,
+      "sha256": "c0e9810cdd46ef17fcd341b3baf056cbf4237d0b8aba9309e3d64039c7ce8edd"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/ratio-before.png",
+      "bytes": 17471,
+      "sha256": "6811d06871e3ea4fd2f3b51e93980acfcd1e4cffcd685809b8a06930fe68a132"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/ratio-context.png",
+      "bytes": 769957,
+      "sha256": "66df79ad0286e8aa9b9af410b8ddc77fdeba0036dd11a947744723433edea0e9"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/statistics-after.png",
+      "bytes": 18943,
+      "sha256": "0acf99720e714b36374b25234d07ce5db00b32ef845483404e01f30b905a1a30"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/statistics-before.png",
+      "bytes": 14818,
+      "sha256": "fce3dce67c1d65f44346cf1fde1adbb9852d08076ceff73a62726ac076cb215c"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/statistics-context.png",
+      "bytes": 755811,
+      "sha256": "bfd61d22f6ed2e69009cd8afbd72bc6b12de7d37cbeb4b7e38ea14a8f66f1dd8"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/town-after.png",
+      "bytes": 24345,
+      "sha256": "8ecf56259031fd7e197e1d1919a9ffcf2adfe3c61a0b8ffe59006f739701df73"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/town-before.png",
+      "bytes": 19018,
+      "sha256": "7111b9b77233ef580d2f5e865c832db98bf89b4a33f732d8817680642c74491c"
+    },
+    {
+      "path": "docs/review/production-guide-portraits/ipad-portrait-chromium/town-context.png",
+      "bytes": 909577,
+      "sha256": "bf2d8dbea919836545786d5ceef29056d345c09f129cabae829ddef3fc975942"
+    },
+    {
+      "path": "docs/review/ratio-pixel-regression/background-after.png",
+      "bytes": 1409782,
+      "sha256": "cb1484a2f6aa0fde720408ab71cc7059102d729bfb0fdec0d1f52ec4299744e9"
+    },
+    {
+      "path": "docs/review/ratio-pixel-regression/background-before.png",
+      "bytes": 1409782,
+      "sha256": "cb1484a2f6aa0fde720408ab71cc7059102d729bfb0fdec0d1f52ec4299744e9"
+    },
+    {
+      "path": "docs/review/ratio-pixel-regression/corner-pixel-analysis.png",
+      "bytes": 74121,
+      "sha256": "20b0fdf0f6581207dadecb443d460242dda5a8d26f770e821824125d124b70b6"
+    },
+    {
+      "path": "docs/review/ratio-pixel-regression/probe-after.png",
+      "bytes": 1398567,
+      "sha256": "78d259a5d54e88b7abcb32f1434e37499d3acb417d1a91eac05dbcaf606b99cc"
+    },
+    {
+      "path": "docs/review/ratio-pixel-regression/probe-before.png",
+      "bytes": 1398572,
+      "sha256": "0b57a8affbcbd36aff449ca7268b6623aeafe154582028117b4f0507f046873e"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-demo-desktop-chromium-pasta-fridge.jpg",
+      "bytes": 93356,
+      "sha256": "e4fb618f7503e5551514d93719322312d50e29e464fa3b7f8450f3190c423be4"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-demo-desktop-chromium-pasta-recipe.jpg",
+      "bytes": 93067,
+      "sha256": "e292009bb3d0d30910fd80ff36914e8c2f03fd123dbbb7c2e3b5505aeb712008"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-demo-ipad-landscape-chromium-pasta-recipe.jpg",
+      "bytes": 67731,
+      "sha256": "6114666584098620bcf956eea52a579320012062add878aa44f9e17c29e27e8f"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-demo-ipad-portrait-chromium-pasta-recipe.jpg",
+      "bytes": 77937,
+      "sha256": "b20da60f5a170d1f727e004d02c346d1b1c0456a30f2f7c60a3db89e0a59bf1d"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-demo-small-touch-curry-recipe.jpg",
+      "bytes": 40397,
+      "sha256": "d4b4a5b5ed778cacbd197b985591b559fbccd9a6eb2446ecd486f6fc52ec9934"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-demo-small-touch-pancakes-recipe.jpg",
+      "bytes": 39298,
+      "sha256": "dd8f0881a4191fd56e6070308e56ed84354fa66512660f3c26bff382eb9a9a81"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-demo-small-touch-pasta-basket.jpg",
+      "bytes": 41592,
+      "sha256": "4b5bed6334f2bc52cd4943873d1a03a08c4d1e5cbcb576eaf8a84dd0c6f90afb"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-demo-small-touch-pasta-pantry.jpg",
+      "bytes": 35577,
+      "sha256": "d56c4d29876f32bfb58f5b831f417e8ef99c2af622a73920409f679a54ec0eba"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-demo-small-touch-pasta-recipe.jpg",
+      "bytes": 36669,
+      "sha256": "bac4bb3f39033e9b8750c805be725e4b087cc8c718b8d92d6b5fa6bf89333842"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-demo-small-touch-pizza-recipe.jpg",
+      "bytes": 41423,
+      "sha256": "199964d5d92da508d9d7a76dee864eae374c79b7a434e9433167a3d8134289b9"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-demo-small-touch-soup-recipe.jpg",
+      "bytes": 39129,
+      "sha256": "723eba22da0e2ca99ac0abb0e3f454a5fab442539367c1a32da549afe18b09f9"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-production-desktop-chromium-curry-recipe.jpg",
+      "bytes": 92707,
+      "sha256": "c5ef633b9ad4b2bbb9fb23fcc47ac63c15cf9e6b1d053c739d9b06ff05816c71"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-production-desktop-chromium-pancakes-recipe.jpg",
+      "bytes": 90631,
+      "sha256": "b7cc9169d41df165aa30fe1e91af791192403c51d7b1ac3a0996ded25a96f092"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-production-desktop-chromium-pasta-fridge.jpg",
+      "bytes": 93356,
+      "sha256": "e4fb618f7503e5551514d93719322312d50e29e464fa3b7f8450f3190c423be4"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-production-desktop-chromium-pasta-recipe.jpg",
+      "bytes": 93067,
+      "sha256": "e292009bb3d0d30910fd80ff36914e8c2f03fd123dbbb7c2e3b5505aeb712008"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-production-desktop-chromium-pizza-recipe.jpg",
+      "bytes": 92913,
+      "sha256": "2c3898fd0904e953ad9a2d718aaf2da0fb0f5920a1d53e1cbbbee228980608ba"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-production-desktop-chromium-soup-recipe.jpg",
+      "bytes": 90624,
+      "sha256": "a5d83fb3ee1c441d212dc31ff5e9b5bde7ed10e980997031e57a7ac0b3fa38c3"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-production-ipad-landscape-chromium-pasta-recipe.jpg",
+      "bytes": 67731,
+      "sha256": "6114666584098620bcf956eea52a579320012062add878aa44f9e17c29e27e8f"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-production-ipad-portrait-chromium-pasta-recipe.jpg",
+      "bytes": 77854,
+      "sha256": "abd86250819082344ea465cd5e4455e44e9197eeef8ba7f492d350b4dc1ed171"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-production-small-touch-pasta-basket.jpg",
+      "bytes": 41732,
+      "sha256": "59b78573614eaf51fc7bce2b98c853e99b3da16e714a7b1b78466d578b2d42d0"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-production-small-touch-pasta-pantry.jpg",
+      "bytes": 35592,
+      "sha256": "49375c9a38b822b5b11aeb358eb7197127fc6ef192bd80ac6d1781365dcf1fe3"
+    },
+    {
+      "path": "docs/review/recipes/gallery/after-production-small-touch-pasta-recipe.jpg",
+      "bytes": 36665,
+      "sha256": "069fcfe48dab1f81601cffd8f63e7dfa7823300676b54a9023c38494770bfa85"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-demo-desktop-chromium-pasta-fridge.jpg",
+      "bytes": 101595,
+      "sha256": "a563604ffdb2f0415177195e21f01a9cbc0576a377091895d104266ffa4d82c4"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-demo-desktop-chromium-pasta-recipe.jpg",
+      "bytes": 86795,
+      "sha256": "6e26943716addf57e26316feaa11b5a9a7e08c2b125bd27c9d988b3086cd93f1"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-demo-ipad-landscape-chromium-pasta-recipe.jpg",
+      "bytes": 68124,
+      "sha256": "23a0bc76b748ea86e71c2ed66366c8b8b62b8e25966c41cd68dc74b3afcdf22a"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-demo-ipad-portrait-chromium-pasta-recipe.jpg",
+      "bytes": 65944,
+      "sha256": "1c4d03e7e992427ecb380660aa6f3dd7e31e1a0fe3c5ced83b0c097a765e0990"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-demo-small-touch-pasta-basket.jpg",
+      "bytes": 40250,
+      "sha256": "3b8ff0b8f26df498cee8f8fbfdcb3f428b342c45905b432a67d3f74a14563ac3"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-demo-small-touch-pasta-pantry.jpg",
+      "bytes": 33206,
+      "sha256": "bcf3a3c46b43727e355822bc41ba0fe9959d9a733c1fc6a65afe2be692af85f6"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-demo-small-touch-pasta-recipe.jpg",
+      "bytes": 33036,
+      "sha256": "9f2acb332a82d9d887d298abc1586e30191a31a7d87315362de5d8e82c36d4b1"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-production-desktop-chromium-pasta-fridge.jpg",
+      "bytes": 101595,
+      "sha256": "a563604ffdb2f0415177195e21f01a9cbc0576a377091895d104266ffa4d82c4"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-production-desktop-chromium-pasta-recipe.jpg",
+      "bytes": 86795,
+      "sha256": "6e26943716addf57e26316feaa11b5a9a7e08c2b125bd27c9d988b3086cd93f1"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-production-ipad-landscape-chromium-pasta-recipe.jpg",
+      "bytes": 68124,
+      "sha256": "23a0bc76b748ea86e71c2ed66366c8b8b62b8e25966c41cd68dc74b3afcdf22a"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-production-ipad-portrait-chromium-pasta-recipe.jpg",
+      "bytes": 65621,
+      "sha256": "d8e961f872baeaf8a2be6f233025cd57c75728e3be04f8713a6ad8993bb02a09"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-production-small-touch-pasta-basket.jpg",
+      "bytes": 40248,
+      "sha256": "4c4e2b50a9b81223bc4011ad46e35a0b862a55220ffc7f21a27b687f60b7cccf"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-production-small-touch-pasta-pantry.jpg",
+      "bytes": 33201,
+      "sha256": "215c51d868502402772a23ad1342407462df72c400346d188e44e6d2661461db"
+    },
+    {
+      "path": "docs/review/recipes/gallery/before-production-small-touch-pasta-recipe.jpg",
+      "bytes": 33043,
+      "sha256": "b950532f4307c8592a8860bde99da57235639159177512e0a34d27ebd5d613d7"
+    },
+    {
+      "path": "docs/review/starting-profile/desktop-chromium/direct-touch-resumed.jpg",
+      "bytes": 92802,
+      "sha256": "85edfca873a1865c57dfbc89183b5a5994a47c081590a34d4f497cac7215bd68"
+    },
+    {
+      "path": "docs/review/starting-profile/desktop-chromium/first-home.jpg",
+      "bytes": 50875,
+      "sha256": "d972f563a1f9780007ce0ebe3663fd589ca25a28f4827f5405f2493fe0ac126c"
+    },
+    {
+      "path": "docs/review/starting-profile/desktop-chromium/neutral-assessment.jpg",
+      "bytes": 45383,
+      "sha256": "24f50276e1684393b338e6bd36e5e8ad1a72e0ebc7897008b9b380b9264db02b"
+    },
+    {
+      "path": "docs/review/starting-profile/desktop-chromium/nine-areas.jpg",
+      "bytes": 125013,
+      "sha256": "39901a09ca2983d0e9fea5c4f720f7546b0a54f57098bc0ff13f4c1b2b842a85"
+    },
+    {
+      "path": "docs/review/starting-profile/desktop-chromium/parent-profile.jpg",
+      "bytes": 219553,
+      "sha256": "10250a5eb03fe46ae64816fc02f04fa11fb21cb91196e9dbc4ef4206e90a0b5d"
+    },
+    {
+      "path": "docs/review/starting-profile/desktop-chromium/profile-complete.jpg",
+      "bytes": 131376,
+      "sha256": "8c2a06faeb9aa22e9823783c28bd6679c9ad28e81dc261f817c4f2f8290f3343"
+    },
+    {
+      "path": "docs/review/starting-profile/desktop-chromium/resume-lesson-tools.jpg",
+      "bytes": 95417,
+      "sha256": "95c048e869af7dad4c8de8163f6cf9d46297d749793393d42f1ae95d4e03e6d6"
+    },
+    {
+      "path": "docs/review/starting-profile/desktop-chromium/saved-activities-number.jpg",
+      "bytes": 818855,
+      "sha256": "a666176e3948f405a2e3b07b8ec14a7de0bb781d4af7172847b5e67d575bfa3d"
+    },
+    {
+      "path": "docs/review/starting-profile/desktop-chromium/saved-activities-town.jpg",
+      "bytes": 641021,
+      "sha256": "8c31b00751064f9ad10b0432ade049fd2288f98610ee5e03ebd1120509900ffa"
+    },
+    {
+      "path": "docs/review/starting-profile/desktop-chromium/town-resume-reset.jpg",
+      "bytes": 206109,
+      "sha256": "c3afe47660cd0afb4813250679b9daf5e50a419b990f1239ed2766dda20383a2"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-landscape-chromium/direct-touch-resumed.jpg",
+      "bytes": 81348,
+      "sha256": "bf042491998d40350ecf830477897e9e377adf1abdd6688c8c813ac05375c85f"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-landscape-chromium/first-home.jpg",
+      "bytes": 50393,
+      "sha256": "d7a06f6100d83143d091f4aefe91ce5cfef8fa1588ecaeec543619e5b6eec067"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-landscape-chromium/neutral-assessment.jpg",
+      "bytes": 39115,
+      "sha256": "28d5eb27ee67431ae3cf52a75aaa60b79a71350ef0efa42f2c82ac089158c7fd"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-landscape-chromium/nine-areas.jpg",
+      "bytes": 119452,
+      "sha256": "9a962070125e1dd6e56520880ee80fede71052a59fead29cbd38b0610127bac7"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-landscape-chromium/parent-profile.jpg",
+      "bytes": 216615,
+      "sha256": "6d25c22b4bc46ad1044637e903fad60b68af095399bc81e4286c01a153e533a4"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-landscape-chromium/profile-complete.jpg",
+      "bytes": 126681,
+      "sha256": "39e0e795f433f9a5e6a45f9158c2664ff7a17e377d50c6b84a993e1bf7239316"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-landscape-chromium/resume-lesson-tools.jpg",
+      "bytes": 92199,
+      "sha256": "e234e0b3f5660b1b0e9dc4a29f0e5ecb0014786fc8ac1b102966606584beb9d0"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-landscape-chromium/saved-activities-number.jpg",
+      "bytes": 765785,
+      "sha256": "49fcb379222f794ce750ccd242c85f5d18b6f85c19c7bf814872886d8315d639"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-landscape-chromium/saved-activities-town.jpg",
+      "bytes": 764831,
+      "sha256": "1e4e1dadd98b00149051ed392b495d194a52662a0f533027be84f147ac70171a"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-landscape-chromium/town-resume-reset.jpg",
+      "bytes": 190581,
+      "sha256": "0b0e8fec545bb0754ff5b56844bdc606413b21532c486b9c2986d6890d920144"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-portrait-chromium/direct-touch-resumed.jpg",
+      "bytes": 99459,
+      "sha256": "fc3d9571988ebaa6d9add4303ce040daa6757d56d8d972658fd81ed6a61964af"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-portrait-chromium/first-home.jpg",
+      "bytes": 46820,
+      "sha256": "2320fa90ca87e0aed9b1786c59edeb2e6c6a5b37d3e9425883dc508b38bb7f32"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-portrait-chromium/neutral-assessment.jpg",
+      "bytes": 40781,
+      "sha256": "5d16533f5dae2cc02c7a665e4bb9721f18b09bc619e1b4931942284acc1924b2"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-portrait-chromium/nine-areas.jpg",
+      "bytes": 121357,
+      "sha256": "d1411f74b2962127b444bcf7e537e641c291851796ef2530e1b2fbbe617ce13b"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-portrait-chromium/parent-profile.jpg",
+      "bytes": 220557,
+      "sha256": "7ef61998c1bd35b4b5844fd59db57d7b57e4b2ff872aa68e2c21ac6b14dd68fc"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-portrait-chromium/profile-complete.jpg",
+      "bytes": 123659,
+      "sha256": "2408c1d5a8c158cff34920f67e05693f9976c3ce3599479327591d0517e22f51"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-portrait-chromium/resume-lesson-tools.jpg",
+      "bytes": 90628,
+      "sha256": "e224d09db52cdc676b403379a70e525ac4bb48e51989e0203d0a6f564d5edce8"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-portrait-chromium/saved-activities-number.jpg",
+      "bytes": 538201,
+      "sha256": "a14ee607d3eea1522f67b72b552b7d13694438725619069936d747b7ce4c7954"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-portrait-chromium/saved-activities-town.jpg",
+      "bytes": 537278,
+      "sha256": "082296479833ecb6ecada4099e0d1e38634ec722e0ec51c8fcf6544ebfe85553"
+    },
+    {
+      "path": "docs/review/starting-profile/ipad-portrait-chromium/town-resume-reset.jpg",
+      "bytes": 127958,
+      "sha256": "6b7ef5ec282731b1d540c4ab8c829f02d7b620ad77467f3865f9c767ad506080"
+    },
+    {
+      "path": "docs/review/starting-profile/small-touch/direct-touch-resumed.jpg",
+      "bytes": 46664,
+      "sha256": "7bf33235d34e1ca48ff562caa192ebbbd53728e3505ea0d175a792ceb71aeff9"
+    },
+    {
+      "path": "docs/review/starting-profile/small-touch/first-home.jpg",
+      "bytes": 45991,
+      "sha256": "ab7eada27f4f1a7804df0fdadf8315ace5fab951f820cfd4e2712903b0169847"
+    },
+    {
+      "path": "docs/review/starting-profile/small-touch/neutral-assessment.jpg",
+      "bytes": 30238,
+      "sha256": "b0294ffe25771f5b6a79ee647e88107744245165f426fdf375d8a4e65ef14b74"
+    },
+    {
+      "path": "docs/review/starting-profile/small-touch/nine-areas.jpg",
+      "bytes": 108289,
+      "sha256": "ad94606812634f52eadb981f19c2afabd74caef6cb6f175c579dabfa1f885281"
+    },
+    {
+      "path": "docs/review/starting-profile/small-touch/parent-profile.jpg",
+      "bytes": 219115,
+      "sha256": "5589250633294daf2222e960e828cf60d1a86cc70335a5a552919e1afa804fa7"
+    },
+    {
+      "path": "docs/review/starting-profile/small-touch/profile-complete.jpg",
+      "bytes": 113213,
+      "sha256": "ca60c46c1711efa8f49d07dfaeb9a98e08ea183cbba83e8ff0856f1757580bc6"
+    },
+    {
+      "path": "docs/review/starting-profile/small-touch/resume-lesson-tools.jpg",
+      "bytes": 83459,
+      "sha256": "1f20f1df9cc62b70480a902a1a3c86c5961ed5933ef58ab216a999065b1a3842"
+    },
+    {
+      "path": "docs/review/starting-profile/small-touch/saved-activities-number.jpg",
+      "bytes": 271374,
+      "sha256": "681a1ff6010221a9c69fae7a246d28aef2622ab6c7b9248f1b28ea12f7c0eb08"
+    },
+    {
+      "path": "docs/review/starting-profile/small-touch/saved-activities-town.jpg",
+      "bytes": 269533,
+      "sha256": "f2ef5579ceb28ee839e119c078dfbbd958b95f8032396588e306f15bdf6b4057"
+    },
+    {
+      "path": "docs/review/starting-profile/small-touch/town-resume-reset.jpg",
+      "bytes": 67951,
+      "sha256": "7962a86908f39ab94de85e89205e52b71bc0e2d59324d07790c0dd4e853afc88"
+    },
+    {
+      "path": "docs/review/town-navigation/after-demo-desktop-chromium-overview.jpg",
+      "bytes": 299568,
+      "sha256": "b634ec99bace9e2279cf469d05468b4eb2f0046fdbbbf5f6c5fc6da0be1e4e5b"
+    },
+    {
+      "path": "docs/review/town-navigation/after-demo-desktop-chromium-repair-panel.jpg",
+      "bytes": 88822,
+      "sha256": "0ea494c05cb428e7dafae651481390c8494fc76abcad1da38f77c1ab970790de"
+    },
+    {
+      "path": "docs/review/town-navigation/after-demo-ipad-landscape-chromium-overview.jpg",
+      "bytes": 274860,
+      "sha256": "ef8af2be0134667f409f28b6e58192bdd03d0431c8622b3e077669668dc68e09"
+    },
+    {
+      "path": "docs/review/town-navigation/after-demo-ipad-portrait-chromium-overview.jpg",
+      "bytes": 134370,
+      "sha256": "d125c7e552ed5a182ce78126fe9d494da1240b33f19bdd706a735fc55ed0c4bb"
+    },
+    {
+      "path": "docs/review/town-navigation/after-demo-small-touch-bank-activity.jpg",
+      "bytes": 37089,
+      "sha256": "1e2dc83ad6d0478b791e99fba8aeb2aad050630dd91989408b20ddb59b4aed56"
+    },
+    {
+      "path": "docs/review/town-navigation/after-demo-small-touch-festival-activity.jpg",
+      "bytes": 40514,
+      "sha256": "556fd2ef48eb426a70816772e365801ba4cc4498f9618185f0b6013ce1510d90"
+    },
+    {
+      "path": "docs/review/town-navigation/after-demo-small-touch-overview.jpg",
+      "bytes": 32077,
+      "sha256": "79ca0d8be51919605f4b6fba4d09ca5c7d133195e16b473276da0c9bf103a699"
+    },
+    {
+      "path": "docs/review/town-navigation/after-demo-small-touch-repair-panel.jpg",
+      "bytes": 34756,
+      "sha256": "338a0dbfcb80ae98914ce5b4ea73cf529746436c0e52e85190e4d32af0a43854"
+    },
+    {
+      "path": "docs/review/town-navigation/after-production-desktop-chromium-locked-festival.jpg",
+      "bytes": 75629,
+      "sha256": "6c3ea7d1465af9c42d622820f325d5844c330048906450f62b05e2fcaf97e475"
+    },
+    {
+      "path": "docs/review/town-navigation/after-production-desktop-chromium-overview.jpg",
+      "bytes": 298995,
+      "sha256": "a8b97a62eb8117132821ddea9428a19aaa5f086c32e854af09097447065268ca"
+    },
+    {
+      "path": "docs/review/town-navigation/after-production-desktop-chromium-repair-panel.jpg",
+      "bytes": 88822,
+      "sha256": "0ea494c05cb428e7dafae651481390c8494fc76abcad1da38f77c1ab970790de"
+    },
+    {
+      "path": "docs/review/town-navigation/after-production-ipad-landscape-chromium-overview.jpg",
+      "bytes": 274998,
+      "sha256": "305f5b4830cb09c5c80238c64d8ddedca8409706d8bec39e30810a3156b43821"
+    },
+    {
+      "path": "docs/review/town-navigation/after-production-ipad-portrait-chromium-overview.jpg",
+      "bytes": 124974,
+      "sha256": "c270f0e11e63b15fdee3d0762ffecdba7dd430d9809f79bc2656f273145c7b69"
+    },
+    {
+      "path": "docs/review/town-navigation/after-production-small-touch-bank-activity.jpg",
+      "bytes": 37103,
+      "sha256": "180b2f4e6c2b995a1432d91cce7712994f46b492cde9d654c2011c50d70456a2"
+    },
+    {
+      "path": "docs/review/town-navigation/after-production-small-touch-festival-activity.jpg",
+      "bytes": 40931,
+      "sha256": "fbab2a5fa3f0a54c1a33ee1f71393eebd45f4e40162fc19a6104718da8d7ed92"
+    },
+    {
+      "path": "docs/review/town-navigation/after-production-small-touch-locked-festival.jpg",
+      "bytes": 36530,
+      "sha256": "dd41824212014c588a4fbfb923008ee9a5d8823732db0bc1054ec3a49df2af0b"
+    },
+    {
+      "path": "docs/review/town-navigation/after-production-small-touch-overview.jpg",
+      "bytes": 32788,
+      "sha256": "5665993350688d7545e4f96de564c36680f0b0ed64c6f86e1a290e29adb3732f"
+    },
+    {
+      "path": "docs/review/town-navigation/after-production-small-touch-repair-panel.jpg",
+      "bytes": 34822,
+      "sha256": "f823a2be8f57ab940990bb0fd7ee8dd5f8fa6bdcf22e0eef5c5546deae574d7e"
+    },
+    {
+      "path": "docs/review/town-navigation/after/desktop-chromium/home.jpg",
+      "bytes": 232969,
+      "sha256": "5b3837f4fb215e17842b21355eb8f711376064abd579bd471abf087d890a6348"
+    },
+    {
+      "path": "docs/review/town-navigation/after/desktop-chromium/how-to-play.jpg",
+      "bytes": 170933,
+      "sha256": "2296e0915087f3f7941c9e61d78fd568687b72a0f711b301295c8ba2b9036303"
+    },
+    {
+      "path": "docs/review/town-navigation/after/desktop-chromium/my-explorer.jpg",
+      "bytes": 235340,
+      "sha256": "bcbe33ca05a6eb938fc0051218b6e05375c039a010e9281192b72280f04af837"
+    },
+    {
+      "path": "docs/review/town-navigation/after/desktop-chromium/settings.jpg",
+      "bytes": 124210,
+      "sha256": "d24333f3490b376ce708447f44d3f7169ab5ec11731e5da6df78f23027c05e2e"
+    },
+    {
+      "path": "docs/review/town-navigation/after/desktop-chromium/town.jpg",
+      "bytes": 411180,
+      "sha256": "704e85165d1f321a8876baedad0d2c83b8c6b71fe8bf021c1b23d0b8c753a055"
+    },
+    {
+      "path": "docs/review/town-navigation/after/desktop-chromium/worlds.jpg",
+      "bytes": 325643,
+      "sha256": "d2e2cced24b81910f86d5b1f32b091efa95f9c3b10242c17177e0e870b404b6c"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-landscape-chromium/home.jpg",
+      "bytes": 152355,
+      "sha256": "db663409f81fbeb5f438464ac5ca24091ee59e4402c4804d9e6fe6517ddf0974"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-landscape-chromium/how-to-play.jpg",
+      "bytes": 125430,
+      "sha256": "bcb4a7ebfba3142ffc35f77faf4468bb6d4e337e2c4c9bce19cdea79122a305a"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-landscape-chromium/my-explorer.jpg",
+      "bytes": 152190,
+      "sha256": "afd6013c4353536b06feb78f515fceaf0d92cc478d30d4e4648880c946533fa9"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-landscape-chromium/settings.jpg",
+      "bytes": 99464,
+      "sha256": "020f8c510cc2a3b90f6d222a0905719d1d55b269f7b0828fdc6ca8084b8425ee"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-landscape-chromium/town.jpg",
+      "bytes": 308290,
+      "sha256": "85938da60bd8294b9c31b33e2f083cc4ea2fb4e1d3b3dde4ef2b76ac27185381"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-landscape-chromium/worlds.jpg",
+      "bytes": 226486,
+      "sha256": "61be4957a8c059689d7157d3779c24e8ba34e41cddfd6187cd00e0cae91585d9"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-portrait-chromium/home.jpg",
+      "bytes": 188649,
+      "sha256": "98c52054072d1a46f1209ce444665087ff691e0c256bd074da56b4f521a99923"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-portrait-chromium/how-to-play.jpg",
+      "bytes": 160032,
+      "sha256": "682a90b9e48729def30dc0a3c8e362be7b0f1a8765974f2b84f150b4a6a9d779"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-portrait-chromium/my-explorer.jpg",
+      "bytes": 187470,
+      "sha256": "bc33b9e2d9bbe157d7f30cbc4fce26e6b5cbd61c23b0807933534058e86c88b1"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-portrait-chromium/settings.jpg",
+      "bytes": 106214,
+      "sha256": "2504e7465b30a161504e643cea1876f051a001e91b2455f945fe89a71f4c77bc"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-portrait-chromium/town.jpg",
+      "bytes": 238146,
+      "sha256": "16d8741d056c1ef62e36d42c1abefaa1e690468ede81b869d2e7e57b887d0b6a"
+    },
+    {
+      "path": "docs/review/town-navigation/after/ipad-portrait-chromium/worlds.jpg",
+      "bytes": 228158,
+      "sha256": "1fad851292af42f600727f4caec65a56422960665240043c0972356b9dd4d086"
+    },
+    {
+      "path": "docs/review/town-navigation/before-demo-desktop-chromium-overview.jpg",
+      "bytes": 157646,
+      "sha256": "58c2fcee5afbea903a362935a45c667611be58db4257243f9dcc4c929e071e5b"
+    },
+    {
+      "path": "docs/review/town-navigation/before-demo-ipad-landscape-chromium-overview.jpg",
+      "bytes": 152854,
+      "sha256": "e20985f1764a997cfe8b1eaf0050b548431f3d2a0dd8b55b019c5d705f1eaf99"
+    },
+    {
+      "path": "docs/review/town-navigation/before-demo-ipad-portrait-chromium-overview.jpg",
+      "bytes": 179637,
+      "sha256": "f5a730199ed0a80e6c317311856fe8f65e2641e71ba7f36e68a1df7de97b8f42"
+    },
+    {
+      "path": "docs/review/town-navigation/before-demo-small-touch-overview.jpg",
+      "bytes": 71523,
+      "sha256": "36d6398cade0809159d35db60d74386e40e8e515095737fa660acf96b2caeb48"
+    },
+    {
+      "path": "docs/review/town-navigation/before-production-desktop-chromium-locked-festival.jpg",
+      "bytes": 76559,
+      "sha256": "dbff7059ff5c96930ce05a0f0641835f477eabb07b682cdcc3ac961e050b4946"
+    },
+    {
+      "path": "docs/review/town-navigation/before-production-desktop-chromium-overview.jpg",
+      "bytes": 164416,
+      "sha256": "37e130af2b871b64cdb12de65932758231fbf6bb6164e89191fc53702612dc16"
+    },
+    {
+      "path": "docs/review/town-navigation/before-production-ipad-landscape-chromium-overview.jpg",
+      "bytes": 152854,
+      "sha256": "e20985f1764a997cfe8b1eaf0050b548431f3d2a0dd8b55b019c5d705f1eaf99"
+    },
+    {
+      "path": "docs/review/town-navigation/before-production-ipad-portrait-chromium-overview.jpg",
+      "bytes": 179020,
+      "sha256": "7ef6ef5dd1a53ae82eff8d0f58c4fd4ab5517782e2a61fa053d75ceda9f21764"
+    },
+    {
+      "path": "docs/review/town-navigation/before-production-small-touch-locked-festival.jpg",
+      "bytes": 30743,
+      "sha256": "82d17c7f4ee842f964e7389e877ad5e33f5eb8a6b4753315b56b0b9df323ee39"
+    },
+    {
+      "path": "docs/review/town-navigation/before-production-small-touch-overview.jpg",
+      "bytes": 72241,
+      "sha256": "a6bc6040bf0c5214cdeae5e3abf0a72d930d11d6a5810e6dd66b8e1b75912075"
+    },
+    {
+      "path": "docs/review/town-navigation/before/desktop-chromium/town.jpg",
+      "bytes": 411301,
+      "sha256": "b2ca5cf74e9e515be047e30c43d888497c9d13535ddf48ffd2378e525af3f1ef"
+    },
+    {
+      "path": "docs/review/town-navigation/before/ipad-landscape-chromium/town.jpg",
+      "bytes": 308269,
+      "sha256": "36bde96ec6681cb86f4ea927469918c3567a7ecd83c46e3df506ae092a030435"
+    },
+    {
+      "path": "docs/review/town-navigation/before/ipad-portrait-chromium/town.jpg",
+      "bytes": 236708,
+      "sha256": "4c10c988388d442e6d95ce81eb7841ebdb03e73c9e5a3cc6ef6b42ac1c559bfe"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/algebra-after.png",
+      "bytes": 25753,
+      "sha256": "c397bb7fd25d201fbe870a9d5128f5f787087c4c20b901265aeb6d28a041c9e6"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/algebra-before.png",
+      "bytes": 23245,
+      "sha256": "03deb921aa1e412800e2fb61bc614e8e2cfa0a8235c443c3036a5c5834645235"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/algebra-context.png",
+      "bytes": 1720794,
+      "sha256": "a1d3ea2071516a4b7f8dcb5aa42646b1d82241692c36bca1b7a065b87c0f184f"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/fractions-after.png",
+      "bytes": 27634,
+      "sha256": "8b359599681d2ea4627c36fe4b50a500123275fe9088fffd933ad239ce4caab9"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/fractions-before.png",
+      "bytes": 27609,
+      "sha256": "8b83f11202c0bb731c8bd66baf23630da36e8393df55887167f0605c69d804bd"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/fractions-context.png",
+      "bytes": 1578316,
+      "sha256": "fc8c909b06d9d0ab9a93a7cdd4e01ef38efca9e41e1410683109a55bef18216f"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/geometry-after.png",
+      "bytes": 25844,
+      "sha256": "0a2207c8fc273ee0430f5a1f058a540357e49ca5045511b06ca6919c5428286f"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/geometry-before.png",
+      "bytes": 23156,
+      "sha256": "38b723519adb19615b39d167ccad02948919a286fbc23ced149f5e51ad2041d3"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/geometry-context.png",
+      "bytes": 1597724,
+      "sha256": "cf460efc8f9cd317a71e82f99171e08f21e6cbd11749e9b28be9ddc2d308c1f8"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/measure-after.png",
+      "bytes": 25013,
+      "sha256": "2cf202438910ecd522b2fbd8fb7213f222794572887c94d9208bbb0fe25c36ec"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/measure-before.png",
+      "bytes": 23449,
+      "sha256": "00880477d28879e3813ad935d378709b09021a35aafa44d5bccab4dd39436a56"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/measure-context.png",
+      "bytes": 1461413,
+      "sha256": "adf7ef91bdcd8fc4ea9c429c2d4a752f4f3dc0042ad07722e81bfce5d75c3afb"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/number-after.png",
+      "bytes": 27230,
+      "sha256": "8d1e6db39dd34c78656aded70ac6e9eec2260e56b557a67f815cbeee33b7e0e0"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/number-before.png",
+      "bytes": 27225,
+      "sha256": "94df855c48b66ae307af03f3c698e1de4d9e4d6ea9036f1bbc9b707efc5cb5a7"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/number-context.png",
+      "bytes": 1666406,
+      "sha256": "124e3e9997fb332ac98a251da1a46992d316d0f61cb61fb90ad29b333fe3d2e6"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/probability-after.png",
+      "bytes": 26746,
+      "sha256": "83dcf2222db20029c0b9a475d41d60c5d6a465d4bb5ec2c6cc2d8528faf45cc2"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/probability-before.png",
+      "bytes": 23758,
+      "sha256": "f5d387c3d518f0070b46c05f0d0c7fc4db79ec118322bb86a2b0a360d295a2fa"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/probability-context.png",
+      "bytes": 1575513,
+      "sha256": "63e6c6c5157a372ca63ea519cbb462452664698942696dc3d0964015919c985d"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/ratio-after.png",
+      "bytes": 26931,
+      "sha256": "e027c6f62d03825ee29459c9636a65a1130af8560282a1f012b93342cc5be4fb"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/ratio-before.png",
+      "bytes": 22718,
+      "sha256": "5a26a49af9115d824bacade70c618bbd05626185869b4f75cae761b631368107"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/ratio-context.png",
+      "bytes": 1558923,
+      "sha256": "9b85ff73e768036f1ea114b0f5f2db0dceb7886f2848ae6e5c57eb15a29c524a"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/statistics-after.png",
+      "bytes": 24432,
+      "sha256": "5dd674f9c9a14697cb736d7ac013cb500b3b850387f8dd986328274f07e780ef"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/statistics-before.png",
+      "bytes": 20317,
+      "sha256": "20380d2b3fcb455bf1cce1601d8e36e1202395591f5857cb2283f8e76f9277a8"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/statistics-context.png",
+      "bytes": 1503469,
+      "sha256": "d810ec7c1d342059a8a91ae7174ed578c907cc4c79abeec4daf14595517e5a4a"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/town-after.png",
+      "bytes": 24842,
+      "sha256": "02caaafb863e3ea17bfabbabd35409188eeb58f832e6ee78b50518bb1ee0fa07"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/town-before.png",
+      "bytes": 19657,
+      "sha256": "2cd0bbd5bb2b1a7822675edf76559e4eeb8ce9a638b03a815ade6554b538323e"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/desktop-chromium/town-context.png",
+      "bytes": 1895049,
+      "sha256": "15b02508536368098c88b9ccb833c8a3d8fba91651ab1ec79be5bd707fd7001c"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/algebra-after.png",
+      "bytes": 25767,
+      "sha256": "0177a5523cb5602c0ecdc7889abdd69eeb92a5274587103bafc3b61936f8ac6c"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/algebra-before.png",
+      "bytes": 23166,
+      "sha256": "e0e71908e3dfd463bb5e9accf612056fe95f98e03fcca31f16876c24c7163a44"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/algebra-context.png",
+      "bytes": 762986,
+      "sha256": "43c3a7375ad564e6c53c461945eac78f9d3b35f86f12620f1a86abce66455f3f"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/fractions-after.png",
+      "bytes": 27655,
+      "sha256": "31f57ae7e2e13cee15b56201340a965c5e95976d1f0aa479bcee528381a2e8c7"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/fractions-before.png",
+      "bytes": 27627,
+      "sha256": "647b16402fcc298bb2759100f8fb30ac47d989cc549f28c50fe061f2e1ffe42d"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/fractions-context.png",
+      "bytes": 699028,
+      "sha256": "3a3f7c0aeb01a35809640268b79c7d4ca69fc4e4b866018c2b4b095ca7be03b4"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/geometry-after.png",
+      "bytes": 25750,
+      "sha256": "75f615d2db6f138c39253d0cb9133f62f07c32308f9d17689c7e9fd1cc1da5df"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/geometry-before.png",
+      "bytes": 23148,
+      "sha256": "9dcc8fef5e741f52ca2aea9cbf5b0f14b63ca17047d7da453cbc1c4c6ea3fd21"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/geometry-context.png",
+      "bytes": 702154,
+      "sha256": "ec72e598184013a187824b2b471c6735751b002685426a8570a7ae88b7b0d175"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/measure-after.png",
+      "bytes": 24983,
+      "sha256": "aa0a65d8f7e9a84fb312d09359657ca5ac379a2972f4bfdb5162caba01b72d5b"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/measure-before.png",
+      "bytes": 23390,
+      "sha256": "e03ad1ff4369bb92e6df18cc92583a5b93a2c32e60ee3d26a02b4384e020b75e"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/measure-context.png",
+      "bytes": 627237,
+      "sha256": "8dbeb43520817044c2f12eac4d411696585e3c0524a61805f762aa50dd8993ab"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/number-after.png",
+      "bytes": 27199,
+      "sha256": "e9eccb35a58e9c68fbd11b9b2b84491dfe9804ef1de20e10fc9eb0acd107860b"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/number-before.png",
+      "bytes": 27202,
+      "sha256": "8376b591018b2202bf9f66eb2aa494f294c0fbc7f35e7610d1b47ff4b89bc365"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/number-context.png",
+      "bytes": 748410,
+      "sha256": "c6ed13cb28ce84caa27b583a28fd6310bc49df57111b851976785f91dd820311"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/probability-after.png",
+      "bytes": 26735,
+      "sha256": "26ed39aa3e97d95996aa805ed11892cd6fb5d5582a059be53839a5d9ffc00ec9"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/probability-before.png",
+      "bytes": 23727,
+      "sha256": "2abb4a0cf0e557c8a9764b89d1b693f4ebd1362e9c8fd9d04612c332496c37ab"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/probability-context.png",
+      "bytes": 692814,
+      "sha256": "dd854b258e6a642ca8301d2782bbc324d282ade66277c08f39c682729eadbf6e"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/ratio-after.png",
+      "bytes": 26927,
+      "sha256": "e6668b0fe447be916ae3b42b8223554ee255eeb686879132b3a38f9af1042515"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/ratio-before.png",
+      "bytes": 22671,
+      "sha256": "887b5caceb669806ede0f796af4ee44297553e52090544d44927b2b4356a3907"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/ratio-context.png",
+      "bytes": 690892,
+      "sha256": "8b37525f4eddb7b003704c443fdbb2beed9ea3d9b5fc5dc62869d22d74cd29c6"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/statistics-after.png",
+      "bytes": 24422,
+      "sha256": "cf167d0dd15ed2e9f720bf03b1b7f0cebc70656e473083d4bdb90495d309d821"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/statistics-before.png",
+      "bytes": 20295,
+      "sha256": "2f187e6ef02eec9d5b235375b18aa682448ab082e630b47e5520ecd2f8f59143"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/statistics-context.png",
+      "bytes": 638462,
+      "sha256": "3bf1266f57c403186e4312737eba7921274a543e684485eb211b5ab63752be49"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/town-after.png",
+      "bytes": 24846,
+      "sha256": "2a8f9c9c87bc37bbb489426293ba7e05f111fc24290e726cc4cba8ef668b5019"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/town-before.png",
+      "bytes": 19643,
+      "sha256": "b6964c36339773dcdb7acd614d11ce70b7d1cd1fd0eea6c9bc6c7ae1e346029e"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-landscape-chromium/town-context.png",
+      "bytes": 710862,
+      "sha256": "99423ae07f06de72c99511847f3f3f3a744cd931a8b490792f0f1eafaa8b4f37"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/algebra-after.png",
+      "bytes": 20211,
+      "sha256": "7b2785993f0843ca82b651ce9397e154d9cd9a90176fe370803b78b3490424ac"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/algebra-before.png",
+      "bytes": 17669,
+      "sha256": "59b93bf05b7575467fd903671c983797994640a6dec0032d568804b45f593c8b"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/algebra-context.png",
+      "bytes": 847730,
+      "sha256": "5d509fcd72702114adb56d5c101ac42ab9c816438a61dd83e2064c3f41d1c840"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/fractions-after.png",
+      "bytes": 21997,
+      "sha256": "de630152f23a43aca75cd9f233860b874c568c0c2e1aa5bc189b48c8bc52e3e2"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/fractions-before.png",
+      "bytes": 22006,
+      "sha256": "4406642468613d504976d1b70326350bc2d9d27f4b2a812fa2160efffcdb0023"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/fractions-context.png",
+      "bytes": 808630,
+      "sha256": "44d1dd7ecef095b8a1d71d9ac6e2fdd2cbaf155bab656f1fce3112f7f3fefcf4"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/geometry-after.png",
+      "bytes": 20222,
+      "sha256": "f555b2b22e57f68b5e966dceb5b9c7ce298a08b2b573f0827447da9f063a79cd"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/geometry-before.png",
+      "bytes": 17599,
+      "sha256": "f147d627b1d16bbdd913a308fe6633625124955de54f035c9430186c1fcf6e4f"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/geometry-context.png",
+      "bytes": 802054,
+      "sha256": "2ecfa3822b38a57e75626997619db146b29b63226aed08430a382b87037d22ad"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/measure-after.png",
+      "bytes": 19356,
+      "sha256": "880928e2196081286dc58567d27d3cbedebf5fcb22d5d641a6378916aecc1ee8"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/measure-before.png",
+      "bytes": 17789,
+      "sha256": "693d840b582f436fe139678927168c936e7425131057907e7b5a193e80d8779a"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/measure-context.png",
+      "bytes": 763876,
+      "sha256": "579c6e7a195b8c0f54a3409cf7a073f97a40f9ecbc0f7c7f435ed119e29c6fc3"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/number-after.png",
+      "bytes": 21640,
+      "sha256": "189e4b91552711af183d86a625ab6555dcb9f2c55a7ac555af3b1826719d9ee9"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/number-before.png",
+      "bytes": 21580,
+      "sha256": "324ba9bd308357605a163962d45d537627a75c6e2691dc9e2a1001ce033887ff"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/number-context.png",
+      "bytes": 842919,
+      "sha256": "6f6810aeca01ba440d0d1163e4008d2219b1a9635855b38d1cc20286db57c3dc"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/probability-after.png",
+      "bytes": 21196,
+      "sha256": "ca7df407b9c0b9fff661e8d33aab374f31549e5650ebb9db6fafe454bdf017bd"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/probability-before.png",
+      "bytes": 18179,
+      "sha256": "a9a06879bdf42ce90c82ca2d2b3a6090145c29deca4fdbebdc561fff3d259358"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/probability-context.png",
+      "bytes": 792073,
+      "sha256": "d38cf41666b787d26c2d2fde58f3b7f4ff58362a6a4f6ebe997d70f52ae77b7e"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/ratio-after.png",
+      "bytes": 21446,
+      "sha256": "91f0437efc8061073f4ff9c9777fe80c4219d751f44c2ef5ef85a76b15ebe05c"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/ratio-before.png",
+      "bytes": 17301,
+      "sha256": "8e5c6cbb02d91d8834293750b20317ef3bb84c89917da4cbdcb4a11af67cca4d"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/ratio-context.png",
+      "bytes": 773920,
+      "sha256": "61b1f229c915209976e0476544f8b8e4976acf5fe993aeeb48407066ba9a07a6"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/statistics-after.png",
+      "bytes": 18929,
+      "sha256": "5ded77e5a10ecf54d82fc7fd2b2e32640a1c3d72e141f85bdd65c717d5caf763"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/statistics-before.png",
+      "bytes": 14818,
+      "sha256": "c036871497c967385ec5a132a2b75e28d2418fa0d7914efbaacd4cbb32751e94"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/statistics-context.png",
+      "bytes": 760756,
+      "sha256": "550779cbcd7f6d2080bbe54301b66af6478b31103abbe7be1627818005b73a2a"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/town-after.png",
+      "bytes": 24345,
+      "sha256": "e9bf2624b61129289a0334ad2a38cba8c3c9350b6104a595c6e1da0841e2b315"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/town-before.png",
+      "bytes": 19014,
+      "sha256": "16c01c6cafd7ae78e4c8968fff2b7659c182ae9a9760d1c1e6fccb6e388d32c1"
+    },
+    {
+      "path": "docs/review/world-guide-portraits/ipad-portrait-chromium/town-context.png",
+      "bytes": 914017,
+      "sha256": "bbe86b6e0549b3ae66953638102f13fa1f9f656a555d84ae67410963f0fcebab"
+    }
+  ]
+}

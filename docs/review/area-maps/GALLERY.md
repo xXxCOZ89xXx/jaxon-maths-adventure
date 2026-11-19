@@ -8,88 +8,88 @@ The normal maps and mission entrances remain. The main-screen repair overlays/du
 
 Before: repair presentation on the area overview.
 
-![Before Number Forest](number-before.jpg)
+[Before Number Forest](/docs/review/ARCHIVE.md)
 
 After: the normal map and a compact repair challenge panel showing the next stage and prerequisites.
 
-![After Number Forest](number-after.jpg)
+[After Number Forest](/docs/review/ARCHIVE.md)
 
 ## Fraction Desert
 
 Before: repair presentation on the area overview.
 
-![Before Fraction Desert](fractions-before.jpg)
+[Before Fraction Desert](/docs/review/ARCHIVE.md)
 
 After: the normal map and a compact repair challenge panel showing the next stage and prerequisites.
 
-![After Fraction Desert](fractions-after.jpg)
+[After Fraction Desert](/docs/review/ARCHIVE.md)
 
 ## Algebra Peaks
 
 Before: repair presentation on the area overview.
 
-![Before Algebra Peaks](algebra-before.jpg)
+[Before Algebra Peaks](/docs/review/ARCHIVE.md)
 
 After: the normal map and a compact repair challenge panel showing the next stage and prerequisites.
 
-![After Algebra Peaks](algebra-after.jpg)
+[After Algebra Peaks](/docs/review/ARCHIVE.md)
 
 ## Geometry Kingdom
 
 Before: repair presentation on the area overview.
 
-![Before Geometry Kingdom](geometry-before.jpg)
+[Before Geometry Kingdom](/docs/review/ARCHIVE.md)
 
 After: the normal map and a compact repair challenge panel showing the next stage and prerequisites.
 
-![After Geometry Kingdom](geometry-after.jpg)
+[After Geometry Kingdom](/docs/review/ARCHIVE.md)
 
 ## Ratio Island
 
 Before: repair presentation on the area overview.
 
-![Before Ratio Island](ratio-before.jpg)
+[Before Ratio Island](/docs/review/ARCHIVE.md)
 
 After: the normal map and a compact repair challenge panel showing the next stage and prerequisites.
 
-![After Ratio Island](ratio-after.jpg)
+[After Ratio Island](/docs/review/ARCHIVE.md)
 
 ## Statistics City
 
 Before: repair presentation on the area overview.
 
-![Before Statistics City](statistics-before.jpg)
+[Before Statistics City](/docs/review/ARCHIVE.md)
 
 After: the normal map and a compact repair challenge panel showing the next stage and prerequisites.
 
-![After Statistics City](statistics-after.jpg)
+[After Statistics City](/docs/review/ARCHIVE.md)
 
 ## Probability Portal
 
 Before: repair presentation on the area overview.
 
-![Before Probability Portal](probability-before.jpg)
+[Before Probability Portal](/docs/review/ARCHIVE.md)
 
 After: the normal map and a compact repair challenge panel showing the next stage and prerequisites.
 
-![After Probability Portal](probability-after.jpg)
+[After Probability Portal](/docs/review/ARCHIVE.md)
 
 ## Measurement Mines
 
 Before: repair presentation on the area overview.
 
-![Before Measurement Mines](measure-before.jpg)
+[Before Measurement Mines](/docs/review/ARCHIVE.md)
 
 After: the normal map and a compact repair challenge panel showing the next stage and prerequisites.
 
-![After Measurement Mines](measure-after.jpg)
+[After Measurement Mines](/docs/review/ARCHIVE.md)
 
 ## Practical Maths Town
 
 Before: repair presentation on the area overview.
 
-![Before Practical Maths Town](town-before.jpg)
+[Before Practical Maths Town](/docs/review/ARCHIVE.md)
 
 After: the normal map and a compact repair challenge panel showing the next stage and prerequisites.
 
-![After Practical Maths Town](town-after.jpg)
+[After Practical Maths Town](/docs/review/ARCHIVE.md)

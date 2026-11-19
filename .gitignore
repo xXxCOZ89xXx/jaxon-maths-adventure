@@ -19,3 +19,9 @@ v52-staging-test-dist/
 work/
 
 demo-dist/
+
+# Generated review images belong in CI artifacts, not current source.
+docs/review/**/*.png
+docs/review/**/*.jpg
+docs/review/**/*.jpeg
+docs/review/**/*.webp

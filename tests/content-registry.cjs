@@ -1,0 +1,90 @@
+const assert = require("node:assert/strict"),
+  { load } = require("../scripts/audit-curriculum.cjs");
+const c = load(),
+  R = c.V3Content,
+  E = c.V3Engine,
+  M = c.V3Adventure,
+  plain = (x) => JSON.parse(JSON.stringify(x));
+const catalog = R.catalog(c.V3Curriculum, c.V6Education);
+assert.equal(catalog.length, 96);
+assert.equal(new Set(catalog.map((x) => x.world)).size, 9);
+assert(catalog.every((x) => Array.isArray(x.prerequisites)));
+const row = [
+    "Original wording",
+    "12",
+    ["12", "13"],
+    "hint",
+    "steps",
+    { id: "fixture:v1:b6:s2:f1", family: "fixture:1", contentVersion: 3 },
+  ],
+  before = plain(row);
+const a = R.rows("fixture", [row], { band: 6, round: 2 })[0],
+  b = R.rows("fixture", [["New wording", ...row.slice(1)]], {
+    band: 6,
+    round: 2,
+  })[0];
+assert.equal(a[5].questionKey, b[5].questionKey);
+assert.deepEqual(plain(row), before);
+assert.notEqual(R.rows("other", [row])[0][5].questionKey, a[5].questionKey);
+assert.throws(
+  () =>
+    R.create({ create: () => [row] }, "fixture", 6, 2, {
+      excludeIds: new Set([a[5].questionKey]),
+    }),
+  /Duplicate/,
+);
+const invalid = {
+  skills: [
+    { id: "one", world: "number" },
+    { id: "two", world: "number" },
+  ],
+};
+assert.throws(
+  () => R.catalog(invalid, { prerequisites: { one: ["two"], two: ["one"] } }),
+  /cycle/,
+);
+assert.throws(
+  () => R.catalog(invalid, { prerequisites: { one: ["missing"] } }),
+  /Unknown/,
+);
+let s = E.fresh();
+E.generate(s, "number_bonds", "practice", c.JaxonFreshReview, c.V3Curriculum);
+assert.equal(s.learning.qs.length, 6);
+assert(s.learning.qs.every((q) => q[5].questionKey));
+assert.equal(new Set(s.learning.qs.map((q) => q[5].questionKey)).size, 6);
+assert(s.seenQuestionIds.length >= 6);
+s.learning.started = true;
+E.answerLearning(s, s.learning.qs[0][1]);
+assert(s.learning.responses[0].questionKey);
+const saved = plain(s),
+  restored = E.migrate(plain(s));
+assert.deepEqual(plain(restored.learning), saved.learning);
+assert.deepEqual(plain(restored.seenQuestionIds), saved.seenQuestionIds);
+const legacy = {
+  ...E.fresh(),
+  learning: {
+    id: "fixture",
+    mode: "practice",
+    qs: [["Historical copy", "1", [], null, "old steps"]],
+    i: 0,
+    correct: 0,
+    answered: false,
+  },
+  fictionalPending: { requestId: "unchanged", body: "original bytes" },
+};
+const old = plain(legacy);
+const migrated = E.migrate(plain(legacy));
+assert.deepEqual(plain(migrated.learning), old.learning);
+assert.deepEqual(plain(migrated.fictionalPending), old.fictionalPending);
+assert.equal(migrated.seenQuestionIds, undefined);
+for (const world of E.worlds) {
+  const state = E.fresh(),
+    route = M.routes(world.id)[0];
+  M.start(state, world.id, route.id, 1);
+  assert(M.current(state).tasks.every((t) => R.identity(t)));
+  const tasks = plain(M.current(state).tasks);
+  assert.deepEqual(plain(M.current(E.migrate(plain(state))).tasks), tasks);
+}
+console.log(
+  "PASS content registry: all 96 skills/9 worlds, complete acyclic prerequisite nodes, stable copy-independent IDs, identity and wording exclusions, new mission identities and byte-preserving legacy resume.",
+);

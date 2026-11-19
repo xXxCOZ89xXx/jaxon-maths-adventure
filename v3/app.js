@@ -3,25 +3,30 @@
   const M = window.V3Adventure,
     U = window.V3AdventureUI,
     T = window.V3Town;
-  const R=window.V10Restoration,N=window.V10Navigation,P=window.V11StartingProfile;
-  let recoveryChoice=null;
-  let townVisitError='';
+  const R = window.V10Restoration,
+    N = window.V10Navigation,
+    P = window.V11StartingProfile;
+  let recoveryChoice = null;
+  let townVisitError = "";
   const E = window.V3Engine,
     C = window.V3Curriculum,
     A = window.V3Art,
     $ = (id) => document.getElementById(id),
     esc = A.esc;
   const cloud = window.V3CloudContext;
+  const localGameStorage = cloud?.storage || localStorage;
   const KEY = cloud?.key || "jaxon_v3_fictional_demo_2026",
     LOCK = KEY + ":transaction";
-  let itemPreview=null, lastSceneKey=null;
-  const hiddenCelebrations=new Set();
-  let coinBaseline=null, coinNoticeTimer=null;
+  let itemPreview = null,
+    lastSceneKey = null;
+  const hiddenCelebrations = new Set();
+  let coinBaseline = null,
+    coinNoticeTimer = null;
   let storageError = false,
     pendingSaves = 0;
   function read() {
     try {
-      return E.migrate(JSON.parse(localStorage.getItem(KEY)) || {});
+      return E.migrate(JSON.parse(localGameStorage.getItem(KEY)) || {});
     } catch (error) {
       storageError = error instanceof SyntaxError ? "corrupt" : "unavailable";
       return E.fresh();
@@ -35,37 +40,68 @@
     activity = 0,
     lastTick = Date.now();
   // Presentation only: these values never enter saved game or wallet state.
-  function coinFeedback(){
-    const coins=Number(s.coins)||0,previous=coinBaseline;
-    if(coinBaseline===null)coinBaseline=coins;
-    let badge=document.getElementById('coin-readout');
-    if(!badge){badge=document.createElement('div');badge.id='coin-readout';badge.className='coin-readout';document.querySelector('.topbar').append(badge);}
-    badge.textContent=window.V3Presentation.coins(coins)+' coins';badge.setAttribute('role','status');badge.setAttribute('aria-live','polite');badge.setAttribute('aria-label','Learning coin balance '+window.V3Presentation.coins(coins));
-    if(previous!==null&&coins<previous)coinBaseline=coins;
-    if(previous!==null&&coins-previous>=1){
-      const delta=coins-previous;coinBaseline=coins;
-      badge.textContent=window.V3Presentation.coins(coins)+' coins · +'+window.V3Presentation.coins(delta);
-      badge.classList.add('coin-earned');clearTimeout(coinNoticeTimer);coinNoticeTimer=setTimeout(()=>{badge.classList.remove('coin-earned');badge.textContent=window.V3Presentation.coins(s.coins)+' coins';},4500);
+  function coinFeedback() {
+    const coins = Number(s.coins) || 0,
+      previous = coinBaseline;
+    if (coinBaseline === null) coinBaseline = coins;
+    let badge = document.getElementById("coin-readout");
+    if (!badge) {
+      badge = document.createElement("div");
+      badge.id = "coin-readout";
+      badge.className = "coin-readout";
+      document.querySelector(".topbar").append(badge);
+    }
+    badge.textContent = window.V3Presentation.coins(coins) + " coins";
+    badge.setAttribute("role", "status");
+    badge.setAttribute("aria-live", "polite");
+    badge.setAttribute(
+      "aria-label",
+      "Learning coin balance " + window.V3Presentation.coins(coins),
+    );
+    if (previous !== null && coins < previous) coinBaseline = coins;
+    if (previous !== null && coins - previous >= 1) {
+      const delta = coins - previous;
+      coinBaseline = coins;
+      badge.textContent =
+        window.V3Presentation.coins(coins) +
+        " coins · +" +
+        window.V3Presentation.coins(delta);
+      badge.classList.add("coin-earned");
+      clearTimeout(coinNoticeTimer);
+      coinNoticeTimer = setTimeout(() => {
+        badge.classList.remove("coin-earned");
+        badge.textContent = window.V3Presentation.coins(s.coins) + " coins";
+      }, 4500);
     }
   }
-  function locationTrail(j){
-    const venue=id=>T.venues.find(v=>v.id===id)?.name||'Home',previous=j.steps?.[j.stage-1]?.venue;
-    return `<div class="location-ribbon" aria-label="Current Town location"><strong>${esc(venue(j.venue))}</strong><span>${previous&&previous!==j.venue?'From '+esc(venue(previous)):'Continue at this location'}</span></div>`;
+  function locationTrail(j) {
+    const venue = (id) => T.venues.find((v) => v.id === id)?.name || "Home",
+      previous = j.steps?.[j.stage - 1]?.venue;
+    return `<div class="location-ribbon" aria-label="Current Town location"><strong>${esc(venue(j.venue))}</strong><span>${previous && previous !== j.venue ? "From " + esc(venue(previous)) : "Continue at this location"}</span></div>`;
   }
-  function presentationFinish(){
+  function presentationFinish() {
     coinFeedback();
-    const j=s.view==='journey'?window.V5Journey.model(s):null,key=s.view+':'+s.world+':'+(j?.id||'')+':'+(j?.venue||'');
-    if(key!==lastSceneKey)$('main').setAttribute('data-scene-arrival','');else $('main').removeAttribute('data-scene-arrival');lastSceneKey=key;
-    const complete=document.querySelector('.recap,.town-complete');
-    const completionKey=j?.done?j.id:JSON.stringify(s.lastResult);
-    if(complete&&!hiddenCelebrations.has(completionKey)){
-      const banner=document.createElement('aside');banner.className='completion-ribbon';banner.innerHTML='<span class="completion-crest" aria-hidden="true">◆</span><div><strong>A good place to pause.</strong><p>Choose your next step when you are ready.</p></div><button data-ui="hide-celebration">Hide celebration</button>';banner.dataset.completionKey=completionKey;complete.prepend(banner);
+    const j = s.view === "journey" ? window.V5Journey.model(s) : null,
+      key =
+        s.view + ":" + s.world + ":" + (j?.id || "") + ":" + (j?.venue || "");
+    if (key !== lastSceneKey) $("main").setAttribute("data-scene-arrival", "");
+    else $("main").removeAttribute("data-scene-arrival");
+    lastSceneKey = key;
+    const complete = document.querySelector(".recap,.town-complete");
+    const completionKey = j?.done ? j.id : JSON.stringify(s.lastResult);
+    if (complete && !hiddenCelebrations.has(completionKey)) {
+      const banner = document.createElement("aside");
+      banner.className = "completion-ribbon";
+      banner.innerHTML =
+        '<span class="completion-crest" aria-hidden="true">◆</span><div><strong>A good place to pause.</strong><p>Choose your next step when you are ready.</p></div><button data-ui="hide-celebration">Hide celebration</button>';
+      banner.dataset.completionKey = completionKey;
+      complete.prepend(banner);
     }
   }
   function status(message) {
     $("status").textContent = message;
   }
-  function persist() {
+  async function persist() {
     if (storageError === "corrupt") {
       status(
         "Saved Test Camp data could not be read. This session is temporary; the saved copy has been preserved.",
@@ -75,8 +111,8 @@
     if (cloud) cloud.applyWallet(s);
     s.revision++;
     try {
-      cloud?.onSave(s);
-      localStorage.setItem(KEY, JSON.stringify(s));
+      await cloud?.onSave(s);
+      await localGameStorage.setItem(KEY, JSON.stringify(s));
       storageError = false;
       coinFeedback();
       status(
@@ -95,16 +131,23 @@
     if (cloud && !cloud.isUnlocked()) return;
     pendingSaves++;
     document.documentElement.setAttribute("data-saving", "");
-    const transact = () => {
+    const transact = async () => {
       if (!storageError) s = read();
       const priorView = s.view,
         focused = document.activeElement,
-        kind = ["d9Focus", "action", "act", "setting", "missionTier", "campSlot", "startingYear", "startingRetakeYear"].find(
-          (key) => focused?.dataset?.[key],
-        ),
+        kind = [
+          "d9Focus",
+          "action",
+          "act",
+          "setting",
+          "missionTier",
+          "campSlot",
+          "startingYear",
+          "startingRetakeYear",
+        ].find((key) => focused?.dataset?.[key]),
         token = kind ? focused.dataset[kind] : null;
       fn();
-      persist();
+      await persist();
       if (renderPage) {
         render(focus);
         if (!focus && priorView === s.view && kind && token) {
@@ -125,7 +168,7 @@
     try {
       if (navigator.locks) await navigator.locks.request(LOCK, transact);
       else {
-        transact();
+        await transact();
         status(
           "Please use one Test Camp tab: this browser cannot coordinate saves across tabs.",
         );
@@ -145,80 +188,150 @@
   const art = (id, level = E.count(s, id), showRepairs = true) =>
     `<div class="hero-art">${A.scene(id, M.visualLevel(s, id, level), before, M.completions(s, id).length, showRepairs)}</div>`;
   function header(eyebrow, title, back = "map") {
-    return `<div class="section-head"><div><div class="eyebrow">${eyebrow}</div><h1>${title}</h1></div>${back?btn("← Back", "nav:" + back):""}</div>`;
+    return `<div class="section-head"><div><div class="eyebrow">${eyebrow}</div><h1>${title}</h1></div>${back ? btn("← Back", "nav:" + back) : ""}</div>`;
   }
-  function home(){return camp();}
-  function starting(){const done=P.complete(s);
-    const summary=P.rows(s);
-    return `${header('YOUR STARTING POINTS','Find my starting points','home')}<section class="panel">
+  function home() {
+    return camp();
+  }
+  function starting() {
+    const done = P.complete(s);
+    const summary = P.rows(s);
+    return `${header("YOUR STARTING POINTS", "Find my starting points", "home")}<section class="panel">
       <p>New starting checks have 8 questions per area. No timer. Choose your current UK curriculum year before starting each area. Two answers in a row in a new check can move the next question up or down a year within that area’s available question range.</p>
       <p>Pause whenever you like. Wrong answers, “I don’t know” and “I can’t do this” all count towards the same downward streak. A correct answer resets that streak.</p>
-      <p>${done?'All nine samples are saved. Learning adventures are now open.':'Explore the maps while we find your starting points. Play opens after one area. Find the other starting points whenever you are ready.'}</p>
-      <p>${Object.keys(P.areas).filter(id=>P.valid(P.latest(s,id))).length} / 9 areas complete. This is a starting estimate, not a full assessment or proof of mastery. No coins or rewards are awarded.</p>
-      </section><div class="starting-results">${E.worlds.map(w=>{
-        const a=s.startingProfile?.areas?.[w.id],ready=P.valid(a),years=P.years(C,w.id),selected=s.startingProfile?.years?.[w.id],retakeYear=s.startingProfile?.retakeYears?.[w.id],history=s.startingProfile?.history?.[w.id]||[],row=summary.find(r=>r.id===w.id);
-        return `<article class="panel"><h2>${esc(w.name)}</h2><p>${ready?'Sample complete':a?.question?'Paused · '+a.responses.length+' / '+P.length(a)+' answers saved':'Not assessed yet'}</p>
-          ${!a?`<label for="starting-year-${w.id}">Your current curriculum year for ${esc(w.name)}</label><select id="starting-year-${w.id}" data-starting-year="${w.id}"><option value="">Choose a year</option>${years.map(y=>`<option value="${y}" ${selected===y?'selected':''}>Year ${y}</option>`).join('')}</select><p class="small">Available questions: Year ${years[0]}–Year ${years.at(-1)}. Choose a year in this range; lower-year questions are not available for every area.</p>`:''}
-          ${ready?'':btn(a?.question?'Resume this area':'Find this starting point','starting:'+w.id,'primary',!a&&!years.includes(selected))}
-          ${ready?`<div class="starting-estimate"><h3>${esc(row.estimate)}</h3><p>${a.responses.filter(r=>r.correct).length} correct from ${P.length(a)} saved answers. ${a.responses.filter(r=>r.skipped).length} marked not known or not doable yet.</p><p>${[2,3].includes(a.assessmentVersion)?`Next, try teaching for ${a.estimate.nextSkills.map(id=>esc(skill(id)?.name||id)).join(' or ')} around Year ${a.estimate.nextYear}. Check each topic separately.`:'Your earlier four-question sample is preserved. Check each topic separately.'}</p><p>A cautious starting estimate from a limited sample, not a full assessment. It does not award mastery or change completed learning.</p></div>`:''}
-          ${ready&&done?`<details><summary>Your saved answers explained</summary>${a.responses.map(r=>`<p>Year ${r.band}: ${esc(r.prompt)}</p><p>You chose: ${esc(r.skipped?r.skipReason==='cannot'?'I can’t do this':'I don’t know':r.value)}. ${esc(r.explanation)}</p>`).join('')}</details>`:''}
-          ${ready?`<details ${retakeYear?'open':''}><summary>Take a new 8-question starting estimate</summary><p>Your previous estimate and completed learning stay saved.</p><label for="retake-year-${w.id}">Current curriculum year for a new ${esc(w.name)} estimate</label><select id="retake-year-${w.id}" data-starting-retake-year="${w.id}"><option value="">Choose a year</option>${years.map(y=>`<option value="${y}" ${retakeYear===y?'selected':''}>Year ${y}</option>`).join('')}</select>${btn('Start new starting estimate','starting-retake:'+w.id,'primary',!years.includes(retakeYear))}</details>`:''}
-          ${history.length?`<details><summary>Earlier starting estimates (${history.length})</summary>${history.map(old=>`<p>Saved ${P.length(old)}-question estimate, starting range ${old.assessmentVersion===2?'Year ':''}${old.estimate.band}. Your original ${old.responses.length} answers are retained.</p><ol>${old.responses.map(r=>`<li>${esc(r.prompt)} — ${esc(r.skipped?'Not known yet':r.value)}</li>`).join('')}</ol>`).join('')}</details>`:''}
+      <p>${done ? "All nine samples are saved. Learning adventures are now open." : "Explore the maps while we find your starting points. Play opens after one area. Find the other starting points whenever you are ready."}</p>
+      <p>${Object.keys(P.areas).filter((id) => P.valid(P.latest(s, id))).length} / 9 areas complete. This is a starting estimate, not a full assessment or proof of mastery. No coins or rewards are awarded.</p>
+      </section><div class="starting-results">${E.worlds
+        .map((w) => {
+          const a = s.startingProfile?.areas?.[w.id],
+            ready = P.valid(a),
+            years = P.years(C, w.id),
+            selected = s.startingProfile?.years?.[w.id],
+            retakeYear = s.startingProfile?.retakeYears?.[w.id],
+            history = s.startingProfile?.history?.[w.id] || [],
+            row = summary.find((r) => r.id === w.id);
+          return `<article class="panel"><h2>${esc(w.name)}</h2><p>${ready ? "Sample complete" : a?.question ? "Paused · " + a.responses.length + " / " + P.length(a) + " answers saved" : "Not assessed yet"}</p>
+          ${!a ? `<label for="starting-year-${w.id}">Your current curriculum year for ${esc(w.name)}</label><select id="starting-year-${w.id}" data-starting-year="${w.id}"><option value="">Choose a year</option>${years.map((y) => `<option value="${y}" ${selected === y ? "selected" : ""}>Year ${y}</option>`).join("")}</select><p class="small">Available questions: Year ${years[0]}–Year ${years.at(-1)}. Choose a year in this range; lower-year questions are not available for every area.</p>` : ""}
+          ${ready ? "" : btn(a?.question ? "Resume this area" : "Find this starting point", "starting:" + w.id, "primary", !a && !years.includes(selected))}
+          ${ready ? `<div class="starting-estimate"><h3>${esc(row.estimate)}</h3><p>${a.responses.filter((r) => r.correct).length} correct from ${P.length(a)} saved answers. ${a.responses.filter((r) => r.skipped).length} marked not known or not doable yet.</p><p>${[2, 3].includes(a.assessmentVersion) ? `Next, try teaching for ${a.estimate.nextSkills.map((id) => esc(skill(id)?.name || id)).join(" or ")} around Year ${a.estimate.nextYear}. Check each topic separately.` : "Your earlier four-question sample is preserved. Check each topic separately."}</p><p>A cautious starting estimate from a limited sample, not a full assessment. It does not award mastery or change completed learning.</p></div>` : ""}
+          ${ready && done ? `<details><summary>Your saved answers explained</summary>${a.responses.map((r) => `<p>Year ${r.band}: ${esc(r.prompt)}</p><p>You chose: ${esc(r.skipped ? (r.skipReason === "cannot" ? "I can’t do this" : "I don’t know") : r.value)}. ${esc(r.explanation)}</p>`).join("")}</details>` : ""}
+          ${ready ? `<details ${retakeYear ? "open" : ""}><summary>Take a new 8-question starting estimate</summary><p>Your previous estimate and completed learning stay saved.</p><label for="retake-year-${w.id}">Current curriculum year for a new ${esc(w.name)} estimate</label><select id="retake-year-${w.id}" data-starting-retake-year="${w.id}"><option value="">Choose a year</option>${years.map((y) => `<option value="${y}" ${retakeYear === y ? "selected" : ""}>Year ${y}</option>`).join("")}</select>${btn("Start new starting estimate", "starting-retake:" + w.id, "primary", !years.includes(retakeYear))}</details>` : ""}
+          ${history.length ? `<details><summary>Earlier starting estimates (${history.length})</summary>${history.map((old) => `<p>Saved ${P.length(old)}-question estimate, starting range ${old.assessmentVersion === 2 ? "Year " : ""}${old.estimate.band}. Your original ${old.responses.length} answers are retained.</p><ol>${old.responses.map((r) => `<li>${esc(r.prompt)} — ${esc(r.skipped ? "Not known yet" : r.value)}</li>`).join("")}</ol>`).join("")}</details>` : ""}
           </article>`;
-      }).join('')}</div>${P.unlocked(s)?btn('Choose a learning adventure','nav:map','primary'):''}`;
+        })
+        .join(
+          "",
+        )}</div>${P.unlocked(s) ? btn("Choose a learning adventure", "nav:map", "primary") : ""}`;
   }
-  function startingArea(){
-    const id=s.startingProfile?.active,a=s.startingProfile?.areas?.[id],q=P.question(s,id);
-    if(!q||!Array.isArray(q.choices)||typeof q.prompt!=='string')return starting();
-    const total=P.length(a);
-    return `${header('FIND YOUR STARTING POINT',esc(E.worlds.find(w=>w.id===id).name),'starting')}<section class="panel baseline-question" data-baseline-scope="${esc(JSON.stringify([id,a.responses.length,q.prompt,a.answered]))}">
-      <p id="starting-question-progress">Question ${Math.min(a.responses.length+(a.answered?0:1),total)} / ${total} · Year ${q.band} · no timer</p>
-      ${[2,3].includes(a.assessmentVersion)?`<p class="small">Started at Year ${a.selectedYear}. Questions adapt within Year ${a.availableYears[0]}–Year ${a.availableYears.at(-1)}. Your answers are saved.</p>`:''}
+  function startingArea() {
+    const id = s.startingProfile?.active,
+      a = s.startingProfile?.areas?.[id],
+      q = P.question(s, id);
+    if (!q || !Array.isArray(q.choices) || typeof q.prompt !== "string")
+      return starting();
+    const total = P.length(a);
+    return `${header("FIND YOUR STARTING POINT", esc(E.worlds.find((w) => w.id === id).name), "starting")}<section class="panel baseline-question" data-baseline-scope="${esc(JSON.stringify([id, a.responses.length, q.prompt, a.answered]))}">
+      <p id="starting-question-progress">Question ${Math.min(a.responses.length + (a.answered ? 0 : 1), total)} / ${total} · Year ${q.band} · no timer</p>
+      ${[2, 3].includes(a.assessmentVersion) ? `<p class="small">Started at Year ${a.selectedYear}. Questions adapt within Year ${a.availableYears[0]}–Year ${a.availableYears.at(-1)}. Your answers are saved.</p>` : ""}
       <h2 aria-describedby="starting-question-progress">${esc(q.prompt)}</h2>
-      ${a.answered?`<p role="status">Answer saved. Keep using your own ideas; your estimate appears at the end.</p>${btn(a.responses.length===total?'See starting estimate':'Next question','starting-next','primary')}`:q.choices.length?`<div class="actions baseline-choices">${q.choices.map((v,i)=>btn(esc(T.answerLabel([q.prompt],v)),'starting-choice:'+i)).join('')}</div><div class="actions">${btn('I don’t know','starting-skip')}${btn('I can’t do this','starting-skip:cannot')}</div>`:`<label>Your answer <input data-baseline-draft inputmode="decimal" value="${esc(a.draft||'')}" autocomplete="off"></label><div class="actions">${btn('Submit answer','starting-submit','primary',!a.draft?.trim())}${btn('I don’t know','starting-skip')}${btn('I can’t do this','starting-skip:cannot')}</div>`}
-      <p>It’s safe not to know. This starting estimate earns no mastery, coins or rewards.</p>${a.validation?`<p role="alert">${esc(a.validation)}</p>`:''}
+      ${a.answered ? `<p role="status">Answer saved. Keep using your own ideas; your estimate appears at the end.</p>${btn(a.responses.length === total ? "See starting estimate" : "Next question", "starting-next", "primary")}` : q.choices.length ? `<div class="actions baseline-choices">${q.choices.map((v, i) => btn(esc(T.answerLabel([q.prompt], v)), "starting-choice:" + i)).join("")}</div><div class="actions">${btn("I don’t know", "starting-skip")}${btn("I can’t do this", "starting-skip:cannot")}</div>` : `<label>Your answer <input data-baseline-draft inputmode="decimal" value="${esc(a.draft || "")}" autocomplete="off"></label><div class="actions">${btn("Submit answer", "starting-submit", "primary", !a.draft?.trim())}${btn("I don’t know", "starting-skip")}${btn("I can’t do this", "starting-skip:cannot")}</div>`}
+      <p>It’s safe not to know. This starting estimate earns no mastery, coins or rewards.</p>${a.validation ? `<p role="alert">${esc(a.validation)}</p>` : ""}
       </section>`;
   }
-  function savedActivities(){const entries=N.saved(s);return entries.length?`<section class="panel saved-activities"><h2>Your paused activities</h2><p>Pick one to return to the exact saved question, answer and tools.</p>${entries.map(x=>btn(esc(x.label),`resume-saved:${x.kind}:${encodeURIComponent(x.key)}`)).join('')}</section>`:'';}
+  function savedActivities() {
+    const entries = N.saved(s);
+    return entries.length
+      ? `<section class="panel saved-activities"><h2>Your paused activities</h2><p>Pick one to return to the exact saved question, answer and tools.</p>${entries.map((x) => btn(esc(x.label), `resume-saved:${x.kind}:${encodeURIComponent(x.key)}`)).join("")}</section>`
+      : "";
+  }
 
   function map() {
-    return `${header("THE ADVENTURE ATLAS", "Where will you go?", "home")}<div class="toolbar"><p class="muted">Choose a subject world. Town has its own destination from Base Camp or the Town button.</p>${A.explorer(s, true)}<span class="badge">${s.milestones.length} learning milestones</span></div>${A.atlas?A.atlas(s):""}<div class="world-grid">${E.worlds.filter(w=>w.id!=='town').map((w, i) => `<article class="world-card" data-world="${w.id}" style="--world-accent:${w.color}"><div class="world-vista">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="world-open">OPEN TO EXPLORE</span><span class="world-landmarks" role="img" aria-label="${M.visualLevel(s,w.id,E.count(s,w.id))} of 3 landmarks restored">${[0,1,2].map(i=>`<i class="${i<M.visualLevel(s,w.id,E.count(s,w.id))?'restored':''}" aria-hidden="true">◆</i>`).join('')}</span></div><div class="body"><div class="eyebrow">0${i + 1} · ${s.world === w.id ? "YOU ARE HERE" : "OPEN TO EXPLORE"}</div><h2>${w.name}</h2><p class="muted">${w.tag} · ${M.visualLevel(s, w.id, E.count(s, w.id))}/3 restored · ${M.completions(s, w.id).length} expeditions</p>${bar(M.visualLevel(s, w.id, E.count(s, w.id)), 3)}${btn("Explore " + w.name, "world:" + w.id)}</div></article>`).join("")}</div>`;
+    return `${header("THE ADVENTURE ATLAS", "Where will you go?", "home")}<div class="toolbar"><p class="muted">Choose a subject world. Town has its own destination from Base Camp or the Town button.</p>${A.explorer(s, true)}<span class="badge">${s.milestones.length} learning milestones</span></div>${A.atlas ? A.atlas(s) : ""}<div class="world-grid">${E.worlds
+      .filter((w) => w.id !== "town")
+      .map(
+        (w, i) =>
+          `<article class="world-card" data-world="${w.id}" style="--world-accent:${w.color}"><div class="world-vista">${A.scene(w.id, M.visualLevel(s, w.id, E.count(s, w.id)), false, M.completions(s, w.id).length)}<span class="world-open">OPEN TO EXPLORE</span><span class="world-landmarks" role="img" aria-label="${M.visualLevel(s, w.id, E.count(s, w.id))} of 3 landmarks restored">${[0, 1, 2].map((i) => `<i class="${i < M.visualLevel(s, w.id, E.count(s, w.id)) ? "restored" : ""}" aria-hidden="true">◆</i>`).join("")}</span></div><div class="body"><div class="eyebrow">0${i + 1} · ${s.world === w.id ? "YOU ARE HERE" : "OPEN TO EXPLORE"}</div><h2>${w.name}</h2><p class="muted">${w.tag} · ${M.visualLevel(s, w.id, E.count(s, w.id))}/3 restored · ${M.completions(s, w.id).length} expeditions</p>${bar(M.visualLevel(s, w.id, E.count(s, w.id)), 3)}${btn("Explore " + w.name, "world:" + w.id)}</div></article>`,
+      )
+      .join("")}</div>`;
   }
   function worldRoutePins(w) {
-    const routes = M.routes(w.id), columns = Math.min(4, routes.length),
+    const routes = M.routes(w.id),
+      columns = Math.min(4, routes.length),
       rows = Math.ceil(routes.length / columns);
     // Curriculum routes extend the original three landmarks. Position the entire
     // current list, rather than indexing a three-entry coordinate array.
-    const original = [[39, 53], [62, 64], [49, 35]];
-    return `<nav class="world-route-pins" aria-label="Explore ${esc(w.name)} landmarks">${routes.map((r, i) => {
-      const column = i % columns, row = Math.floor(i / columns);
-      const [x, y] = routes.length === 3 ? original[i] : [
-        columns === 1 ? 50 : 15 + 70 * column / (columns - 1),
-        rows === 1 ? 53 : 28 + 50 * row / (rows - 1),
-      ];
-      const align = x < 30 ? 'left' : x > 70 ? 'right' : 'center';
-      return `<button data-action="scene-mission:${w.id}:${r.id}:${M.state(s).difficulty[w.id] || M.recommendation(s,w.id)}" style="left:${x}%;top:${y}%" data-label-align="${align}" ${y < 40 ? 'data-label-below' : ''} aria-label="Visit ${esc(r.name)}"><span aria-hidden="true">${i+1}</span><span class="route-label">${esc(r.name)}</span></button>`;
-    }).join('')}</nav>`;
+    const original = [
+      [39, 53],
+      [62, 64],
+      [49, 35],
+    ];
+    return `<nav class="world-route-pins" aria-label="Explore ${esc(w.name)} landmarks">${routes
+      .map((r, i) => {
+        const column = i % columns,
+          row = Math.floor(i / columns);
+        const [x, y] =
+          routes.length === 3
+            ? original[i]
+            : [
+                columns === 1 ? 50 : 15 + (70 * column) / (columns - 1),
+                rows === 1 ? 53 : 28 + (50 * row) / (rows - 1),
+              ];
+        const align = x < 30 ? "left" : x > 70 ? "right" : "center";
+        return `<button data-action="scene-mission:${w.id}:${r.id}:${M.state(s).difficulty[w.id] || M.recommendation(s, w.id)}" style="left:${x}%;top:${y}%" data-label-align="${align}" ${y < 40 ? "data-label-below" : ""} aria-label="Visit ${esc(r.name)}"><span aria-hidden="true">${i + 1}</span><span class="route-label">${esc(r.name)}</span></button>`;
+      })
+      .join("")}</nav>`;
   }
   function worldPage() {
     const w = world();
-    return `${header("WORLD " + (E.worlds.indexOf(w) + 1) + " / 09", w.name)}<div class="split world-overview ${w.id==='town'?'town-overview':''}"><div><div class="world-route-map">${w.id==='town'?U.worldMap(s,w):art(w.id, E.count(s,w.id), false)}${w.id !== "town" ? worldRoutePins(w) : ""}</div></div>${w.id==='town'?'':repairEntry(w)}</div><h2>Optional exploration</h2><p>Try a mission, a Town plan or Base Camp whenever you like. These are separate from your starting-point and independent checks.</p>${U.board(s, w, false, w.id==='town'?repairEntry(w):'')}${w.id === "town" ? '<details class="town-lessons"><summary>Maths lessons and independent checks · 16 skills</summary>' : ""}<h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills
+    return `${header("WORLD " + (E.worlds.indexOf(w) + 1) + " / 09", w.name)}<div class="split world-overview ${w.id === "town" ? "town-overview" : ""}"><div><div class="world-route-map">${w.id === "town" ? U.worldMap(s, w) : art(w.id, E.count(s, w.id), false)}${w.id !== "town" ? worldRoutePins(w) : ""}</div></div>${w.id === "town" ? "" : repairEntry(w)}</div><h2>Optional exploration</h2><p>Try a mission, a Town plan or Base Camp whenever you like. These are separate from your starting-point and independent checks.</p>${U.board(s, w, false, w.id === "town" ? repairEntry(w) : "")}${w.id === "town" ? '<details class="town-lessons"><summary>Maths lessons and independent checks · 16 skills</summary>' : ""}<h2 style="margin-top:38px">Choose a maths mission</h2><p class="muted">Explore a lesson, practise with support, then try a separate fresh check.</p><section class="skill-list">${C.skills
       .filter((k) => k.world === w.id)
       .map((k) => {
         const c = s.checks[k.id],
           old = s.skills[k.id];
-        return `<article class="panel"><h3>${esc(k.name)}</h3><p class="small muted">${esc(k.description)}</p><span class="badge">${c?.stage >= 2 ? "SPACED MASTERY" : c?.stage === 1 ? "INDEPENDENTLY PRACTISED" : old?.state === "mastered" ? "EXISTING MASTERY" : "READY TO EXPLORE"}</span><div class="actions">${btn("Learn & practise", "learn:" + k.id)}${!s.discovery[k.id]?.complete ? btn("Find my starting point", "discover:" + k.id) : ""}${btn("Independent check", "check:" + k.id, "", !s.practice[k.id]?.completed || c?.reteach || c?.due > Date.now())}</div>${c?.due > Date.now() ? '<p class="small muted">Memory check due ' + esc(new Date(c.due).toLocaleDateString("en-GB", { timeZone: "Europe/London" })) + "</p>" : ""}${c?.reteach ? '<p class="small muted">Revisit the lesson before another check.</p>' : ""}</article>`;
+        return `<article class="panel"><h3>${esc(k.name)}</h3><p class="small muted">${esc(k.description)}</p><span class="badge">${c?.reteach ? "REVISIT LESSON" : c?.stage >= 2 ? "SPACED MASTERY" : c?.stage === 1 ? "INDEPENDENTLY PRACTISED" : old?.state === "mastered" ? "EXISTING MASTERY" : "READY TO EXPLORE"}</span><div class="actions">${btn("Learn & practise", "learn:" + k.id)}${!s.discovery[k.id]?.complete ? btn("Find my starting point", "discover:" + k.id) : ""}${btn("Independent check", "check:" + k.id, "", !s.practice[k.id]?.completed || c?.reteach || c?.due > Date.now())}</div>${c?.due > Date.now() ? '<p class="small muted">Memory check due ' + esc(new Date(c.due).toLocaleDateString("en-GB", { timeZone: "Europe/London" })) + "</p>" : ""}${c?.reteach ? '<p class="small muted">Revisit the lesson before another check.</p>' : ""}</article>`;
       })
       .join("")}</section>${w.id === "town" ? "</details>" : ""}`;
   }
-  function nextButton(world,stage){const n=R.recommend(s,world,stage),name=skill(n.id)?.name||n.id;const label=n.type==='discover'?'Starting point: '+name:n.type==='learn'?'Learn and practise: '+name:n.type==='check'?'Independent check: '+name:n.type==='restore'?(world==='town'?'Restore Community ':'Restore stage ')+(n.stage+1):'Choose an optional adventure';return btn(label,n.type==='restore'?`restore:${world}:${n.stage}`:n.type==='complete'?`world:${world}`:`${n.type}:${n.id}`,'primary');}
-  function repairEntry(w){
-    const stage=[0,1,2].find(i=>!s.milestones.includes(w.id+':'+i)),g=stage===undefined?null:R.gate(s,w.id,stage);
-    return `<section class="panel repair-entry" aria-label="Repair and restoration challenge"><h2>Repair and restoration challenge</h2><p>${s.milestones.filter(m=>[0,1,2].some(i=>m===w.id+':'+i)).length} / 3 stages complete · progress stays saved</p>${g?`<h3>Next repair · Stage ${stage+1}: ${esc(w.stages[stage])}</h3><p>Maths for this stage: ${g.skills.map(id=>esc(skill(id)?.name||id)).join(' · ')}</p><p>${g.missing.length?'Before repairing: find your starting point for '+g.missing.map(id=>esc(skill(id)?.name||id)).join(' · '):'Starting-point requirements complete. Your stage uses your assessed level.'}</p><div class="recommended-next"><h3>Recommended next step</h3>${nextButton(w.id)}</div>`:'<p>All repair stages complete. Your completed work and recaps stay available.</p>'}<details class="repair-stage-picker"><summary>Open repair challenge · stages and saved progress</summary>${restorationBoard(w)}</details><p class="small muted">Restoration is guided practice. Independent mastery has its own fresh checks. Pause whenever you need.</p></section>`;
+  function nextButton(world, stage) {
+    const n = R.recommend(s, world, stage),
+      name = skill(n.id)?.name || n.id;
+    const label =
+      n.type === "discover"
+        ? "Starting point: " + name
+        : n.type === "learn"
+          ? "Learn and practise: " + name
+          : n.type === "check"
+            ? "Independent check: " + name
+            : n.type === "restore"
+              ? (world === "town" ? "Restore Community " : "Restore stage ") +
+                (n.stage + 1)
+              : "Choose an optional adventure";
+    return btn(
+      label,
+      n.type === "restore"
+        ? `restore:${world}:${n.stage}`
+        : n.type === "complete"
+          ? `world:${world}`
+          : `${n.type}:${n.id}`,
+      "primary",
+    );
   }
-  function restorationBoard(w){return `<section class="restoration-path panel" id="${w.id==='town'?'town-restoration':'restoration-path'}"><h2>${w.id==='town'?'Restore the Town community':'Your restoration path'}</h2><p>Find your starting point, learn and practise, try an independent check, then restore. Hints are safe.</p><div class="recommended-next"><h3>Your next step</h3>${nextButton(w.id)}</div><div class="skill-list">${w.stages.map((name,i)=>{const g=R.gate(s,w.id,i),done=s.milestones.includes(w.id+':'+i);return `<article class="panel"><h3>${w.id==='town'?'Restore Community':'Stage'} ${i+1}: ${esc(name)}</h3><p>Maths for this stage: ${g.skills.map(id=>esc(skill(id)?.name||id)).join(' · ')}</p>${done?'<p>Completed work stays saved.</p>':`<p>${g.ready?'Ready to restore. No timer; pause whenever you need.':'Before this stage:'}</p>${g.prior?`<p>Finish ${w.id==='town'?'Restore Community':'Stage'} ${i}: ${esc(w.stages[i-1])}.</p>${nextButton(w.id,i-1)}`:''}${g.missing.length?`<ul>${g.missing.map(id=>`<li>Complete the starting point for ${esc(skill(id)?.name||id)}. ${btn('Starting point: '+(skill(id)?.name||id),'discover:'+id)}</li>`).join('')}</ul>`:''}`}<div class="actions">${done||g.ready?btn(done?'View restoration recap':'Start or resume restoration',`restore:${w.id}:${i}`,'primary'):''}</div></article>`;}).join('')}</div></section>`;}
+  function repairEntry(w) {
+    const stage = [0, 1, 2].find((i) => !s.milestones.includes(w.id + ":" + i)),
+      g = stage === undefined ? null : R.gate(s, w.id, stage);
+    return `<section class="panel repair-entry" aria-label="Repair and restoration challenge"><h2>Repair and restoration challenge</h2><p>${s.milestones.filter((m) => [0, 1, 2].some((i) => m === w.id + ":" + i)).length} / 3 stages complete · progress stays saved</p>${g ? `<h3>Next repair · Stage ${stage + 1}: ${esc(w.stages[stage])}</h3><p>Maths for this stage: ${g.skills.map((id) => esc(skill(id)?.name || id)).join(" · ")}</p><p>${g.missing.length ? "Before repairing: find your starting point for " + g.missing.map((id) => esc(skill(id)?.name || id)).join(" · ") : "Starting-point requirements complete. Your stage uses your assessed level."}</p><div class="recommended-next"><h3>Recommended next step</h3>${nextButton(w.id)}</div>` : "<p>All repair stages complete. Your completed work and recaps stay available.</p>"}<details class="repair-stage-picker"><summary>Open repair challenge · stages and saved progress</summary>${restorationBoard(w)}</details><p class="small muted">Restoration is guided practice. Independent mastery has its own fresh checks. Pause whenever you need.</p></section>`;
+  }
+  function restorationBoard(w) {
+    return `<section class="restoration-path panel" id="${w.id === "town" ? "town-restoration" : "restoration-path"}"><h2>${w.id === "town" ? "Restore the Town community" : "Your restoration path"}</h2><p>Find your starting point, learn and practise, try an independent check, then restore. Hints are safe.</p><div class="recommended-next"><h3>Your next step</h3>${nextButton(w.id)}</div><div class="skill-list">${w.stages
+      .map((name, i) => {
+        const g = R.gate(s, w.id, i),
+          done = s.milestones.includes(w.id + ":" + i);
+        return `<article class="panel"><h3>${w.id === "town" ? "Restore Community" : "Stage"} ${i + 1}: ${esc(name)}</h3><p>Maths for this stage: ${g.skills.map((id) => esc(skill(id)?.name || id)).join(" · ")}</p>${done ? "<p>Completed work stays saved.</p>" : `<p>${g.ready ? "Ready to restore. No timer; pause whenever you need." : "Before this stage:"}</p>${g.prior ? `<p>Finish ${w.id === "town" ? "Restore Community" : "Stage"} ${i}: ${esc(w.stages[i - 1])}.</p>${nextButton(w.id, i - 1)}` : ""}${g.missing.length ? `<ul>${g.missing.map((id) => `<li>Complete the starting point for ${esc(skill(id)?.name || id)}. ${btn("Starting point: " + (skill(id)?.name || id), "discover:" + id)}</li>`).join("")}</ul>` : ""}`}<div class="actions">${done || g.ready ? btn(done ? "View restoration recap" : "Start or resume restoration", `restore:${w.id}:${i}`, "primary") : ""}</div></article>`;
+      })
+      .join("")}</div></section>`;
+  }
   function stepper(q, p, unit = "") {
-    return `<div class="stepper">${btn("−", "adjust:-" + (p.step || 1), "", q.value <= (p.min || 0))}${window.V5HandsOn.numericInput({...p,unit:unit.trim()},q.value,q.amountDraft,"quest")}${btn("+", "adjust:" + (p.step || 1), "", q.value >= p.max)}</div>`;
+    return `<div class="stepper">${btn("−", "adjust:-" + (p.step || 1), "", q.value <= (p.min || 0))}${window.V5HandsOn.numericInput({ ...p, unit: unit.trim() }, q.value, q.amountDraft, "quest")}${btn("+", "adjust:" + (p.step || 1), "", q.value >= p.max)}</div>`;
   }
   function puzzle(q) {
     const p = E.puzzle(q.world, q.i);
@@ -247,84 +360,186 @@
       ui = `<div class="puzzle-bars" role="img" aria-label="Left neighbourhood: ${p.values.join(" plus ")}. Right neighbourhood: two bars each ${q.value}.">${[...p.values, q.value, q.value].map((v, i) => `<span style="height:${v * 12}px;${i === 2 ? "margin-left:25px" : ""}">${v}</span>`).join("")}</div>${stepper(q, p)}<p class="small muted">Left: ${p.values.join(" + ")}. Adjust both right-hand bars together.</p>`;
     if (p.kind === "measure")
       ui = `<div class="ruler" aria-hidden="true">${[0, 100, 200, 300, 400, 500].map((v) => "<span>" + v + "</span>").join("")}</div><div style="height:14px;background:#72976c;width:${q.value / 5}%;max-width:100%"></div>${stepper(q, p, " cm")}`;
-    if(['balance','ratio','bars','measure'].includes(p.kind)){
-      const spec={...p,unit:p.kind==='measure'?'cm':p.unit,...(p.kind==='balance'?{coefficient:1,add:q.i+3,total:q.i+8}:{})};
-      ui=window.V5HandsOn.visualTool({values:{amount:q.value}},spec).replaceAll('data-action="m-value:', 'data-action="value:');
+    if (["balance", "ratio", "bars", "measure"].includes(p.kind)) {
+      const spec = {
+        ...p,
+        unit: p.kind === "measure" ? "cm" : p.unit,
+        ...(p.kind === "balance"
+          ? { coefficient: 1, add: q.i + 3, total: q.i + 8 }
+          : {}),
+      };
+      ui = window.V5HandsOn.visualTool(
+        { values: { amount: q.value } },
+        spec,
+      ).replaceAll('data-action="m-value:', 'data-action="value:');
     }
     return `<div class="puzzle"><div class="eyebrow">PUZZLE ${q.i + 1} / 3 · ${esc(E.worlds.find((w) => w.id === q.world).stages[q.i])}</div><h2>${esc(p.prompt)}</h2><div ${q.solved ? "inert" : ""}>${ui}</div></div>`;
   }
   function quest() {
     const q = s.quest,
       w = E.worlds.find((w) => w.id === q.world);
-    if(!R.gate(s,w.id,q.i).ready)return `${header("SAVED RESTORATION",w.name,"world")}<div class="panel"><h2>Find your starting point first</h2><p>Your earlier puzzle stays saved. This stage needs its starting-point checks before you continue.</p>${R.gate(s,w.id,q.i).missing.map(id=>btn("Starting point: "+(skill(id)?.name||id),"discover:"+id)).join("")}</div>`;
+    if (!R.gate(s, w.id, q.i).ready)
+      return `${header("SAVED RESTORATION", w.name, "world")}<div class="panel"><h2>Find your starting point first</h2><p>Your earlier puzzle stays saved. This stage needs its starting-point checks before you continue.</p>${R.gate(
+        s,
+        w.id,
+        q.i,
+      )
+        .missing.map((id) =>
+          btn("Starting point: " + (skill(id)?.name || id), "discover:" + id),
+        )
+        .join("")}</div>`;
     return `${header("RESTORE THE WORLD", w.name, "world")}<div class="quest-layout world-stage stage-${w.id} ${q.solved ? "stage-restored" : ""}"><div class="stage-vista">${art(w.id).replace('viewBox="0 0 900 560"', 'viewBox="0 110 900 380" preserveAspectRatio="xMidYMid slice"')}<section class="panel guide">${A.guide(w.guide)}<div><h3>${w.guide}, your guide</h3><p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p></div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s, true)}${btn("Save & exit", "nav:home")}</div></div><section class="panel stage-workbench">${q.intro ? `<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2><p>This is your earlier saved puzzle. Finish it here; later stages use your assessed maths in a longer plan.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn("Start building →", "begin", "primary")}` : puzzle(q) + `${q.solved ? `<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn("Stage recap →", "next-quest", "primary")}</div>` : `<div class="actions">${btn("Submit answer", "solve", "primary")}${btn("Hint", "hint")}${btn("I don’t know", "skip")}</div>${q.feedback ? `<div class="feedback" role="status">${esc(q.feedback)}</div>` : ""}`}`}</section></div>`;
   }
-  function learningStamp(l){return l?JSON.stringify([l.id,l.mode,l.round,l.i,l.qs?.[l.i]?.[5]?.id]):'';}
-  function c8Scope(el){const world=el.closest('.world-task-dialog');if(world)return 'world|'+world.dataset.worldScope;const learning=el.closest('[data-c8-learning]');return learning?'learning|'+learning.dataset.c8Learning:null;}
-  function editDirectModel(values,intent,apply){
-    const evidence=()=>{const {picked,...model}=values.d9||{};return JSON.stringify(model);};
-    const before=evidence(),applied=apply();
+  function learningStamp(l) {
+    return l
+      ? JSON.stringify([l.id, l.mode, l.round, l.i, l.qs?.[l.i]?.[5]?.id])
+      : "";
+  }
+  function c8Scope(el) {
+    const world = el.closest(".world-task-dialog");
+    if (world) return "world|" + world.dataset.worldScope;
+    const learning = el.closest("[data-c8-learning]");
+    return learning ? "learning|" + learning.dataset.c8Learning : null;
+  }
+  function editDirectModel(values, intent, apply) {
+    const evidence = () => {
+      const { picked, ...model } = values.d9 || {};
+      return JSON.stringify(model);
+    };
+    const before = evidence(),
+      applied = apply();
     // Called only inside the existing lock, after its question/world scope guard.
     // Raw movement, stale edits, picking and resets never renew active learning.
-    if(applied&&!['pick','reset'].includes(intent.op)&&before!==evidence())activity=Date.now();
+    if (
+      applied &&
+      !["pick", "reset"].includes(intent.op) &&
+      before !== evidence()
+    )
+      activity = Date.now();
     return applied;
   }
   function learning() {
     const l = s.learning,
       k = skill(l.id),
       q = l.qs[l.i];
-    const payroll=['town_wages','town_payslip'].includes(l.id)?T.payslipPanel():'';
+    const payroll = ["town_wages", "town_payslip"].includes(l.id)
+      ? T.payslipPanel()
+      : "";
     if (s.view === "lesson") {
-      const example=l.teachingExample;
-      const plan = example?{title:"A different example",explain:example[3],question:example[0],worked:example[4]}:window.JaxonTutor.plan(l.id, []);
-      const prerequisites=window.V6Education.gaps(s,l.id);
-      return `${header("LEARN AT YOUR OWN PACE", esc(k.name), "world")}<div class="split"><section class="panel"><h2>Build the idea</h2>${payroll}${prerequisites.length?`<div class="prerequisite-path"><h3>Check the foundations</h3><p>These short starting-point checks help us find the right level. Your earlier progress stays saved.</p>${prerequisites.map(id=>btn("Discover: "+skill(id).name,"discover:"+id)).join("")}</div>`:""}${l.feedback?`<div class="feedback" role="status">${esc(l.feedback)}</div>`:""}<p class="lesson-copy">${esc(k.lesson)}</p>${plan ? `<div class="feedback"><strong>${esc(plan.title || "An easier example")}</strong><p>${esc(plan.explain || "")}</p><p>${esc(plan.question || plan.prompt || "")}</p><p>${esc(plan.worked || plan.feedback || "")}</p></div>` : ""}<div class="actions">${btn("Try supported practice →", "practice", "primary")}${btn("Save & exit", "nav:home")}</div></section><div>${art(k.world)}<p class="small muted">Practice helps you learn. Only separate fresh independent checks can establish mastery.</p></div></div>`;
+      const example = l.teachingExample;
+      const plan = example
+        ? {
+            title: "A different example",
+            explain: example[3],
+            question: example[0],
+            worked: example[4],
+          }
+        : window.JaxonTutor.plan(l.id, []);
+      const prerequisites = window.V6Education.gaps(s, l.id);
+      return `${header("LEARN AT YOUR OWN PACE", esc(k.name), "world")}<div class="split"><section class="panel"><h2>Build the idea</h2>${payroll}${prerequisites.length ? `<div class="prerequisite-path"><h3>Check the foundations</h3><p>These short starting-point checks help us find the right level. Your earlier progress stays saved.</p>${prerequisites.map((id) => btn("Discover: " + skill(id).name, "discover:" + id)).join("")}</div>` : ""}${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}<p class="lesson-copy">${esc(k.lesson)}</p>${plan ? `<div class="feedback"><strong>${esc(plan.title || "An easier example")}</strong><p>${esc(plan.explain || "")}</p><p>${esc(plan.question || plan.prompt || "")}</p><p>${esc(plan.worked || plan.feedback || "")}</p></div>` : ""}<div class="actions">${btn("Try supported practice →", "practice", "primary")}${btn("Save & exit", "nav:home")}</div></section><div>${art(k.world)}<p class="small muted">Practice helps you learn. Only separate fresh independent checks can establish mastery.</p></div></div>`;
     }
-    const direct=q[5]?.direct;
-    const c8=q[5]?.contentVersion===8;
-    const handsOn=direct&&!l.answered?`<div data-c8-learning="${esc(learningStamp(l))}">${window.V9Touch.render(direct,l.manipulation||{},"d9-p")}${btn("Submit answer","d9-check","primary")}</div>`:c8&&!l.answered?`<div data-c8-learning="${esc(learningStamp(l))}">${window.V8Activities.render({answer:q[1],activity:q[5].activity,allowCalculator:q[5].allowCalculator},l.manipulation||{},"c8-p")}${(q[5].activity?.kind==='choice'?'':btn("Submit answer","c8-check","primary"))}</div>`:window.V5HandsOn.practiceRender(l,k);
+    const direct = q[5]?.direct;
+    const c8 = q[5]?.contentVersion === 8;
+    const handsOn =
+      direct && !l.answered
+        ? `<div data-c8-learning="${esc(learningStamp(l))}">${window.V9Touch.render(direct, l.manipulation || {}, "d9-p")}${btn("Submit answer", "d9-check", "primary")}</div>`
+        : c8 && !l.answered
+          ? `<div data-c8-learning="${esc(learningStamp(l))}">${window.V8Activities.render({ answer: q[1], activity: q[5].activity, allowCalculator: q[5].allowCalculator }, l.manipulation || {}, "c8-p")}${q[5].activity?.kind === "choice" ? "" : btn("Submit answer", "c8-check", "primary")}</div>`
+          : window.V5HandsOn.practiceRender(l, k);
     const tools =
-      l.mode === "practice" && !direct && !["algebra_coordinates","geometry_transforms"].includes(k.id)
+      l.mode === "practice" &&
+      !direct &&
+      !["algebra_coordinates", "geometry_transforms"].includes(k.id)
         ? (window.JaxonMathTools.render(k.id, k.world, {
             ...l,
             type: "mission",
             mode: "question",
           }) || "") +
-          (window.JaxonMathToolsExtra.render(k.id, k.world, {
-            ...l,
-            type: "mission",
-            mode: "question",
-          }) || "").replace('<div class="math-extra-dots"','<div role="img" class="math-extra-dots"')
+          (
+            window.JaxonMathToolsExtra.render(k.id, k.world, {
+              ...l,
+              type: "mission",
+              mode: "question",
+            }) || ""
+          ).replace(
+            '<div class="math-extra-dots"',
+            '<div role="img" class="math-extra-dots"',
+          )
         : "";
-    return `${header(l.mode === "check" ? "FRESH INDEPENDENT CHECK" : l.mode === "discovery" ? "FIND YOUR STARTING POINT" : "SUPPORTED PRACTICE", esc(k.name), "world")}<div class="split learning-practice-split"><section class="panel"><span class="badge">QUESTION ${l.i + 1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2>${payroll}${handsOn}<div class="answer-grid">${(c8||direct?[]:q[2]).map((a, i) => btn(esc(T.answerLabel(q,a)), "answer:" + i, "", l.answered)).join("")}</div><div class="actions">${btn("Hint", "learning-hint", "", l.answered)}${btn("I don’t know", "learning-skip", "", l.answered)}${btn("Save & exit", "nav:home")}</div>${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}${l.answered ? `<div class="actions">${btn(l.i === l.qs.length - 1 ? "See recap →" : "Next question →", "next-learning", "primary")}</div>` : ""}</section><aside><div class="panel"><h3>${l.mode === "check" ? "Your own thinking" : "Explore the idea"}</h3><p class="muted">${l.mode === "check" ? "Only the first answer without help counts as independent. Hints and “I don’t know” are always safe." : "Use the tools, take a hint, or work through an example. Practice never awards mastery."}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
+    return `${header(l.mode === "check" ? "FRESH INDEPENDENT CHECK" : l.mode === "discovery" ? "FIND YOUR STARTING POINT" : "SUPPORTED PRACTICE", esc(k.name), "world")}<div class="split learning-practice-split"><section class="panel"><span class="badge">QUESTION ${l.i + 1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2>${payroll}${handsOn}<div class="answer-grid">${(c8 || direct ? [] : q[2]).map((a, i) => btn(esc(T.answerLabel(q, a)), "answer:" + i, "", l.answered)).join("")}</div><div class="actions">${btn("Hint", "learning-hint", "", l.answered)}${btn("I don’t know", "learning-skip", "", l.answered)}${btn("Save & exit", "nav:home")}</div>${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}${l.answered ? `<div class="actions">${btn(l.i === l.qs.length - 1 ? "See recap →" : "Next question →", "next-learning", "primary")}</div>` : ""}</section><aside><div class="panel"><h3>${l.mode === "check" ? "Your own thinking" : "Explore the idea"}</h3><p class="muted">${l.mode === "check" ? "Only the first answer without help counts as independent. Hints and “I don’t know” are always safe." : "Use the tools, take a hint, or work through an example. Practice never awards mastery."}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
   }
-  function townLife(j){
-    const t=j.task,q={world:'town',route:j.venue,values:j.values,solved:j.solved,recipeArt:j.category==='Cooking'};
-    const controls=t?U.controls(q,t).replaceAll('data-action="m-','data-action="j-').replaceAll('data-action="h-','data-action="j-').replaceAll('mission-amount','journey-amount').replaceAll('mission-number-help','journey-number-help').replace('data-numeric-answer="mission"','data-numeric-answer="journey"').replace('data-mission-clock="true"','data-life-clock="true"'):'';
-    if(window.V6SceneUI?.supports(j))return `${header(j.category+' · LEVEL '+j.tier,esc(j.name),'world')}${locationTrail(j)}${window.V6SceneUI.journey(j,controls)}`;
-    return `${header(j.category+' · LEVEL '+j.tier,esc(j.name),'world')}${locationTrail(j)}${T.balancePanel(j)}${T.isWageTask(t)?T.payslipPanel():''}<div class="journey-progress panel"><p>Stage ${Math.min(j.stage+1,j.steps.length)} / ${j.steps.length} · ${T.clock(j.time)} · pretend cash ${t?.title==='Count your remaining cash'?'use your receipts':T.money(j.cash)} · savings plan ${T.money(j.savings)}</p><p>List: ${Object.entries(j.shoppingList).map(([k,v])=>esc(k)+' × '+v).join(' · ')||'No shopping needed yet'}</p><details><summary>Carried inventory</summary><p>${esc(U.inventoryText(j))||'Nothing carried yet'}</p></details><details><summary>Receipts · ${j.receipts.length}</summary><ul>${j.receipts.map(r=>`<li>${esc(r.label)} · ${T.clock(r.time)} · paid ${T.money(r.spent)} · received ${T.money(r.earned)}${r.sale?' · customer sale '+T.money(r.sale):''}${r.saved?' · moved to savings '+T.money(r.saved):''}${Object.keys(r.items||{}).length?' · '+esc(U.inventoryText(j,r.items)):''}${r.choice?' · '+esc(r.choice):''}</li>`).join('')}</ul></details><p class="small">Fictional Town cash. Learning coins, mastery and parent rewards stay separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Ellis')}<p>${esc(j.context.objective)}</p></div></aside><section class="panel stage-workbench">${j.done?`<div class="town-complete"><h2>Town plan complete.</h2><p>You finished ${esc(j.name)}. Your receipts and decisions are saved. ${j.milestoneParticipation&&!j.milestoneParticipation.eligible?`Finished with help. Replay and answer at least ${j.milestoneParticipation.required} of ${j.milestoneParticipation.total} steps without choosing I don’t know to earn the milestone. Hints and retries are welcome.`:''} Replay starts a fresh day with different values and keeps this completed day.</p><div class="actions">${btn('Try another day',j.originalRecipe?'j-recipe-replay:'+j.originalRecipe:'j-replay:'+j.scenario,'primary')}${btn('Choose another Town plan','world:town')}</div></div>`:`<h2>${esc(j.title)}</h2>${U.recipe(j.recipeCard)}<p class="town-task-prompt">${esc(t.prompt)}</p><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${controls}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===j.steps.length-1?'Complete Town plan':'Continue plan','j-next','primary'):(['choice','journey'].includes(t.kind)?'':btn('Submit answer','j-submit','primary'))}${btn('Hint','j-help')}${btn('I don’t know','j-skip')}${btn('Save & exit','nav:home')}${btn('Choose a different plan','world:town')}</div>`}</section></div>`;
+  function townLife(j) {
+    const t = j.task,
+      q = {
+        world: "town",
+        route: j.venue,
+        values: j.values,
+        solved: j.solved,
+        recipeArt: j.category === "Cooking",
+      };
+    const controls = t
+      ? U.controls(q, t)
+          .replaceAll('data-action="m-', 'data-action="j-')
+          .replaceAll('data-action="h-', 'data-action="j-')
+          .replaceAll("mission-amount", "journey-amount")
+          .replaceAll("mission-number-help", "journey-number-help")
+          .replace(
+            'data-numeric-answer="mission"',
+            'data-numeric-answer="journey"',
+          )
+          .replace('data-mission-clock="true"', 'data-life-clock="true"')
+      : "";
+    if (window.V6SceneUI?.supports(j))
+      return `${header(j.category + " · LEVEL " + j.tier, esc(j.name), "world")}${locationTrail(j)}${window.V6SceneUI.journey(j, controls)}`;
+    return `${header(j.category + " · LEVEL " + j.tier, esc(j.name), "world")}${locationTrail(j)}${T.balancePanel(j)}${T.isWageTask(t) ? T.payslipPanel() : ""}<div class="journey-progress panel"><p>Stage ${Math.min(j.stage + 1, j.steps.length)} / ${j.steps.length} · ${T.clock(j.time)} · pretend cash ${t?.title === "Count your remaining cash" ? "use your receipts" : T.money(j.cash)} · savings plan ${T.money(j.savings)}</p><p>List: ${
+      Object.entries(j.shoppingList)
+        .map(([k, v]) => esc(k) + " × " + v)
+        .join(" · ") || "No shopping needed yet"
+    }</p><details><summary>Carried inventory</summary><p>${esc(U.inventoryText(j)) || "Nothing carried yet"}</p></details><details><summary>Receipts · ${j.receipts.length}</summary><ul>${j.receipts.map((r) => `<li>${esc(r.label)} · ${T.clock(r.time)} · paid ${T.money(r.spent)} · received ${T.money(r.earned)}${r.sale ? " · customer sale " + T.money(r.sale) : ""}${r.saved ? " · moved to savings " + T.money(r.saved) : ""}${Object.keys(r.items || {}).length ? " · " + esc(U.inventoryText(j, r.items)) : ""}${r.choice ? " · " + esc(r.choice) : ""}</li>`).join("")}</ul></details><p class="small">Fictional Town cash. Learning coins, mastery and parent rewards stay separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue, q)}</div><div class="panel">${A.guide("Ellis")}<p>${esc(j.context.objective)}</p></div></aside><section class="panel stage-workbench">${j.done ? `<div class="town-complete"><h2>Town plan complete.</h2><p>You finished ${esc(j.name)}. Your receipts and decisions are saved. ${j.milestoneParticipation && !j.milestoneParticipation.eligible ? `Finished with help. Replay and answer at least ${j.milestoneParticipation.required} of ${j.milestoneParticipation.total} steps without choosing I don’t know to earn the milestone. Hints and retries are welcome.` : ""} Replay starts a fresh day with different values and keeps this completed day.</p><div class="actions">${btn("Try another day", j.originalRecipe ? "j-recipe-replay:" + j.originalRecipe : "j-replay:" + j.scenario, "primary")}${btn("Choose another Town plan", "world:town")}</div></div>` : `<h2>${esc(j.title)}</h2>${U.recipe(j.recipeCard)}<p class="town-task-prompt">${esc(t.prompt)}</p><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved ? "inert" : ""}>${controls}</div>${j.feedback ? `<p class="feedback" role="status">${esc(j.feedback)}</p>` : ""}<div class="actions">${j.solved ? btn(j.stage === j.steps.length - 1 ? "Complete Town plan" : "Continue plan", "j-next", "primary") : ["choice", "journey"].includes(t.kind) ? "" : btn("Submit answer", "j-submit", "primary")}${btn("Hint", "j-help")}${btn("I don’t know", "j-skip")}${btn("Save & exit", "nav:home")}${btn("Choose a different plan", "world:town")}</div>`}</section></div>`;
   }
-  function journey(){
-    const J=window.V5Journey,j=J.model(s);if(!j)return `<section class="panel"><h1>This journey needs another look.</h1><p>The saved copy has been preserved. Other learning remains available.</p>${btn('Choose another Town plan','world:town')}${btn('Back home','nav:home')}</section>`;
-    if(j.version===2)return townLife(j);
-    const t=j.task,q={world:'town',route:j.venue,values:j.values,solved:j.solved,recipeArt:true},role=j.context.role;
-    return `${header('ADVENTURE JOURNEY · '+j.recipeName,esc(j.title),'world')}<div class="journey-progress"><p>Step ${Math.min(8,j.stage+1)} of 8 · cash ${T.money(j.cash)}</p><p>Shopping list: ${j.shoppingList?`pasta ${j.shoppingList[0]} packs · tomatoes ${j.shoppingList[1]} tins · protein ${j.shoppingList[2]} packs`:'not prepared yet'} · Inventory: pasta ${j.inventory[0]} packs · tomatoes ${j.inventory[1]} tins · protein ${j.inventory[2]} packs</p><p class="small">Fictional journey inventory and money. Your learning coins and mastery are separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue,q)}</div><div class="panel">${A.guide('Jess')}<p>Your same Town, seen through a different role.</p></div></aside><section class="panel stage-workbench">${j.done?`<h2>The recipe is ready.</h2><p>Your shopping, change and cooking were saved together. Reopening this journey cannot repeat a payment or consume ingredients again.</p>${btn('Back to Town','world:town','primary')}`:`<h2>${esc(t.prompt)}</h2><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved?'inert':''}>${U.controls(q,t).replaceAll('data-action="m-','data-action="j-').replaceAll('mission-amount','journey-amount').replaceAll('mission-number-help','journey-number-help').replace('data-numeric-answer="mission"','data-numeric-answer="journey"')}</div>${j.feedback?`<p class="feedback" role="status">${esc(j.feedback)}</p>`:''}<div class="actions">${j.solved?btn(j.stage===7?'Prepare dinner':'Continue journey','j-next','primary'):(['choice','journey'].includes(t.kind)?'':btn('Submit answer','j-submit','primary'))}${btn('Hint','j-help')}${btn('I don’t know','j-skip')}${btn('Save & exit','nav:home')}</div>`}</section></div>`;
+  function journey() {
+    const J = window.V5Journey,
+      j = J.model(s);
+    if (!j)
+      return `<section class="panel"><h1>This journey needs another look.</h1><p>The saved copy has been preserved. Other learning remains available.</p>${btn("Choose another Town plan", "world:town")}${btn("Back home", "nav:home")}</section>`;
+    if (j.version === 2) return townLife(j);
+    const t = j.task,
+      q = {
+        world: "town",
+        route: j.venue,
+        values: j.values,
+        solved: j.solved,
+        recipeArt: true,
+      },
+      role = j.context.role;
+    return `${header("ADVENTURE JOURNEY · " + j.recipeName, esc(j.title), "world")}<div class="journey-progress"><p>Step ${Math.min(8, j.stage + 1)} of 8 · cash ${T.money(j.cash)}</p><p>Shopping list: ${j.shoppingList ? `pasta ${j.shoppingList[0]} packs · tomatoes ${j.shoppingList[1]} tins · protein ${j.shoppingList[2]} packs` : "not prepared yet"} · Inventory: pasta ${j.inventory[0]} packs · tomatoes ${j.inventory[1]} tins · protein ${j.inventory[2]} packs</p><p class="small">Fictional journey inventory and money. Your learning coins and mastery are separate.</p></div><div class="quest-layout world-stage venue-${j.venue}"><aside class="stage-vista"><div class="hero-art">${A.location(j.venue, q)}</div><div class="panel">${A.guide("Jess")}<p>Your same Town, seen through a different role.</p></div></aside><section class="panel stage-workbench">${j.done ? `<h2>The recipe is ready.</h2><p>Your shopping, change and cooking were saved together. Reopening this journey cannot repeat a payment or consume ingredients again.</p>${btn("Back to Town", "world:town", "primary")}` : `<h2>${esc(t.prompt)}</h2><p>${esc(t.teach)}</p><details><summary>An easier example</summary><p>${esc(t.example)}</p></details><div class="task-controls" ${j.solved ? "inert" : ""}>${U.controls(q, t).replaceAll('data-action="m-', 'data-action="j-').replaceAll("mission-amount", "journey-amount").replaceAll("mission-number-help", "journey-number-help").replace('data-numeric-answer="mission"', 'data-numeric-answer="journey"')}</div>${j.feedback ? `<p class="feedback" role="status">${esc(j.feedback)}</p>` : ""}<div class="actions">${j.solved ? btn(j.stage === 7 ? "Prepare dinner" : "Continue journey", "j-next", "primary") : ["choice", "journey"].includes(t.kind) ? "" : btn("Submit answer", "j-submit", "primary")}${btn("Hint", "j-help")}${btn("I don’t know", "j-skip")}${btn("Save & exit", "nav:home")}</div>`}</section></div>`;
   }
   function recap() {
     const r = s.lastResult;
     if (!r) return home();
     const w = r.world || skill(r.id)?.world || s.world;
-    return `<section class="recap"><span class="badge">A CHAPTER IN YOUR JOURNEY</span><h1 style="margin-top:22px">${r.type === "expedition" ? "A visit worth remembering." : r.type === "restoration" ? "Your restoration stage is complete." : r.type === "quest" ? "Look what you restored." : r.type === "discovery" ? "Your starting point" : r.type === "check" ? "Your independent check" : "Another idea explored."}</h1><p class="muted">${r.type === "expedition" ? (r.newReward ? "A new milestone and keepsake are saved. Your maths has helped this place grow." : "A fresh visit complete. Your earlier rewards are safe; replaying does not duplicate them.") : r.type === "restoration" ? (r.legacy ? "Your earlier saved puzzle is complete. Later stages use your assessed maths in a longer plan. Restoration stays separate from independent mastery." : "You applied your assessed maths in a longer plan. Your work is saved as restoration practice, not independent mastery.") : r.type === "quest" ? "Three landmarks, brought back to life through your maths. Your progress is saved." : r.type === "discovery" ? "A starting point helps us choose suitable fresh practice. Discovery does not award mastery." : r.type === "check" ? r.correct + " / " + r.total + " first answers without help. " + (s.checks[r.id]?.stage >= 2 ? "Spaced mastery demonstrated." : s.checks[r.id]?.stage === 1 ? "Independently practised. Come back for a memory check in two days." : "Revisit the lesson before your next fresh check.") : "Guided practice complete. Your next step can be a separate fresh independent check."}</p>${r.participation&&!r.participation.eligible?`<p role="status">Finished with help. Your work is saved. Replay and answer at least ${r.participation.required} of ${r.participation.total} steps without choosing I don’t know to earn the milestone. Hints and retries are welcome.</p>`:""}${art(w)}<div class="actions">${btn("Explore this world", "world:" + w, "primary")}${r.type === "practice" ? btn("Try a fresh independent check", "check:" + r.id) : r.type === "discovery" && !s.discovery[r.id]?.complete ? btn("Continue discovery", "discover:" + r.id) : ""}${r.type === "expedition" ? btn("Learn the maths behind this visit", "learn:" + (M.routes(w).find((v) => v.id === r.route)?.skills[0] || E.worlds.find((v) => v.id === w).skill)) : ""}${btn("Visit Base Camp", "nav:camp")}${btn("Save & exit", "nav:home")}</div></section>`;
+    return `<section class="recap"><span class="badge">A CHAPTER IN YOUR JOURNEY</span><h1 style="margin-top:22px">${r.type === "expedition" ? "A visit worth remembering." : r.type === "restoration" ? "Your restoration stage is complete." : r.type === "quest" ? "Look what you restored." : r.type === "discovery" ? "Your starting point" : r.type === "check" ? "Your independent check" : "Another idea explored."}</h1><p class="muted">${r.type === "expedition" ? (r.newReward ? "A new milestone and keepsake are saved. Your maths has helped this place grow." : "A fresh visit complete. Your earlier rewards are safe; replaying does not duplicate them.") : r.type === "restoration" ? (r.legacy ? "Your earlier saved puzzle is complete. Later stages use your assessed maths in a longer plan. Restoration stays separate from independent mastery." : "You applied your assessed maths in a longer plan. Your work is saved as restoration practice, not independent mastery.") : r.type === "quest" ? "Three landmarks, brought back to life through your maths. Your progress is saved." : r.type === "discovery" ? "A starting point helps us choose suitable fresh practice. Discovery does not award mastery." : r.type === "check" ? r.correct + " / " + r.total + " first answers without help. " + (s.checks[r.id]?.reteach ? "Revisit the lesson before your next fresh check. Your earlier evidence stays saved." : s.checks[r.id]?.stage >= 2 ? "Spaced mastery demonstrated." : s.checks[r.id]?.stage === 1 ? "Independently practised. Come back for a memory check in two days." : "Revisit the lesson before your next fresh check.") : "Guided practice complete. Your next step can be a separate fresh independent check."}</p>${r.participation && !r.participation.eligible ? `<p role="status">Finished with help. Your work is saved. Replay and answer at least ${r.participation.required} of ${r.participation.total} steps without choosing I don’t know to earn the milestone. Hints and retries are welcome.</p>` : ""}${art(w)}<div class="actions">${btn("Explore this world", "world:" + w, "primary")}${r.type === "practice" ? btn("Try a fresh independent check", "check:" + r.id) : r.type === "discovery" && !s.discovery[r.id]?.complete ? btn("Continue discovery", "discover:" + r.id) : ""}${r.type === "expedition" ? btn("Learn the maths behind this visit", "learn:" + (M.routes(w).find((v) => v.id === r.route)?.skills[0] || E.worlds.find((v) => v.id === w).skill)) : ""}${btn("Visit Base Camp", "nav:camp")}${btn("Save & exit", "nav:home")}</div></section>`;
   }
   function campPlanner(progress) {
-    const selected=M.campStages.find(st=>st.id===campPreview && st.id<=progress.current.id) || progress.current;
-    const ready=progress.next && progress.remaining===0;
-    return `<section id="estate-planner" class="estate-planner panel" aria-label="Camp upgrade planner"><div class="section-head"><div><div class="eyebrow">A HOME BUILT THROUGH ADVENTURE</div><h2>${progress.next ? "Next upgrade: " + esc(progress.next.name) : "Your mansion estate is complete."}</h2><p>${progress.count} unique milestones · ${progress.next ? progress.remaining + " more for the next upgrade" : "Every earned upgrade stays with you"}.</p></div><span class="badge">BASE CAMP LEVEL ${progress.current.id} / 8</span></div><p class="small muted">Complete different world restoration stages or expedition difficulty levels to earn unique milestones. Hints are welcome. Repeating a completed milestone adds no progress. Coins and independent mastery are separate.</p>${progress.next ? `<p><strong>Complete Level ${progress.current.id}:</strong> earn ${progress.next.need} unique milestones in total (${Math.min(progress.count,progress.next.need)} / ${progress.next.need}), then build the ${esc(progress.next.name)} upgrade. ${esc(progress.next.story)}</p><div class="actions">${btn("Build Level " + progress.next.id + " upgrade", "camp-upgrade:" + progress.next.id, "primary", !ready)}${btn("Explore worlds to earn milestones", "nav:map")}</div>` : ""}<div class="estate-track" role="group" aria-label="Eight Base Camp levels">${M.campStages.map(st=>`<button data-action="camp-preview:${st.id}" ${st.id>progress.current.id?'disabled':''} aria-pressed="${selected.id===st.id}"><strong>Level ${st.id}. ${esc(st.name)}</strong><span>${st.need} unique milestones · ${st.id<=progress.current.id ? "earned" : "locked"}</span></button>`).join("")}</div><div class="estate-plan-preview"><div>${A.camp(s,selected.id)}</div><div><span class="badge">EARNED HOME · LEVEL ${selected.id}</span><h3>${esc(selected.name)}</h3><p>${esc(selected.story)}</p><p class="small muted">Viewing camp never builds an upgrade, spends coins or earns rewards.</p>${progress.current.id>=6?`<div class="actions">${btn("Plan fictional water supply", "mission:measure:1:1")}${progress.current.id>=7?btn("Explore fictional power planning", "mission:statistics:1:1"):""}</div><p class="small muted">Illustrated maths models, not real machinery or electrical instructions.</p>`:""}</div></div></section>`;
+    const selected =
+      M.campStages.find(
+        (st) => st.id === campPreview && st.id <= progress.current.id,
+      ) || progress.current;
+    const ready = progress.next && progress.remaining === 0;
+    return `<section id="estate-planner" class="estate-planner panel" aria-label="Camp upgrade planner"><div class="section-head"><div><div class="eyebrow">A HOME BUILT THROUGH ADVENTURE</div><h2>${progress.next ? "Next upgrade: " + esc(progress.next.name) : "Your mansion estate is complete."}</h2><p>${progress.count} unique milestones · ${progress.next ? progress.remaining + " more for the next upgrade" : "Every earned upgrade stays with you"}.</p></div><span class="badge">BASE CAMP LEVEL ${progress.current.id} / 8</span></div><p class="small muted">Complete different world restoration stages or expedition difficulty levels to earn unique milestones. Hints are welcome. Repeating a completed milestone adds no progress. Coins and independent mastery are separate.</p>${progress.next ? `<p><strong>Complete Level ${progress.current.id}:</strong> earn ${progress.next.need} unique milestones in total (${Math.min(progress.count, progress.next.need)} / ${progress.next.need}), then build the ${esc(progress.next.name)} upgrade. ${esc(progress.next.story)}</p><div class="actions">${btn("Build Level " + progress.next.id + " upgrade", "camp-upgrade:" + progress.next.id, "primary", !ready)}${btn("Explore worlds to earn milestones", "nav:map")}</div>` : ""}<div class="estate-track" role="group" aria-label="Eight Base Camp levels">${M.campStages.map((st) => `<button data-action="camp-preview:${st.id}" ${st.id > progress.current.id ? "disabled" : ""} aria-pressed="${selected.id === st.id}"><strong>Level ${st.id}. ${esc(st.name)}</strong><span>${st.need} unique milestones · ${st.id <= progress.current.id ? "earned" : "locked"}</span></button>`).join("")}</div><div class="estate-plan-preview"><div>${A.camp(s, selected.id)}</div><div><span class="badge">EARNED HOME · LEVEL ${selected.id}</span><h3>${esc(selected.name)}</h3><p>${esc(selected.story)}</p><p class="small muted">Viewing camp never builds an upgrade, spends coins or earns rewards.</p>${progress.current.id >= 6 ? `<div class="actions">${btn("Plan fictional water supply", "mission:measure:1:1")}${progress.current.id >= 7 ? btn("Explore fictional power planning", "mission:statistics:1:1") : ""}</div><p class="small muted">Illustrated maths models, not real machinery or electrical instructions.</p>` : ""}</div></div></section>`;
   }
-  function startingCard(){const n=Object.keys(P.areas).filter(id=>P.valid(P.latest(s,id))).length;return n<9?`<section class="panel" aria-label="More starting points"><h2>${n} of 9 starting points found</h2><p>Find the next one when you feel ready. Each new area has 8 questions; the result is provisional, not mastery.</p>${btn('Find the next one','nav:starting')}</section>`:'';}
+  function startingCard() {
+    const n = Object.keys(P.areas).filter((id) =>
+      P.valid(P.latest(s, id)),
+    ).length;
+    return n < 9
+      ? `<section class="panel" aria-label="More starting points"><h2>${n} of 9 starting points found</h2><p>Find the next one when you feel ready. Each new area has 8 questions; the result is provisional, not mastery.</p>${btn("Find the next one", "nav:starting")}</section>`
+      : "";
+  }
   function camp() {
-    const progress=M.campProgress(s),n=progress.count;
-    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Base Camp", null)}<section class="home-path panel" aria-label="Choose your adventure"><h2>Where next?</h2>${!P.unlocked(s)?`<div class="notice"><h3>Start with your starting points</h3><p>Start with one short 8-question area. Then play opens and you can find the remaining starting points over time.</p>${btn("Find my starting points","nav:starting","primary")}</div>`:btn("Your starting points","nav:starting")}${!s.tourSeen?`<div class="notice"><p>New here? Your guide can show you the way.</p><div class="actions">${btn("Show me how","nav:tour")}${btn("Start exploring","skip-tour")}</div></div>`:""}<p>${esc(P.unlocked(s)?N.summary(s):'Find one starting point to open play. Your paused activities will wait for you.')}</p><div class="actions">${btn('Continue adventure','continue','primary')}${btn('Subject worlds','nav:map')}${btn('Town and Restore Community','world:town')}${btn('How to play','nav:tour')}</div><p>${!P.unlocked(s)?'You can explore the maps between questions.':s.world==='town'?nextButton('town'):btn('Your next learning step','next-path:'+s.world)}</p></section>${startingCard()}${savedActivities()}<section class="camp-overview ${progress.pending ? "estate-unveiling" : ""}">${progress.pending ? `<div class="estate-celebration" role="status"><strong>Your ${esc(progress.current.name)} is ready.</strong><span>Built through your adventures. No coins spent.</span>${btn("Enjoy the new home", "camp-celebrate")}</div>` : ""}<div class="camp-map hero-art">${A.camp(s)}<span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>${esc(progress.current.name)}</h2><p class="muted">Choose a place in camp to continue, explore or view your progress. Every earned upgrade stays with you.</p><p class="camp-inventory small">Base Camp Level ${progress.current.id} / 8 · ${esc(progress.current.name)}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section>${campPlanner(progress)}<details class="camp-journal" id="camp-achievements"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
+    const progress = M.campProgress(s),
+      n = progress.count;
+    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Base Camp", null)}<section class="home-path panel" aria-label="Choose your adventure"><h2>Where next?</h2>${!P.unlocked(s) ? `<div class="notice"><h3>Start with your starting points</h3><p>Start with one short 8-question area. Then play opens and you can find the remaining starting points over time.</p>${btn("Find my starting points", "nav:starting", "primary")}</div>` : btn("Your starting points", "nav:starting")}${!s.tourSeen ? `<div class="notice"><p>New here? Your guide can show you the way.</p><div class="actions">${btn("Show me how", "nav:tour")}${btn("Start exploring", "skip-tour")}</div></div>` : ""}<p>${esc(P.unlocked(s) ? N.summary(s) : "Find one starting point to open play. Your paused activities will wait for you.")}</p><div class="actions">${btn("Continue adventure", "continue", "primary")}${btn("Subject worlds", "nav:map")}${btn("Town and Restore Community", "world:town")}${btn("How to play", "nav:tour")}</div><p>${!P.unlocked(s) ? "You can explore the maps between questions." : s.world === "town" ? nextButton("town") : btn("Your next learning step", "next-path:" + s.world)}</p></section>${startingCard()}${savedActivities()}<section class="camp-overview ${progress.pending ? "estate-unveiling" : ""}">${progress.pending ? `<div class="estate-celebration" role="status"><strong>Your ${esc(progress.current.name)} is ready.</strong><span>Built through your adventures. No coins spent.</span>${btn("Enjoy the new home", "camp-celebrate")}</div>` : ""}<div class="camp-map hero-art">${A.camp(s)}<span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>${esc(progress.current.name)}</h2><p class="muted">Choose a place in camp to continue, explore or view your progress. Every earned upgrade stays with you.</p><p class="camp-inventory small">Base Camp Level ${progress.current.id} / 8 · ${esc(progress.current.name)}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section>${campPlanner(progress)}<details class="camp-journal" id="camp-achievements"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
       ["First steps", n >= 1, "Restore your first landmark."],
       [
         "Forest keeper",
@@ -380,15 +595,42 @@
       .join("")}</div></details>${U.collection(s)}`;
   }
   function shop() {
-    const activeCatalog = C.catalog.filter(i=>!window.V7Avatar||V7Avatar.isActiveItem(i));
+    const activeCatalog = C.catalog.filter(
+      (i) => !window.V7Avatar || window.V7Avatar.isActiveItem(i),
+    );
     const slots = [...new Set(activeCatalog.map((i) => i.slot))];
-    const preview=activeCatalog.find(i=>i.id===itemPreview),look=preview?{...s,bought:[...s.bought,preview.id],equipped:[...s.equipped.filter(id=>C.catalog.find(i=>i.id===id)?.slot!==preview.slot),preview.id]}:s;
-    const slotNames = {Companions:'Pet or companion',Backgrounds:'Background',Headwear:'Hat',Outfits:'Clothing'};
-    const equipment = `<section class="equipment-slots" tabindex="-1" aria-label="Equipped items"><h2>Your equipment</h2><p>Choose one item per category. Changing or removing one keeps your other items.</p><div class="equipment-slot-grid">${slots.map(slot=>{
-      const item=activeCatalog.find(i=>i.slot===slot&&s.bought.includes(i.id)&&s.equipped.includes(i.id));
-      return `<div class="equipment-slot"><strong>${esc(slotNames[slot]||slot)}</strong><span>${item?esc(item.label):'None equipped'}</span><button data-action="remove-slot:${esc(slot)}" ${item?'':'disabled'}>Remove ${esc(slotNames[slot]||slot)}</button></div>`;
-    }).join('')}</div></section>`;
-    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar?V7Avatar.controls(s):""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview?'Preview: '+esc(preview.label):'Your explorer'}</h2>${preview?'<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>':''}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p></div></div>${equipment}<label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${activeCatalog
+    const preview = activeCatalog.find((i) => i.id === itemPreview),
+      look = preview
+        ? {
+            ...s,
+            bought: [...s.bought, preview.id],
+            equipped: [
+              ...s.equipped.filter(
+                (id) =>
+                  C.catalog.find((i) => i.id === id)?.slot !== preview.slot,
+              ),
+              preview.id,
+            ],
+          }
+        : s;
+    const slotNames = {
+      Companions: "Pet or companion",
+      Backgrounds: "Background",
+      Headwear: "Hat",
+      Outfits: "Clothing",
+    };
+    const equipment = `<section class="equipment-slots" tabindex="-1" aria-label="Equipped items"><h2>Your equipment</h2><p>Choose one item per category. Changing or removing one keeps your other items.</p><div class="equipment-slot-grid">${slots
+      .map((slot) => {
+        const item = activeCatalog.find(
+          (i) =>
+            i.slot === slot &&
+            s.bought.includes(i.id) &&
+            s.equipped.includes(i.id),
+        );
+        return `<div class="equipment-slot"><strong>${esc(slotNames[slot] || slot)}</strong><span>${item ? esc(item.label) : "None equipped"}</span><button data-action="remove-slot:${esc(slot)}" ${item ? "" : "disabled"}>Remove ${esc(slotNames[slot] || slot)}</button></div>`;
+      })
+      .join("")}</div></section>`;
+    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar ? window.V7Avatar.controls(s) : ""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview ? "Preview: " + esc(preview.label) : "Your explorer"}</h2>${preview ? '<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>' : ""}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p></div></div>${equipment}<label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${activeCatalog
       .filter(
         (i) =>
           filter === "all" ||
@@ -428,24 +670,79 @@
     }</section></div>`;
   }
   function tour() {
-    return `<section class="tour">${header('YOUR ADVENTURE GUIDE','How to play','home')}<div class="panel"><h2>Follow four small steps</h2><ol><li><strong>Find your starting point.</strong> Choose your curriculum year, then answer 8 questions in one area to help your guide choose a starting level. You can say “I don’t know”.</li><li><strong>Learn and practise.</strong> Try an example, move the maths tools and ask for hints.</li><li><strong>Try an independent check.</strong> Use your own thinking. Help is still safe; it just stays separate from independent answers.</li><li><strong>Restore your world.</strong> Use the ideas in a longer plan. Each stage opens after its starting-point checks. Restoration is practice, not proof of mastery.</li></ol><h2>Explore your way</h2><p>Other missions, Town plans and Base Camp are optional adventures. You can visit another world at any time. Find one starting point to open learning adventures. The remaining areas are optional and can be explored over time. The short profile is a starting suggestion, not mastery.</p><h2>Pause or reset</h2><p>Pause and explore saves your question and tools. Home and World map also leave your activity saved. Base Camp lists your paused activities. Continue brings you back; a finished activity shows its recap. Reset names exactly what a restart or exit resets before you confirm. Completed work, coins and learning evidence stay saved.</p><p>Lessons and checks restart only the current question’s draft. Earlier answers stay. A restarted Town plan or mission keeps its earlier steps in Earlier attempts.</p><div class="actions">${btn('Continue my activity','continue','primary')}${btn('Choose a world','nav:map')}${btn('Finish guide','skip-tour')}</div></div>${s.activityArchives?.length?`<details class="panel"><summary>Earlier attempts · ${s.activityArchives.length}</summary>${s.activityArchives.map(x=>`<article><h3>${esc(x.name)}</h3><p>${x.snapshot.completed?.length??x.snapshot.i??0} earlier steps kept. ${x.snapshot.receipts?.length||0} receipts kept.</p>${x.snapshot.receipts?.length?`<ul>${x.snapshot.receipts.map(r=>`<li>${esc(r.label)}</li>`).join('')}</ul>`:''}</article>`).join('')}</details>`:''}</section>`;
-
+    return `<section class="tour">${header("YOUR ADVENTURE GUIDE", "How to play", "home")}<div class="panel"><h2>Follow four small steps</h2><ol><li><strong>Find your starting point.</strong> Choose your curriculum year, then answer 8 questions in one area to help your guide choose a starting level. You can say “I don’t know”.</li><li><strong>Learn and practise.</strong> Try an example, move the maths tools and ask for hints.</li><li><strong>Try an independent check.</strong> Use your own thinking. Help is still safe; it just stays separate from independent answers.</li><li><strong>Restore your world.</strong> Use the ideas in a longer plan. Each stage opens after its starting-point checks. Restoration is practice, not proof of mastery.</li></ol><h2>Explore your way</h2><p>Other missions, Town plans and Base Camp are optional adventures. You can visit another world at any time. Find one starting point to open learning adventures. The remaining areas are optional and can be explored over time. The short profile is a starting suggestion, not mastery.</p><h2>Pause or reset</h2><p>Pause and explore saves your question and tools. Home and World map also leave your activity saved. Base Camp lists your paused activities. Continue brings you back; a finished activity shows its recap. Reset names exactly what a restart or exit resets before you confirm. Completed work, coins and learning evidence stay saved.</p><p>Lessons and checks restart only the current question’s draft. Earlier answers stay. A restarted Town plan or mission keeps its earlier steps in Earlier attempts.</p><div class="actions">${btn("Continue my activity", "continue", "primary")}${btn("Choose a world", "nav:map")}${btn("Finish guide", "skip-tour")}</div></div>${s.activityArchives?.length ? `<details class="panel"><summary>Earlier attempts · ${s.activityArchives.length}</summary>${s.activityArchives.map((x) => `<article><h3>${esc(x.name)}</h3><p>${x.snapshot.completed?.length ?? x.snapshot.i ?? 0} earlier steps kept. ${x.snapshot.receipts?.length || 0} receipts kept.</p>${x.snapshot.receipts?.length ? `<ul>${x.snapshot.receipts.map((r) => `<li>${esc(r.label)}</li>`).join("")}</ul>` : ""}</article>`).join("")}</details>` : ""}</section>`;
   }
-  function closeDialogs(){document.querySelectorAll('dialog[open]').forEach(d=>d.close());}
-  function safetyButtons(){return `${btn("Pause and explore","pause-explore")}${btn('Home','nav:home')}${btn('World map','nav:map')}${btn('How to play','nav:tour')}${N.target(s)?btn('Reset','recover-open'):''}`;}
-  function activitySafety(){
-    document.body.classList.toggle('task-active',['quest','adventure','journey','lesson','practice','check','discovery','starting-area'].includes(s.view));
-    if(!document.getElementById('town-entry')){const b=document.createElement('button');b.id='town-entry';b.dataset.action='world:town';b.textContent='Town';document.querySelector('.topbar nav').append(b);}
-    if(!document.getElementById('play-help')){const b=document.createElement('button');b.id='play-help';b.dataset.action='nav:tour';b.textContent='How to play';document.querySelector('.topbar nav').append(b);}
-    if(!document.getElementById('recovery-dialog')){const d=document.createElement('dialog');d.id='recovery-dialog';d.setAttribute('aria-label','Reset confirmation');d.innerHTML='<h2>Reset</h2><p class="recovery-copy"></p><div class="actions"><button data-action="recover-apply:restart" data-recovery-confirm>Confirm restart</button><button data-action="recover-apply:exit" data-recovery-confirm>Exit this activity</button><button data-action="recover-cancel">Keep playing</button><button data-action="nav:home">Pause and go home</button><button data-action="nav:map">Pause and open world map</button></div>';document.body.append(d);}
-    if(['quest','adventure','journey','lesson','practice','check','discovery','starting-area'].includes(s.view)){
-      const dock=document.createElement('nav');dock.className='activity-safety';dock.setAttribute('aria-label','Activity help and leaving');dock.innerHTML=safetyButtons();document.getElementById('main').prepend(dock);
-      document.querySelectorAll('#main dialog').forEach(d=>{const n=document.createElement('nav');n.className='activity-safety';n.setAttribute('aria-label','Activity help and leaving');n.innerHTML=safetyButtons();d.append(n);});
+  function closeDialogs() {
+    document.querySelectorAll("dialog[open]").forEach((d) => d.close());
+  }
+  function safetyButtons() {
+    return `${btn("Pause and explore", "pause-explore")}${btn("Home", "nav:home")}${btn("World map", "nav:map")}${btn("How to play", "nav:tour")}${N.target(s) ? btn("Reset", "recover-open") : ""}`;
+  }
+  function activitySafety() {
+    document.body.classList.toggle(
+      "task-active",
+      [
+        "quest",
+        "adventure",
+        "journey",
+        "lesson",
+        "practice",
+        "check",
+        "discovery",
+        "starting-area",
+      ].includes(s.view),
+    );
+    if (!document.getElementById("town-entry")) {
+      const b = document.createElement("button");
+      b.id = "town-entry";
+      b.dataset.action = "world:town";
+      b.textContent = "Town";
+      document.querySelector(".topbar nav").append(b);
+    }
+    if (!document.getElementById("play-help")) {
+      const b = document.createElement("button");
+      b.id = "play-help";
+      b.dataset.action = "nav:tour";
+      b.textContent = "How to play";
+      document.querySelector(".topbar nav").append(b);
+    }
+    if (!document.getElementById("recovery-dialog")) {
+      const d = document.createElement("dialog");
+      d.id = "recovery-dialog";
+      d.setAttribute("aria-label", "Reset confirmation");
+      d.innerHTML =
+        '<h2>Reset</h2><p class="recovery-copy"></p><div class="actions"><button data-action="recover-apply:restart" data-recovery-confirm>Confirm restart</button><button data-action="recover-apply:exit" data-recovery-confirm>Exit this activity</button><button data-action="recover-cancel">Keep playing</button><button data-action="nav:home">Pause and go home</button><button data-action="nav:map">Pause and open world map</button></div>';
+      document.body.append(d);
+    }
+    if (
+      [
+        "quest",
+        "adventure",
+        "journey",
+        "lesson",
+        "practice",
+        "check",
+        "discovery",
+        "starting-area",
+      ].includes(s.view)
+    ) {
+      const dock = document.createElement("nav");
+      dock.className = "activity-safety";
+      dock.setAttribute("aria-label", "Activity help and leaving");
+      dock.innerHTML = safetyButtons();
+      document.getElementById("main").prepend(dock);
+      document.querySelectorAll("#main dialog").forEach((d) => {
+        const n = document.createElement("nav");
+        n.className = "activity-safety";
+        n.setAttribute("aria-label", "Activity help and leaving");
+        n.innerHTML = safetyButtons();
+        d.append(n);
+      });
     }
   }
   function render(focus = false) {
     if (cloud && !cloud.isUnlocked()) return;
-    if(!P.unlocked(s)&&P.views.includes(s.view))s.view='starting';
+    if (!P.unlocked(s) && P.views.includes(s.view)) s.view = "starting";
 
     window.V7Avatar?.setState(s);
     window.V7ActivityScenes?.before();
@@ -455,7 +752,7 @@
     const screens = {
       home,
       starting,
-      "starting-area":startingArea,
+      "starting-area": startingArea,
       map,
       world: worldPage,
       quest,
@@ -469,18 +766,36 @@
       recap,
       tour,
       discovery: learning,
-      adventure: () => U.play(s,venueExterior),
+      adventure: () => U.play(s, venueExterior),
       journey,
     };
     $("main").innerHTML =
       cloud && s.view === "parent"
         ? "<h1>Parent account required</h1>"
         : (screens[s.view] || home)();
-    if(!P.unlocked(s)){
-      document.querySelectorAll('#main [data-action]').forEach(el=>{if(!P.allowed(s,el.dataset.action)){if(el.dataset.action==='continue'){el.dataset.action='nav:starting';el.textContent='Continue starting points';}else{el.disabled=true;el.title='Find one starting point first';}}});
-      if(s.view==='world'){const notice=document.createElement('section');notice.className='notice';notice.innerHTML='<p>Look around freely. Find one starting point before learning adventures begin.</p>'+btn('Find my starting points','nav:starting','primary');$('main').prepend(notice);}
+    if (!P.unlocked(s)) {
+      document.querySelectorAll("#main [data-action]").forEach((el) => {
+        if (!P.allowed(s, el.dataset.action)) {
+          if (el.dataset.action === "continue") {
+            el.dataset.action = "nav:starting";
+            el.textContent = "Continue starting points";
+          } else {
+            el.disabled = true;
+            el.title = "Find one starting point first";
+          }
+        }
+      });
+      if (s.view === "world") {
+        const notice = document.createElement("section");
+        notice.className = "notice";
+        notice.innerHTML =
+          "<p>Look around freely. Find one starting point before learning adventures begin.</p>" +
+          btn("Find my starting points", "nav:starting", "primary");
+        $("main").prepend(notice);
+      }
     }
-    const visitStatus=document.querySelector('.town-visit-status');if(visitStatus)visitStatus.textContent=townVisitError;
+    const visitStatus = document.querySelector(".town-visit-status");
+    if (visitStatus) visitStatus.textContent = townVisitError;
     presentationFinish();
     if (focus) {
       $("main").focus();
@@ -491,16 +806,51 @@
     activitySafety();
     // Town uses the existing world/action route; highlight its own section,
     // including saved activities, rather than every world view as Worlds.
-    const worldView = ["world", "quest", "lesson", "practice", "check", "discovery", "adventure", "journey"].includes(s.view);
-    const section = worldView ? (s.world === "town" ? "town" : "map") : s.view === "shop" ? "camp" : s.view;
-    document.querySelectorAll(".topbar nav [data-nav], .topbar nav [data-action]").forEach((el) => {
-      const target = el.dataset.nav || (el.dataset.action === "world:town" ? "town" : el.dataset.action?.replace(/^nav:/, ""));
-      if (target === section) el.setAttribute("aria-current", "page");
-      else el.removeAttribute("aria-current");
-    });
-    if(s.view==='world'&&P.unlocked(s)&&!P.valid(P.latest(s,s.world))&&!s.startingProfile?.offered?.[s.world]){const n=document.createElement('section');n.className='panel';n.setAttribute('aria-label','Optional starting point');n.innerHTML='<h2>Find a starting point for this world?</h2><p>A short sample can help choose a level. You can keep playing now.</p>'+btn('Find this starting point','nav:starting')+btn('Not now','starting-later:'+s.world);$('main').prepend(n);}
+    const worldView = [
+      "world",
+      "quest",
+      "lesson",
+      "practice",
+      "check",
+      "discovery",
+      "adventure",
+      "journey",
+    ].includes(s.view);
+    const section = worldView
+      ? s.world === "town"
+        ? "town"
+        : "map"
+      : s.view === "shop"
+        ? "camp"
+        : s.view;
+    document
+      .querySelectorAll(".topbar nav [data-nav], .topbar nav [data-action]")
+      .forEach((el) => {
+        const target =
+          el.dataset.nav ||
+          (el.dataset.action === "world:town"
+            ? "town"
+            : el.dataset.action?.replace(/^nav:/, ""));
+        if (target === section) el.setAttribute("aria-current", "page");
+        else el.removeAttribute("aria-current");
+      });
+    if (
+      s.view === "world" &&
+      P.unlocked(s) &&
+      !P.valid(P.latest(s, s.world)) &&
+      !s.startingProfile?.offered?.[s.world]
+    ) {
+      const n = document.createElement("section");
+      n.className = "panel";
+      n.setAttribute("aria-label", "Optional starting point");
+      n.innerHTML =
+        "<h2>Find a starting point for this world?</h2><p>A short sample can help choose a level. You can keep playing now.</p>" +
+        btn("Find this starting point", "nav:starting") +
+        btn("Not now", "starting-later:" + s.world);
+      $("main").prepend(n);
+    }
   }
-  document.addEventListener('v6-scene-ui',()=>render());
+  document.addEventListener("v6-scene-ui", () => render());
   function sound() {
     if (!s.settings.sound) return;
     try {
@@ -517,19 +867,52 @@
       osc.onended = () => ctx.close();
     } catch {}
   }
-  let purchaseChoice=null;
+  let purchaseChoice = null;
   async function dispatch(action, sceneKey = null) {
     let [name, arg] = action.split(":");
-    if(["pause-explore","nav","world","resume-saved","starting"].includes(name))activity=0;
+    if (
+      ["pause-explore", "nav", "world", "resume-saved", "starting"].includes(
+        name,
+      )
+    )
+      activity = 0;
     if (cloud && !cloud.isUnlocked()) return;
-    if (name === "buy" && window.V7Avatar && !V7Avatar.isActiveItem(C.catalog.find(i=>i.id===arg))) return;
-    if(name==='buy-cancel'){document.getElementById('purchase-confirmation')?.close();purchaseChoice=null;return;}
-    const confirmed=name==='buy-confirm';
-    if(confirmed){if(purchaseChoice!==arg)return;purchaseChoice=null;document.getElementById('purchase-confirmation')?.close();name='buy';}
-    if(name==='buy'&&!s.bought.includes(arg)&&!confirmed){
-      const item=C.catalog.find(i=>i.id===arg);if(!item||Math.floor(s.coins)<item.cost)return;
-      let dialog=document.getElementById('purchase-confirmation');if(!dialog){dialog=document.createElement('dialog');dialog.id='purchase-confirmation';dialog.setAttribute('aria-labelledby','purchase-title');dialog.addEventListener('cancel',()=>{purchaseChoice=null;});document.body.append(dialog);}
-      purchaseChoice=arg;dialog.innerHTML=`<h2 id="purchase-title">Buy ${esc(item.label)} for ${window.V3Presentation.coins(item.cost)} coins?</h2><p>You will have ${window.V3Presentation.coins(s.coins-item.cost)} coins left.</p><div class="actions">${btn('Buy','buy-confirm:'+item.id,'primary')}${btn('Cancel','buy-cancel')}</div>`;dialog.showModal();dialog.querySelector('[data-action="buy-cancel"]').focus();return;
+    if (
+      name === "buy" &&
+      window.V7Avatar &&
+      !window.V7Avatar.isActiveItem(C.catalog.find((i) => i.id === arg))
+    )
+      return;
+    if (name === "buy-cancel") {
+      document.getElementById("purchase-confirmation")?.close();
+      purchaseChoice = null;
+      return;
+    }
+    const confirmed = name === "buy-confirm";
+    if (confirmed) {
+      if (purchaseChoice !== arg) return;
+      purchaseChoice = null;
+      document.getElementById("purchase-confirmation")?.close();
+      name = "buy";
+    }
+    if (name === "buy" && !s.bought.includes(arg) && !confirmed) {
+      const item = C.catalog.find((i) => i.id === arg);
+      if (!item || Math.floor(s.coins) < item.cost) return;
+      let dialog = document.getElementById("purchase-confirmation");
+      if (!dialog) {
+        dialog = document.createElement("dialog");
+        dialog.id = "purchase-confirmation";
+        dialog.setAttribute("aria-labelledby", "purchase-title");
+        dialog.addEventListener("cancel", () => {
+          purchaseChoice = null;
+        });
+        document.body.append(dialog);
+      }
+      purchaseChoice = arg;
+      dialog.innerHTML = `<h2 id="purchase-title">Buy ${esc(item.label)} for ${window.V3Presentation.coins(item.cost)} coins?</h2><p>You will have ${window.V3Presentation.coins(s.coins - item.cost)} coins left.</p><div class="actions">${btn("Buy", "buy-confirm:" + item.id, "primary")}${btn("Cancel", "buy-cancel")}</div>`;
+      dialog.showModal();
+      dialog.querySelector('[data-action="buy-cancel"]').focus();
+      return;
     }
     if (cloud && name === "buy" && !s.bought.includes(arg)) {
       try {
@@ -540,345 +923,797 @@
         return;
       }
     }
-    if(name==='recover-open'){
-      recoveryChoice=N.target(s);closeDialogs();
-      const d=document.getElementById('recovery-dialog');
-      d.querySelector('.recovery-copy').textContent=recoveryChoice?`Reset: ${recoveryChoice.label}. ${recoveryChoice.reset}`:'No unfinished activity needs a reset. Your completed work is safe.';
-      d.querySelectorAll('[data-recovery-confirm]').forEach(b=>b.hidden=!recoveryChoice);
-      d.querySelector('[data-action="recover-apply:restart"]').hidden=!recoveryChoice||['learning','baseline'].includes(recoveryChoice.kind)&&recoveryChoice.snapshot.answered;
-      d.showModal();return;
+    if (name === "recover-open") {
+      recoveryChoice = N.target(s);
+      closeDialogs();
+      const d = document.getElementById("recovery-dialog");
+      d.querySelector(".recovery-copy").textContent = recoveryChoice
+        ? `Reset: ${recoveryChoice.label}. ${recoveryChoice.reset}`
+        : "No unfinished activity needs a reset. Your completed work is safe.";
+      d.querySelectorAll("[data-recovery-confirm]").forEach(
+        (b) => (b.hidden = !recoveryChoice),
+      );
+      d.querySelector('[data-action="recover-apply:restart"]').hidden =
+        !recoveryChoice ||
+        (["learning", "baseline"].includes(recoveryChoice.kind) &&
+          recoveryChoice.snapshot.answered);
+      d.showModal();
+      return;
     }
-    if(name==='recover-cancel'){document.getElementById('recovery-dialog').close();recoveryChoice=null;return;}
-    if(['nav','world','continue','recover-apply','pause-explore','resume-saved'].includes(name))closeDialogs();
+    if (name === "recover-cancel") {
+      document.getElementById("recovery-dialog").close();
+      recoveryChoice = null;
+      return;
+    }
+    if (
+      [
+        "nav",
+        "world",
+        "continue",
+        "recover-apply",
+        "pause-explore",
+        "resume-saved",
+      ].includes(name)
+    )
+      closeDialogs();
     const oldView = s.view;
     let error = null,
       restored = false;
-    await change(() => {
-      if(sceneKey?.startsWith('baseline|')){const id=s.startingProfile?.active,a=s.startingProfile?.areas?.[id];if(JSON.stringify([id,a?.responses.length,a?.question?.prompt,a?.answered])!==sceneKey.slice(9))return;}
-      if(sceneKey?.startsWith('world|')&&V7ActivityScenes.key(s)!==sceneKey.slice(6))return;
-      if(sceneKey?.startsWith('learning|')&&learningStamp(s.learning)!==sceneKey.slice(9))return;
-      if(sceneKey && !sceneKey.startsWith('world|')&&name.startsWith('j-')) {
-        const live=window.V5Journey.model(s);
-        if(s.view!=='journey'||!live||JSON.stringify([live.id||live.scenario,live.seed,live.stage])!==sceneKey)return;
-      }
-      if(!P.allowed(s,action)){s.view='starting';error='Find one starting point first. Your saved work is safe.';return;}
-      if(['nav','world'].includes(name)&&['quest','adventure','journey','lesson','practice','check','discovery','starting-area'].includes(s.view)&&!P.views.includes(arg)){error=N.pause(s);if(error)return;}
-      if(name==='pause-explore'){const repair=s.view==='adventure'&&M.current(s)?.restoration;error=N.pause(s);if(!error&&repair)s.view='world';return;}
-      if(name==='resume-saved'){const bits=action.split(':');error=N.openSaved(s,bits[1],decodeURIComponent(bits.slice(2).join(':')));return;}
-      if(name==='starting-later'){const b=P.book(s);if(b){b.offered||={};b.offered[arg]=true;}return;}
-      if(name==='starting-retake'){error=P.retake(s,arg,C);return;}
-      if(name==='starting'){error=P.start(s,arg,C);return;}
-      if(name==='starting-choice'||name==='starting-submit'||name==='starting-skip'){const id=s.startingProfile?.active,a=s.startingProfile?.areas?.[id];P.answer(s,id,name==='starting-choice'?a?.question?.choices[Number(arg)]:a?.draft,name==='starting-skip',Date.now(),arg==='cannot'?'cannot':'unknown');return;}
-      if(name==='starting-next'){P.advance(s,s.startingProfile?.active,C);return;}
-      if(name==='home-activity'){venueExterior=false;if(window.V7Home.start(s,arg,M.state(s).difficulty.town||1))window.V7ActivityScenes?.selectHome(s);return;}
-      if(name==='home-exterior'){error=N.pause(s);if(!error){s.world='town';s.view='world';}return;}
-      if(name==='j-work'){const tier=Number(action.split(':')[2])||M.recommendation(s,'town');if(!window.V52TownLife.start(s,'job-'+arg,tier))error='This saved Town plan needs another look. It has been preserved.';return;}
-      if(name==='j-plan'||name==='j-replay'){const tier=M.state(s).difficulty.town||M.recommendation(s,'town');if(!window.V52TownLife.start(s,arg,tier,name==='j-replay'))error='This saved Town plan needs another look. It has been preserved.';return;}
-      if(name==='j-recipe-replay'){if(!window.V52TownLife.startRecipe(s,arg,M.state(s).difficulty.town||1,true))error='This saved recipe needs another look. Choose another Town plan; its original data is preserved.';return;}
-      if(name==='j-start'){M.state(s);if(!window.V5Journey.start(s,arg,M.state(s).difficulty.town||M.recommendation(s,'town')))error='This saved journey cannot be opened; its original data has been preserved.';return;}
-      if(name.startsWith('j-')){const changed=window.V5Journey.action(s,name,arg,action);if(changed&&name==='j-choice')window.V5Journey.action(s,'j-submit');if(!changed&&name==='j-next')error=window.V5Journey.state(s)?.feedback||'This saved step cannot continue. Choose another Town plan; your progress is preserved.';return;}
-      if(name === 'd9-m'){try{const q=M.current(s),intent=JSON.parse(decodeURIComponent(arg));if(q)editDirectModel(q.values,intent,()=>M.edit(s,'direct',intent));}catch{}return;}
-      if(name === 'd9-p'){const l=s.learning;if(l&&!l.answered&&!l.needsTeaching&&l.qs[l.i]?.[5]?.direct){try{l.manipulation||={};const intent=JSON.parse(decodeURIComponent(arg));editDirectModel(l.manipulation,intent,()=>window.V9Touch.edit(l.qs[l.i][5].direct,l.manipulation,intent));}catch{}}return;}
-      if(name === 'd9-check'){const l=s.learning;if(l&&!l.answered&&l.qs[l.i]?.[5]?.direct)E.answerLearning(s,window.V9Touch.value(l.qs[l.i][5].direct,l.manipulation));return;}
-      if(name === 'c8-m'){const q=M.current(s);if(M.edit(s,'c8action',action.slice(5))&&q?.tasks[q.i].activity?.kind==='choice'&&action.includes(':choice-'))M.submit(s);return;}
-      if(name === 'c8-p'){const l=s.learning;if(l&&!l.answered&&l.qs[l.i]?.[5]?.contentVersion===8){const q=l.qs[l.i];l.manipulation||={};window.V8Activities.edit({activity:q[5]?.activity,allowCalculator:q[5]?.allowCalculator},l.manipulation,action.slice(5));if(q[5]?.activity?.kind==='choice'&&action.includes(':choice-'))E.answerLearning(s,window.V8Activities.value({activity:q[5].activity},l.manipulation));}return;}
-      if(name === 'c8-check'){const l=s.learning;if(l&&!l.answered&&l.qs[l.i]?.[5]?.contentVersion===8){const q=l.qs[l.i];E.answerLearning(s,window.V8Activities.value({activity:q[5]?.activity,allowCalculator:q[5]?.allowCalculator},l.manipulation));}return;}
-      if(name==='next-path'){const n=R.recommend(s,arg);s.world=arg;if(n.type==='restore')error=R.start(s,arg,n.stage);else if(n.type==='discover')error=E.startDiscovery(s,n.id,C,window.V3Discovery);else if(n.type==='learn'||n.type==='check')error=E.generate(s,n.id,n.type==='learn'?'practice':'check',window.JaxonFreshReview,C);else s.view='world';return;}
-      if(name==='town-level'){const tier=Number(arg);if([1,2,3].includes(tier))M.state(s).difficulty.town=tier;return;}
-      if(name==='restore'){const bits=action.split(':');error=R.start(s,bits[1],Number(bits[2]));return;}
-      if(name==='recover-apply'){error=N.recover(s,recoveryChoice,arg);recoveryChoice=null;return;}
-      switch (name) {
-        case "nav":
-          s.view = arg;
-          before = false;
-          break;
-        case "world":
-          townVisitError='';
-          s.world = arg;
-          s.view = "world";
-          before = false;
-          break;
-        case "continue":
-          N.resume(s);
-          break;
-        case "quest":
-          error=E.startQuest(s,arg);
-          break;
-        case "scene-mission":
-        case "mission": {
-          const bits = action.split(":");
-          venueExterior=false;
-          if(bits[1]==='town'){const result=M.visit(s,bits[1],bits[2],Number(bits[3]));
-            townVisitError=result.available?'':result.reason;error=townVisitError;if(result.available)closeDialogs();
-          }else M.start(s,bits[1],bits[2],Number(bits[3]));
-          break;
+    await change(
+      () => {
+        if (sceneKey?.startsWith("baseline|")) {
+          const id = s.startingProfile?.active,
+            a = s.startingProfile?.areas?.[id];
+          if (
+            JSON.stringify([
+              id,
+              a?.responses.length,
+              a?.question?.prompt,
+              a?.answered,
+            ]) !== sceneKey.slice(9)
+          )
+            return;
         }
-        case "camp-preview":
-          if(M.campStages.some(st=>st.id===Number(arg) && st.id<=M.campProgress(s).current.id)) campPreview=Number(arg);
-          break;
-        case "camp-upgrade":
-          if(M.upgradeCamp(s,Number(arg))) campPreview=Number(arg);
-          break;
-        case "camp-celebrate":
-          M.celebrateCamp(s);
-          break;
-        case "venue-view":
-          venueExterior=arg==="exterior";
-          break;
-        case "camp-build":
-          M.build(s, arg);
-          break;
-        case "m-begin":
-          M.begin(s);
-          break;
-        case "m-value":
-          M.edit(s, "amount", Number(arg));
-          break;
-        case "m-adjust": {
-          const q = M.current(s),
-            t = q?.tasks[q.i];
-          if (t)
-            M.edit(
+        if (
+          sceneKey?.startsWith("world|") &&
+          window.V7ActivityScenes.key(s) !== sceneKey.slice(6)
+        )
+          return;
+        if (
+          sceneKey?.startsWith("learning|") &&
+          learningStamp(s.learning) !== sceneKey.slice(9)
+        )
+          return;
+        if (
+          sceneKey &&
+          !sceneKey.startsWith("world|") &&
+          name.startsWith("j-")
+        ) {
+          const live = window.V5Journey.model(s);
+          if (
+            s.view !== "journey" ||
+            !live ||
+            JSON.stringify([
+              live.id || live.scenario,
+              live.seed,
+              live.stage,
+            ]) !== sceneKey
+          )
+            return;
+        }
+        if (!P.allowed(s, action)) {
+          s.view = "starting";
+          error = "Find one starting point first. Your saved work is safe.";
+          return;
+        }
+        if (
+          ["nav", "world"].includes(name) &&
+          [
+            "quest",
+            "adventure",
+            "journey",
+            "lesson",
+            "practice",
+            "check",
+            "discovery",
+            "starting-area",
+          ].includes(s.view) &&
+          !P.views.includes(arg)
+        ) {
+          error = N.pause(s);
+          if (error) return;
+        }
+        if (name === "pause-explore") {
+          const repair = s.view === "adventure" && M.current(s)?.restoration;
+          error = N.pause(s);
+          if (!error && repair) s.view = "world";
+          return;
+        }
+        if (name === "resume-saved") {
+          const bits = action.split(":");
+          error = N.openSaved(
+            s,
+            bits[1],
+            decodeURIComponent(bits.slice(2).join(":")),
+          );
+          return;
+        }
+        if (name === "starting-later") {
+          const b = P.book(s);
+          if (b) {
+            b.offered ||= {};
+            b.offered[arg] = true;
+          }
+          return;
+        }
+        if (name === "starting-retake") {
+          error = P.retake(s, arg, C);
+          return;
+        }
+        if (name === "starting") {
+          error = P.start(s, arg, C);
+          return;
+        }
+        if (
+          name === "starting-choice" ||
+          name === "starting-submit" ||
+          name === "starting-skip"
+        ) {
+          const id = s.startingProfile?.active,
+            a = s.startingProfile?.areas?.[id];
+          P.answer(
+            s,
+            id,
+            name === "starting-choice"
+              ? a?.question?.choices[Number(arg)]
+              : a?.draft,
+            name === "starting-skip",
+            Date.now(),
+            arg === "cannot" ? "cannot" : "unknown",
+          );
+          return;
+        }
+        if (name === "starting-next") {
+          P.advance(s, s.startingProfile?.active, C);
+          return;
+        }
+        if (name === "home-activity") {
+          venueExterior = false;
+          if (window.V7Home.start(s, arg, M.state(s).difficulty.town || 1))
+            window.V7ActivityScenes?.selectHome(s);
+          return;
+        }
+        if (name === "home-exterior") {
+          error = N.pause(s);
+          if (!error) {
+            s.world = "town";
+            s.view = "world";
+          }
+          return;
+        }
+        if (name === "j-work") {
+          const tier =
+            Number(action.split(":")[2]) || M.recommendation(s, "town");
+          if (!window.V52TownLife.start(s, "job-" + arg, tier))
+            error =
+              "This saved Town plan needs another look. It has been preserved.";
+          return;
+        }
+        if (name === "j-plan" || name === "j-replay") {
+          const tier =
+            M.state(s).difficulty.town || M.recommendation(s, "town");
+          if (!window.V52TownLife.start(s, arg, tier, name === "j-replay"))
+            error =
+              "This saved Town plan needs another look. It has been preserved.";
+          return;
+        }
+        if (name === "j-recipe-replay") {
+          if (
+            !window.V52TownLife.startRecipe(
               s,
-              "amount",
-              Math.min(
-                t.max,
-                Math.max(t.min || 0, (q.values.amount || 0) + Number(arg)),
+              arg,
+              M.state(s).difficulty.town || 1,
+              true,
+            )
+          )
+            error =
+              "This saved recipe needs another look. Choose another Town plan; its original data is preserved.";
+          return;
+        }
+        if (name === "j-start") {
+          M.state(s);
+          if (
+            !window.V5Journey.start(
+              s,
+              arg,
+              M.state(s).difficulty.town || M.recommendation(s, "town"),
+            )
+          )
+            error =
+              "This saved journey cannot be opened; its original data has been preserved.";
+          return;
+        }
+        if (name.startsWith("j-")) {
+          const changed = window.V5Journey.action(s, name, arg, action);
+          if (changed && name === "j-choice")
+            window.V5Journey.action(s, "j-submit");
+          if (!changed && name === "j-next")
+            error =
+              window.V5Journey.state(s)?.feedback ||
+              "This saved step cannot continue. Choose another Town plan; your progress is preserved.";
+          return;
+        }
+        if (name === "d9-m") {
+          try {
+            const q = M.current(s),
+              intent = JSON.parse(decodeURIComponent(arg));
+            if (q)
+              editDirectModel(q.values, intent, () =>
+                M.edit(s, "direct", intent),
+              );
+          } catch {}
+          return;
+        }
+        if (name === "d9-p") {
+          const l = s.learning;
+          if (l && !l.answered && !l.needsTeaching && l.qs[l.i]?.[5]?.direct) {
+            try {
+              l.manipulation ||= {};
+              const intent = JSON.parse(decodeURIComponent(arg));
+              editDirectModel(l.manipulation, intent, () =>
+                window.V9Touch.edit(
+                  l.qs[l.i][5].direct,
+                  l.manipulation,
+                  intent,
+                ),
+              );
+            } catch {}
+          }
+          return;
+        }
+        if (name === "d9-check") {
+          const l = s.learning;
+          if (l && !l.answered && l.qs[l.i]?.[5]?.direct)
+            E.answerLearning(
+              s,
+              window.V9Touch.value(l.qs[l.i][5].direct, l.manipulation),
+            );
+          return;
+        }
+        if (name === "c8-m") {
+          const q = M.current(s);
+          if (
+            M.edit(s, "c8action", action.slice(5)) &&
+            q?.tasks[q.i].activity?.kind === "choice" &&
+            action.includes(":choice-")
+          )
+            M.submit(s);
+          return;
+        }
+        if (name === "c8-p") {
+          const l = s.learning;
+          if (l && !l.answered && l.qs[l.i]?.[5]?.contentVersion === 8) {
+            const q = l.qs[l.i];
+            l.manipulation ||= {};
+            window.V8Activities.edit(
+              {
+                activity: q[5]?.activity,
+                allowCalculator: q[5]?.allowCalculator,
+              },
+              l.manipulation,
+              action.slice(5),
+            );
+            if (
+              q[5]?.activity?.kind === "choice" &&
+              action.includes(":choice-")
+            )
+              E.answerLearning(
+                s,
+                window.V8Activities.value(
+                  { activity: q[5].activity },
+                  l.manipulation,
+                ),
+              );
+          }
+          return;
+        }
+        if (name === "c8-check") {
+          const l = s.learning;
+          if (l && !l.answered && l.qs[l.i]?.[5]?.contentVersion === 8) {
+            const q = l.qs[l.i];
+            E.answerLearning(
+              s,
+              window.V8Activities.value(
+                {
+                  activity: q[5]?.activity,
+                  allowCalculator: q[5]?.allowCalculator,
+                },
+                l.manipulation,
               ),
             );
-          break;
-        }
-        case "m-budget-pick": M.edit(s,'budgetToken',Number(arg));break;
-        case "m-budget-place": {
-          const q=M.current(s),t=q?.tasks[q.i],i=Number(arg);
-          if(t?.kind==='budget'&&Number.isInteger(i)&&i>=0&&i<t.labels.length&&[1,5,50,100,500,1000].includes(q.values.budgetToken)){
-            const parts=[...(q.values.parts||t.labels.map(()=>0))];if(parts.reduce((a,b)=>a+b,0)+q.values.budgetToken<=t.budget){parts[i]+=q.values.budgetToken;M.edit(s,'parts',parts);}
-          }break;
-        }
-        case "m-array": {
-          const q=M.current(s),bits=action.split(':');if(q)M.edit(s,'parts',[Number(bits[1]),Number(bits[2]),q.values.parts?.[2]||0]);break;
-        }
-        case "m-layer": {
-          const q=M.current(s);if(q)M.edit(s,'parts',[q.values.parts?.[0]||0,q.values.parts?.[1]||0,Number(arg)]);break;
-        }
-        case "m-chart": {
-          const q=M.current(s),bits=action.split(':');if(q){const parts=[...(q.values.parts||[0,0,0])];parts[Number(bits[1])]=Number(bits[2]);M.edit(s,'parts',parts);}break;
-        }
-        case "m-part": {
-          const q = M.current(s),
-            t = q?.tasks[q.i],
-            bits = action.split(":");
-          if (t) {
-            const n = t.items?.length || 3,
-              parts = q.values.parts || Array(n).fill(0),
-              i = Number(bits[1]),
-              max =
-                ["blocks","array","volume"].includes(t.kind) ? 9 : t.kind === "budget" ? t.budget : 12;
-            parts[i] = Math.min(
-              max,
-              Math.max(0, (parts[i] || 0) + Number(bits[2])),
-            );
-            M.edit(s, "parts", parts);
           }
-          break;
+          return;
         }
-        case "h-pick": {
-          M.edit(s,'picked',Number(arg));
-          break;
-        }
-        case "h-clear": M.edit(s,'order',[]);break;
-        case "h-place": {
-          const q=M.current(s),t=q?.tasks[q.i];
-          if(q&&Number.isInteger(q.values.picked)){
-            const order=Array(t.items.length).fill(null).map((_,i)=>q.values.order?.[i]??null),pick=q.values.picked,slot=Number(arg);
-            if(slot>=0&&slot<order.length){for(let i=0;i<order.length;i++)if(order[i]===pick)order[i]=null;order[slot]=pick;M.edit(s,'order',order);}
-          }break;
-        }
-        case "p5-add": case "p5-value": case "p5-shade": case "p5-count":
-          window.V5HandsOn.practiceEdit(s.learning,name.slice(3),Number(arg));break;
-        case "p5-submit":
-          if (s.learning && window.V5HandsOn.invalidDraft(s.learning.manipulation,window.V5HandsOn.practiceSpec({id:s.learning.id},s.learning.qs[s.learning.i]))) break;
-          if(s.learning?.mode==='practice'){const stamp=JSON.stringify(s.learning.manipulation||{});if(s.learning.retrying&&s.learning.lastConstructedSubmission===stamp)break;s.learning.lastConstructedSubmission=stamp;const correct=E.answerLearning(s,window.V5HandsOn.practiceValue(s.learning));if(!correct){s.learning.answered=false;s.learning.assisted=true;s.learning.retrying=true;}}break;
-        case "h-shade": {
-          const bits=action.split(':'),q=M.current(s);if(q){const sel=q.values.selected||[],i=Number(bits[1]),on=bits[2]==='1';if(sel.includes(i)!==on&&M.edit(s,'selected',on?[...new Set([...sel,i])]:sel.filter(x=>x!==i)))activity=Date.now();}break;
-        }
-        case "m-select": {
-          const q = M.current(s);
-          if (q) {
-            const sel = q.values.selected || [],
-              i = Number(arg);
-            M.edit(
+        if (name === "next-path") {
+          const n = R.recommend(s, arg);
+          s.world = arg;
+          if (n.type === "restore") error = R.start(s, arg, n.stage);
+          else if (n.type === "discover")
+            error = E.startDiscovery(s, n.id, C, window.V3Discovery);
+          else if (n.type === "learn" || n.type === "check")
+            error = E.generate(
               s,
-              "selected",
-              sel.includes(i) ? sel.filter((v) => v !== i) : [...sel, i],
+              n.id,
+              n.type === "learn" ? "practice" : "check",
+              window.JaxonFreshReview,
+              C,
             );
-          }
-          break;
+          else s.view = "world";
+          return;
         }
-        case "m-point": {
+        if (name === "town-level") {
+          const tier = Number(arg);
+          if ([1, 2, 3].includes(tier)) M.state(s).difficulty.town = tier;
+          return;
+        }
+        if (name === "restore") {
           const bits = action.split(":");
-          M.edit(s, "point", [Number(bits[1]), Number(bits[2])]);
-          break;
+          error = R.start(s, bits[1], Number(bits[2]));
+          return;
         }
-        case "m-turn-back": {
-          const q = M.current(s);
-          if (q) M.edit(s, "amount", ((q.values.amount || 0) + 270) % 360);
-          break;
+        if (name === "recover-apply") {
+          error = N.recover(s, recoveryChoice, arg);
+          recoveryChoice = null;
+          return;
         }
-        case "m-turn": {
-          const q = M.current(s);
-          if (q) M.edit(s, "amount", ((q.values.amount || 0) + 90) % 360);
-          break;
-        }
-        case "m-choice":
-          if(M.edit(s, "choice", Number(arg)))M.submit(s);
-          break;
-        case "m-post": {
-          const q = M.current(s);
-          if (q && Number(arg) === (q.values.posted || 0))
-            M.edit(s, "posted", Number(arg) + 1);
-          break;
-        }
-        case "m-coin": {
-          const q = M.current(s);
-          if (q) {
-            const coins = q.values.coins || [];
-            if (arg === "clear") M.edit(s, "coins", []);
-            else if (arg === "undo") M.edit(s, "coins", coins.slice(0, -1));
-            else if (coins.length < 100)
-              M.edit(s, "coins", [...coins, Number(arg)]);
+        switch (name) {
+          case "nav":
+            s.view = arg;
+            before = false;
+            break;
+          case "world":
+            townVisitError = "";
+            s.world = arg;
+            s.view = "world";
+            before = false;
+            break;
+          case "continue":
+            N.resume(s);
+            break;
+          case "quest":
+            error = E.startQuest(s, arg);
+            break;
+          case "scene-mission":
+          case "mission": {
+            const bits = action.split(":");
+            venueExterior = false;
+            if (bits[1] === "town") {
+              const result = M.visit(s, bits[1], bits[2], Number(bits[3]));
+              townVisitError = result.available ? "" : result.reason;
+              error = townVisitError;
+              if (result.available) closeDialogs();
+            } else M.start(s, bits[1], bits[2], Number(bits[3]));
+            break;
           }
-          break;
-        }
-        case "m-help":
-          M.help(s);
-          break;
-        case "m-worked": {
-          const q=M.current(s);if(q&&!q.solved){
-            const t=q.tasks[q.i];q.evidence ||= [];
-            if(!q.evidence.some(e=>e.step===q.i))q.evidence.push({step:q.i,skill:t.skill,firstValue:JSON.parse(JSON.stringify(M.value(q,t))),correct:false,assisted:true,skipped:true,source:'guided-adventure'});
-            const first=q.evidence.find(e=>e.step===q.i);if(first&&!first.skipped)first.skippedAfterAttempt=true;
-            q.skips ||= [];if(!q.skips.includes(q.i))q.skips.push(q.i);
-            q.assisted=true;q.solved=true;q.feedback='Skipped with help. '+t.worked;
+          case "camp-preview":
+            if (
+              M.campStages.some(
+                (st) =>
+                  st.id === Number(arg) &&
+                  st.id <= M.campProgress(s).current.id,
+              )
+            )
+              campPreview = Number(arg);
+            break;
+          case "camp-upgrade":
+            if (M.upgradeCamp(s, Number(arg))) campPreview = Number(arg);
+            break;
+          case "camp-celebrate":
+            M.celebrateCamp(s);
+            break;
+          case "venue-view":
+            venueExterior = arg === "exterior";
+            break;
+          case "camp-build":
+            M.build(s, arg);
+            break;
+          case "m-begin":
+            M.begin(s);
+            break;
+          case "m-value":
+            M.edit(s, "amount", Number(arg));
+            break;
+          case "m-adjust": {
+            const q = M.current(s),
+              t = q?.tasks[q.i];
+            if (t)
+              M.edit(
+                s,
+                "amount",
+                Math.min(
+                  t.max,
+                  Math.max(t.min || 0, (q.values.amount || 0) + Number(arg)),
+                ),
+              );
+            break;
           }
-        }
-          break;
-        case "m-submit":
-          restored = M.submit(s);
-          break;
-        case "m-next":
-          restored = M.next(s);
-          break;
-        case "begin":
-          if (s.quest) s.quest.intro = false;
-          break;
-        case "value":
-          if (s.quest && !s.quest.solved) {s.quest.value = Number(arg);delete s.quest.amountDraft;}
-          break;
-        case "adjust":
-          if (s.quest && !s.quest.solved) {
-            delete s.quest.amountDraft;
-            const p = E.puzzle(s.quest.world, s.quest.i);
-            s.quest.value = Math.min(
-              p.max,
-              Math.max(p.min || 0, s.quest.value + Number(arg)),
-            );
-          }
-          break;
-        case "part":
-          if (s.quest && !s.quest.solved) {
-            const sel = s.quest.selected;
-            s.quest.selected = sel.includes(Number(arg))
-              ? sel.filter((v) => v !== Number(arg))
-              : [...sel, Number(arg)];
-          }
-          break;
-        case "rotate":
-          if (s.quest && !s.quest.solved)
-            s.quest.value = (s.quest.value + 90) % 360;
-          break;
-        case "hint":
-          E.help(s);
-          break;
-        case "solve":
-          if (s.quest && window.V5HandsOn.invalidDraft(s.quest,E.puzzle(s.quest.world,s.quest.i))) break;
-          restored = E.answerQuest(s);
-          break;
-        case "skip":
-          E.answerQuest(s, true);
-          break;
-        case "next-quest":
-          E.nextQuest(s);
-          break;
-        case "before":
-          before = !before;
-          break;
-        case "learn":
-          error = E.generate(s, arg, "practice", window.JaxonFreshReview, C);
-          break;
-        case "discover":
-          error = E.startDiscovery(s, arg, C, window.V3Discovery);
-          break;
-        case "check":
-          error = E.generate(s, arg, "check", window.JaxonFreshReview, C);
-          break;
-        case "practice":
-          if (s.learning) {
-            s.learning.started = true;
-            delete s.learning.needsTeaching;
-            s.view = "practice";
-            s.resumeView = "practice";
-          }
-          break;
-        case "answer":
-          if (s.learning)
-            E.answerLearning(s, s.learning.qs[s.learning.i][2][Number(arg)]);
-          break;
-        case "learning-skip":
-          E.answerLearning(s, "", true);
-          break;
-        case "learning-hint":
-          if (s.learning && !s.learning.answered) {
-            s.learning.assisted = true;
-            s.learning.hintLevel=(s.learning.hintLevel||0)+1;
-            s.learning.feedback = window.V6Education.hints(s.learning.qs[s.learning.i],s.learning.hintLevel);
-          }
-          break;
-        case "next-learning":
-          E.nextLearning(s);
-          break;
-        case "buy":
-          itemPreview = null;
-          if (!E.purchase(s, arg, C.catalog))
-            error = "More active learning coins are needed for this item.";
-          break;
-        case "remove-slot":
-          E.removeEquipment(s, arg, C.catalog);
-          itemPreview = null;
-          break;
-        case "unequip":
-          s.equipped = [];
-          break;
-        case "skip-tour":
-          s.tourSeen = true;
-          s.view = "home";
-          break;
-        case "finish-tour":
-          s.tourSeen = true;
-          s.view = "map";
-          break;
-        default:
-          if (action.startsWith("math:") || action.startsWith("mathx:")) {
-            if (s.learning) {
-              s.learning.type = "mission";
-              window.JaxonMathTools.update(s.learning, action);
-              window.JaxonMathToolsExtra.update(s.learning, action);
+          case "m-budget-pick":
+            M.edit(s, "budgetToken", Number(arg));
+            break;
+          case "m-budget-place": {
+            const q = M.current(s),
+              t = q?.tasks[q.i],
+              i = Number(arg);
+            if (
+              t?.kind === "budget" &&
+              Number.isInteger(i) &&
+              i >= 0 &&
+              i < t.labels.length &&
+              [1, 5, 50, 100, 500, 1000].includes(q.values.budgetToken)
+            ) {
+              const parts = [...(q.values.parts || t.labels.map(() => 0))];
+              if (
+                parts.reduce((a, b) => a + b, 0) + q.values.budgetToken <=
+                t.budget
+              ) {
+                parts[i] += q.values.budgetToken;
+                M.edit(s, "parts", parts);
+              }
             }
+            break;
           }
-      }
-    }, {renderPage: !((name==='c8-m'||name==='c8-p')&&(action.includes(':input-')||action.includes(':calc-input-')))});
+          case "m-array": {
+            const q = M.current(s),
+              bits = action.split(":");
+            if (q)
+              M.edit(s, "parts", [
+                Number(bits[1]),
+                Number(bits[2]),
+                q.values.parts?.[2] || 0,
+              ]);
+            break;
+          }
+          case "m-layer": {
+            const q = M.current(s);
+            if (q)
+              M.edit(s, "parts", [
+                q.values.parts?.[0] || 0,
+                q.values.parts?.[1] || 0,
+                Number(arg),
+              ]);
+            break;
+          }
+          case "m-chart": {
+            const q = M.current(s),
+              bits = action.split(":");
+            if (q) {
+              const parts = [...(q.values.parts || [0, 0, 0])];
+              parts[Number(bits[1])] = Number(bits[2]);
+              M.edit(s, "parts", parts);
+            }
+            break;
+          }
+          case "m-part": {
+            const q = M.current(s),
+              t = q?.tasks[q.i],
+              bits = action.split(":");
+            if (t) {
+              const n = t.items?.length || 3,
+                parts = q.values.parts || Array(n).fill(0),
+                i = Number(bits[1]),
+                max = ["blocks", "array", "volume"].includes(t.kind)
+                  ? 9
+                  : t.kind === "budget"
+                    ? t.budget
+                    : 12;
+              parts[i] = Math.min(
+                max,
+                Math.max(0, (parts[i] || 0) + Number(bits[2])),
+              );
+              M.edit(s, "parts", parts);
+            }
+            break;
+          }
+          case "h-pick": {
+            M.edit(s, "picked", Number(arg));
+            break;
+          }
+          case "h-clear":
+            M.edit(s, "order", []);
+            break;
+          case "h-place": {
+            const q = M.current(s),
+              t = q?.tasks[q.i];
+            if (q && Number.isInteger(q.values.picked)) {
+              const order = Array(t.items.length)
+                  .fill(null)
+                  .map((_, i) => q.values.order?.[i] ?? null),
+                pick = q.values.picked,
+                slot = Number(arg);
+              if (slot >= 0 && slot < order.length) {
+                for (let i = 0; i < order.length; i++)
+                  if (order[i] === pick) order[i] = null;
+                order[slot] = pick;
+                M.edit(s, "order", order);
+              }
+            }
+            break;
+          }
+          case "p5-add":
+          case "p5-value":
+          case "p5-shade":
+          case "p5-count":
+            window.V5HandsOn.practiceEdit(
+              s.learning,
+              name.slice(3),
+              Number(arg),
+            );
+            break;
+          case "p5-submit":
+            if (
+              s.learning &&
+              window.V5HandsOn.invalidDraft(
+                s.learning.manipulation,
+                window.V5HandsOn.practiceSpec(
+                  { id: s.learning.id },
+                  s.learning.qs[s.learning.i],
+                ),
+              )
+            )
+              break;
+            if (s.learning?.mode === "practice") {
+              const stamp = JSON.stringify(s.learning.manipulation || {});
+              if (
+                s.learning.retrying &&
+                s.learning.lastConstructedSubmission === stamp
+              )
+                break;
+              s.learning.lastConstructedSubmission = stamp;
+              const correct = E.answerLearning(
+                s,
+                window.V5HandsOn.practiceValue(s.learning),
+              );
+              if (!correct) {
+                s.learning.answered = false;
+                s.learning.assisted = true;
+                s.learning.retrying = true;
+              }
+            }
+            break;
+          case "h-shade": {
+            const bits = action.split(":"),
+              q = M.current(s);
+            if (q) {
+              const sel = q.values.selected || [],
+                i = Number(bits[1]),
+                on = bits[2] === "1";
+              if (
+                sel.includes(i) !== on &&
+                M.edit(
+                  s,
+                  "selected",
+                  on ? [...new Set([...sel, i])] : sel.filter((x) => x !== i),
+                )
+              )
+                activity = Date.now();
+            }
+            break;
+          }
+          case "m-select": {
+            const q = M.current(s);
+            if (q) {
+              const sel = q.values.selected || [],
+                i = Number(arg);
+              M.edit(
+                s,
+                "selected",
+                sel.includes(i) ? sel.filter((v) => v !== i) : [...sel, i],
+              );
+            }
+            break;
+          }
+          case "m-point": {
+            const bits = action.split(":");
+            M.edit(s, "point", [Number(bits[1]), Number(bits[2])]);
+            break;
+          }
+          case "m-turn-back": {
+            const q = M.current(s);
+            if (q) M.edit(s, "amount", ((q.values.amount || 0) + 270) % 360);
+            break;
+          }
+          case "m-turn": {
+            const q = M.current(s);
+            if (q) M.edit(s, "amount", ((q.values.amount || 0) + 90) % 360);
+            break;
+          }
+          case "m-choice":
+            if (M.edit(s, "choice", Number(arg))) M.submit(s);
+            break;
+          case "m-post": {
+            const q = M.current(s);
+            if (q && Number(arg) === (q.values.posted || 0))
+              M.edit(s, "posted", Number(arg) + 1);
+            break;
+          }
+          case "m-coin": {
+            const q = M.current(s);
+            if (q) {
+              const coins = q.values.coins || [];
+              if (arg === "clear") M.edit(s, "coins", []);
+              else if (arg === "undo") M.edit(s, "coins", coins.slice(0, -1));
+              else if (coins.length < 100)
+                M.edit(s, "coins", [...coins, Number(arg)]);
+            }
+            break;
+          }
+          case "m-help":
+            M.help(s);
+            break;
+          case "m-worked":
+            {
+              const q = M.current(s);
+              if (q && !q.solved) {
+                const t = q.tasks[q.i];
+                q.evidence ||= [];
+                if (!q.evidence.some((e) => e.step === q.i))
+                  q.evidence.push({
+                    step: q.i,
+                    skill: t.skill,
+                    firstValue: JSON.parse(JSON.stringify(M.value(q, t))),
+                    correct: false,
+                    assisted: true,
+                    skipped: true,
+                    source: "guided-adventure",
+                  });
+                const first = q.evidence.find((e) => e.step === q.i);
+                if (first && !first.skipped) first.skippedAfterAttempt = true;
+                q.skips ||= [];
+                if (!q.skips.includes(q.i)) q.skips.push(q.i);
+                q.assisted = true;
+                q.solved = true;
+                q.feedback = "Skipped with help. " + t.worked;
+              }
+            }
+            break;
+          case "m-submit":
+            restored = M.submit(s);
+            break;
+          case "m-next":
+            restored = M.next(s);
+            break;
+          case "begin":
+            if (s.quest) s.quest.intro = false;
+            break;
+          case "value":
+            if (s.quest && !s.quest.solved) {
+              s.quest.value = Number(arg);
+              delete s.quest.amountDraft;
+            }
+            break;
+          case "adjust":
+            if (s.quest && !s.quest.solved) {
+              delete s.quest.amountDraft;
+              const p = E.puzzle(s.quest.world, s.quest.i);
+              s.quest.value = Math.min(
+                p.max,
+                Math.max(p.min || 0, s.quest.value + Number(arg)),
+              );
+            }
+            break;
+          case "part":
+            if (s.quest && !s.quest.solved) {
+              const sel = s.quest.selected;
+              s.quest.selected = sel.includes(Number(arg))
+                ? sel.filter((v) => v !== Number(arg))
+                : [...sel, Number(arg)];
+            }
+            break;
+          case "rotate":
+            if (s.quest && !s.quest.solved)
+              s.quest.value = (s.quest.value + 90) % 360;
+            break;
+          case "hint":
+            E.help(s);
+            break;
+          case "solve":
+            if (
+              s.quest &&
+              window.V5HandsOn.invalidDraft(
+                s.quest,
+                E.puzzle(s.quest.world, s.quest.i),
+              )
+            )
+              break;
+            restored = E.answerQuest(s);
+            break;
+          case "skip":
+            E.answerQuest(s, true);
+            break;
+          case "next-quest":
+            E.nextQuest(s);
+            break;
+          case "before":
+            before = !before;
+            break;
+          case "learn":
+            error = E.generate(s, arg, "practice", window.JaxonFreshReview, C);
+            break;
+          case "discover":
+            error = E.startDiscovery(s, arg, C, window.V3Discovery);
+            break;
+          case "check":
+            error = E.generate(s, arg, "check", window.JaxonFreshReview, C);
+            break;
+          case "practice":
+            if (s.learning) {
+              s.learning.started = true;
+              delete s.learning.needsTeaching;
+              s.view = "practice";
+              s.resumeView = "practice";
+            }
+            break;
+          case "answer":
+            if (s.learning)
+              E.answerLearning(s, s.learning.qs[s.learning.i][2][Number(arg)]);
+            break;
+          case "learning-skip":
+            E.answerLearning(s, "", true);
+            break;
+          case "learning-hint":
+            if (s.learning && !s.learning.answered) {
+              s.learning.assisted = true;
+              s.learning.hintLevel = (s.learning.hintLevel || 0) + 1;
+              s.learning.feedback = window.V6Education.hints(
+                s.learning.qs[s.learning.i],
+                s.learning.hintLevel,
+              );
+            }
+            break;
+          case "next-learning":
+            E.nextLearning(s);
+            break;
+          case "buy":
+            itemPreview = null;
+            if (!E.purchase(s, arg, C.catalog))
+              error = "More active learning coins are needed for this item.";
+            break;
+          case "remove-slot":
+            E.removeEquipment(s, arg, C.catalog);
+            itemPreview = null;
+            break;
+          case "unequip":
+            s.equipped = [];
+            break;
+          case "skip-tour":
+            s.tourSeen = true;
+            s.view = "home";
+            break;
+          case "finish-tour":
+            s.tourSeen = true;
+            s.view = "map";
+            break;
+          default:
+            if (action.startsWith("math:") || action.startsWith("mathx:")) {
+              if (s.learning) {
+                s.learning.type = "mission";
+                window.JaxonMathTools.update(s.learning, action);
+                window.JaxonMathToolsExtra.update(s.learning, action);
+              }
+            }
+        }
+      },
+      {
+        renderPage: !(
+          (name === "c8-m" || name === "c8-p") &&
+          (action.includes(":input-") || action.includes(":calc-input-"))
+        ),
+      },
+    );
     if (name === "remove-slot") {
-      document.querySelector(".equipment-slots")?.focus({preventScroll:true});
+      document
+        .querySelector(".equipment-slots")
+        ?.focus({ preventScroll: true });
       status("Removed item. Your other equipment is unchanged.");
     }
     if (error) status(error);
@@ -897,7 +1732,10 @@
         "skip",
         "begin",
         "solve",
-        "j-next", "j-submit", "j-help", "j-skip",
+        "j-next",
+        "j-submit",
+        "j-help",
+        "j-skip",
         "m-begin",
         "m-submit",
         "m-next",
@@ -908,28 +1746,123 @@
       $("main").focus();
     }
   }
-  function answerFocus(name){
-    if(['starting-choice','starting-submit','starting-skip'].includes(name)){document.querySelector('[data-action="starting-next"]')?.focus({preventScroll:true});return;}
-    if(name==='starting-next'){const h=document.querySelector('.baseline-question h2');if(h){h.tabIndex=-1;h.focus({preventScroll:true});}return;}
-    const scope=document.querySelector('dialog[open]')||document.getElementById('main');
-    if(['m-next','j-next','next-learning'].includes(name)){const heading=scope.querySelector('h2');if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true});}return;}
-    const action=s.view==='journey'&&V5Journey.state(s)?.solved?'j-next':s.view==='adventure'&&M.current(s)?.solved?'m-next':s.view==='quest'&&s.quest?.solved?'next-quest':['practice','check','discovery'].includes(s.view)&&s.learning?.answered?'next-learning':null;
-    const answerActions=['answer','learning-skip','skip','solve','m-choice','m-submit','m-skip','j-choice','j-submit','j-skip','c8-m','c8-p','c8-check','d9-check','p5-submit'];
-    if(answerActions.includes(name)){
-      const next=action&&scope.querySelector('[data-action="'+action+'"]');
-      if(next){next.focus({preventScroll:true});return;}
-      const feedback=scope.querySelector('.feedback[role="status"],.feedback');
-      if(feedback){feedback.tabIndex=-1;feedback.focus({preventScroll:true});}
+  function answerFocus(name) {
+    if (
+      ["starting-choice", "starting-submit", "starting-skip"].includes(name)
+    ) {
+      document
+        .querySelector('[data-action="starting-next"]')
+        ?.focus({ preventScroll: true });
+      return;
+    }
+    if (name === "starting-next") {
+      const h = document.querySelector(".baseline-question h2");
+      if (h) {
+        h.tabIndex = -1;
+        h.focus({ preventScroll: true });
+      }
+      return;
+    }
+    const scope =
+      document.querySelector("dialog[open]") || document.getElementById("main");
+    if (["m-next", "j-next", "next-learning"].includes(name)) {
+      const heading = scope.querySelector("h2");
+      if (heading) {
+        heading.tabIndex = -1;
+        heading.focus({ preventScroll: true });
+      }
+      return;
+    }
+    const action =
+      s.view === "journey" && window.V5Journey.state(s)?.solved
+        ? "j-next"
+        : s.view === "adventure" && M.current(s)?.solved
+          ? "m-next"
+          : s.view === "quest" && s.quest?.solved
+            ? "next-quest"
+            : ["practice", "check", "discovery"].includes(s.view) &&
+                s.learning?.answered
+              ? "next-learning"
+              : null;
+    const answerActions = [
+      "answer",
+      "learning-skip",
+      "skip",
+      "solve",
+      "m-choice",
+      "m-submit",
+      "m-skip",
+      "j-choice",
+      "j-submit",
+      "j-skip",
+      "c8-m",
+      "c8-p",
+      "c8-check",
+      "d9-check",
+      "p5-submit",
+    ];
+    if (answerActions.includes(name)) {
+      const next =
+        action && scope.querySelector('[data-action="' + action + '"]');
+      if (next) {
+        next.focus({ preventScroll: true });
+        return;
+      }
+      const feedback = scope.querySelector(
+        '.feedback[role="status"],.feedback',
+      );
+      if (feedback) {
+        feedback.tabIndex = -1;
+        feedback.focus({ preventScroll: true });
+      }
     }
   }
   document.addEventListener("click", async (e) => {
-    const ui=e.target.closest('[data-ui]');
-    if(ui){
-      if(ui.dataset.ui==='open-camp-journal'){e.preventDefault();const journal=document.getElementById('camp-achievements');if(journal){journal.open=true;journal.scrollIntoView({block:'start',behavior:'instant'});journal.querySelector('summary')?.focus();}}
-      if(ui.dataset.ui==='choose-town-plan'){const plans=document.getElementById('town-plans');plans?.scrollIntoView({block:'start',behavior:'instant'});plans?.focus({preventScroll:true});}
-      if(ui.dataset.ui==='choose-home-activity'){const exterior=document.getElementById('home-exterior');exterior?.scrollIntoView({block:'start',behavior:'instant'});exterior?.focus({preventScroll:true});}
-      if(ui.dataset.ui==='preview-item'||ui.dataset.ui==='clear-preview'){itemPreview=ui.dataset.item&&(!window.V7Avatar||V7Avatar.isActiveItem(C.catalog.find(i=>i.id===ui.dataset.item)))?ui.dataset.item:null;render();document.getElementById('wardrobe-preview')?.focus();}
-      if(ui.dataset.ui==='hide-celebration'){const banner=ui.closest('.completion-ribbon');hiddenCelebrations.add(banner.dataset.completionKey);banner.remove();document.querySelector('.recap h1,.town-complete h2')?.closest('main')?.focus();}
+    const ui = e.target.closest("[data-ui]");
+    if (ui) {
+      if (ui.dataset.ui === "open-camp-journal") {
+        e.preventDefault();
+        const journal = document.getElementById("camp-achievements");
+        if (journal) {
+          journal.open = true;
+          journal.scrollIntoView({ block: "start", behavior: "instant" });
+          journal.querySelector("summary")?.focus();
+        }
+      }
+      if (ui.dataset.ui === "choose-town-plan") {
+        const plans = document.getElementById("town-plans");
+        plans?.scrollIntoView({ block: "start", behavior: "instant" });
+        plans?.focus({ preventScroll: true });
+      }
+      if (ui.dataset.ui === "choose-home-activity") {
+        const exterior = document.getElementById("home-exterior");
+        exterior?.scrollIntoView({ block: "start", behavior: "instant" });
+        exterior?.focus({ preventScroll: true });
+      }
+      if (
+        ui.dataset.ui === "preview-item" ||
+        ui.dataset.ui === "clear-preview"
+      ) {
+        itemPreview =
+          ui.dataset.item &&
+          (!window.V7Avatar ||
+            window.V7Avatar.isActiveItem(
+              C.catalog.find((i) => i.id === ui.dataset.item),
+            ))
+            ? ui.dataset.item
+            : null;
+        render();
+        document.getElementById("wardrobe-preview")?.focus();
+      }
+      if (ui.dataset.ui === "hide-celebration") {
+        const banner = ui.closest(".completion-ribbon");
+        hiddenCelebrations.add(banner.dataset.completionKey);
+        banner.remove();
+        document
+          .querySelector(".recap h1,.town-complete h2")
+          ?.closest("main")
+          ?.focus();
+      }
       return;
     }
     const el = e.target.closest("[data-action],[data-nav],[data-act]");
@@ -937,9 +1870,18 @@
     const action =
       el.dataset.action || el.dataset.act || "nav:" + el.dataset.nav;
     const name = action.split(":")[0];
-    if (["m-submit","j-submit","p5-submit","solve"].includes(name)) {
-      const input = document.querySelector('[data-numeric-answer][aria-invalid="true"],[data-mission-clock][aria-invalid="true"],[data-life-clock][aria-invalid="true"]');
-      if(input) { input.setCustomValidity(document.getElementById(input.getAttribute('aria-describedby'))?.textContent || 'Check your answer before submitting.'); input.reportValidity(); return; }
+    if (["m-submit", "j-submit", "p5-submit", "solve"].includes(name)) {
+      const input = document.querySelector(
+        '[data-numeric-answer][aria-invalid="true"],[data-mission-clock][aria-invalid="true"],[data-life-clock][aria-invalid="true"]',
+      );
+      if (input) {
+        input.setCustomValidity(
+          document.getElementById(input.getAttribute("aria-describedby"))
+            ?.textContent || "Check your answer before submitting.",
+        );
+        input.reportValidity();
+        return;
+      }
     }
     // Only maths manipulation/answer/support controls renew the bounded learning window.
     // Navigation, focus, raw key presses, pointer movement and refresh never do.
@@ -950,8 +1892,24 @@
         "select",
         "part",
         "rotate",
-        "h-place", "h-clear", "p5-add", "p5-value", "p5-shade", "p5-count", "p5-submit",
-        "d9-m", "d9-p", "d9-check", "c8-m", "c8-p", "c8-check", "m-point", "m-array", "m-layer", "m-chart", "m-budget-place",
+        "h-place",
+        "h-clear",
+        "p5-add",
+        "p5-value",
+        "p5-shade",
+        "p5-count",
+        "p5-submit",
+        "d9-m",
+        "d9-p",
+        "d9-check",
+        "c8-m",
+        "c8-p",
+        "c8-check",
+        "m-point",
+        "m-array",
+        "m-layer",
+        "m-chart",
+        "m-budget-place",
         "solve",
         "hint",
         "skip",
@@ -971,60 +1929,242 @@
         "m-submit",
         "m-help",
         "m-worked",
-      ].includes(name) || ["j-budget-place","j-part","j-choice","j-coin","j-adjust","j-value","j-submit","j-help","j-place","j-clear","j-skip"].includes(name) || el.dataset.act;
-    const evidence = () => JSON.stringify([s.quest, s.learning, M.current(s),window.V5Journey.state(s)]);
+      ].includes(name) ||
+      [
+        "j-budget-place",
+        "j-part",
+        "j-choice",
+        "j-coin",
+        "j-adjust",
+        "j-value",
+        "j-submit",
+        "j-help",
+        "j-place",
+        "j-clear",
+        "j-skip",
+      ].includes(name) ||
+      el.dataset.act;
+    const evidence = () =>
+      JSON.stringify([
+        s.quest,
+        s.learning,
+        M.current(s),
+        window.V5Journey.state(s),
+      ]);
     const previous = evidence();
-    await dispatch(action, (el.closest('[data-baseline-scope]')?'baseline|'+el.closest('[data-baseline-scope]').dataset.baselineScope:null) || c8Scope(el) || (el.closest('.world-task-dialog')?.dataset.worldScope ? 'world|'+el.closest('.world-task-dialog').dataset.worldScope : el.closest('.immersive-journey')?.dataset.sceneKey || null));
+    await dispatch(
+      action,
+      (el.closest("[data-baseline-scope]")
+        ? "baseline|" +
+          el.closest("[data-baseline-scope]").dataset.baselineScope
+        : null) ||
+        c8Scope(el) ||
+        (el.closest(".world-task-dialog")?.dataset.worldScope
+          ? "world|" + el.closest(".world-task-dialog").dataset.worldScope
+          : el.closest(".immersive-journey")?.dataset.sceneKey || null),
+    );
     answerFocus(name);
-    if(name==='home-exterior'){const exterior=document.getElementById('home-exterior');exterior?.scrollIntoView({block:'start',behavior:'instant'});exterior?.focus({preventScroll:true});}
+    if (name === "home-exterior") {
+      const exterior = document.getElementById("home-exterior");
+      exterior?.scrollIntoView({ block: "start", behavior: "instant" });
+      exterior?.focus({ preventScroll: true });
+    }
     if (!meaningful) activity = 0;
     else if (previous !== evidence()) activity = Date.now();
   });
-  document.addEventListener('change',async e=>{
-    const input=e.target;if(!input.matches('[data-model-range]'))return;
-    const view=s.view,n=Number(input.value),get=()=>view==='journey'?window.V5Journey.state(s):view==='quest'?s.quest:M.current(s),q=get();
-    if(!q||!Number.isInteger(n))return;
-    const stamp=x=>JSON.stringify([x?.key||x?.id||x?.world,x?.i??x?.stage,x?.seed,x?.round]),original=stamp(q);let applied=false;
-    await change(()=>{
-      const current=get();if(s.view!==view||!current||stamp(current)!==original||current.solved||current.answered)return;
-      const before=JSON.stringify(current);
-      if(view==='journey')window.V5Journey.action(s,'j-value',String(n));
-      else if(view==='quest'){const p=E.puzzle(current.world,current.i);if(n<(p.min||0)||n>p.max)return;current.value=n;delete current.amountDraft;}
-      else M.edit(s,'amount',n);
-      applied=JSON.stringify(current)!==before;if(applied)activity=Date.now();
+  document.addEventListener("change", async (e) => {
+    const input = e.target;
+    if (!input.matches("[data-model-range]")) return;
+    const view = s.view,
+      n = Number(input.value),
+      get = () =>
+        view === "journey"
+          ? window.V5Journey.state(s)
+          : view === "quest"
+            ? s.quest
+            : M.current(s),
+      q = get();
+    if (!q || !Number.isInteger(n)) return;
+    const stamp = (x) =>
+        JSON.stringify([
+          x?.key || x?.id || x?.world,
+          x?.i ?? x?.stage,
+          x?.seed,
+          x?.round,
+        ]),
+      original = stamp(q);
+    let applied = false;
+    await change(() => {
+      const current = get();
+      if (
+        s.view !== view ||
+        !current ||
+        stamp(current) !== original ||
+        current.solved ||
+        current.answered
+      )
+        return;
+      const before = JSON.stringify(current);
+      if (view === "journey") window.V5Journey.action(s, "j-value", String(n));
+      else if (view === "quest") {
+        const p = E.puzzle(current.world, current.i);
+        if (n < (p.min || 0) || n > p.max) return;
+        current.value = n;
+        delete current.amountDraft;
+      } else M.edit(s, "amount", n);
+      applied = JSON.stringify(current) !== before;
+      if (applied) activity = Date.now();
     });
-    if(applied)document.querySelector('[data-model-range]')?.focus({preventScroll:true});
+    if (applied)
+      document
+        .querySelector("[data-model-range]")
+        ?.focus({ preventScroll: true });
   });
-  document.addEventListener('input',e=>{if(e.target.matches('[data-model-range]')){const out=e.target.parentElement.querySelector('output');if(out)out.textContent=e.target.value;}});
-  document.addEventListener('keydown',e=>{
-    if(e.key==='Enter'&&e.target.hasAttribute('data-baseline-draft')){e.preventDefault();document.querySelector('[data-action="starting-submit"]')?.click();return;}
-    if(e.key==='Enter'&&e.target.matches('[data-c8-input]')&&e.target.type!=='range'){e.preventDefault();const prefix=e.target.dataset.c8Input;const action=prefix==='c8-m'?'m-submit':'c8-check';const scope=e.target.closest('.world-task-dialog,[data-c8-learning]');scope?.querySelector('[data-action="'+action+'"]')?.click();return;}
-    if(e.key==='Enter' && e.target.dataset.numericAnswer) {
+  document.addEventListener("input", (e) => {
+    if (e.target.matches("[data-model-range]")) {
+      const out = e.target.parentElement.querySelector("output");
+      if (out) out.textContent = e.target.value;
+    }
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.target.hasAttribute("data-baseline-draft")) {
       e.preventDefault();
-      const action={mission:'m-submit',journey:'j-submit',practice:'p5-submit',quest:'solve'}[e.target.dataset.numericAnswer];
+      document.querySelector('[data-action="starting-submit"]')?.click();
+      return;
+    }
+    if (
+      e.key === "Enter" &&
+      e.target.matches("[data-c8-input]") &&
+      e.target.type !== "range"
+    ) {
+      e.preventDefault();
+      const prefix = e.target.dataset.c8Input;
+      const action = prefix === "c8-m" ? "m-submit" : "c8-check";
+      const scope = e.target.closest(".world-task-dialog,[data-c8-learning]");
+      scope?.querySelector('[data-action="' + action + '"]')?.click();
+      return;
+    }
+    if (e.key === "Enter" && e.target.dataset.numericAnswer) {
+      e.preventDefault();
+      const action = {
+        mission: "m-submit",
+        journey: "j-submit",
+        practice: "p5-submit",
+        quest: "solve",
+      }[e.target.dataset.numericAnswer];
       document.querySelector(`[data-action="${action}"]`)?.click();
     }
   });
-  let paint=null, suppressPaintClick=false;
-  document.addEventListener('pointerdown',e=>{const b=e.target.closest('.mission-parts .part,[data-shade-group] button');if(!b)return;paint={id:e.pointerId,x:e.clientX,y:e.clientY,first:b,on:b.getAttribute('aria-pressed')!=='true',seen:new Set(),active:false};});
-  document.addEventListener('pointermove',e=>{
-    if(!paint||paint.id!==e.pointerId)return;
-    if(!paint.active){if(Math.abs(e.clientY-paint.y)>12&&Math.abs(e.clientY-paint.y)>Math.abs(e.clientX-paint.x)){paint=null;return;}if(Math.abs(e.clientX-paint.x)<8)return;paint.active=true;}
-    const hit=document.elementFromPoint(e.clientX,e.clientY)?.closest('.mission-parts .part,[data-shade-group] button');
-    for(const b of [paint.first,hit])if(b&&!paint.seen.has(b.getAttribute('data-action'))){const action=b.getAttribute('data-action');paint.seen.add(action);if(action.startsWith('m-select:')){dispatch('h-shade:'+action.split(':')[1]+':'+(paint.on?1:0));}else if((b.getAttribute('aria-pressed')==='true')!==paint.on)dispatch(action);}
+  let paint = null,
+    suppressPaintClick = false;
+  document.addEventListener("pointerdown", (e) => {
+    const b = e.target.closest(
+      ".mission-parts .part,[data-shade-group] button",
+    );
+    if (!b) return;
+    paint = {
+      id: e.pointerId,
+      x: e.clientX,
+      y: e.clientY,
+      first: b,
+      on: b.getAttribute("aria-pressed") !== "true",
+      seen: new Set(),
+      active: false,
+    };
   });
-  document.addEventListener('pointerup',()=>{if(paint?.active){suppressPaintClick=true;setTimeout(()=>suppressPaintClick=false,0);}paint=null;});
-  document.addEventListener('pointercancel',()=>{paint=null;});
-  document.addEventListener('click',e=>{if(suppressPaintClick){suppressPaintClick=false;e.stopImmediatePropagation();e.preventDefault();}},true);
-  document.addEventListener('keydown',e=>{const b=e.target.closest('.cartesian-point');if(!b||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;e.preventDefault();const x=Number(b.dataset.cx)+(e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0),y=Number(b.dataset.cy)+(e.key==='ArrowUp'?1:e.key==='ArrowDown'?-1:0);b.closest('.cartesian-plane').querySelector(`[data-cx="${x}"][data-cy="${y}"]`)?.focus();});
+  document.addEventListener("pointermove", (e) => {
+    if (!paint || paint.id !== e.pointerId) return;
+    if (!paint.active) {
+      if (
+        Math.abs(e.clientY - paint.y) > 12 &&
+        Math.abs(e.clientY - paint.y) > Math.abs(e.clientX - paint.x)
+      ) {
+        paint = null;
+        return;
+      }
+      if (Math.abs(e.clientX - paint.x) < 8) return;
+      paint.active = true;
+    }
+    const hit = document
+      .elementFromPoint(e.clientX, e.clientY)
+      ?.closest(".mission-parts .part,[data-shade-group] button");
+    for (const b of [paint.first, hit])
+      if (b && !paint.seen.has(b.getAttribute("data-action"))) {
+        const action = b.getAttribute("data-action");
+        paint.seen.add(action);
+        if (action.startsWith("m-select:")) {
+          dispatch(
+            "h-shade:" + action.split(":")[1] + ":" + (paint.on ? 1 : 0),
+          );
+        } else if ((b.getAttribute("aria-pressed") === "true") !== paint.on)
+          dispatch(action);
+      }
+  });
+  document.addEventListener("pointerup", () => {
+    if (paint?.active) {
+      suppressPaintClick = true;
+      setTimeout(() => (suppressPaintClick = false), 0);
+    }
+    paint = null;
+  });
+  document.addEventListener("pointercancel", () => {
+    paint = null;
+  });
+  document.addEventListener(
+    "click",
+    (e) => {
+      if (suppressPaintClick) {
+        suppressPaintClick = false;
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    },
+    true,
+  );
+  document.addEventListener("keydown", (e) => {
+    const b = e.target.closest(".cartesian-point");
+    if (
+      !b ||
+      !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)
+    )
+      return;
+    e.preventDefault();
+    const x =
+        Number(b.dataset.cx) +
+        (e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0),
+      y =
+        Number(b.dataset.cy) +
+        (e.key === "ArrowUp" ? 1 : e.key === "ArrowDown" ? -1 : 0);
+    b.closest(".cartesian-plane")
+      .querySelector(`[data-cx="${x}"][data-cy="${y}"]`)
+      ?.focus();
+  });
   document.addEventListener("change", async (e) => {
-    if(e.target.hasAttribute("data-starting-retake-year")){const id=e.target.dataset.startingRetakeYear,year=e.target.value?Number(e.target.value):null;let problem;await change(()=>{problem=P.chooseYear(s,id,year,C,true);});if(problem)status(problem);return;}
-    if(e.target.hasAttribute("data-starting-year")){const id=e.target.dataset.startingYear,year=e.target.value?Number(e.target.value):null;let problem;await change(()=>{problem=P.chooseYear(s,id,year,C);});if(problem)status(problem);return;}
+    if (e.target.hasAttribute("data-starting-retake-year")) {
+      const id = e.target.dataset.startingRetakeYear,
+        year = e.target.value ? Number(e.target.value) : null;
+      let problem;
+      await change(() => {
+        problem = P.chooseYear(s, id, year, C, true);
+      });
+      if (problem) status(problem);
+      return;
+    }
+    if (e.target.hasAttribute("data-starting-year")) {
+      const id = e.target.dataset.startingYear,
+        year = e.target.value ? Number(e.target.value) : null;
+      let problem;
+      await change(() => {
+        problem = P.chooseYear(s, id, year, C);
+      });
+      if (problem) status(problem);
+      return;
+    }
     if (e.target.dataset.missionTier) {
       const id = e.target.dataset.missionTier,
         value = Number(e.target.value);
       await change(() => {
-        if(id==='town')townVisitError='';
+        if (id === "town") townVisitError = "";
         M.state(s).difficulty[id] = value;
       });
       return;
@@ -1041,10 +2181,24 @@
       $("shop-filter")?.focus({ preventScroll: true });
       return;
     }
-    if(e.target.hasAttribute('data-character-choice')){const value=e.target.value;if(['boy','girl'].includes(value))await change(()=>{s.settings.avatarCharacter=value;});return;}
+    if (e.target.hasAttribute("data-character-choice")) {
+      const value = e.target.value;
+      if (["boy", "girl"].includes(value))
+        await change(() => {
+          s.settings.avatarCharacter = value;
+        });
+      return;
+    }
     if (e.target.dataset.avatarLook) {
-      const key=e.target.dataset.avatarLook, value=Number(e.target.value);
-      if(['avatarHair','avatarFace','avatarShoes'].includes(key)&&value===0)await change(()=>{s.settings[key]=value;});
+      const key = e.target.dataset.avatarLook,
+        value = Number(e.target.value);
+      if (
+        ["avatarHair", "avatarFace", "avatarShoes"].includes(key) &&
+        value === 0
+      )
+        await change(() => {
+          s.settings[key] = value;
+        });
       return;
     }
     if (e.target.dataset.setting) {
@@ -1061,87 +2215,221 @@
     }
   });
   document.addEventListener("input", async (e) => {
-    if(e.target.hasAttribute('data-baseline-draft')){const raw=e.target.value,id=s.startingProfile?.active,q=P.question(s,id);await change(()=>{const a=s.startingProfile?.areas?.[id];if(s.view==='starting-area'&&a?.question?.prompt===q?.prompt&&!a.answered)a.draft=raw;},{renderPage:false});const submit=document.querySelector('[data-action="starting-submit"]');if(submit)submit.disabled=!raw.trim();return;}
+    if (e.target.hasAttribute("data-baseline-draft")) {
+      const raw = e.target.value,
+        id = s.startingProfile?.active,
+        q = P.question(s, id);
+      await change(
+        () => {
+          const a = s.startingProfile?.areas?.[id];
+          if (
+            s.view === "starting-area" &&
+            a?.question?.prompt === q?.prompt &&
+            !a.answered
+          )
+            a.draft = raw;
+        },
+        { renderPage: false },
+      );
+      const submit = document.querySelector('[data-action="starting-submit"]');
+      if (submit) submit.disabled = !raw.trim();
+      return;
+    }
 
     if (e.target.dataset.numericAnswer) {
-      const input = e.target, context = input.dataset.numericAnswer, raw = input.value;
-      const target = () => context === 'mission' ? M.current(s) : context === 'journey' ? window.V5Journey.state(s) : context === 'quest' ? s.quest : s.learning;
-      const original = target(), step = original?.i ?? original?.stage;
-      const spec = () => context === 'mission' ? M.current(s)?.tasks[M.current(s).i] : context === 'journey' ? window.V5Journey.task(s) : context === 'quest' ? E.puzzle(s.quest.world,s.quest.i) : window.V5HandsOn.practiceSpec({id:s.learning?.id},s.learning?.qs[s.learning.i]);
+      const input = e.target,
+        context = input.dataset.numericAnswer,
+        raw = input.value;
+      const target = () =>
+        context === "mission"
+          ? M.current(s)
+          : context === "journey"
+            ? window.V5Journey.state(s)
+            : context === "quest"
+              ? s.quest
+              : s.learning;
+      const original = target(),
+        step = original?.i ?? original?.stage;
+      const spec = () =>
+        context === "mission"
+          ? M.current(s)?.tasks[M.current(s).i]
+          : context === "journey"
+            ? window.V5Journey.task(s)
+            : context === "quest"
+              ? E.puzzle(s.quest.world, s.quest.i)
+              : window.V5HandsOn.practiceSpec(
+                  { id: s.learning?.id },
+                  s.learning?.qs[s.learning.i],
+                );
       const t = spec();
       if (!original || !t) return;
-      const scale=t.responseUnit==='pounds'?100:context==='practice' ? t.scale || 1 : 1, n = window.V5HandsOn.numericValue(raw,t,scale);
-      await change(() => {
-        const q = target();
-        if (!q || (q.i ?? q.stage) !== step || (q.key ?? q.id) !== (original.key ?? original.id) || q.world !== original.world || q.seed !== original.seed || q.round !== original.round || q.solved || q.answered || q.intro) return;
-        const values = context === 'practice' ? (q.manipulation ||= {}) : context === 'quest' ? q : q.values;
-        if (n !== null) {
-          if ((context === 'quest' ? q.value : values.amount) !== n) activity = Date.now();
-          if (context === 'mission') M.edit(s,'amount',n);
-          else if (context === 'journey') window.V5Journey.action(s,'j-value',String(n),'j-value:'+n);
-          else if(context === 'quest') q.value=n;
-          else window.V5HandsOn.practiceEdit(q,'value',n);
-        }
-        values.amountDraft = raw;
-      }, {renderPage:false});
+      const scale =
+          t.responseUnit === "pounds"
+            ? 100
+            : context === "practice"
+              ? t.scale || 1
+              : 1,
+        n = window.V5HandsOn.numericValue(raw, t, scale);
+      await change(
+        () => {
+          const q = target();
+          if (
+            !q ||
+            (q.i ?? q.stage) !== step ||
+            (q.key ?? q.id) !== (original.key ?? original.id) ||
+            q.world !== original.world ||
+            q.seed !== original.seed ||
+            q.round !== original.round ||
+            q.solved ||
+            q.answered ||
+            q.intro
+          )
+            return;
+          const values =
+            context === "practice"
+              ? (q.manipulation ||= {})
+              : context === "quest"
+                ? q
+                : q.values;
+          if (n !== null) {
+            if ((context === "quest" ? q.value : values.amount) !== n)
+              activity = Date.now();
+            if (context === "mission") M.edit(s, "amount", n);
+            else if (context === "journey")
+              window.V5Journey.action(s, "j-value", String(n), "j-value:" + n);
+            else if (context === "quest") q.value = n;
+            else window.V5HandsOn.practiceEdit(q, "value", n);
+          }
+          values.amountDraft = raw;
+        },
+        { renderPage: false },
+      );
       if (!input.isConnected || input.value !== raw) return;
       const invalid = n === null;
-      input.setAttribute('aria-invalid',String(invalid));
-      input.setCustomValidity(invalid ? window.V5HandsOn.numericMessage(t,scale) : '');
-      input.parentElement.querySelector('.numeric-help').textContent = invalid ? input.validationMessage : 'Type an answer or use the model.';
+      input.setAttribute("aria-invalid", String(invalid));
+      input.setCustomValidity(
+        invalid ? window.V5HandsOn.numericMessage(t, scale) : "",
+      );
+      input.parentElement.querySelector(".numeric-help").textContent = invalid
+        ? input.validationMessage
+        : "Type an answer or use the model.";
       if (!invalid) {
         const q = target();
-        if(context === 'practice') {
-          const template=document.createElement('template');
-          template.innerHTML=window.V5HandsOn.practiceRender(q,{id:q.id});
-          const model=document.querySelector('.practice-model');
-          if(model) model.innerHTML=template.content.querySelector('.practice-model').innerHTML;
+        if (context === "practice") {
+          const template = document.createElement("template");
+          template.innerHTML = window.V5HandsOn.practiceRender(q, { id: q.id });
+          const model = document.querySelector(".practice-model");
+          if (model)
+            model.innerHTML =
+              template.content.querySelector(".practice-model").innerHTML;
         }
-        if(context === 'quest') {
-          const template=document.createElement('template');template.innerHTML=puzzle(q);
-          const current=document.querySelector('.puzzle > div:last-child'),fresh=template.content.querySelector('.puzzle > div:last-child');
-          if(current&&fresh) [...fresh.children].forEach((child,i)=>{if(!child.classList.contains('stepper')) current.children[i]?.replaceWith(child.cloneNode(true));});
-        } else if(context !== 'practice') {
-          const template=document.createElement('template');template.innerHTML=U.controls(q,t);
-          for(const selector of ['.invoice','.sale-tag']) {
-            const current=input.closest('.task-controls')?.querySelector(selector),fresh=template.content.querySelector(selector);
-            if(current&&fresh) current.replaceWith(fresh);
+        if (context === "quest") {
+          const template = document.createElement("template");
+          template.innerHTML = puzzle(q);
+          const current = document.querySelector(".puzzle > div:last-child"),
+            fresh = template.content.querySelector(".puzzle > div:last-child");
+          if (current && fresh)
+            [...fresh.children].forEach((child, i) => {
+              if (!child.classList.contains("stepper"))
+                current.children[i]?.replaceWith(child.cloneNode(true));
+            });
+        } else if (context !== "practice") {
+          const template = document.createElement("template");
+          template.innerHTML = U.controls(q, t);
+          for (const selector of [".invoice", ".sale-tag"]) {
+            const current = input
+                .closest(".task-controls")
+                ?.querySelector(selector),
+              fresh = template.content.querySelector(selector);
+            if (current && fresh) current.replaceWith(fresh);
           }
         }
-        const model = input.closest('.task-controls,.mission-task,.practice-manipulative')?.querySelector('.hands-on');
-        if (model && context !== 'practice') {const html=window.V5HandsOn.render(q,t) || ''; model.outerHTML=context==='journey' ? html.replaceAll('data-action="m-','data-action="j-') : html;}
-        const display = document.querySelector('.amount-display');
-        if (display) display.textContent = t.unit === 'p' ? T.money(n) : n + ' ' + (t.unit || 'units');
-        const stepper = context==='quest' ? input.closest('.stepper') : input.closest('.amount-editor')?.querySelector('.stepper');
-        if(stepper) {stepper.firstElementChild.disabled=n <= (t.min ?? 0);stepper.lastElementChild.disabled=n >= t.max;}
+        const model = input
+          .closest(".task-controls,.mission-task,.practice-manipulative")
+          ?.querySelector(".hands-on");
+        if (model && context !== "practice") {
+          const html = window.V5HandsOn.render(q, t) || "";
+          model.outerHTML =
+            context === "journey"
+              ? html.replaceAll('data-action="m-', 'data-action="j-')
+              : html;
+        }
+        const display = document.querySelector(".amount-display");
+        if (display)
+          display.textContent =
+            t.unit === "p" ? T.money(n) : n + " " + (t.unit || "units");
+        const stepper =
+          context === "quest"
+            ? input.closest(".stepper")
+            : input.closest(".amount-editor")?.querySelector(".stepper");
+        if (stepper) {
+          stepper.firstElementChild.disabled = n <= (t.min ?? 0);
+          stepper.lastElementChild.disabled = n >= t.max;
+        }
       }
       return;
     }
 
-    if(e.target.dataset.lifeClock){
-      const input=e.target,raw=input.value,original=window.V52TownLife.state(s),id=original?.id,stage=original?.stage;
-      const valid=/^([01]\d|2[0-3]):[0-5]\d$/.test(raw),[h,m]=raw.split(':').map(Number);
-      await change(()=>{const j=window.V52TownLife.state(s);if(!j||j.id!==id||j.stage!==stage||j.solved)return;if(valid){if(j.values.amount!==h*60+m)activity=Date.now();window.V52TownLife.action(s,'j-value',String(h*60+m));}j.values.clockDraft=raw;},{renderPage:false});
-      input.setAttribute('aria-invalid',String(!valid));input.setCustomValidity(valid?'':'Choose a complete 24-hour time.');const display=document.querySelector('.clock-display');if(display&&valid)display.textContent=T.clock(h*60+m);return;
-    }
-
-    if (e.target.dataset.missionClock) {
-      const input=e.target, raw=input.value, original=M.current(s), step=original?.i;
-      const valid=/^([01]\d|2[0-3]):[0-5]\d$/.test(raw);
-      const [hour,minute]=raw.split(':').map(Number),value=hour*60+minute;
-      await change(()=>{
-        const q=M.current(s);
-        if(!q || q.key!==original?.key || q.seed!==original?.seed || q.i!==step || q.solved) return;
-        if(valid) {if(q.values.amount!==value) activity=Date.now();M.edit(s,'amount',value);}
-        q.values.clockDraft=raw;
-      },{renderPage:false});
-      input.setAttribute('aria-invalid',String(!valid));
-      input.setCustomValidity(valid?'':'Choose a complete 24-hour time.');
-      const display=document.querySelector('.clock-display');
-      if(display&&valid) display.textContent=T.clock(value);
+    if (e.target.dataset.lifeClock) {
+      const input = e.target,
+        raw = input.value,
+        original = window.V52TownLife.state(s),
+        id = original?.id,
+        stage = original?.stage;
+      const valid = /^([01]\d|2[0-3]):[0-5]\d$/.test(raw),
+        [h, m] = raw.split(":").map(Number);
+      await change(
+        () => {
+          const j = window.V52TownLife.state(s);
+          if (!j || j.id !== id || j.stage !== stage || j.solved) return;
+          if (valid) {
+            if (j.values.amount !== h * 60 + m) activity = Date.now();
+            window.V52TownLife.action(s, "j-value", String(h * 60 + m));
+          }
+          j.values.clockDraft = raw;
+        },
+        { renderPage: false },
+      );
+      input.setAttribute("aria-invalid", String(!valid));
+      input.setCustomValidity(valid ? "" : "Choose a complete 24-hour time.");
+      const display = document.querySelector(".clock-display");
+      if (display && valid) display.textContent = T.clock(h * 60 + m);
       return;
     }
 
+    if (e.target.dataset.missionClock) {
+      const input = e.target,
+        raw = input.value,
+        original = M.current(s),
+        step = original?.i;
+      const valid = /^([01]\d|2[0-3]):[0-5]\d$/.test(raw);
+      const [hour, minute] = raw.split(":").map(Number),
+        value = hour * 60 + minute;
+      await change(
+        () => {
+          const q = M.current(s);
+          if (
+            !q ||
+            q.key !== original?.key ||
+            q.seed !== original?.seed ||
+            q.i !== step ||
+            q.solved
+          )
+            return;
+          if (valid) {
+            if (q.values.amount !== value) activity = Date.now();
+            M.edit(s, "amount", value);
+          }
+          q.values.clockDraft = raw;
+        },
+        { renderPage: false },
+      );
+      input.setAttribute("aria-invalid", String(!valid));
+      input.setCustomValidity(valid ? "" : "Choose a complete 24-hour time.");
+      const display = document.querySelector(".clock-display");
+      if (display && valid) display.textContent = T.clock(value);
+      return;
+    }
   });
   window.addEventListener("storage", (e) => {
     if (e.key === KEY) {
@@ -1169,13 +2457,17 @@
         "discovery",
         "adventure",
       ].includes(s.view) &&
-      (s.view === "journey" ? !!window.V5Journey.state(s)&&!window.V5Journey.state(s).solved&&!window.V5Journey.state(s).done : s.view === "adventure"
-        ? !!M.current(s) &&
-          M.current(s)?.phase !== "lesson" &&
-          !M.current(s)?.solved
-        : s.view === "quest"
-          ? !s.quest?.intro && !s.quest?.solved
-          : !s.learning?.answered)
+      (s.view === "journey"
+        ? !!window.V5Journey.state(s) &&
+          !window.V5Journey.state(s).solved &&
+          !window.V5Journey.state(s).done
+        : s.view === "adventure"
+          ? !!M.current(s) &&
+            M.current(s)?.phase !== "lesson" &&
+            !M.current(s)?.solved
+          : s.view === "quest"
+            ? !s.quest?.intro && !s.quest?.solved
+            : !s.learning?.answered)
     );
   }
   setInterval(async () => {
@@ -1203,11 +2495,70 @@
         ? "Saved Test Camp data could not be read. This session is temporary; the saved copy has been preserved."
         : "Device storage unavailable. This session is temporary.",
     );
-  if(!cloud&&document.getElementById("touch-review")){const review=document.getElementById("touch-review");review.hidden=false;review.innerHTML='<a href="dev/touch-preview.html">Review direct touch activities · fictional preview</a>';}
-  window.V9Touch.bind(document,(el,action)=>dispatch(action,c8Scope(el)));
-  document.addEventListener('input', e=>{if(e.target.matches('[data-c8-input]')){dispatch(e.target.dataset.c8Input+':input-'+e.target.value,c8Scope(e.target));if(e.target.type==='range'){const section=e.target.closest('.c8-activity'),n=Number(e.target.value),live=section?.querySelector('[data-c8-live]');if(live)live.textContent=e.target.value;const marker=section?.querySelector('[data-c8-numberline-marker]');if(marker)marker.setAttribute('cx',30+(n-Number(e.target.min))/(Number(e.target.max)-Number(e.target.min))*300);const angle=section?.querySelector('[data-c8-angleline]');if(angle)angle.setAttribute('d',`M325 180H180L${180+145*Math.cos(n*Math.PI/180)} ${180-145*Math.sin(n*Math.PI/180)}`);}}});
-  document.addEventListener('input',e=>{if(e.target.matches('[data-c8-calc]'))dispatch(e.target.dataset.c8Calc+':calc-input-'+e.target.value,c8Scope(e.target));});
-  document.addEventListener('change',e=>{if(e.target.matches('[data-c8-cell]'))dispatch(e.target.dataset.c8Prefix+':cell-'+e.target.dataset.c8Cell+'-'+e.target.value,c8Scope(e.target));});
-  function c8Point(e){const el=e.target.closest?.('[data-c8-point]');if(el&&(e.type==='click'||e.key==='Enter'||e.key===' ')){e.preventDefault();dispatch(el.dataset.c8Prefix+':point-'+el.dataset.c8Point,c8Scope(el));}}
-  document.addEventListener('click',c8Point);document.addEventListener('keydown',c8Point);
+  if (!cloud && document.getElementById("touch-review")) {
+    const review = document.getElementById("touch-review");
+    review.hidden = false;
+    review.innerHTML =
+      '<a href="dev/touch-preview.html">Review direct touch activities · fictional preview</a>';
+  }
+  window.V9Touch.bind(document, (el, action) => dispatch(action, c8Scope(el)));
+  document.addEventListener("input", (e) => {
+    if (e.target.matches("[data-c8-input]")) {
+      dispatch(
+        e.target.dataset.c8Input + ":input-" + e.target.value,
+        c8Scope(e.target),
+      );
+      if (e.target.type === "range") {
+        const section = e.target.closest(".c8-activity"),
+          n = Number(e.target.value),
+          live = section?.querySelector("[data-c8-live]");
+        if (live) live.textContent = e.target.value;
+        const marker = section?.querySelector("[data-c8-numberline-marker]");
+        if (marker)
+          marker.setAttribute(
+            "cx",
+            30 +
+              ((n - Number(e.target.min)) /
+                (Number(e.target.max) - Number(e.target.min))) *
+                300,
+          );
+        const angle = section?.querySelector("[data-c8-angleline]");
+        if (angle)
+          angle.setAttribute(
+            "d",
+            `M325 180H180L${180 + 145 * Math.cos((n * Math.PI) / 180)} ${180 - 145 * Math.sin((n * Math.PI) / 180)}`,
+          );
+      }
+    }
+  });
+  document.addEventListener("input", (e) => {
+    if (e.target.matches("[data-c8-calc]"))
+      dispatch(
+        e.target.dataset.c8Calc + ":calc-input-" + e.target.value,
+        c8Scope(e.target),
+      );
+  });
+  document.addEventListener("change", (e) => {
+    if (e.target.matches("[data-c8-cell]"))
+      dispatch(
+        e.target.dataset.c8Prefix +
+          ":cell-" +
+          e.target.dataset.c8Cell +
+          "-" +
+          e.target.value,
+        c8Scope(e.target),
+      );
+  });
+  function c8Point(e) {
+    const el = e.target.closest?.("[data-c8-point]");
+    if (el && (e.type === "click" || e.key === "Enter" || e.key === " ")) {
+      e.preventDefault();
+      dispatch(
+        el.dataset.c8Prefix + ":point-" + el.dataset.c8Point,
+        c8Scope(el),
+      );
+    }
+  }
+  document.addEventListener("click", c8Point);
+  document.addEventListener("keydown", c8Point);
 })();

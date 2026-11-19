@@ -2,7 +2,7 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('nod
 const c=load();vm.runInContext(fs.readFileSync('v3/starting-profile.js','utf8'),c);const{V11StartingProfile:P,V3Engine:E,V3Curriculum:C,V10Navigation:N}=c,copy=x=>JSON.parse(JSON.stringify(x)),at=1794355200000;
 function begin(id='number',year=6){const s=E.fresh();assert.equal(P.chooseYear(s,id,year,C),null);assert.equal(P.start(s,id,C,at),null);assert.equal(P.question(s,id).band,year);s.startingProfile.areas[id].assessmentVersion=2;return s;}
 function respond(s,id,outcome){const q=P.question(s,id),value=outcome==='correct'?q.answer:String(E.parseNumber(q.answer)+100000);assert(P.answer(s,id,value,['unknown','cannot'].includes(outcome),at+s.startingProfile.areas[id].responses.length,outcome),JSON.stringify({id,q,outcome,value,validation:s.startingProfile.areas[id].validation}));assert(P.advance(s,id,C,at+s.startingProfile.areas[id].responses.length));}
-function untouched(s){const x=copy(s);for(const k of ['startingProfile','seen','view','resumeView','world','pausedActivity'])delete x[k];return x;}
+function untouched(s){const x=copy(s);for(const k of ['startingProfile','seen','seenQuestionIds','view','resumeView','world','pausedActivity'])delete x[k];return x;}
 let runs=0;
 for(const id of Object.keys(P.areas))for(const year of P.years(C,id))for(const pattern of [['correct'],['wrong'],['wrong','unknown','cannot'],['correct','wrong'],['correct','correct','wrong'],['wrong','wrong','correct']]){
  const s=begin(id,year),before=untouched(s),levels=[],a=s.startingProfile.areas[id];let expected=year,up=0,down=0;
