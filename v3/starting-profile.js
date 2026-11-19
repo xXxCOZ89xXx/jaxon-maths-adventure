@@ -424,9 +424,7 @@
         ? {
             ...original,
             answer: compared.answer,
-            choices: compared.choices.map((v) =>
-              String(get("V3AnswerMarking", "answer-marking").parse(v).value),
-            ),
+            choices: compared.choices.map(String),
           }
         : original,
       registry = get("V3Content", "content-registry"),

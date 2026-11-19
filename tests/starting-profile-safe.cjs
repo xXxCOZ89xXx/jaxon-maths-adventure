@@ -15,7 +15,7 @@ let checked=0;
 for(const id of Object.keys(P.areas))for(const year of P.years(C,id))for(let seed=1;seed<=3;seed++){
  const s=E.fresh(),now=100000000+seed*100003+year*1009;assert.equal(P.start(s,id,C,now,year),null,`${id} Year ${year}`);
  for(let i=0;i<P.length(s.startingProfile.areas[id]);i++){
-  const q=P.question(s,id);assert(q&&q.prompt,`${id} ${year} ${seed} question ${i}`);assert(P.startingSafe([q.prompt,q.answer,q.choices]),`${id} ${year} tool prompt: ${q.prompt}`);assert.equal(q.choices.length,4,'Each starting question uses choices; typed input is reserved for no-choice questions');
+  const q=P.question(s,id);assert(q&&q.prompt,`${id} ${year} ${seed} question ${i}`);assert(P.startingSafe([q.prompt,q.answer,q.choices]),`${id} ${year} tool prompt: ${q.prompt}`);assert.equal(q.choices.length,4,'Each starting question uses choices; typed input is reserved for no-choice questions');assert(q.choices.includes(q.answer),'The canonical answer must be one of the displayed choices: '+q.prompt);
   assert(!/\b(?:drag|move the marker|move marker|move the point|plot the point|build .{0,50} using|measure .{0,40} strip|align the ruler|ruler's zero|sort (?:the )?)\b/i.test(q.prompt),q.prompt);
   assert(P.answer(s,id,q.answer,false,now+i));assert(P.advance(s,id,C,now+i));checked++;
  }
