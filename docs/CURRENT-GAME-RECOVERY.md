@@ -36,6 +36,8 @@ The verifier now accepts optional `-ValidationReportPath` pointing to that **ori
 
 Specific validation stages identify row counts, COPY content (by ordinal, without table/record output), constraints, indexes, sequences or identity checks. Console diagnostic codes come from fixed verifier messages or fixed PowerShell error categories. Arbitrary native/SQL/record errors remain private. A mismatch still fails; the diagnostic does not waive checks or repair/rewrite any records.
 
+Windows PowerShell 5.1 reproduced an empty-table verifier defect: its array overload binding could throw ArgumentNullException during row sorting. The helper now skips unnecessary sorting for empty/single-element arrays and explicitly encodes a string. Six synthetic helper cases pass on actual Windows PowerShell 5.1; the twelve database rehearsals still pass on Linux. These are verifier tests, not verification of the owner's recovered data.
+
 Twelve fictional checks cover this mode, including matching-report/unchanged-archive guards, missing dependencies, empty/null/binary/multiline values, CRLF tool output, unchanged database lists/data and server rejection of an injected diagnostic write. The owner's current archive still requires its own successful check. No managed-service recovery is certified.
 
 ## Scope relative to retained-history installation

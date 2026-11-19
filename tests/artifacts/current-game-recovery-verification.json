@@ -6,7 +6,7 @@
   "ownerWindowsExecutionVerified": false,
   "hostedSQLExecuted": false,
   "mergeOrDeploymentPerformed": false,
-  "scriptSha256": "476b8761033159464044c24cd1476c94c108058dc9d6d3534edd6cd764a4d02a",
+  "scriptSha256": "3bf6819b7d6a6d5806fa029a6449570e9715d2ce151dde990d0253bcf8ab9684",
   "rehearsal": {
     "powershell": "7.4.6 on Linux; Windows PowerShell 5.1 compatibility intended, not owner-executed",
     "database": "PostgreSQL 17.12 Alpine; disposable network-disabled containers",
@@ -38,5 +38,23 @@
     "Managed-service/Auth/Vault/configuration/Storage recovery remains unverified",
     "Specific installed-contract and SQL installation/activation review required"
   ],
-  "diagnosticMode": "Optional original-report-bound read-only revalidation; no restore, database creation or data repair"
+  "diagnosticMode": "Optional original-report-bound read-only revalidation; no restore, database creation or data repair",
+  "windowsPowerShellHelperRegression": {
+    "version": "5.1.26100.33822",
+    "sourceCommit": "5b7db3a993af25ef3b00189ff91e60b34baa2e93",
+    "cases": 6,
+    "result": "PASS",
+    "before": "Empty/null array sorting reproduced ArgumentNullException in Windows PowerShell 5.1",
+    "fix": "Skip sorting empty/single-element arrays and explicitly encode a string; row-count/content checks retained",
+    "checks": [
+      "empty table",
+      "one empty field",
+      "scalar row LF",
+      "scalar row CRLF",
+      "multiple rows CRLF",
+      "Unicode normalization"
+    ],
+    "jobUrl": "https://github.com/xXxCOZ89xXx/jaxon-maths-adventure/actions/jobs/135709466833",
+    "boundary": "Helper tests on Windows; not execution of owner archive or full Windows database restore"
+  }
 }
