@@ -135,6 +135,54 @@ const reject = (fn, re) =>
         "supabase/history/001_retained_history.sql",
         "utf8",
       );
+    const preflight = fs.readFileSync(
+      "supabase/history/000_preflight.sql",
+      "utf8",
+    );
+    const review = () =>
+      JSON.parse(
+        sql(
+          "set app.history_expected_project_ref='sfogrvedypgtxfvecmbx';" +
+            preflight,
+        ),
+      );
+    reject(() => sql(preflight), /verified project/);
+    reject(
+      () =>
+        sql(
+          "set app.history_expected_project_ref='abcdefghijklmnopqrst';" +
+            preflight,
+        ),
+      /verified project/,
+    );
+    const inspected = review();
+    assert.equal(inspected.historyAlreadyInstalled, false);
+    assert.equal(inspected.authenticatedRequestAllowed, true);
+    assert.equal(inspected.anonymousRequestDenied, true);
+    assert.equal(inspected.baseResetDelegatePrivate, true);
+    for (const table of Object.values(inspected.tables)) {
+      assert.equal(table.present, true);
+      assert.equal(table.rls, true);
+      assert.equal(table.noClientTableAccess, true);
+    }
+    for (const routine of Object.values(inspected.routines)) {
+      assert.equal(routine.present, true);
+      assert.equal(routine.secureDefiner, true);
+      assert.match(routine.definitionSha256, /^[a-f0-9]{64}$/);
+    }
+    sql("grant select on public.v3_wallet to anon;");
+    assert.equal(
+      review().tables["public.v3_wallet"].noClientTableAccess,
+      false,
+    );
+    sql("revoke select on public.v3_wallet from anon;");
+    assert.equal(
+      sql("select jsonb_agg(to_jsonb(p)) from public.v3_progress p"),
+      before,
+    );
+    console.log(
+      "PASS read-only installed-contract review: project guard, table/RLS/grant inspection, secure routine hashes, leaked grant detection; no record output or data changes.",
+    );
     reject(() => sql(migration), /Reviewed/);
     reject(
       () =>

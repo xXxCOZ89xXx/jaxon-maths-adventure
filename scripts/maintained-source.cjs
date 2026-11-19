@@ -50,4 +50,5 @@ module.exports = [
   "scripts/maintained-source.cjs",
   "scripts/source-checks.cjs",
   "eslint.config.cjs",
+  "tests/current-game-windows-restore.cjs",
 ];
