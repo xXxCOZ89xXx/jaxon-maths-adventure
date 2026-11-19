@@ -477,6 +477,111 @@ alter default privileges for role postgres in schema public grant execute on fun
   assert.equal(afterPrecheck.authUserCount, 4);
   assert.equal(afterPrecheck.existingSyntheticMarker, true);
   assert.deepEqual(req("other", "read").progress, {});
+  const retainedFixture = {
+    paused: { draft: "fictional pending draft" },
+    unknown: { preserve: true },
+    minutes: 3,
+  };
+  const retainedArgs = {
+    requestId: crypto.randomUUID(),
+    revision: 0,
+    gameEpoch: 0,
+    progress: retainedFixture,
+  };
+  const retainedAck = req("other", "save", retainedArgs);
+  const retainedAward = {
+    requestId: crypto.randomUUID(),
+    amount: 10,
+    gameEpoch: 0,
+  };
+  const retainedAwardAck = req("otherParent", "award", retainedAward);
+  const historyPackage =
+    require("../scripts/prepare-synthetic-history.cjs").prepare();
+  assert.equal(
+    fs.readFileSync(
+      path.join(root, "supabase/synthetic/history/INSTALL-TEST-HISTORY.sql"),
+      "utf8",
+    ),
+    historyPackage.sql,
+  );
+  assert.deepEqual(
+    JSON.parse(
+      fs.readFileSync(
+        path.join(root, "supabase/synthetic/history/MANIFEST.json"),
+        "utf8",
+      ),
+    ),
+    historyPackage.manifest,
+  );
+  reject(
+    () =>
+      require("../scripts/prepare-synthetic-history.cjs").prepare(
+        (f) => fs.readFileSync(path.join(root, f), "utf8") + "\n",
+      ),
+    /source changed/,
+  );
+  sql("update public.v3_environment set project_ref='sfogrvedypgtxfvecmbx'");
+  reject(() => sql(historyPackage.sql), /Exact synthetic test identity/);
+  sql(`update public.v3_environment set project_ref='${reviewedRef}'`);
+  assert.equal(
+    sql("select to_regclass('public.v3_history_settings') is null"),
+    "t",
+  );
+  reject(
+    () =>
+      sql(
+        historyPackage.sql.replace(
+          /COMMIT;\nSELECT jsonb_build_object/,
+          "DO $$BEGIN RAISE EXCEPTION 'fictional late history failure';END$$;COMMIT;\nSELECT jsonb_build_object",
+        ),
+      ),
+    /fictional late history failure/,
+  );
+  assert.equal(
+    sql("select to_regclass('public.v3_history_settings') is null"),
+    "t",
+  );
+  reject(
+    () =>
+      sql(
+        historyPackage.sql.replace(
+          "DO $preserve$",
+          `UPDATE public.v3_wallet SET bonus=bonus+1 WHERE child_user_id='${ids.other}';DO $preserve$`,
+        ),
+      ),
+    /Application rows changed/,
+  );
+  assert.equal(
+    sql("select to_regclass('public.v3_history_settings') is null"),
+    "t",
+  );
+  assert.equal(req("other", "read").wallet.bonus, 10);
+  sql(`update auth.users set email=null where id='${ids.otherParent}'`);
+  reject(() => sql(historyPackage.sql), /four reserved fictional/);
+  sql(
+    `update auth.users set email='parent-b@esa-test.invalid' where id='${ids.otherParent}'`,
+  );
+  const historyResult = JSON.parse(sql(historyPackage.sql));
+  assert.equal(historyResult.historyEnabled, false);
+  assert.equal(historyResult.historyWritesEnabled, false);
+  assert.equal(historyResult.originalRowsPreservedDuringInstall, true);
+  assert.equal(historyResult.progressStorageVersion, 1);
+  assert.equal(
+    JSON.parse(sql("set role anon;select public.v3_identity()")).syntheticOnly,
+    true,
+  );
+  const afterHistoryRead = req("other", "read");
+  assert.deepEqual(afterHistoryRead.progress, retainedFixture);
+  assert.equal(afterHistoryRead.wallet.bonus, 10);
+  assert.deepEqual(req("other", "save", retainedArgs), retainedAck);
+  assert.deepEqual(
+    req("otherParent", "award", retainedAward),
+    retainedAwardAck,
+  );
+  reject(() => sql(historyPackage.sql), /History already installed/);
+  pass(
+    "target-bound hosted-test history package preserves all application rows, rolls back on failure and leaves history disabled",
+  );
   fs.mkdirSync(path.join(root, "tests/artifacts"), { recursive: true });
   fs.writeFileSync(
     path.join(root, "tests/artifacts/synthetic-baseline-verification.json"),
