@@ -1,4 +1,5 @@
 module.exports = [
+  "scripts/prepare-main-history-review.cjs",
   "scripts/prepare-synthetic-history-activation.cjs",
   "scripts/prepare-synthetic-history.cjs",
   "scripts/prepare-synthetic-baseline.cjs",

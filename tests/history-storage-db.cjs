@@ -139,13 +139,36 @@ const reject = (fn, re) =>
       "supabase/history/000_preflight.sql",
       "utf8",
     );
-    const review = () =>
+    const reviewModule = require("../scripts/prepare-main-history-review.cjs");
+    const mainReview = reviewModule.prepare();
+    assert.equal(
+      fs.readFileSync(
+        "supabase/history/main-review/READ-ONLY-MAIN-CONTRACT.sql",
+        "utf8",
+      ),
+      mainReview.sql,
+    );
+    assert.deepEqual(
       JSON.parse(
+        fs.readFileSync("supabase/history/main-review/MANIFEST.json", "utf8"),
+      ),
+      mainReview.manifest,
+    );
+    reject(
+      () => reviewModule.prepare((f) => fs.readFileSync(f, "utf8") + "\n"),
+      /read-only source changed/,
+    );
+    const review = () => JSON.parse(sql(mainReview.sql));
+    reject(
+      () =>
         sql(
-          "set app.history_expected_project_ref='sfogrvedypgtxfvecmbx';" +
-            preflight,
+          mainReview.sql.replace(
+            "SET LOCAL statement_timeout='10s';",
+            "SET LOCAL statement_timeout='10s';UPDATE public.v3_wallet SET bonus=bonus+1;",
+          ),
         ),
-      );
+      /read-only transaction/,
+    );
     reject(() => sql(preflight), /verified project/);
     reject(
       () =>
@@ -156,6 +179,10 @@ const reject = (fn, re) =>
       /verified project/,
     );
     const inspected = review();
+    assert.equal(inspected.projectRef, "sfogrvedypgtxfvecmbx");
+    sql("update public.v3_environment set project_ref='abcdefghijklmnopqrst'");
+    reject(() => review(), /verified project/);
+    sql("update public.v3_environment set project_ref='sfogrvedypgtxfvecmbx'");
     assert.equal(inspected.historyAlreadyInstalled, false);
     assert.equal(inspected.authenticatedRequestAllowed, true);
     assert.equal(inspected.anonymousRequestDenied, true);
