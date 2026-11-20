@@ -19,7 +19,9 @@ jobs:
       - run: docker pull postgres:17-alpine
       - run: npx playwright install --with-deps chromium
       - name: Verify project/build isolation and local SQL contracts
-        run: npm run test:synthetic
+        run: npm run test:synthetic && npm run test:synthetic-baseline
+      - name: Verify guarded Main package with fictional PostgreSQL only
+        run: npm run test:main-history-preservation && npm run test:main-history-activation && node tests/main-history-native.cjs
       - name: Verify browser sessions, queues and fail-closed identity
         run: npm run test:synthetic-browser
       - uses: actions/upload-artifact@v4
@@ -28,5 +30,9 @@ jobs:
           name: synthetic-environment-evidence
           path: |
             tests/artifacts/synthetic-environment-browser.json
+            tests/artifacts/synthetic-baseline-verification.json
+            tests/artifacts/main-history-preservation-verification.json
+            tests/artifacts/main-history-native-verification.json
+            tests/artifacts/main-history-activation-verification.json
             test-results/synthetic-environment/
           retention-days: 14

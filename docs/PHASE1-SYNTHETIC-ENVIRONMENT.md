@@ -2,6 +2,10 @@
 
 19 November 2026. Implemented locally for the agreed UK family launch plan. This package prepares a separate test target and its guarded server marker; it does not provision a hosted project, apply SQL, create accounts, publish, change the live family identity or perform the separate environment rename.
 
+## Subsequent progress
+
+PRs #39/#40 are released; both existing Cloudflare hosts passed exact-merge checks for latest merge `f7be74159137bc3bad289b53df615f9afdf9ad68`. The owner subsequently supplied the separate new test reference `vyxvemtevkxlwqzelghj`; no hosted baseline or Auth/API verification has been performed by this work. See [the fresh-baseline review package](PHASE1-SYNTHETIC-BASELINE.md). The original preparation evidence below retains its stated local/mock scope.
+
 ## Delivered
 
 - `v3/synthetic-environment.js`: explicit `synthetic-test` configuration and server identity/capability validation. Both known current/legacy live project references are refused. The expected project, authorised reference, HTTPS endpoint and public browser key must match; private/service-role keys are refused and unknown configuration fields are discarded.
@@ -51,6 +55,6 @@ Branding is released and the owner has completed current application-data recove
 
 The active release ruleset was read on 19 November: it applies to `release/ipad`, requires pull requests and the `save-and-recovery` status, and has no bypass actors. Repository visibility was read as public; the owner's source/IP visibility decision remains open. Operator MFA/password-manager actions are not inferred from repository settings and no password workbook was opened.
 
-Remaining Phase 1 operations are: the concrete retained-history installed-contract/recovery-limit review and separate installation/activation approval; approved synthetic project/baseline/host provisioning and actual Auth/API acceptance; remaining operator security/visibility decisions; and a transferable sales-site source handoff. The website chat and shared Notion reference have been read, but its source files are not present in this build workspace. Workspace paths alone are not a code transfer. The canonical www routing, mail records and /game, /account and /demo selections remain in the shared plan.
+Remaining Phase 1 operations are: the concrete retained-history installed-contract/recovery-limit review and separate installation/activation approval; approved synthetic project/baseline/host provisioning and actual Auth/API acceptance; remaining operator security/visibility decisions; and sales-source/public-upload parity review. Read-only sales source is now available in this build workspace at `/workspace/sales-site-source-readonly`, commit `94e7510f5abf1bde74fad001011938a86487f0cf`, retrieved through the owner’s Sites source access. This resolves source access for preparation; parity with the latest manual Cloudflare upload and later website-chat edits remains unverified. The canonical www routing, mail records and /game, /account and /demo selections remain in the shared plan.
 
 Current shared plan: https://app.notion.com/p/41d245cc3bb581b8b8eec6de9bb20c9b . Keep completed, prepared and live work distinct there. No merge, deployment, hosted SQL or project creation is performed by this preparation.
