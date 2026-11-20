@@ -1,4 +1,10 @@
 module.exports = [
+  "scripts/prepare-main-history-preservation.cjs",
+  "scripts/rebuild-main-history-baseline.cjs",
+  "tests/main-history-preservation.cjs",
+  "tests/main-history-native.cjs",
+  "tests/helpers/main-history-contract.cjs",
+  "tests/helpers/main-history-fixture.cjs",
   "scripts/prepare-main-history-review.cjs",
   "scripts/prepare-synthetic-history-activation.cjs",
   "scripts/prepare-synthetic-history.cjs",

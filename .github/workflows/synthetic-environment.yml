@@ -20,6 +20,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Verify project/build isolation and local SQL contracts
         run: npm run test:synthetic && npm run test:synthetic-baseline
+      - name: Verify guarded Main package with fictional PostgreSQL only
+        run: npm run test:main-history-preservation && node tests/main-history-native.cjs
       - name: Verify browser sessions, queues and fail-closed identity
         run: npm run test:synthetic-browser
       - uses: actions/upload-artifact@v4
@@ -29,5 +31,7 @@ jobs:
           path: |
             tests/artifacts/synthetic-environment-browser.json
             tests/artifacts/synthetic-baseline-verification.json
+            tests/artifacts/main-history-preservation-verification.json
+            tests/artifacts/main-history-native-verification.json
             test-results/synthetic-environment/
           retention-days: 14

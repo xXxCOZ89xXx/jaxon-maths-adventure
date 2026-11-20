@@ -78,10 +78,12 @@
     "test:synthetic": "node tests/synthetic-environment.cjs && node tests/synthetic-environment-db.cjs",
     "test:synthetic-browser": "node tests/prepare-synthetic.cjs && playwright test -c playwright.synthetic.config.cjs",
     "prepare:synthetic-baseline": "node scripts/prepare-synthetic-baseline.cjs",
-    "test:synthetic-baseline": "node tests/synthetic-baseline.cjs"
+    "test:synthetic-baseline": "node tests/synthetic-baseline.cjs",
+    "test:main-history-preservation": "node tests/main-history-preservation.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
+    "@electric-sql/pglite": "0.4.6",
     "@playwright/test": "^1.56.1",
     "@supabase/supabase-js": "^2.118.0",
     "esbuild": "^0.28.2",
