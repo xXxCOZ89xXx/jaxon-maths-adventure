@@ -178,10 +178,32 @@ const reject = (fn, re) =>
         ),
       /verified project/,
     );
+    assert.equal(
+      fs.readFileSync(
+        "supabase/history/main-review/READ-ONLY-MAIN-ACTIVITY.sql",
+        "utf8",
+      ),
+      mainReview.activitySql,
+    );
+    const activity = JSON.parse(sql(mainReview.activitySql));
+    assert.equal(activity.projectRef, "sfogrvedypgtxfvecmbx");
+    assert.match(activity.latestProgressWriteUtc, /Z$/);
+    assert.match(activity.latestTransactionUtc, /Z$/);
+    assert.deepEqual(
+      Object.keys(activity).sort(),
+      [
+        "projectRef",
+        "latestProgressWriteUtc",
+        "latestTransactionUtc",
+        "latestWalletActivityUtc",
+        "latestResetUtc",
+      ].sort(),
+    );
     const inspected = review();
     assert.equal(inspected.projectRef, "sfogrvedypgtxfvecmbx");
     sql("update public.v3_environment set project_ref='abcdefghijklmnopqrst'");
     reject(() => review(), /verified project/);
+    reject(() => sql(mainReview.activitySql), /verified Main project/);
     sql("update public.v3_environment set project_ref='sfogrvedypgtxfvecmbx'");
     assert.equal(inspected.historyAlreadyInstalled, false);
     assert.equal(inspected.authenticatedRequestAllowed, true);

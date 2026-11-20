@@ -3,6 +3,7 @@
   "sourceFile": "supabase/history/000_preflight.sql",
   "sourceSha256": "0c708db5f507ae9e24dd8294e2e16093bb6edf092f5b56831a4348380f6dec3d",
   "sqlSha256": "c27402e66b9a4ec203e6e73b07a9cb57e2c8bc2043fd9b509b8c713b7f6b107b",
+  "activitySqlSha256": "df852eab44a38dd4aaa0b82bc36bb39303e86587cea9d817f1b90ee1c45e1be3",
   "transactionMode": "READ ONLY",
   "outputs": "catalogue/contract flags and definition digests only",
   "installationIncluded": false,

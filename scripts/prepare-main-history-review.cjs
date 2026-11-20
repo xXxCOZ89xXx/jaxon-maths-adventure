@@ -28,13 +28,30 @@ function prepare(read = (f) => fs.readFileSync(path.join(root, f), "utf8")) {
     "SELECT jsonb_build_object(\n 'projectRef',(SELECT project_ref FROM public.v3_environment),\n 'scope'",
   );
   sql = `-- READ ONLY: MAIN game project ${projectRef}, not the new test project.\n-- Catalogue booleans and routine hashes only; no learner rows or function bodies.\n-- Does not install or activate history, change grants, or write application data.\n-- Copy this entire file into one new postgres SQL-editor query.\n${sql}`;
+  const activitySql = `-- READ ONLY aggregate activity times for MAIN ${projectRef}. No learner records.
+BEGIN READ ONLY;
+SET LOCAL statement_timeout='10s';
+DO $$BEGIN
+ IF current_user<>'postgres' OR (SELECT count(*) FROM public.v3_environment)<>1
+ OR (SELECT project_ref FROM public.v3_environment) IS DISTINCT FROM '${projectRef}'
+ THEN RAISE EXCEPTION 'Read-only activity review requires the verified Main project and operator'; END IF;
+END$$;
+SELECT jsonb_build_object('projectRef',(SELECT project_ref FROM public.v3_environment),
+ 'latestProgressWriteUtc',to_char((SELECT max(updated_at) FROM public.v3_progress) AT TIME ZONE 'UTC','YYYY-MM-DD"T"HH24:MI:SS.US"Z"'),
+ 'latestTransactionUtc',to_char((SELECT max(created_at) FROM public.v3_transactions) AT TIME ZONE 'UTC','YYYY-MM-DD"T"HH24:MI:SS.US"Z"'),
+ 'latestWalletActivityUtc',to_char((SELECT max(last_active) FROM public.v3_wallet) AT TIME ZONE 'UTC','YYYY-MM-DD"T"HH24:MI:SS.US"Z"'),
+ 'latestResetUtc',to_char((SELECT max(created_at) FROM public.v3_game_resets) AT TIME ZONE 'UTC','YYYY-MM-DD"T"HH24:MI:SS.US"Z"')) AS main_activity_summary;
+COMMIT;
+`;
   return {
     sql,
+    activitySql,
     manifest: {
       projectRef,
       sourceFile,
       sourceSha256,
       sqlSha256: hash(sql),
+      activitySqlSha256: hash(activitySql),
       transactionMode: "READ ONLY",
       outputs: "catalogue/contract flags and definition digests only",
       installationIncluded: false,
@@ -56,6 +73,11 @@ if (require.main === module) {
   fs.writeFileSync(path.join(out, "READ-ONLY-MAIN-CONTRACT.sql"), p.sql, {
     flag: "wx",
   });
+  fs.writeFileSync(
+    path.join(out, "READ-ONLY-MAIN-ACTIVITY.sql"),
+    p.activitySql,
+    { flag: "wx" },
+  );
   fs.writeFileSync(
     path.join(out, "MANIFEST.json"),
     JSON.stringify(p.manifest, null, 2) + "\n",
