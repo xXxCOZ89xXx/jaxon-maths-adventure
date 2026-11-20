@@ -1,4 +1,7 @@
 module.exports = [
+  "scripts/review-credential-scan.cjs",
+  "scripts/credential-review-allowlist.json",
+  "tests/credential-review.cjs",
   "scripts/prepare-main-history-activation.cjs",
   "tests/main-history-activation.cjs",
   "scripts/prepare-main-history-preservation.cjs",
