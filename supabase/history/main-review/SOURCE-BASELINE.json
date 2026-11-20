@@ -1,5 +1,6 @@
 {
   "scope": "Reviewed source contracts, not a live database inventory",
+  "fixturePrivilegeProfile": "Supabase server-role defaults confirmed by Main catalogue review, 20 November 2026",
   "projectRef": "sfogrvedypgtxfvecmbx",
   "sourceHashes": {
     "supabase/v3-staging/001_secure_core.sql": "80ff825e0888d7e4a7aa44aaf0c96f09922eb88cba622184d64ce5f7c456f054",
@@ -87,7 +88,7 @@
         "volatility": "v",
         "anonExecute": true,
         "publicExecute": false,
-        "serviceExecute": false,
+        "serviceExecute": true,
         "authenticatedExecute": true
       },
       "bodyHashes": [
@@ -113,7 +114,7 @@
         "volatility": "v",
         "anonExecute": false,
         "publicExecute": false,
-        "serviceExecute": false,
+        "serviceExecute": true,
         "authenticatedExecute": true
       },
       "bodyHashes": [
@@ -141,7 +142,7 @@
         "volatility": "v",
         "anonExecute": false,
         "publicExecute": false,
-        "serviceExecute": false,
+        "serviceExecute": true,
         "authenticatedExecute": true
       },
       "bodyHashes": [
@@ -169,7 +170,7 @@
         "volatility": "v",
         "anonExecute": false,
         "publicExecute": false,
-        "serviceExecute": false,
+        "serviceExecute": true,
         "authenticatedExecute": true
       },
       "bodyHashes": [
@@ -427,7 +428,7 @@
         "volatility": "v",
         "anonExecute": false,
         "publicExecute": false,
-        "serviceExecute": false,
+        "serviceExecute": true,
         "authenticatedExecute": true
       },
       "bodyHashes": [
@@ -455,7 +456,7 @@
         "volatility": "v",
         "anonExecute": false,
         "publicExecute": false,
-        "serviceExecute": false,
+        "serviceExecute": true,
         "authenticatedExecute": true
       },
       "bodyHashes": [
@@ -483,7 +484,7 @@
         "volatility": "v",
         "anonExecute": false,
         "publicExecute": false,
-        "serviceExecute": false,
+        "serviceExecute": true,
         "authenticatedExecute": true
       },
       "bodyHashes": [

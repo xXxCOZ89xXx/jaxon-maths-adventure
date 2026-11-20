@@ -53,6 +53,32 @@ async function run() {
       /baseline.*changed/i,
     );
   });
+  await check(
+    "partial operator access and RLS-filtered fingerprints are refused",
+    async () => {
+      for (const change of [
+        "CREATE ROLE fictional_operator BYPASSRLS;GRANT USAGE ON SCHEMA auth TO fictional_operator;GRANT SELECT ON ALL TABLES IN SCHEMA public,auth TO fictional_operator;SET ROLE fictional_operator;",
+        "CREATE ROLE fictional_operator;GRANT USAGE ON SCHEMA auth TO fictional_operator;GRANT SELECT,UPDATE ON ALL TABLES IN SCHEMA public,auth TO fictional_operator;CREATE POLICY fixture_operator ON public.v3_environment FOR SELECT TO fictional_operator USING (true);SET ROLE fictional_operator;",
+      ]) {
+        const limited = await fixture();
+        try {
+          await limited.exec(change);
+          await assert.rejects(
+            // Fixture-only operator alias isolates this guard; the real Main operator check is unchanged.
+            limited.exec(
+              p.precheckSql.replace(
+                "current_user<>'postgres'",
+                "current_user<>'fictional_operator'",
+              ),
+            ),
+            /Operator cannot fully read and lock/,
+          );
+        } finally {
+          await limited.close();
+        }
+      }
+    },
+  );
   const db = await fixture();
   const one = async (s) => (await db.query(s)).rows[0];
   const exec = async (s) => {
@@ -141,7 +167,9 @@ UNION ALL SELECT 'private',jsonb_agg(to_jsonb(t)) FROM v52_staging_private.fixtu
         assert.deepEqual(result, {
           projectRef: "sfogrvedypgtxfvecmbx",
           sourceContractsMatch: true,
-          tableAndColumnGrantsDenied: true,
+          browserTableAndColumnGrantsDenied: true,
+          existingServiceRoleContractMatches: true,
+          operatorPreservationAccessVerified: true,
           activityMatchesReviewedCheckpoint: true,
           historyAbsent: true,
         });
@@ -183,6 +211,15 @@ UNION ALL SELECT 'private',jsonb_agg(to_jsonb(t)) FROM v52_staging_private.fixtu
         await exec(
           "REVOKE fictional_leak FROM authenticated;REVOKE SELECT(hash) ON public.v3_pins FROM fictional_leak;DROP ROLE fictional_leak",
         );
+        await exec("REVOKE SELECT ON public.v3_wallet FROM service_role");
+        await reject(
+          p.precheckSql,
+          /Existing server-role table contract differs/,
+        );
+        await exec("GRANT SELECT ON public.v3_wallet TO service_role");
+        await exec("GRANT MAINTAIN ON public.v3_wallet TO anon");
+        await reject(p.precheckSql, /column grant/);
+        await exec("REVOKE MAINTAIN ON public.v3_wallet FROM anon");
       },
     );
     await check(
@@ -246,10 +283,19 @@ UNION ALL SELECT 'private',jsonb_agg(to_jsonb(t)) FROM v52_staging_private.fixtu
               "DO $preserve$",
               "GRANT SELECT(coins) ON public.v3_wallet TO anon;DO $preserve$",
             ),
-          /must remain private/,
+          /Original table permissions changed/,
         );
         await absent();
         await exec(p.precheckSql);
+        await reject(
+          approval +
+            p.sql.replace(
+              "DO $preserve$",
+              "ALTER TABLE public.v3_wallet DISABLE ROW LEVEL SECURITY;DO $preserve$",
+            ),
+          /Original table permissions changed/,
+        );
+        await absent();
       },
     );
     await check(

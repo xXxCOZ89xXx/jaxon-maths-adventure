@@ -1,14 +1,15 @@
 {
   "runtime": "PGlite 0.4.6 / PostgreSQL 17.5, in-memory, no network listener",
-  "groupsPassed": 12,
+  "groupsPassed": 13,
   "package": {
     "projectRef": "sfogrvedypgtxfvecmbx",
     "sourceFile": "supabase/history/001_retained_history.sql",
     "sourceSha256": "3cdad342ebfecff2c28c32299573cbaa679c06d86b099e1a54a988a2f916f185",
-    "baselineSha256": "9094588694cbd6e16f95dea326c72fada3adf61f3140c66e3adc511a4296e7c8",
-    "sqlSha256": "74ce064c70c928e03803239408de99c387988ef0fe743bfda4adaef807e4f880",
-    "precheckSqlSha256": "aedf13016ce543d576185942302e6673024f2396c386b7c9364a9003aa1bd768",
+    "baselineSha256": "c384542b09d0850dcbc78cd7bdbaf361d9b8e40946bc59746f19536e74efbf77",
+    "sqlSha256": "7cbb3c603e8ff08b7f9d1f34b182a8b11dc06c2d44b72bce17de84ece9509668",
+    "precheckSqlSha256": "ce4cc73d53b96a4fa284e4955c252b05879727a4f44bb4933f16f4ba7e1a9b0d",
     "activationIncluded": false,
+    "originalTableAclsCompared": true,
     "ownerApprovalRequired": true,
     "preservationScope": "All pre-existing public/v52_staging_private ordinary/partitioned tables plus auth.users and auth.identities; row contents checked inside transaction",
     "baselineSourceOnly": true

@@ -12,7 +12,7 @@ const sourceSha256 =
   "3cdad342ebfecff2c28c32299573cbaa679c06d86b099e1a54a988a2f916f185";
 const baselineFile = "supabase/history/main-review/SOURCE-BASELINE.json";
 const baselineSha256 =
-  "9094588694cbd6e16f95dea326c72fada3adf61f3140c66e3adc511a4296e7c8";
+  "c384542b09d0850dcbc78cd7bdbaf361d9b8e40946bc59746f19536e74efbf77";
 const lit = (s) => "'" + String(s).replaceAll("'", "''") + "'";
 const tables = [
   "maths_families",
@@ -26,6 +26,14 @@ const tables = [
   "v3_game_resets",
   "v3_game_requests",
 ];
+const legacyServiceTables = tables.slice(0, 8);
+const grantCheck = `IF role_name='service_role' AND name=ANY(ARRAY[${legacyServiceTables.map(lit).join(",")}]) THEN
+    FOREACH privilege_name IN ARRAY ARRAY['SELECT','INSERT','UPDATE','DELETE','TRUNCATE','REFERENCES','TRIGGER'] LOOP
+     IF NOT has_table_privilege(role_name,relation,privilege_name) THEN RAISE EXCEPTION 'Existing server-role table contract differs; stop for review'; END IF;
+    END LOOP;
+   ELSIF has_table_privilege(role_name,relation,'SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER,MAINTAIN')
+   OR has_any_column_privilege(role_name,relation,'SELECT,INSERT,UPDATE,REFERENCES')
+   THEN RAISE EXCEPTION 'Unexpected application table or column grant; review permissions'; END IF;`;
 function contractGuard(expected, label) {
   return `DO $contracts$
 DECLARE expected jsonb; signature text; actual jsonb;
@@ -39,7 +47,7 @@ BEGIN
 END $contracts$;`;
 }
 const targetGuard = `DO $target$
-DECLARE name text; role_name text; relation oid;
+DECLARE name text; role_name text; privilege_name text; relation oid; protected record;
 BEGIN
  IF current_user<>'postgres' OR current_setting('session_replication_role')<>'origin'
  OR (SELECT count(*) FROM public.v3_environment)<>1
@@ -55,13 +63,18 @@ BEGIN
   IF relation IS NULL OR NOT (SELECT relrowsecurity FROM pg_class WHERE oid=relation)
   THEN RAISE EXCEPTION 'Required isolated application table missing'; END IF;
   FOREACH role_name IN ARRAY ARRAY['anon','authenticated','service_role'] LOOP
-   IF has_table_privilege(role_name,relation,'SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER')
-   OR has_any_column_privilege(role_name,relation,'SELECT,INSERT,UPDATE,REFERENCES')
-   THEN RAISE EXCEPTION 'Unexpected application table or column grant; review permissions'; END IF;
+   ${grantCheck}
   END LOOP;
  END LOOP;
  IF to_regclass('auth.users') IS NULL OR to_regclass('auth.identities') IS NULL
  THEN RAISE EXCEPTION 'Expected Auth preservation scope missing'; END IF;
+ FOR protected IN SELECT c.oid FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace
+ WHERE c.relkind IN ('r','p') AND (n.nspname IN ('public','v52_staging_private') OR (n.nspname='auth' AND c.relname IN ('users','identities'))) LOOP
+  IF NOT has_table_privilege(current_user,protected.oid,'SELECT')
+  OR NOT has_table_privilege(current_user,protected.oid,'UPDATE,DELETE,TRUNCATE,MAINTAIN')
+  OR row_security_active(protected.oid)
+  THEN RAISE EXCEPTION 'Operator cannot fully read and lock every preservation table; stop without changing permissions'; END IF;
+ END LOOP;
 END $target$;`;
 const activityGuard = `DO $activity$
 BEGIN
@@ -74,7 +87,14 @@ END $activity$;`;
 // Hash each row first, then a sorted multiset of hashes. Unknown columns and duplicate rows participate.
 const fingerprintSql =
   "SELECT encode(extensions.digest(convert_to(coalesce(string_agg(row_hash,',' ORDER BY row_hash),''),'UTF8'),'sha256'),'hex') FROM (SELECT encode(extensions.digest(convert_to(to_jsonb(t)::text,'UTF8'),'sha256'),'hex') AS row_hash FROM %I.%I t) rows";
-const capture = `CREATE TEMP TABLE esa_main_history_before(schema_name text,table_name text,fingerprint text NOT NULL,PRIMARY KEY(schema_name,table_name)) ON COMMIT DROP;
+const aclFingerprint = (
+  schema,
+  table,
+) => `(SELECT encode(extensions.digest(convert_to(jsonb_build_object(
+ 'owner',pg_get_userbyid(c.relowner),'acl',to_jsonb(c.relacl),'rls',c.relrowsecurity,'forceRls',c.relforcerowsecurity,
+ 'columns',(SELECT jsonb_agg(jsonb_build_object('name',a.attname,'acl',to_jsonb(a.attacl)) ORDER BY a.attnum) FROM pg_attribute a WHERE a.attrelid=c.oid AND a.attnum>0 AND NOT a.attisdropped))::text,'UTF8'),'sha256'),'hex')
+ FROM pg_class c WHERE c.oid=to_regclass(format('%I.%I',${schema},${table})))`;
+const capture = `CREATE TEMP TABLE esa_main_history_before(schema_name text,table_name text,fingerprint text NOT NULL,acl_fingerprint text NOT NULL,PRIMARY KEY(schema_name,table_name)) ON COMMIT DROP;
 DO $capture$
 DECLARE item record; value text;
 BEGIN
@@ -83,7 +103,7 @@ BEGIN
  ORDER BY n.nspname,c.relname LOOP
   EXECUTE format('LOCK TABLE %I.%I IN SHARE MODE',item.nspname,item.relname);
   EXECUTE format(${lit(fingerprintSql)},item.nspname,item.relname) INTO value;
-  INSERT INTO pg_temp.esa_main_history_before VALUES(item.nspname,item.relname,value);
+  INSERT INTO pg_temp.esa_main_history_before VALUES(item.nspname,item.relname,value,${aclFingerprint("item.nspname", "item.relname")});
  END LOOP;
 END $capture$;`;
 const preserve = `DO $preserve$
@@ -92,6 +112,7 @@ BEGIN
  FOR saved IN SELECT * FROM pg_temp.esa_main_history_before LOOP
   EXECUTE format(${lit(fingerprintSql)},saved.schema_name,saved.table_name) INTO value;
   IF value IS DISTINCT FROM saved.fingerprint THEN RAISE EXCEPTION 'Original rows changed; rolling back the entire installation'; END IF;
+  IF ${aclFingerprint("saved.schema_name", "saved.table_name")} IS DISTINCT FROM saved.acl_fingerprint THEN RAISE EXCEPTION 'Original table permissions changed; rolling back the entire installation'; END IF;
  END LOOP;
  IF (SELECT count(*) FROM public.v3_history_settings)<>1
  OR NOT EXISTS(SELECT 1 FROM public.v3_history_settings WHERE singleton AND NOT enabled AND NOT write_enabled AND client_release IS NULL)
@@ -132,7 +153,7 @@ ${settings}
 ${targetGuard}
 ${before}
 ${activityGuard}
-SELECT jsonb_build_object('projectRef','${projectRef}','sourceContractsMatch',true,'tableAndColumnGrantsDenied',true,'activityMatchesReviewedCheckpoint',true,'historyAbsent',true) AS main_preservation_precheck;
+SELECT jsonb_build_object('projectRef','${projectRef}','sourceContractsMatch',true,'browserTableAndColumnGrantsDenied',true,'existingServiceRoleContractMatches',true,'operatorPreservationAccessVerified',true,'activityMatchesReviewedCheckpoint',true,'historyAbsent',true) AS main_preservation_precheck;
 COMMIT;
 `;
   const sql = `-- REVIEW PACKAGE ONLY. Owner approval for this exact file is required before use on MAIN.
@@ -157,14 +178,12 @@ SET LOCAL app.history_expected_project_ref='${projectRef}';
 ${source.replace(/^BEGIN;$/m, "").replace(/^COMMIT;$/m, "")}
 ${preserve}
 ${contractGuard(baseline.installed, "Installed")}
-DO $newtables$ DECLARE name text; role_name text; relation oid; BEGIN
+DO $newtables$ DECLARE name text; role_name text; privilege_name text; relation oid; BEGIN
  FOREACH name IN ARRAY ARRAY[${[...tables, "v3_history_settings", "v3_history_nodes", "v3_history_roots"].map(lit).join(",")}] LOOP
   relation:=to_regclass('public.'||name);
   IF relation IS NULL OR NOT (SELECT relrowsecurity FROM pg_class WHERE oid=relation) THEN RAISE EXCEPTION 'New history RLS required'; END IF;
   FOREACH role_name IN ARRAY ARRAY['anon','authenticated','service_role'] LOOP
-   IF has_table_privilege(role_name,relation,'SELECT,INSERT,UPDATE,DELETE,TRUNCATE,REFERENCES,TRIGGER')
-   OR has_any_column_privilege(role_name,relation,'SELECT,INSERT,UPDATE,REFERENCES')
-   THEN RAISE EXCEPTION 'Game and history tables must remain private'; END IF;
+   ${grantCheck}
   END LOOP;
  END LOOP;
 END $newtables$;
@@ -183,6 +202,7 @@ COMMIT;
       sqlSha256: hash(sql),
       precheckSqlSha256: hash(precheckSql),
       activationIncluded: false,
+      originalTableAclsCompared: true,
       ownerApprovalRequired: true,
       preservationScope:
         "All pre-existing public/v52_staging_private ordinary/partitioned tables plus auth.users and auth.identities; row contents checked inside transaction",

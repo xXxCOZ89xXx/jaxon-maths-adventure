@@ -34,6 +34,8 @@ async function rebuild() {
     );
     return {
       scope: "Reviewed source contracts, not a live database inventory",
+      fixturePrivilegeProfile:
+        "Supabase server-role defaults confirmed by Main catalogue review, 20 November 2026",
       projectRef: "sfogrvedypgtxfvecmbx",
       sourceHashes: Object.fromEntries(
         [...sources, installation].map((file) => [

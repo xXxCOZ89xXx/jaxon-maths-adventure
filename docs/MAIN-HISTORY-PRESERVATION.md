@@ -1,6 +1,6 @@
 # Main history installation: preservation review
 
-20 November 2026. Prepared for review. **No live SQL, merge or deployment has been performed.** Installation and activation remain separate owner decisions.
+20 November 2026. Prepared for review. **Only read-only live catalogue/aggregate queries have run. No live installation, activation, merge or game/demo deployment has been performed.** Installation and activation remain separate owner decisions.
 
 ## Scope and recovered checkpoint
 
@@ -11,14 +11,17 @@ The previously recorded installed routine comparison is source evidence, not per
 ## What the guarded package adds
 
 - Binds the target to Main `sfogrvedypgtxfvecmbx`, the postgres operator, six reviewed existing routines and an absent-history state. The source baseline comes from pristine repository SQL rehearsed with fictional data; its digest and each input SQL digest are fixed by the packager.
-- Refuses unexpected table **or column** privileges for anonymous, authenticated and service roles, including inherited access. Checks RLS, existing reset compatibility and the new helpers' private grants.
+- Refuses table **or column** privileges for anonymous/authenticated browser roles, including inherited access and PostgreSQL 17's MAINTAIN privilege. Separately verifies the observed existing server-role contract: all seven legacy table privileges on the original eight core tables, none on the two reset/request tables. Existing service privileges are preserved, not newly granted. Checks RLS, existing reset compatibility and the new helpers' private grants.
 - Refuses a changed activity checkpoint. A newer play/write needs preservation review, not altered expected dates to force a pass.
 - Uses one bounded transaction, a maintenance advisory lock and SHARE locks that prevent concurrent writes to each protected table while it is compared. A busy writer results in a three-second lock timeout and rollback. This is a short maintenance operation; save and close devices before the approved run.
-- Fingerprints every pre-existing ordinary/partitioned table in `public` and `v52_staging_private`, plus `auth.users` and `auth.identities`. Unknown columns, duplicate rows, pending-request bytes, PIN/unlock records, wallets, receipts and reset generations participate. Fingerprints remain in transaction-local temporary tables and are dropped at commit. Only aggregate flags are returned.
+- Verifies that the actual operator can read and acquire SHARE locks on every protected table, and that row security will not filter the fingerprint input. Missing managed-Auth permissions stop the package; it does not grant itself access or turn off RLS. PostgreSQL's [LOCK permissions](https://www.postgresql.org/docs/17/sql-lock.html) require more than SELECT for SHARE locks.
+- Fingerprints every pre-existing ordinary/partitioned table in `public` and `v52_staging_private`, plus `auth.users` and `auth.identities`. Unknown columns, duplicate rows, pending-request bytes, PIN/unlock records, wallets, receipts and reset generations participate. Also compares each original table's owner, table/column ACLs and RLS flags before/after. Fingerprints remain in transaction-local temporary tables and are dropped at commit. Only aggregate flags are returned.
 - Executes the exact existing `001_retained_history.sql`, unchanged apart from embedding it inside the guarded outer transaction. A changed input hash is refused. The final comparison rolls back all transactional DDL and data if any original row differs, a routine/grant mismatches, or the expected disabled/empty state is absent.
 - Leaves capability 1, history disabled, writes disabled and no recorded client release. Activation is not included. Existing request and identity implementations remain under their private compatibility names.
 
 The source SQL and package do not update Auth identities, PINs, family relationships or existing gameplay rows; they do not rename the environment, change hosted configuration, read Vault secrets or move Storage objects. Row checks do not certify every aspect of managed Auth/service recovery or replace a release permission review.
+
+Live read-only review on 20 November identified the original fixture's missing Supabase service-role defaults. Main PostgreSQL 17.11 has no browser-role table/column access, but its existing server role has all seven checked privileges on eight original tables and EXECUTE on identity/role/PIN/unlock routines. Request/reset delegates remain restricted as expected. The fixture now models those observed defaults before applying pristine SQL. The revised guard binds that exact profile and preserves original table ACLs; it does not revoke working service access or weaken browser isolation. This is an observed catalogue contract, not an assertion about where service credentials are stored.
 
 ## Files and review sequence
 
