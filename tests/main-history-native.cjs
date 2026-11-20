@@ -190,6 +190,35 @@ INSERT INTO public.maths_families VALUES('${learner}','${parent}');`);
     );
     reject(approval + p.sql, /Fresh absent-history/);
     assert.equal(snapshot(), before);
+    const activation =
+      require("../scripts/prepare-main-history-activation.cjs").prepare();
+    reject(activation.sql, /Specific Main activation/);
+    const activationApproval =
+      "SET app.main_history_activation_approved='yes';";
+    reject(
+      activationApproval +
+        activation.sql.replace(
+          "DO $preserve$",
+          "UPDATE public.v3_wallet SET coins=coins+1;DO $preserve$",
+        ),
+      /Original rows changed/,
+    );
+    assert.equal(snapshot(), before);
+    assert.equal(
+      sql("SELECT enabled OR write_enabled FROM public.v3_history_settings"),
+      "f",
+    );
+    sql(activationApproval + activation.sql);
+    assert.equal(snapshot(), before);
+    assert.deepEqual(save(), receipt);
+    assert.equal(
+      sql("SELECT public.v3_identity()->>'progressStorageVersion'"),
+      "2",
+    );
+    reject(activationApproval + activation.sql, /Fresh disabled empty history/);
+    console.log(
+      "PASS native activation approval, corruption rollback, old retry preservation and rerun refusal",
+    );
     fs.writeFileSync(
       "tests/artifacts/main-history-native-verification.json",
       JSON.stringify(

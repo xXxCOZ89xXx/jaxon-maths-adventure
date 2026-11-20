@@ -374,8 +374,9 @@ UNION ALL SELECT 'private',jsonb_agg(to_jsonb(t)) FROM v52_staging_private.fixtu
       "separate fictional activation keeps old retries, >2MB V2 history and sibling isolation",
       async () => {
         await exec(
-          "SET app.history_cutover_reviewed='yes';SET app.history_expected_project_ref='sfogrvedypgtxfvecmbx';SET app.history_client_release='cccccccccccccccccccccccccccccccccccccccc';" +
-            read("supabase/history/002_enable_retained_history.sql"),
+          "SET app.main_history_activation_approved='yes';" +
+            require("../scripts/prepare-main-history-activation.cjs").prepare()
+              .sql,
         );
         const state = {
           skills: {

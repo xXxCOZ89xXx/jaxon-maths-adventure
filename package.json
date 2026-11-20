@@ -79,7 +79,8 @@
     "test:synthetic-browser": "node tests/prepare-synthetic.cjs && playwright test -c playwright.synthetic.config.cjs",
     "prepare:synthetic-baseline": "node scripts/prepare-synthetic-baseline.cjs",
     "test:synthetic-baseline": "node tests/synthetic-baseline.cjs",
-    "test:main-history-preservation": "node tests/main-history-preservation.cjs"
+    "test:main-history-preservation": "node tests/main-history-preservation.cjs",
+    "test:main-history-activation": "node tests/main-history-activation.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",

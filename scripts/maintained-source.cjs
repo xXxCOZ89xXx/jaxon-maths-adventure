@@ -1,4 +1,6 @@
 module.exports = [
+  "scripts/prepare-main-history-activation.cjs",
+  "tests/main-history-activation.cjs",
   "scripts/prepare-main-history-preservation.cjs",
   "scripts/rebuild-main-history-baseline.cjs",
   "tests/main-history-preservation.cjs",

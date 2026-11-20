@@ -54,3 +54,16 @@ Vault/Storage state, other managed Auth tables, provider configuration/roles and
 `node tests/main-history-native.cjs` additionally runs actual PostgreSQL 17 in Docker with `--network none`. It verifies the native source contracts and rollback, a conflicting writer in a separate session causing bounded lock-timeout rollback, disabled installation and the old save acknowledgement. It never accepts a remote host or credentials. Native CI evidence is required before proposing the live installation; PGlite alone is not multi-session lock certification.
 
 The existing `npm test` and combined `save-and-recovery` release checks remain required. Browser emulation is separate from the single grouped physical iPad acceptance near launch. Passing this package does not finish Phase 1's independently deployed API/isolation/email recovery, operator MFA/IP decisions or later launch gates.
+
+## Main installation completed
+
+On 20 November 2026 the owner explicitly approved the disabled-only installation.
+The exact safeguards passed through the connected Supabase account. Main applied
+package SHA-256 `7cbb3c603e8ff08b7f9d1f34b182a8b11dc06c2d44b72bce17de84ece9509668`
+as migration `20261120183217_install_retained_history_disabled_7f1b0ba`.
+The transaction enforces original-data/ACL preservation. A separate read-only
+postcheck verified exact installed contracts/grants, both history stores empty,
+client release unset, history/writes disabled and storage version 1.
+The earlier “prepared” statements above describe the pre-install review, not the
+current installed state. No activation or game/demo source release occurred.
+See [separate activation review](MAIN-HISTORY-ACTIVATION.md).
