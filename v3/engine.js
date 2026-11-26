@@ -200,6 +200,21 @@
     for (const k of ["coins", "earned", "minutes", "revision"])
       s[k] = num(s[k]);
     s.settings = { ...fresh().settings, ...old.settings };
+    // Optional saving goal: an item id, or absent.
+    if (typeof s.savingGoal !== "string") delete s.savingGoal;
+    // Optional wardrobe colour choices: { item: 2 or 3 }, or absent.
+    if (
+      s.colours &&
+      typeof s.colours === "object" &&
+      !Array.isArray(s.colours)
+    ) {
+      const colours = {};
+      for (const w of wardrobeColours)
+        if ([2, 3].includes(s.colours[w.item]))
+          colours[w.item] = s.colours[w.item];
+      if (Object.keys(colours).length) s.colours = colours;
+      else delete s.colours;
+    } else delete s.colours;
     if (!worlds.some((w) => w.id === s.world)) s.world = "number";
     if (
       ![
@@ -827,9 +842,17 @@
     const parts = String(input ?? "")
       .trim()
       .replace(/−/g, "-")
-      .replace(/,/g, "")
       .replace(/%$/, "")
-      .split("/");
+      .split("/")
+      .map((p) => {
+        // Commas count only as thousands separators (12,345.5); 2,5 is refused.
+        const t = p.trim();
+        return !t.includes(",")
+          ? t
+          : /^[+-]?\d{1,3}(?:,\d{3})+(?:\.\d+)?$/.test(t)
+            ? t.replace(/,/g, "")
+            : "invalid";
+      });
     if (
       parts.length > 2 ||
       parts.some(
@@ -964,6 +987,302 @@
     }
     return true;
   }
+  // Saving goal (the owner, 26 November 2026): one unowned item to save towards.
+  // It only reads coins; prices, purchases and the wallet never change here.
+  function setSavingGoal(s, id, items = catalog) {
+    if (!items.some((i) => i.id === id) || s.bought.includes(id)) return false;
+    s.savingGoal = id;
+    return true;
+  }
+  function savingGoal(s, items = catalog) {
+    const item = items.find((i) => i.id === s.savingGoal);
+    if (!item || s.bought.includes(item.id)) return null;
+    const have = Math.min(item.cost, Math.floor(num(s.coins))),
+      left = item.cost - have;
+    // 10 coins for each minute of active learning, as in activeTime.
+    return { item, have, left, minutes: Math.ceil(left / 10), reached: !left };
+  }
+  // Town projects (the owner, 26 November 2026): shared Town builds a child adds coins to, a bit at a time.
+  // Each 50-coin part has its own server price, so the server's usual buy check covers every
+  // contribution: the price, enough coins (earned first, then bonus), and never the same part twice.
+  // No server function changes. Wardrobe prices, items and equipment are untouched.
+  const TOWN_PART = 50;
+  const townProjects = Object.freeze(
+    [
+      {
+        id: "bench",
+        label: "Park bench",
+        target: 500,
+        thanks: "Families can sit and rest in the park.",
+      },
+      {
+        id: "library",
+        label: "Library books",
+        target: 1000,
+        thanks: "The library shelves are full of new books to borrow.",
+      },
+      {
+        id: "playground",
+        label: "Playground",
+        target: 2000,
+        thanks: "Children in Town have a new place to play.",
+      },
+    ].map((p) =>
+      Object.freeze({
+        ...p,
+        parts: Object.freeze(
+          Array.from(
+            { length: p.target / TOWN_PART },
+            (_, i) => `town-${p.id}-${String(i + 1).padStart(2, "0")}`,
+          ),
+        ),
+      }),
+    ),
+  );
+  const townCatalog = Object.freeze(
+    townProjects.flatMap((p) =>
+      p.parts.map((id) =>
+        Object.freeze({ id, cost: TOWN_PART, project: p.id }),
+      ),
+    ),
+  );
+  const isTownPart = (id) => townCatalog.some((x) => x.id === id);
+  function townProject(s, id) {
+    const project = townProjects.find((p) => p.id === id);
+    if (!project) return null;
+    const bought = s.bought || [],
+      given =
+        project.parts.filter((x) => bought.includes(x)).length * TOWN_PART,
+      left = project.target - given;
+    return {
+      project,
+      given,
+      left,
+      done: !left,
+      next: project.parts.find((x) => !bought.includes(x)) || null,
+    };
+  }
+  // Adds the next 50-coin part on this device. A part the server already recorded is not paid twice.
+  function contributeTown(s, part) {
+    const item = townCatalog.find((x) => x.id === part);
+    if (!item) return false;
+    if (s.bought.includes(part)) return true;
+    if (
+      townProject(s, item.project).next !== part ||
+      Math.floor(num(s.coins)) < item.cost
+    )
+      return false;
+    s.coins -= item.cost;
+    s.bought.push(part);
+    return true;
+  }
+  // Base Camp decorations (the owner, 26 November 2026): eight approved items and prices.
+  // Each is its own catalogue item, so the server's buy checks the price and ownership.
+  const decorations = Object.freeze(
+    [
+      ["plant", "Plant pot", "small", 100],
+      ["bunting", "Bunting", "small", 100],
+      ["birdbox", "Bird box", "small", 150],
+      ["lantern", "Lantern post", "medium", 200],
+      ["hammock", "Hammock", "medium", 250],
+      ["telescope", "Telescope", "medium", 300],
+      ["bookshelf", "Bookshelf", "large", 350],
+      ["picnic-table", "Picnic table", "large", 400],
+    ].map(([key, label, size, cost]) =>
+      Object.freeze({ id: `deco-${key}`, label, size, cost }),
+    ),
+  );
+  const isDecoration = (id) => decorations.some((x) => x.id === id);
+  // Buys one decoration on this device. One the server already recorded is not paid twice.
+  function buyDecoration(s, id) {
+    const item = decorations.find((x) => x.id === id);
+    if (!item) return false;
+    if (s.bought.includes(id)) return true;
+    if (Math.floor(num(s.coins)) < item.cost) return false;
+    s.coins -= item.cost;
+    s.bought.push(id);
+    return true;
+  }
+  // Wardrobe colours (the owner, 26 November 2026): 16 clothing items come in 3 colours. Colour 1
+  // comes with the item; colours 2 and 3 cost a flat 50 coins each. Four items with a colour in
+  // their name get their own name per colour; the rest show "name · colour". Colours follow the
+  // picture brief. Each extra colour is its own catalogue item, so the server's buy checks it.
+  const COLOUR_PRICE = 50;
+  const wardrobeColours = Object.freeze(
+    [
+      [
+        "helmet",
+        "Explorer helmet",
+        ["khaki", "#b59b62"],
+        ["slate grey", "#5d6670"],
+        ["sky blue", "#7fb8e0"],
+      ],
+      [
+        "cap",
+        "Forest cap",
+        ["forest green", "#2f6b3a", "Forest cap"],
+        ["red", "#c0392b", "Poppy cap"],
+        ["navy", "#22315a", "Midnight cap"],
+      ],
+      [
+        "crown",
+        "Golden crown",
+        ["gold", "#d4a62a", "Golden crown"],
+        ["silver", "#b8bec6", "Silver crown"],
+        ["rose gold", "#d99a8c", "Rose gold crown"],
+      ],
+      [
+        "wizardhat",
+        "Wizard hat",
+        ["purple", "#6b3fa0"],
+        ["midnight blue", "#1f2a5c"],
+        ["emerald green", "#1f8a5b"],
+      ],
+      [
+        "hardhat",
+        "Builder hard hat",
+        ["yellow", "#f2c230"],
+        ["orange", "#e6762a"],
+        ["white", "#f4f4f0"],
+      ],
+      [
+        "headphones",
+        "Gaming headphones",
+        ["blue", "#2f6fd0"],
+        ["red", "#c8323a"],
+        ["mint green", "#7fd8b4"],
+      ],
+      [
+        "tophat",
+        "Top hat",
+        ["black", "#222222"],
+        ["navy", "#22315a"],
+        ["burgundy", "#7a2236"],
+      ],
+      [
+        "jacket",
+        "Hero jacket",
+        ["navy and gold", "#22315a"],
+        ["forest green and bronze", "#2f6b3a"],
+        ["burgundy and gold", "#7a2236"],
+      ],
+      [
+        "hoodie",
+        "Emerald hoodie",
+        ["green", "#2e8b57", "Emerald hoodie"],
+        ["orange", "#e0892b", "Amber hoodie"],
+        ["sky blue", "#7fb8e0", "Sky hoodie"],
+      ],
+      [
+        "armour",
+        "Emerald armour",
+        ["green and gold", "#2e8b57", "Emerald armour"],
+        ["silver and blue", "#4a78c2", "Sapphire armour"],
+        ["red and gold", "#b3262e", "Ruby armour"],
+      ],
+      [
+        "suit",
+        "Sharp suit",
+        ["charcoal", "#3a3d42"],
+        ["navy", "#22315a"],
+        ["light grey", "#c4c7cc"],
+      ],
+      [
+        "cape",
+        "Superhero cape",
+        ["red", "#c0392b"],
+        ["royal blue", "#2a4fb0"],
+        ["purple", "#6b3fa0"],
+      ],
+      [
+        "spacesuit",
+        "Space suit",
+        ["white and blue", "#e8eef6"],
+        ["white and orange", "#f2b27a"],
+        ["silver and green", "#9fb8a0"],
+      ],
+      [
+        "ninja",
+        "Ninja outfit",
+        ["black and blue", "#1d2233"],
+        ["charcoal and red", "#4a2a2a"],
+        ["dark green and gold", "#24452f"],
+      ],
+      [
+        "wings",
+        "Magic wings",
+        ["ice blue", "#a9d8f0"],
+        ["golden", "#e2b53a"],
+        ["sunset orange", "#ee8a44"],
+      ],
+      [
+        "glasses",
+        "Cool sunglasses",
+        ["black frames", "#222222"],
+        ["red frames", "#c0392b"],
+        ["blue frames", "#2f6fd0"],
+      ],
+    ].map(([item, label, ...cs]) =>
+      Object.freeze({
+        item,
+        label,
+        colours: Object.freeze(
+          cs.map(([colour, swatch, own], i) =>
+            Object.freeze({
+              id: `colour-${item}-${i + 1}`,
+              item,
+              n: i + 1,
+              colour,
+              swatch,
+              name: own || (i ? `${label} · ${colour}` : label),
+              cost: i ? COLOUR_PRICE : 0,
+            }),
+          ),
+        ),
+      }),
+    ),
+  );
+  // Only colours 2 and 3 are sold; colour 1 comes with the item.
+  const colourCatalog = Object.freeze(
+    wardrobeColours.flatMap((w) => w.colours.slice(1)),
+  );
+  const isColour = (id) => colourCatalog.some((x) => x.id === id);
+  const findColour = (id) =>
+    wardrobeColours.flatMap((w) => w.colours).find((x) => x.id === id) || null;
+  const ownsColour = (s, c) =>
+    !!c &&
+    (s.bought || []).includes(c.item) &&
+    (c.n === 1 || (s.bought || []).includes(c.id));
+  // The colour the explorer wears for an item: the chosen one if it is still owned, else colour 1.
+  function colourOf(s, item) {
+    const w = wardrobeColours.find((x) => x.item === item);
+    if (!w) return null;
+    const chosen = w.colours.find((c) => c.n === (s.colours || {})[item]);
+    return chosen && ownsColour(s, chosen) ? chosen : w.colours[0];
+  }
+  // Buys one extra colour on this device. The item itself must be owned first. One the server
+  // already recorded is not paid twice. A bought colour becomes the one worn.
+  function buyColour(s, id) {
+    const c = colourCatalog.find((x) => x.id === id);
+    if (!c || !s.bought.includes(c.item)) return false;
+    if (!s.bought.includes(id)) {
+      if (Math.floor(num(s.coins)) < c.cost) return false;
+      s.coins -= c.cost;
+      s.bought.push(id);
+    }
+    return chooseColour(s, id);
+  }
+  // Chooses which owned colour to wear. Never changes coins or what is owned.
+  function chooseColour(s, id) {
+    const c = findColour(id);
+    if (!ownsColour(s, c)) return false;
+    const colours = { ...(s.colours || {}) };
+    if (c.n === 1) delete colours[c.item];
+    else colours[c.item] = c.n;
+    if (Object.keys(colours).length) s.colours = colours;
+    else delete s.colours;
+    return true;
+  }
   // Story milestones require participation, separate from independent mastery.
   function participation(run, total) {
     const skipped = new Set(
@@ -1024,6 +1343,22 @@
     answerLearning,
     nextLearning,
     purchase,
+    setSavingGoal,
+    savingGoal,
+    townProjects,
+    townCatalog,
+    townProject,
+    contributeTown,
+    isTownPart,
+    decorations,
+    isDecoration,
+    buyDecoration,
+    wardrobeColours,
+    colourCatalog,
+    isColour,
+    colourOf,
+    buyColour,
+    chooseColour,
     normaliseEquipment,
     removeEquipment,
     participation,

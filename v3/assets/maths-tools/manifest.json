@@ -1,0 +1,58 @@
+{
+  "sourceZipSha256": "2c1bbcf6ab3dff92926596bd33325f2b8824aafbaa8365bfffdc5066f19ac71c",
+  "role": "Owner-supplied cleaned masters; copied byte for byte. Empty balance is reference only; separate components are assembled at runtime.",
+  "assets": [
+    {
+      "file": "algebra-balance-base.png",
+      "sha256": "4e0b9b18b64705973d8ef5f88377ca084977e9add7fa929e4599e8bae4de028c"
+    },
+    {
+      "file": "algebra-balance-beam.png",
+      "sha256": "82dacf17afe4bcb453ad39743ce78c639c29dc9acfc2cb2d5d3af73c7cccdeac"
+    },
+    {
+      "file": "algebra-balance-pan.png",
+      "sha256": "caacc804ec8c345810196a46526842bda5c5b52a313ee828d17c92df8ec74ad5"
+    },
+    {
+      "file": "chart-bar-surface.png",
+      "sha256": "b6051d018b7585b10d62a01cbb6643aaef2d5aeb70528f8af177e28b8e0d4d05"
+    },
+    {
+      "file": "chart-surround.png",
+      "sha256": "997dd6026be4f70619e83a01bc72612720706ff1bf3768fd9093097cca9dfd96"
+    },
+    {
+      "file": "empty-balance.png",
+      "sha256": "a88bb2578c38d6b46e939dcee066a95a5899c81dcbbbfc02aba55a048cdd0c70"
+    },
+    {
+      "file": "fraction-selection-edge.png",
+      "sha256": "7d6a2e59034a9ad05cf276a949fd7e44436f09fc531d425268d266ca5a68e0de"
+    },
+    {
+      "file": "fraction-tile.png",
+      "sha256": "fd1a6230169d462f9b7fdd04e04d6e4ce5e054026bc54e5f738b5bbc16d0c055"
+    },
+    {
+      "file": "fraction-tray.png",
+      "sha256": "8b61ab20f016eb2149ca4870c230ada67ebe0e16ad60d5171bcdff2e19483c5e"
+    },
+    {
+      "file": "number-line-marker.png",
+      "sha256": "6058834907a179fb3a36ac02e3e78cbcd0004e4b36ba1ed142ef4caa3c9f542a"
+    },
+    {
+      "file": "number-line-surround.png",
+      "sha256": "d6cb1490514482df7dcffe1b068396d90ac9968930730d33ef9a370ba0febb80"
+    },
+    {
+      "file": "place-value-mat.png",
+      "sha256": "ab44ca1691aabd92ff2a16e576ab540f4cce4c43cd037b49e205f20551d1c6d1"
+    },
+    {
+      "file": "place-value-unit-block.png",
+      "sha256": "4634d00d40b81d3dcee22ccb780400c87133747a271df205f59857413ea6eb94"
+    }
+  ]
+}

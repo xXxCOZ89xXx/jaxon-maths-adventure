@@ -276,7 +276,9 @@
       case "percent_change":
       case "town_discounts": {
         const original = 20 * (2 + r(10)),
-          change = (original * p) / 100;
+          change = (original * p) / 100,
+          discountPercent = 5 * (1 + ((p / 5 - 1) % 20)),
+          discount = (original * discountPercent) / 100;
         rows = [
           row(
             `Increase ${original} by ${p}%.`,
@@ -284,14 +286,14 @@
             `${p}% is ${change}; add it.`,
           ),
           row(
-            `Reduce ${original} by ${p}%.`,
-            original - change,
-            `${p}% is ${change}; subtract it.`,
+            `Reduce ${original} by ${discountPercent}%.`,
+            original - discount,
+            `${discountPercent}% is ${discount}; subtract it.`,
           ),
           row(
-            `A £${original} jacket has ${p}% off. Pounds saved?`,
-            change,
-            `${original} × ${p}/100 = ${change}.`,
+            `A £${original} jacket has ${discountPercent}% off. Pounds saved?`,
+            discount,
+            `${original} × ${discountPercent}/100 = ${discount}.`,
           ),
           row(
             `A £${original} item rises to £${original + change}. Percentage increase?`,
@@ -299,14 +301,14 @@
             `Increase ÷ original × 100 = ${p}%.`,
           ),
           row(
-            `After a ${p}% discount, £${original} becomes how many pounds?`,
-            original - change,
-            "Subtract the saving, rather than giving the saving as the final price.",
+            `After a ${discountPercent}% discount, £${original} becomes how many pounds?`,
+            original - discount,
+            `£${original} − £${discount} = £${original - discount}.`,
           ),
           row(
-            `Two offers on £${original}: £${change} off or ${p}% off. Difference in pounds saved?`,
+            `Two offers on £${original}: £${discount} off or ${discountPercent}% off. Difference in pounds saved?`,
             0,
-            `Both save £${change}.`,
+            `Both save £${discount}.`,
           ),
         ];
         hint =
@@ -847,7 +849,11 @@
       case "stats_pie": {
         const pd = [4, 5, 6, 8, 10, 12][r(6)],
           pn = 1 + r(pd - 1),
-          pc = 1 + r(20);
+          pc = 1 + r(20),
+          sectorPercent = 5 * (1 + ((p / 5 - 1) % 20)),
+          surveyTenths = 1 + ((p / 5 - 1) % 10),
+          firstSector = 10 * (1 + (a % 17)),
+          secondSector = 10 * (1 + (b % 17));
         rows =
           id === "stats_pie"
             ? [
@@ -862,8 +868,8 @@
                   "Multiply the fraction by 360°.",
                 ),
                 row(
-                  `A sector represents ${p}% of the total. Angle in degrees?`,
-                  p * 3.6,
+                  `A sector represents ${sectorPercent}% of the total. Angle in degrees?`,
+                  sectorPercent * 3.6,
                   "Percentage ÷ 100 × 360°.",
                 ),
                 row(
@@ -877,16 +883,16 @@
                   "Category ÷ total × 360.",
                 ),
                 row(
-                  `Two sectors have angles ${a * 10}° and ${b * 10}°. Remaining sector degrees?`,
-                  360 - (a + b) * 10,
-                  "All sectors total 360°.",
+                  `Two sectors have angles ${firstSector}° and ${secondSector}°. Remaining sector degrees?`,
+                  360 - firstSector - secondSector,
+                  `360 − ${firstSector} − ${secondSector} = ${360 - firstSector - secondSector}°.`,
                 ),
               ]
             : id === "stats_probability_data"
               ? [
                   row(
-                    `Of ${n * 10} survey answers, ${(n * p) / 5} chose walking. What percentage?`,
-                    p * 2,
+                    `Of ${n * 10} survey answers, ${n * surveyTenths} chose walking. What percentage?`,
+                    surveyTenths * 10,
                     "Category ÷ total × 100.",
                   ),
                   row(
@@ -1236,7 +1242,7 @@
         if (id === "town_split")
           rows = [
             row(
-              `Share £${fmt((price * qty) / 100)} equally between ${qty} friends. Pence each?`,
+              `Share £${((price * qty) / 100).toFixed(2)} equally between ${qty} friends. Pence each?`,
               price,
               "Convert to pence and divide by friends.",
             ),
@@ -1251,7 +1257,7 @@
               "Subtract the payments already made.",
             ),
             row(
-              `A £${fmt((price * qty) / 100)} bill is split equally. Each pays ${price}p. How many friends?`,
+              `A £${((price * qty) / 100).toFixed(2)} bill is split equally. Each pays ${price}p. How many friends?`,
               qty,
               "Total ÷ one share.",
             ),
@@ -1598,6 +1604,11 @@
     }
     const chosen = rows[f % 6];
     if (!chosen) throw Error("Missing structure " + id + ":" + f);
+    const revisedFamily =
+      (id === "stats_pie" && [2, 5].includes(f % 6)) ||
+      (id === "stats_probability_data" && f % 6 === 0) ||
+      (["percent_change", "town_discounts"].includes(id) &&
+        [1, 2, 4, 5].includes(f % 6));
     const [prompt, answer, worked] = chosen,
       choices = [answer];
     if (/^\d{2}:\d{2}$/.test(answer)) {
@@ -1664,7 +1675,7 @@
       worked,
       {
         contentVersion: 3,
-        generatorKey: `depth:${id}:v1:b${band}:s${seed}:f${f}`,
+        generatorKey: `depth:${id}:v${revisedFamily ? 2 : 1}:b${band}:s${seed}:f${f}`,
         family: id + ":depth:" + (f % 6),
         band,
         misconception: mis,

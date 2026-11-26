@@ -3,13 +3,13 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('n
 const root=path.resolve(__dirname,'..'),build=()=>execFileSync(process.execPath,['demo/build.cjs'],{cwd:root,stdio:'pipe'});
 build();execFileSync(process.execPath,['demo/check.cjs'],{cwd:root,stdio:'pipe'});
 const audited=JSON.parse(fs.readFileSync(path.join(__dirname,'dependencies.json'))),inv=JSON.parse(fs.readFileSync(path.join(root,'work/public-demo/build-inventory.json')));
-const transformed=new Set(['v3/app.js','v3/starting-profile.js','v3/activity-navigation.js','v3/town.js']);
+const transformed=new Set(['v3/app.js','v3/starting-profile.js','v3/activity-navigation.js','v3/town.js','v3/adventure.js']);
 for(const file of inv.scripts)if(!transformed.has(file))assert.equal(fs.readFileSync(path.join(root,'demo-dist',file),'utf8'),fs.readFileSync(path.join(root,file),'utf8'),file+' must be shared verbatim');
 for(const branch of ['', 'codex/offline-demo-release-sync','main']){const r=spawnSync(process.execPath,['demo/release-build.cjs'],{cwd:root,env:{...process.env,CF_PAGES_BRANCH:branch},encoding:'utf8'});assert.notEqual(r.status,0);assert.match(r.stderr,/only from release\/ipad/);}
 // Simulate a later approved source change in a disposable copy; never publish it.
 const scratch=fs.mkdtempSync(path.join(root,'work/demo-sync-'));
 try{
- const files=new Set([...audited.source.map(x=>x.path),...audited.images.map(x=>x.path),'demo/build.cjs','demo/check.cjs','demo/dependencies.json','v3/assets/branding/manifest.json','v3/assets/delivery-manifest.json',...['checkpoint','rollout','world-guide-portraits-preview','ingredients','base-camp'].map(x=>'v3/assets/'+x+'/manifest.json')]);
+ const files=new Set([...audited.source.map(x=>x.path),...audited.images.map(x=>x.path),'demo/build.cjs','demo/check.cjs','demo/dependencies.json','demo/sample.json','demo/sample-policy.js','v3/assets/maths-tools/manifest.json','v3/assets/branding/manifest.json','v3/assets/delivery-manifest.json',...['checkpoint','rollout','world-guide-portraits-preview','ingredients','base-camp'].map(x=>'v3/assets/'+x+'/manifest.json')]);
  for(const file of files){const target=path.join(scratch,file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync(path.join(root,file),target);}
  fs.appendFileSync(path.join(scratch,'v3/home-activities.js'),'\n// Fictional subsequent approved source revision for rebuild verification.\n');
  execFileSync(process.execPath,['demo/build.cjs'],{cwd:scratch,stdio:'pipe'});execFileSync(process.execPath,['demo/check.cjs'],{cwd:scratch,stdio:'pipe'});

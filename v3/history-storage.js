@@ -396,10 +396,22 @@
       },
     };
   }
+  // B4 decision 5 (the owner, 25 November 2026): ask the browser to keep this
+  // site's storage. Safari may refuse in a normal tab; it never blocks saving.
+  async function keepStorage(storage = root.navigator?.storage) {
+    try {
+      if (!storage?.persist) return "unsupported";
+      if (storage.persisted && (await storage.persisted())) return "kept";
+      return (await storage.persist()) ? "kept" : "not-kept";
+    } catch {
+      return "not-kept";
+    }
+  }
   function indexedDBBackend(name) {
     let opened;
     const open = () =>
       (opened ||= new Promise((resolve, reject) => {
+        keepStorage();
         const r = indexedDB.open(name, 1);
         r.onupgradeneeded = () => {
           r.result.createObjectStore("nodes");
@@ -442,6 +454,7 @@
     transport,
     localStore,
     indexedDBBackend,
+    keepStorage,
   };
   root.V3HistoryStorage = api;
   if (typeof module !== "undefined") module.exports = { V3HistoryStorage: api };

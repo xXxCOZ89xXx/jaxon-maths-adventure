@@ -20,6 +20,12 @@ The output's CSP has `connect-src 'none'`, no workers, frames, forms, fonts or m
 
 A distinct public origin separates browser storage from the private game. Progress stays in the visitor's localStorage, without email, password, PIN, Access login, session storage, cookies or learner accounts. No private game or Access configuration is changed. Parent approvals, real rewards, cloud sync and real family accounts cannot be included because the demo intentionally has no trusted backend; fictional gameplay and its local learning-coin state remain separate.
 
+## Sample and stopping points
+
+`demo/sample.json` decides which activities a visitor may start and when the demo ends. `demo/sample-policy.js` applies it through the game's existing start check, in the demo build only. Continuing, pausing and resuming are never blocked. Out-of-sample activities stay visible but disabled with a short reason. Usage is saved inside the demo save under `demoSample`. Use `node demo/build.cjs --sample demo/<name>.json` to try another file. `demo/release-build.cjs` refuses any sample whose status does not start with "approved". Checks: `node demo/test-sample.cjs` and `node demo/test-sample-browser.cjs`. Details: [docs/DEMO-PARITY-B1-20261125.md](../docs/DEMO-PARITY-B1-20261125.md).
+
+The cleaned maths-tools images (12 runtime files) are included. Stylesheet url() references are allowed only for those files. `empty-balance.png` is reference-only and never copied.
+
 ## Current Home activities
 
 Go to **Town journeys → Outside your home**:

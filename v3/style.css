@@ -2324,6 +2324,37 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .equipment-slot { display: flex; flex-direction: column; gap: .5rem; padding: .75rem; border: 1px solid var(--line,#71866b); border-radius: 12px; }
 .equipment-slot button { min-height: 44px; margin-top: auto; }
 
+/* Saving goal: reads coins only; prices and purchases are unchanged. */
+.saving-goal { margin-block: 1rem; padding: .75rem 1rem; border: 1px solid var(--line,#71866b); border-radius: 12px; }
+.saving-goal h2 { margin: 0 0 .5rem; }
+.saving-goal p { margin: .5rem 0; }
+.saving-goal .bar { height: 14px; border: 1px solid #67894c; }
+.saving-goal button, .shop-item .goal-toggle { min-height: 44px; }
+/* Town projects: plain stand-in cards until the project pictures arrive (the owner, 26 November 2026). */
+.town-projects .town-project-list { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); }
+.town-project-card { padding: .75rem; border: 1px solid var(--line,#71866b); border-radius: 12px; }
+.town-project-card h3 { margin: .5rem 0 .25rem; }
+.town-project-card p { margin: .5rem 0; }
+.town-project-card .bar { height: 14px; border: 1px solid #67894c; }
+.town-project-card button { min-height: 44px; width: 100%; }
+.town-project-standin { display: grid; place-content: center; gap: .25rem; aspect-ratio: 3 / 2; border: 2px dashed #8a9a78; border-radius: 10px; background: #f4f1e6; color: #33402c; text-align: center; }
+.town-project-card.done .town-project-standin { border-style: solid; border-color: #4f7a3a; background: #e6f0dc; }
+.camp-decorations .decoration-list { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)); }
+.decoration-card { padding: .75rem; border: 1px solid var(--line,#71866b); border-radius: 12px; }
+.decoration-card h3 { margin: .5rem 0 .25rem; }
+.decoration-card p { margin: .5rem 0; }
+.decoration-card button { min-height: 44px; width: 100%; }
+.decoration-standin { display: grid; place-content: center; gap: .25rem; aspect-ratio: 1; border: 2px dashed #8a9a78; border-radius: 10px; background: #f4f1e6; color: #33402c; text-align: center; }
+.decoration-card.owned .decoration-standin { border-style: solid; border-color: #4f7a3a; background: #e6f0dc; }
+.colour-choices { margin-top: .75rem; border-top: 1px solid var(--line,#71866b); padding-top: .5rem; text-align: left; }
+.colour-choices ul { list-style: none; margin: .25rem 0 0; padding: 0; display: grid; gap: .5rem; }
+.colour-choices li { display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: .25rem .5rem; }
+.colour-choices li > :nth-child(n+3) { grid-column: 2; }
+.colour-choices button { min-height: 44px; width: 100%; }
+.colour-swatch { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #33402c; }
+.colour-worn { font-weight: 700; color: #2f5a24; }
+.shop-item .goal-toggle { margin-top: 6px; }
+
 /* Supplied Base Camp atlas crops. Live labels/controls remain outside the artwork. */
 .display-plinth{position:relative;aspect-ratio:3/1;height:auto;border:0;background:transparent;overflow:hidden}
 .camp-surface{width:100%;height:100%;display:block;object-fit:contain}
@@ -2359,3 +2390,18 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .shelf-touch .recipe-ingredient-prop{max-width:100%;min-width:0}
 .shelf-touch{grid-template-columns:minmax(0,1fr)}
 .shelf-touch strong{min-width:0;overflow-wrap:anywhere}
+
+/* Cleaned owner-supplied maths artwork. All quantities and hit areas remain code-owned. */
+.base-ten-model, .math-art-place { background: #f8f2e3 url("assets/maths-tools/place-value-mat.png") center / 100% 100% no-repeat; padding: 32px; box-sizing: border-box; }
+.base-ten-model > section, .math-art-place > section { background: #fffdf2eb; border: 1px solid #637250; padding: 8px; min-width: 0; }
+.base-ten.base-1, .math-art-unit { display: inline-block; width: 48px; height: 40px; background: url("assets/maths-tools/place-value-unit-block.png") center / 76px 51px no-repeat; font-size: 0; vertical-align: middle; }
+.fraction-answer-bars > .parts { padding: 26px 22px; background: url("assets/maths-tools/fraction-tray.png") center / 100% 100% no-repeat; }
+.fraction-answer-bars button, .practice-manipulative .parts button { background: #f6f1d9 url("assets/maths-tools/fraction-tile.png") center / 100% 100% no-repeat; color: #203b2e; border: 2px solid #536549; }
+.fraction-answer-bars button[aria-pressed=true], .practice-manipulative .parts button[aria-pressed=true] { background: #245b45; color: white; outline: 3px solid #173d30; outline-offset: -5px; }
+.tap-chart { background: #f8f3e6 url("assets/maths-tools/chart-surround.png") center / 100% 100% no-repeat; padding: 50px 38px 38px; }
+.tap-chart-column button[aria-pressed=true] { background: #ae742f url("assets/maths-tools/chart-bar-surface.png") center / cover; color: #122b1d; font-weight: 800; border-color: #34563e; }
+.math-art-balance { display: block; width: 100%; max-width: 600px; margin: 0 auto; pointer-events: none; }
+.numberline { background-image: url("assets/maths-tools/number-line-surround.png"); background-size: 100% 100%; padding: 36px; }
+@media(max-width:480px) { .base-ten-model, .math-art-place { padding: 24px 18px; } .tap-chart { padding: 36px 22px 24px; gap: 6px; } }
+/* Skip intros (the owner, 26 November 2026): folded intro text with a 48px "Read the intro" control. */
+.intro-more { margin: 8px 0 0; } .intro-more > summary { cursor: pointer; min-height: 48px; display: inline-flex; align-items: center; padding: 0 12px; border: 2px solid currentColor; border-radius: 8px; font-weight: 700; color: inherit; } .intro-more[open] > summary { margin-bottom: 8px; }
