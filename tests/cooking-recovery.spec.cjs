@@ -22,7 +22,8 @@ async function launch(p,build){
  return{key,server,read,baseline,verify:async()=>{expect(errors).toEqual([]);expect(mockErrors).toEqual([]);expect(external).toEqual([]);expect(preserved(await read())).toEqual(baseline);expect(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);if(build==='demo'){expect(await p.evaluate(()=>Object.keys(localStorage))).toEqual([key]);expect(await p.context().cookies()).toEqual([]);}}};
 }
 async function shot(p,info,build,name){const dir=`work/cooking-recovery/${process.env.COOKING_BEFORE?'before':'after'}/${build}/${info.project.name}`;fs.mkdirSync(dir,{recursive:true});const storage=p.locator('dialog[open] .storage-closeup');await storage.locator('img').evaluateAll(images=>Promise.all(images.map(i=>i.decode())));await storage.screenshot({path:dir+'/'+name+'.png'});}
-for(const build of ['private','demo']){
+// Recipes are outside the approved demo sample (demo/sample.json "recipes": []), so the full recovery checks run on the private build.
+for(const build of ['private']){
  test(`Cooking recovery: ${build} pantry/fridge controls do not overlap and support touch and keyboard`,async({page:p},info)=>{
   const f=await launch(p,build);
   for(const name of ['pantry','fridge']){
@@ -55,3 +56,13 @@ for(const build of ['private','demo']){
   await p.reload();await action(p,'resume-saved:town:'+encodeURIComponent(saved.id));expect(run(await f.read())).toEqual(saved);await f.verify();
  });
 }
+test('Cooking recovery: demo keeps recipes outside the approved sample closed and unchanged',async({page:p})=>{
+ const state=F.completedTown(),key='jaxon_public_demo_v1',errors=[],external=[];p.on('pageerror',e=>errors.push(e.message));
+ await p.route('**/*',r=>{if(new URL(r.request().url()).origin===origin)return r.continue();external.push(r.request().url());return r.abort();});
+ await p.addInitScript(({key,state})=>{if(!sessionStorage.getItem('cooking-fixture')){localStorage.setItem(key,JSON.stringify(state));sessionStorage.setItem('cooking-fixture','1');}},{key,state});
+ await p.goto('/demo-dist/');expect(await p.evaluate(()=>typeof window.V3CloudContext)).toBe('undefined');
+ const read=async()=>{await settled(p);return p.evaluate(k=>JSON.parse(localStorage.getItem(k)),key);};const before=preserved(await read());
+ await action(p,'world:town');const start=p.locator('[data-action="j-start:bolognese"]:visible').first();
+ await expect(start).toBeDisabled();await expect(start).toHaveClass(/demo-out-of-sample/);expect(await start.getAttribute('title')).toBe(require('../demo/sample.json').messages.notInSample);
+ expect(preserved(await read())).toEqual(before);expect(errors).toEqual([]);expect(external).toEqual([]);expect(await p.evaluate(()=>Object.keys(localStorage))).toEqual([key]);expect(await p.context().cookies()).toEqual([]);
+});

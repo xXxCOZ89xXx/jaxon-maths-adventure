@@ -953,7 +953,11 @@
         : q[4];
   }
   function explain(q) {
-    return (q[5]?.misconception ? q[5].misconception + " " : "") + q[4];
+    const worked = String(q[4] ?? ""),
+      misconception = String(q[5]?.misconception ?? "").trim();
+    return misconception && !worked.trimStart().startsWith(misconception)
+      ? misconception + " " + worked
+      : worked;
   }
   const api = {
     source,

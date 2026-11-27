@@ -1,6 +1,7 @@
 const {test,expect}=require('@playwright/test'),fs=require('node:fs');
 const F=require('./helpers/guided-progression.cjs'),{fixture,mock}=require('./helpers/cloud-server.cjs');
 const origin='http://127.0.0.1:4173',copy=x=>JSON.parse(JSON.stringify(x));
+const SAMPLE=require('../demo/sample.json'),inSample=(route,tier)=>SAMPLE.missions.town.includes(route)&&tier<=SAMPLE.maxLevel;
 const settled=p=>p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
 async function click(p,a){const s=`[data-action="${a}"]:visible`,d=p.locator('dialog[open]'),b=await d.count()&&await d.locator(s).count()?d.locator(s).first():p.locator(s).first();if(p.touch)await b.tap();else await b.click();await settled(p);}
 async function launch(p,build,state){let key,server,errors=[],outside=[],mockErrors=[];p.on('pageerror',e=>errors.push(e.message));
@@ -14,7 +15,12 @@ async function layout(p){
  expect(await p.locator('.repair-entry').evaluate(e=>{const heading=document.querySelector('.mission-board>.section-head');return !!(heading.compareDocumentPosition(e)&Node.DOCUMENT_POSITION_FOLLOWING);})).toBe(true);await expect(p.locator('.world-overview .repair-entry')).toHaveCount(0);expect(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
 }
 async function answerFirst(p,f){
- await p.locator('.activity-entry [data-world-task-open]').click();await click(p,'m-begin');const q=(await f.read()).adventure.active,t=q.tasks[q.i],index=q.i;
+ await p.locator('.activity-entry [data-world-task-open]').click();await click(p,'m-begin');const index=(await f.read()).adventure.active.i;
+ await answerCurrent(p,f);await expect.poll(async()=>(await f.read()).adventure.active.i).toBe(index+1);
+}
+// Answers the open step correctly, then chooses Next.
+async function answerCurrent(p,f){
+ const q=(await f.read()).adventure.active,t=q.tasks[q.i],index=q.i;
  if(t.direct)await require('./helpers/direct.cjs').alternative(p,t.direct,t.answer);
  else if(t.kind==='curriculum'){
   const a=t.activity;if(!a||['readgraph','angle','numberline'].includes(a.kind)){await p.locator('dialog[open] [data-c8-input]').fill(t.answer);await settled(p);}
@@ -23,18 +29,24 @@ async function answerFirst(p,f){
   else await click(p,'c8-m:choice-'+t.answer);
  }else if(['basket','offers','budget'].includes(t.kind)){
   for(let i=0;i<t.answer.length;i++){let n=t.answer[i];for(const step of t.kind==='budget'?[1000,500,100,5,1]:[1])while(n>=step){if(t.kind==='budget'){await click(p,'m-budget-pick:'+step);await click(p,'m-budget-place:'+i);}else await click(p,`m-part:${i}:1`);n-=step;}}
- }else if(['order','match'].includes(t.kind)){for(let i=0;i<t.answer.length;i++){await click(p,'m-pick:'+t.answer[i]);await click(p,'m-place:'+i);}}
+ }else if(['order','match'].includes(t.kind)){const h=await p.locator('dialog[open] [data-action^="h-pick:"]').count()?'h':'m';for(let i=0;i<t.answer.length;i++){await click(p,h+'-pick:'+t.answer[i]);await click(p,h+'-place:'+i);}}
  else if(['choice','journey'].includes(t.kind))await click(p,'m-choice:'+t.answer);
  else if(t.kind==='coins'){let n=t.answer;for(const v of [5000,2000,1000,500,200,100,50,20,10,5,2,1])while(n>=v){await click(p,'m-coin:'+v);n-=v;}}
- else {if(t.kind==='bank')for(let i=0;i<t.transactions.length;i++)await click(p,'m-post:'+i);const input=p.locator('dialog[open] [data-numeric-answer]').first();if(t.kind==='clock'){await p.locator('dialog[open] [data-mission-clock]').fill(String(Math.floor(t.answer/60)).padStart(2,'0')+':'+String(t.answer%60).padStart(2,'0'));}else await input.fill(String(t.responseUnit==='pounds'?t.answer/100:t.answer));await settled(p);}
- if((await f.read()).adventure.active.i===index&&!(await f.read()).adventure.active.solved)await click(p,'m-submit');await expect.poll(async()=>(await f.read()).adventure.active.i).toBe(index+1);
+ else {if(t.kind==='bank')for(let i=0;i<t.transactions.length;i++)await click(p,'m-post:'+i);
+  // Money amounts are built from coins and notes on the money tray (v3/hands-on.js), in pence.
+  if(await p.locator('dialog[open] [data-mechanic="money"]').count()){await click(p,'m-value:0');let n=t.answer;for(const v of [5000,2000,1000,500,200,100,50,20,10,5,2,1])while(n>=v){await click(p,'m-adjust:'+v);n-=v;}}else{const input=p.locator('dialog[open] [data-numeric-answer]').first();if(t.kind==='clock'){await p.locator('dialog[open] [data-mission-clock]').fill(String(Math.floor(t.answer/60)).padStart(2,'0')+':'+String(t.answer%60).padStart(2,'0'));}else await input.fill(String(t.responseUnit==='pounds'?t.answer/100:t.answer));}await settled(p);}
+ if((await f.read()).adventure.active.i===index&&!(await f.read()).adventure.active.solved)await click(p,'m-submit');
+ // Since 97924af the feedback stays until the learner chooses Next.
+ if((await f.read()).adventure.active.i===index&&(await f.read()).adventure.active.solved)await click(p,'m-next');
 }
 for(const build of ['production','demo'])test(build+': Town destination audit',async({page:p},info)=>{
  p.touch=!!info.project.use.hasTouch;const s=process.env.TOWN_BEFORE?F.fresh():require('./helpers/town-navigation.cjs').completed();s.view='world';s.world='town';const f=await launch(p,build,s);await expect(p.locator('#main h1')).toHaveText('Practical Maths Town');await shot(p,info,build,'overview');
  const routes=await p.evaluate(()=>V3Adventure.routes('town').map(r=>({id:r.id,name:r.name})));const audit=[];if(!process.env.TOWN_BEFORE){await layout(p);const tier=await p.locator('[data-mission-tier="town"]').inputValue();for(const action of await p.locator('.visit-control [data-action^="mission:"]').evaluateAll(es=>es.map(e=>e.dataset.action)))expect(action.endsWith(':'+tier)).toBe(true);}
  for(const r of [...routes,{id:'gateway',name:'Town Festival'}])for(const tier of [1,2,3]){
   if((await f.read()).view!=='world')await click(p,'world:town');await p.locator('[data-mission-tier="town"]').selectOption(String(tier));await settled(p);
-  const b=p.locator(`[data-action="mission:town:${r.id}:${tier}"]`).first();const generation=await p.evaluate(({r,tier,key})=>{try{const s=JSON.parse(localStorage.getItem(key));return{ok:V3Adventure.start(s,'town',r.id,tier),route:s.adventure.active?.route,tasks:s.adventure.active?.tasks?.length};}catch(e){return{error:e.message,stack:e.stack};}},{r,tier,key:f.key});let blocked=null;
+  const b=p.locator(`[data-action="mission:town:${r.id}:${tier}"]`).first();
+  if(build==='demo'&&!process.env.TOWN_BEFORE&&!inSample(r.id,tier)){await expect(b).toBeDisabled();await expect(b).toHaveAttribute('title',SAMPLE.messages.notInSample);audit.push({route:r.id,tier,outsideDemoSample:true});continue;}
+  const generation=await p.evaluate(({r,tier,key})=>{try{const s=JSON.parse(localStorage.getItem(key));return{ok:V3Adventure.start(s,'town',r.id,tier),route:s.adventure.active?.route,tasks:s.adventure.active?.tasks?.length};}catch(e){return{error:e.message,stack:e.stack};}},{r,tier,key:f.key});let blocked=null;
   try{if(p.touch)await b.tap({timeout:2500});else await b.click({timeout:2500});await settled(p);}catch(e){blocked=e.message.slice(0,600);}
   const a=await f.read(),q=a.adventure?.active;audit.push({route:r.id,tier,generation,blocked,view:a.view,opened:q?.route,selected:q?.tier,errors:f.errors.slice()});
   if(!process.env.TOWN_BEFORE){expect(blocked).toBeNull();expect(a.view).toBe('adventure');expect(q.route).toBe(r.id);expect(q.tier).toBe(tier);const snapshot=copy(q);await click(p,'world:town');await click(p,`mission:town:${r.id}:${tier}`);expect((await f.read()).adventure.active).toEqual(snapshot);await answerFirst(p,f);const saved=copy((await f.read()).adventure.active);await p.reload();expect((await f.read()).adventure.active).toEqual(saved);}
@@ -42,19 +54,28 @@ for(const build of ['production','demo'])test(build+': Town destination audit',a
  const dir='work/town-navigation';fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(`${dir}/${process.env.TOWN_BEFORE?'baseline':'audit'}-${build}-${info.project.name}.json`,JSON.stringify(audit,null,2));if(!process.env.TOWN_BEFORE)await f.verify();
 });
 for(const build of ['production','demo'])test(build+': completed legacy visits preserve the build admission policy and explain private locks',async({page:p},info)=>{
- p.touch=!!info.project.use.hasTouch;const s=require('./helpers/town-navigation.cjs').completed();delete s.startingProfile.areas.number;delete s.startingProfile.areas.town;const f=await launch(p,build,s),before=await f.read();
+ p.touch=!!info.project.use.hasTouch;const s=require('./helpers/town-navigation.cjs').completed();
+ // Since 1297603 one starting point opens play, so the locked case has none, and a new check
+ // starts once the child's school year is chosen (this fictional child has chosen Year 6).
+ s.startingProfile.areas={};s.startingProfile.years={number:6};const f=await launch(p,build,s),before=await f.read();
  await p.locator('.gateway').scrollIntoViewIfNeeded();await shot(p,info,build,'locked-festival');
  const controls=p.locator('.location-card .visit-control,.gateway .visit-control');
  if(process.env.TOWN_BEFORE){const disabled=await p.locator('.location-card [data-action^="mission:"],.gateway [data-action^="mission:"]').evaluateAll(es=>es.map(e=>({action:e.dataset.action,disabled:e.disabled,reason:e.title})));fs.writeFileSync(`work/town-navigation/locked-before-${build}-${info.project.name}.json`,JSON.stringify(disabled,null,2));return;}
- if(build==='demo'){await expect(controls).toHaveCount(10);for(const control of await controls.all())await expect(control.locator('[data-action^="mission:"]')).toBeEnabled();await click(p,'mission:town:gateway:1');expect((await f.read()).adventure.active.route).toBe('gateway');expect((await f.read()).startingProfile).toEqual(before.startingProfile);await f.verify();return;}
+ // The demo opens only its approved sample (c096d07, approved in c3c7d71): some Town visits up to a level.
+ if(build==='demo'){await expect(controls).toHaveCount(10);const tier=Number(await p.locator('[data-mission-tier="town"]').inputValue());expect(inSample('market',tier)).toBe(true);
+  for(const control of await controls.all()){const b=control.locator('[data-action^="mission:"]'),route=(await b.getAttribute('data-action')).split(':')[2];if(inSample(route,tier))await expect(b).toBeEnabled();else{await expect(b).toBeDisabled();await expect(b).toHaveAttribute('title',SAMPLE.messages.notInSample);}}
+  await click(p,`mission:town:market:${tier}`);expect((await f.read()).adventure.active.route).toBe('market');expect((await f.read()).startingProfile).toEqual(before.startingProfile);await f.verify();return;}
  await expect(controls).toHaveCount(10);for(const control of await controls.all()){await expect(control.locator('[data-action^="mission:"]')).toBeDisabled();await expect(control).toContainText('Number Forest');await expect(control).toContainText('Practical Maths Town');await expect(control.locator('[data-action="starting:number"]')).toBeEnabled();}
  await p.locator('.gateway [data-action="starting:number"]').click();await expect(p.locator('[data-baseline-scope]')).toBeVisible();expect((await f.read()).adventure.records).toEqual(before.adventure.records);expect((await f.read()).checks).toEqual(before.checks);await f.verify();
 });
-if(!process.env.TOWN_BEFORE)for(const build of ['production','demo'])for(const route of ['market','gateway'])test(`${build} ${route}: keyboard entry, full answer flow, resume, completion and replay preserve unrelated work`,async({page:p},info)=>{
+// The Town Festival is not in the demo sample, so the demo walks through the café instead.
+if(!process.env.TOWN_BEFORE)for(const build of ['production','demo'])for(const route of build==='demo'?['market','cafe']:['market','gateway'])test(`${build} ${route}: keyboard entry, full answer flow, resume, completion and replay preserve unrelated work`,async({page:p},info)=>{
  p.touch=!!info.project.use.hasTouch;const s=require('./helpers/town-navigation.cjs').completed();F.L.start(s,'travel-library',1);const old=copy(F.L.state(s));s.pausedActivity={kind:'town',key:old.id,world:'town'};s.view='world';s.world='town';const f=await launch(p,build,s),before=await f.read();
  await p.locator('[data-mission-tier="town"]').selectOption('2');await settled(p);const button=p.locator(`[data-action="mission:town:${route}:2"]`).first();await button.focus();await p.keyboard.press('Enter');await settled(p);expect((await f.read()).adventure.active.route).toBe(route);expect((await f.read()).coins).toBe(before.coins);expect((await f.read()).adventure.townLifeV2.runs[old.id]).toEqual(old);
  await answerFirst(p,f);await click(p,'pause-explore');await p.reload();await click(p,'world:town');await p.locator('[data-mission-tier="town"]').selectOption('2');await settled(p);await click(p,`mission:town:${route}:2`);
- for(let guard=0;guard<15&&(await f.read()).view==='adventure';guard++){if(!await p.locator('dialog[open]').count())await p.locator('.activity-entry [data-world-task-open]').click();const q=(await f.read()).adventure.active;if(q.phase==='lesson')await click(p,'m-begin');await click(p,'m-worked');await expect.poll(async()=>{const a=await f.read();return a.view!=='adventure'||a.adventure.active.i!==q.i;}).toBe(true);}
+ for(let guard=0;guard<15&&(await f.read()).view==='adventure';guard++){if(!await p.locator('dialog[open]').count())await p.locator('.activity-entry [data-world-task-open]').click();const q=(await f.read()).adventure.active;if(q.phase==='lesson')await click(p,'m-begin');
+  // Since 66e459c a visit counts as completed only when at least half its steps are answered, so answer each step.
+  await answerCurrent(p,f);await expect.poll(async()=>{const a=await f.read();return a.view!=='adventure'||a.adventure.active.i!==q.i;}).toBe(true);}
  await expect(p.locator('.recap')).toBeVisible();const completed=await f.read();expect(completed.adventure.records[`town|${route}|2`].taskCount).toBe(route==='gateway'?12:6);expect(completed.checks).toEqual(before.checks);expect(completed.startingProfile).toEqual(before.startingProfile);expect(completed.adventure.records['town|shops|1']).toEqual(before.adventure.records['town|shops|1']);expect(completed.adventure.townLifeV2.runs[old.id]).toEqual(old);expect(completed.bought).toEqual(before.bought);
  await click(p,'nav:home');await p.reload();await click(p,'continue');await expect(p.locator('.recap')).toBeVisible();await click(p,'world:town');await layout(p);await click(p,`mission:town:${route}:2`);expect((await f.read()).adventure.active.i).toBe(0);expect((await f.read()).adventure.records[`town|${route}|2`]).toEqual(completed.adventure.records[`town|${route}|2`]);await f.verify();
 });

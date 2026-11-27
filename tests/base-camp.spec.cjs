@@ -34,7 +34,7 @@ test('progression locks, earned upgrades and saved builds',async({page:p},info)=
  await expect(projects).toContainText('0 / 3 projects built');await expect(p.locator('[data-built-project]')).toHaveCount(0);expect((await read(p)).adventure.campProjects).toEqual({});await expect(projects.locator('.badge').first()).toHaveText('0 / 12 LANDMARKS');
  const invariant=x=>({coins:x.coins,earned:x.earned,minutes:x.minutes,weekly:x.weekly,settings:x.settings,checks:x.checks,skills:x.skills,bought:x.bought,equipped:x.equipped,startingProfile:x.startingProfile,customFuture:x.customFuture});
  const untouched=invariant(await read(p));
- for(let n=0;n<2;n++){await p.getByRole('button',{name:'Subject worlds',exact:true}).first().click();await p.getByRole('button',{name:'Home',exact:true}).first().click();}
+ for(let n=0;n<2;n++){await p.getByRole('button',{name:'Explore worlds',exact:true}).first().click();await p.getByRole('button',{name:'Home',exact:true}).first().click();}
  expect(invariant(await read(p))).toEqual(untouched);await expect(planner).toContainText('BASE CAMP LEVEL 1 / 8');
  const earned=await read(p);earned.milestones=F.M.campMilestoneIds().slice(0,30);await seed(p,earned);
  await expect(planner).toContainText('BASE CAMP LEVEL 1 / 8');await expect(projects).toContainText('0 / 3 projects built');await shot(p,info,'earned-before-claim',planner);
@@ -45,7 +45,7 @@ test('progression locks, earned upgrades and saved builds',async({page:p},info)=
  await projects.locator('[data-action="camp-build:greenhouse"]').click();await expect(projects).toContainText('1 / 3 projects built');await projects.locator('[data-action="camp-build:lookout"]').click();await expect(projects).toContainText('2 / 3 projects built');
  await expect(p.locator('[data-built-project]')).toHaveCount(2);
  const built=(await read(p)).adventure.campProjects;expect(built).toEqual({greenhouse:true,lookout:true});await shot(p,info,'completed-builds',projects);await shot(p,info,'built-scene',p.locator('.camp-map'));await shot(p,info,'earned-level-5',planner);
- await p.getByRole('button',{name:'Subject worlds',exact:true}).first().click();await p.getByRole('button',{name:'Home',exact:true}).first().click();await expect(planner).toBeVisible();await p.reload();expect((await read(p)).adventure.campProjects).toEqual(built);await expect(projects).toContainText('2 / 3 projects built');expect(invariant(await read(p))).toEqual(untouched);
+ await p.getByRole('button',{name:'Explore worlds',exact:true}).first().click();await p.getByRole('button',{name:'Home',exact:true}).first().click();await expect(planner).toBeVisible();await p.reload();expect((await read(p)).adventure.campProjects).toEqual(built);await expect(projects).toContainText('2 / 3 projects built');expect(invariant(await read(p))).toEqual(untouched);
  // An explicit replacement of a fictional local fixture models a full game reset.
  const reset=F.fresh();reset.view='camp';await seed(p,reset);await expect(planner).toContainText('BASE CAMP LEVEL 1 / 8');await expect(projects).toContainText('0 / 3 projects built');
 });

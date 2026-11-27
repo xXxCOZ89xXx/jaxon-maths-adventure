@@ -12,3 +12,19 @@
 /* Empty-line swipes scroll; the marker remains a direct drag target. */
 .d9-line-window,.d9-board .d9-line-window .d9-canvas{touch-action:pan-x pan-y}
 .d9-line-window .d9-handle,.d9-line-window .d9-handle *{touch-action:none}
+
+/* Decorative materials never set slot count, placement, value or hit geometry. */
+.d9-whole { background: #f6efd9 url("assets/maths-tools/fraction-tray.png") center / 100% 100% no-repeat; padding: 28px 24px; }
+.d9-slot { background: #f7f3e5 url("assets/maths-tools/fraction-tile.png") center / 100% 100% no-repeat; }
+.d9-slot.d9-filled { border-style: solid; border-color: #174f39; box-shadow: inset 0 0 0 3px #174f39; }
+.d9-whole .d9-piece[aria-pressed=true], .d9-board[data-direct-kind="fraction"] .d9-tray .d9-piece[aria-pressed=true] { background: #d6e6b5 url("assets/maths-tools/fraction-selection-edge.png") center / 100% 100% no-repeat; outline: 3px solid #174f39; }
+
+/* One uninterrupted whole: equal-width parts scroll together on small screens. */
+.d9-whole { min-inline-size: 0; }
+.d9-fractions { grid-template-columns: repeat(var(--d9-cols), minmax(110px, 1fr)); overflow-x: auto; padding: 5px; }
+
+
+/* An HTML hit area gives the marker its own gesture policy. SVG children do not
+   reliably override their scrolling viewport in touch browsers. */
+.d9-line-surface { position: relative; min-width: 600px; }
+.d9-line-drag { position: absolute; display: block; top: 43.75%; width: 14%; height: 26.25%; transform: translate(-50%,-50%); touch-action: none; user-select: none; cursor: grab; }

@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "id": "approved-2026-11-25",
+  "status": "approved: the owner approved the proposed sample and stopping points unchanged on 25 November 2026",
+  "enabled": true,
+  "maxLevel": 2,
+  "lessons": [
+    "place",
+    "negative",
+    "fractions",
+    "algebra_missing",
+    "geometry_angles",
+    "ratio_sharing",
+    "stats_tables",
+    "prob_events",
+    "measure_units",
+    "town_totals"
+  ],
+  "missions": {
+    "number": ["0"],
+    "fractions": ["0"],
+    "algebra": ["0"],
+    "geometry": ["0"],
+    "ratio": ["0"],
+    "statistics": ["0"],
+    "probability": ["0"],
+    "measure": ["0"],
+    "town": ["market", "cafe", "bank"]
+  },
+  "restorationWorlds": ["*"],
+  "townPlans": [
+    "cook-pasta",
+    "shop-groceries",
+    "travel-swim",
+    "job-market",
+    "errand-post"
+  ],
+  "recipes": [],
+  "homeActivities": ["recycling", "post", "meters"],
+  "startingChecks": ["*"],
+  "quests": [],
+  "stop": {
+    "activities": 10,
+    "repeatsPerActivity": 2
+  },
+  "bannerViews": ["home", "map", "world"],
+  "messages": {
+    "notInSample": "This activity is not part of the demo. Try one of the activities that are still open.",
+    "repeatUsed": "You have tried this demo activity the most times the demo allows. Try another open activity.",
+    "ended": "That is the end of the demo. Your fictional explorer stays saved on this device, and anything you started can still be finished.",
+    "progress": "Demo: you have tried {used} of {total} activities."
+  },
+  "endLink": {
+    "href": "/",
+    "text": "Back to Everyday Skills Adventures"
+  }
+}

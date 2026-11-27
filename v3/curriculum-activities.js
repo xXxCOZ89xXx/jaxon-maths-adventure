@@ -108,7 +108,7 @@
       }
       html =
         diagram +
-        `<p>Set AB, angle A and angle B. The two rays intersect at C. These are ruler and degree models; the diagram scales to fit.</p>${a.labels.map((label, i) => `<label>${esc(label)} <input type="range" data-c8-cell="${i}" data-c8-prefix="${prefix}" min="${i ? 1 : 0.1}" max="${i ? 178 : 10}" step="${i ? 1 : 0.1}" value="${vals[i]}"></label><output>${vals[i]}</output><div class="c8-options">${btn("Decrease " + label, "cell-add-" + i + "-" + (i ? -1 : -0.1))}${btn("Increase " + label, "cell-add-" + i + "-" + (i ? 1 : 0.1))}</div>`).join("")}`;
+        `<p>Set AB, angle A and angle B. The two rays intersect at C. These are ruler and degree models; the diagram scales to fit.</p>${a.labels.map((label, i) => `<label>${esc(label)} <input type="range" data-c8-cell="${i}" data-c8-prefix="${prefix}" min="${i ? 1 : 0.1}" max="${i ? 178 : 100}" step="${i ? 1 : 0.1}" value="${vals[i]}"></label><output>${vals[i]}</output><div class="c8-options">${btn("Decrease " + label, "cell-add-" + i + "-" + (i ? -1 : -0.1))}${btn("Increase " + label, "cell-add-" + i + "-" + (i ? 1 : 0.1))}</div>`).join("")}`;
     } else if (a.kind === "markings") {
       const vals = v.cells || [0, 0, 0, 0],
         sides = [
@@ -379,7 +379,7 @@
               : a.kind === "triangle"
                 ? i
                   ? 178
-                  : 10
+                  : 100
                 : a.kind === "markings"
                   ? 2
                   : a.max || 20)
@@ -617,8 +617,16 @@
       const p = String(s)
         .trim()
         .replace(/−/g, "-")
-        .replace(/,/g, "")
-        .split("/");
+        .split("/")
+        .map((p) => {
+          // Commas count only as thousands separators (12,345.5); 2,5 is refused.
+          const t = p.trim();
+          return !t.includes(",")
+            ? t
+            : /^[+-]?\d{1,3}(?:,\d{3})+(?:\.\d+)?$/.test(t)
+              ? t.replace(/,/g, "")
+              : "invalid";
+        });
       if (
         p.length > 2 ||
         p.some((x) => !/^[-+]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(x.trim()))

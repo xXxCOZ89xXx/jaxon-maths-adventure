@@ -9,6 +9,22 @@ const root = path.resolve(__dirname, ".."),
 const read = (p) => fs.readFileSync(path.join(root, p), "utf8");
 const hash = (x) => crypto.createHash("sha256").update(x).digest("hex");
 const KEY = "jaxon_public_demo_v1";
+// The sample and stopping points are configuration, chosen by the owner.
+// Optional: node demo/build.cjs --sample demo/<file>.json (must stay in demo/).
+const sampleArg = process.argv.indexOf("--sample"),
+  samplePath = sampleArg > 0 ? process.argv[sampleArg + 1] : "demo/sample.json";
+assert(
+  /^demo\/[a-z0-9-]+\.json$/.test(samplePath),
+  "Sample config must be a demo/*.json file",
+);
+const SAMPLE = JSON.parse(read(samplePath));
+assert.equal(SAMPLE.version, 1, "Demo sample config version");
+// Runtime maths-tool images: every cleaned master except the reference-only flattened balance.
+const MATHS_DIR = "v3/assets/maths-tools",
+  MATHS_REFERENCE_ONLY = ["empty-balance.png"],
+  MATHS = JSON.parse(read(MATHS_DIR + "/manifest.json")).assets.filter(
+    (a) => !MATHS_REFERENCE_ONLY.includes(a.file),
+  );
 let html = read("v3-adventure.html");
 const scripts = [...html.matchAll(/<script src="([^"]+)"><\/script>/g)].map(
   (x) => x[1],
@@ -53,7 +69,20 @@ for (const file of scripts) {
   if (file === "v3/starting-profile.js") {
     // Admission is separate from assessment evidence. Never fabricate a completed profile.
     js +=
-      "\nwindow.V11StartingProfile.canExplore = () => true;\nwindow.V11StartingProfile.allowed = () => true;\n";
+      "\nwindow.V11StartingProfile.canExplore = () => true;\n" +
+      // Configurable demo sample: which activities may start, and when it stops.
+      read("demo/sample-policy.js") +
+      "\nwindow.ESADemoSample = window.ESADemoSampleFactory(" +
+      JSON.stringify(SAMPLE) +
+      ");\nwindow.V11StartingProfile.allowed = (s, action) => window.ESADemoSample.allowed(s, action);\n";
+  }
+  if (file === "v3/adventure.js") {
+    // Town visits outside the sample explain the demo limit, not starting points.
+    js = replaceOnce(
+      js,
+      '"Find one starting point before visiting. The remaining areas are optional."',
+      "root.ESADemoSample.reason(s, `mission:${world}:${route}:${tier}`)",
+    );
   }
   if (file === "v3/activity-navigation.js") {
     js = replaceOnce(
@@ -69,7 +98,7 @@ for (const file of scripts) {
     js = replaceOnce(js, "Your starting points", "Optional starting points");
     js = replaceOnce(
       js,
-      '${btn("Town and Restore Community", "world:town")}',
+      '${btn("Town", "world:town")}',
       "${btn('Try a cooking journey','j-plan:cook-pasta','primary')}${btn('Town journeys','world:town')}",
     );
     js = replaceOnce(
@@ -112,6 +141,27 @@ for (const file of scripts) {
       "This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.",
       "Your fictional explorer is saved only in this browser. No account is needed. Nothing here is connected to the family game.",
     );
+    js = replaceOnce(
+      js,
+      `        if (!P.allowed(s, action)) {
+          s.view = "starting";
+          error = "Find one starting point first. Your saved work is safe.";
+          return;
+        }`,
+      `        if (!P.allowed(s, action)) {
+          error = window.ESADemoSample.reason(s, action);
+          return;
+        }
+        window.ESADemoSample.record(s, action);`,
+    );
+    js = replaceOnce(
+      js,
+      `    if (!P.canExplore(s)) {
+      document.querySelectorAll("#main [data-action]")`,
+      `    window.ESADemoSample.decorate(s, $("main"));
+    if (!P.canExplore(s)) {
+      document.querySelectorAll("#main [data-action]")`,
+    );
     const review = js.match(
       /^  if\s*\(!cloud\s*&&\s*document.getElementById\("touch-review"\)\)\s*\{[\s\S]*?^  \}\n/m,
     );
@@ -120,9 +170,26 @@ for (const file of scripts) {
   }
   emit(file, js);
 }
+// CSS may reference only the reviewed runtime maths-tool images, nothing else.
+const allowedCssUrls = new Set(
+  MATHS.map((a) => "assets/maths-tools/" + a.file),
+);
 for (const file of styles) {
-  assert(!/@import|url\s*\(/i.test(read(file)), "Unreviewed CSS dependency");
-  emit(file, read(file));
+  const css = read(file);
+  assert(!/@import/i.test(css), "Unreviewed CSS import in " + file);
+  for (const m of css.matchAll(/url\s*\(\s*(["']?)([^"')]*)\1\s*\)/gi))
+    assert(
+      file.startsWith("v3/") && allowedCssUrls.has(m[2]),
+      "Unreviewed CSS dependency " + m[2] + " in " + file,
+    );
+  emit(file, css);
+}
+for (const asset of MATHS) {
+  assert(/^[a-z0-9-]+\.png$/.test(asset.file));
+  const file = MATHS_DIR + "/" + asset.file,
+    bytes = fs.readFileSync(path.join(root, file));
+  assert.equal(hash(bytes), asset.sha256, "Maths master changed: " + file);
+  emit(file, bytes);
 }
 // All dynamic image families used by asset-checkpoint, world-art, avatar-art and guides.
 for (const dir of ["checkpoint", "rollout", "world-guide-portraits-preview"]) {
@@ -181,6 +248,11 @@ emit(
     {
       entry: "v3-adventure.html",
       releaseBranch: "release/ipad",
+      demoSample: {
+        id: SAMPLE.id,
+        status: SAMPLE.status,
+        sha256: hash(JSON.stringify(SAMPLE)),
+      },
       sharedSources: scripts.map((file) => ({
         path: file,
         sha256: hash(read(file)),
@@ -225,4 +297,4 @@ fs.writeFileSync(
 console.log(
   `Public demo: ${scripts.length} scripts, ${styles.length} styles, ${inventory.length} files. Output: demo-dist. No environment/config/SDK/backend files copied.`,
 );
-module.exports = { KEY };
+module.exports = { KEY, SAMPLE };

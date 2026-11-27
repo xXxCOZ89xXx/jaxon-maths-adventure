@@ -127,7 +127,7 @@
       objects+=counter(571,455,99,"#86a594")+till(590,410)+block(318,440,34,20,25,"#a68a5c","#d9c18c");
       const count=Math.min(12,(v.parts||[]).reduce((a,b)=>a+b,0));
       for(let n=0;n<count;n++)objects+=at(299+n%4*10,409-Math.floor(n/4)*13,poly("M0-5h9v10H0Z",["#b77b52","#bdd3be","#d6b174"][n%3]));
-      readout=`Your basket · ${count} selected items`;
+      readout=`Your basket · ${count} selected ${count===1?'item':'items'}`;
     } else if(i===1) {
       objects+=counter(324,327,137,"#b28d71")+till(410,309);
       for(const [x,y] of [[314,421],[481,434],[627,387]])objects+=block(x,y,32,19,30,"#a38b63","#e3cfa0")+bench(x-52,y+15,.65)+bench(x+47,y+24,.65)+at(x,y-31,'<ellipse rx="11" ry="5" fill="#f2e5bc"/><path d="M-6-9h12v9H-6z" fill="#b6815d"/>');

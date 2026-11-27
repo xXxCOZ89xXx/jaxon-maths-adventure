@@ -51,7 +51,7 @@
       badge.className = "coin-readout";
       document.querySelector(".topbar").append(badge);
     }
-    badge.textContent = window.V3Presentation.coins(coins) + " coins";
+    badge.textContent = window.V3Presentation.count(coins, "coin");
     badge.setAttribute("role", "status");
     badge.setAttribute("aria-live", "polite");
     badge.setAttribute(
@@ -63,14 +63,14 @@
       const delta = coins - previous;
       coinBaseline = coins;
       badge.textContent =
-        window.V3Presentation.coins(coins) +
-        " coins · +" +
+        window.V3Presentation.count(coins, "coin") +
+        " · +" +
         window.V3Presentation.coins(delta);
       badge.classList.add("coin-earned");
       clearTimeout(coinNoticeTimer);
       coinNoticeTimer = setTimeout(() => {
         badge.classList.remove("coin-earned");
-        badge.textContent = window.V3Presentation.coins(s.coins) + " coins";
+        badge.textContent = window.V3Presentation.count(s.coins, "coin");
       }, 4500);
     }
   }
@@ -117,7 +117,7 @@
       coinFeedback();
       status(
         cloud
-          ? "Saved on this device · waiting for sync"
+          ? cloud.savedMessage || "Saved on this device · waiting for sync"
           : "Saved on this device · offline demo",
       );
     } catch {
@@ -216,7 +216,7 @@
           ${ready ? `<div class="starting-estimate"><h3>${esc(row.estimate)}</h3><p>${a.responses.filter((r) => r.correct).length} correct from ${P.length(a)} saved answers. ${a.responses.filter((r) => r.skipped).length} marked not known or not doable yet.</p><p>${[2, 3].includes(a.assessmentVersion) ? `Next, try teaching for ${a.estimate.nextSkills.map((id) => esc(skill(id)?.name || id)).join(" or ")} around Year ${a.estimate.nextYear}. Check each topic separately.` : "Your earlier four-question sample is preserved. Check each topic separately."}</p><p>A cautious starting estimate from a limited sample, not a full assessment. It does not award mastery or change completed learning.</p></div>` : ""}
           ${ready && done ? `<details><summary>Your saved answers explained</summary>${a.responses.map((r) => `<p>Year ${r.band}: ${esc(r.prompt)}</p><p>You chose: ${esc(r.skipped ? (r.skipReason === "cannot" ? "I can’t do this" : "I don’t know") : r.value)}. ${esc(r.explanation)}</p>`).join("")}</details>` : ""}
           ${ready ? `<details ${retakeYear ? "open" : ""}><summary>Take a new 8-question starting estimate</summary><p>Your previous estimate and completed learning stay saved.</p><label for="retake-year-${w.id}">Current curriculum year for a new ${esc(w.name)} estimate</label><select id="retake-year-${w.id}" data-starting-retake-year="${w.id}"><option value="">Choose a year</option>${years.map((y) => `<option value="${y}" ${retakeYear === y ? "selected" : ""}>Year ${y}</option>`).join("")}</select>${btn("Start new starting estimate", "starting-retake:" + w.id, "primary", !years.includes(retakeYear))}</details>` : ""}
-          ${history.length ? `<details><summary>Earlier starting estimates (${history.length})</summary>${history.map((old) => `<p>Saved ${P.length(old)}-question estimate, starting range ${old.assessmentVersion === 2 ? "Year " : ""}${old.estimate.band}. Your original ${old.responses.length} answers are retained.</p><ol>${old.responses.map((r) => `<li>${esc(r.prompt)} — ${esc(r.skipped ? "Not known yet" : r.value)}</li>`).join("")}</ol>`).join("")}</details>` : ""}
+          ${history.length ? `<details><summary>Earlier starting estimates (${history.length})</summary>${history.map((old) => `<p>Saved ${P.length(old)}-question estimate, starting range ${old.assessmentVersion === 2 ? "Year " : ""}${old.estimate.band}. Your original ${old.responses.length} ${old.responses.length === 1 ? "answer is" : "answers are"} retained.</p><ol>${old.responses.map((r) => `<li>${esc(r.prompt)} — ${esc(r.skipped ? "Not known yet" : r.value)}</li>`).join("")}</ol>`).join("")}</details>` : ""}
           </article>`;
         })
         .join(
@@ -388,7 +388,7 @@
           btn("Starting point: " + (skill(id)?.name || id), "discover:" + id),
         )
         .join("")}</div>`;
-    return `${header("RESTORE THE WORLD", w.name, "world")}<div class="quest-layout world-stage stage-${w.id} ${q.solved ? "stage-restored" : ""}"><div class="stage-vista">${art(w.id).replace('viewBox="0 0 900 560"', 'viewBox="0 110 900 380" preserveAspectRatio="xMidYMid slice"')}<section class="panel guide">${A.guide(w.guide)}<div><h3>${w.guide}, your guide</h3><p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p></div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s, true)}${btn("Save & exit", "nav:home")}</div></div><section class="panel stage-workbench">${q.intro ? `<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2><p>This is your earlier saved puzzle. Finish it here; later stages use your assessed maths in a longer plan.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn("Start building →", "begin", "primary")}` : puzzle(q) + `${q.solved ? `<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn("Stage recap →", "next-quest", "primary")}</div>` : `<div class="actions">${btn("Submit answer", "solve", "primary")}${btn("Hint", "hint")}${btn("I don’t know", "skip")}</div>${q.feedback ? `<div class="feedback" role="status">${esc(q.feedback)}</div>` : ""}`}`}</section></div>`;
+    return `${header("RESTORE THE WORLD", w.name, "world")}<div class="quest-layout world-stage stage-${w.id} ${q.solved ? "stage-restored" : ""}"><div class="stage-vista">${art(w.id).replace('viewBox="0 0 900 560"', 'viewBox="0 110 900 380" preserveAspectRatio="xMidYMid slice"')}<section class="panel guide">${A.guide(w.guide)}<div><h3>${w.guide}, your guide</h3>${s.settings.skipIntros ? `<details class="intro-more"><summary>Read the intro</summary><p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p></details>` : `<p>${q.intro ? esc(w.goal) : "Take your time. You can use a hint or ask me to work through it. Every idea helps."}</p>`}</div></section><div class="toolbar" style="margin-top:18px">${A.explorer(s, true)}${btn("Save & exit", "nav:home")}</div></div><section class="panel stage-workbench">${q.intro ? `<span class="badge">A NEW CHAPTER</span><h2 style="margin-top:20px">${w.tag}</h2>${s.settings.skipIntros ? `${btn("Start building →", "begin", "primary")}<details class="intro-more"><summary>Read the intro</summary><p>This is your earlier saved puzzle. Finish it here; later stages use your assessed maths in a longer plan.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p></details>` : `<p>This is your earlier saved puzzle. Finish it here; later stages use your assessed maths in a longer plan.</p><p class="muted">Hints are always welcome. This is guided adventure, separate from independent checks.</p>${btn("Start building →", "begin", "primary")}`}` : puzzle(q) + `${q.solved ? `<div class="feedback" role="status">${esc(q.feedback)}<br><strong>${esc(w.stages[q.i])}</strong></div><div class="actions">${btn("Stage recap →", "next-quest", "primary")}</div>` : `<div class="actions">${btn("Submit answer", "solve", "primary")}${btn("Hint", "hint")}${btn("I don’t know", "skip")}</div>${q.feedback ? `<div class="feedback" role="status">${esc(q.feedback)}</div>` : ""}`}`}</section></div>`;
   }
   function learningStamp(l) {
     return l
@@ -539,7 +539,7 @@
   function camp() {
     const progress = M.campProgress(s),
       n = progress.count;
-    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Base Camp", null)}<section class="home-path panel" aria-label="Choose your adventure"><h2>Where next?</h2>${!P.unlocked(s) ? `<div class="notice"><h3>Start with your starting points</h3><p>Start with one short 8-question area. Then play opens and you can find the remaining starting points over time.</p>${btn("Find my starting points", "nav:starting", "primary")}</div>` : btn("Your starting points", "nav:starting")}${!s.tourSeen ? `<div class="notice"><p>New here? Your guide can show you the way.</p><div class="actions">${btn("Show me how", "nav:tour")}${btn("Start exploring", "skip-tour")}</div></div>` : ""}<p>${esc(P.unlocked(s) ? N.summary(s) : "Find one starting point to open play. Your paused activities will wait for you.")}</p><div class="actions">${btn("Continue adventure", "continue", "primary")}${btn("Subject worlds", "nav:map")}${btn("Town and Restore Community", "world:town")}${btn("How to play", "nav:tour")}</div><p>${!P.unlocked(s) ? "You can explore the maps between questions." : s.world === "town" ? nextButton("town") : btn("Your next learning step", "next-path:" + s.world)}</p></section>${startingCard()}${savedActivities()}<section class="camp-overview ${progress.pending ? "estate-unveiling" : ""}">${progress.pending ? `<div class="estate-celebration" role="status"><strong>Your ${esc(progress.current.name)} is ready.</strong><span>Built through your adventures. No coins spent.</span>${btn("Enjoy the new home", "camp-celebrate")}</div>` : ""}<div class="camp-map hero-art">${A.camp(s)}<span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>${esc(progress.current.name)}</h2><p class="muted">Choose a place in camp to continue, explore or view your progress. Every earned upgrade stays with you.</p><p class="camp-inventory small">Base Camp Level ${progress.current.id} / 8 · ${esc(progress.current.name)}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Customise explorer", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section>${campPlanner(progress)}<details class="camp-journal" id="camp-achievements"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
+    return `${header("YOUR LITTLE CORNER OF THE WORLD", "Base Camp", null)}<section class="home-path panel" aria-label="Choose your adventure"><h2>Where next?</h2>${!P.unlocked(s) ? `<div class="notice"><h3>Start with your starting points</h3><p>Start with one short 8-question area. Then play opens and you can find the remaining starting points over time.</p>${btn("Find my starting points", "nav:starting", "primary")}</div><div class="actions">${btn("How to play", "nav:tour")}</div>` : `<div class="actions">${btn("Your starting points", "nav:starting")}${s.world === "town" ? nextButton("town") : btn("Your next learning step", "next-path:" + s.world)}${btn("How to play", "nav:tour")}</div>`}${!s.tourSeen && !s.settings.skipIntros ? `<div class="notice"><p>New here? Your guide can show you the way.</p><div class="actions">${btn("Show me how", "nav:tour")}${btn("Start exploring", "skip-tour")}</div></div>` : ""}<p>${esc(P.unlocked(s) ? N.summary(s) : "Find one starting point to open play. Your paused activities will wait for you.")}</p><div class="actions">${btn("Continue adventure", "continue", "primary")}${btn("Explore worlds", "nav:map")}${btn("Town", "world:town")}</div>${!P.unlocked(s) ? "<p>You can explore the maps between questions.</p>" : ""}</section>${startingCard()}${savedActivities()}<section class="camp-overview ${progress.pending ? "estate-unveiling" : ""}">${progress.pending ? `<div class="estate-celebration" role="status"><strong>Your ${esc(progress.current.name)} is ready.</strong><span>Built through your adventures. No coins spent.</span>${btn("Enjoy the new home", "camp-celebrate")}</div>` : ""}<div class="camp-map hero-art">${A.camp(s)}<span class="scene-caption">YOUR CAMP · ${n} LANDMARKS</span></div><div class="camp-dock">${A.explorer(s)}<div><span class="badge">LEVEL ${1 + Math.floor(E.xp(s) / 400)} EXPLORER</span><h2>${esc(progress.current.name)}</h2><p class="muted">Choose a place in camp to continue, explore or view your progress. Every earned upgrade stays with you.</p><p class="camp-inventory small">Base Camp Level ${progress.current.id} / 8 · ${esc(progress.current.name)}</p><p><strong>${E.xp(s)} explorer XP</strong> · ${window.V3Presentation.coins(s.coins)} learning coins</p><div class="actions">${btn("Explorer wardrobe", "nav:shop", "primary")}${btn("Explore worlds", "nav:map")}</div><p class="small muted">XP comes once per landmark. Coins come from active learning: 10 per minute. Screen-time remains 1:1.</p></div></div></section>${U.decorations(s)}${campPlanner(progress)}<details class="camp-journal" id="camp-achievements"><summary>Your discoveries · achievement journal</summary><div class="panel achievement-grid">${[
       ["First steps", n >= 1, "Restore your first landmark."],
       [
         "Forest keeper",
@@ -594,6 +594,22 @@
       )
       .join("")}</div></details>${U.collection(s)}`;
   }
+  // Wardrobe colours: colour 1 comes with the item; colours 2 and 3 are 50 coins each.
+  // Plain colour swatches (data-standin) until the new pictures arrive.
+  function colourChoices(i) {
+    const w = E.wardrobeColours.find((x) => x.item === i.id);
+    if (!w) return "";
+    const owned = s.bought.includes(i.id),
+      worn = E.colourOf(s, i.id);
+    return `<div class="colour-choices" data-colour-item="${esc(i.id)}" tabindex="-1" role="group" aria-label="Colours for ${esc(i.label)}"><p class="small"><strong>Colours</strong>${owned ? ` · wearing ${esc(worn.name)}` : ""}</p><ul>${w.colours
+      .map((c) => {
+        const mine = owned && (c.n === 1 || s.bought.includes(c.id));
+        return `<li><span class="colour-swatch" data-standin style="background:${c.swatch}" aria-hidden="true"></span><span class="colour-name">${esc(c.name)}</span>${!owned ? (c.n === 1 ? '<span class="small muted">comes with it</span>' : '<span class="small muted">50 coins</span>') : worn.id === c.id ? '<span class="colour-worn">Wearing now</span>' : mine ? btn("Wear " + c.name, "colour-wear:" + c.id) : btn("Buy " + c.name + " for " + c.cost + " coins", "colour-buy:" + c.id, "", Math.floor(s.coins) < c.cost)}</li>`;
+      })
+      .join(
+        "",
+      )}</ul>${owned ? "" : `<p class="small muted">Buy the ${esc(i.label.toLowerCase())} first to choose other colours.</p>`}</div>`;
+  }
   function shop() {
     const activeCatalog = C.catalog.filter(
       (i) => !window.V7Avatar || window.V7Avatar.isActiveItem(i),
@@ -627,10 +643,19 @@
             s.bought.includes(i.id) &&
             s.equipped.includes(i.id),
         );
-        return `<div class="equipment-slot"><strong>${esc(slotNames[slot] || slot)}</strong><span>${item ? esc(item.label) : "None equipped"}</span><button data-action="remove-slot:${esc(slot)}" ${item ? "" : "disabled"}>Remove ${esc(slotNames[slot] || slot)}</button></div>`;
+        return `<div class="equipment-slot"><strong>${esc(slotNames[slot] || slot)}</strong><span>${item ? esc(E.colourOf(s, item.id)?.name || item.label) : "None equipped"}</span><button data-action="remove-slot:${esc(slot)}" ${item ? "" : "disabled"}>Remove ${esc(slotNames[slot] || slot)}</button></div>`;
       })
       .join("")}</div></section>`;
-    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar ? window.V7Avatar.controls(s) : ""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview ? "Preview: " + esc(preview.label) : "Your explorer"}</h2>${preview ? '<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>' : ""}<p class="muted">${window.V3Presentation.coins(s.coins)} learning coins · ${s.bought.length} items owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p></div></div>${equipment}<label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><div class="shop-grid">${activeCatalog
+    // Saving goal: shows coins saved and roughly how much learning is left.
+    const show = window.V3Presentation,
+      goal = E.savingGoal(s, activeCatalog),
+      goalName = goal ? esc(goal.item.label) : "",
+      saving = `<section class="saving-goal" id="saving-goal" tabindex="-1" aria-labelledby="saving-goal-title"><h2 id="saving-goal-title">Saving goal</h2>${
+        goal
+          ? `<p class="saving-goal-item"><strong>${goalName}</strong> · ${show.count(goal.item.cost, "coin")}</p><div class="bar" role="progressbar" aria-label="Coins saved for ${goalName}" aria-valuemin="0" aria-valuemax="${goal.item.cost}" aria-valuenow="${goal.have}"><span style="width:${(goal.have / goal.item.cost) * 100}%"></span></div><p>${goal.reached ? `You have enough coins for ${goalName}. Buy it whenever you are ready.` : `${show.count(goal.have, "coin")} saved. ${show.count(goal.left, "coin")} to go: about ${show.count(goal.minutes, "minute")} of learning.`}</p>${btn("Clear goal", "goal-clear")}`
+          : `<p>Pick something to save for with "Save for" on any item below. You can change or clear it at any time.</p>`
+      }</section>`;
+    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar ? window.V7Avatar.controls(s) : ""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview ? "Preview: " + esc(preview.label) : "Your explorer"}</h2>${preview ? '<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>' : ""}<p class="muted">${window.V3Presentation.count(s.coins, "learning coin")} · ${window.V3Presentation.count(s.bought.filter((id) => !E.isTownPart(id) && !E.isDecoration(id) && !E.isColour(id)).length, "item")} owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p></div></div>${saving}${equipment}<label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><p class="colour-note small muted">Clothes come in 3 colours. New colour pictures are on the way; until then your explorer shows the first colour.</p><div class="shop-grid">${activeCatalog
       .filter(
         (i) =>
           filter === "all" ||
@@ -641,12 +666,12 @@
       )
       .map(
         (i) =>
-          `<article class="shop-item"><span class="ico" aria-hidden="true">${A.icon(i)}</span><h3>${i.label}</h3><p class="small muted">${i.cost} coins · ${i.slot}</p><button data-ui="preview-item" data-item="${esc(i.id)}">Preview ${esc(i.label)}</button>${btn(s.equipped.includes(i.id) ? "Unequip " + i.label : s.bought.includes(i.id) ? "Equip " + i.label : "Buy " + i.label, "buy:" + i.id, s.equipped.includes(i.id) ? "primary" : "", !s.bought.includes(i.id) && Math.floor(s.coins) < i.cost)}</article>`,
+          `<article class="shop-item"><span class="ico" aria-hidden="true">${A.icon(i)}</span><h3>${i.label}</h3><p class="small muted">${i.cost} coins · ${i.slot}</p><button data-ui="preview-item" data-item="${esc(i.id)}">Preview ${esc(i.label)}</button>${btn(s.equipped.includes(i.id) ? "Unequip " + i.label : s.bought.includes(i.id) ? "Equip " + i.label : "Buy " + i.label, "buy:" + i.id, s.equipped.includes(i.id) ? "primary" : "", !s.bought.includes(i.id) && Math.floor(s.coins) < i.cost)}${s.bought.includes(i.id) ? "" : goal?.item.id === i.id ? btn("Stop saving for " + i.label, "goal-clear", "goal-toggle") : btn("Save for " + i.label, "goal-set:" + i.id, "goal-toggle")}${colourChoices(i)}</article>`,
       )
       .join("")}</div>`;
   }
   function settings() {
-    return `${header("PLAY YOUR WAY", "Settings", "home")}<div class="panel preferences"><h2>Comfort comes first</h2><label><input type="checkbox" data-setting="motion" ${s.settings.motion ? "checked" : ""}>Gentle scene animation (system reduced-motion preference takes priority)</label><label><input type="checkbox" data-setting="sound" ${s.settings.sound ? "checked" : ""}>Quiet restoration sound</label><p class="muted">Sound and animation start off. All puzzles work with tapping and a keyboard; dragging is optional.</p><div class="actions">${btn("Replay the welcome tour", "nav:tour")}</div>${cloud ? "<h3>Account and privacy</h3><p>Lock or sign out on shared devices. Parents use their own account and parent PIN to see the starting profile and independent evidence. This device keeps an offline copy and pending saves; reconnect before changing devices. Reset never clears a learner profile. This release supports one linked learner per family; it has no child-switching control.</p>" : '<h3>Fictional Test Camp</h3><p class="small muted">This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.</p>'}</div>`;
+    return `${header("PLAY YOUR WAY", "Settings", "home")}<div class="panel preferences"><h2>Comfort comes first</h2><label><input type="checkbox" data-setting="motion" ${s.settings.motion ? "checked" : ""}>Gentle scene animation (system reduced-motion preference takes priority)</label><label><input type="checkbox" data-setting="sound" ${s.settings.sound ? "checked" : ""}>Quiet restoration sound</label><label><input type="checkbox" data-setting="skipIntros" ${s.settings.skipIntros ? "checked" : ""}>Skip intros (the welcome offer, chapter intros and mission stories fold away; hints, lessons and How to play stay)</label><p class="muted">Sound, animation and Skip intros start off. All puzzles work with tapping and a keyboard; dragging is optional.</p><div class="actions">${btn("Replay the welcome tour", "nav:tour")}</div>${cloud ? "<h3>Account and privacy</h3><p>" + esc(cloud.accountHelp || "Lock or sign out on shared devices. Parents use their own account and parent PIN to see the starting profile and independent evidence. This device keeps an offline copy and pending saves; reconnect before changing devices. Reset never clears a learner profile. This release supports one linked learner per family; it has no child-switching control.") + "</p>" : '<h3>Fictional Test Camp</h3><p class="small muted">This build has no cloud adapter or live account login. It uses its own device storage. Existing V2 progress is never read or changed. Cloud sync and secure parent rewards must be tested separately in staging.</p>'}</div>`;
   }
   function parent() {
     const minutes = s.weekly[E.weekKey(Date.now())] || 0;
@@ -820,8 +845,8 @@
       ? s.world === "town"
         ? "town"
         : "map"
-      : s.view === "shop"
-        ? "camp"
+      : ["camp", "shop"].includes(s.view)
+        ? "home"
         : s.view;
     document
       .querySelectorAll(".topbar nav [data-nav], .topbar nav [data-action]")
@@ -851,23 +876,39 @@
     }
   }
   document.addEventListener("v6-scene-ui", () => render());
+  // One shared audio context for the whole session. Browsers (Safari on iPad
+  // especially) limit how many can exist, and a fresh one per beep can start
+  // suspended or fail. It is created on first use and resumed when suspended.
+  let audioContext = null;
   function sound() {
     if (!s.settings.sound) return;
     try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)(),
-        osc = ctx.createOscillator(),
-        gain = ctx.createGain();
-      gain.gain.value = 0.025;
+      const AudioCtor = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtor) return;
+      if (!audioContext || audioContext.state === "closed")
+        audioContext = new AudioCtor();
+      const ctx = audioContext;
+      if (ctx.state === "suspended") ctx.resume().catch(() => {});
+      const osc = ctx.createOscillator(),
+        gain = ctx.createGain(),
+        now = ctx.currentTime;
+      gain.gain.setValueAtTime(0.025, now);
       osc.frequency.value = 440;
       osc.connect(gain);
       gain.connect(ctx.destination);
-      osc.start();
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
-      osc.stop(ctx.currentTime + 0.3);
-      osc.onended = () => ctx.close();
+      osc.start(now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+      osc.stop(now + 0.3);
+      osc.onended = () => {
+        osc.disconnect();
+        gain.disconnect();
+      };
     } catch {}
   }
-  let purchaseChoice = null;
+  let purchaseChoice = null,
+    townChoice = null,
+    decoChoice = null,
+    colourChoice = null;
   async function dispatch(action, sceneKey = null) {
     let [name, arg] = action.split(":");
     if (
@@ -887,6 +928,134 @@
       document.getElementById("purchase-confirmation")?.close();
       purchaseChoice = null;
       return;
+    }
+    // Town projects: one 50-coin part at a time, confirmed first, checked by the server's buy.
+    if (name === "town-cancel") {
+      document.getElementById("town-confirmation")?.close();
+      townChoice = null;
+      return;
+    }
+    if (name === "town-add") {
+      const t = E.townProject(s, arg),
+        part = t && E.townCatalog.find((x) => x.id === t.next);
+      if (!part || Math.floor(s.coins) < part.cost) return;
+      let dialog = document.getElementById("town-confirmation");
+      if (!dialog) {
+        dialog = document.createElement("dialog");
+        dialog.id = "town-confirmation";
+        dialog.setAttribute("aria-labelledby", "town-confirm-title");
+        dialog.addEventListener("cancel", () => {
+          townChoice = null;
+        });
+        document.body.append(dialog);
+      }
+      townChoice = part.id;
+      const show = window.V3Presentation;
+      dialog.innerHTML = `<h2 id="town-confirm-title">Add ${part.cost} coins to the ${esc(t.project.label.toLowerCase())}?</h2><p>You will have ${show.coins(s.coins - part.cost)} coins left. Coins you add stay with the project.</p><div class="actions">${btn("Add " + part.cost + " coins", "town-confirm:" + part.id, "primary")}${btn("Not now", "town-cancel")}</div>`;
+      dialog.showModal();
+      dialog.querySelector('[data-action="town-cancel"]').focus();
+      return;
+    }
+    if (name === "town-confirm") {
+      if (townChoice !== arg) return;
+      townChoice = null;
+      document.getElementById("town-confirmation")?.close();
+      if (cloud && !s.bought.includes(arg)) {
+        try {
+          await cloud.purchase(arg);
+          s = read();
+        } catch (e) {
+          status(e.message);
+          return;
+        }
+      }
+    }
+    // Base Camp decorations: confirmed first, checked by the server's buy.
+    if (name === "deco-cancel") {
+      document.getElementById("decoration-confirmation")?.close();
+      decoChoice = null;
+      return;
+    }
+    if (name === "deco-buy") {
+      const item = E.decorations.find((x) => x.id === arg);
+      if (!item || s.bought.includes(arg) || Math.floor(s.coins) < item.cost)
+        return;
+      let dialog = document.getElementById("decoration-confirmation");
+      if (!dialog) {
+        dialog = document.createElement("dialog");
+        dialog.id = "decoration-confirmation";
+        dialog.setAttribute("aria-labelledby", "decoration-confirm-title");
+        dialog.addEventListener("cancel", () => {
+          decoChoice = null;
+        });
+        document.body.append(dialog);
+      }
+      decoChoice = item.id;
+      const show = window.V3Presentation;
+      dialog.innerHTML = `<h2 id="decoration-confirm-title">Buy the ${esc(item.label.toLowerCase())} for ${show.coins(item.cost)} coins?</h2><p>You will have ${show.coins(s.coins - item.cost)} coins left. It will go in your camp.</p><div class="actions">${btn("Buy " + item.label, "deco-confirm:" + item.id, "primary")}${btn("Not now", "deco-cancel")}</div>`;
+      dialog.showModal();
+      dialog.querySelector('[data-action="deco-cancel"]').focus();
+      return;
+    }
+    if (name === "deco-confirm") {
+      if (decoChoice !== arg) return;
+      decoChoice = null;
+      document.getElementById("decoration-confirmation")?.close();
+      if (cloud && !s.bought.includes(arg)) {
+        try {
+          await cloud.purchase(arg);
+          s = read();
+        } catch (e) {
+          status(e.message);
+          return;
+        }
+      }
+    }
+    // Wardrobe colours: confirmed first, checked by the server's buy.
+    if (name === "colour-cancel") {
+      document.getElementById("colour-confirmation")?.close();
+      colourChoice = null;
+      return;
+    }
+    if (name === "colour-buy") {
+      const c = E.colourCatalog.find((x) => x.id === arg);
+      if (
+        !c ||
+        !s.bought.includes(c.item) ||
+        s.bought.includes(arg) ||
+        Math.floor(s.coins) < c.cost
+      )
+        return;
+      let dialog = document.getElementById("colour-confirmation");
+      if (!dialog) {
+        dialog = document.createElement("dialog");
+        dialog.id = "colour-confirmation";
+        dialog.setAttribute("aria-labelledby", "colour-confirm-title");
+        dialog.addEventListener("cancel", () => {
+          colourChoice = null;
+        });
+        document.body.append(dialog);
+      }
+      colourChoice = c.id;
+      const show = window.V3Presentation;
+      dialog.innerHTML = `<h2 id="colour-confirm-title">Buy the ${esc(c.name)} colour for ${show.coins(c.cost)} coins?</h2><p>You will have ${show.coins(s.coins - c.cost)} coins left. You can switch between your colours at any time.</p><div class="actions">${btn("Buy " + c.name, "colour-confirm:" + c.id, "primary")}${btn("Not now", "colour-cancel")}</div>`;
+      dialog.showModal();
+      dialog.querySelector('[data-action="colour-cancel"]').focus();
+      return;
+    }
+    if (name === "colour-confirm") {
+      if (colourChoice !== arg) return;
+      colourChoice = null;
+      document.getElementById("colour-confirmation")?.close();
+      if (cloud && !s.bought.includes(arg)) {
+        try {
+          await cloud.purchase(arg);
+          s = read();
+        } catch (e) {
+          status(e.message);
+          return;
+        }
+      }
     }
     const confirmed = name === "buy-confirm";
     if (confirmed) {
@@ -1677,6 +1846,34 @@
             itemPreview = null;
             if (!E.purchase(s, arg, C.catalog))
               error = "More active learning coins are needed for this item.";
+            else if (s.savingGoal === arg) delete s.savingGoal;
+            break;
+          case "goal-set":
+            if (
+              !window.V7Avatar ||
+              window.V7Avatar.isActiveItem(C.catalog.find((i) => i.id === arg))
+            )
+              E.setSavingGoal(s, arg, C.catalog);
+            break;
+          case "goal-clear":
+            delete s.savingGoal;
+            break;
+          case "town-confirm":
+            if (!E.contributeTown(s, arg))
+              error =
+                "More active learning coins are needed to add to this project.";
+            break;
+          case "colour-confirm":
+            if (!E.buyColour(s, arg))
+              error = "More active learning coins are needed for this colour.";
+            break;
+          case "colour-wear":
+            E.chooseColour(s, arg);
+            break;
+          case "deco-confirm":
+            if (!E.buyDecoration(s, arg))
+              error =
+                "More active learning coins are needed for this decoration.";
             break;
           case "remove-slot":
             E.removeEquipment(s, arg, C.catalog);
@@ -1715,6 +1912,57 @@
         .querySelector(".equipment-slots")
         ?.focus({ preventScroll: true });
       status("Removed item. Your other equipment is unchanged.");
+    }
+    if (name === "goal-set" || name === "goal-clear") {
+      document.getElementById("saving-goal")?.focus({ preventScroll: true });
+      const goal = E.savingGoal(s, C.catalog);
+      status(
+        goal
+          ? `Saving for ${goal.item.label}. Your coins have not changed.`
+          : "Saving goal cleared. Your coins have not changed.",
+      );
+    }
+    if (name === "town-confirm" && !error) {
+      const part = E.townCatalog.find((x) => x.id === arg),
+        t = part && E.townProject(s, part.project);
+      if (t) {
+        document
+          .querySelector(`[data-town-project="${t.project.id}"]`)
+          ?.focus({ preventScroll: true });
+        const name = t.project.label.toLowerCase();
+        status(
+          t.done
+            ? `The ${name} is finished. Thank you for helping Town!`
+            : `You added ${part.cost} coins to the ${name}. ${window.V3Presentation.count(t.left, "coin")} to go.`,
+        );
+      }
+    }
+    if ((name === "colour-confirm" || name === "colour-wear") && !error) {
+      const item = arg.replace(/^colour-/, "").replace(/-\d$/, ""),
+        worn = E.colourOf(s, item);
+      if (worn) {
+        document
+          .querySelector(`[data-colour-item="${item}"]`)
+          ?.focus({ preventScroll: true });
+        status(
+          worn.id === arg
+            ? name === "colour-confirm"
+              ? `The ${worn.name} colour is yours and you are wearing it now.`
+              : `You are wearing the ${worn.name} now. Your coins have not changed.`
+            : "That colour is not yours yet. Nothing has changed.",
+        );
+      }
+    }
+    if (name === "deco-confirm" && !error) {
+      const item = E.decorations.find((x) => x.id === arg);
+      if (item) {
+        document
+          .querySelector(`[data-decoration="${item.id}"]`)
+          ?.focus({ preventScroll: true });
+        status(
+          `The ${item.label.toLowerCase()} is in your camp. You have ${window.V3Presentation.count(Math.floor(s.coins), "coin")} left.`,
+        );
+      }
     }
     if (error) status(error);
     if (restored) sound();
@@ -2538,16 +2786,25 @@
         c8Scope(e.target),
       );
   });
-  document.addEventListener("change", (e) => {
-    if (e.target.matches("[data-c8-cell]"))
-      dispatch(
-        e.target.dataset.c8Prefix +
-          ":cell-" +
-          e.target.dataset.c8Cell +
-          "-" +
-          e.target.value,
-        c8Scope(e.target),
+  document.addEventListener("change", async (e) => {
+    const input = e.target;
+    if (!input.matches("[data-c8-cell]")) return;
+    const prefix = input.dataset.c8Prefix,
+      cell = input.dataset.c8Cell,
+      scope = c8Scope(input),
+      focused = document.activeElement === input;
+    await dispatch(prefix + ":cell-" + cell + "-" + input.value, scope);
+    // A saved edit redraws the controls. Keep keyboard focus on the same cell
+    // only while that exact learning question or mission step is still current.
+    if (focused) {
+      const next = [...document.querySelectorAll("[data-c8-cell]")].find(
+        (el) =>
+          el.dataset.c8Prefix === prefix &&
+          el.dataset.c8Cell === cell &&
+          c8Scope(el) === scope,
       );
+      next?.focus({ preventScroll: true });
+    }
   });
   function c8Point(e) {
     const el = e.target.closest?.("[data-c8-point]");

@@ -22,6 +22,7 @@ let gameStorage = localStorage,
   historyRpc = null,
   historyVersion = 1;
 let gameEpoch = null;
+let historyReadEpoch = null;
 let resetBlocked = false;
 let resetSupported = false;
 let busy = false,
@@ -256,6 +257,7 @@ async function lock() {
 async function open(u) {
   message("");
   gameEpoch = null;
+  historyReadEpoch = null;
   resetBlocked = false;
   unlock = u.token;
   expires = Date.parse(u.expires);
@@ -763,10 +765,18 @@ async function boot() {
     }
     historyVersion =
       Number(sessionStorage.getItem(historyVerifiedKey)) === 2 ? 2 : 1;
+    // History pages are read straight after read_v2, before open() learns the game
+    // number. Use the number from that reply, or a reset learner could never reopen.
     if (historyVersion === 2)
-      historyRpc = window.V3HistoryStorage.transport(rawRpc, {
-        epoch: () => gameEpoch || 0,
-      });
+      historyRpc = window.V3HistoryStorage.transport(
+        async (op, args) => {
+          const data = await rawRpc(op, args);
+          if (op === "read_v2" && Number.isSafeInteger(data?.gameEpoch))
+            historyReadEpoch = data.gameEpoch;
+          return data;
+        },
+        { epoch: () => gameEpoch ?? historyReadEpoch ?? 0 },
+      );
     $("cloud-lock").onclick = lock;
     $("cloud-signout").onclick = async () => {
       try {

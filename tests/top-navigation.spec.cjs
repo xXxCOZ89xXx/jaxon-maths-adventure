@@ -42,7 +42,7 @@ for(const production of [true,false])test(`${production?'production':'offline'}:
  // Sections are saved app views, not URL routes. Real document back/forward
  // restores the latest saved view; clicking sections creates no history entries.
  const initialURL=page.url(),initialHistory=await page.evaluate(()=>history.length);
- for(const [label,heading] of [['Worlds','Where will you go?'],['Home','Base Camp'],['My explorer','Base Camp'],['Settings','Settings'],['How to play','How to play'],['Town','Practical Maths Town']]){
+ for(const [label,heading] of [['Worlds','Where will you go?'],['Home','Base Camp'],['Settings','Settings'],['How to play','How to play'],['Town','Practical Maths Town']]){
   await nav.getByRole('button',{name:label,exact:true}).click();
   await expect(page.locator('#main h1')).toHaveText(heading);await selected(page,label);
   expect(page.url()).toBe(initialURL);expect(await page.evaluate(()=>history.length)).toBe(initialHistory);

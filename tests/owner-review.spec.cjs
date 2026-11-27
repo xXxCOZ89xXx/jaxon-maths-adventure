@@ -4,11 +4,12 @@ async function read(p){await p.waitForFunction(()=>!document.documentElement.has
 async function seed(p,state){await p.goto('/v3-adventure.html');await p.evaluate(({state,key})=>localStorage.setItem(key,JSON.stringify(state)),{state,key:KEY});await p.reload();await p.locator('#main h1').waitFor();}
 async function shot(p,info,name,loc){const dir='docs/review/owner-review/after/'+info.project.name;fs.mkdirSync(dir,{recursive:true});await p.evaluate(()=>Promise.all([...document.images].map(i=>i.decode().catch(()=>{}))));await (loc||p).screenshot({path:dir+'/'+name+'.jpg',type:'jpeg',quality:80,...(loc?{}:{fullPage:false})});}
 async function open(p){const d=p.locator('.world-task-dialog');if(!await d.isVisible())await p.locator('[data-world-task-open]').first().click();}
+async function stages(p){const d=p.locator('.repair-entry .repair-stage-picker');await expect(p.locator('.repair-entry').getByRole('heading',{name:'Repair and restoration challenge'})).toBeVisible();if(!await d.evaluate(e=>e.open))await d.locator('summary').click();await expect(d.locator('#town-restoration')).toBeVisible();}
 test.beforeEach(async({page:p})=>{await require("./helpers/starting-profile.cjs").browser(p);p.errors=[];p.on('pageerror',e=>p.errors.push(e.message));await p.route('**/*',r=>new URL(r.request().url()).origin==='http://127.0.0.1:4173'?r.continue():r.abort());await p.emulateMedia({reducedMotion:'reduce'});});
 test.afterEach(async({page:p})=>{expect(p.errors).toEqual([]);expect(await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1)).toBe(false);});
 test('Base Camp starts home; eight subject worlds and a separate Town with named next steps',async({page:p},info)=>{
- await seed(p,F.fresh());await expect(p.locator('#main h1')).toHaveText('Base Camp');for(const text of ['Continue adventure','Subject worlds','Town and Restore Community','How to play'])await expect(p.locator('.home-path').getByRole('button',{name:text,exact:true})).toBeVisible();await shot(p,info,'base-camp');
- await p.locator('.home-path [data-action="nav:map"]').click();await expect(p.locator('.world-card')).toHaveCount(8);expect(await p.locator('[data-world-island="town"],.world-card[data-world="town"]').count()).toBe(0);await p.locator('#town-entry').click();
+ await seed(p,F.fresh());await expect(p.locator('#main h1')).toHaveText('Base Camp');for(const text of ['Continue adventure','Explore worlds','Town','How to play'])await expect(p.locator('.home-path').getByRole('button',{name:text,exact:true})).toBeVisible();await shot(p,info,'base-camp');
+ await p.locator('.home-path [data-action="nav:map"]').click();await expect(p.locator('.world-card')).toHaveCount(8);expect(await p.locator('[data-world-island="town"],.world-card[data-world="town"]').count()).toBe(0);await p.locator('#town-entry').click();await stages(p);
  const board=p.locator('#town-restoration');await expect(board.getByRole('heading',{name:'Restore the Town community'})).toBeVisible();await expect(board.locator('.recommended-next')).toContainText('Starting point:');expect(await board.locator('[data-action="discover:town_money"]').count()).toBeGreaterThan(0);expect(await board.locator('[data-action="restore:town:0"]').count()).toBe(0);await expect(board).toContainText('Finish Restore Community 1:');await shot(p,info,'town-path',board);
  await board.locator('[data-action="discover:town_money"]').first().click();expect((await read(p)).learning.id).toBe('town_money');await p.getByRole('button',{name:'Home',exact:true}).first().click();await expect(p.locator('#main h1')).toHaveText('Base Camp');
 });
@@ -35,7 +36,7 @@ test('Town learning choice retries in place, with no independent credit after a 
 test('all Community stages complete, unlock in order and resume exact assessed tasks',async({page:p},info)=>{
  const s=F.restoration('town',0),evidence=JSON.parse(JSON.stringify({checks:s.checks,discovery:s.discovery,skills:s.skills}));await seed(p,s);
  for(let stage=0;stage<3;stage++){
-  let snapshot=(await read(p)).adventure.active;if(stage){await p.locator('[data-action="world:town"]').first().click();await p.locator(`[data-action="restore:town:${stage}"]`).first().click();snapshot=(await read(p)).adventure.active;}
+  let snapshot=(await read(p)).adventure.active;if(stage){await p.locator('[data-action="world:town"]').first().click();await stages(p);await p.locator(`#town-restoration [data-action="restore:town:${stage}"]`).first().click();snapshot=(await read(p)).adventure.active;}
   const key=snapshot.key,placement=snapshot.restoration.placement;
   for(let i=0;i<12;i++){
    await open(p);await p.locator('[data-action="m-begin"]').click();const a=await read(p),q=a.adventure.active,t=q.tasks[i];expect(q.key).toBe(key);expect(q.i).toBe(i);expect(q.restoration.placement).toEqual(placement);
@@ -45,7 +46,7 @@ test('all Community stages complete, unlock in order and resume exact assessed t
   }
   const a=await read(p);expect(a.milestones).toContain('town:'+stage);expect(a.restoration.completed['town:'+stage].evidence).toHaveLength(12);expect(a.restoration.completed['town:'+stage].independentMastery).toBe(false);expect({checks:a.checks,discovery:a.discovery,skills:a.skills}).toEqual(evidence);
  }
- await p.locator('[data-action="world:town"]').first().click();await expect(p.locator('#town-restoration')).toContainText('Completed work stays saved');await shot(p,info,'community-complete',p.locator('#town-restoration'));
+ await p.locator('[data-action="world:town"]').first().click();await stages(p);await expect(p.locator('#town-restoration')).toContainText('Completed work stays saved');await shot(p,info,'community-complete',p.locator('#town-restoration'));
 });
 test('Reset resets only the named current plan and completed Continue stays complete',async({page:p},info)=>{
  const s=F.completedTown(),done=JSON.parse(JSON.stringify(F.L.state(s)));F.L.start(s,'travel-swim',2);const active=JSON.parse(JSON.stringify(F.L.state(s)));await seed(p,s);await p.getByRole('button',{name:'Reset',exact:true}).first().click();const d=p.locator('#recovery-dialog');await expect(d).toContainText(active.name);await shot(p,info,'scoped-recovery',d);await d.getByRole('button',{name:'Confirm restart',exact:true}).click();let a=await read(p);expect(a.activityArchives[0].snapshot).toEqual(active);expect(a.adventure.townLifeV2.runs[done.id]).toEqual(done);expect(a.bought).toEqual(s.bought);expect(a.discovery).toEqual(s.discovery);

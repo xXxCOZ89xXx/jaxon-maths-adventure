@@ -9,10 +9,17 @@
       const v = String(input || "")
         .trim()
         .replace("−", "-")
-        .replaceAll(",", "")
         .replace(/%$/, "");
       if (!v) return NaN;
-      const parts = v.split("/");
+      const parts = v.split("/").map((p) => {
+        // Commas count only as thousands separators (12,345.5); 2,5 is refused.
+        const t = p.trim();
+        return !t.includes(",")
+          ? t
+          : /^[+-]?\d{1,3}(?:,\d{3})+(?:\.\d+)?$/.test(t)
+            ? t.replace(/,/g, "")
+            : "invalid";
+      });
       if (parts.length > 2) return NaN;
       if (
         parts.some(

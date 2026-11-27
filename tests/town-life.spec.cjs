@@ -93,7 +93,9 @@ test.describe('Evidence-informed Town level',()=>{
     const {page,key}=camp;await page.locator('nav [data-nav="map"]').click();await town(page);
     await expect(page.locator('[data-mission-tier="town"]')).toHaveValue('3');
     await page.locator('.town-plan-catalog details').filter({has:page.locator('summary',{hasText:'Cooking'})}).locator('summary').click();await click(page,'j-plan:cook-pasta');
-    const hard=await current(page,key);expect(hard.tier).toBe(3);expect(hard.steps[1].answer.reduce((a,b)=>a+b,0)).toBeGreaterThan(5);
+    const hard=await current(page,key);expect(hard.tier).toBe(3);
+    // Since the recipe refresh (40682a0) Level 3 scales the recipe to 6 servings (Level 1 cooks for 2 with no scaling step).
+    expect(hard.recipeCard.portions).toBe(6);expect(hard.steps.find(t=>t.title==='Scale the recipe').answer).toBe(600);expect(hard.steps.find(t=>t.title==='Make your shopping list').answer.reduce((a,b)=>a+b,0)).toBeGreaterThan(1);
     await town(page);await page.locator('[data-mission-tier="town"]').selectOption('1');await page.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
     await page.locator('.town-plan-catalog details').filter({has:page.locator('summary',{hasText:'Cooking'})}).locator('summary').click();await click(page,'j-plan:cook-soup');expect((await current(page,key)).tier).toBe(1);
     expect(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).adventure.townLifeV2.runs['cook-pasta:1'],key)).toEqual(hard);

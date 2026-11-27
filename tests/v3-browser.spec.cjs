@@ -146,7 +146,7 @@ test("Home, tour, map and all eight interactive world quests restore and persist
   expect((await read(page)).skills).toEqual({});
   await page.reload();
   expect((await read(page)).milestones).toHaveLength(24);
-  await page.locator('nav [data-nav="camp"]').click();
+  await page.locator('nav [data-nav="home"]').click();
   await expect(
     page.getByText("Explorer lodge", { exact: false }),
   ).toBeVisible();
@@ -236,7 +236,7 @@ test("Shop, avatar across screens, preferences and mock parent summary", async (
     milestones: ["number:0"],
     tourSeen: true,
   });
-  await page.locator('nav [data-nav="camp"]').click();
+  await page.locator('nav [data-nav="home"]').click();
   await action(page, "nav:shop").click();
   await expect(page.locator(".shop-item")).toHaveCount(40);
   await action(page, "buy:cap").click();
@@ -276,7 +276,7 @@ test("Two tabs serialize purchases and milestones without duplicate rewards", as
   context,
 }) => {
   await seed(page, { coins: 100, tourSeen: true });
-  await page.locator('nav [data-nav="camp"]').click();
+  await page.locator('nav [data-nav="home"]').click();
   await action(page, "nav:shop").click();
   const other = await context.newPage();
   await other.goto("/v3-adventure.html");
@@ -468,7 +468,7 @@ test("World-stage bridge exposes every destination and moves its explorer withou
 });
 
 test("Camp places are keyboard links to usable displays; navigation cannot earn rewards", async ({page})=>{
-  await page.locator('nav [data-nav="camp"]').click();
+  await page.locator('nav [data-nav="home"]').click();
   // Navigation persists through Web Locks; click completion is not a save acknowledgement.
   await expect.poll(async () => (await read(page))?.view).toBe("camp");
   const before=await read(page);

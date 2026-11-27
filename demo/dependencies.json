@@ -675,6 +675,42 @@
     },
     {
       "path": "v3/assets/branding/esa-symbol-64.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/algebra-balance-base.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/algebra-balance-beam.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/algebra-balance-pan.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/chart-bar-surface.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/chart-surround.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/fraction-selection-edge.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/fraction-tile.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/fraction-tray.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/number-line-marker.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/number-line-surround.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/place-value-mat.png"
+    },
+    {
+      "path": "v3/assets/maths-tools/place-value-unit-block.png"
     }
   ]
 }

@@ -15,6 +15,15 @@
       new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 }).format(
         Math.floor(finite(value)),
       ),
+    // "1 coin", "2 coins": the whole-number count shown with its noun.
+    count: (value, one, many = one + "s") => {
+      const n = Math.floor(finite(value));
+      return (
+        new Intl.NumberFormat("en-GB", { maximumFractionDigits: 0 }).format(n) +
+        " " +
+        (n === 1 ? one : many)
+      );
+    },
     minutes: (value) =>
       new Intl.NumberFormat("en-GB", { maximumFractionDigits: 1 }).format(
         finite(value),

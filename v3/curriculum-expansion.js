@@ -38,6 +38,10 @@
     activity: { kind: "choice", labels },
   });
   const fmt = (n) => String(Number(n.toFixed(6)));
+  // A family whose numbers or answers change gets a new ID revision, so saved
+  // questions from the earlier wording keep their own IDs.
+  const rev = (r) => ({ ...r, revision: 2 });
+  const pick = (list, n) => list[n % list.length];
   pack(
     "written_methods",
     "Written methods and remainders",
@@ -335,11 +339,14 @@
         a + 2,
         `Subtract ${a}, then divide by ${b}.`,
       ),
-      num(
-        `${b + 1}x + ${a} = x + ${a + b * 3}. Find x.`,
-        3,
-        `Subtract x and ${a} from both sides: ${b}x = ${b * 3}.`,
-      ),
+      ((k) =>
+        rev(
+          num(
+            `${b + 1}x + ${a} = x + ${a + b * k}. Find x.`,
+            k,
+            `Subtract x and ${a} from both sides: ${b}x = ${b * k}, so x = ${k}.`,
+          ),
+        ))(2 + (a % 6)),
       num(
         `x/${b} − ${a} = 2. Find x.`,
         b * (a + 2),
@@ -477,11 +484,14 @@
         48,
         "Multiply by 2; adding the same amount would not fit every gap.",
       ),
-      num(
-        `A sequence begins ${a}, ${a + b} and adds ${b} each time. Which position contains ${a + 5 * b}?`,
-        6,
-        "The first term uses zero additions; five additions reach the sixth term.",
-      ),
+      ((n) =>
+        rev(
+          num(
+            `A sequence begins ${a}, ${a + b} and adds ${b} each time. Which position contains ${a + n * b}?`,
+            n + 1,
+            `(${a + n * b} − ${a}) ÷ ${b} = ${n} additions. The first term uses none, so this is term ${n + 1}.`,
+          ),
+        ))(4 + (a % 6)),
       match(
         "Match each sequence to its rule.",
         ["2, 5, 8, 11", "2, 4, 8, 16", "1, 4, 9, 16"],
@@ -556,10 +566,12 @@
         a,
         "Bisect means divide into two equal parts.",
       ),
-      num(
-        `Bisect an angle of ${2 * b * 5}°. Each new angle?`,
-        b * 5,
-        "Keep the compass radius fixed for the two equal arcs.",
+      rev(
+        num(
+          `Bisect an angle of ${2 * (1 + (b % 89))}°. Each new angle?`,
+          1 + (b % 89),
+          `Bisect means halve the angle: ${2 * (1 + (b % 89))} ÷ 2 = ${1 + (b % 89)}°.`,
+        ),
       ),
       num(
         `A perpendicular meets a straight line. Angle in degrees?`,
@@ -602,11 +614,14 @@
     ["ratio_basics", "geometry_triangles", "algebra_coordinates"],
     "Congruent shapes have equal corresponding sides and angles. Similar shapes have equal angles and proportional corresponding lengths. Enlargement multiplies displacement from the centre by the scale factor. SSS, SAS, ASA and RHS can establish triangle congruence; AAA establishes similarity only.",
     (a, b) => [
-      num(
-        `A similar triangle has corresponding sides ${a} cm and ${3 * a} cm. Scale factor?`,
-        3,
-        "Divide image length by original length.",
-      ),
+      ((k) =>
+        rev(
+          num(
+            `A similar triangle has corresponding sides ${a} cm and ${k * a} cm. Scale factor?`,
+            k,
+            `Divide image length by original length: ${k * a} ÷ ${a} = ${k}.`,
+          ),
+        ))(2 + (a % 4)),
       num(
         `Enlarge a ${b} cm side by factor 3. New length?`,
         3 * b,
@@ -758,20 +773,60 @@
     ["geometry_similarity", "geometry_pythagoras"],
     "Relative to the chosen angle: sin = opposite/hypotenuse, cos = adjacent/hypotenuse, tan = opposite/adjacent. Similar right triangles preserve these ratios. Use degree mode and interpret an approximate calculator result in context.",
     (a, b) => [
-      num(
-        `A right triangle has opposite ${3 * b}, hypotenuse ${5 * b}. Find sin θ.`,
-        0.6,
-        "Divide opposite by hypotenuse: 3/5 = 0.6.",
+      (([o, h]) =>
+        rev(
+          num(
+            `A right triangle has opposite ${o * b}, hypotenuse ${h * b}. Find sin θ.`,
+            o / h,
+            `Divide opposite by hypotenuse: ${o * b}/${h * b} = ${o}/${h} = ${fmt(o / h)}.`,
+          ),
+        ))(
+        pick(
+          [
+            [3, 5],
+            [4, 5],
+            [7, 25],
+            [24, 25],
+          ],
+          a,
+        ),
       ),
-      num(
-        `Adjacent ${4 * b}, hypotenuse ${5 * b}. Find cos θ.`,
-        0.8,
-        "Divide adjacent by hypotenuse: 4/5 = 0.8.",
+      (([j, h]) =>
+        rev(
+          num(
+            `Adjacent ${j * b}, hypotenuse ${h * b}. Find cos θ.`,
+            j / h,
+            `Divide adjacent by hypotenuse: ${j * b}/${h * b} = ${j}/${h} = ${fmt(j / h)}.`,
+          ),
+        ))(
+        pick(
+          [
+            [4, 5],
+            [3, 5],
+            [24, 25],
+            [7, 25],
+          ],
+          b,
+        ),
       ),
-      num(
-        `Opposite ${3 * b}, adjacent ${4 * b}. Find tan θ.`,
-        0.75,
-        "Divide opposite by adjacent: 3/4 = 0.75.",
+      (([o, j]) =>
+        rev(
+          num(
+            `Opposite ${o * b}, adjacent ${j * b}. Find tan θ.`,
+            o / j,
+            `Divide opposite by adjacent: ${o * b}/${j * b} = ${o}/${j} = ${fmt(o / j)}.`,
+          ),
+        ))(
+        pick(
+          [
+            [3, 4],
+            [12, 5],
+            [15, 8],
+            [21, 20],
+            [9, 40],
+          ],
+          a,
+        ),
       ),
       num(
         `A 30° right triangle has hypotenuse ${2 * a} m. Use sin 30° = 0.5. Opposite length?`,
@@ -930,10 +985,25 @@
         2 * a,
         `There are 5 parts. Each part is ${a}. Red gets 2 parts.`,
       ),
-      num(
-        `There are ${3 * b} red and ${2 * b} blue counters. Red as a fraction of all counters?`,
-        0.6,
-        "Red is 3 of the 5 equal parts: 3/5.",
+      (([r, u]) =>
+        rev(
+          num(
+            `There are ${r * b} red and ${u * b} blue counters. Red as a fraction of all counters?`,
+            r / (r + u),
+            `Red is ${r} of the ${r + u} equal parts: ${r}/${r + u} = ${fmt(r / (r + u))}.`,
+          ),
+        ))(
+        pick(
+          [
+            [3, 2],
+            [1, 3],
+            [3, 1],
+            [1, 4],
+            [3, 5],
+            [7, 3],
+          ],
+          a,
+        ),
       ),
       match(
         "Match equivalent ratios.",
@@ -972,10 +1042,25 @@
         3 * a * b,
         "Principal × rate/100 × years; do not compound.",
       ),
-      num(
-        `${a} is what percentage of ${4 * a}?`,
-        25,
-        "Part ÷ comparison whole × 100 = 25%.",
+      (([p, w]) =>
+        rev(
+          num(
+            `${p * a} is what percentage of ${w * a}?`,
+            (100 * p) / w,
+            `Part ÷ comparison whole × 100: ${p}/${w} × 100 = ${(100 * p) / w}%.`,
+          ),
+        ))(
+        pick(
+          [
+            [1, 4],
+            [1, 2],
+            [3, 4],
+            [1, 5],
+            [2, 5],
+            [3, 10],
+          ],
+          a,
+        ),
       ),
       match(
         "Match each change to its multiplier.",
@@ -1014,11 +1099,14 @@
         100 - b,
         "Maximum minus minimum measures the full spread.",
       ),
-      num(
-        `Data: 2, 3, 4, ${a + 100}. Median?`,
-        3.5,
-        "There are four values; average the two middle values 3 and 4.",
-      ),
+      ((lo, m1, m2) =>
+        rev(
+          num(
+            `Data: ${lo}, ${m1}, ${m2}, ${a + 100}. Median?`,
+            (m1 + m2) / 2,
+            `There are four values; average the two middle values ${m1} and ${m2}. The very large value would pull the mean up, but not the median.`,
+          ),
+        ))(2 + (b % 5), 3 + (b % 5) + (a % 4), 4 + (b % 5) + (a % 4) + (b % 4)),
       num(
         "Grouped data: 0–10 has frequency 2; 10–20 has frequency 4. Estimated total using midpoints?",
         70,
@@ -1100,10 +1188,27 @@
     ["stats_scale", "stats_pie"],
     "Choose a display suited to the variable. Bar charts compare categories; line graphs show change in an ordered variable such as time; pie charts show shares of a whole. Read scales and label both axes.",
     (a, b) => [
-      num(
-        `A pie category contains ${a} of ${4 * a} responses. Angle in degrees?`,
-        90,
-        "The share is 1/4; multiply by 360°.",
+      (([p, w]) =>
+        rev(
+          num(
+            `A pie category contains ${p * a} of ${w * a} responses. Angle in degrees?`,
+            (360 * p) / w,
+            `The share is ${p}/${w}; ${p}/${w} × 360° = ${(360 * p) / w}°.`,
+          ),
+        ))(
+        pick(
+          [
+            [1, 4],
+            [1, 2],
+            [1, 3],
+            [1, 6],
+            [3, 4],
+            [1, 8],
+            [1, 5],
+            [1, 10],
+          ],
+          a,
+        ),
       ),
       num(
         `A line graph rises from ${a} to ${a + b} litres. Increase in litres?`,
@@ -1204,10 +1309,25 @@
     ["prob_chance", "decimals"],
     "Relative frequency is successes divided by trials. It estimates a probability; it does not guarantee future outcomes. Unequal sectors or outcome weights require their actual shares. Mutually exclusive exhaustive outcomes have probabilities summing to 1.",
     (a, b) => [
-      num(
-        `${a} successes in ${4 * a} trials. Relative frequency?`,
-        0.25,
-        "Divide successes by the total trials: 1/4.",
+      (([p, w]) =>
+        rev(
+          num(
+            `${p * a} successes in ${w * a} trials. Relative frequency?`,
+            p / w,
+            `Divide successes by the total trials: ${p}/${w} = ${fmt(p / w)}.`,
+          ),
+        ))(
+        pick(
+          [
+            [1, 4],
+            [1, 5],
+            [3, 10],
+            [2, 5],
+            [3, 4],
+            [1, 2],
+          ],
+          a,
+        ),
       ),
       num(
         "A spinner has red area 1/2, blue 1/3 and green the rest. Probability of green?",
@@ -1219,10 +1339,25 @@
         3 * a,
         "Multiply estimated probability by trial count; this is an expectation, not a promise.",
       ),
-      num(
-        `A bag has ${3 * b} red and ${b} blue identical counters. Probability of red?`,
-        0.75,
-        "There are 4 equal parts in all, of which 3 are red.",
+      (([r, u]) =>
+        rev(
+          num(
+            `A bag has ${r * b} red and ${u * b} blue identical counters. Probability of red?`,
+            r / (r + u),
+            `There are ${r + u} equal parts in all, of which ${r} are red: ${r}/${r + u} = ${fmt(r / (r + u))}.`,
+          ),
+        ))(
+        pick(
+          [
+            [3, 1],
+            [1, 1],
+            [2, 3],
+            [1, 4],
+            [7, 3],
+            [3, 5],
+          ],
+          a,
+        ),
       ),
       match(
         "Match each statement with its interpretation.",
@@ -1298,11 +1433,14 @@
     ["measure_speed", "measure_units", "ratio_rates"],
     "Write units as well as numbers. Speed is distance/time; density is mass/volume; unit price is cost/quantity. Square conversion factors for areas and cube them for volumes. For approximate conversions use the stated factor.",
     (a, b) => [
-      num(
-        `A ${a * 100} g block occupies ${a * 20} cm³. Density in g/cm³?`,
-        5,
-        "Mass divided by volume: 100/20 = 5.",
-      ),
+      ((d) =>
+        rev(
+          num(
+            `A ${a * 20 * d} g block occupies ${a * 20} cm³. Density in g/cm³?`,
+            d,
+            `Mass divided by volume: ${a * 20 * d} ÷ ${a * 20} = ${d}.`,
+          ),
+        ))(pick([5, 2, 4, 8, 10, 2.5], a)),
       num(
         `${b} m² is how many cm²?`,
         b * 10000,
@@ -1341,16 +1479,22 @@
     ["town_totals", "town_timetable", "ratio_proportion"],
     "Begin a home journey as a customer: check stock, list what is missing, allow travel time, compare suitable offers, pay, return and scale a recipe. A direct business entrance can instead start a worker day. All prices and budgets are fictional.",
     (a, b) => [
-      num(
-        `A recipe needs ${a + 3} portions; the cupboard has ${a}. Portions to buy?`,
-        3,
-        "Subtract existing stock before shopping.",
-      ),
-      num(
-        `Need ${b + 1} items sold only in packs of ${b}. Minimum whole packs?`,
-        2,
-        "One pack is short; round up to cover the actual need.",
-      ),
+      ((k) =>
+        rev(
+          num(
+            `A recipe needs ${a + k} portions; the cupboard has ${a}. Portions to buy?`,
+            k,
+            `Subtract existing stock before shopping: ${a + k} − ${a} = ${k}.`,
+          ),
+        ))(2 + (a % 6)),
+      ((k) =>
+        rev(
+          num(
+            `Need ${b * k + 1} items sold only in packs of ${b}. Minimum whole packs?`,
+            k + 1,
+            `${k === 1 ? "One pack gives" : k + " packs give"} ${b * k}, one short; round up to ${k + 1} packs to cover the actual need.`,
+          ),
+        ))(1 + (a % 4)),
       num(
         `A bus takes ${a} minutes, then a walk takes ${b}. Total minutes?`,
         a + b,
@@ -1513,15 +1657,45 @@
     ["ratio_inverse", "ratio_scale"],
     "A quantity can be more than the comparison whole: 6 compared with 4 is 6/4 = 1.5. In inverse proportion xy is constant, so doubling x halves y. Its graph curves; connected samples are an approximation, not a straight-line proportional model.",
     (a, b) => [
-      num(
-        `${3 * a} is what fraction of ${2 * a}? Give a decimal or fraction.`,
-        1.5,
-        "Divide the first quantity by the comparison quantity: 3/2. A fraction may exceed one.",
+      (([p, w]) =>
+        rev(
+          num(
+            `${p * a} is what fraction of ${w * a}? Give a decimal or fraction.`,
+            p / w,
+            `Divide the first quantity by the comparison quantity: ${p}/${w} = ${fmt(p / w)}. A fraction may exceed one.`,
+          ),
+        ))(
+        pick(
+          [
+            [3, 2],
+            [5, 4],
+            [5, 2],
+            [7, 4],
+            [6, 5],
+            [9, 4],
+          ],
+          a,
+        ),
       ),
-      num(
-        `A mixture has ${3 * b} ml concentrate and ${2 * b} ml water. Concentrate as a percentage of water?`,
-        150,
-        "The comparison whole is water, not the mixture total: 3/2 × 100 = 150%.",
+      (([c, w]) =>
+        rev(
+          num(
+            `A mixture has ${c * b} ml concentrate and ${w * b} ml water. Concentrate as a percentage of water?`,
+            (100 * c) / w,
+            `The comparison whole is water, not the mixture total: ${c}/${w} × 100 = ${(100 * c) / w}%.`,
+          ),
+        ))(
+        pick(
+          [
+            [3, 2],
+            [5, 4],
+            [1, 2],
+            [3, 4],
+            [7, 5],
+            [1, 4],
+          ],
+          a,
+        ),
       ),
       num(
         `For y = ${a * b}/x, find y when x = ${b}.`,
@@ -1702,7 +1876,8 @@
       });
     if (id === "number_precision") {
       base[1] = num(
-        `Round ${(a + 0.456) / 100000} to 3 significant figures.`,
+        // toPrecision(10) removes binary noise such as 0.00044456000000000004.
+        `Round ${Number(((a + 0.456) / 100000).toPrecision(10))} to 3 significant figures.`,
         Number(((a + 0.456) / 100000).toPrecision(3)),
         "Begin at the first non-zero digit. Keep three significant digits, inspect the next digit, and round.",
       );
@@ -1807,7 +1982,7 @@
         x0 = (a % (2 * peak + 1)) - peak,
         reciprocal = 2 + (b % 7),
         rx = 1.5 + (a % 7) * 0.5,
-        target = 0.5 + (a % 36) * 0.1,
+        target = (5 + (a % 36)) / 10,
         c = (a % 97) - 48,
         shift = (b % 97) - 48,
         slope = 1 + (a % 2),
@@ -2170,7 +2345,7 @@
       }
       const meta = {
         contentVersion: 8,
-        id: `${id}:v1:b${band}:s${seed}:f${i}`,
+        id: `${id}:v${r.revision || 1}:b${band}:s${seed}:f${i}`,
         family: `${id}:${i}`,
         band,
         unit: r.unit || "",
@@ -2187,7 +2362,9 @@
     for (let family = 0; family < 6; family++) {
       let chosen;
       for (let attempt = 0; attempt < 100; attempt++) {
-        const row = rows(id, band, round + attempt * 31)[family];
+        // Each family uses its own seed, so one lesson does not reuse the same
+        // numbers and answers across several questions. Rows are unchanged.
+        const row = rows(id, band, round + family * 7 + attempt * 31)[family];
         if (!seen.has(row[0])) {
           chosen = row;
           break;
