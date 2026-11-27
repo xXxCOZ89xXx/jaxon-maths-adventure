@@ -38,7 +38,7 @@ test('intercepted cloud saves retain the combination and wallet across reload',a
  const ids=['fox','forestbg','cap','hoodie'];family.server.progress.equipped=['cap'];family.server.wallet.owned=[...ids,'dog'];
  const original={...family.server.wallet},p=await family.open('learner');
  await p.locator('[data-action="skip-tour"]').click();await ready(p);
- await p.locator('nav [data-nav="camp"]').click();await ready(p);await p.locator('[data-action="nav:shop"]').first().click();await ready(p);
+ await p.locator('nav [data-nav="home"]').click();await ready(p);await p.locator('[data-action="nav:shop"]').first().click();await ready(p);
  for(const id of ['fox','forestbg','hoodie']){await p.locator(`[data-action="buy:${id}"]`).click();await ready(p);}
  await p.evaluate(()=>window.dispatchEvent(new Event('online')));
  await expect.poll(()=>[...family.server.progress.equipped].sort()).toEqual([...ids].sort());

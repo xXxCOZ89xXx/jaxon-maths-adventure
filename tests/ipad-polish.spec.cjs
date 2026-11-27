@@ -12,7 +12,7 @@ test('Map and Town show distinct artwork, progress, buildings and literal role l
   const before=await read();expect(before.settings.sound).toBe(false);await page.locator('.town-hotspots [data-action^="j-work:market:"]').click();await expect(page.locator('.location-ribbon')).toContainText('EMPLOYEE');await expect(page.locator('.location-ribbon')).toContainText('Supermarket');await layout(page);
 });
 test('Wardrobe previews are reversible and never change coins, ownership, equipment or storage',async({camp},info)=>{
-  const {page,key,read}=camp;await click(page,'skip-tour');await click(page,'nav:camp');await click(page,'nav:shop');
+  const {page,key,read}=camp;await click(page,'skip-tour');await click(page,'nav:home');await click(page,'nav:shop');
   const before=await page.evaluate(key=>localStorage.getItem(key),key);const item=await page.evaluate(()=>V3Curriculum.catalog[0]);
   await page.locator(`[data-ui="preview-item"][data-item="${item.id}"]`).click();await expect(page.locator('#wardrobe-preview h2')).toContainText(item.label);await expect(page.locator('#wardrobe-preview svg')).toHaveAttribute('aria-label',new RegExp(item.label));expect(await page.evaluate(key=>localStorage.getItem(key),key)).toBe(before);
   await layout(page);await page.screenshot({path:`tests/artifacts/${info.project.name}-polished-preview.png`});await page.locator('[data-ui="clear-preview"]').click();await expect(page.locator('#wardrobe-preview h2')).toHaveText('Your explorer');expect(await page.evaluate(key=>localStorage.getItem(key),key)).toBe(before);

@@ -4,6 +4,11 @@ function solution(a,answer){const ops=[];
  else if(a.kind==='numberline'){const value=Number(answer),jump=(a.max-a.min)/10,start=a.min+Math.floor((value-a.min)/jump)*jump;ops.push({op:'value',value:start});for(let n=start+a.step;n<=value+1e-7;n+=a.step)ops.push({op:'value',value:Number(n.toFixed(6))});}
  else if(a.kind==='jug')for(let n=a.step;n<=Number(answer)+1e-7;n+=a.step)ops.push({op:'value',value:n});
  else if(a.kind==='grid')ops.push({op:'point',point:JSON.parse(answer)});
+ // B2 models, using only the buttons a keyboard user can press.
+ else if(a.kind==='tiles')for(const row of [...new Set(a.cells.map(c=>c[1]))].sort((x,y)=>x-y))ops.push({op:'row',row});
+ else if(a.kind==='balance'){for(let k=1;k<=a.left;k++)ops.push({op:'remove',value:k});ops.push({op:'share',value:true});}
+ else if(a.kind==='bar'){const value=Number(answer);let parts=2;while(parts<=(a.maxParts||12)&&!Number.isInteger(Number((value*parts/a.whole).toFixed(6))))parts++;assert(parts<=(a.maxParts||12),'bar split');const shade=Math.round(value*parts/a.whole);for(let k=2;k<=parts;k++)ops.push({op:'split',value:k});for(let k=1;k<=shade;k++)ops.push({op:'shadeTo',value:k});}
+ else if(a.kind==='clock')for(let n=a.step;n<=Number(answer);n+=a.step)ops.push({op:'value',value:n});
  else {let targets=[];
   if(a.kind==='fraction')targets=Array.from({length:Math.round(Number(answer)*a.denominator)},(_,i)=>[i,i]);
   if(a.kind==='groups'){const key=JSON.parse(answer);if(a.counts){let item=0;for(const [target,n]of key.entries())for(let i=0;i<n;i++)targets.push([item++,target]);}else targets=key.map((target,i)=>[i,target]);}

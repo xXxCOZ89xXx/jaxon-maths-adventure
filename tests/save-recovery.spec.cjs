@@ -2,12 +2,12 @@ const {test,expect}=require('./helpers/identities.cjs');
 async function tap(p,a){const d=p.locator('dialog[open]');await (await d.count()?d:p).locator(`[data-action="${a}"]`).first().tap();if(a.startsWith('buy:')&&await p.locator('#purchase-confirmation[open]').count())await p.locator('#purchase-confirmation [data-action^="buy-confirm:"]').tap();await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));}
 const waitSave=p=>p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));
 for(const failure of ['loseBuy','failReadAfterBuy'])test(`purchase ${failure}: resume acknowledged intent after refresh and buy another item`,async({family})=>{
- const p=await family.open('learner');await tap(p,'skip-tour');await p.locator('nav [data-nav="camp"]').tap();await tap(p,'nav:shop');family.server[failure]=true;const before=family.server.wallet.coins;
+ const p=await family.open('learner');await tap(p,'skip-tour');await p.locator('nav [data-nav="home"]').tap();await tap(p,'nav:shop');family.server[failure]=true;const before=family.server.wallet.coins;
  await tap(p,'buy:cap');await expect.poll(()=>family.server.wallet.owned).toContain('cap');const key=`v3-intent:${family.ref}:${family.uid}`;
  // Let the injected read failure occur before reloading, so it cannot fail the new session's initial read.
  if(failure==='failReadAfterBuy'){await expect.poll(()=>family.server.failNextRead).toBe(false);await expect.poll(()=>p.evaluate(k=>!!JSON.parse(localStorage.getItem(k))?.receipt,key)).toBe(true);}
  await expect.poll(()=>p.evaluate(k=>!!localStorage.getItem(k),key)).toBe(true);await p.reload();await p.waitForFunction(k=>!localStorage.getItem(k),key);expect(family.server.wallet.coins).toBe(before-45);
- await p.locator('nav [data-nav="camp"]').tap();await tap(p,'nav:shop');await tap(p,'buy:helmet');await expect.poll(()=>family.server.wallet.owned).toContain('helmet');expect(family.server.wallet.coins).toBe(before-90);
+ await p.locator('nav [data-nav="home"]').tap();await tap(p,'nav:shop');await tap(p,'buy:helmet');await expect.poll(()=>family.server.wallet.owned).toContain('helmet');expect(family.server.wallet.coins).toBe(before-90);
  const calls=family.server.calls.filter(c=>c.body?.p_operation==='buy'&&c.body?.p_args?.item==='cap');expect(new Set(calls.map(c=>c.body.p_args.requestId)).size).toBe(1);
 });
 test('offline edits keep the immutable request, reopen exact journey and recover on reconnect',async({family})=>{

@@ -157,7 +157,7 @@ test("Practical Town: all eight venues teach and complete actual tasks, restore 
   expect(s.milestones).toHaveLength(8);
   expect(s.skills).toEqual({});
   await expect(page.getByText("3/3 LANDMARKS RESTORED")).toBeVisible();
-  await page.locator('nav [data-nav="camp"]').click();
+  await page.locator('nav [data-nav="home"]').click();
   await page.getByText("Your discoveries · achievement journal", {exact:true}).click();
   await expect(page.getByText("Town neighbour · earned")).toBeVisible();
   await expect(page.locator(".keepsake")).toHaveCount(8);
@@ -303,7 +303,7 @@ test("Concurrent mission completion grants one milestone and camp projects need 
   await expect.poll(async () => (await saved(page)).milestones.length).toBe(1);
   expect(Object.keys((await saved(page)).adventure.records)).toHaveLength(1);
   await other.close();
-  await page.locator('nav [data-nav="camp"]').click();
+  await page.locator('nav [data-nav="home"]').click();
   await expect(
     page.locator('[data-action="camp-build:greenhouse"]'),
   ).toBeDisabled();

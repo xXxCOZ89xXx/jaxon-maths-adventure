@@ -5,7 +5,7 @@ const settled=p=>p.waitForFunction(()=>!document.documentElement.hasAttribute('d
 async function click(p,action){const selector=`[data-action="${action}"]:visible`,dialog=p.locator('dialog[open]');const target=(await dialog.count()&&await dialog.locator(selector).count()?dialog.locator(selector):p.locator(selector)).first();if(p.homeTouch)await target.tap();else await target.click();await settled(p);}
 async function open(p){const d=p.locator('.world-task-dialog');if(await d.count()&&!await d.isVisible())await p.locator('[data-world-task-open]').first().click();}
 async function shot(p,info,build,name,selector='#main'){const dir=`work/home-exterior/${process.env.HOME_BEFORE?'before':'after'}/${build}/${info.project.name}`;fs.mkdirSync(dir,{recursive:true});await p.locator(selector).locator('img').evaluateAll(images=>Promise.all(images.map(i=>i.decode())));await p.locator(selector).screenshot({path:dir+'/'+name+'.png'});}
-for(const build of ['private','demo'])test(`${build}: Home selection, all six transitions, pause and completion`,async({page:p},info)=>{
+for(const build of ['private','demo'])test(`${build}: Home selection${build==='demo'?' within the approved demo sample':', all six transitions, pause and completion'}`,async({page:p},info)=>{
  const errors=[],external=[];p.homeTouch=!!info.project.use.hasTouch;p.on('pageerror',e=>errors.push(e.message));
  let key,server,mockErrors=[];
  if(build==='private'){
@@ -26,6 +26,9 @@ for(const build of ['private','demo'])test(`${build}: Home selection, all six tr
  // Keyboard alternative below the scene uses exactly the same actions.
  for(const kind of kinds){await p.locator('.home-accessible summary').press('Enter');await p.locator(`.home-accessible [data-action="home-activity:${kind}"]`).focus();await p.keyboard.press('Enter');await settled(p);expect((await read()).adventure.active.context.homeActivity).toBe(kind);await click(p,'home-exterior');}
  const initial=await read();
+ if(build==='demo'){// Approved demo sample: 2 tries per activity, 10 activities (demo/sample.json). Transitions and completion run on the private build.
+  await expect(p.locator('.demo-sample-note')).toContainText('Demo: you have tried 3 of 10 activities.');expect(initial.skills).toBeTruthy();
+  expect(errors).toEqual([]);expect(external).toEqual([]);expect(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);expect(await p.evaluate(()=>Object.keys(localStorage))).toEqual([key]);expect(await p.context().cookies()).toEqual([]);return;}
  for(const from of kinds)for(const to of kinds.filter(k=>k!==from)){
   await click(p,'home-activity:'+from);await open(p);if((await read()).adventure.active.phase==='lesson')await click(p,'m-begin');await click(p,'m-help');
   const old=structuredClone((await read()).adventure.active);

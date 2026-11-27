@@ -201,9 +201,10 @@ test("offline edit and reconnect, competing-device conflict and server shop owne
     .click();
   await expect.poll(() => server.progress.quest?.assisted).toBe(true);
   await expect(page.getByRole("dialog")).toHaveCount(0);
-  await page.getByRole("button", { name: "My explorer", exact: true }).click();
+  await page.getByRole("button", { name: "Home", exact: true }).click();
   await page
-    .getByRole("button", { name: "Customise explorer", exact: true })
+    .locator(".camp-dock")
+    .getByRole("button", { name: "Explorer wardrobe", exact: true })
     .click();
   await page
     .getByRole("button", { name: "Buy Forest cap", exact: true })
@@ -246,9 +247,10 @@ test("a parent award reaches an open learner shop without a progress revision", 
   const errors = await mock(page, server);
   await page.clock.install();
   await login(page);
-  await page.getByRole("button", { name: "My explorer", exact: true }).click();
+  await page.getByRole("button", { name: "Home", exact: true }).click();
   await page
-    .getByRole("button", { name: "Customise explorer", exact: true })
+    .locator(".camp-dock")
+    .getByRole("button", { name: "Explorer wardrobe", exact: true })
     .click();
   const cap = page.getByRole("button", { name: "Buy Forest cap", exact: true });
   await expect(cap).toBeDisabled();
