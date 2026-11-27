@@ -1,0 +1,11 @@
+{
+  "projectRef": "vyxvemtevkxlwqzelghj",
+  "deployedClient": "cbee972f7e176471611e1749c8f48cac2aec0d44",
+  "sourceFile": "supabase/history/002_enable_retained_history.sql",
+  "sourceSha256": "2d476e63b98e0290d1a0ee1051f3e5a9576fdaaeb009a731a7dcbfacc90f0b2d",
+  "installedPackageSha256": "b51a27fa5299af28dbe3bcbf968abe46e0f20f79b46b026c1148db6909ed385e",
+  "sqlSha256": "cc9c1ab9d37e289d1530eec87f40384548f4076401cf4f876dc47cec5ad2735d",
+  "existingApplicationRowsCompared": true,
+  "accountChangesIncluded": false,
+  "liveProjectAllowed": false
+}

@@ -4,6 +4,8 @@ The owner approved the Claude-review plan on 18 November 2026: stable question i
 
 ## Scope and release
 
+- The owner’s 19 November UK launch plan and subsequent instructions authorise setup, configuration, fictional accounts, fixes and testing in the separate synthetic project `vyxvemtevkxlwqzelghj` without repeated approval. Its baseline and Auth settings are owner-confirmed installed/configured. The earlier hosted-QA restriction below continues to protect live/legacy projects; it does not block this authorised synthetic work. Use no real learner data, live clones or public fixture passwords. Updates or merges that reach the existing live game/demo still need owner approval. Keep live history installation/activation separate; the scoped application-data backup checkpoint is complete. Follow the shared Notion project home for current evidence and the full launch roadmap.
+
 - Develop on an isolated branch based on `release/ipad`. Submit normal PRs to that branch; never push a release directly, bypass checks, use skip flags, or change branch protections. Keep `main`, `index.html` and the original `v2-game-test.html` untouched.
 - Development includes concrete migration scripts and fictional rehearsals. Hosted database installation/cutover needs its own reviewed package and a verified encrypted backup; the original Claude brief assigns that backup to the owner. Do not run hosted SQL, create accounts/projects, use learner services or change hosting/access settings as development QA.
 - Publish only when release is authorised, through the existing Git-connected Cloudflare projects. Verify deployment checks for the exact merge commit through GitHub. No Cloudflare API, Wrangler, manual uploads or configuration changes.

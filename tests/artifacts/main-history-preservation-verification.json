@@ -1,0 +1,19 @@
+{
+  "runtime": "PGlite 0.4.6 / PostgreSQL 17.5, in-memory, no network listener",
+  "groupsPassed": 13,
+  "package": {
+    "projectRef": "sfogrvedypgtxfvecmbx",
+    "sourceFile": "supabase/history/001_retained_history.sql",
+    "sourceSha256": "3cdad342ebfecff2c28c32299573cbaa679c06d86b099e1a54a988a2f916f185",
+    "baselineSha256": "c384542b09d0850dcbc78cd7bdbaf361d9b8e40946bc59746f19536e74efbf77",
+    "sqlSha256": "7cbb3c603e8ff08b7f9d1f34b182a8b11dc06c2d44b72bce17de84ece9509668",
+    "precheckSqlSha256": "ce4cc73d53b96a4fa284e4955c252b05879727a4f44bb4933f16f4ba7e1a9b0d",
+    "activationIncluded": false,
+    "originalTableAclsCompared": true,
+    "ownerApprovalRequired": true,
+    "preservationScope": "All pre-existing public/v52_staging_private ordinary/partitioned tables plus auth.users and auth.identities; row contents checked inside transaction",
+    "baselineSourceOnly": true
+  },
+  "scope": "Fictional SQL rehearsals only, not native multi-session locking, live deployment or managed-service recovery certification",
+  "hostedSqlExecuted": false
+}

@@ -1,0 +1,496 @@
+{
+  "scope": "Reviewed source contracts, not a live database inventory",
+  "fixturePrivilegeProfile": "Supabase server-role defaults confirmed by Main catalogue review, 20 November 2026",
+  "projectRef": "sfogrvedypgtxfvecmbx",
+  "sourceHashes": {
+    "supabase/v3-staging/001_secure_core.sql": "80ff825e0888d7e4a7aa44aaf0c96f09922eb88cba622184d64ce5f7c456f054",
+    "supabase/v3-staging/002_catalog.sql": "26c1fe9447f67e1f775ac2bf726f6dee617fd66ec9bb856a276662fa3895116a",
+    "supabase/v3-staging/004_compact_save_receipts.sql": "085f3d619bf4194e6c05fdf01dbd31e56a6b1a33cfde7110413a6933e901d905",
+    "supabase/base-camp/001_parent_game_reset.sql": "97619e3fbc141de1f9a68b0ac3ee9e069f13676f6160a231923c066761ecb131",
+    "supabase/history/001_retained_history.sql": "3cdad342ebfecff2c28c32299573cbaa679c06d86b099e1a54a988a2f916f185"
+  },
+  "before": {
+    "public.v3_request(text,text,jsonb)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": [
+          "p_token",
+          "p_operation",
+          "p_args"
+        ],
+        "defaults": "'{}'::jsonb",
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": false,
+        "authenticatedExecute": true
+      },
+      "bodyHashes": [
+        "672261fe60b5c215036aa4033f46d5b99d61f59bcccdbf72d2b42be4e1765fe0",
+        "dc9ea869f04c0064863088277c1baac8d65c977b0a6cc8ecbbe664829024cd14"
+      ]
+    },
+    "public.v3_request_before_game_reset(text,text,jsonb)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": [
+          "p_token",
+          "p_operation",
+          "p_args"
+        ],
+        "defaults": "'{}'::jsonb",
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": false,
+        "authenticatedExecute": false
+      },
+      "bodyHashes": [
+        "ca2432d4745cee13a1ce8a5c47176d76ab1c41dbafd8f4191fbdb84b78a4c698",
+        "23694d6804651e0ab6eb9d2a5a6d494a0187a975bef7998797105157bd7fb185"
+      ]
+    },
+    "public.v3_identity()": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": null,
+        "defaults": null,
+        "language": "sql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": true,
+        "publicExecute": false,
+        "serviceExecute": true,
+        "authenticatedExecute": true
+      },
+      "bodyHashes": [
+        "a7a9fe2a949db2c5610caf9de54c212fd01ed9b66e84c9648f8b7410020cf059",
+        "c614d16a07afb032f733ab221ecc1cafb8425c343fc46247f06ac2a1e1b9bfd2"
+      ]
+    },
+    "public.v3_role()": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": null,
+        "defaults": null,
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": true,
+        "authenticatedExecute": true
+      },
+      "bodyHashes": [
+        "29ca307a30a2ca49992eadcf74cb63b4d42812a578ec90d52437c3b39cc77ba9",
+        "602d5563e1ac536b4a5526ea7e29e1715c9b8b976995bf5512e2945d9741dfe8"
+      ]
+    },
+    "public.v3_set_pin(text)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": [
+          "p_pin"
+        ],
+        "defaults": null,
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": true,
+        "authenticatedExecute": true
+      },
+      "bodyHashes": [
+        "511a9ac2a7d5285ac7ca3fe70cd2de2d23d76a933be775f84ce6ef9b4e56a4af",
+        "ae41aacc513fe8423cc841087408ec1a85b5368046f4415a6d4eaf57149d7e8b"
+      ]
+    },
+    "public.v3_unlock(text)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": [
+          "p_pin"
+        ],
+        "defaults": null,
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": true,
+        "authenticatedExecute": true
+      },
+      "bodyHashes": [
+        "468d0cb21ffa73454b68d5d47a54776d0728ea9c64af6ea80b327dbf884f6df0",
+        "6443cb3162af5867d5afb5e363abab1c7fbfc1d33c1642fcbb3bbae8cbc436ce"
+      ]
+    }
+  },
+  "installed": {
+    "public.v3_request(text,text,jsonb)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": [
+          "p_token",
+          "p_operation",
+          "p_args"
+        ],
+        "defaults": "'{}'::jsonb",
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": false,
+        "authenticatedExecute": true
+      },
+      "bodyHashes": [
+        "36567628acc811b342e065e284701b79bf970327549ee50e0353b83e5e02a34c",
+        "b864909c5745f57734ba72461d28bd947d38463f6f51cebb366db21092e769e9"
+      ]
+    },
+    "public.v3_request_before_history(text,text,jsonb)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": [
+          "p_token",
+          "p_operation",
+          "p_args"
+        ],
+        "defaults": "'{}'::jsonb",
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": false,
+        "authenticatedExecute": false
+      },
+      "bodyHashes": [
+        "672261fe60b5c215036aa4033f46d5b99d61f59bcccdbf72d2b42be4e1765fe0",
+        "dc9ea869f04c0064863088277c1baac8d65c977b0a6cc8ecbbe664829024cd14"
+      ]
+    },
+    "public.v3_identity()": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": null,
+        "defaults": null,
+        "language": "sql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": true,
+        "publicExecute": false,
+        "serviceExecute": false,
+        "authenticatedExecute": true
+      },
+      "bodyHashes": [
+        "9bc94f1a4a0095557ea08e47ee282cf5e425d06ad6b56876104efa695003648c"
+      ]
+    },
+    "public.v3_identity_before_history()": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": null,
+        "defaults": null,
+        "language": "sql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": false,
+        "authenticatedExecute": false
+      },
+      "bodyHashes": [
+        "a7a9fe2a949db2c5610caf9de54c212fd01ed9b66e84c9648f8b7410020cf059",
+        "c614d16a07afb032f733ab221ecc1cafb8425c343fc46247f06ac2a1e1b9bfd2"
+      ]
+    },
+    "public.v3_history_children(jsonb)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": false,
+        "returns": "text[]",
+        "argnames": [
+          "n"
+        ],
+        "defaults": null,
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "i",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": false,
+        "authenticatedExecute": false
+      },
+      "bodyHashes": [
+        "020deac8ca494b94b7a3780272fb7581ec9c2890807104806e3d89909aaea46d",
+        "b9b7dbbd2d5ebf8beabdbe71c35d1d177f6511b058d386f76abfcc5c29a76be1"
+      ]
+    },
+    "public.v3_history_value(uuid,bigint,text,integer)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": [
+          "c",
+          "epoch",
+          "node_id",
+          "depth"
+        ],
+        "defaults": "0",
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": false,
+        "authenticatedExecute": false
+      },
+      "bodyHashes": [
+        "9b1fb5eb54c8ebb8da44af971eb8f317b439cd2f8d9817bc1d30cc2203ab23e3",
+        "fff61db7e923188606a0433dbacff6bbf2f66eab75c945869c3d2bed36c21552"
+      ]
+    },
+    "public.v3_history_restore(uuid,bigint,jsonb)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": [
+          "c",
+          "epoch",
+          "p"
+        ],
+        "defaults": null,
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": false,
+        "authenticatedExecute": false
+      },
+      "bodyHashes": [
+        "29685cf6f8a7b3cf4fb374b9f009a373c4926430dd87dabd727756e9f76f28c0",
+        "9d9790ae06bf1b6bb7b166ceea80e94eccbcd60c283e2a52443fee2194ab8d4f"
+      ]
+    },
+    "public.v3_request_before_game_reset(text,text,jsonb)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": [
+          "p_token",
+          "p_operation",
+          "p_args"
+        ],
+        "defaults": "'{}'::jsonb",
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": false,
+        "authenticatedExecute": false
+      },
+      "bodyHashes": [
+        "ca2432d4745cee13a1ce8a5c47176d76ab1c41dbafd8f4191fbdb84b78a4c698",
+        "23694d6804651e0ab6eb9d2a5a6d494a0187a975bef7998797105157bd7fb185"
+      ]
+    },
+    "public.v3_role()": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": null,
+        "defaults": null,
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": true,
+        "authenticatedExecute": true
+      },
+      "bodyHashes": [
+        "29ca307a30a2ca49992eadcf74cb63b4d42812a578ec90d52437c3b39cc77ba9",
+        "602d5563e1ac536b4a5526ea7e29e1715c9b8b976995bf5512e2945d9741dfe8"
+      ]
+    },
+    "public.v3_set_pin(text)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": [
+          "p_pin"
+        ],
+        "defaults": null,
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": true,
+        "authenticatedExecute": true
+      },
+      "bodyHashes": [
+        "511a9ac2a7d5285ac7ca3fe70cd2de2d23d76a933be775f84ce6ef9b4e56a4af",
+        "ae41aacc513fe8423cc841087408ec1a85b5368046f4415a6d4eaf57149d7e8b"
+      ]
+    },
+    "public.v3_unlock(text)": {
+      "metadata": {
+        "owner": "postgres",
+        "config": [
+          "search_path=\"\""
+        ],
+        "strict": false,
+        "definer": true,
+        "returns": "jsonb",
+        "argnames": [
+          "p_pin"
+        ],
+        "defaults": null,
+        "language": "plpgsql",
+        "parallel": "u",
+        "leakproof": false,
+        "returnsSet": false,
+        "volatility": "v",
+        "anonExecute": false,
+        "publicExecute": false,
+        "serviceExecute": true,
+        "authenticatedExecute": true
+      },
+      "bodyHashes": [
+        "468d0cb21ffa73454b68d5d47a54776d0728ea9c64af6ea80b327dbf884f6df0",
+        "6443cb3162af5867d5afb5e363abab1c7fbfc1d33c1642fcbb3bbae8cbc436ce"
+      ]
+    }
+  }
+}

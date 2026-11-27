@@ -1,0 +1,18 @@
+{
+  "groupsPassed": 8,
+  "package": {
+    "projectRef": "sfogrvedypgtxfvecmbx",
+    "deployedClient": "f7be74159137bc3bad289b53df615f9afdf9ad68",
+    "installedPackageSha256": "7cbb3c603e8ff08b7f9d1f34b182a8b11dc06c2d44b72bce17de84ece9509668",
+    "sourceFile": "supabase/history/002_enable_retained_history.sql",
+    "sourceSha256": "2d476e63b98e0290d1a0ee1051f3e5a9576fdaaeb009a731a7dcbfacc90f0b2d",
+    "sqlSha256": "fcdf36e9b0603613b131f3a5cee551764c38adae65bce4fad0faddb75c7a0147",
+    "precheckSqlSha256": "4f5f4605bdf7140237283adce600bac8274951ef96a786f00727516e1549a2f5",
+    "ownerApprovalRequired": true,
+    "currentDeploymentProofRequired": true,
+    "originalTableAclsCompared": true,
+    "onlyPermittedRowChange": "public.v3_history_settings singleton exact false/false/null to true/true/reviewed-client",
+    "accountChangesIncluded": false
+  },
+  "scope": "Fictional in-memory PostgreSQL; hosted activation not executed"
+}

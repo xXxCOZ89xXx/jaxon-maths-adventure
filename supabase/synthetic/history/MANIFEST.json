@@ -1,0 +1,9 @@
+{
+  "projectRef": "vyxvemtevkxlwqzelghj",
+  "sourceFile": "supabase/history/001_retained_history.sql",
+  "sourceSha256": "3cdad342ebfecff2c28c32299573cbaa679c06d86b099e1a54a988a2f916f185",
+  "sqlSha256": "b51a27fa5299af28dbe3bcbf968abe46e0f20f79b46b026c1148db6909ed385e",
+  "activationIncluded": false,
+  "accountChangesIncluded": false,
+  "existingRowsComparedInsideTransaction": true
+}
