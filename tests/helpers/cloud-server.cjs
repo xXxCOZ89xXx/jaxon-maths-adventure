@@ -291,7 +291,10 @@ async function mock(page, server, options = {}) {
       } else if (body.p_operation === "buy") {
         const a = body.p_args;
         if (!server.transactions.has(a.requestId)) {
-          server.wallet.coins -= 45;
+          server.wallet.coins -=
+            require("../../v3/curriculum").V3Curriculum.catalog.find(
+              (i) => i.id === a.item,
+            ).cost;
           server.wallet.owned.push(a.item);
           server.transactions.set(a.requestId, { wallet: server.wallet });
         }

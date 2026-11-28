@@ -2405,3 +2405,24 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 @media(max-width:480px) { .base-ten-model, .math-art-place { padding: 24px 18px; } .tap-chart { padding: 36px 22px 24px; gap: 6px; } }
 /* Skip intros (the owner, 26 November 2026): folded intro text with a 48px "Read the intro" control. */
 .intro-more { margin: 8px 0 0; } .intro-more > summary { cursor: pointer; min-height: 48px; display: inline-flex; align-items: center; padding: 0 12px; border: 2px solid currentColor; border-radius: 8px; font-weight: 700; color: inherit; } .intro-more[open] > summary { margin-bottom: 8px; }
+
+/* Supplied artwork review. Scene, explorer and input proportions are retained. */
+.supplied-attachment .supplied-wearable{display:block;width:100%;height:100%;object-fit:fill;max-height:none;border:0;border-radius:0}
+.supplied-attachment[data-attachment-category="companion"] .supplied-wearable{object-fit:contain;object-position:center bottom}
+.item-art .supplied-item-image{width:100%;height:100%;object-fit:contain;border-radius:0}
+.colour-art{display:inline-flex!important;width:64px!important;height:76px!important;flex:0 0 64px!important;background:#edf0e4!important;border:1px solid #64816b;border-radius:8px}
+.wardrobe-colour-image{width:100%;height:100%;object-fit:contain;padding:4px}
+.decoration-art,.town-project-art{display:flex;align-items:center;justify-content:center;background:#e4ecdb;border-radius:10px;width:100%;height:180px;padding:12px}
+.decoration-image,.town-project-image{width:100%;height:100%;object-fit:contain;max-height:none}
+
+/* Launch clothing: original head placement, original skin at the join, front cloth above the neck. */
+.layered-explorer .avatar-base:not(.avatar-skin){z-index:2;clip-path:none;transform:none}
+.has-outfit .avatar-base:not(.avatar-skin){z-index:5;top:var(--outfit-head-top,8%);clip-path:inset(0 0 78.5% 0);transform:none}
+/* Remove the rear braid and loose hair below the jaw from the worn girl portrait. */
+.has-outfit[data-avatar-character="girl"] .avatar-base:not(.avatar-skin){clip-path:polygon(0 0,100% 0,100% 18.2%,57% 18.2%,53.5% 20.2%,53.5% 21.5%,45% 21.5%,45% 20.2%,42.5% 18.2%,0 18.2%)}
+.avatar-neck-bridge{position:absolute;display:block;overflow:hidden;pointer-events:none;clip-path:polygon(5% 0,95% 0,100% 100%,0 100%)}
+.native-neck-source{display:block;width:100%;height:100%;background-repeat:no-repeat;pointer-events:none}
+
+/* Optional employee practice keeps its inputs inside the guide on narrow screens. */
+.induction-answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:12px 0}.induction-answers label{display:grid;gap:6px;font-weight:700}.induction-answers input{box-sizing:border-box;width:100%;max-width:16rem;min-height:48px;font:inherit;padding:8px}
+@media(max-width:480px){.induction-answers{grid-template-columns:1fr}}

@@ -24,6 +24,8 @@ html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
     js='window.V3CampAssetFiles='+JSON.stringify(Object.fromEntries(assets.map(a=>[a.file,'data:image/webp;base64,'+fs.readFileSync(path.join(root,'v3/assets/base-camp',a.file)).toString('base64')])))+';\n'+js;
   }
   if(src === 'v3/avatar-art.js') {
+    const supplied=JSON.parse(fs.readFileSync(path.join(root,'v3/assets/supplied-20261128/manifest.json'))).assets;
+    js='window.V3SuppliedArtworkFiles='+JSON.stringify(Object.fromEntries(supplied.map(a=>[a.name,'data:image/webp;base64,'+fs.readFileSync(path.join(root,a.file)).toString('base64')])))+';\n'+js;
     const assets=JSON.parse(fs.readFileSync(path.join(root,'v3/assets/delivery-manifest.json'))).assets.filter(a=>a.source.startsWith('v3/assets/ingredients/'));
     js='window.V3IngredientFiles='+JSON.stringify(Object.fromEntries(assets.map(a=>[path.basename(a.file,'.webp'),'data:image/webp;base64,'+fs.readFileSync(path.join(root,a.file)).toString('base64')])))+';\n'+js;
   }
@@ -63,6 +65,12 @@ html = html.replace(/<script src="([^"]+)"><\/script>/g, (_, src) => {
     const names={number:'number-forest',fractions:'fraction-desert',algebra:'algebra-peaks',geometry:'geometry-kingdom',ratio:'ratio-island',statistics:'statistics-city',probability:'probability-portal',measure:'measurement-mines',town:'practical-maths-town'};
     js='window.WorldGuidePortraitFiles='+JSON.stringify(Object.fromEntries(Object.entries(names).map(([world,name])=>[world,assets[name]])))+';\n'+js;
   }
+  if (src === 'v3/hands-on.js' || src === 'v3/touch-activities.js') {
+    const dir=path.join(root,'v3/assets/maths-tools');
+    const assets=Object.fromEntries(JSON.parse(fs.readFileSync(path.join(dir,'manifest.json'),'utf8')).assets.map(a=>[path.basename(a.file,'.png'),'data:image/png;base64,'+fs.readFileSync(path.join(dir,a.file)).toString('base64')]));
+    js=js.replace(/v3\/assets\/maths-tools\/([a-z-]+)\.png/g,(_,name)=>assets[name]);
+    if(src==='v3/hands-on.js') js='window.V3MathToolFiles='+JSON.stringify(assets)+';\n'+js;
+  }
   hashes.push(
     "'sha256-" + crypto.createHash("sha256").update(js).digest("base64") + "'",
   );
@@ -81,6 +89,9 @@ html = html
       '"',
   )
   .replace('href="v3-adventure.html"', 'href="#main"');
+html=html.replace(/url\("assets\/maths-tools\/([a-z-]+\.png)"\)/g,(_,name)=>'url("data:image/png;base64,'+fs.readFileSync(path.join(root,'v3/assets/maths-tools',name)).toString('base64')+'")');
+// Keep the approved branding self-contained in the downloadable review build.
+html=html.replace(/(src|srcset|href)="(v3\/assets\/branding\/[a-z0-9-]+\.(?:png|webp))"/g,(_,attr,file)=>attr+'="data:image/'+path.extname(file).slice(1)+';base64,'+fs.readFileSync(path.join(root,file)).toString('base64')+'"');
 fs.writeFileSync(path.join(out, "PLAY-V3.html"), html);
 fs.writeFileSync(
   path.join(out, "README.txt"),

@@ -1,0 +1,1018 @@
+{
+  "baseline": "1ab97b4",
+  "files": [
+    {
+      "file": "v3/assets/base-camp/collection-surface.webp",
+      "sha256": "d00a312e9f7594ca2ee6c80cf6f9b46796d31d598afe59f5d8bb2ed229b388da"
+    },
+    {
+      "file": "v3/assets/base-camp/display-garden.webp",
+      "sha256": "26a93d9f9fbe322309edac467d645b209063e9754dc35ebaa384f22f5857dd92"
+    },
+    {
+      "file": "v3/assets/base-camp/display-gate.webp",
+      "sha256": "ac6d9744b77080b8b8c86ca2e2c0b318823de2f5be95a640380b28c795d940a8"
+    },
+    {
+      "file": "v3/assets/base-camp/display-shelf.webp",
+      "sha256": "e39eac3e0b6f42394aaeff8853e0280c5b8ad69e03c529fe28c7ad6624c0c4b0"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/algebra-0.webp",
+      "sha256": "82f1efba5f9afe467da32086f4d61cd695caf8c4aa4f9b79be380ea554fb849f"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/algebra-1.webp",
+      "sha256": "602751870138f69aae90430990fc30a335d4576d9982c690d3f868104091005c"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/algebra-2.webp",
+      "sha256": "7b89bb6ed760f8bd748bf2cf79ee2272d7eb77fca04477a2dada254f556902fb"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/algebra-gateway.webp",
+      "sha256": "d6c3f7fab6ef91e776df746a1d3567bec8bff98cf5a1f18a5f6a9717186e8b74"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/fractions-0.webp",
+      "sha256": "7c5f08fa233377596c5a2333178820e0f980a54ddd82e9584fbfd8cc9045c3dd"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/fractions-1.webp",
+      "sha256": "2aadd19741e9d1f96ccd2bcf6023ff7a792738f0c044b650997497d615d43443"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/fractions-2.webp",
+      "sha256": "034b82815644f4a45accbb12d8b41c258b6ed8fdcfae67d8ea70f4a0d76bcca0"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/fractions-gateway.webp",
+      "sha256": "e9c820ff765723326f8acfc7dd1b28d82cf7017fb50124537cab400b8857d76f"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/geometry-0.webp",
+      "sha256": "12ceffbd4d57714a7df7cebf0b23a01a4ef0880cd597cbe5c62709bd3101a932"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/geometry-1.webp",
+      "sha256": "8a54e61c24e07cac3d721e531a37d45904fad45bf5f74018457e9c1853310aa6"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/geometry-2.webp",
+      "sha256": "8225e4e5355de59e968e3d970248d2d21e38d2e5a4f873303317658f9bd92e17"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/geometry-gateway.webp",
+      "sha256": "21b7ac99d0db75687f05fa10c2dbdf3b9fc89f6e9d7a2383744911947d2b5e07"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/measure-0.webp",
+      "sha256": "bd436b503feb0627db071cb44dbe248f82c0f509423553e450c2ec3dcdccf771"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/measure-1.webp",
+      "sha256": "0eaccb70d25db92527c7bd61d20001934f72791ccedbe7de5a930680ef722258"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/measure-2.webp",
+      "sha256": "a391fd78b4b4e14b8af40fae6c02c507155b077bbd5849dabc0d34e792ae2644"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/measure-gateway.webp",
+      "sha256": "42a43d2e8f39e5bfa45285df147aaec538232eeb57c76e16637c2f38b9430240"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/number-0.webp",
+      "sha256": "c448960474e0d61f3f3239a13c45f9e0b747ce72e27b8f5831e00a0ff5b2311c"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/number-1.webp",
+      "sha256": "45218f34a0528ab61ec5a624303113ef5d6e2409a80350276722b17f424a04d3"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/number-2.webp",
+      "sha256": "1dd04720adc5ddfbb88ef7c5d53a4b955dd19ed2ceded6c2a76b4f7eb3a5c53f"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/number-gateway.webp",
+      "sha256": "2e9d64198b650a48744dd88c91839957d0e0942d49ec20d4e58479eec454bcb7"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/probability-0.webp",
+      "sha256": "f13031ef2cc8f1f345f0da809c5b7eaa74971782e3b902df736b117ab8bfa652"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/probability-1.webp",
+      "sha256": "17d60a8561ce7a040e2a5ac16bc5e14474c8f3c5c02a5d2d3d55bee7cde5ef67"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/probability-2.webp",
+      "sha256": "7a2c27b00f29f0a82cf37f9502fc045d30ea4cf09ace54a33b7695a5659492d4"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/probability-gateway.webp",
+      "sha256": "8257745629ca610c2d0176a376146a786f3e5d642ce9c2fc49830b4d9e87a33f"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/ratio-0.webp",
+      "sha256": "bbf0d114b061953c27d016ebb96dab0e9c31d974a577967c82fde94ee3dd9078"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/ratio-1.webp",
+      "sha256": "8554911ec55bdfa4ff5b1c11ae06b3728f0581818e6f4d4a9fa2a453ff4e2b97"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/ratio-2.webp",
+      "sha256": "6978e048bbfe10c992bd1dae500baf4d51d447f6cfb36776a0c9bb80c169b04f"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/ratio-gateway.webp",
+      "sha256": "f785a987f7690b3c3b61d5ab5b1f80dfcaebe02f71b949fe215c4ef9a0eec0cb"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/statistics-0.webp",
+      "sha256": "923c7fbd12a2feef1b81c4b864244a0581690c73011071f9eef312bf2810df77"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/statistics-1.webp",
+      "sha256": "a5bafc3872e32b8dedf9c8b32e268301a358e5544a925069761d1710046cdf0a"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/statistics-2.webp",
+      "sha256": "ae1e65512be81cfd118544f6aa9bf59f17cf0c9fbb9886687897c0088a6faa3a"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/statistics-gateway.webp",
+      "sha256": "edffb710dafad9b93b38bf15b84c702abd1e46c638578486e58fa17a03989455"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/town-bank.webp",
+      "sha256": "9cfb86b867e1ef9a303b1195474bcee91916fa3ec44cffc5473be26429105b3d"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/town-cafe.webp",
+      "sha256": "54ff25250afeb1bcb7ab7f81d304d38b4fcd34f97b2532be5a8cfc346effcc48"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/town-gateway.webp",
+      "sha256": "ff4953934985d600cd6a0eb6b0c2f29bd02dc39a9e8bc55921fb8926a26aa42d"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/town-home.webp",
+      "sha256": "4a14e7fb53f4e8bad52202edc28c239bb5f40d1072a5b65fd7bc4a929baaa0af"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/town-leisure.webp",
+      "sha256": "503cf2dfdd4da31dac77953352f88ca258f5a1b3db023c1eaed14a5e7823f777"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/town-market.webp",
+      "sha256": "0043bfb628589a128770e22b56895dc02fa0ea736520ecb717583a167241adfd"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/town-shops.webp",
+      "sha256": "4639a5d39e1af0334829e53eeadd14e0eae8c7d2aaef00951fd5c7a654322c0a"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/town-station.webp",
+      "sha256": "de634fc9d556592d3658e4ce8268c8a0a23fc9d1691d36829964f69ef2161a3c"
+    },
+    {
+      "file": "v3/assets/base-camp/keepsakes/town-work.webp",
+      "sha256": "3fbd8328cee1c2b70d48b009be48e22a0614e275bd0b8f844d538505a4c98ddd"
+    },
+    {
+      "file": "v3/assets/base-camp/manifest.json",
+      "sha256": "2d54c386de1bc648e8d2709d0b6dbb63af1c95d3435db3c02ca67b50af0d7936"
+    },
+    {
+      "file": "v3/assets/base-camp/projects/greenhouse-built.webp",
+      "sha256": "4efe8228c8b091d620122de4690053080c51f68b7482af29825ace8a9d3ebf84"
+    },
+    {
+      "file": "v3/assets/base-camp/projects/greenhouse-planned.webp",
+      "sha256": "c2008cc2523b42d2d3739f58945676ade4b54dd7029757320009840eb6e52542"
+    },
+    {
+      "file": "v3/assets/base-camp/projects/greenhouse-scene.webp",
+      "sha256": "67b8b54b312637248ea938a5acac054dae8273cd5dd9663bc045c4358a9265dc"
+    },
+    {
+      "file": "v3/assets/base-camp/projects/lookout-built.webp",
+      "sha256": "fd8588e88703673af7f5e91feecc23920c72a7999dc96190c08adb505ee5c7cd"
+    },
+    {
+      "file": "v3/assets/base-camp/projects/lookout-planned.webp",
+      "sha256": "56f2fff3612cfbb53a1eb4be1374df47c4164b4a380e9783db58ca1dbc735279"
+    },
+    {
+      "file": "v3/assets/base-camp/projects/lookout-scene.webp",
+      "sha256": "80f33af00221fb904fba56ccf903b345c421576357ee7f817e73d0284daf001b"
+    },
+    {
+      "file": "v3/assets/base-camp/projects/noticeboard-built.webp",
+      "sha256": "7bfb8b2a8276bd93849db903cbc4988f444bacd4e8be873212373c05da64ce3b"
+    },
+    {
+      "file": "v3/assets/base-camp/projects/noticeboard-planned.webp",
+      "sha256": "4765289194e17e0a966771a6d84568f2e2319adf68c47698503ad8dc0be84543"
+    },
+    {
+      "file": "v3/assets/base-camp/projects/noticeboard-scene.webp",
+      "sha256": "bdba4ece11bbc4e3b35e8fbeea886cd4ce95e8fbcb04eec1ffacab4308866dd2"
+    },
+    {
+      "file": "v3/assets/branding/esa-logo.png",
+      "sha256": "cb6bf6a6d5008f44e08ed15a01f7076acc4eede1039661a55262e764c51f1a88"
+    },
+    {
+      "file": "v3/assets/branding/esa-logo.webp",
+      "sha256": "81192f5b368facc91db470ea2eaeefcad1891c01848c8e3f652c2577a2a31caf"
+    },
+    {
+      "file": "v3/assets/branding/esa-symbol-128.png",
+      "sha256": "19ecaebadcb66c77d643400b89336704374bc7b11defe63b591a4cef902abaeb"
+    },
+    {
+      "file": "v3/assets/branding/esa-symbol-256.png",
+      "sha256": "5ef62ed8c12fe9eb471d7714106ba40136dd5536901d1aa0c497a5d32b5d1ac7"
+    },
+    {
+      "file": "v3/assets/branding/esa-symbol-64.png",
+      "sha256": "a0fee88125580ba4e6402e5816a485452c057acc7847136afa1e151ea329a471"
+    },
+    {
+      "file": "v3/assets/branding/FONT-LICENSE-FRAUNCES.txt",
+      "sha256": "bdf4c22802eaf804f998195871c6b8938aac2ac14b2d78a8bd66a6f1eced833b"
+    },
+    {
+      "file": "v3/assets/branding/manifest.json",
+      "sha256": "1f4011892f492fa7e22d5efa183af3fdbad3d430694276cd7f54c2b32e02bc0e"
+    },
+    {
+      "file": "v3/assets/branding/README.md",
+      "sha256": "d5177ba1596230607035154ff0ea931fdc852b7e1272dd6b11541113724c8a98"
+    },
+    {
+      "file": "v3/assets/checkpoint/basket-empty.webp",
+      "sha256": "6db2f0c5d8b7bea5578cc676ed577d764f1e0ca8cd256149bc5f87038d7e7591"
+    },
+    {
+      "file": "v3/assets/checkpoint/bus.webp",
+      "sha256": "6568727eabfe6367a77cfff7b0c5bf656b41b1f9122ff6b58301797ab30c8248"
+    },
+    {
+      "file": "v3/assets/checkpoint/camp.webp",
+      "sha256": "9039b45a2c804f2fdc79278432117f980699fa8358478270192916baac93a7c4"
+    },
+    {
+      "file": "v3/assets/checkpoint/engine.webp",
+      "sha256": "85154a79aa73f605f807d5a4d9f124777ca97cfb49560fa38528c8cc63c8d6a1"
+    },
+    {
+      "file": "v3/assets/checkpoint/explorer.webp",
+      "sha256": "283d997bc1f6c45bec3235ab4c5c5f13166c29ed43ee1b74c00b25bb5e51c617"
+    },
+    {
+      "file": "v3/assets/checkpoint/fridge-empty.webp",
+      "sha256": "1f3e34a2fca0f98184cefc1a74d99c9efb1633f9a63ddb20e6c5be87868818c4"
+    },
+    {
+      "file": "v3/assets/checkpoint/fridge.webp",
+      "sha256": "8066f7c0ef9a559dce11218d11e823ea719b3fc1e7ac9884707cb2e17d535df4"
+    },
+    {
+      "file": "v3/assets/checkpoint/kitchen.webp",
+      "sha256": "dbdc258f40882264e3c7263dda4e3d21251e2173635118ff5acec7a42add7899"
+    },
+    {
+      "file": "v3/assets/checkpoint/manifest.json",
+      "sha256": "0665bca71be0633e30cd89a04b3c55c8a251614d0c779f91a8bfb627b44c96f0"
+    },
+    {
+      "file": "v3/assets/checkpoint/market.webp",
+      "sha256": "0592df5c3771128824a57b7083b5e845a9fb372ce3924d08c2baa720f71ef71f"
+    },
+    {
+      "file": "v3/assets/checkpoint/mince.webp",
+      "sha256": "06e42e6c94e150b3e6399261061be056f5449ddf2df3f4c4f8202fd4f3d12e10"
+    },
+    {
+      "file": "v3/assets/checkpoint/pantry-empty.webp",
+      "sha256": "188b23eb0ce2d24a2faa54247a47492059ecaa507e2504753b2edef831b23dc4"
+    },
+    {
+      "file": "v3/assets/checkpoint/pantry.webp",
+      "sha256": "a247d5943023a34b0e9d70949cfa3bc3fb485cd1fc97e70d06c7965aab7ec2b7"
+    },
+    {
+      "file": "v3/assets/checkpoint/pasta.webp",
+      "sha256": "635d1f964c06582362a114cfbfca5aa0b46b77149efe2ebf51fc7a67439bd47f"
+    },
+    {
+      "file": "v3/assets/checkpoint/rail.webp",
+      "sha256": "87b5da8082e7829de81d37b0c388825b7ba4fa51125f4616e894310372ae54b4"
+    },
+    {
+      "file": "v3/assets/checkpoint/served/bus-1024.webp",
+      "sha256": "7b9d606e77d1dc1ea55691b906f05b02287d02e8219b1b02649ee989b09f3c53"
+    },
+    {
+      "file": "v3/assets/checkpoint/served/camp-1024.webp",
+      "sha256": "49c806c5566ac033a91adaaee848dc055c26d06cdd57c539d0f7474d31925c7c"
+    },
+    {
+      "file": "v3/assets/checkpoint/served/kitchen-1024.webp",
+      "sha256": "0763cdb67fc97716c557391a1b3b4878c60c850cc63ebeb3980023e505135300"
+    },
+    {
+      "file": "v3/assets/checkpoint/served/market-1024.webp",
+      "sha256": "003421154f5d918679b1a5e227515ada124dbd47bd675b5edf2f2cab020add21"
+    },
+    {
+      "file": "v3/assets/checkpoint/served/rail-1024.webp",
+      "sha256": "5554be1a6618d9f3f196b37388098f20e7c4a1cdc706a3ff74676540bf94521e"
+    },
+    {
+      "file": "v3/assets/checkpoint/served/town-1024.webp",
+      "sha256": "e8c382b7dc14cdeab55da7f3769600d6e1daad6cf4db5cc887050a682a143113"
+    },
+    {
+      "file": "v3/assets/checkpoint/teen.webp",
+      "sha256": "536898bfcd86cdd46a568062bb49c3f5893aee45426d68effcbcb84c3be676ea"
+    },
+    {
+      "file": "v3/assets/checkpoint/tomato.webp",
+      "sha256": "b758292f8288d350712f0da64c0bd2ced5ca067c8fb3a6e623133bfc7d4f62ab"
+    },
+    {
+      "file": "v3/assets/checkpoint/town.webp",
+      "sha256": "0ab7e9d4f066311fbf586b9e676112a361f78a096db4fd01ebf940e90f7fcda2"
+    },
+    {
+      "file": "v3/assets/checkpoint/wagon.webp",
+      "sha256": "240add7f9c93efecca977c150725531459722f69a754c8a1217d9c0098810315"
+    },
+    {
+      "file": "v3/assets/delivery-manifest.json",
+      "sha256": "f03e1c649babe9a544012996cd9e711ef75738b1b650094d756c270a328890d5"
+    },
+    {
+      "file": "v3/assets/fraction-desert-preview/fraction-desert-guide-transparent.webp",
+      "sha256": "c1c7b768ac55a1281ce7f6077310e18d63715998a1bbb02eb4e2b30dd55e41cb"
+    },
+    {
+      "file": "v3/assets/fraction-desert-preview/fraction-desert-painted-backdrop.jpg",
+      "sha256": "70f3512816ce8b54dffce5e3f32b2d14ff6c4d7066cfe88864052c80d6c57194"
+    },
+    {
+      "file": "v3/assets/fraction-desert-preview/manifest.json",
+      "sha256": "15081cbfe66afd0a044ea35f5a7683630b6b941279de5241c6d12211fc420df3"
+    },
+    {
+      "file": "v3/assets/ingredients/baking-powder.png",
+      "sha256": "f9c457bfddf656d4e4a8fceaf29613b5e057a30f3e906563d588c1e61fe3972a"
+    },
+    {
+      "file": "v3/assets/ingredients/bananas.png",
+      "sha256": "4421c66f1402918d7b881e9a376e5c24fa3f8ea0ada55557981ea97e731dca1a"
+    },
+    {
+      "file": "v3/assets/ingredients/basmati-rice.png",
+      "sha256": "8fd97a62a3e731d14e9325270e0ef0ea427a8f1703f62834acefeca900a59125"
+    },
+    {
+      "file": "v3/assets/ingredients/carrots.png",
+      "sha256": "7126e316a9670074bfc6ae1b24334948d1350066e7426806d19af3bc7cb264c7"
+    },
+    {
+      "file": "v3/assets/ingredients/chickpeas-tin.png",
+      "sha256": "dcfbb71e797493387da1818e26c6571cd458ee2d4045628587e1e5257ea977a7"
+    },
+    {
+      "file": "v3/assets/ingredients/coconut-milk.png",
+      "sha256": "620be531b1c7b4fd00c56f751f9fe9ab9a4781f8e1c17c00a1e854fa78f4deb7"
+    },
+    {
+      "file": "v3/assets/ingredients/cooking-oil.png",
+      "sha256": "1086ca913bca9ee4551fec54491b0695f770eeb53c832283f4ffad8ced221458"
+    },
+    {
+      "file": "v3/assets/ingredients/eggs.png",
+      "sha256": "ef13cc98c37ef90ecbc6a74966b4faac1235a7a3c0e42d082f9f50c095351b6c"
+    },
+    {
+      "file": "v3/assets/ingredients/flatbreads.png",
+      "sha256": "ce12780d0a16657a068ce266b1b3d2e65a6ad1694732674dab4998d41bf4ae1c"
+    },
+    {
+      "file": "v3/assets/ingredients/fresh-basil.png",
+      "sha256": "f0d11941613d23e761b2ac0f94daf86329b5b6eb8910ff35149c635fd401b1f7"
+    },
+    {
+      "file": "v3/assets/ingredients/fresh-tomatoes.png",
+      "sha256": "e737b40884e4875a733f37112fd3f51a9794994ce39fa7b83c5aca7dce2a131a"
+    },
+    {
+      "file": "v3/assets/ingredients/garlic.png",
+      "sha256": "3087c7bd7ba760359cdc2260d8601c5667c82bebcc1d1f1115b0f3f6136937bb"
+    },
+    {
+      "file": "v3/assets/ingredients/ground-cumin.png",
+      "sha256": "e19fc2b7c8a19ef0e45432b79aa79a886d356a7e7bac430b6314b31ed8539ce5"
+    },
+    {
+      "file": "v3/assets/ingredients/manifest.json",
+      "sha256": "a4433bf61ab686dcf7f174710cbcde44abd20feabfdea978e2250c6bac46dcd8"
+    },
+    {
+      "file": "v3/assets/ingredients/mozzarella.png",
+      "sha256": "9db7fd406d1ec47fe8cdf47c4eeb92007d8fb5bcbf50e7bb4618befe8e6d95c1"
+    },
+    {
+      "file": "v3/assets/ingredients/oat-milk.png",
+      "sha256": "a3ca450698315d1e227409518aa5b2ea55a23f7a8e1ca98c10e94d359b0db07d"
+    },
+    {
+      "file": "v3/assets/ingredients/olive-oil.png",
+      "sha256": "82d0c6b9cfcf42817a88e9778385113a2a8b78cd92c4aed833346d902011f64a"
+    },
+    {
+      "file": "v3/assets/ingredients/onion.png",
+      "sha256": "9c75dcdbde54def826b7df68db524a670070a419da55debaa70595ba883ddaed"
+    },
+    {
+      "file": "v3/assets/ingredients/passata.png",
+      "sha256": "bf211ab2c8ba9baefce57fa6e3fa497bd6d41c2fac0b0be7b5b63c4cdff15be1"
+    },
+    {
+      "file": "v3/assets/ingredients/pasta.png",
+      "sha256": "2e535861e4d0b8463c50e91bc5e4cadb3143a1f8e2c4fae316ad3c4f33bd272b"
+    },
+    {
+      "file": "v3/assets/ingredients/red-lentils.png",
+      "sha256": "9adad5b87de85ce3dd8f641430ef415d1cd362ac8aa1940ec4a4598ab0824bb4"
+    },
+    {
+      "file": "v3/assets/ingredients/red-pepper.png",
+      "sha256": "4f2b9dd615e3a87ac5ea1b51ab82d8756b5828995757139da86466850fad8c20"
+    },
+    {
+      "file": "v3/assets/ingredients/rolled-oats.png",
+      "sha256": "4712036ba2c46924b524dec25317cc6085d1be6f2f43dd1c5c6b29b2ba6d76e4"
+    },
+    {
+      "file": "v3/assets/ingredients/served/baking-powder.webp",
+      "sha256": "c0ea5ce4a5af20d1d3293e65b7ed8b9305c49583b6a83c92d804529685fb683f"
+    },
+    {
+      "file": "v3/assets/ingredients/served/bananas.webp",
+      "sha256": "8f8667cc9b544b5c2c905be72b83f9160128271144cee39f2301f06ca901e9a2"
+    },
+    {
+      "file": "v3/assets/ingredients/served/basmati-rice.webp",
+      "sha256": "f138b7e7f5627f7b2194e15d56e3e71c01262e9a44421fed6b1cf493057fb3f8"
+    },
+    {
+      "file": "v3/assets/ingredients/served/carrots.webp",
+      "sha256": "ed14f85f2ba9663aa1458ba22b62fd50c91359694526d9d4969465fe22615e1d"
+    },
+    {
+      "file": "v3/assets/ingredients/served/chickpeas-tin.webp",
+      "sha256": "153eccad312374d740072239e653ca345e034c7d718dc0ef7a97bf4b60800123"
+    },
+    {
+      "file": "v3/assets/ingredients/served/coconut-milk.webp",
+      "sha256": "5ce1dddda35ec0a3d2493ffcd841e94edd9a4dd34078425f1e771e961ca68092"
+    },
+    {
+      "file": "v3/assets/ingredients/served/cooking-oil.webp",
+      "sha256": "1495312dfc8ce641faf80fee1f3cf1fef873d38a86da01802facc0e8d1659316"
+    },
+    {
+      "file": "v3/assets/ingredients/served/eggs.webp",
+      "sha256": "6d6350d1788342b2c1de9be7cac420948ad4a0dd3ccb7ed84593535eab8ce66b"
+    },
+    {
+      "file": "v3/assets/ingredients/served/flatbreads.webp",
+      "sha256": "d0c4178489c24d49f0c22330987615ea61ba5978cef041052151381188ec3469"
+    },
+    {
+      "file": "v3/assets/ingredients/served/fresh-basil.webp",
+      "sha256": "5ca73eb1935f387fcd61ad48968e6aeb9c8c546b4318c678f3a0c2f620f3bb15"
+    },
+    {
+      "file": "v3/assets/ingredients/served/fresh-tomatoes.webp",
+      "sha256": "e85a6ddc52af8a93ba782dd63cc5688607f0be4506023d0cba02e5f259468442"
+    },
+    {
+      "file": "v3/assets/ingredients/served/garlic.webp",
+      "sha256": "757118a3c046bd52164f3ce57bda6c58db2accabc0e8348e8fd363cc492351cd"
+    },
+    {
+      "file": "v3/assets/ingredients/served/ground-cumin.webp",
+      "sha256": "6c46a3fd08db63fcea4764342baacfdc4b71f83754bbf0e0568e5f9e90c38a11"
+    },
+    {
+      "file": "v3/assets/ingredients/served/mozzarella.webp",
+      "sha256": "dcd751e6279e0df98e9e581400ad6a740de02cf78a93d5416c5c78ee606dc43e"
+    },
+    {
+      "file": "v3/assets/ingredients/served/oat-milk.webp",
+      "sha256": "a2ec6a95ef5bd12066b85caf1d85042a0f97ba74e81baf1cfe710e1aaf1933d8"
+    },
+    {
+      "file": "v3/assets/ingredients/served/olive-oil.webp",
+      "sha256": "232d0f3b83e0878b22d6a0ad93fb54f46c54c544d7bd0fe3b375a54f52ccd5e8"
+    },
+    {
+      "file": "v3/assets/ingredients/served/onion.webp",
+      "sha256": "a30ce65249d4d73cc219b463486e4e6690e9e5eee0ec3dbac8ca4ef9e10f008b"
+    },
+    {
+      "file": "v3/assets/ingredients/served/passata.webp",
+      "sha256": "14c2b26a48c0c845164d988410cb0e8cf79c712395097d68b6822667010018e2"
+    },
+    {
+      "file": "v3/assets/ingredients/served/pasta.webp",
+      "sha256": "b878594c8e45793c1aa5d262a6d03550859f356d723b343d664850c6e22b688f"
+    },
+    {
+      "file": "v3/assets/ingredients/served/red-lentils.webp",
+      "sha256": "06272a91c692093ab36d42256f3b4c0365aa2ffd89f7edfdf8b51e00250a9e67"
+    },
+    {
+      "file": "v3/assets/ingredients/served/red-pepper.webp",
+      "sha256": "c786c1c4cdd9c5fd31064257c1e964bb31aa81e5067c2b70c8fc986c15119272"
+    },
+    {
+      "file": "v3/assets/ingredients/served/rolled-oats.webp",
+      "sha256": "acc6e4d3a7115e8a129aeed3c82ea7da3f4b5929816b874dace4f22d51792e7a"
+    },
+    {
+      "file": "v3/assets/ingredients/served/spaghetti.webp",
+      "sha256": "5cf2ecc465745e114adaeb2eb253ad419ed5832677587ef53f28090585770754"
+    },
+    {
+      "file": "v3/assets/ingredients/served/spinach.webp",
+      "sha256": "d37027fa89e686e46f5f2e733a809a9d2523b2f17c95c8231df526db52acd53c"
+    },
+    {
+      "file": "v3/assets/ingredients/served/tinned-chopped-tomatoes.webp",
+      "sha256": "98100e8efbd6f68b006d9e0910e70013ccf1a8886b585e81576d13afb0ec221b"
+    },
+    {
+      "file": "v3/assets/ingredients/served/turmeric.webp",
+      "sha256": "eada538abacf78a5787f1c49b4adc5d303fce8b11fa0835b61a8a88e45e85ac0"
+    },
+    {
+      "file": "v3/assets/ingredients/served/vegetable-stock.webp",
+      "sha256": "a34c750229bcc1389ab537c7ef7535e97ffb48dee395544cd6ac41de9843b885"
+    },
+    {
+      "file": "v3/assets/ingredients/spaghetti.png",
+      "sha256": "540306e092cc90940692ed263a091df465d2df1aeb4a0080c73af991402a8978"
+    },
+    {
+      "file": "v3/assets/ingredients/spinach.png",
+      "sha256": "717ce0381d1d459090bdc006bcf0f1845a6355bfad338647f9eaa9a95050f023"
+    },
+    {
+      "file": "v3/assets/ingredients/tinned-chopped-tomatoes.png",
+      "sha256": "efc31d455828defc8e35fa8c2dff334c069192f06bcc9f2681b5730ae8ca3eb3"
+    },
+    {
+      "file": "v3/assets/ingredients/turmeric.png",
+      "sha256": "83a4fac2084f33621303bc152d313e81bce54cdb6b906ca536bdcbc605629d3e"
+    },
+    {
+      "file": "v3/assets/ingredients/vegetable-stock.png",
+      "sha256": "97f75894c98c3a844ef97798049b78e416e38bf0fe41f02ee2f0f054adcc0bb8"
+    },
+    {
+      "file": "v3/assets/maths-tools/algebra-balance-base.png",
+      "sha256": "4e0b9b18b64705973d8ef5f88377ca084977e9add7fa929e4599e8bae4de028c"
+    },
+    {
+      "file": "v3/assets/maths-tools/algebra-balance-beam.png",
+      "sha256": "82dacf17afe4bcb453ad39743ce78c639c29dc9acfc2cb2d5d3af73c7cccdeac"
+    },
+    {
+      "file": "v3/assets/maths-tools/algebra-balance-pan.png",
+      "sha256": "caacc804ec8c345810196a46526842bda5c5b52a313ee828d17c92df8ec74ad5"
+    },
+    {
+      "file": "v3/assets/maths-tools/chart-bar-surface.png",
+      "sha256": "b6051d018b7585b10d62a01cbb6643aaef2d5aeb70528f8af177e28b8e0d4d05"
+    },
+    {
+      "file": "v3/assets/maths-tools/chart-surround.png",
+      "sha256": "997dd6026be4f70619e83a01bc72612720706ff1bf3768fd9093097cca9dfd96"
+    },
+    {
+      "file": "v3/assets/maths-tools/empty-balance.png",
+      "sha256": "a88bb2578c38d6b46e939dcee066a95a5899c81dcbbbfc02aba55a048cdd0c70"
+    },
+    {
+      "file": "v3/assets/maths-tools/fraction-selection-edge.png",
+      "sha256": "7d6a2e59034a9ad05cf276a949fd7e44436f09fc531d425268d266ca5a68e0de"
+    },
+    {
+      "file": "v3/assets/maths-tools/fraction-tile.png",
+      "sha256": "fd1a6230169d462f9b7fdd04e04d6e4ce5e054026bc54e5f738b5bbc16d0c055"
+    },
+    {
+      "file": "v3/assets/maths-tools/fraction-tray.png",
+      "sha256": "8b61ab20f016eb2149ca4870c230ada67ebe0e16ad60d5171bcdff2e19483c5e"
+    },
+    {
+      "file": "v3/assets/maths-tools/manifest.json",
+      "sha256": "c5ee06a5564f82d8111416b6bd9cea328150de6bc9ffa50cb671a77d1248ccb3"
+    },
+    {
+      "file": "v3/assets/maths-tools/number-line-marker.png",
+      "sha256": "6058834907a179fb3a36ac02e3e78cbcd0004e4b36ba1ed142ef4caa3c9f542a"
+    },
+    {
+      "file": "v3/assets/maths-tools/number-line-surround.png",
+      "sha256": "d6cb1490514482df7dcffe1b068396d90ac9968930730d33ef9a370ba0febb80"
+    },
+    {
+      "file": "v3/assets/maths-tools/place-value-mat.png",
+      "sha256": "ab44ca1691aabd92ff2a16e576ab540f4cce4c43cd037b49e205f20551d1c6d1"
+    },
+    {
+      "file": "v3/assets/maths-tools/place-value-unit-block.png",
+      "sha256": "4634d00d40b81d3dcee22ccb780400c87133747a271df205f59857413ea6eb94"
+    },
+    {
+      "file": "v3/assets/painted-forest-preview/manifest.json",
+      "sha256": "fd755d7d6927997fdd573088ccc067160fb763cd39e952667ed9eb99283ad9ef"
+    },
+    {
+      "file": "v3/assets/painted-forest-preview/number-forest-painted-backdrop.jpg",
+      "sha256": "0130ff1901bac64a8dfa8c69eac72de3a4ca54b401be6d2838ee8fb1fc661518"
+    },
+    {
+      "file": "v3/assets/painted-forest-preview/rowan-guide-portrait-transparent.webp",
+      "sha256": "87762c0b85789101cd9f8f73c6e7ae3c24406f9e66a1d7a5fda57f6f52702cf7"
+    },
+    {
+      "file": "v3/assets/rollout/atlas.webp",
+      "sha256": "c1b81daac61f727a6dc590fef50466bd2e69a369c7630be285bc0be16413b508"
+    },
+    {
+      "file": "v3/assets/rollout/avatar-base.webp",
+      "sha256": "82d2a795bc3f8836dd387f7b61ddcc48ed0e82619b825c407a84527124f2f236"
+    },
+    {
+      "file": "v3/assets/rollout/avatar-girl.webp",
+      "sha256": "66734d97693ad8e6d9ebb9f068fdb5ffc70cfda99973a1087201f51072a9309f"
+    },
+    {
+      "file": "v3/assets/rollout/bank.webp",
+      "sha256": "4132e8d636b3d5ba429a9c4daa554f04990ecb67ffb62b0a444d373097e3b040"
+    },
+    {
+      "file": "v3/assets/rollout/cafe.webp",
+      "sha256": "d883991f774802a7d0673042cd3f34d66b18351fcedb93f0878be7b82e762a75"
+    },
+    {
+      "file": "v3/assets/rollout/camp1.webp",
+      "sha256": "041d946a032c6ab9cc0c41c07ae055c5bb7198df3b8922f765e41a6c5e7ac76f"
+    },
+    {
+      "file": "v3/assets/rollout/camp2.webp",
+      "sha256": "e820b4d41d24d20af3e041a673c55a81c134bde73ba2347e67458956588026bb"
+    },
+    {
+      "file": "v3/assets/rollout/camp3.webp",
+      "sha256": "29f9e664c42a8a3e24a3c880f877e1a3aefd8f076986e82af2f847ff0870d423"
+    },
+    {
+      "file": "v3/assets/rollout/camp4.webp",
+      "sha256": "0c7b2422b7af997db4a0b7d5261d0f0944bd52505d752401eaaf8b86e8780290"
+    },
+    {
+      "file": "v3/assets/rollout/desert.webp",
+      "sha256": "6e6282c9cc894ce93651c85c3f5bc2ae140fc2833e704b8c8d29fb02a5a73e90"
+    },
+    {
+      "file": "v3/assets/rollout/forest.webp",
+      "sha256": "a63b9fce80484c414613e027fa2438707723ab1b919a3c2ddc1adabad235d1ae"
+    },
+    {
+      "file": "v3/assets/rollout/geometry.webp",
+      "sha256": "25f43ef46b7c279252686febadde68e45489254d70a5dad5fb58ec0fb7ecf9d1"
+    },
+    {
+      "file": "v3/assets/rollout/helpers.webp",
+      "sha256": "1b96923f7b3c3923226ce10463248f55c63ca227503623de5845d0bedef38060"
+    },
+    {
+      "file": "v3/assets/rollout/home-exterior.webp",
+      "sha256": "9104ea3cbadad223e52a7e96d14e5921eae72bc4846c561f49f4ea9a12761f33"
+    },
+    {
+      "file": "v3/assets/rollout/leisure.webp",
+      "sha256": "ebc0a846db06d1e6ced6aa2a8f68b907503e65a3b9e8abdbb3faf4aa63c1b0b3"
+    },
+    {
+      "file": "v3/assets/rollout/library.webp",
+      "sha256": "ae2c0566ce93c8901e7672b833c816efb880fa4ccef847d312f6997818cc1519"
+    },
+    {
+      "file": "v3/assets/rollout/manifest.json",
+      "sha256": "6565fce9a9a673bf509f8a96798392b7ae00a5416007e6139b0023d47155c701"
+    },
+    {
+      "file": "v3/assets/rollout/measure.webp",
+      "sha256": "ffca04520d5e7fa5a203cb63b6d91dbd75549bbf1f32db32b762a9b42e0582ef"
+    },
+    {
+      "file": "v3/assets/rollout/meters.webp",
+      "sha256": "e9506c62828ae5aa25b372e1c3458d54113b07ea788697735b38beae77ddf948"
+    },
+    {
+      "file": "v3/assets/rollout/post.webp",
+      "sha256": "82b42a7976206219b033c6f016403e9729960d90f3c90559891c6009c33c5363"
+    },
+    {
+      "file": "v3/assets/rollout/probability.webp",
+      "sha256": "1038db42a2fab52981a9feb6d6987673ff7ecb02bbb6c7eb18b3d4da96ff2734"
+    },
+    {
+      "file": "v3/assets/rollout/products-food.webp",
+      "sha256": "cc0c72f29787e411a1fd7c0823abb972b83e7ba6271ccd421cdd5d907e329a0b"
+    },
+    {
+      "file": "v3/assets/rollout/products-supplies.webp",
+      "sha256": "cd48528542f2066f42d82509ed0ca39071c7b8c658e4b00a15768379c42b722e"
+    },
+    {
+      "file": "v3/assets/rollout/ratio.webp",
+      "sha256": "2e2895e8bc609ce0d232f706fe0b93217dca5e6e52e29add630189094bfa7129"
+    },
+    {
+      "file": "v3/assets/rollout/repair.webp",
+      "sha256": "20b0c0a5c5a09b9a13c5b9c1208dbe843532efb55afb1476dc37e0ea780c1f6e"
+    },
+    {
+      "file": "v3/assets/rollout/restoration-worlds.webp",
+      "sha256": "3e445ab73011e39ceb783e1f3cb1cac6e0934f0eec908f4b0bdb882249f7e61c"
+    },
+    {
+      "file": "v3/assets/rollout/served/atlas-1024.webp",
+      "sha256": "7ff8b3a5f85de449953bf50f95bdff8d7e11af32441d97d489bd44566564b863"
+    },
+    {
+      "file": "v3/assets/rollout/served/bank-1024.webp",
+      "sha256": "a5c164e3998e87f19d78b61464d2954c7e145b397d6d50087de98b2cc462bc5a"
+    },
+    {
+      "file": "v3/assets/rollout/served/cafe-1024.webp",
+      "sha256": "c3451cbb3f8b9017ea9d190499b0db1a32f7f404f0edc46cd708c5be3d38cdbe"
+    },
+    {
+      "file": "v3/assets/rollout/served/camp1-1024.webp",
+      "sha256": "e5218148e936829680fe62d398582646ea9c695e3e4653ae2491497e990d4008"
+    },
+    {
+      "file": "v3/assets/rollout/served/camp2-1024.webp",
+      "sha256": "f499c4fb35c9cd99539242a997038caf3a22da61cf0a020505bef1a091948303"
+    },
+    {
+      "file": "v3/assets/rollout/served/camp3-1024.webp",
+      "sha256": "c31873c724ee11236fb2953188ac49864ab5a0b44902f33b13b8a2ca359c2f0b"
+    },
+    {
+      "file": "v3/assets/rollout/served/camp4-1024.webp",
+      "sha256": "8a874d38812d67d65ffe85088871d2186f283f3e15bcf1fb7bf355a16407b9dd"
+    },
+    {
+      "file": "v3/assets/rollout/served/desert-1024.webp",
+      "sha256": "656aab84af6ff12a9f09e7400c0ff2193bf77b44b79548668abd8caaaa560dec"
+    },
+    {
+      "file": "v3/assets/rollout/served/forest-1024.webp",
+      "sha256": "4c22393badc05f80857663f8a9c30e8bb10d9f0b6128ff3c03a95a79c4451a87"
+    },
+    {
+      "file": "v3/assets/rollout/served/geometry-1024.webp",
+      "sha256": "08224c257715010ce81a8e0508d4dba92b5bcea00d9662d7256f54552d3bb826"
+    },
+    {
+      "file": "v3/assets/rollout/served/home-exterior-1024.webp",
+      "sha256": "15c12b3b4f772ec6dddf50bf3bdbee6324c38a8c9d8fd7c18a94fb849b18cc5a"
+    },
+    {
+      "file": "v3/assets/rollout/served/leisure-1024.webp",
+      "sha256": "9b53f6007b3bd835e640ef8e0d708350ea57186dda14c97f33ba4e1553de1a6f"
+    },
+    {
+      "file": "v3/assets/rollout/served/library-1024.webp",
+      "sha256": "e3602e97a00bb4905c31bdfc92690c9e90246455a2b6dc57523d2cb5046e59e7"
+    },
+    {
+      "file": "v3/assets/rollout/served/measure-1024.webp",
+      "sha256": "2dec29dbffcef8c18a085be99c36cf29848051a613fcf7c6a1655519660327e5"
+    },
+    {
+      "file": "v3/assets/rollout/served/post-1024.webp",
+      "sha256": "a4664ef82ebf2261720a78aed2dfd708bc39f0712f20051abc50009f6b12d6ae"
+    },
+    {
+      "file": "v3/assets/rollout/served/probability-1024.webp",
+      "sha256": "561ebb8c265880e4f207f92cd3235bed84645a026e1126c9e146afd065798b0e"
+    },
+    {
+      "file": "v3/assets/rollout/served/ratio-1024.webp",
+      "sha256": "a5bd9173aed5b288c435c3a76a4fbf69b1686dcddb89acd5f6aca3a2a0500eea"
+    },
+    {
+      "file": "v3/assets/rollout/served/shops-1024.webp",
+      "sha256": "be948ed16bcebd9a4893557f508d5e162459dbd7585f8b1f9a602763bce403ce"
+    },
+    {
+      "file": "v3/assets/rollout/served/statistics-1024.webp",
+      "sha256": "65386d3c31c1c887505d7bc8e1d2bd7bed420a4562d24e5eb6fac87c3842f2a5"
+    },
+    {
+      "file": "v3/assets/rollout/served/train-station-1024.webp",
+      "sha256": "3bd3328c9cc9bbe4e938c3c9909fd70bb56b1a4bde7eefdb060136dfab06d87d"
+    },
+    {
+      "file": "v3/assets/rollout/served/work-1024.webp",
+      "sha256": "bc2ad00f3c2710022d85131ce2f3d96c5553747dcc7ce8003ccfea72148a8d3e"
+    },
+    {
+      "file": "v3/assets/rollout/shops.webp",
+      "sha256": "fa2734171004bba145b0dc86c9b7fb7c1f942f0cfa40fc776a3a5492ac02f0a9"
+    },
+    {
+      "file": "v3/assets/rollout/statistics.webp",
+      "sha256": "32b686abdf8b7bdc691aa704578163f4153e06966c38bf3ee1d4af0f55bee7f3"
+    },
+    {
+      "file": "v3/assets/rollout/train-station.webp",
+      "sha256": "f5a2c100cadb953ceadd7b64f4c6312d5832b8a434dfbbd0f828c66f24ef135a"
+    },
+    {
+      "file": "v3/assets/rollout/wear-accessories.webp",
+      "sha256": "d53b48342a889888f514d4850336426993f1df6ecb04a440cba77978dc17bdcb"
+    },
+    {
+      "file": "v3/assets/rollout/wear-back.webp",
+      "sha256": "06b9812af7b2271e7539430ad037036a9c07c41d7d0ad32dccbef0aa15efaf71"
+    },
+    {
+      "file": "v3/assets/rollout/wear-companions.webp",
+      "sha256": "fb5e1b5742943a66fa68404b9249869462da11279b823c0f0de3b3a29c21caae"
+    },
+    {
+      "file": "v3/assets/rollout/wear-faces.webp",
+      "sha256": "856409e377abe882e15a1b5f55c223999ea234dc7102faa519a0b2cf8dffd643"
+    },
+    {
+      "file": "v3/assets/rollout/wear-hair.webp",
+      "sha256": "2a3fe8143294300a0f1d093a315ca631c4e8f2a298fc928e255cf489d5b4e425"
+    },
+    {
+      "file": "v3/assets/rollout/wear-head.webp",
+      "sha256": "343864d2c3d7cc7748be8a0bc118fc0a1bfade3d598d9a96703d245a0305da78"
+    },
+    {
+      "file": "v3/assets/rollout/wear-outfits.webp",
+      "sha256": "81171593918362caed45bfcc3fc340fb9f0610f62a61973e615bdf714801059d"
+    },
+    {
+      "file": "v3/assets/rollout/work.webp",
+      "sha256": "3d1d21b9ef3720c5521525e5e3e03db64861d7e771c51e3f37ad167f51c2ab9c"
+    },
+    {
+      "file": "v3/assets/world-guide-portraits-preview/algebra-peaks-guide.webp",
+      "sha256": "3b9819ff117802b8db0e677732b1cee48adaa9fa4c4f6ae0991cabe0ce6058a3"
+    },
+    {
+      "file": "v3/assets/world-guide-portraits-preview/fraction-desert-guide.webp",
+      "sha256": "fb9eb47ecc9ab7695d08dc35278596d71d07ee882647fdb6d63a9e8fcb05f291"
+    },
+    {
+      "file": "v3/assets/world-guide-portraits-preview/geometry-kingdom-guide.webp",
+      "sha256": "e8a84d2df320fd887e4267e50a0502b4493913be78cdac81dcc1f1da7f4bca74"
+    },
+    {
+      "file": "v3/assets/world-guide-portraits-preview/manifest.json",
+      "sha256": "86f7eb3530eab1c7b10d293695bcead717f0e7a58b7e78596fa67520a3594b1f"
+    },
+    {
+      "file": "v3/assets/world-guide-portraits-preview/measurement-mines-guide.webp",
+      "sha256": "333095aaaf6494f252715b61c0b9db957f687d28c479e273da4bc797a0e82617"
+    },
+    {
+      "file": "v3/assets/world-guide-portraits-preview/number-forest-guide.webp",
+      "sha256": "084ef98e3136bc60b6b45cad690cbad4c08992fdec69f912ebe5a93799391784"
+    },
+    {
+      "file": "v3/assets/world-guide-portraits-preview/practical-maths-town-guide.webp",
+      "sha256": "5285ffcfdf1a1660a9ee08676760c47e87d4aa764add9db54793a5a69a902237"
+    },
+    {
+      "file": "v3/assets/world-guide-portraits-preview/probability-portal-guide.webp",
+      "sha256": "b495fc1052435ee8dfe5faed9e56b024b06b0a77e30c4fbfb5c755a2fa32f300"
+    },
+    {
+      "file": "v3/assets/world-guide-portraits-preview/ratio-island-guide.webp",
+      "sha256": "8dcf04affd6317df29c2379503e2caf78e67f620b3ac9567ab45e02108b58e93"
+    },
+    {
+      "file": "v3/assets/world-guide-portraits-preview/statistics-city-guide.webp",
+      "sha256": "808bf347e2b0ff2ed3d0b4437cafe533e6b0c67b69086c8a1f83c8669e42a930"
+    },
+    {
+      "file": "v3/engine.js",
+      "sha256": "2491b02cb74854f82188d8e52ba17a99bf9325a62769bab1edc6eb3efd8689c6",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/curriculum.js",
+      "sha256": "f984595331f0781a2e5741107713216584d7e4a9f190713dccd3bda18268d2b1",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/cloud-sync.js",
+      "sha256": "3b4c9a347e6dfba21df447938a22c4354588119e31337a50a3a6b0844ae2edaf",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/history-storage.js",
+      "sha256": "10f0158dd92ae9b40220cd0ff2d0c378495e9ec62da0a54e23122cf4c92b26dd",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/content-registry.js",
+      "sha256": "6c66f056e058b655e79bee9ffff421df9aa62d213852b9ca6857690a4174f2b2",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/answer-marking.js",
+      "sha256": "535b677b9b89f32f3bb648de0a30fb9379129659e8f4743808073e0589b5f6c5",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/question-teaching.js",
+      "sha256": "80b7675dd8c2138a90e9474812695b1244ca27bdaba7113dc57a26442354f141",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/starting-profile.js",
+      "sha256": "89436aa867f0b6f3ac6326124baa3dc408ed2d5da7133ce05f0c53009ceb801c",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/production-cloud.js",
+      "sha256": "a92d77396901548ce9fd76b5d1c0df42b94c20ba98a66983549145cd86642c90",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/staging-app.js",
+      "sha256": "5922c6fb2f89736f4d221b72684c6f77dfbafe2613f8c2037f6364421ac67db9",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/adventure.js",
+      "sha256": "705ac2b954304d48795f0e3e09b0248840fcbf237ae47a87dd8e197ff9fe2d0c",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/town.js",
+      "sha256": "5bdf509fdbb2e782ad4cd133a5643d897e9faaa76c52fba12edd1f5c56e9d4af",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/town-life.js",
+      "sha256": "561850a1cf0779c260edc16dc0d749a4f18f661d62ffa275e4fd49099b4e8fd9",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/restoration.js",
+      "sha256": "aeea2a4ee55beefc150229fbe54f3f6efde25b0b6a5a99411a8edaedd6eec63f",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "index.html",
+      "sha256": "22e09532651500aec9f5537a87235fa4258dc9007453bde5b4ee15b3562232a0",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v2-game-test.html",
+      "sha256": "fcea8b7881f90d4d2cf792d6301e20fe99e24b5bf0936e61fdd61820f7a1f19a",
+      "normaliseLineEndings": true
+    },
+    {
+      "file": "v3/world-art.js",
+      "normaliseLineEndings": true,
+      "sha256": "6997149e25e2cbd9a308a63a732119934178b0fe286480ad4ebf1aabc9019e5a"
+    }
+  ]
+}
