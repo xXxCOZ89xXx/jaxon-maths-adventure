@@ -2348,8 +2348,8 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 .decoration-card.owned .decoration-standin { border-style: solid; border-color: #4f7a3a; background: #e6f0dc; }
 .colour-choices { margin-top: .75rem; border-top: 1px solid var(--line,#71866b); padding-top: .5rem; text-align: left; }
 .colour-choices ul { list-style: none; margin: .25rem 0 0; padding: 0; display: grid; gap: .5rem; }
-.colour-choices li { display: grid; grid-template-columns: 28px 1fr; align-items: center; gap: .25rem .5rem; }
-.colour-choices li > :nth-child(n+3) { grid-column: 2; }
+.colour-choices li { display: grid; grid-template-columns: 64px minmax(0,1fr); align-items: center; gap: .25rem .5rem; }
+.colour-choices li > :nth-child(n+3) { grid-column: 1 / -1; }
 .colour-choices button { min-height: 44px; width: 100%; }
 .colour-swatch { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #33402c; }
 .colour-worn { font-weight: 700; color: #2f5a24; }
@@ -2426,3 +2426,5 @@ body {background-color:var(--paper);background-image:linear-gradient(#d5dfd233 1
 /* Optional employee practice keeps its inputs inside the guide on narrow screens. */
 .induction-answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:12px 0}.induction-answers label{display:grid;gap:6px;font-weight:700}.induction-answers input{box-sizing:border-box;width:100%;max-width:16rem;min-height:48px;font:inherit;padding:8px}
 @media(max-width:480px){.induction-answers{grid-template-columns:1fr}}
+
+@media(max-width:480px){.colour-choices li{grid-template-columns:minmax(0,1fr)}.colour-choices .colour-art{justify-self:center}.colour-choices .colour-name{text-align:center}}
