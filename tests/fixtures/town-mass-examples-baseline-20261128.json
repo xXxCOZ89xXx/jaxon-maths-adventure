@@ -1,0 +1,3107 @@
+{
+  "source": "8cf2549",
+  "excludedForGramMeasureTasksOnly": [
+    "teach",
+    "example",
+    "contentVersion",
+    "questionKey"
+  ],
+  "rows": [
+    {
+      "scenario": "cook-pasta",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "8da28fd22823b978d8884ee41261d15eee705f3fca68ee2b4c7afccd9ecc8a77"
+    },
+    {
+      "scenario": "cook-pasta",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "b38947dcc7a00c72f5ca4b271044c5cd8fd8b8da699e93cfe04a96093b9b89bd"
+    },
+    {
+      "scenario": "cook-pasta",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "ff3c6d6ad93f1f9693f3d3129f48cf08efd13e04440ea82543d9049bb23ef1e2"
+    },
+    {
+      "scenario": "cook-pasta",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "e66d40b5abbfb22d1a3f7c20a95cda6a6e15a7cb3cd051a5ce3c3ffb33b1cf70"
+    },
+    {
+      "scenario": "cook-pasta",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "ab80cbb1a6361b3ca32fa1aa5ec41b34cfe257a7ba919a0b3c99c65f79ceef60"
+    },
+    {
+      "scenario": "cook-pasta",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "698634b982e1556cf159127193f75fdfd5377220985ce081b0e899cccb399408"
+    },
+    {
+      "scenario": "cook-pasta",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "016be69163373d54bd8122cfa1700bae30ca446d2188213ab0eac110ae50d0d0"
+    },
+    {
+      "scenario": "cook-pasta",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "15590ecaefaaf46ca3baf45cb289cf6bc9823ac39672e59556d16faf3ee13dac"
+    },
+    {
+      "scenario": "cook-pasta",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "79e4e63b65504c76bd0cda2abcc903170c49b71e09888b5be34f0dbdaad3378c"
+    },
+    {
+      "scenario": "cook-curry",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "c4a6d5de50231a8e3324398a4b30d6c09a9bcd4279194addad5bb34dab595fa9"
+    },
+    {
+      "scenario": "cook-curry",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "fdab593047f472932f36e5c4a0ed2f93404a17a96d6bace319c3d40923ae7a54"
+    },
+    {
+      "scenario": "cook-curry",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "323b5870148ded369ed00d3306be6c6eba70beefb26850db12c376fd518a9c7e"
+    },
+    {
+      "scenario": "cook-curry",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "0c03aa51b80c373747120bedbeb58707c1fe4c9199812e9ac835bf2add7bc1b3"
+    },
+    {
+      "scenario": "cook-curry",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "b04048127e822b5863ed425c5c3dad1da677cc8b2fff4e4f8c13976b32b7b81d"
+    },
+    {
+      "scenario": "cook-curry",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "f544579e9083ed362c28be37dca3dfd1d03c9415a146eceb461a84cb7ed5c931"
+    },
+    {
+      "scenario": "cook-curry",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "eb0e3f7ba52104248f3a238fe9f3d347e369b611d74740df43e2b61d0dff975a"
+    },
+    {
+      "scenario": "cook-curry",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "1d6f8091de55bc88a85a6ab031be6315024d57a83bb5135607cf43953db27d1e"
+    },
+    {
+      "scenario": "cook-curry",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "80df8668f47b6009137c5618a0c1820086176700335c1e63a6deb8363d26bba2"
+    },
+    {
+      "scenario": "cook-pizza",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "275d4b0f35231128ecc820643954264d254ab72525be589a8c4b93f300013a28"
+    },
+    {
+      "scenario": "cook-pizza",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "a9597047e2daa9b134042b685916c343f8e431644555e77a5c5c0c7e1c07b67d"
+    },
+    {
+      "scenario": "cook-pizza",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "95b92a611ffd86af408a6ecbfca2ae219a1db375777cb0561be62f720c6f3e38"
+    },
+    {
+      "scenario": "cook-pizza",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "0e146391024dc0e363c03f09bd444179af1ec4c23055d3b865c6e2a537d471d6"
+    },
+    {
+      "scenario": "cook-pizza",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "a69384b32164425930be9a855a26c9c4f41021051314428949cfc4ea0e71eb27"
+    },
+    {
+      "scenario": "cook-pizza",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "3ace3d7475a5de109364d7d0f9c0bc1f9790017c1ab2c81aac4575d4e4aaf029"
+    },
+    {
+      "scenario": "cook-pizza",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "a9ff6ad0d02731dbbb9eb32d0dd409c8b4a30f7708b7caa32e4fe6e3e97c1e84"
+    },
+    {
+      "scenario": "cook-pizza",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "2e714ae159b6bba8b6404f8c8dc8ed92a0d77341f4c2a182c0022834bb764ffe"
+    },
+    {
+      "scenario": "cook-pizza",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "d8223b61587ae034b7e11a00fff98ba38f95392a62e22b920a9ddbf511abada6"
+    },
+    {
+      "scenario": "cook-soup",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "3b1a58d5451282c440429860e12c0e7a0432124758651f43514c7a2d1d57934f"
+    },
+    {
+      "scenario": "cook-soup",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "9fb066ed9638407cca2cf4a737ecb71b0f9a311836f224058ef22a3f87c7913f"
+    },
+    {
+      "scenario": "cook-soup",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "31338d10de6e2e4f0b213a5cd2bf47a5fed0efbe66357f24617a295f2da7d26f"
+    },
+    {
+      "scenario": "cook-soup",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "25521dbdf1aa11b8269257fea4b63cb87dc9f8c548194145d547d57f98ef0c55"
+    },
+    {
+      "scenario": "cook-soup",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "a5c375c2d2d48e9d18cf36f20befbb391b8d8c8c67e2fd7563603ca26cbe8795"
+    },
+    {
+      "scenario": "cook-soup",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "943555333eb99d887b1fb5c7d7f87bf365f023e3745a3db115e03eb663c9aebc"
+    },
+    {
+      "scenario": "cook-soup",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "06d6ff76f162f19f21c754110ea1a8063b651441a1404524e91cdd76262dc2b6"
+    },
+    {
+      "scenario": "cook-soup",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "c70e04ec8a90b8dcb024d4ed30e1b48fb7ec7b5548e8f878ec7ccfdccad14ebd"
+    },
+    {
+      "scenario": "cook-soup",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "52ab566568570d1ea9b01d2bfe4667a53a27faf009d92653462634dd2862b5db"
+    },
+    {
+      "scenario": "cook-pancakes",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "f8587038234b9c8bd291b9f298b63f8eccd3580905db23463da7236b62e1461b"
+    },
+    {
+      "scenario": "cook-pancakes",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "8c26c205bb6a1636d54d068d0fba4539afe62ca174bf42aea36a472cd71ea985"
+    },
+    {
+      "scenario": "cook-pancakes",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "9bfe6763273c2e7293b7576fc9a05e8c65be311b891c5d1656af356e2d76dc01"
+    },
+    {
+      "scenario": "cook-pancakes",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "180a7d4a4e049f6542edd2bf9adb1e509d0ee61162f43f639b62258930eef19f"
+    },
+    {
+      "scenario": "cook-pancakes",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "69850a50f8e3de696908cf3fd7ae4a3f0ece40a923ef7fdf5ca5587f1c2cacc1"
+    },
+    {
+      "scenario": "cook-pancakes",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "2d354b161815f9447991bdf94067a66b768cb730aeae2dec0c50edf34b186576"
+    },
+    {
+      "scenario": "cook-pancakes",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "fdd273735c20f0585567bbfd437afb7a94e5e570cdb990111cb4fdfce3c56631"
+    },
+    {
+      "scenario": "cook-pancakes",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "e3870b8c9d335161c0581e557da310018341d09d849bafa4c1b58f72d8ce73b1"
+    },
+    {
+      "scenario": "cook-pancakes",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "33a617ff24b0d13672b754f7e6282ddc60cc72c72919e844b10d45de0ad2c798"
+    },
+    {
+      "scenario": "shop-groceries",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "1be8a52aa7e9581f5b8d1edbd077e0ec29d620ee74517538cbbc899926499508"
+    },
+    {
+      "scenario": "shop-groceries",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "5a3ce5507e42fbaa9cb0ffb016416c60d269c4a6d3529990f6e202360af0d9d5"
+    },
+    {
+      "scenario": "shop-groceries",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "aa4445b36eabdce654ac3e91e853aef584f29273f27fb8340f1ec51bfff19d7f"
+    },
+    {
+      "scenario": "shop-groceries",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "a915094d244d9efb1bf9ab6592c5ef0d698e526acfc9b869ee1fe921381c76d0"
+    },
+    {
+      "scenario": "shop-groceries",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "afe258a628f7135b25fce457d8d2f2e7cf75557955939b20f8d624a5e24cd51c"
+    },
+    {
+      "scenario": "shop-groceries",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "6b4f5b22a77ae736d3902d8243da9ee10a1bbf02de3aac16165a6dff8916d83e"
+    },
+    {
+      "scenario": "shop-groceries",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "d71f87b81430d4852783823381b36486fd6bd4e2b7ce21c780c99e044ffe4f95"
+    },
+    {
+      "scenario": "shop-groceries",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "9e0ee8c6ae0f062dcb92cbb0df83fa5fa9ffbcf69fa2e1b08df52303e5745574"
+    },
+    {
+      "scenario": "shop-groceries",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "74bdf5b3a60f286d6efcaf8487b718b3a0cff768bae31f46bfe08b6a08d5e6df"
+    },
+    {
+      "scenario": "shop-party",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "3e26edb217742bc8408a5b6cf514dba9f2ee29256790e7357d7de8f5678c54bf"
+    },
+    {
+      "scenario": "shop-party",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "53e30fb7f0c87f4a368f7bce1da85efe5b5bc80bb29c501df7d1fa459ab4ba24"
+    },
+    {
+      "scenario": "shop-party",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "80671e60e456a02cb1af04448bbfaf048342893cc6f4027e568449443dcddefc"
+    },
+    {
+      "scenario": "shop-party",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "0ccdad0b95ed592ceacf560afcf325f72e0e2ab0341256279b503e81ff02bb4d"
+    },
+    {
+      "scenario": "shop-party",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "47a3f3814fed677a198bd91182e550b8b3e30424589880e553659c899064c6ab"
+    },
+    {
+      "scenario": "shop-party",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "1f51b1ca10422e26137b42c981808ddb4b1ce9de917f691a20fc9429ce0ee54b"
+    },
+    {
+      "scenario": "shop-party",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "c7a6dca52b1569eeb5cc14c38d86e13a2b3eb16ae0332e86079f17048586ba98"
+    },
+    {
+      "scenario": "shop-party",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "0e14d4c867c6ce42f5de4a9daefdc25a5b276d5e86bd0a6d0c5cc17332fad6d3"
+    },
+    {
+      "scenario": "shop-party",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "c7ec80955ca5d1d7fbcc1203c827f99adbd5214c234ee4bbc241f620aaf5206d"
+    },
+    {
+      "scenario": "shop-budget",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "fee2f382b8addf9604708152c396c13e0e1974850351b0d19fe5b8407c425fbf"
+    },
+    {
+      "scenario": "shop-budget",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "7774a703b0b79220d426a1119c81703f89b0b37ecf9a5f3c82ad122ab56c6b77"
+    },
+    {
+      "scenario": "shop-budget",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "019f982dac8d5d416013cc4b71be3fee56beeea5424dea2c4670b42bafa5c493"
+    },
+    {
+      "scenario": "shop-budget",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "f7c42ae476b0e7caf5aa3027827d2a4abfc84ae7dcec40629d88964e68aeb69c"
+    },
+    {
+      "scenario": "shop-budget",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "4e003ed9d9a917865c16ef011e029e60655a6cc0dacd211916594b3158f62d54"
+    },
+    {
+      "scenario": "shop-budget",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "f2aeef21c65236ac4095325827231945acd70d74f401915f7f9cb594b2305729"
+    },
+    {
+      "scenario": "shop-budget",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "d4550e041d181ad30dff953367d876aa5a2680886bc7bb87fccc31b352fe63e2"
+    },
+    {
+      "scenario": "shop-budget",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "b14f5f3870cb30809de39d3ba41b55811d257d4aa9fb8f9d05d2c75b73c8f677"
+    },
+    {
+      "scenario": "shop-budget",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "0307a6f6c9f4853a90ab5a37cc9bfcd6d5ec1bd0d57e4d3c50b83c830af6e04b"
+    },
+    {
+      "scenario": "shop-offers",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "df101fffaed8f1da72ed25a62b76e1a874c081cae15da5f651f9d2e10af77792"
+    },
+    {
+      "scenario": "shop-offers",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "54e05a6a913a2039215fa10f8fd4549d207cb999709cba01800bc96b30485baa"
+    },
+    {
+      "scenario": "shop-offers",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "3c07fd7a3b882cf0a03433c145681a977fbab097105bb6cb5ee913927df80b45"
+    },
+    {
+      "scenario": "shop-offers",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "9a2ea8b572ef38a0dc7a811207daeb3ad07e3311a4d5ebcdacefa601fc10e6fc"
+    },
+    {
+      "scenario": "shop-offers",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "9795f9058cc3882ca45b34ae52ed9854d060586293fe4ab05e4d3b81631aba62"
+    },
+    {
+      "scenario": "shop-offers",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "e5feea6241f292bd4b09dc5e21b5800727826a4f4d8199771f18de812a8dbae0"
+    },
+    {
+      "scenario": "shop-offers",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "7056174f6f3bf9b8898e8ccd890a2e341a8cdfec4fd583531181778d6fef246b"
+    },
+    {
+      "scenario": "shop-offers",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "69302f525250d3b0d24612ebc945174210aa459c945581128c0befb1f82253fb"
+    },
+    {
+      "scenario": "shop-offers",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "c0dc8b3e9f61d57d83f800454466023df77ccac03b32c30351b4363d40f12900"
+    },
+    {
+      "scenario": "shop-missing",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "ec8e1c61d1e2f387e3394c936611f3f8fcb5b01393bbace46df25b1728d0110b"
+    },
+    {
+      "scenario": "shop-missing",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "0a46571e01b87a4b8e2a662de35b3fb13d1e6a2638367b9014efdda55ad70dfb"
+    },
+    {
+      "scenario": "shop-missing",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "5488325755382d3e5b01a94aa2e81ce99e63176277de5e94e72212f7141606f0"
+    },
+    {
+      "scenario": "shop-missing",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "06908881942cf69392900b218804752b9062ad405953d1bfee0a75b41b22ef4e"
+    },
+    {
+      "scenario": "shop-missing",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "362376cba57127c47e0805434186000685b329c1b114273d7d930ae55100043c"
+    },
+    {
+      "scenario": "shop-missing",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "e7d18ab5d4ba45f518b6e9a96f589c9db06573da2d4a04565bf987712abae53c"
+    },
+    {
+      "scenario": "shop-missing",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "42d95653d87eae31980e48cc6f1538ab5cf69746f9b3925517fa012bed580a7b"
+    },
+    {
+      "scenario": "shop-missing",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "4bedc87359b0e51f3d582eedcbf6bedc5c5199b05b268a7c088bd0be515f7b5a"
+    },
+    {
+      "scenario": "shop-missing",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "288e9ff3595e70f3338fb28d6662901d7ae1ff3bc168d0cdc090131e2d319dc2"
+    },
+    {
+      "scenario": "travel-swim",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "b9e066cac7ceff3d42c9bf20d1af6706b27f282bbda0c2a767bb3062ad4477b4"
+    },
+    {
+      "scenario": "travel-swim",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "e82186ff5474e8758956f06292de7f7498c622c134156e801343506604c9a82d"
+    },
+    {
+      "scenario": "travel-swim",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "c9a328d34ec6bfc3bae35a35ab22dd776474cda9c8642282632e377c57011c0c"
+    },
+    {
+      "scenario": "travel-swim",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "d663c77f309dcf46d04a01e4ba51fe5bbd0ceedfa9a3bc417d92bd92d4c5c8ff"
+    },
+    {
+      "scenario": "travel-swim",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "b774f4804c199b9f21708de0f06f7e12e36b9446296d68fdd0833aea53622d8b"
+    },
+    {
+      "scenario": "travel-swim",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "828ff4b42370d074b29b81f0f471ca1c035f4b7e0131d815649daf8e658f38c6"
+    },
+    {
+      "scenario": "travel-swim",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "4ebc58728b5b5efd86229039fb55785701af6b34b32355c1a992a243b6670fa2"
+    },
+    {
+      "scenario": "travel-swim",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "0fdd5bea441af4c15018bf6ff9b8b701c8e9b74b8faf9750498e84386b86a479"
+    },
+    {
+      "scenario": "travel-swim",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "bc5b0c06839e6def5b9a9a22914c9ef97db47d3bf50d28d791ff4219f009138c"
+    },
+    {
+      "scenario": "travel-library",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "39e9c0d9693560a0ca0369a1682f6dee0172dd8bf33bbd17f1c66b7175d773db"
+    },
+    {
+      "scenario": "travel-library",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "3d20a119078129d3e4227409cf939daa3144b9a4ca1cfa0fb57cae672b1419b8"
+    },
+    {
+      "scenario": "travel-library",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "8b88c7df096068a85bf8f6512e232644cd55601d9129a1fac531b599196b7902"
+    },
+    {
+      "scenario": "travel-library",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "be58b20eec673131f34c9b72278ad56beb1560a6b3ad7ca38edf867d7ec1ce35"
+    },
+    {
+      "scenario": "travel-library",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "8a60a09452c1b68f2289ba191419dde641a316c4e639673501d102a4da6f31bb"
+    },
+    {
+      "scenario": "travel-library",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "dba4a539246a49178e0f580335ef1b3405ada0919814dfd180f4005530dd5767"
+    },
+    {
+      "scenario": "travel-library",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "4a69796ba3b640e04590c6477c97186998e64bb90877fa9958da9af4bb05aaf5"
+    },
+    {
+      "scenario": "travel-library",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "7a1d545bfdb9afe5d63cdf1601ac9ea81881e37c19ab0a0a943c20499028f357"
+    },
+    {
+      "scenario": "travel-library",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "e617f63d1c35acce398db67e8790bedb64ca545b53a406955fc78e0370064b36"
+    },
+    {
+      "scenario": "travel-appointment",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "e895383f13c02f06fb8454e345333cbdd61ae3e168766832658fbd209e3ba016"
+    },
+    {
+      "scenario": "travel-appointment",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "c8368a00eef9aeecfca8f4dfb043c3dfc4608c3d77ffc1db545dfce3154847ab"
+    },
+    {
+      "scenario": "travel-appointment",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "9d6795c27412db7763dfc4f11ec8a6e8da44afe5607aabde6074dff71c62bbd1"
+    },
+    {
+      "scenario": "travel-appointment",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "6506be80b4e6f9d62fb582c8c44ca85759fcb31bfdf82f2fa828795e2e06e8e8"
+    },
+    {
+      "scenario": "travel-appointment",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "18df2d63136be4d6bc9457ab64a99cdde69fd8444ceda38167ff9197224bc11f"
+    },
+    {
+      "scenario": "travel-appointment",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "42501037eb3a27e9aabb0b2e24b7942a3c085af5de640bc0b343a4a0f4aea819"
+    },
+    {
+      "scenario": "travel-appointment",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "0844aaeb1fc4d8d670d55e513664d5f3a00e9e4e1b0a884908ed69c9d6b20e86"
+    },
+    {
+      "scenario": "travel-appointment",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "f49871d0ba02b328686e594435efe056746c64d83383ade251842048e2f594cf"
+    },
+    {
+      "scenario": "travel-appointment",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "87bb9c2f8ace7e167b5a1ec1c37facd8b56691aca3f41555d1bfa3111e7db7c6"
+    },
+    {
+      "scenario": "travel-cinema",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "87bd2f412919b7bd7b4ebffd06b8e156d02fd6082378912a2cc1e0b7b8afceed"
+    },
+    {
+      "scenario": "travel-cinema",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "06409d0d0358b4fda48ecd67dff063b61c5f13c09fe677ea1fc6a65efe3a58d1"
+    },
+    {
+      "scenario": "travel-cinema",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "ca42e569c97ac9c928071a6c7376ff2f2bff7bdcafbb6163bd087135df9aa645"
+    },
+    {
+      "scenario": "travel-cinema",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "d00f0abc7b6859efdc82b1fefaf0e3f6d849d9c0bd13c0b0c0d0e4480f4bf9cd"
+    },
+    {
+      "scenario": "travel-cinema",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "0b51f489659c780648f2de79de0d53421d5bda980257404ff70ee1afcedcf8e6"
+    },
+    {
+      "scenario": "travel-cinema",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "4447c33eea64de44250f56aefcc64cc44df8849ae881fe74415c40acc26bef17"
+    },
+    {
+      "scenario": "travel-cinema",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "6e0503c0095fa0df2487b4d1afda0b374d5e2de98baf4dc640db0f036b62a706"
+    },
+    {
+      "scenario": "travel-cinema",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "2dba1c90dc7e4685b06662ed1d508089a5ecbafb15823deb8e066b2dfc7f93b1"
+    },
+    {
+      "scenario": "travel-cinema",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "10fd6a3f74239160a1ff443f06f7b33de06a221bf445ad39e9e0740fb08ddb93"
+    },
+    {
+      "scenario": "travel-connection",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "621f9b218284ff5a33b5bfb00bac820fe2959c0f38cb1ecc39222cf39e24dc8a"
+    },
+    {
+      "scenario": "travel-connection",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "5337e98efd8fe254acd5bb129e498c311f4ccb8ceca3865dd8b271cd7317e08d"
+    },
+    {
+      "scenario": "travel-connection",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "be5dac86065ebb95421c1361dbaffe6554d741b68799b2d823ce2d7c9c460b53"
+    },
+    {
+      "scenario": "travel-connection",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "8f190411ac2f485b17f55048d4803063cba8608223faa14580b54c152d6b98e1"
+    },
+    {
+      "scenario": "travel-connection",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "6531d910beed3fa0c874f5246443d647c7905999588d48b046807c9ef3cff438"
+    },
+    {
+      "scenario": "travel-connection",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "937072664519261aa29129e893800bfb309c3316d708c598f30d5bba9bbdd85f"
+    },
+    {
+      "scenario": "travel-connection",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "853f3c30a5308786fc94da645ad6961c3b7ab7f88ac0b4a7b9cd81053f8cae39"
+    },
+    {
+      "scenario": "travel-connection",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "77d031345587bf98023b587b3dafa1640f1544f3e6ad94e59d59ece8636351f1"
+    },
+    {
+      "scenario": "travel-connection",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "9084af5ce2bffd76b6ffd3f5f761b8f5e9c5aacb2fdf70040d9045c36b1eca09"
+    },
+    {
+      "scenario": "job-market",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "c7efa6c6bad58d45b80356644fc9a5449e35a28065f0c7039f03f6ed5219ab62"
+    },
+    {
+      "scenario": "job-market",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "0844c4d217c9062015f036750e3ce48c09be560cf00817f8c268bccc37011448"
+    },
+    {
+      "scenario": "job-market",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "28fd8e9f910d3708b2a8d9b46d03f9a284fc8effa24dc50324ae7bf6cc04ca27"
+    },
+    {
+      "scenario": "job-market",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "ac3724e2cd5bd1f6e1191011f47b65372d2dedc3fad41874a98f246048261837"
+    },
+    {
+      "scenario": "job-market",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "e32f26f886e64d7091b009fc13ff2dd93709ebf636090ef1784cceb3a11b0485"
+    },
+    {
+      "scenario": "job-market",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "f7dfd6cda44b3587616e197034909e70af8c6d92458477d62f8535924983149c"
+    },
+    {
+      "scenario": "job-market",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "172b17515a10d3bd7ba48f1a7df20f361d2609c3263f9acfbd7668084c6a77c7"
+    },
+    {
+      "scenario": "job-market",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "3d7e8caf47801ac8b9874fac11707709cacd9d015a1a98257ebae94d5a5df5ce"
+    },
+    {
+      "scenario": "job-market",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "6e9dab1e92ab3abb02d5cfe3fe8b0ec0f80a60866a509cad099f5d990ffb3d22"
+    },
+    {
+      "scenario": "job-cafe",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "db305954de35d0915d1acb63c9bddfe4a75a718fd3fd2c28d5503710f030a4ed"
+    },
+    {
+      "scenario": "job-cafe",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "f97d2c20d20ddda69ed154ae0b3910e27d61a2fa60165e5953b207ad68aa4b83"
+    },
+    {
+      "scenario": "job-cafe",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "96d3586a59f2f661e2c9f60861aadd5a0ae40aa076364725440fc28d39569937"
+    },
+    {
+      "scenario": "job-cafe",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "f714e63fa750e2ac718b5082e209641bd15894c8061b4ab1a7e440fb129e40ae"
+    },
+    {
+      "scenario": "job-cafe",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "41089f50a24a525db7a42d4a3bd48de5381fe42dbfd1d3c46e838b2a858c1704"
+    },
+    {
+      "scenario": "job-cafe",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "95600552db9acaaf9ae805d000b36486ef9c5a09f704885a37d74acb6227b15b"
+    },
+    {
+      "scenario": "job-cafe",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "3df02453da6937a278a526e5334e747115586f41ff550099876859be99dfbf5c"
+    },
+    {
+      "scenario": "job-cafe",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "6c4c060a9d6263195ef2ea7e949f33b08e9fca73832b27c01b92f8cd0e00beba"
+    },
+    {
+      "scenario": "job-cafe",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "042f3a7a3e5298160e881c48ab03f18764d78b87f91b4632a7a9323bb6b9a876"
+    },
+    {
+      "scenario": "job-shops",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "09bdca8b00bd20c41955d90a7205f2d02c8f31281c934ace5d9a7e2231b4c9b7"
+    },
+    {
+      "scenario": "job-shops",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "bb8a32f0b368df7091e32b3d7bdddeb11b072b9c785be6505e5659a442c2e9b1"
+    },
+    {
+      "scenario": "job-shops",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "46af75d221501caaa5a41f93c90219f7417c952b28ba7aad14db8c3aad1d6900"
+    },
+    {
+      "scenario": "job-shops",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "c7499d386c1ff7e08a71fb55e99209ee2f421dbff74754b55acbc6ab413882de"
+    },
+    {
+      "scenario": "job-shops",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "a1740e72d6447ce3f983d6a4094e5e0ae47b75c407f86838fc3338d4bdd5054a"
+    },
+    {
+      "scenario": "job-shops",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "bd2178b1ef8dabac88b31f078b3bcb2f0a61ede9d90bd510dc6bc1bfa1e80b88"
+    },
+    {
+      "scenario": "job-shops",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "e9b988b6a24880c3f3b5e2661e98784057a62b1bf45fdb7f9cf05c36ec830e3f"
+    },
+    {
+      "scenario": "job-shops",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "0675aa852930a8e56853a38e5ec01d1a3bafb203973abcd7920920716c1f8433"
+    },
+    {
+      "scenario": "job-shops",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "7dc5744484e8da446f6cb47b6970f2b5686838ba25ff3ab50502e53fa707afcd"
+    },
+    {
+      "scenario": "job-station",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "0b5c6a1b0d0938601bb0d47fae3ffc8e9bc57c812859536e604d09296b97692e"
+    },
+    {
+      "scenario": "job-station",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "825b0277701ac0d337bc0dd64cab5ae460032a244faf8bf4cee72c0599dc895b"
+    },
+    {
+      "scenario": "job-station",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "08bb8550ca2678d107a2f3a55a1877d29bd6233b84f749d058280cc493f3934f"
+    },
+    {
+      "scenario": "job-station",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "c5a67938c0a479f8dae74b768f93d7df9ec06ca3636345d54fe65f68584163d5"
+    },
+    {
+      "scenario": "job-station",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "5ae4e26b637f36c7cdfb4052eff3adbb3411d69b929f6f936b9da181e629c73c"
+    },
+    {
+      "scenario": "job-station",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "c97ef9769703e3c5c8d88cdd5fe680e37aa77b481483cc2b5854def8d2f77da8"
+    },
+    {
+      "scenario": "job-station",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "91a1f17f24157e4b20a2f576786afbb40079f06074998d68447678795e8cf9dc"
+    },
+    {
+      "scenario": "job-station",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "d0e2347a9d28e47788c330fa1d5234881b0ed60181c7ba46589f5f0a57141843"
+    },
+    {
+      "scenario": "job-station",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "ef02c25798d3b2e5c3f7b2d83bb6530332fc783af59d97831fa6396d31511c31"
+    },
+    {
+      "scenario": "job-leisure",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "f1c259b5eebb76d6872c62d221c6ce236b0ebd6b13078b6941a309f0a7a7d21c"
+    },
+    {
+      "scenario": "job-leisure",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "6997058aae868741d2c08c3b95576fa3e5c572ffa2137443caf3961649c0cc2b"
+    },
+    {
+      "scenario": "job-leisure",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "cf8fd4e1f21ec75879fa1d4ee2fdc0da3c2030dd68d26d352867de57f912b10b"
+    },
+    {
+      "scenario": "job-leisure",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "9e50313f9b9b16922a7b609d17aeeed310ae0afbcd9913b827ca6ba60999bb4f"
+    },
+    {
+      "scenario": "job-leisure",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "48ff2ac78e69843ddc0381c0074065e424756300e9b50d2912dd224f4dd33d23"
+    },
+    {
+      "scenario": "job-leisure",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "2c4b8ce8df92036aa8104a21ef019a8b18721cada465f838277e2bd92d374a6b"
+    },
+    {
+      "scenario": "job-leisure",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "bbbfb04e5dc706369b6fc4cc564eb4fcff2a7d2140177e4efd7d7f3a7231fd68"
+    },
+    {
+      "scenario": "job-leisure",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "769132688a4c8d5622bbb64771eed6bf0bd67cc31d66b48c20d689d701239f68"
+    },
+    {
+      "scenario": "job-leisure",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "41e65ef93820bcea7a606a08232d7f37f0f6caf231ac43c0d27d5ed8cea7b692"
+    },
+    {
+      "scenario": "job-work",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "063322f06cc0c1c44012fe09cd15fee0a9ca70460abae5051e707c7979a6ed0c"
+    },
+    {
+      "scenario": "job-work",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "25b783996f1cb83f63974d472f10438bbdf4f1df40c46d782df051aeb691a87c"
+    },
+    {
+      "scenario": "job-work",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "3fbe9a6bf42d3f464875226d2d0fae7d92cfb9c9b4fe70c7a9cf755009a6e302"
+    },
+    {
+      "scenario": "job-work",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "a7bd01bd61a27a9dba6dcaa4b1ad7dde4cc6928d531aa09642cc49e6620ad617"
+    },
+    {
+      "scenario": "job-work",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "076aed3cc51f9f5a13b489fa876f76a6b0570a6acd211e6c22021f8d430990e4"
+    },
+    {
+      "scenario": "job-work",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "8b1bd86457fa11516cf213546e0f266310d9cd09a764d10b0557485d0fe5431d"
+    },
+    {
+      "scenario": "job-work",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "a541de2825211f1d1f296dc62f785fde778584ae9504c7a6e3dedb168c70e606"
+    },
+    {
+      "scenario": "job-work",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "b60ad43a36bd90461b3fd7f1e9f1fcf113ffae0ee61ae01a5ebf5b18d8a59d17"
+    },
+    {
+      "scenario": "job-work",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "6be689754dd649c9eb1b71500070beb9d2cd5e3b384a9cd786f6938eed59d429"
+    },
+    {
+      "scenario": "job-bank",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "c981df9f9b9aa2c3b3dd743e9989ef153cc1ee705477e53c9191cc47223280a4"
+    },
+    {
+      "scenario": "job-bank",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "4a6eb0b2f9ec6f24c6a94261d506112244f9c334a8e2d19ac587d04ff78ba76f"
+    },
+    {
+      "scenario": "job-bank",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "6c5ecfba9dd7e3552abf0ea5430bd04560cf1aa6f06be817b7be0b67ff880b9c"
+    },
+    {
+      "scenario": "job-bank",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "2850a0f4394dacd7e89f66a08ff617b6649e7f1b1111be20dff1f1ee31079a4f"
+    },
+    {
+      "scenario": "job-bank",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "b3379de1b55292e43826c41e1d85c333673f4d297ac6a6f7a939d0048ce22984"
+    },
+    {
+      "scenario": "job-bank",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "00f559d085c87fac328b4dae17eaabc0c0f8c435b7b70d4572af382d352da7c2"
+    },
+    {
+      "scenario": "job-bank",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "43a23c12eb667bf32f40db2c6787086bec82f2ce8819bfad9981e31683a29b45"
+    },
+    {
+      "scenario": "job-bank",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "866af606953aa926aa2337618b6dc6cf492363f305fa91cf4545dcb8a228677f"
+    },
+    {
+      "scenario": "job-bank",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "52ce73705fc505af2e618ad962a20d0a002bcb07458197d0f2d96a7bd85746b0"
+    },
+    {
+      "scenario": "errand-post",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "dedaa2db7bc35452f38d49f97de623bae4b6de9bbc0cfdf97513ebb9ed5bbefd"
+    },
+    {
+      "scenario": "errand-post",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "07222671893b84485ab9a87e6cda87b7c42f1c031d9beb7b8b52ae5a8892e370"
+    },
+    {
+      "scenario": "errand-post",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "fcde36ed5aa5d625f42f8c8fdac3130b2db7c851611fdfe1826632fffc3c6956"
+    },
+    {
+      "scenario": "errand-post",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "389bc8e318c064d87ed88161fd8bd48584b28e5d68f8b71f80d18796b2e24682"
+    },
+    {
+      "scenario": "errand-post",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "30a9c132aa627648b7e7ba1d0fb5ef4f6446aeedcb1fb0ef601bce585587ff1c"
+    },
+    {
+      "scenario": "errand-post",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "aedba9a32660b4f55cfec86456206ccb8be83f65d8cb78d6d0e9bc3f9c2432ad"
+    },
+    {
+      "scenario": "errand-post",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "fdf427e2bd84ad6639b787877190807acd98495ea9ea999c4d4051c3cc67d49c"
+    },
+    {
+      "scenario": "errand-post",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "b8339e5b7d13aa853016f700d55adb8e8c2f1d7bf36feaf79bb642705ef85fe7"
+    },
+    {
+      "scenario": "errand-post",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "622734393480b7c49bf1de2bd1cde59a16fbea4a2aa1c30f493275484d2c42f6"
+    },
+    {
+      "scenario": "errand-activity",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "752a902d0bd52c287e7dc3d94dbca9e59b0a6bde306f41c1b92391609840ba9b"
+    },
+    {
+      "scenario": "errand-activity",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "7c11472ab699098cb9ee0b0c0a279918c166e3e44031178ab09217fbe60f5259"
+    },
+    {
+      "scenario": "errand-activity",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "24e7c5f2cf5de6e8ae57156e9ed833c1adc85a4cb83c83f63b10f7145ea6a2f6"
+    },
+    {
+      "scenario": "errand-activity",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "85980a11b38570d798de1fcc3c1d751c17c3c2230320e811f8616fd2f6d5830e"
+    },
+    {
+      "scenario": "errand-activity",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "51f145730962112cfd5c192ae0f3629f65bb07e347ddac0e2788c11223952a46"
+    },
+    {
+      "scenario": "errand-activity",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "4e0e4451087f1b8765afe19e23fe0343290dc93bc96e7ade3a67854d4fec8127"
+    },
+    {
+      "scenario": "errand-activity",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "24af2ab4b8fcff221a697b81780730a9293a9d1b66f552af7be47de4982d9146"
+    },
+    {
+      "scenario": "errand-activity",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "5b72e881d6fc4e18d14aa8eb61b4e7821439765e6ffdac11dac9f402e86cf863"
+    },
+    {
+      "scenario": "errand-activity",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "26ce0b74f8d7ec405407edcecf690aa30a8ded0d10aa26a6f913f2d2973bc3db"
+    },
+    {
+      "scenario": "errand-bills",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "ac4ffec0dc0835de17905b2042f6d4a14fc2506099e4397e7a20f68ad481108a"
+    },
+    {
+      "scenario": "errand-bills",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "2ab56cedd5d553fbce0dc4dd46ada81c3eca952b25f1aadb7470c347dd91abb3"
+    },
+    {
+      "scenario": "errand-bills",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "0a0be076261ade4e677815151423e8c7a50edfd26e4924f0bb072c885d863df7"
+    },
+    {
+      "scenario": "errand-bills",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "0210122c9aac77a8df3d479281cbf9eeae055fff7c53aa3788f2d08cfab4468d"
+    },
+    {
+      "scenario": "errand-bills",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "01b15fa194b47600b89889e08eb19720fbe117737962aa266fc99067307e8416"
+    },
+    {
+      "scenario": "errand-bills",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "06ef701c4b06bd7f548ae8b26b56b5d2782d67a6cb9d2d61d9ae40262d10bbdf"
+    },
+    {
+      "scenario": "errand-bills",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "b775ec893df7fa774bb76ccf730f673f6bf750de3c5008cffdd8a706dcfb5944"
+    },
+    {
+      "scenario": "errand-bills",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "7703251f9c86deb43e25ab5af79dc45ba62474954b6419b961ae1ace17f155d9"
+    },
+    {
+      "scenario": "errand-bills",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "e43ccff255ab61863db7bcc1cf293b2f2b3f608e20c2c9ee49926db757547739"
+    },
+    {
+      "scenario": "errand-appointment",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "b6ee67fade2b56e0b5dab332c13420924959fdc4bb86a1e7758da0de67acf9ee"
+    },
+    {
+      "scenario": "errand-appointment",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "3c6c05222597d54bed488830286e1564b54842979544dec170cc9ca520b10a76"
+    },
+    {
+      "scenario": "errand-appointment",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "02964bb83d921a6bf357ac12034e4f2ccca6ecdb4a6aef53a4407a39d8ec9be5"
+    },
+    {
+      "scenario": "errand-appointment",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "ef14c2e3873b15fcfa82f0c258609d417357bf9de59b980a500b7f1f982b7424"
+    },
+    {
+      "scenario": "errand-appointment",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "a5aae49807fc6e0b6c12a362402ceaccbbf82cbf06270af882547d45e1e2043d"
+    },
+    {
+      "scenario": "errand-appointment",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "d65fb53acc8408d722cb86e5a39d8eaa8bab77f4a21b755b32170903937a8478"
+    },
+    {
+      "scenario": "errand-appointment",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "e89456c82b1b58f42f8d771e1b36050a85e3d46f59c9f12e91a3afabd70a4af3"
+    },
+    {
+      "scenario": "errand-appointment",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "b06b7cea5bb27075b2696b82d7ac5f0cfb56bc5cca52d959a756405bd1fbdb97"
+    },
+    {
+      "scenario": "errand-appointment",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "833994363dfbe8abceff5c9310d0743e690b6732b0065a87a777e271dcb98b28"
+    },
+    {
+      "scenario": "errand-repair",
+      "tier": 1,
+      "seed": 1,
+      "sha256": "f0b57c1ac38cfa512cab47e8593d6dfd3ec70b34409e7018c6bc6d92461ca088"
+    },
+    {
+      "scenario": "errand-repair",
+      "tier": 1,
+      "seed": 2,
+      "sha256": "2ee827f62a1723f00c1a8f12581da73ac3bf18fd346ad4b6307c3668cd7bccd0"
+    },
+    {
+      "scenario": "errand-repair",
+      "tier": 1,
+      "seed": 7,
+      "sha256": "2f7180c22cca8412fa2fda88659072dcdbf481c1d6e9783f3b5f8d5b10e34082"
+    },
+    {
+      "scenario": "errand-repair",
+      "tier": 2,
+      "seed": 1,
+      "sha256": "b1e3506c5d60ce29125a0075449714ea3fc9cff4c55b4e2d95c39cc1bdcf6cd8"
+    },
+    {
+      "scenario": "errand-repair",
+      "tier": 2,
+      "seed": 2,
+      "sha256": "8f64e3bc1878d903cb8c12d1c6ef60170e77a9a2f3d728dd18aa8b99774bc8b9"
+    },
+    {
+      "scenario": "errand-repair",
+      "tier": 2,
+      "seed": 7,
+      "sha256": "8b985b013cbd44d52fbaf2af0b79c5d968488568093bfdc4e3c7dc3ffa79422c"
+    },
+    {
+      "scenario": "errand-repair",
+      "tier": 3,
+      "seed": 1,
+      "sha256": "6020af2980458fda0b14f6680fe49a86d95aec82cd78057fb179219d699d2c3c"
+    },
+    {
+      "scenario": "errand-repair",
+      "tier": 3,
+      "seed": 2,
+      "sha256": "11df38f2a85ca2453716c050f55690651bc012b92efb121aba6c5a70457ab09d"
+    },
+    {
+      "scenario": "errand-repair",
+      "tier": 3,
+      "seed": 7,
+      "sha256": "8871ad68a8e3afb6fd9f232851e626ec47dc8f7383aed5a802029769f2322cec"
+    }
+  ],
+  "snapshots": [
+    {
+      "version": 2,
+      "contentRevision": 3,
+      "id": "cook-pizza:1",
+      "scenario": "cook-pizza",
+      "name": "Vegetable flatbread pizza",
+      "category": "Cooking",
+      "tier": 1,
+      "seed": 1,
+      "stage": 0,
+      "steps": [
+        {
+          "venue": "home",
+          "title": "Inspect the kitchen stock",
+          "kind": "basket",
+          "prompt": "Each picture is one pack. Read its usable contents, then record the packs already at home.",
+          "answer": [
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Count each product separately and compare it with the quantities you need.",
+          "example": "Need 4 notebooks and have 1? Put 3 on the list.",
+          "hint": "Count the products inside each cupboard or fridge compartment.",
+          "worked": "Flatbreads · 4 items usable per pack: 1; Passata · 500 g usable per pack: 0; Spinach, thawed and drained · 250 g usable per pack: 1; Pepper · 160 g usable per pack: 0; Mozzarella · 125 g usable per pack: 0",
+          "effect": {},
+          "items": [
+            {
+              "name": "Flatbreads · 4 items usable per pack",
+              "price": 150,
+              "storage": "cupboard",
+              "packQuantity": 4,
+              "unit": "items"
+            },
+            {
+              "name": "Passata · 500 g usable per pack",
+              "price": 90,
+              "storage": "cupboard",
+              "packQuantity": 500,
+              "unit": "g"
+            },
+            {
+              "name": "Spinach, thawed and drained · 250 g usable per pack",
+              "price": 95,
+              "storage": "fridge",
+              "packQuantity": 250,
+              "unit": "g"
+            },
+            {
+              "name": "Pepper · 160 g usable per pack",
+              "price": 70,
+              "storage": "fridge",
+              "packQuantity": 160,
+              "unit": "g"
+            },
+            {
+              "name": "Mozzarella · 125 g usable per pack",
+              "price": 100,
+              "storage": "fridge",
+              "packQuantity": 125,
+              "unit": "g"
+            }
+          ],
+          "visualContext": "stock",
+          "budget": 6500,
+          "stock": {
+            "Flatbreads · 4 items usable per pack": 1,
+            "Passata · 500 g usable per pack": 0,
+            "Spinach, thawed and drained · 250 g usable per pack": 1,
+            "Pepper · 160 g usable per pack": 0,
+            "Mozzarella · 125 g usable per pack": 0
+          },
+          "instruction": "Tap a product to collect one. Tap a basket item to put one back.",
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/0"
+        },
+        {
+          "venue": "home",
+          "title": "Make your shopping list",
+          "kind": "basket",
+          "prompt": "Compare the scaled recipe with stock. Buy only missing whole packs; round up when part of a pack is needed. Pantry basics are included in the stock check.",
+          "answer": [
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Count each product separately and compare it with the quantities you need.",
+          "example": "Need 4 notebooks and have 1? Put 3 on the list.",
+          "hint": "Compare each basket quantity with your saved shopping list.",
+          "worked": "Flatbreads · 4 items usable per pack: 0; Passata · 500 g usable per pack: 1; Spinach, thawed and drained · 250 g usable per pack: 0; Pepper · 160 g usable per pack: 1; Mozzarella · 125 g usable per pack: 1",
+          "effect": {
+            "list": {
+              "Flatbreads · 4 items usable per pack": 0,
+              "Passata · 500 g usable per pack": 1,
+              "Spinach, thawed and drained · 250 g usable per pack": 0,
+              "Pepper · 160 g usable per pack": 1,
+              "Mozzarella · 125 g usable per pack": 1
+            }
+          },
+          "items": [
+            {
+              "name": "Flatbreads · 4 items usable per pack",
+              "price": 150,
+              "storage": "cupboard",
+              "packQuantity": 4,
+              "unit": "items"
+            },
+            {
+              "name": "Passata · 500 g usable per pack",
+              "price": 90,
+              "storage": "cupboard",
+              "packQuantity": 500,
+              "unit": "g"
+            },
+            {
+              "name": "Spinach, thawed and drained · 250 g usable per pack",
+              "price": 95,
+              "storage": "fridge",
+              "packQuantity": 250,
+              "unit": "g"
+            },
+            {
+              "name": "Pepper · 160 g usable per pack",
+              "price": 70,
+              "storage": "fridge",
+              "packQuantity": 160,
+              "unit": "g"
+            },
+            {
+              "name": "Mozzarella · 125 g usable per pack",
+              "price": 100,
+              "storage": "fridge",
+              "packQuantity": 125,
+              "unit": "g"
+            }
+          ],
+          "visualContext": "list",
+          "budget": 6500,
+          "stock": {
+            "Flatbreads · 4 items usable per pack": 4,
+            "Passata · 500 g usable per pack": 0,
+            "Spinach, thawed and drained · 250 g usable per pack": 250,
+            "Pepper · 160 g usable per pack": 0,
+            "Mozzarella · 125 g usable per pack": 0
+          },
+          "instruction": "Tap a product to collect one. Tap a basket item to put one back.",
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/1"
+        },
+        {
+          "venue": "station",
+          "title": "Catch the bus to the supermarket",
+          "kind": "journey",
+          "prompt": "Catch the bus to the supermarket. It is 09:00. Allow 5 minutes to walk after the bus. You need to arrive by 09:35. Choose the cheapest service that gets you there in time.",
+          "answer": 0,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Add walking time to each arrival before comparing eligible fares.",
+          "example": "A bus arriving at 08:00 plus a 10-minute walk reaches the destination at 08:10.",
+          "hint": "Add the walking time to each bus arrival. Compare fares only for services that arrive in time.",
+          "worked": "The local service reaches the destination at 09:30 and costs £1.00.",
+          "effect": {
+            "spend": 100,
+            "minutes": 30,
+            "receipt": "Bus to the supermarket",
+            "choice": "Local bus"
+          },
+          "destination": "the supermarket",
+          "options": [
+            {
+              "name": "Local bus",
+              "depart": 550,
+              "arrive": 565,
+              "price": 100
+            },
+            {
+              "name": "Express bus",
+              "depart": 555,
+              "arrive": 560,
+              "price": 200
+            },
+            {
+              "name": "Later bus",
+              "depart": 560,
+              "arrive": 580,
+              "price": 75
+            }
+          ],
+          "walk": 5,
+          "deadline": 575,
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/2"
+        },
+        {
+          "venue": "market",
+          "title": "Collect from the shelves",
+          "kind": "basket",
+          "prompt": "Collect the packs on your saved list. The printed usable quantity is what each pack adds. Prices are fictional.",
+          "answer": [
+            0,
+            1,
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Count each product separately and compare it with the quantities you need.",
+          "example": "Need 4 notebooks and have 1? Put 3 on the list.",
+          "hint": "Compare each basket quantity with your saved shopping list.",
+          "worked": "Flatbreads · 4 items usable per pack: 0; Passata · 500 g usable per pack: 1; Spinach, thawed and drained · 250 g usable per pack: 0; Pepper · 160 g usable per pack: 1; Mozzarella · 125 g usable per pack: 1; Chocolate bar: 0; Fizzy drink: 0",
+          "effect": {},
+          "items": [
+            {
+              "name": "Flatbreads · 4 items usable per pack",
+              "price": 150,
+              "storage": "cupboard",
+              "packQuantity": 4,
+              "unit": "items"
+            },
+            {
+              "name": "Passata · 500 g usable per pack",
+              "price": 90,
+              "storage": "cupboard",
+              "packQuantity": 500,
+              "unit": "g"
+            },
+            {
+              "name": "Spinach, thawed and drained · 250 g usable per pack",
+              "price": 95,
+              "storage": "fridge",
+              "packQuantity": 250,
+              "unit": "g"
+            },
+            {
+              "name": "Pepper · 160 g usable per pack",
+              "price": 70,
+              "storage": "fridge",
+              "packQuantity": 160,
+              "unit": "g"
+            },
+            {
+              "name": "Mozzarella · 125 g usable per pack",
+              "price": 100,
+              "storage": "fridge",
+              "packQuantity": 125,
+              "unit": "g"
+            },
+            {
+              "name": "Chocolate bar",
+              "price": 85
+            },
+            {
+              "name": "Fizzy drink",
+              "price": 110
+            }
+          ],
+          "visualContext": "shelves",
+          "budget": 6400,
+          "stock": {
+            "Flatbreads · 4 items usable per pack": 4,
+            "Passata · 500 g usable per pack": 0,
+            "Spinach, thawed and drained · 250 g usable per pack": 250,
+            "Pepper · 160 g usable per pack": 0,
+            "Mozzarella · 125 g usable per pack": 0
+          },
+          "instruction": "Tap a product to collect one. Tap a basket item to put one back.",
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/3"
+        },
+        {
+          "venue": "market",
+          "title": "Check the recipe budget",
+          "kind": "amount",
+          "prompt": "Your pretend purse holds £64.00. The recipe basket costs £2.60. How much remains before the return bus?",
+          "answer": 6140,
+          "min": 0,
+          "max": 100000,
+          "step": 25,
+          "unit": "p",
+          "skill": "town_money",
+          "teach": "Use pounds and pence consistently: £1 = 100p. Add costs; subtract costs from the amount paid for change.",
+          "example": "For a separate purchase, £5 paid for a £3.20 bill gives £1.80 change.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "The amount is £61.40.",
+          "effect": {},
+          "responseUnit": "pounds",
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "pence"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/4"
+        },
+        {
+          "venue": "market",
+          "title": "Pay for recipe ingredients",
+          "kind": "coins",
+          "prompt": "The bill is £2.60. Take £5.00 from your pretend purse and place it on the counter.",
+          "answer": 500,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "p",
+          "skill": "town_money",
+          "teach": "Build the payment from UK coin and note values.",
+          "example": "For a separate purchase, £5 paid for a £3.20 bill gives £1.80 change.",
+          "hint": "£1 is 100p. You can remove the last token.",
+          "worked": "The payment tray needs £5.00.",
+          "effect": {},
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "pence"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/5"
+        },
+        {
+          "venue": "market",
+          "title": "Collect your change",
+          "kind": "coins",
+          "prompt": "You paid £5.00 for a £2.60 bill. Collect the change.",
+          "answer": 240,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "p",
+          "skill": "town_money",
+          "teach": "Use pounds and pence consistently: £1 = 100p. Add costs; subtract costs from the amount paid for change.",
+          "example": "For a separate purchase, £5 paid for a £3.20 bill gives £1.80 change.",
+          "hint": "Subtract the bill from the amount paid.",
+          "worked": "£5.00 − £2.60 = £2.40.",
+          "effect": {
+            "spend": 260,
+            "receipt": "recipe ingredients",
+            "add": {
+              "Flatbreads · 4 items usable per pack": 0,
+              "Passata · 500 g usable per pack": 500,
+              "Spinach, thawed and drained · 250 g usable per pack": 0,
+              "Pepper · 160 g usable per pack": 160,
+              "Mozzarella · 125 g usable per pack": 125
+            }
+          },
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "pence"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/6"
+        },
+        {
+          "venue": "station",
+          "title": "Catch the bus home",
+          "kind": "journey",
+          "prompt": "Catch the bus home. It is 09:30. Allow 5 minutes to walk after the bus. You need to arrive by 10:05. Choose the cheapest service that gets you there in time.",
+          "answer": 1,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Add walking time to each arrival before comparing eligible fares.",
+          "example": "A bus arriving at 08:00 plus a 10-minute walk reaches the destination at 08:10.",
+          "hint": "Add the walking time to each bus arrival. Compare fares only for services that arrive in time.",
+          "worked": "The local service reaches the destination at 10:00 and costs £1.00.",
+          "effect": {
+            "spend": 100,
+            "minutes": 30,
+            "receipt": "Bus to home",
+            "choice": "Local bus"
+          },
+          "destination": "home",
+          "options": [
+            {
+              "name": "Later bus",
+              "depart": 590,
+              "arrive": 610,
+              "price": 75
+            },
+            {
+              "name": "Local bus",
+              "depart": 580,
+              "arrive": 595,
+              "price": 100
+            },
+            {
+              "name": "Express bus",
+              "depart": 585,
+              "arrive": 590,
+              "price": 200
+            }
+          ],
+          "walk": 5,
+          "deadline": 605,
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/7"
+        },
+        {
+          "venue": "home",
+          "title": "Check ingredients before cooking",
+          "kind": "choice",
+          "prompt": "Compare your carried ingredients with the recipe. Only begin when every required ingredient, including pantry basics, is available.",
+          "answer": 1,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Check which option meets the requirement before comparing its cost.",
+          "example": "A 4-seat ticket is too small for 5 people, even when cheaper.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "Check each quantity and the operation you used.",
+          "effect": {},
+          "options": [
+            {
+              "name": "Cook without checking the stock",
+              "price": 0
+            },
+            {
+              "name": "The required ingredients are ready",
+              "price": 0
+            }
+          ],
+          "requiresStock": {
+            "Flatbreads · 4 items usable per pack": 2,
+            "Passata · 500 g usable per pack": 100,
+            "Spinach, thawed and drained · 250 g usable per pack": 100,
+            "Pepper · 160 g usable per pack": 80,
+            "Mozzarella · 125 g usable per pack": 100
+          },
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/8"
+        },
+        {
+          "venue": "home",
+          "title": "Choose a baking tray",
+          "kind": "choice",
+          "prompt": "Each flatbread is 25 cm wide. Choose the smallest suitable tray. An adult bakes two flatbreads per batch, using suitable trays.",
+          "answer": 0,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Check which option meets the requirement before comparing its cost.",
+          "example": "A 4-seat ticket is too small for 5 people, even when cheaper.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "Check each quantity and the operation you used.",
+          "effect": {},
+          "options": [
+            {
+              "name": "28 cm tray",
+              "price": 0
+            },
+            {
+              "name": "40 cm tray",
+              "price": 0
+            },
+            {
+              "name": "20 cm tray",
+              "price": 0
+            }
+          ],
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/9"
+        },
+        {
+          "venue": "home",
+          "title": "Plan cooking batches",
+          "kind": "amount",
+          "prompt": "Make 2 flatbreads. Bake 2 per batch. How many batches?",
+          "answer": 1,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "batches",
+          "skill": "town_money",
+          "teach": "Work out the requested total or difference, using the units in the question.",
+          "example": "Three groups of 2 items contain 6 items.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "The required quantity is 1 batches.",
+          "effect": {},
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "batches"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/10"
+        },
+        {
+          "venue": "home",
+          "title": "Prepare Vegetable flatbread pizza",
+          "kind": "order",
+          "prompt": "Use the recipe card to place the preparation actions in order.",
+          "answer": [
+            2,
+            1,
+            0,
+            3
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Think about which action depends on an earlier action.",
+          "example": "For a different task: put socks on before putting shoes on.",
+          "hint": "Which action can safely happen first? What needs to be ready before the next action?",
+          "worked": "Ask an adult to preheat the oven and prepare the pepper; squeeze excess water from the thawed spinach. → Cover the flatbreads with the measured passata, vegetables and torn mozzarella. → An adult bakes two flatbreads per batch until hot throughout and the cheese has melted. → Let the pizzas cool slightly before an adult cuts them for serving.",
+          "effect": {
+            "minutes": 15
+          },
+          "items": [
+            "An adult bakes two flatbreads per batch until hot throughout and the cheese has melted.",
+            "Cover the flatbreads with the measured passata, vegetables and torn mozzarella.",
+            "Ask an adult to preheat the oven and prepare the pepper; squeeze excess water from the thawed spinach.",
+            "Let the pizzas cool slightly before an adult cuts them for serving."
+          ],
+          "instruction": "Tap an action, then its position. Use every action once.",
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/11"
+        },
+        {
+          "venue": "home",
+          "title": "Measure the passata",
+          "kind": "measure",
+          "prompt": "Measure 100 g of passata for this batch.",
+          "answer": 100,
+          "min": 0,
+          "max": 1000,
+          "step": 25,
+          "unit": "g",
+          "skill": "town_money",
+          "teach": "Convert the units, then position the scale marker.",
+          "example": "0.1 litre equals 100 ml.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "The recipe needs 100 g.",
+          "effect": {},
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "g"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/12"
+        },
+        {
+          "venue": "home",
+          "title": "Set the recipe temperature",
+          "kind": "choice",
+          "prompt": "An adult uses the conventional oven setting on the card. The fan-oven alternative is labelled separately.",
+          "answer": 0,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Check which option meets the requirement before comparing its cost.",
+          "example": "A 4-seat ticket is too small for 5 people, even when cheaper.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "Check each quantity and the operation you used.",
+          "effect": {},
+          "options": [
+            {
+              "name": "200 °C conventional",
+              "price": 0
+            },
+            {
+              "name": "180 °C conventional",
+              "price": 0
+            },
+            {
+              "name": "220 °C conventional",
+              "price": 0
+            }
+          ],
+          "cookingHeat": true,
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/13"
+        },
+        {
+          "venue": "home",
+          "title": "When will the meal be ready?",
+          "kind": "clock",
+          "prompt": "Cooking starts at 10:15. Allow 12 minutes. Set the estimated finish time; an adult still checks the food.",
+          "answer": 627,
+          "min": 0,
+          "max": 1439,
+          "step": 1,
+          "unit": "time",
+          "skill": "town_money",
+          "teach": "Add the duration to the start time. Carry 60 minutes into the next hour.",
+          "example": "08:45 plus 20 minutes is 09:05.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "The finish time is 10:27.",
+          "effect": {
+            "minutes": 12,
+            "consume": {
+              "Flatbreads · 4 items usable per pack": 2,
+              "Passata · 500 g usable per pack": 100,
+              "Spinach, thawed and drained · 250 g usable per pack": 100,
+              "Pepper · 160 g usable per pack": 80,
+              "Mozzarella · 125 g usable per pack": 100
+            }
+          },
+          "requiresStock": {
+            "Flatbreads · 4 items usable per pack": 2,
+            "Passata · 500 g usable per pack": 100,
+            "Spinach, thawed and drained · 250 g usable per pack": 100,
+            "Pepper · 160 g usable per pack": 80,
+            "Mozzarella · 125 g usable per pack": 100
+          },
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "time"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/14"
+        },
+        {
+          "venue": "home",
+          "title": "Serve and tidy",
+          "kind": "order",
+          "prompt": "Finish the meal safely, with adult help.",
+          "answer": [
+            2,
+            0,
+            1
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Think about which action depends on an earlier action.",
+          "example": "For a different task: put socks on before putting shoes on.",
+          "hint": "Which action can safely happen first? What needs to be ready before the next action?",
+          "worked": "An adult turns off the equipment → Serve the cooked meal → Clean the work area and equipment",
+          "effect": {},
+          "items": [
+            "Serve the cooked meal",
+            "Clean the work area and equipment",
+            "An adult turns off the equipment"
+          ],
+          "instruction": "Tap an action, then its position. Use every action once.",
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/15"
+        },
+        {
+          "venue": "home",
+          "title": "Track leftover ingredients",
+          "kind": "amount",
+          "prompt": "You had 4 items of Flatbreads and bought 0 items. Cooking used 2 items. How much remains?",
+          "answer": 2,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "items",
+          "skill": "town_money",
+          "teach": "Work out the requested total or difference, using the units in the question.",
+          "example": "Three groups of 2 items contain 6 items.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "The required quantity is 2 items.",
+          "effect": {},
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "items"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-pizza%3A/1/1/16"
+        }
+      ],
+      "values": {},
+      "inventory": {
+        "Flatbreads · 4 items usable per pack": 4,
+        "Passata · 500 g usable per pack": 0,
+        "Spinach, thawed and drained · 250 g usable per pack": 250,
+        "Pepper · 160 g usable per pack": 0,
+        "Mozzarella · 125 g usable per pack": 0
+      },
+      "shoppingList": {},
+      "cash": 6500,
+      "startingCash": 6500,
+      "time": 540,
+      "savings": 0,
+      "receipts": [],
+      "completed": [],
+      "evidence": [],
+      "solved": false,
+      "assisted": false,
+      "feedback": "",
+      "done": false,
+      "recipeCard": {
+        "recipeVersion": 1,
+        "name": "Vegetable flatbread pizza",
+        "basePortions": 2,
+        "portions": 2,
+        "ingredients": [
+          {
+            "name": "Flatbreads",
+            "quantity": 2,
+            "unit": "items",
+            "pack": 4,
+            "price": 150,
+            "storage": "cupboard",
+            "group": "required",
+            "key": "Flatbreads · 4 items usable per pack",
+            "base": 2,
+            "required": 2,
+            "packQuantity": 4,
+            "packLabel": "4 items usable per pack"
+          },
+          {
+            "name": "Passata",
+            "quantity": 100,
+            "unit": "g",
+            "pack": 500,
+            "price": 90,
+            "storage": "cupboard",
+            "group": "required",
+            "key": "Passata · 500 g usable per pack",
+            "base": 100,
+            "required": 100,
+            "packQuantity": 500,
+            "packLabel": "500 g usable per pack"
+          },
+          {
+            "name": "Spinach, thawed and drained",
+            "quantity": 100,
+            "unit": "g",
+            "pack": 250,
+            "price": 95,
+            "storage": "fridge",
+            "group": "required",
+            "key": "Spinach, thawed and drained · 250 g usable per pack",
+            "base": 100,
+            "required": 100,
+            "packQuantity": 250,
+            "packLabel": "250 g usable per pack"
+          },
+          {
+            "name": "Pepper",
+            "quantity": 80,
+            "unit": "g",
+            "pack": 160,
+            "price": 70,
+            "storage": "fridge",
+            "group": "required",
+            "key": "Pepper · 160 g usable per pack",
+            "base": 80,
+            "required": 80,
+            "packQuantity": 160,
+            "packLabel": "160 g usable per pack"
+          },
+          {
+            "name": "Mozzarella",
+            "quantity": 100,
+            "unit": "g",
+            "pack": 125,
+            "price": 100,
+            "storage": "fridge",
+            "group": "required",
+            "key": "Mozzarella · 125 g usable per pack",
+            "base": 100,
+            "required": 100,
+            "packQuantity": 125,
+            "packLabel": "125 g usable per pack"
+          }
+        ],
+        "optional": [
+          "Basil leaves to finish",
+          "A little grated hard cheese (milk)"
+        ],
+        "prep": [
+          "Ask an adult to preheat the oven and prepare the pepper; squeeze excess water from the thawed spinach.",
+          "Cover the flatbreads with the measured passata, vegetables and torn mozzarella.",
+          "An adult bakes two flatbreads per batch until hot throughout and the cheese has melted.",
+          "Let the pizzas cool slightly before an adult cuts them for serving."
+        ],
+        "prepMinutes": 15,
+        "minutes": 12,
+        "totalMinutes": 27,
+        "water": 0,
+        "method": "oven",
+        "heat": "200 °C conventional / 180 °C fan",
+        "temperature": 200,
+        "batches": 1,
+        "measured": {
+          "name": "passata",
+          "quantity": 100,
+          "unit": "g"
+        },
+        "allergens": "Wheat/gluten in flatbreads and milk in mozzarella; check flatbread labels for other ingredients.",
+        "fictionalPrices": true,
+        "safety": "Wash hands and produce. An adult must handle sharp knives, hot pans, boiling water, the oven and any blender. Timings are estimates: an adult checks the food is properly cooked.",
+        "allergenNote": "Check every ingredient and topping label with an adult, including possible cross-contact. These notes do not guarantee allergy safety."
+      }
+    },
+    {
+      "version": 2,
+      "contentRevision": 3,
+      "id": "cook-soup:1",
+      "scenario": "cook-soup",
+      "name": "Carrot and red lentil soup",
+      "category": "Cooking",
+      "tier": 1,
+      "seed": 1,
+      "stage": 0,
+      "steps": [
+        {
+          "venue": "home",
+          "title": "Inspect the kitchen stock",
+          "kind": "basket",
+          "prompt": "Each picture is one pack. Read its usable contents, then record the packs already at home.",
+          "answer": [
+            1,
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Count each product separately and compare it with the quantities you need.",
+          "example": "Need 4 notebooks and have 1? Put 3 on the list.",
+          "hint": "Count the products inside each cupboard or fridge compartment.",
+          "worked": "Carrots · 500 g usable per pack: 1; Red lentils · 500 g usable per pack: 0; Onion · 200 g usable per pack: 0; Garlic · 6 cloves usable per pack: 0; Vegetable stock cubes · 6 items usable per pack: 1; Olive oil · 250 ml usable per pack: 1",
+          "effect": {},
+          "items": [
+            {
+              "name": "Carrots · 500 g usable per pack",
+              "price": 65,
+              "storage": "fridge",
+              "packQuantity": 500,
+              "unit": "g"
+            },
+            {
+              "name": "Red lentils · 500 g usable per pack",
+              "price": 120,
+              "storage": "cupboard",
+              "packQuantity": 500,
+              "unit": "g"
+            },
+            {
+              "name": "Onion · 200 g usable per pack",
+              "price": 45,
+              "storage": "cupboard",
+              "packQuantity": 200,
+              "unit": "g"
+            },
+            {
+              "name": "Garlic · 6 cloves usable per pack",
+              "price": 55,
+              "storage": "cupboard",
+              "packQuantity": 6,
+              "unit": "cloves"
+            },
+            {
+              "name": "Vegetable stock cubes · 6 items usable per pack",
+              "price": 75,
+              "storage": "cupboard",
+              "packQuantity": 6,
+              "unit": "items"
+            },
+            {
+              "name": "Olive oil · 250 ml usable per pack",
+              "price": 180,
+              "storage": "cupboard",
+              "packQuantity": 250,
+              "unit": "ml"
+            }
+          ],
+          "visualContext": "stock",
+          "budget": 6500,
+          "stock": {
+            "Carrots · 500 g usable per pack": 1,
+            "Red lentils · 500 g usable per pack": 0,
+            "Onion · 200 g usable per pack": 0,
+            "Garlic · 6 cloves usable per pack": 0,
+            "Vegetable stock cubes · 6 items usable per pack": 1,
+            "Olive oil · 250 ml usable per pack": 1
+          },
+          "instruction": "Tap a product to collect one. Tap a basket item to put one back.",
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/0"
+        },
+        {
+          "venue": "home",
+          "title": "Make your shopping list",
+          "kind": "basket",
+          "prompt": "Compare the scaled recipe with stock. Buy only missing whole packs; round up when part of a pack is needed. Pantry basics are included in the stock check.",
+          "answer": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Count each product separately and compare it with the quantities you need.",
+          "example": "Need 4 notebooks and have 1? Put 3 on the list.",
+          "hint": "Compare each basket quantity with your saved shopping list.",
+          "worked": "Carrots · 500 g usable per pack: 0; Red lentils · 500 g usable per pack: 1; Onion · 200 g usable per pack: 1; Garlic · 6 cloves usable per pack: 1; Vegetable stock cubes · 6 items usable per pack: 0; Olive oil · 250 ml usable per pack: 0",
+          "effect": {
+            "list": {
+              "Carrots · 500 g usable per pack": 0,
+              "Red lentils · 500 g usable per pack": 1,
+              "Onion · 200 g usable per pack": 1,
+              "Garlic · 6 cloves usable per pack": 1,
+              "Vegetable stock cubes · 6 items usable per pack": 0,
+              "Olive oil · 250 ml usable per pack": 0
+            }
+          },
+          "items": [
+            {
+              "name": "Carrots · 500 g usable per pack",
+              "price": 65,
+              "storage": "fridge",
+              "packQuantity": 500,
+              "unit": "g"
+            },
+            {
+              "name": "Red lentils · 500 g usable per pack",
+              "price": 120,
+              "storage": "cupboard",
+              "packQuantity": 500,
+              "unit": "g"
+            },
+            {
+              "name": "Onion · 200 g usable per pack",
+              "price": 45,
+              "storage": "cupboard",
+              "packQuantity": 200,
+              "unit": "g"
+            },
+            {
+              "name": "Garlic · 6 cloves usable per pack",
+              "price": 55,
+              "storage": "cupboard",
+              "packQuantity": 6,
+              "unit": "cloves"
+            },
+            {
+              "name": "Vegetable stock cubes · 6 items usable per pack",
+              "price": 75,
+              "storage": "cupboard",
+              "packQuantity": 6,
+              "unit": "items"
+            },
+            {
+              "name": "Olive oil · 250 ml usable per pack",
+              "price": 180,
+              "storage": "cupboard",
+              "packQuantity": 250,
+              "unit": "ml"
+            }
+          ],
+          "visualContext": "list",
+          "budget": 6500,
+          "stock": {
+            "Carrots · 500 g usable per pack": 500,
+            "Red lentils · 500 g usable per pack": 0,
+            "Onion · 200 g usable per pack": 0,
+            "Garlic · 6 cloves usable per pack": 0,
+            "Vegetable stock cubes · 6 items usable per pack": 6,
+            "Olive oil · 250 ml usable per pack": 250
+          },
+          "instruction": "Tap a product to collect one. Tap a basket item to put one back.",
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/1"
+        },
+        {
+          "venue": "station",
+          "title": "Catch the bus to the supermarket",
+          "kind": "journey",
+          "prompt": "Catch the bus to the supermarket. It is 09:00. Allow 5 minutes to walk after the bus. You need to arrive by 09:35. Choose the cheapest service that gets you there in time.",
+          "answer": 0,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Add walking time to each arrival before comparing eligible fares.",
+          "example": "A bus arriving at 08:00 plus a 10-minute walk reaches the destination at 08:10.",
+          "hint": "Add the walking time to each bus arrival. Compare fares only for services that arrive in time.",
+          "worked": "The local service reaches the destination at 09:30 and costs £1.00.",
+          "effect": {
+            "spend": 100,
+            "minutes": 30,
+            "receipt": "Bus to the supermarket",
+            "choice": "Local bus"
+          },
+          "destination": "the supermarket",
+          "options": [
+            {
+              "name": "Local bus",
+              "depart": 550,
+              "arrive": 565,
+              "price": 100
+            },
+            {
+              "name": "Express bus",
+              "depart": 555,
+              "arrive": 560,
+              "price": 200
+            },
+            {
+              "name": "Later bus",
+              "depart": 560,
+              "arrive": 580,
+              "price": 75
+            }
+          ],
+          "walk": 5,
+          "deadline": 575,
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/2"
+        },
+        {
+          "venue": "market",
+          "title": "Collect from the shelves",
+          "kind": "basket",
+          "prompt": "Collect the packs on your saved list. The printed usable quantity is what each pack adds. Prices are fictional.",
+          "answer": [
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Count each product separately and compare it with the quantities you need.",
+          "example": "Need 4 notebooks and have 1? Put 3 on the list.",
+          "hint": "Compare each basket quantity with your saved shopping list.",
+          "worked": "Carrots · 500 g usable per pack: 0; Red lentils · 500 g usable per pack: 1; Onion · 200 g usable per pack: 1; Garlic · 6 cloves usable per pack: 1; Vegetable stock cubes · 6 items usable per pack: 0; Olive oil · 250 ml usable per pack: 0; Chocolate bar: 0; Fizzy drink: 0",
+          "effect": {},
+          "items": [
+            {
+              "name": "Carrots · 500 g usable per pack",
+              "price": 65,
+              "storage": "fridge",
+              "packQuantity": 500,
+              "unit": "g"
+            },
+            {
+              "name": "Red lentils · 500 g usable per pack",
+              "price": 120,
+              "storage": "cupboard",
+              "packQuantity": 500,
+              "unit": "g"
+            },
+            {
+              "name": "Onion · 200 g usable per pack",
+              "price": 45,
+              "storage": "cupboard",
+              "packQuantity": 200,
+              "unit": "g"
+            },
+            {
+              "name": "Garlic · 6 cloves usable per pack",
+              "price": 55,
+              "storage": "cupboard",
+              "packQuantity": 6,
+              "unit": "cloves"
+            },
+            {
+              "name": "Vegetable stock cubes · 6 items usable per pack",
+              "price": 75,
+              "storage": "cupboard",
+              "packQuantity": 6,
+              "unit": "items"
+            },
+            {
+              "name": "Olive oil · 250 ml usable per pack",
+              "price": 180,
+              "storage": "cupboard",
+              "packQuantity": 250,
+              "unit": "ml"
+            },
+            {
+              "name": "Chocolate bar",
+              "price": 85
+            },
+            {
+              "name": "Fizzy drink",
+              "price": 110
+            }
+          ],
+          "visualContext": "shelves",
+          "budget": 6400,
+          "stock": {
+            "Carrots · 500 g usable per pack": 500,
+            "Red lentils · 500 g usable per pack": 0,
+            "Onion · 200 g usable per pack": 0,
+            "Garlic · 6 cloves usable per pack": 0,
+            "Vegetable stock cubes · 6 items usable per pack": 6,
+            "Olive oil · 250 ml usable per pack": 250
+          },
+          "instruction": "Tap a product to collect one. Tap a basket item to put one back.",
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/3"
+        },
+        {
+          "venue": "market",
+          "title": "Check the recipe budget",
+          "kind": "amount",
+          "prompt": "Your pretend purse holds £64.00. The recipe basket costs £2.20. How much remains before the return bus?",
+          "answer": 6180,
+          "min": 0,
+          "max": 100000,
+          "step": 25,
+          "unit": "p",
+          "skill": "town_money",
+          "teach": "Use pounds and pence consistently: £1 = 100p. Add costs; subtract costs from the amount paid for change.",
+          "example": "For a separate purchase, £5 paid for a £3.20 bill gives £1.80 change.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "The amount is £61.80.",
+          "effect": {},
+          "responseUnit": "pounds",
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "pence"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/4"
+        },
+        {
+          "venue": "market",
+          "title": "Pay for recipe ingredients",
+          "kind": "coins",
+          "prompt": "The bill is £2.20. Take £5.00 from your pretend purse and place it on the counter.",
+          "answer": 500,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "p",
+          "skill": "town_money",
+          "teach": "Build the payment from UK coin and note values.",
+          "example": "For a separate purchase, £5 paid for a £3.20 bill gives £1.80 change.",
+          "hint": "£1 is 100p. You can remove the last token.",
+          "worked": "The payment tray needs £5.00.",
+          "effect": {},
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "pence"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/5"
+        },
+        {
+          "venue": "market",
+          "title": "Collect your change",
+          "kind": "coins",
+          "prompt": "You paid £5.00 for a £2.20 bill. Collect the change.",
+          "answer": 280,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "p",
+          "skill": "town_money",
+          "teach": "Use pounds and pence consistently: £1 = 100p. Add costs; subtract costs from the amount paid for change.",
+          "example": "For a separate purchase, £5 paid for a £3.20 bill gives £1.80 change.",
+          "hint": "Subtract the bill from the amount paid.",
+          "worked": "£5.00 − £2.20 = £2.80.",
+          "effect": {
+            "spend": 220,
+            "receipt": "recipe ingredients",
+            "add": {
+              "Carrots · 500 g usable per pack": 0,
+              "Red lentils · 500 g usable per pack": 500,
+              "Onion · 200 g usable per pack": 200,
+              "Garlic · 6 cloves usable per pack": 6,
+              "Vegetable stock cubes · 6 items usable per pack": 0,
+              "Olive oil · 250 ml usable per pack": 0
+            }
+          },
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "pence"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/6"
+        },
+        {
+          "venue": "station",
+          "title": "Catch the bus home",
+          "kind": "journey",
+          "prompt": "Catch the bus home. It is 09:30. Allow 5 minutes to walk after the bus. You need to arrive by 10:05. Choose the cheapest service that gets you there in time.",
+          "answer": 1,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Add walking time to each arrival before comparing eligible fares.",
+          "example": "A bus arriving at 08:00 plus a 10-minute walk reaches the destination at 08:10.",
+          "hint": "Add the walking time to each bus arrival. Compare fares only for services that arrive in time.",
+          "worked": "The local service reaches the destination at 10:00 and costs £1.00.",
+          "effect": {
+            "spend": 100,
+            "minutes": 30,
+            "receipt": "Bus to home",
+            "choice": "Local bus"
+          },
+          "destination": "home",
+          "options": [
+            {
+              "name": "Later bus",
+              "depart": 590,
+              "arrive": 610,
+              "price": 75
+            },
+            {
+              "name": "Local bus",
+              "depart": 580,
+              "arrive": 595,
+              "price": 100
+            },
+            {
+              "name": "Express bus",
+              "depart": 585,
+              "arrive": 590,
+              "price": 200
+            }
+          ],
+          "walk": 5,
+          "deadline": 605,
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/7"
+        },
+        {
+          "venue": "home",
+          "title": "Check ingredients before cooking",
+          "kind": "choice",
+          "prompt": "Compare your carried ingredients with the recipe. Only begin when every required ingredient, including pantry basics, is available.",
+          "answer": 1,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Check which option meets the requirement before comparing its cost.",
+          "example": "A 4-seat ticket is too small for 5 people, even when cheaper.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "Check each quantity and the operation you used.",
+          "effect": {},
+          "options": [
+            {
+              "name": "Cook without checking the stock",
+              "price": 0
+            },
+            {
+              "name": "The required ingredients are ready",
+              "price": 0
+            }
+          ],
+          "requiresStock": {
+            "Carrots · 500 g usable per pack": 250,
+            "Red lentils · 500 g usable per pack": 100,
+            "Onion · 200 g usable per pack": 100,
+            "Garlic · 6 cloves usable per pack": 1,
+            "Vegetable stock cubes · 6 items usable per pack": 1,
+            "Olive oil · 250 ml usable per pack": 10
+          },
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/8"
+        },
+        {
+          "venue": "home",
+          "title": "Weigh the vegetables",
+          "kind": "measure",
+          "prompt": "Weigh 250 g of prepared carrots for this batch.",
+          "answer": 250,
+          "min": 0,
+          "max": 1500,
+          "step": 25,
+          "unit": "g",
+          "skill": "town_money",
+          "teach": "Convert the units, then position the scale marker.",
+          "example": "0.1 litre equals 100 ml.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "Check each quantity and the operation you used.",
+          "effect": {},
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "g"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/9"
+        },
+        {
+          "venue": "home",
+          "title": "Prepare Carrot and red lentil soup",
+          "kind": "order",
+          "prompt": "Use the recipe card to place the preparation actions in order.",
+          "answer": [
+            1,
+            2,
+            3,
+            0
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Think about which action depends on an earlier action.",
+          "example": "For a different task: put socks on before putting shoes on.",
+          "hint": "Which action can safely happen first? What needs to be ready before the next action?",
+          "worked": "Wash the carrots; an adult chops the carrots, onion and garlic. Rinse the lentils. → An adult softens the onion and garlic in the measured oil, then adds the carrots. → Add the lentils, stock cube and measured water; simmer until the vegetables and lentils are tender. → Serve as a chunky soup, or let an adult blend it safely away from splashes.",
+          "effect": {
+            "minutes": 10
+          },
+          "items": [
+            "Serve as a chunky soup, or let an adult blend it safely away from splashes.",
+            "Wash the carrots; an adult chops the carrots, onion and garlic. Rinse the lentils.",
+            "An adult softens the onion and garlic in the measured oil, then adds the carrots.",
+            "Add the lentils, stock cube and measured water; simmer until the vegetables and lentils are tender."
+          ],
+          "instruction": "Tap an action, then its position. Use every action once.",
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/10"
+        },
+        {
+          "venue": "home",
+          "title": "Measure the water for the stock",
+          "kind": "measure",
+          "prompt": "Measure 750 ml of water for the stock for this batch.",
+          "answer": 750,
+          "min": 0,
+          "max": 1250,
+          "step": 25,
+          "unit": "ml",
+          "skill": "town_money",
+          "teach": "Convert the units, then position the scale marker.",
+          "example": "0.1 litre equals 100 ml.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "The recipe needs 750 ml.",
+          "effect": {},
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "ml"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/11"
+        },
+        {
+          "venue": "home",
+          "title": "Choose the cooking heat",
+          "kind": "choice",
+          "prompt": "Choose the guidance printed on the card. An adult controls the actual pan and checks the food.",
+          "answer": 2,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Check which option meets the requirement before comparing its cost.",
+          "example": "A 4-seat ticket is too small for 5 people, even when cheaper.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "Check each quantity and the operation you used.",
+          "effect": {},
+          "options": [
+            {
+              "name": "Leave the equipment unattended",
+              "price": 0
+            },
+            {
+              "name": "Maximum heat throughout",
+              "price": 0
+            },
+            {
+              "name": "A gentle simmer",
+              "price": 0
+            }
+          ],
+          "cookingHeat": true,
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/12"
+        },
+        {
+          "venue": "home",
+          "title": "When will the meal be ready?",
+          "kind": "clock",
+          "prompt": "Cooking starts at 10:10. Allow 25 minutes. Set the estimated finish time; an adult still checks the food.",
+          "answer": 635,
+          "min": 0,
+          "max": 1439,
+          "step": 1,
+          "unit": "time",
+          "skill": "town_money",
+          "teach": "Add the duration to the start time. Carry 60 minutes into the next hour.",
+          "example": "08:45 plus 20 minutes is 09:05.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "The finish time is 10:35.",
+          "effect": {
+            "minutes": 25,
+            "consume": {
+              "Carrots · 500 g usable per pack": 250,
+              "Red lentils · 500 g usable per pack": 100,
+              "Onion · 200 g usable per pack": 100,
+              "Garlic · 6 cloves usable per pack": 1,
+              "Vegetable stock cubes · 6 items usable per pack": 1,
+              "Olive oil · 250 ml usable per pack": 10
+            }
+          },
+          "requiresStock": {
+            "Carrots · 500 g usable per pack": 250,
+            "Red lentils · 500 g usable per pack": 100,
+            "Onion · 200 g usable per pack": 100,
+            "Garlic · 6 cloves usable per pack": 1,
+            "Vegetable stock cubes · 6 items usable per pack": 1,
+            "Olive oil · 250 ml usable per pack": 10
+          },
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "time"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/13"
+        },
+        {
+          "venue": "home",
+          "title": "Serve and tidy",
+          "kind": "order",
+          "prompt": "Finish the meal safely, with adult help.",
+          "answer": [
+            0,
+            2,
+            1
+          ],
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "",
+          "skill": "town_money",
+          "teach": "Think about which action depends on an earlier action.",
+          "example": "For a different task: put socks on before putting shoes on.",
+          "hint": "Which action can safely happen first? What needs to be ready before the next action?",
+          "worked": "An adult turns off the equipment → Serve the cooked meal → Clean the work area and equipment",
+          "effect": {},
+          "items": [
+            "An adult turns off the equipment",
+            "Clean the work area and equipment",
+            "Serve the cooked meal"
+          ],
+          "instruction": "Tap an action, then its position. Use every action once.",
+          "markingVersion": 1,
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/14"
+        },
+        {
+          "venue": "home",
+          "title": "Track leftover ingredients",
+          "kind": "amount",
+          "prompt": "You had 500 g of Carrots and bought 0 g. Cooking used 250 g. How much remains?",
+          "answer": 250,
+          "min": 0,
+          "max": 100000,
+          "step": 1,
+          "unit": "g",
+          "skill": "town_money",
+          "teach": "Work out the requested total or difference, using the units in the question.",
+          "example": "Three groups of 2 items contain 6 items.",
+          "hint": "Compare your model with the quantities and units in the task.",
+          "worked": "The required quantity is 250 g.",
+          "effect": {},
+          "markingVersion": 1,
+          "answerContract": {
+            "unit": "g"
+          },
+          "questionKey": "q3/town_money/mission/v1/town/cook-soup%3A/1/1/15"
+        }
+      ],
+      "values": {},
+      "inventory": {
+        "Carrots · 500 g usable per pack": 500,
+        "Red lentils · 500 g usable per pack": 0,
+        "Onion · 200 g usable per pack": 0,
+        "Garlic · 6 cloves usable per pack": 0,
+        "Vegetable stock cubes · 6 items usable per pack": 6,
+        "Olive oil · 250 ml usable per pack": 250
+      },
+      "shoppingList": {},
+      "cash": 6500,
+      "startingCash": 6500,
+      "time": 540,
+      "savings": 0,
+      "receipts": [],
+      "completed": [],
+      "evidence": [],
+      "solved": false,
+      "assisted": false,
+      "feedback": "",
+      "done": false,
+      "recipeCard": {
+        "recipeVersion": 1,
+        "name": "Carrot and red lentil soup",
+        "basePortions": 2,
+        "portions": 2,
+        "ingredients": [
+          {
+            "name": "Carrots",
+            "quantity": 250,
+            "unit": "g",
+            "pack": 500,
+            "price": 65,
+            "storage": "fridge",
+            "group": "required",
+            "key": "Carrots · 500 g usable per pack",
+            "base": 250,
+            "required": 250,
+            "packQuantity": 500,
+            "packLabel": "500 g usable per pack"
+          },
+          {
+            "name": "Red lentils",
+            "quantity": 100,
+            "unit": "g",
+            "pack": 500,
+            "price": 120,
+            "storage": "cupboard",
+            "group": "required",
+            "key": "Red lentils · 500 g usable per pack",
+            "base": 100,
+            "required": 100,
+            "packQuantity": 500,
+            "packLabel": "500 g usable per pack"
+          },
+          {
+            "name": "Onion",
+            "quantity": 100,
+            "unit": "g",
+            "pack": 200,
+            "price": 45,
+            "storage": "cupboard",
+            "group": "required",
+            "key": "Onion · 200 g usable per pack",
+            "base": 100,
+            "required": 100,
+            "packQuantity": 200,
+            "packLabel": "200 g usable per pack"
+          },
+          {
+            "name": "Garlic",
+            "quantity": 1,
+            "unit": "cloves",
+            "pack": 6,
+            "price": 55,
+            "storage": "cupboard",
+            "group": "required",
+            "key": "Garlic · 6 cloves usable per pack",
+            "base": 1,
+            "required": 1,
+            "packQuantity": 6,
+            "packLabel": "6 cloves usable per pack"
+          },
+          {
+            "name": "Vegetable stock cubes",
+            "quantity": 1,
+            "unit": "items",
+            "pack": 6,
+            "price": 75,
+            "storage": "cupboard",
+            "group": "pantry",
+            "key": "Vegetable stock cubes · 6 items usable per pack",
+            "base": 1,
+            "required": 1,
+            "packQuantity": 6,
+            "packLabel": "6 items usable per pack"
+          },
+          {
+            "name": "Olive oil",
+            "quantity": 10,
+            "unit": "ml",
+            "pack": 250,
+            "price": 180,
+            "storage": "cupboard",
+            "group": "pantry",
+            "key": "Olive oil · 250 ml usable per pack",
+            "base": 10,
+            "required": 10,
+            "packQuantity": 250,
+            "packLabel": "250 ml usable per pack"
+          }
+        ],
+        "optional": [
+          "Chopped parsley to finish"
+        ],
+        "prep": [
+          "Wash the carrots; an adult chops the carrots, onion and garlic. Rinse the lentils.",
+          "An adult softens the onion and garlic in the measured oil, then adds the carrots.",
+          "Add the lentils, stock cube and measured water; simmer until the vegetables and lentils are tender.",
+          "Serve as a chunky soup, or let an adult blend it safely away from splashes."
+        ],
+        "prepMinutes": 10,
+        "minutes": 25,
+        "totalMinutes": 35,
+        "water": 750,
+        "method": "hob",
+        "heat": "A gentle simmer",
+        "batches": 1,
+        "measured": {
+          "name": "water for the stock",
+          "quantity": 750,
+          "unit": "ml"
+        },
+        "allergens": "Stock cubes may contain celery, gluten or milk: check the label.",
+        "fictionalPrices": true,
+        "safety": "Wash hands and produce. An adult must handle sharp knives, hot pans, boiling water, the oven and any blender. Timings are estimates: an adult checks the food is properly cooked.",
+        "allergenNote": "Check every ingredient and topping label with an adult, including possible cross-contact. These notes do not guarantee allergy safety."
+      }
+    }
+  ]
+}

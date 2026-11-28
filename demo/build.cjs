@@ -205,6 +205,9 @@ for (const dir of ["checkpoint", "rollout", "world-guide-portraits-preview"]) {
 }
 for (const a of JSON.parse(read("v3/assets/delivery-manifest.json")).assets)
   emit(a.file, fs.readFileSync(path.join(root, a.file)));
+for (const a of JSON.parse(read("v3/assets/supplied-20261128/manifest.json"))
+  .assets)
+  emit(a.file, fs.readFileSync(path.join(root, a.file)));
 for (const a of JSON.parse(read("v3/assets/base-camp/manifest.json")).assets)
   emit(
     "v3/assets/base-camp/" + a.file,

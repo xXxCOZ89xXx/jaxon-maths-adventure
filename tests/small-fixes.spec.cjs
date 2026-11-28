@@ -3,10 +3,10 @@ const {fixture,mock}=require('./helpers/cloud-server.cjs');
 test('purchase requires confirmation; cancel is inert and confirm creates exactly one request',async({family})=>{
  const p=await family.open('learner');await p.locator('[data-action="skip-tour"]').click();await p.locator('nav [data-nav="home"]').click();await p.locator('[data-action="nav:shop"]').first().click();
  const before=structuredClone(family.server.wallet),buys=()=>family.server.calls.filter(c=>c.body?.p_operation==='buy');
- await p.locator('[data-action="buy:cap"]').click();const d=p.getByRole('dialog',{name:/Buy Forest cap/});await expect(d).toContainText('45 coins');await expect(d).toContainText('155 coins left');expect(buys()).toHaveLength(0);expect(family.server.wallet).toEqual(before);expect(await p.evaluate(()=>Object.keys(localStorage).filter(k=>k.startsWith('v3-intent:')))).toEqual([]);
+ await p.locator('[data-action="buy:hoodie"]').click();const d=p.getByRole('dialog',{name:/Buy Emerald hoodie/});await expect(d).toContainText('90 coins');await expect(d).toContainText('110 coins left');expect(buys()).toHaveLength(0);expect(family.server.wallet).toEqual(before);expect(await p.evaluate(()=>Object.keys(localStorage).filter(k=>k.startsWith('v3-intent:')))).toEqual([]);
  await d.getByRole('button',{name:'Cancel',exact:true}).click();await expect(d).not.toBeVisible();expect(buys()).toHaveLength(0);expect(family.server.wallet).toEqual(before);
- await p.locator('[data-action="buy:cap"]').click();await p.locator('[data-action="buy-confirm:cap"]').click();await expect.poll(()=>family.server.wallet.owned).toContain('cap');expect(buys()).toHaveLength(1);expect(family.server.wallet.coins).toBe(before.coins-45);
- await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));await p.locator('[data-action="buy:cap"]').click();await expect(p.locator('#purchase-confirmation')).not.toBeVisible();expect(buys()).toHaveLength(1);
+ await p.locator('[data-action="buy:hoodie"]').click();await p.locator('[data-action="buy-confirm:hoodie"]').click();await expect.poll(()=>family.server.wallet.owned).toContain('hoodie');expect(buys()).toHaveLength(1);expect(family.server.wallet.coins).toBe(before.coins-90);
+ await p.waitForFunction(()=>!document.documentElement.hasAttribute('data-saving'));await p.locator('[data-action="buy:hoodie"]').click();await expect(p.locator('#purchase-confirmation')).not.toBeVisible();expect(buys()).toHaveLength(1);
 });
 for(const role of ['learner','parent'])test(role+': failed password and PIN errors clear, with menus hidden before unlock',async({page:p})=>{
  const server=fixture(),errors=await mock(p,server);await p.goto('/staging-fixture-dist/');const nav=p.locator('.topbar nav');await expect(nav).toBeHidden();

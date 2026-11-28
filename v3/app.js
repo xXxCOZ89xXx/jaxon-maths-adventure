@@ -468,6 +468,18 @@
         : "";
     return `${header(l.mode === "check" ? "FRESH INDEPENDENT CHECK" : l.mode === "discovery" ? "FIND YOUR STARTING POINT" : "SUPPORTED PRACTICE", esc(k.name), "world")}<div class="split learning-practice-split"><section class="panel"><span class="badge">QUESTION ${l.i + 1} / ${l.qs.length}</span><h2 style="margin-top:20px">${esc(q[0])}</h2>${payroll}${handsOn}<div class="answer-grid">${(c8 || direct ? [] : q[2]).map((a, i) => btn(esc(T.answerLabel(q, a)), "answer:" + i, "", l.answered)).join("")}</div><div class="actions">${btn("Hint", "learning-hint", "", l.answered)}${btn("I don’t know", "learning-skip", "", l.answered)}${btn("Save & exit", "nav:home")}</div>${l.feedback ? `<div class="feedback" role="status">${esc(l.feedback)}</div>` : ""}${l.answered ? `<div class="actions">${btn(l.i === l.qs.length - 1 ? "See recap →" : "Next question →", "next-learning", "primary")}</div>` : ""}</section><aside><div class="panel"><h3>${l.mode === "check" ? "Your own thinking" : "Explore the idea"}</h3><p class="muted">${l.mode === "check" ? "Only the first answer without help counts as independent. Hints and “I don’t know” are always safe." : "Use the tools, take a hint, or work through an example. Practice never awards mastery."}</p>${A.explorer(s)}</div>${tools}</aside></div>`;
   }
+  function employmentGuide(j) {
+    if (j.stage !== 0 || j.done) return "";
+    if (j.employmentInduction?.version === 1)
+      return `<details class="panel town-job-induction"><summary>Learn this job</summary><h2>Before your first shift</h2><p>${esc(j.employmentInduction.role)}</p><h3>1. Learn the method</h3><p>${esc(j.employmentInduction.example)}</p><h3>2. Try with help</h3><p>${esc(j.employmentInduction.practice)}</p><details><summary>Show the practice explanation</summary><p>${esc(j.employmentInduction.explanation)}</p></details><h3>3. Start your shift</h3><p>${esc(j.employmentInduction.method)}</p><p class="small">This practice does not submit an answer, earn coins or count as an independent check. Close this guide when you are ready to choose your shift.</p></details>`;
+    const model = window.V53TownContent.inductionModel(j);
+    if (!model) return "";
+    const i = j.employmentInduction,
+      p = model.progress;
+    const field = (name, label, invalid) =>
+      `<label for="induction-${name}">${label}<input id="induction-${name}" data-induction-field="${name}" type="text" inputmode="decimal" autocomplete="off" maxlength="24" aria-describedby="induction-practice-help" aria-invalid="${invalid}" value="${esc(p[name])}" ${model.correct ? "readonly" : ""}></label>`;
+    return `<details class="panel town-job-induction" data-induction-run="${esc(j.id)}" ${p.open ? "open" : ""}><summary>Learn this job</summary><h2>Before your first shift</h2><p>${esc(i.role)}</p><h3>1. Learn the method</h3><p>${esc(i.example)}</p><h3>2. Try with help</h3><p>${esc(i.practice)}</p><p id="induction-practice-help">Enter both amounts in pounds, for example 12.50.</p><div class="induction-answers">${field("gross", "Gross pay (£)", model.invalidGross)}${field("net", "Net pay (£)", model.invalidNet)}</div><p id="induction-practice-feedback" class="feedback" role="status" tabindex="-1">${esc(model.feedback)}</p><div class="actions">${model.correct ? btn("Start your shift", "induction-ready", "primary") : btn(p.attempts ? "Check again" : "Check practice", "induction-check", "primary")}</div><details><summary>Show the practice explanation</summary><p>${esc(i.explanation)}</p></details><h3>3. Start your shift</h3><p>${esc(i.method)}</p><p class="small">This is practice. Your shift answers, coins and independent checks stay separate. You can close this guide and choose your shift whenever you are ready.</p></details>`;
+  }
   function townLife(j) {
     const t = j.task,
       q = {
@@ -489,9 +501,10 @@
           )
           .replace('data-mission-clock="true"', 'data-life-clock="true"')
       : "";
+    const induction = employmentGuide(j);
     if (window.V6SceneUI?.supports(j))
-      return `${header(j.category + " · LEVEL " + j.tier, esc(j.name), "world")}${locationTrail(j)}${window.V6SceneUI.journey(j, controls)}`;
-    return `${header(j.category + " · LEVEL " + j.tier, esc(j.name), "world")}${locationTrail(j)}${T.balancePanel(j)}${T.isWageTask(t) ? T.payslipPanel() : ""}<div class="journey-progress panel"><p>Stage ${Math.min(j.stage + 1, j.steps.length)} / ${j.steps.length} · ${T.clock(j.time)} · pretend cash ${t?.title === "Count your remaining cash" ? "use your receipts" : T.money(j.cash)} · savings plan ${T.money(j.savings)}</p><p>List: ${
+      return `${header(j.category + " · LEVEL " + j.tier, esc(j.name), "world")}${locationTrail(j)}${induction}${window.V6SceneUI.journey(j, controls)}`;
+    return `${header(j.category + " · LEVEL " + j.tier, esc(j.name), "world")}${locationTrail(j)}${induction}${T.balancePanel(j)}${T.isWageTask(t) ? T.payslipPanel() : ""}<div class="journey-progress panel"><p>Stage ${Math.min(j.stage + 1, j.steps.length)} / ${j.steps.length} · ${T.clock(j.time)} · pretend cash ${t?.title === "Count your remaining cash" ? "use your receipts" : T.money(j.cash)} · savings plan ${T.money(j.savings)}</p><p>List: ${
       Object.entries(j.shoppingList)
         .map(([k, v]) => esc(k) + " × " + v)
         .join(" · ") || "No shopping needed yet"
@@ -604,7 +617,7 @@
     return `<div class="colour-choices" data-colour-item="${esc(i.id)}" tabindex="-1" role="group" aria-label="Colours for ${esc(i.label)}"><p class="small"><strong>Colours</strong>${owned ? ` · wearing ${esc(worn.name)}` : ""}</p><ul>${w.colours
       .map((c) => {
         const mine = owned && (c.n === 1 || s.bought.includes(c.id));
-        return `<li><span class="colour-swatch" data-standin style="background:${c.swatch}" aria-hidden="true"></span><span class="colour-name">${esc(c.name)}</span>${!owned ? (c.n === 1 ? '<span class="small muted">comes with it</span>' : '<span class="small muted">50 coins</span>') : worn.id === c.id ? '<span class="colour-worn">Wearing now</span>' : mine ? btn("Wear " + c.name, "colour-wear:" + c.id) : btn("Buy " + c.name + " for " + c.cost + " coins", "colour-buy:" + c.id, "", Math.floor(s.coins) < c.cost)}</li>`;
+        return `<li><span class="colour-swatch colour-art" aria-hidden="true">${A.colourArt(c)}</span><span class="colour-name">${esc(c.name)}</span>${!owned ? (c.n === 1 ? '<span class="small muted">comes with it</span>' : '<span class="small muted">50 coins</span>') : worn.id === c.id ? '<span class="colour-worn">Wearing now</span>' : mine ? btn("Wear " + c.name, "colour-wear:" + c.id) : btn("Buy " + c.name + " for " + c.cost + " coins", "colour-buy:" + c.id, "", Math.floor(s.coins) < c.cost)}</li>`;
       })
       .join(
         "",
@@ -655,7 +668,7 @@
           ? `<p class="saving-goal-item"><strong>${goalName}</strong> · ${show.count(goal.item.cost, "coin")}</p><div class="bar" role="progressbar" aria-label="Coins saved for ${goalName}" aria-valuemin="0" aria-valuemax="${goal.item.cost}" aria-valuenow="${goal.have}"><span style="width:${(goal.have / goal.item.cost) * 100}%"></span></div><p>${goal.reached ? `You have enough coins for ${goalName}. Buy it whenever you are ready.` : `${show.count(goal.have, "coin")} saved. ${show.count(goal.left, "coin")} to go: about ${show.count(goal.minutes, "minute")} of learning.`}</p>${btn("Clear goal", "goal-clear")}`
           : `<p>Pick something to save for with "Save for" on any item below. You can change or clear it at any time.</p>`
       }</section>`;
-    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar ? window.V7Avatar.controls(s) : ""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview ? "Preview: " + esc(preview.label) : "Your explorer"}</h2>${preview ? '<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>' : ""}<p class="muted">${window.V3Presentation.count(s.coins, "learning coin")} · ${window.V3Presentation.count(s.bought.filter((id) => !E.isTownPart(id) && !E.isDecoration(id) && !E.isColour(id)).length, "item")} owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p></div></div>${saving}${equipment}<label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><p class="colour-note small muted">Clothes come in 3 colours. New colour pictures are on the way; until then your explorer shows the first colour.</p><div class="shop-grid">${activeCatalog
+    return `${header("A LOOK THAT IS ALL YOURS", "Explorer wardrobe", "camp")}${window.V7Avatar ? window.V7Avatar.controls(s) : ""}<div class="shop-preview" id="wardrobe-preview" tabindex="-1">${A.explorer(look)}<div><h2>${preview ? "Preview: " + esc(preview.label) : "Your explorer"}</h2>${preview ? '<p class="preview-note">Preview only. Your outfit and coins have not changed.</p><button data-ui="clear-preview">Back to my outfit</button>' : ""}<p class="muted">${window.V3Presentation.count(s.coins, "learning coin")} · ${window.V3Presentation.count(s.bought.filter((id) => !E.isTownPart(id) && !E.isDecoration(id) && !E.isColour(id)).length, "item")} owned</p><p class="small muted">Outfits appear in every world. ${cloud ? "Purchases are checked before saving. Reconnect to buy an item." : "Only fictional demo coins are used here."}</p></div></div>${saving}${equipment}<label for="shop-filter">Browse collection <select id="shop-filter"><option value="all">All ${activeCatalog.length} items</option><option value="owned" ${filter === "owned" ? "selected" : ""}>Owned</option><option value="affordable" ${filter === "affordable" ? "selected" : ""}>Affordable</option>${slots.map((x) => `<option ${filter === x ? "selected" : ""}>${x}</option>`).join("")}</select></label><p class="colour-note small muted">Clothes come in 3 colours. Choose an owned colour to wear it on your explorer.</p><div class="shop-grid">${activeCatalog
       .filter(
         (i) =>
           filter === "all" ||
@@ -924,6 +937,40 @@
       !window.V7Avatar.isActiveItem(C.catalog.find((i) => i.id === arg))
     )
       return;
+    if (["induction-check", "induction-ready"].includes(name)) {
+      activity = 0;
+      const guide = document.querySelector(
+          ".town-job-induction[data-induction-run]",
+        ),
+        id = guide?.dataset.inductionRun;
+      const answers = Object.fromEntries(
+        ["gross", "net"].map((k) => [
+          k,
+          guide?.querySelector('[data-induction-field="' + k + '"]')?.value ||
+            "",
+        ]),
+      );
+      await change(() => {
+        const j = window.V52TownLife.state(s);
+        if (s.view === "journey" && j?.id === id)
+          window.V53TownContent.inductionAction(
+            j,
+            name === "induction-check" ? "check" : "ready",
+            answers,
+          );
+      });
+      if (name === "induction-check")
+        document.getElementById("induction-practice-feedback")?.focus();
+      else {
+        const start = document.querySelector(
+          '.scene-dock [data-scene-open="task"]',
+        );
+        if (start) {
+          start.click();
+        } else document.querySelector('[data-action^="j-choice"]')?.focus();
+      }
+      return;
+    }
     if (name === "buy-cancel") {
       document.getElementById("purchase-confirmation")?.close();
       purchaseChoice = null;
@@ -1010,6 +1057,16 @@
           return;
         }
       }
+    }
+    // Hidden/retired items cannot start new colour actions. Existing ownership is retained.
+    if (
+      ["colour-buy", "colour-confirm", "colour-wear"].includes(name) &&
+      window.V7Avatar
+    ) {
+      const item = E.wardrobeColours
+        .flatMap((w) => w.colours)
+        .find((c) => c.id === arg)?.item;
+      if (item && !window.V7Avatar.isActiveItem(item)) return;
     }
     // Wardrobe colours: confirmed first, checked by the server's buy.
     if (name === "colour-cancel") {
@@ -2275,6 +2332,11 @@
     }
   });
   document.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.target.hasAttribute("data-induction-field")) {
+      e.preventDefault();
+      document.querySelector('[data-action="induction-check"]')?.click();
+      return;
+    }
     if (e.key === "Enter" && e.target.hasAttribute("data-baseline-draft")) {
       e.preventDefault();
       document.querySelector('[data-action="starting-submit"]')?.click();
@@ -2463,6 +2525,27 @@
     }
   });
   document.addEventListener("input", async (e) => {
+    if (e.target.hasAttribute("data-induction-field")) {
+      activity = 0;
+      const field = e.target.dataset.inductionField,
+        value = e.target.value,
+        id = e.target.closest("[data-induction-run]")?.dataset.inductionRun;
+      await change(
+        () => {
+          const j = window.V52TownLife.state(s);
+          if (s.view === "journey" && j?.id === id)
+            window.V53TownContent.inductionAction(j, "draft", { field, value });
+        },
+        { renderPage: false },
+      );
+      e.target
+        .closest("[data-induction-run]")
+        ?.querySelectorAll("[data-induction-field]")
+        .forEach((input) => input.setAttribute("aria-invalid", "false"));
+      const feedback = document.getElementById("induction-practice-feedback");
+      if (feedback) feedback.textContent = "";
+      return;
+    }
     if (e.target.hasAttribute("data-baseline-draft")) {
       const raw = e.target.value,
         id = s.startingProfile?.active,
